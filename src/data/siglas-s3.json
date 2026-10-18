@@ -1,0 +1,402 @@
+[
+ {
+  "sigla": "API",
+  "en": "Application Programming Interface",
+  "es": "Interfaz de programación de aplicaciones"
+ },
+ {
+  "sigla": "BD",
+  "en": "",
+  "es": "Base de Datos"
+ },
+ {
+  "sigla": "BH",
+  "en": "Horizontal Bias",
+  "es": "Sesgo horizontal (variable que desbordó en el Ariane 5)"
+ },
+ {
+  "sigla": "CI/CD",
+  "en": "Continuous Integration / Continuous Delivery (Deployment)",
+  "es": "Integración continua / Entrega (despliegue) continua"
+ },
+ {
+  "sigla": "CMMI",
+  "en": "Capability Maturity Model Integration",
+  "es": "Integración de Modelos de Madurez de Capacidades"
+ },
+ {
+  "sigla": "CoGQ",
+  "en": "Cost of Good Quality",
+  "es": "Costo de la buena calidad (prevención + evaluación)"
+ },
+ {
+  "sigla": "CoPQ",
+  "en": "Cost of Poor Quality",
+  "es": "Costo de la mala calidad (fallas internas + externas)"
+ },
+ {
+  "sigla": "CoQ",
+  "en": "Cost of Quality",
+  "es": "Costo de la calidad"
+ },
+ {
+  "sigla": "CPD",
+  "en": "Copy/Paste Detector",
+  "es": "Detector de código duplicado (parte de PMD)"
+ },
+ {
+  "sigla": "CSAT",
+  "en": "Customer Satisfaction Score",
+  "es": "Índice de satisfacción del cliente"
+ },
+ {
+  "sigla": "CVE",
+  "en": "Common Vulnerabilities and Exposures",
+  "es": "Catálogo público de vulnerabilidades conocidas"
+ },
+ {
+  "sigla": "DAST",
+  "en": "Dynamic Application Security Testing",
+  "es": "Pruebas dinámicas de seguridad de aplicaciones"
+ },
+ {
+  "sigla": "DCU",
+  "en": "",
+  "es": "Diseño Centrado en el Usuario (UCD)"
+ },
+ {
+  "sigla": "DevSecOps",
+  "en": "Development, Security and Operations",
+  "es": "Desarrollo, Seguridad y Operaciones"
+ },
+ {
+  "sigla": "DRE",
+  "en": "Defect Removal Efficiency",
+  "es": "Eficiencia de eliminación de defectos"
+ },
+ {
+  "sigla": "DVCS",
+  "en": "Distributed Version Control System",
+  "es": "Sistema de control de versiones distribuido"
+ },
+ {
+  "sigla": "E2E",
+  "en": "End-to-End",
+  "es": "De extremo a extremo"
+ },
+ {
+  "sigla": "ESA",
+  "en": "European Space Agency",
+  "es": "Agencia Espacial Europea"
+ },
+ {
+  "sigla": "HCD",
+  "en": "Human-Centred Design",
+  "es": "Diseño centrado en el ser humano (ISO 9241-210)"
+ },
+ {
+  "sigla": "HW",
+  "en": "Hardware",
+  "es": "Hardware / equipo físico"
+ },
+ {
+  "sigla": "IAST",
+  "en": "Interactive Application Security Testing",
+  "es": "Pruebas interactivas de seguridad de aplicaciones"
+ },
+ {
+  "sigla": "IDE",
+  "en": "Integrated Development Environment",
+  "es": "Entorno de desarrollo integrado"
+ },
+ {
+  "sigla": "IEC",
+  "en": "International Electrotechnical Commission",
+  "es": "Comisión Electrotécnica Internacional"
+ },
+ {
+  "sigla": "IEEE",
+  "en": "Institute of Electrical and Electronics Engineers",
+  "es": "Instituto de Ingenieros Eléctricos y Electrónicos"
+ },
+ {
+  "sigla": "INACAL",
+  "en": "",
+  "es": "Instituto Nacional de Calidad (Perú)"
+ },
+ {
+  "sigla": "ISMS",
+  "en": "Information Security Management System",
+  "es": "Sistema de Gestión de Seguridad de la Información (SGSI)"
+ },
+ {
+  "sigla": "ISO",
+  "en": "International Organization for Standardization",
+  "es": "Organización Internacional de Normalización"
+ },
+ {
+  "sigla": "ISTQB",
+  "en": "International Software Testing Qualifications Board",
+  "es": "Junta internacional de certificación en pruebas de SW"
+ },
+ {
+  "sigla": "IV&V",
+  "en": "Independent Verification and Validation",
+  "es": "Verificación y validación independientes"
+ },
+ {
+  "sigla": "JTC 1/SC 7",
+  "en": "Joint Technical Committee 1 / Subcommittee 7",
+  "es": "Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas"
+ },
+ {
+  "sigla": "KLOC",
+  "en": "Kilo Lines Of Code",
+  "es": "Miles de líneas de código"
+ },
+ {
+  "sigla": "KPI",
+  "en": "Key Performance Indicator",
+  "es": "Indicador clave de desempeño"
+ },
+ {
+  "sigla": "LOC",
+  "en": "Lines Of Code",
+  "es": "Líneas de código"
+ },
+ {
+  "sigla": "MTBF",
+  "en": "Mean Time Between Failures",
+  "es": "Tiempo medio entre fallos"
+ },
+ {
+  "sigla": "MTTF",
+  "en": "Mean Time To Failure",
+  "es": "Tiempo medio hasta el fallo"
+ },
+ {
+  "sigla": "MTTR",
+  "en": "Mean Time To Repair",
+  "es": "Tiempo medio de reparación"
+ },
+ {
+  "sigla": "NPS",
+  "en": "Net Promoter Score",
+  "es": "Índice de promotores netos"
+ },
+ {
+  "sigla": "NTP",
+  "en": "",
+  "es": "Norma Técnica Peruana"
+ },
+ {
+  "sigla": "OWASP",
+  "en": "Open Worldwide Application Security Project",
+  "es": "Proyecto abierto mundial de seguridad de aplicaciones"
+ },
+ {
+  "sigla": "PDCA",
+  "en": "Plan-Do-Check-Act",
+  "es": "Planificar-Hacer-Verificar-Actuar (PHVA)"
+ },
+ {
+  "sigla": "PHVA",
+  "en": "",
+  "es": "Planificar-Hacer-Verificar-Actuar (PDCA en español)"
+ },
+ {
+  "sigla": "PMO",
+  "en": "Project Management Office",
+  "es": "Oficina de gestión de proyectos"
+ },
+ {
+  "sigla": "PR",
+  "en": "Pull Request",
+  "es": "Solicitud de integración de cambios (gatillo de code review)"
+ },
+ {
+  "sigla": "QA",
+  "en": "Quality Assurance",
+  "es": "Aseguramiento de la calidad"
+ },
+ {
+  "sigla": "QC",
+  "en": "Quality Control",
+  "es": "Control de la calidad"
+ },
+ {
+  "sigla": "QMS",
+  "en": "Quality Management System",
+  "es": "Sistema de Gestión de la Calidad (SGC)"
+ },
+ {
+  "sigla": "RCA",
+  "en": "Root Cause Analysis",
+  "es": "Análisis de causa raíz"
+ },
+ {
+  "sigla": "SAMM",
+  "en": "Software Assurance Maturity Model",
+  "es": "Modelo de Madurez del Aseguramiento del Software"
+ },
+ {
+  "sigla": "SAST",
+  "en": "Static Application Security Testing",
+  "es": "Pruebas estáticas de seguridad de aplicaciones"
+ },
+ {
+  "sigla": "SBTM",
+  "en": "Session-Based Test Management",
+  "es": "Gestión de pruebas basada en sesiones"
+ },
+ {
+  "sigla": "SCA",
+  "en": "Software Composition Analysis",
+  "es": "Análisis de composición del SW (dependencias de terceros)"
+ },
+ {
+  "sigla": "SCAMPI",
+  "en": "Standard CMMI Appraisal Method for Process Improvement",
+  "es": "Método estándar de evaluación CMMI para la mejora de procesos"
+ },
+ {
+  "sigla": "SCM",
+  "en": "Software Configuration Management",
+  "es": "Gestión de la configuración del SW"
+ },
+ {
+  "sigla": "SDD",
+  "en": "Software Design Description",
+  "es": "Descripción del diseño del SW"
+ },
+ {
+  "sigla": "SDLC",
+  "en": "Software Development Life Cycle",
+  "es": "Ciclo de vida del desarrollo de SW"
+ },
+ {
+  "sigla": "SEI",
+  "en": "Software Engineering Institute",
+  "es": "Instituto de Ingeniería de Software (Carnegie Mellon)"
+ },
+ {
+  "sigla": "SGC",
+  "en": "",
+  "es": "Sistema de Gestión de la Calidad (QMS, ISO 9001)"
+ },
+ {
+  "sigla": "SGSI",
+  "en": "",
+  "es": "Sistema de Gestión de Seguridad de la Información (ISMS, ISO/IEC 27001)"
+ },
+ {
+  "sigla": "SLA",
+  "en": "Service Level Agreement",
+  "es": "Acuerdo de nivel de servicio"
+ },
+ {
+  "sigla": "SPE",
+  "en": "Software Performance Engineering",
+  "es": "Ingeniería del Rendimiento del Software"
+ },
+ {
+  "sigla": "SPI",
+  "en": "Software Process Improvement",
+  "es": "Mejora del proceso de software"
+ },
+ {
+  "sigla": "SQA",
+  "en": "Software Quality Assurance",
+  "es": "Aseguramiento de la calidad del software"
+ },
+ {
+  "sigla": "SQAP",
+  "en": "Software Quality Assurance Plan",
+  "es": "Plan de aseguramiento de la calidad del SW (IEEE 730)"
+ },
+ {
+  "sigla": "SQC",
+  "en": "Software Quality Control",
+  "es": "Control de la calidad del software"
+ },
+ {
+  "sigla": "SQL",
+  "en": "Structured Query Language",
+  "es": "Lenguaje de consulta estructurado"
+ },
+ {
+  "sigla": "SQuaRE",
+  "en": "Systems and software Quality Requirements and Evaluation",
+  "es": "Requisitos y evaluación de la calidad de sistemas y software (serie ISO/IEC 25000)"
+ },
+ {
+  "sigla": "SRI",
+  "en": "Inertial Reference System (Système de Référence Inertielle)",
+  "es": "Sistema de Referencia Inercial (Ariane 5)"
+ },
+ {
+  "sigla": "SRS",
+  "en": "Software Requirements Specification",
+  "es": "Especificación de requisitos del SW"
+ },
+ {
+  "sigla": "SVN",
+  "en": "Apache Subversion",
+  "es": "Sistema de control de versiones centralizado"
+ },
+ {
+  "sigla": "SVVP",
+  "en": "Software Verification and Validation Plan",
+  "es": "Plan de verificación y validación del SW (IEEE 1012)"
+ },
+ {
+  "sigla": "SW",
+  "en": "Software",
+  "es": "Software / soporte lógico"
+ },
+ {
+  "sigla": "TDR",
+  "en": "Technical Debt Ratio",
+  "es": "Ratio de deuda técnica (SonarQube)"
+ },
+ {
+  "sigla": "TTM",
+  "en": "Time-to-Market",
+  "es": "Tiempo de llegada al mercado"
+ },
+ {
+  "sigla": "UAT",
+  "en": "User Acceptance Testing",
+  "es": "Pruebas de aceptación del usuario"
+ },
+ {
+  "sigla": "UCD",
+  "en": "User-Centered Design",
+  "es": "Diseño Centrado en el Usuario; la profesora: Desarrollo Orientado al Usuario"
+ },
+ {
+  "sigla": "UI",
+  "en": "User Interface",
+  "es": "Interfaz de usuario"
+ },
+ {
+  "sigla": "UX",
+  "en": "User Experience",
+  "es": "Experiencia de usuario"
+ },
+ {
+  "sigla": "V&V",
+  "en": "Verification and Validation",
+  "es": "Verificación y validación"
+ },
+ {
+  "sigla": "VCS",
+  "en": "Version Control System",
+  "es": "Sistema de control de versiones"
+ },
+ {
+  "sigla": "ZAP",
+  "en": "Zed Attack Proxy",
+  "es": "Herramienta DAST de OWASP"
+ }
+]

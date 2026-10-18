@@ -1,0 +1,865 @@
+{
+ "mcq": [
+  {
+   "id": "s7-m01",
+   "s": 7,
+   "q": "Una software factory de Arequipa contrata a un Evaluador Certificado de NYCE para acreditar capacidades con EvalProSoft. El perfil resultante es GN=2, GPR=3, GPY=3, GR=2, RHAT=2, BSI=3, CO=2, APE=4 y DMS=4. El gerente afirma que, como la Operación está en 4 y la mayoría de procesos supera 2, la empresa ya puede anunciarse en un nivel superior. ¿Qué dictamen corresponde?",
+   "o": [
+    "Nivel 3, porque basta que la mayoría de los procesos alcance capacidad 3",
+    "Nivel 2, y para subir a 3 deben elevarse GN, GR, RHAT y CO a capacidad 3",
+    "Nivel 3, porque el promedio redondeado del perfil de nueve procesos es 3",
+    "Nivel 4, porque la Operación concentra los procesos que ve el cliente final"
+   ],
+   "a": 1,
+   "exp": "Correcta: en EvalProSoft, NMX-I-059/04-NYCE, el nivel de madurez de capacidades es el nivel máximo que alcanzan TODOS los 9 procesos, es decir el mínimo del perfil; aquí GN, GR, RHAT y CO están en 2, así que la organización es nivel 2 y para pasar a 3 esos cuatro deben llegar a 3, conservando lo de niveles previos. Distractores: la regla de mayoría no existe en el método, 5 de 9 en nivel 3 o más no basta; el promedio 2,8 redondeado es el error clásico de promediar; tomar el máximo de OPE confunde el perfil de un proceso con el nivel organizacional y además ignora que DIR y GER forman parte del alcance de la evaluación."
+  },
+  {
+   "id": "s7-m02",
+   "s": 7,
+   "q": "Durante el proyecto de matrícula del SUM-UNMSM, la OGTI presenta una Solicitud de Cambio para agregar pago con Yape. La misma semana, el Vicerrectorado envía una queja formal porque la empresa proveedora incumplió plazos en otros tres contratos con la universidad. Según MoProSoft v1.3, ¿qué procesos deben atender cada hecho?",
+   "o": [
+    "El cambio lo atiende GPY en su Plan de Ventas y la queja la atiende APE",
+    "El cambio lo atiende DMS en Requerimientos y la queja la atiende GN",
+    "El cambio lo atiende APE en su Realización y la queja la atiende GPY",
+    "El cambio lo atiende GPR en Evaluación y la queja la atiende GR"
+   ],
+   "a": 2,
+   "exp": "Correcta: recibir y analizar Solicitudes de Cambio es tarea de OPE.1 APE, actividad A2 Realización, objetivo O3; la queja sobre la relación global con la empresa es del objetivo O4 de GES.2 GPY, Comentarios y Quejas del Cliente, porque GPY gestiona la cartera y la relación comercial. Distractores: invertirlos confunde cartera con proyecto específico; DMS ejecuta los requerimientos ya aprobados pero no decide el cambio, y GN fija la estrategia, no atiende quejas; GPR gestiona procesos y GR recursos, ninguno trata la queja de un cliente."
+  },
+  {
+   "id": "s7-m03",
+   "s": 7,
+   "q": "Un auditor de NYCE debe obtener el perfil de nivel de capacidad de cada proceso de una PYME mexicana y su nivel de madurez de capacidades. ¿Qué parte de la NMX-I-059-NYCE guía esa tarea y con qué apoyo normativo?",
+   "o": [
+    "La parte 02, que contiene los requisitos de procesos y su escala de nivel",
+    "La parte 03, que guía la implantación y fija cómo calcular la capacidad",
+    "La parte 01, que define conceptos y productos que sirven como evidencia",
+    "La parte 04, que combina la parte 02 con la NMX-I-15504/02 de la NYCE"
+   ],
+   "a": 3,
+   "exp": "Correcta: la NMX-I-059/04-NYCE es EvalProSoft, las directrices de evaluación; usa la parte 02 como modelo de referencia y el capítulo 5 de la NMX-I-15504/02-NYCE, equivalente a ISO/IEC 15504-2, como marco de medición. Distractores: la parte 02 es el modelo MoProSoft, define procesos pero no el método de evaluación; la 03 es la guía de implantación; la 01 es el glosario de conceptos y productos. Trampa típica: creer que el modelo y el método están en la misma parte."
+  },
+  {
+   "id": "s7-m04",
+   "s": 7,
+   "q": "Una empresa de São Paulo se evalúa con el MR-MPS-SW:2021. Evidencia GPR y REQ con CP-F; GCO, MED, GPC y ORG con CP-F; AQU excluido y justificado en el Plan de Avaliação; GRH implantado con CP-F; y PCP, ITP y VV ejecutados en los proyectos de forma gestionada sin proceso padrón. ¿Qué nivel le corresponde?",
+   "o": [
+    "Nivel E, porque GRH ya está implantado y AQU se excluyó con justificación",
+    "Nivel F, porque E exige todos sus procesos con la capacidad CP-E/D/C",
+    "Nivel D, porque PCP, ITP y VV ya se ejecutan en los proyectos evaluados",
+    "Nivel G, porque la exclusión de AQU impide reconocer el nivel F completo"
+   ],
+   "a": 1,
+   "exp": "Correcta: F exige GPR, REQ, GCO, MED, AQU, GPC y ORG con CP-F, y AQU puede excluirse si no se ejecuta; E agrega GRH pero además exige que todos los procesos alcancen CP-E/D/C, es decir proceso padrón con directrices de adaptación, verificación de efectividad y activos disponibles. Nada aquí tiene proceso padrón, por eso queda en F. Distractores: tener GRH no basta sin la capacidad; PCP, ITP y VV pertenecen a D y tampoco tienen la capacidad requerida; la exclusión justificada de AQU es válida y no rebaja a G."
+  },
+  {
+   "id": "s7-m05",
+   "s": 7,
+   "q": "Un evaluador formado con la versión 2012 del MPS revisa en 2026 una empresa nivel F con el MR-MPS-SW:2021 y pide las evidencias del proceso GQA. El Avaliador Líder le responde que ese proceso ya no existe. ¿Dónde quedó el aseguramiento de la calidad de proceso y producto?",
+   "o": [
+    "Se fusionó con la verificación y validación dentro del proceso VV",
+    "Pasó al proceso ORG junto con la gestión del portafolio de proyectos",
+    "Quedó repartido entre la capacidad CP-F y el proceso organizacional GPC",
+    "Sigue como proceso GQA del nivel F con su atributo de proceso AP 2.2"
+   ],
+   "a": 2,
+   "exp": "Correcta: en 2021 la QA deja de ser proceso; la capacidad CP-F exige verificación objetiva de que el proceso se sigue y evaluación objetiva de productos con registro y resolución de no conformidades, y GPC incluye la estrategia de garantía de calidad. Distractores: VV integra las antiguas VER y VAL, que son V&V del producto, no SQA; ORG absorbió el portafolio GPP, no la QA; GQA con AP 2.2 es la estructura de 2012, que ya no rige. Integra S1: QA es de proceso y producto, distinta del QC y de la V&V."
+  },
+  {
+   "id": "s7-m06",
+   "s": 7,
+   "q": "Una empresa brasileña evaluada en el nivel C del MR-MPS-SW quiere ser proveedora de un banco de Miami que exige en su contrato CMMI-DEV nivel de madurez 3. El gerente comercial sostiene que el certificado MPS basta. ¿Qué análisis integra correctamente MPS y CMMI?",
+   "o": [
+    "C equivale a ML4, porque B y A se definen por capacidades de cada proceso",
+    "C convalida ML3 de oficio, porque el MA-MPS es conforme a la ISO/IEC 33020",
+    "C queda por debajo de ML3, porque el ML3 corresponde al nivel B del MPS",
+    "C se aproxima a ML3, pero el banco igual puede exigir un appraisal CMMI"
+   ],
+   "a": 3,
+   "exp": "Correcta: la correspondencia aproximada es G y F con ML2, E, D y C con ML3, B con ML4 y A con ML5; pero es compatibilidad técnica, no convalidación: si el contrato exige CMMI, se necesita un appraisal del CMMI Institute, antes SCAMPI A, hoy Benchmark, visto en S6. Distractores: B se asocia a ML4, por eso C no es ML4; la conformidad del MA-MPS con 33020 no otorga ratings CMMI; ubicar ML3 en B corre la escala un nivel."
+  },
+  {
+   "id": "s7-m07",
+   "s": 7,
+   "q": "Una VSE limeña de 22 personas, fundada hace cinco años, mantiene tres proyectos en paralelo con dos equipos distintos y quiere certificarse con la serie ISO/IEC 29110. ¿Qué perfil del Generic Profile Group le corresponde?",
+   "o": [
+    "Basic, porque toda VSE de hasta 25 personas parte del perfil de base",
+    "Intermediate, porque gestiona varios proyectos con más de un equipo",
+    "Advanced, porque los proyectos paralelos exigen gestión del negocio",
+    "Entry, porque cada proyecto paralelo dura menos de seis personas-mes"
+   ],
+   "a": 1,
+   "exp": "Correcta: Intermediate está dirigido a VSE con varios proyectos simultáneos y más de un equipo; agrega gestión organizacional de cartera, recursos y procesos sobre PM y SI. Distractores: Basic supone un proyecto a la vez y un solo equipo; Advanced es para VSE que quieren crecer como empresa independiente con gestión del negocio; Entry es para startups de menos de 3 años o proyectos de unas 6 personas-mes, y la empresa tiene 5 años."
+  },
+  {
+   "id": "s7-m08",
+   "s": 7,
+   "q": "En el perfil Básico de ISO/IEC 29110, un Project Manager ya aprobó el Project Plan con el cliente. Al empezar la implementación, el Technical Leader reúne al Work Team para revisar ese plan y obtener su compromiso, y prepara el ambiente de desarrollo. ¿A qué actividad pertenece esa tarea?",
+   "o": [
+    "PM.1, porque toda revisión del plan forma parte de su verificación",
+    "PM.2, porque la revisión ocurre durante la ejecución del plan",
+    "SI.1, porque el plan ya existe y se revisa con el equipo de trabajo",
+    "PM.3, porque compara el plan contra el avance del equipo técnico"
+   ],
+   "a": 2,
+   "exp": "Correcta: SI.1 Software Implementation Initiation revisa el Project Plan con el equipo para lograr entendimiento común y compromiso y prepara el ambiente de implementación; es el análogo de la fase A1 Inicio de DMS en MoProSoft. Distractores: PM.1 elabora, verifica y aprueba el plan, ya hecho; PM.2 registra avance, analiza Change Requests y hace reuniones de revisión; PM.3 compara avance real contra plan y registra acciones correctivas."
+  },
+  {
+   "id": "s7-m09",
+   "s": 7,
+   "q": "En un proyecto de una VSE para el MEF bajo ISO/IEC 29110 Basic, el cliente pide agregar un reporte; el equipo analiza su impacto en costo, plazo y aspecto técnico. Dos semanas después, el PM compara el avance real con el planificado y registra acciones correctivas. ¿Qué actividades del proceso PM corresponden?",
+   "o": [
+    "PM.3 para el análisis del cambio y PM.2 para comparar avance y plan",
+    "PM.2 para el análisis del cambio y PM.3 para comparar avance y plan",
+    "PM.1 para el análisis del cambio y PM.3 para comparar avance y plan",
+    "SI.2 para el análisis del cambio y PM.2 para comparar avance y plan"
+   ],
+   "a": 1,
+   "exp": "Correcta: PM.2 Project Plan Execution incluye analizar y evaluar las Change Requests por costo, plazo e impacto técnico; PM.3 Project Assessment and Control compara el avance real con el plan y genera el Correction Register. Distractores: invertirlos es la confusión más frecuente; PM.1 planifica, no evalúa cambios en curso; SI.2 trabaja la Requirements Specification, pero la decisión sobre el cambio y su impacto es de gestión del proyecto."
+  },
+  {
+   "id": "s7-m10",
+   "s": 7,
+   "q": "Una PYME evaluada con IT Mark obtiene 72 % de criterios en gestión del negocio, seguridad de la información institucionalizada de nivel 3 y, en desarrollo, ningún proceso CMMI no implementado con 12 procesos largamente o totalmente implementados. ¿Qué resultado global recibe?",
+   "o": [
+    "Elite, porque seguridad y desarrollo superan los umbrales de Elite",
+    "Premium, porque el área de negocio no llega al umbral de Elite",
+    "Elite, porque el resultado global toma el área de mejor puntaje",
+    "Basic, porque el negocio no supera el setenta y cinco por ciento"
+   ],
+   "a": 1,
+   "exp": "Correcta: Elite exige negocio de al menos 75 %, SI de nivel 3 y más de 10 procesos largamente o totalmente implementados; el negocio con 72 % cumple Premium, que pide al menos 60 %, y el nivel global se limita por el área más baja. Distractores: dos áreas en Elite no compensan la tercera; tomar el mejor puntaje invierte la regla; Basic exige solo 50 % en negocio, y 72 % supera el umbral de Premium."
+  },
+  {
+   "id": "s7-m11",
+   "s": 7,
+   "q": "Interbank pide a un proveedor de 15 personas evidencia integral de sostenibilidad del negocio, protección de datos y madurez en desarrollo, todo en una sola evaluación de bajo costo. El proveedor propone IT Mark. ¿Cuál descripción de IT Mark es la correcta?",
+   "o": [
+    "Norma de la ISO que define tres perfiles de procesos para micro PYMEs TI",
+    "Modelo de procesos del ESI derivado de MoProSoft con tres categorías",
+    "Premio europeo basado en EFQM que otorga de una a tres estrellas TI",
+    "Esquema del ESI que integra 10², ISO/IEC 27001 y CMMI de niveles 2 y 3"
+   ],
+   "a": 3,
+   "exp": "Correcta: IT Mark, lanzado por el ESI en 2005, es un esquema de certificación que combina el modelo 10-Squared para negocio, ISO/IEC 27001/27002 para seguridad y un CMMI-DEV simplificado de niveles 2 y 3 para desarrollo, con evaluación basada en ISO/IEC 15504 y niveles Basic, Premium y Elite. Distractores: no es norma ISO; los perfiles son de 29110; no deriva de MoProSoft, que es mexicano; no es un premio EFQM, aunque el reporte agrupe criterios de negocio con los criterios EFQM vistos en S2."
+  },
+  {
+   "id": "s7-m12",
+   "s": 7,
+   "q": "Una PYME de Trujillo que ya documentó sus procesos con MoProSoft decide migrar al Modelo de Procesos de COMPETISOFT. ¿Qué cambios estructurales debe esperar el Responsable de Gestión de Procesos?",
+   "o": [
+    "APE se divide en PM y SI, y DMS se renombra como Desarrollo de Software",
+    "DMS se divide en DS y MS, y GPY se renombra como Gestión de Cartera",
+    "GR se fusiona con GPR, y aparece una cuarta categoría de Soporte",
+    "DIR se fusiona con GER, y DMS pasa a ser un subproceso de la APE"
+   ],
+   "a": 1,
+   "exp": "Correcta: COMPETISOFT mantiene las tres categorías DIR, GER y OPE y el patrón de procesos, pero divide DMS en Desarrollo de Software y Mantenimiento de Software, este inspirado en MANTEMA, y renombra Gestión de Proyectos como Gestión de Cartera de Proyectos; además toma CMMI-DEV v1.2 en lugar de CMM v1.1. Distractores: PM y SI son procesos de ISO/IEC 29110, no de COMPETISOFT; no hay categoría de Soporte, que es una agrupación de CMMI; DIR y GER siguen separadas."
+  },
+  {
+   "id": "s7-m13",
+   "s": 7,
+   "q": "Un consultor presenta PmCOMPETISOFT a una mipyme de Popayán como si fuera un modelo alternativo de procesos. El asesor académico lo corrige. ¿Qué es realmente PmCOMPETISOFT?",
+   "o": [
+    "Un proceso de mejora que despliega Gestión de Negocio y deriva de IDEAL",
+    "Un método de evaluación que despliega la APE y deriva de Light MECPDS",
+    "Un modelo de procesos que despliega DS y MS y deriva de la MANTEMA",
+    "Un proceso de mejora que despliega Gestión de Procesos y deriva de Agile SPI"
+   ],
+   "a": 3,
+   "exp": "Correcta: PmCOMPETISOFT es un proceso ligero, iterativo e incremental para guiar la mejora en PYMEs y VSE; es un despliegue detallado del proceso Gestión de Procesos y deriva de Agile SPI-Process del proyecto colombiano SIMEP-SW. Distractores: se le compara con IDEAL del SEI, pero no despliega Gestión de Negocio; Light MECPDS es el método de valoración que usa, no lo que es; MANTEMA inspira el proceso de Mantenimiento de Software del modelo de procesos."
+  },
+  {
+   "id": "s7-m14",
+   "s": 7,
+   "q": "En un ciclo PmCOMPETISOFT, el equipo ya aplicó Light MECPDS y obtuvo el perfil de capacidad de APE y DS. Ahora el GGM prioriza las oportunidades de mejora, decide hacer dos iteraciones y asigna recursos y contingencias. ¿En qué actividad están y a qué fase de IDEAL equivale?",
+   "o": [
+    "Diagnóstico, que equivale a la fase Diagnosing del modelo IDEAL",
+    "Ejecución, que equivale a la fase Acting del modelo IDEAL del SEI",
+    "Instalación, que equivale a la fase Initiating del modelo IDEAL",
+    "Formulación, que equivale a la fase Establishing del modelo IDEAL"
+   ],
+   "a": 3,
+   "exp": "Correcta: el ciclo tiene Instalación, Diagnóstico, Formulación, Ejecución y Revisión; la Formulación produce el plan de mejora con prioridades, número de iteraciones, recursos y riesgos, y corresponde a Establishing de IDEAL. Distractores: el Diagnóstico terminó al obtener el perfil; la Ejecución define y pilota los procesos mejorados; la Instalación logra compromiso y alcance. Integra S3 y S4: es un PDCA de mejora, con Formulación como parte del Planificar."
+  },
+  {
+   "id": "s7-m15",
+   "s": 7,
+   "q": "Un gobierno regional exige a sus proveedores alineamiento con la NTP-ISO/IEC 12207:2016 vista en S5. Una VSE de 9 personas responde que adoptará el perfil Básico de la NTP-ISO/IEC 29110. ¿Cómo debe evaluarse esa respuesta?",
+   "o": [
+    "Es la versión de la 12207 para VSE, que la reemplaza en el sector público",
+    "Es un modelo ajeno a la 12207, construido sobre CMMI de niveles 2 y 3",
+    "Es un perfil de la 12207 para VSE, útil para alinearse sin reemplazarla",
+    "Es un modelo de madurez cuyo nivel 3 exige cumplir toda la norma 12207"
+   ],
+   "a": 2,
+   "exp": "Correcta: la 29110 define perfiles que son subconjuntos de ISO/IEC 12207 para software y 15288 para sistemas, adaptados a VSE; es una vía de alineamiento razonable y así la vio la ONGEI en 2015, pero no sustituye a la NTP-ISO/IEC 12207:2016. Distractores: no la reemplaza; no se basa en CMMI sino en 12207, 15288 y 15289 con MoProSoft como base; no tiene niveles de madurez sino perfiles Entry, Basic, Intermediate y Advanced."
+  },
+  {
+   "id": "s7-m16",
+   "s": 7,
+   "q": "En la versión coloreada v1.3 de MoProSoft, un equipo implantó en APE todas las prácticas marcadas en azul, pero omitió varias marcadas en amarillo, por lo que el proceso no logra su propósito. ¿Qué nivel de capacidad tendría APE?",
+   "o": [
+    "Nivel 2, porque lo azul corresponde a Gestionado y se evalúa aparte",
+    "Nivel 3, porque lo azul corresponde a Establecido en la versión 1.3",
+    "Nivel 0, porque sin lo amarillo no se logra el nivel 1 y no hay salto",
+    "Nivel 1, porque lo azul se reconoce como un avance parcial del nivel 1"
+   ],
+   "a": 2,
+   "exp": "Correcta: amarillo es nivel 1 Realizado, azul nivel 2 Gestionado, verde nivel 3 Establecido y rosa nivel 4 Predecible; los niveles son acumulativos como en ISO/IEC 15504 de S6, y si el proceso no logra su propósito queda en nivel 0 Incompleto. Distractores: lo azul no se evalúa aparte; azul no es Establecido; no existe reconocimiento parcial del nivel 1 por prácticas de nivel 2."
+  },
+  {
+   "id": "s7-m17",
+   "s": 7,
+   "q": "Una PYME madrileña recibe su reporte IT Mark. En el área de gestión del negocio, los porcentajes de adherencia se presentan agrupados según los criterios de un modelo de excelencia visto en la S2. ¿Cuál es ese agrupamiento?",
+   "o": [
+    "Los nueve criterios del modelo EFQM entre agentes y resultados",
+    "Los siete criterios del modelo Malcolm Baldrige de excelencia",
+    "Los diez criterios del Premio Deming otorgado por la JUSE",
+    "Las seis categorías del Ishikawa 6M aplicadas al negocio"
+   ],
+   "a": 0,
+   "exp": "Correcta: el reporte IT Mark agrupa los criterios de negocio según los 9 criterios EFQM, 5 agentes facilitadores y 4 resultados; en versiones posteriores IT Mark incorpora EFQM e ISO 9001 junto al 10-Squared. Distractores: Baldrige tiene 7 criterios pero es estadounidense y no es la referencia de este esquema europeo; el Premio Deming de la JUSE es japonés; el 6M es una herramienta de causa raíz, no un modelo de excelencia."
+  },
+  {
+   "id": "s7-m18",
+   "s": 7,
+   "q": "En MoProSoft, el RE revisa la Especificación de Requerimientos contra la plantilla y el estándar de documentación; luego el cliente la revisa para confirmar que describe lo que necesita. ¿Cómo se clasifican esas revisiones en el patrón de procesos?",
+   "o": [
+    "La del RE es validación interna y la del cliente es una verificación",
+    "Las dos son verificaciones, una interna y otra externa al proyecto",
+    "La del RE es verificación y la del cliente es una validación externa",
+    "Las dos son validaciones, porque cada una recae sobre la especificación"
+   ],
+   "a": 2,
+   "exp": "Correcta: el patrón distingue Ver, comprobar contra lo especificado o estándares, y Val, comprobar que sirve para el uso previsto, interna o externa con el cliente, y recomienda validar después de verificar; coincide con la V&V de IEEE 1012 e ISO/IEC 12207 de S4 y S5. Distractores: invertir V&V es el error clásico de S1; ser externo no convierte una revisión en verificación; el objeto revisado no define el tipo, lo define el criterio de comparación."
+  },
+  {
+   "id": "s7-m19",
+   "s": 7,
+   "q": "Un alumno documenta con el patrón MoProSoft el proceso APE de su empresa. En el campo Indicadores escribe la fórmula de desviación porcentual del tiempo real frente al estimado, y en Metas cuantitativas anota el objetivo O1. ¿Cuál es la corrección adecuada?",
+   "o": [
+    "La fórmula es una medición M1 y el umbral del diez por ciento es la meta",
+    "La fórmula es un indicador I1 y el umbral del diez por ciento es la medición",
+    "La fórmula es una meta cuantitativa y el umbral es el indicador del objetivo",
+    "La fórmula es un objetivo O1 y el umbral es la guía de ajuste del proceso"
+   ],
+   "a": 0,
+   "exp": "Correcta: el indicador dice qué se evalúa, por ejemplo que el tiempo real esté acorde con lo estimado; la medición M1, en la sección de Prácticas, dice cómo obtener el dato, la fórmula; y la meta cuantitativa da el valor esperado, por ejemplo no más de 10 %. Distractores: llamar indicador a la fórmula y medición al umbral es justo la confusión a corregir; la meta no es una fórmula; la guía de ajuste regula modificaciones permitidas que no afecten objetivos, no umbrales. Integra S1 y S3: KPI con definición, fórmula y meta."
+  },
+  {
+   "id": "s7-m20",
+   "s": 7,
+   "q": "Un informe de 2026 afirma que la NTP 291.100 adoptó la ISO/IEC 29110 y que el INACAL la publicó en 2009. ¿Qué corrección es fiel a la cronología peruana?",
+   "o": [
+    "Es de 2009, adoptó MoProSoft y salió en la etapa normativa del INDECOPI",
+    "Es de 2009, adoptó COMPETISOFT y salió en la etapa normativa del INACAL",
+    "Es de 2012, adoptó la ISO/IEC 29110 y salió en la etapa del INDECOPI",
+    "Es de 2015, adoptó el MPS.BR y salió en la etapa normativa del INACAL"
+   ],
+   "a": 0,
+   "exp": "Correcta: la NTP-291.100-1:2009 se basó en MoProSoft, con numeración elegida para parecerse a la futura 29110, cuando la normalización estaba en el INDECOPI vía el CTN-ISSI; en 2012 se publicaron las NTP-ISO/IEC 29110 y desde 2015 la normalización pasó al INACAL. Distractores: COMPETISOFT usó la NTP para certificar a 5 empresas en 2010 pero no es su origen; 2012 corresponde a las NTP de la 29110, no a la 291.100; el MPS.BR nunca fue adoptado como NTP."
+  },
+  {
+   "id": "s7-m21",
+   "s": 7,
+   "q": "Una empresa brasileña nivel F del MR-MPS-SW:2021 planea llegar al nivel D. ¿Qué procesos nuevos debe incorporar en ese recorrido y con qué capacidad?",
+   "o": [
+    "GRH en E y luego PCP, ITP y VV en D, todos con capacidad CP-E/D/C",
+    "GDE en E y luego PCP, ITP y VV en D, todos con capacidad CP-E/D/C",
+    "GRH en E y luego DRE, VER y VAL en D, todos con la capacidad CP-F",
+    "DFP y AMP en E y luego GDE y GRI en D, todos con la capacidad CP-B"
+   ],
+   "a": 0,
+   "exp": "Correcta: en 2021, E agrega GRH y evoluciona GPC y ORG; D evoluciona GPR y REQ y agrega PCP, ITP y VV; desde E todos los procesos deben estar en CP-E/D/C. Distractores: GDE entra en C, no en E; DRE, VER y VAL son nombres de 2012 y CP-F es insuficiente; DFP, AMP y GRI pertenecen al modelo clásico y CP-B es la capacidad de B."
+  },
+  {
+   "id": "s7-m22",
+   "s": 7,
+   "q": "En la evaluación MA-MPS de una empresa de Recife, el equipo evidencia que varios procesos seleccionados usan técnicas estadísticas para prever el logro de objetivos de calidad y desempeño, pero todavía no seleccionan mejoras que remuevan causas comunes de variación. ¿Con qué se corresponde esa situación?",
+   "o": [
+    "Con CMMI ML4 y con capacidad 4 de ISO/IEC 15504 en procesos elegidos",
+    "Con CMMI ML5 y con capacidad 5 de ISO/IEC 15504 en procesos elegidos",
+    "Con CMMI ML3 y con capacidad 3 de ISO/IEC 15504 en procesos elegidos",
+    "Con CMMI ML2 y con capacidad 2 de ISO/IEC 15504 en procesos elegidos"
+   ],
+   "a": 0,
+   "exp": "Correcta: es CP-B, proceso previsible, que caracteriza el nivel B del MPS y se corresponde con CMMI ML4 y con la capacidad 4 Predecible de 15504/33020. Distractores: remover causas comunes de variación es CP-A, nivel A, equivalente a ML5 y CL5, y aún no ocurre; ML3 y CL3 son proceso definido, sin técnicas estadísticas; ML2 y CL2 son gestión básica. Integra S6 y S2: variación por causas comunes y especiales."
+  },
+  {
+   "id": "s7-m23",
+   "s": 7,
+   "q": "El área de desarrollo de un banco limeño con 3 000 empleados tiene 14 personas en un solo equipo y un proyecto a la vez. El jefe de TI cree que no puede usar ISO/IEC 29110 porque el banco es una gran empresa. ¿Qué es correcto?",
+   "o": [
+    "No, porque la VSE se mide por toda la empresa y no por cada una de sus áreas",
+    "Sí, pero tendría que usar el perfil Advanced por pertenecer a un gran banco",
+    "No, porque el WG24 limita la VSE a empresas con menos de diez empleados",
+    "Sí, porque una VSE puede ser un área o un proyecto de hasta 25 personas"
+   ],
+   "a": 3,
+   "exp": "Correcta: la 29110 define VSE como empresa, organización, departamento o proyecto de hasta 25 personas; un área de 14 personas con un proyecto y un equipo encaja en el perfil Basic. Distractores: el tamaño no se mide por toda la empresa; Advanced no depende de la casa matriz sino de querer crecer como empresa independiente; el umbral de 10 corresponde a la definición europea de microempresa, no a la VSE."
+  },
+  {
+   "id": "s7-m24",
+   "s": 7,
+   "q": "Al comparar las bases normativas de dos modelos para una tesis, un alumno debe indicar en qué se apoyó cada uno. ¿Cuál combinación es correcta?",
+   "o": [
+    "MoProSoft: ISO 12207 y CMMI-DEV 2 y 3; MPS-SW: ISO 9001 y el SW-CMM",
+    "MoProSoft: ISO 9000:2000 y CMM 2 y 3; MPS-SW: 12207, 330xx y CMMI-DEV",
+    "MoProSoft: EFQM y CMMI 4 y 5; MPS-SW: la ISO/IEC 25010 y la 15288",
+    "MoProSoft: ISO 27001 y CMM 2 y 3; MPS-SW: ISO 9000:2000 y la SPICE"
+   ],
+   "a": 1,
+   "exp": "Correcta: MoProSoft se apoya en ISO 9000:2000 y en los niveles 2 y 3 de CMM v1.1, con 15504 como marco y prácticas de PMBOK y SWEBOK; el MR-MPS-SW se basa en NBR ISO/IEC/IEEE 12207 y la familia ISO/IEC 330xx, compatible con CMMI-DEV v2.0. Distractores: invertir las bases; EFQM y 25010 son modelos de excelencia y de calidad de producto de S2 y S3, no bases de estos modelos; ISO 27001 es la base de seguridad de IT Mark."
+  },
+  {
+   "id": "s7-m25",
+   "s": 7,
+   "q": "Una empresa de Monterrey certificada en MoProSoft nivel 2 quiere certificarse en el perfil Básico de ISO/IEC 29110. ¿Qué procesos de MoProSoft cubren esencialmente los procesos del perfil?",
+   "o": [
+    "GPY cubre PM y DMS cubre SI; los procesos de DIR y OPE no se exigen",
+    "APE cubre PM y GPR cubre SI; los procesos de DIR y GES no se exigen",
+    "APE cubre PM y DMS cubre SI; los procesos de DIR y GER no se exigen",
+    "GN cubre PM y APE cubre SI; los procesos de GER y OPE no se exigen"
+   ],
+   "a": 2,
+   "exp": "Correcta: el WG24 eligió MoProSoft en 2006 como base; APE pasó a PM, con Planificación, Realización, Evaluación y Control y Cierre equivalentes a PM.1 a PM.4, y DMS pasó a SI, con sus seis fases equivalentes a SI.1 a SI.6. Los procesos de DIR y GER no los exige el Basic y reaparecen en Intermediate y Advanced. Distractores: GPY gestiona la cartera, no un proyecto; GPR gestiona procesos, no implementa software; GN es estrategia."
+  },
+  {
+   "id": "s7-m26",
+   "s": 7,
+   "q": "Los 13 países de COMPETISOFT necesitaban que una evaluación hecha en Perú fuera reconocida en Chile o México sin imponer un único método. ¿Cómo lo resolvió su Modelo de Evaluación?",
+   "o": [
+    "Cada país define su método conforme a la 15504-2 y 15504-4",
+    "Se impone SCAMPI C como método común de los países socios",
+    "Se usa EvalProSoft como método obligatorio en los países",
+    "Cada país define su método conforme a CMMI-DEV versión 1.2"
+   ],
+   "a": 0,
+   "exp": "Correcta: el Modelo de Evaluación no impone un método; cada país define el suyo conforme a ISO/IEC 15504-2 y 15504-4 para lograr reconocimiento mutuo, con escala de capacidad 0 a 5 y atributos PA de S6, y herramientas como Light MECPDS y EvalTOOL. Distractores: SCAMPI es del CMMI y de alto costo; EvalProSoft es mexicano y no obligatorio para los demás; CMMI-DEV v1.2 es una base del modelo de procesos, no un marco de medición conforme."
+  },
+  {
+   "id": "s7-m27",
+   "s": 7,
+   "q": "Un directorio de Lima debe ubicar seis decisiones dentro de MoProSoft: definir el Plan Estratégico 2027, decidir si se presenta propuesta a Rímac, contratar dos testers, comprar licencias de SonarQube, mantener el repositorio de lecciones aprendidas e investigar IA generativa para pruebas. ¿Qué asignación de las tres últimas es correcta?",
+   "o": [
+    "BSI para licencias, GPR para el repositorio y CO para la investigación",
+    "BSI para licencias, CO para el repositorio y GR para la investigación",
+    "RHAT para licencias, CO para el repositorio y BSI para la investigación",
+    "BSI para licencias, APE para el repositorio y GN para la investigación"
+   ],
+   "a": 1,
+   "exp": "Correcta: comprar licencias e infraestructura es GES.3.2 BSI; la Base de Conocimiento con plantillas y lecciones aprendidas es GES.3.3 CO; investigar tendencias tecnológicas es la actividad A3 del proceso padre GES.3 GR, no de sus subprocesos. Distractores: GPR define y mejora procesos pero no administra la Base de Conocimiento; RHAT es personal y clima; APE gestiona un proyecto y GN la estrategia, aunque reciba las Propuestas Tecnológicas."
+  }
+ ],
+ "fill": [
+  {
+   "id": "s7-f01",
+   "s": 7,
+   "t": "MoProSoft fue elaborado por el grupo de la Dra. {{1}} de la {{2}}, por encargo de la {{3}} de México dentro del programa PROSOFT.",
+   "r": [
+    [
+     "Hanna Oktaba",
+     "Oktaba"
+    ],
+    [
+     "UNAM",
+     "Universidad Nacional Autónoma de México",
+     "Universidad Nacional Autonoma de Mexico"
+    ],
+    [
+     "Secretaría de Economía",
+     "Secretaria de Economia",
+     "SE"
+    ]
+   ],
+   "exp": "Oktaba, de la Facultad de Ciencias de la UNAM y presidenta de la AMCIS, dirigió el grupo editor; el promotor fue la SE con PROSOFT, lanzado en 2002."
+  },
+  {
+   "id": "s7-f02",
+   "s": 7,
+   "t": "MoProSoft se declaró Norma Mexicana con el código {{1}} en el año {{2}}, y el organismo que normaliza y certifica es {{3}}.",
+   "r": [
+    [
+     "NMX-I-059",
+     "NMX-I-059-NYCE",
+     "NMX I 059"
+    ],
+    [
+     "2005"
+    ],
+    [
+     "NYCE",
+     "Normalización y Certificación Electrónica"
+    ]
+   ],
+   "exp": "NMX-I-059/01..04-NYCE-2005, declarada el 15 de agosto de 2005, con revisión en 2011."
+  },
+  {
+   "id": "s7-f03",
+   "s": 7,
+   "t": "Las tres categorías de MoProSoft son Alta Dirección o {{1}}, Gerencia o {{2}}, y Operación u {{3}}.",
+   "r": [
+    [
+     "DIR"
+    ],
+    [
+     "GER",
+     "GES"
+    ],
+    [
+     "OPE"
+    ]
+   ],
+   "exp": "La categoría Gerencia se abrevia GER, aunque sus procesos se numeran GES.1 a GES.3; ambas siglas se aceptan."
+  },
+  {
+   "id": "s7-f04",
+   "s": 7,
+   "t": "En MoProSoft, OPE.1 es {{1}} y OPE.2 es Desarrollo y {{2}} de Software.",
+   "r": [
+    [
+     "Administración de Proyectos Específicos",
+     "Administracion de Proyectos Especificos",
+     "APE"
+    ],
+    [
+     "Mantenimiento"
+    ]
+   ],
+   "exp": "APE gestiona un proyecto concreto; DMS realiza análisis, diseño, construcción, integración y pruebas en ciclos de 6 fases."
+  },
+  {
+   "id": "s7-f05",
+   "s": 7,
+   "t": "El método de evaluación de MoProSoft se llama {{1}} y corresponde a la parte {{2}} de la NMX-I-059.",
+   "r": [
+    [
+     "EvalProSoft"
+    ],
+    [
+     "04",
+     "4",
+     "cuatro"
+    ]
+   ],
+   "exp": "La parte 02 es el modelo de procesos; la 04 es EvalProSoft, apoyada en la NMX-I-15504/02-NYCE."
+  },
+  {
+   "id": "s7-f06",
+   "s": 7,
+   "t": "El programa MPS.BR nació en {{1}}, lo coordina la asociación {{2}} y su nivel de madurez más bajo es el {{3}}.",
+   "r": [
+    [
+     "2003"
+    ],
+    [
+     "SOFTEX"
+    ],
+    [
+     "G",
+     "nivel G"
+    ]
+   ],
+   "exp": "Siete niveles de G a A; G Parcialmente Gerenciado es el inicial."
+  },
+  {
+   "id": "s7-f07",
+   "s": 7,
+   "t": "Los componentes clásicos del MPS son el modelo de referencia MR-MPS, el método de evaluación {{1}} y el modelo de negocio {{2}}.",
+   "r": [
+    [
+     "MA-MPS",
+     "MA MPS"
+    ],
+    [
+     "MN-MPS",
+     "MN MPS"
+    ]
+   ],
+   "exp": "La guía de 2021 habla de cinco componentes al separar MR-MPS-SW, MR-MPS-SV y MR-MPS-RH."
+  },
+  {
+   "id": "s7-f08",
+   "s": 7,
+   "t": "En el MR-MPS-SW, el nivel F se llama {{1}}, el nivel B {{2}} y el nivel A {{3}}.",
+   "r": [
+    [
+     "Gerenciado",
+     "Gestionado"
+    ],
+    [
+     "Gerenciado Quantitativamente",
+     "Gestionado cuantitativamente",
+     "Gerenciado Cuantitativamente"
+    ],
+    [
+     "Em Otimização",
+     "Em Otimizacao",
+     "En optimización",
+     "En optimizacion"
+    ]
+   ],
+   "exp": "G Parcialmente Gerenciado, F Gerenciado, E Parcialmente Definido, D Largamente Definido, C Definido, B Gerenciado Quantitativamente, A Em Otimização."
+  },
+  {
+   "id": "s7-f09",
+   "s": 7,
+   "t": "COMPETISOFT fue un proyecto del programa {{1}}, dirigido por el Dr. {{2}}, con participación de {{3}} países entre 2006 y 2008.",
+   "r": [
+    [
+     "CYTED"
+    ],
+    [
+     "Mario Piattini",
+     "Piattini"
+    ],
+    [
+     "13",
+     "trece"
+    ]
+   ],
+   "exp": "Proyecto 506AC0287; la directora técnica fue Hanna Oktaba y en Perú participó el GIDIS-PUCP."
+  },
+  {
+   "id": "s7-f10",
+   "s": 7,
+   "t": "El ciclo de PmCOMPETISOFT tiene cinco actividades: Instalación, {{1}}, {{2}}, Ejecución y {{3}}.",
+   "r": [
+    [
+     "Diagnóstico",
+     "Diagnostico"
+    ],
+    [
+     "Formulación",
+     "Formulacion"
+    ],
+    [
+     "Revisión",
+     "Revision"
+    ]
+   ],
+   "exp": "Equivalen a Initiating, Diagnosing, Establishing, Acting y Learning del modelo IDEAL del SEI."
+  },
+  {
+   "id": "s7-f11",
+   "s": 7,
+   "t": "IT Mark fue lanzado por el {{1}} en {{2}}, y su área de gestión del negocio usa el modelo {{3}}.",
+   "r": [
+    [
+     "ESI",
+     "European Software Institute"
+    ],
+    [
+     "2005"
+    ],
+    [
+     "10-Squared",
+     "10²",
+     "10 Squared",
+     "Ten-Squared"
+    ]
+   ],
+   "exp": "Las otras dos áreas usan ISO/IEC 27001/27002 para seguridad y CMMI-DEV simplificado de niveles 2 y 3 para desarrollo."
+  },
+  {
+   "id": "s7-f12",
+   "s": 7,
+   "t": "Los tres niveles de IT Mark, de una a tres estrellas, son Basic, {{1}} y {{2}}.",
+   "r": [
+    [
+     "Premium"
+    ],
+    [
+     "Elite"
+    ]
+   ],
+   "exp": "Negocio de al menos 50, 60 y 75 % respectivamente; el resultado global lo limita el área más baja."
+  },
+  {
+   "id": "s7-f13",
+   "s": 7,
+   "t": "La ISO/IEC 29110 define VSE como una entidad de hasta {{1}} personas; la elaboró el {{2}} del ISO/IEC JTC 1/SC 7, y su perfil Básico tiene los procesos {{3}} y SI.",
+   "r": [
+    [
+     "25",
+     "veinticinco"
+    ],
+    [
+     "WG24",
+     "WG 24",
+     "Working Group 24"
+    ],
+    [
+     "PM",
+     "Project Management",
+     "Gestión de Proyecto"
+    ]
+   ],
+   "exp": "PM es Project Management y SI es Software Implementation."
+  },
+  {
+   "id": "s7-f14",
+   "s": 7,
+   "t": "Los cuatro perfiles del Generic Profile Group de la 29110 son {{1}}, Basic, {{2}} y {{3}}.",
+   "r": [
+    [
+     "Entry"
+    ],
+    [
+     "Intermediate"
+    ],
+    [
+     "Advanced"
+    ]
+   ],
+   "exp": "Son perfiles acumulativos, no niveles de madurez."
+  },
+  {
+   "id": "s7-f15",
+   "s": 7,
+   "t": "En mayo de {{1}}, el WG24 eligió a {{2}} como base del proyecto que originó la ISO/IEC 29110.",
+   "r": [
+    [
+     "2006"
+    ],
+    [
+     "MoProSoft"
+    ]
+   ],
+   "exp": "APE pasó a ser PM y DMS pasó a ser SI."
+  },
+  {
+   "id": "s7-f16",
+   "s": 7,
+   "t": "En Perú, la {{1}} de 2009 adoptó MoProSoft; desde 2015 la normalización técnica pasó del INDECOPI al {{2}}.",
+   "r": [
+    [
+     "NTP 291.100",
+     "NTP-291.100",
+     "NTP 291.100-1",
+     "NTP-291.100-1"
+    ],
+    [
+     "INACAL",
+     "Instituto Nacional de Calidad"
+    ]
+   ],
+   "exp": "En 2012 se publicaron las NTP-ISO/IEC 29110-1, TR 29110-3 y RT TR 29110-5-1-2."
+  },
+  {
+   "id": "s7-f17",
+   "s": 7,
+   "t": "Las guías, plantillas y ejemplos gratuitos que apoyan la implantación de la 29110 se llaman {{1}}.",
+   "r": [
+    [
+     "Deployment Packages",
+     "DP",
+     "paquetes de despliegue"
+    ]
+   ],
+   "exp": "Existen DP de requisitos, arquitectura, V&V, gestión de proyecto y configuración, entre otros."
+  },
+  {
+   "id": "s7-f18",
+   "s": 7,
+   "t": "En MoProSoft v1.3, el nivel 1 de capacidad se llama {{1}} y se marca en amarillo; el nivel 2 se marca en {{2}}; el nivel 3 se llama {{3}} y se marca en verde.",
+   "r": [
+    [
+     "Realizado"
+    ],
+    [
+     "azul"
+    ],
+    [
+     "Establecido"
+    ]
+   ],
+   "exp": "El nivel 4 Predecible se marca en rosa y el 5 Optimizado no tiene color."
+  },
+  {
+   "id": "s7-f19",
+   "s": 7,
+   "t": "En el MR-MPS-SW:2021, la capacidad exigida en el nivel G es {{1}} y la del nivel F es {{2}}.",
+   "r": [
+    [
+     "CP-G",
+     "CP G"
+    ],
+    [
+     "CP-F",
+     "CP F"
+    ]
+   ],
+   "exp": "Luego CP-E/D/C para E, D y C; CP-B para B y CP-A para A."
+  },
+  {
+   "id": "s7-f20",
+   "s": 7,
+   "t": "El patrón de procesos de MoProSoft tiene tres partes: Definición general, {{1}} y {{2}}.",
+   "r": [
+    [
+     "Prácticas",
+     "Practicas"
+    ],
+    [
+     "Guías de ajuste",
+     "Guias de ajuste"
+    ]
+   ],
+   "exp": "Las guías de ajuste permiten modificaciones que no afecten los objetivos del proceso."
+  }
+ ],
+ "casos": [
+  {
+   "id": "s7-c01",
+   "s": [
+    7,
+    5,
+    6
+   ],
+   "titulo": "Elegir modelo para una VSE limeña que licita con el Estado",
+   "enunciado": "<p><b>AndesCode S.A.C.</b> tiene 18 colaboradores, factura S/ 2,4 M al año y ejecuta un proyecto grande a la vez, un sistema de trámite documentario para municipalidades, con un único equipo Scrum. Datos del último año: 10 proyectos cerrados, 4 con retraso mayor al 20 %; ninguna SRS formal; los requisitos se guardan en hojas sueltas sin versión; 0 actas de aceptación firmadas; 31 Change Requests aceptadas por correo, sin análisis de impacto.</p><p>La empresa quiere licitar en 12 meses con entidades que piden alineamiento con la NTP-ISO/IEC 12207:2016. Presupuesto de mejora: S/ 60 000. Un socio propone CMMI ML3 con appraisal Benchmark; otro, MPS-SW nivel G; un tercero, ISO/IEC 29110.</p>",
+   "preguntas": [
+    "Elija el modelo y justifique con al menos cuatro criterios: tamaño, número de proyectos y equipos, mercado, costo y plazo.",
+    "Mapee cada problema observado a una actividad concreta del modelo elegido.",
+    "Calcule el porcentaje actual de proyectos con retraso y proponga tres KPI con fórmula y meta.",
+    "Indique la relación del modelo elegido con la NTP-ISO/IEC 12207:2016 y con la escala de capacidad de la ISO/IEC 15504/33000.",
+    "Proponga una alternativa B si la empresa crece a 40 personas con tres proyectos simultáneos."
+   ],
+   "solucion": "<h4>1. Modelo</h4><p><b>ISO/IEC 29110 perfil Básico</b>, vía NTP-ISO/IEC 29110 del INACAL. Es VSE porque 18 ≤ 25; tiene un proyecto a la vez y un equipo, que es la definición del Basic; el mercado es el Estado peruano, que conoce las NTP; los TR y los DP son gratuitos y la auditoría dura 1 a 2 días, viable con S/ 60 000 en 12 meses. CMMI ML3 es desproporcionado en costo y plazo, de 18 a 24 meses. MPS-SW G es técnicamente válido, pero poco reconocido en compras públicas peruanas.</p><h4>2. Mapeo</h4><ul><li>Retrasos: PM.1, con estimación de esfuerzo, calendario y riesgos, y PM.3, con comparación real contra plan y Correction Register.</li><li>Sin SRS: SI.2, con Requirements Specification verificada y validada con el cliente.</li><li>Sin versionado: PM.1, estrategia de control de versiones y Project Repository, y PM.2, respaldo y recuperación.</li><li>Sin actas: PM.4, Acceptance Record.</li><li>Cambios por correo: PM.2, análisis de Change Requests por costo, plazo e impacto técnico.</li></ul><h4>3. KPI</h4><p>Retraso actual: 4/10 = 40 %.</p><ul><li>% de proyectos con desviación de plazo ≤ 10 % = proyectos dentro de rango / total × 100; meta ≥ 80 %.</li><li>% de Change Requests con análisis de impacto antes de implementarse; meta 100 %.</li><li>% de requisitos con trazabilidad completa en el Traceability Record; meta ≥ 95 %.</li></ul><h4>4. Relación normativa</h4><p>La 29110 es un perfil, un subconjunto de la 12207 para VSE: alinea sin reemplazar la NTP-ISO/IEC 12207:2016 de S5. Su guía de evaluación 29110-3 es conforme a 15504/33000 de S6, por lo que los procesos PM y SI pueden valorarse con la escala de capacidad 0 a 5.</p><h4>5. Alternativa B</h4><p>Con 40 personas deja de ser VSE como organización: puede mantener 29110 por departamento o proyecto de hasta 25, pasar a <b>Intermediate</b> si sigue en ese tamaño, o migrar a CMMI ML2 o MPS-SW F si exporta.</p>",
+   "criterios": [
+    "Elige 29110 Basic con al menos cuatro criterios correctos.",
+    "Descarta CMMI ML3 por costo y plazo con argumento.",
+    "Mapea los cinco problemas a PM.1, PM.2, PM.3, PM.4 y SI.2 sin errores.",
+    "Calcula 40 % y define KPI con fórmula y meta.",
+    "Explica 29110 como perfil de la 12207 y su evaluación conforme a 15504/33000.",
+    "No menciona niveles de madurez en la 29110."
+   ]
+  },
+  {
+   "id": "s7-c02",
+   "s": [
+    7,
+    6
+   ],
+   "titulo": "EvalProSoft para un proveedor de la SUNAT",
+   "enunciado": "<p>La SUNAT planea tercerizar el mantenimiento de un aplicativo de declaraciones y pide una <b>evaluación de capacidades del proveedor</b> a <b>DataInca</b>, empresa de 70 personas que usa MoProSoft. Además, DataInca contrató una evaluación para la acreditación de capacidades. El perfil certificado es:</p><ul><li>GN = 1, GPR = 2, GPY = 2, GR = 2</li><li>RHAT = 3, BSI = 2, CO = 2</li><li>APE = 3, DMS = 3</li></ul><p>El gerente publica en LinkedIn que DataInca es nivel 3 porque la Operación, que es lo que importa al cliente, está en 3. El promedio del perfil es 2,2.</p>",
+   "preguntas": [
+    "Determine el nivel de madurez de capacidades y explique la regla.",
+    "Explique qué procesos evaluaría la SUNAT en la evaluación del proveedor y por qué difiere de la acreditación.",
+    "Indique qué proceso priorizar para subir de nivel y qué prácticas de color implantar.",
+    "Compare esta escala con los niveles de madurez de CMMI y con la capacidad de 15504 vistos en S6.",
+    "Si DMS llegara a 4, ¿cambia el nivel organizacional? Justifique."
+   ],
+   "solucion": "<h4>1. Nivel</h4><p><b>Nivel 1</b>: el nivel de madurez de capacidades es el máximo que alcanzan todos los 9 procesos, es decir el mínimo del perfil. GN = 1 limita a toda la organización. Ni el promedio 2,2 ni el valor de la Operación sirven.</p><h4>2. Evaluación del proveedor</h4><p>En este uso de EvalProSoft el cliente elige los procesos según el servicio: para mantenimiento tercerizado, <b>APE y DMS</b>, posiblemente CO para la gestión de configuración. Ahí DataInca sí muestra capacidad 3. La acreditación, en cambio, evalúa los 9 procesos con un Evaluador Certificado y da un nivel comparable en el mercado. La afirmación pública del gerente confunde ambos usos.</p><h4>3. Prioridad</h4><p>Elevar <b>GN a 2</b>: implantar las prácticas azules de Gestión de Negocio, como Plan Estratégico con indicadores, seguimiento y valoración planificados y controlados, conservando las amarillas. Con eso la empresa sube a nivel 2. Para nivel 3, todos deben llegar a verde.</p><h4>4. Comparación</h4><p>MoProSoft usa capacidad 0 a 5 por proceso, como 15504 con PA 1.1 a PA 5.2, y deriva un nivel organizacional por mínimo común. CMMI por etapas asigna niveles de madurez 1 a 5 según áreas de proceso. No son equivalentes uno a uno.</p><h4>5. DMS = 4</h4><p>No cambia: el nivel sigue limitado por GN = 1.</p>",
+   "criterios": [
+    "Concluye nivel 1 con la regla del mínimo.",
+    "Distingue evaluación del proveedor, acreditación y autoevaluación.",
+    "Prioriza GN e indica prácticas azules.",
+    "Diferencia capacidad por proceso de madurez CMMI.",
+    "Responde que DMS = 4 no cambia el nivel."
+   ]
+  },
+  {
+   "id": "s7-c03",
+   "s": [
+    7,
+    6,
+    1
+   ],
+   "titulo": "Nivel MR-MPS-SW:2021 y transición desde la versión 2012",
+   "enunciado": "<p><b>CodeSul Ltda.</b>, de Porto Alegre, tiene 45 personas y fue evaluada nivel F con la versión 2012 en 2023. En 2026 se re-evalúa con el MR-MPS-SW:2021. Evidencias:</p><ul><li>GPR y REQ con CP-F en sus 4 proyectos.</li><li>GCO, MED y ORG con CP-F; GPC con CP-F, incluyendo la estrategia de QA.</li><li>No subcontrata: AQU excluido y justificado.</li><li>GRH implantado, con proceso padrón y directrices de adaptación.</li><li>PCP, ITP y VV ejecutados de manera gestionada, sin proceso padrón.</li></ul><p>El director quiere anunciar nivel E y luego vender a un banco de Nueva York que exige CMMI ML3. El consultor de 2012 insiste en preparar evidencias de GQA, GPP y GRE.</p>",
+   "preguntas": [
+    "Determine el nivel alcanzado y justifique proceso por proceso.",
+    "Indique qué falta para E y para D.",
+    "Explique qué pasó con GQA, GPP, GRE, DRE, VER y VAL en la versión 2021.",
+    "Establezca la equivalencia con CMMI y qué necesita para el banco.",
+    "Relacione CP-F con la diferencia entre QA y QC vista en S1."
+   ],
+   "solucion": "<h4>1. Nivel</h4><p><b>Nivel F</b>. G: GPR y REQ con CP-F superan CP-G. F: GCO, MED, GPC y ORG con CP-F, y AQU excluido válidamente. E no se alcanza: aunque GRH tiene proceso padrón, E exige que todos los procesos estén en CP-E/D/C y los demás siguen en CP-F.</p><h4>2. Brechas</h4><ul><li>Para E: llevar GPR, REQ, GCO, MED, GPC, ORG y GRH a CP-E/D/C, con proceso padrón, adaptación, verificación de efectividad y activos disponibles; evolucionar GPC y ORG.</li><li>Para D: además evolucionar GPR y REQ e incorporar PCP, ITP y VV con CP-E/D/C.</li></ul><h4>3. Cambios 2012 a 2021</h4><p>GRE y DRE se unen en REQ; VER y VAL en VV; GQA desaparece y pasa a CP-F y GPC; GPP pasa a ORG; DFP y AMP pasan a GPC; GRI se integra en GPR. Preparar evidencias de GQA como proceso es trabajo innecesario.</p><h4>4. CMMI</h4><p>F se aproxima a CMMI ML2; ML3 se aproxima a C. Para el banco se necesita un appraisal CMMI del CMMI Institute, porque la compatibilidad no es convalidación. Ruta: subir a C en MPS, lo que acerca las prácticas de ML3, y luego un Benchmark.</p><h4>5. QA y QC</h4><p>CP-F exige verificar objetivamente que el proceso se sigue y evaluar productos contra estándares, con no conformidades registradas y resueltas. Eso es SQA, preventiva y orientada al proceso; el QC detecta defectos en el producto.</p>",
+   "criterios": [
+    "Concluye F y explica por qué no E.",
+    "Lista brechas para E y D con la capacidad correcta.",
+    "Describe al menos cuatro cambios 2012 a 2021.",
+    "Distingue equivalencia de convalidación con CMMI.",
+    "Relaciona CP-F con SQA y no con QC."
+   ]
+  },
+  {
+   "id": "s7-c04",
+   "s": [
+    7,
+    2,
+    4
+   ],
+   "titulo": "Plan de mejora con PmCOMPETISOFT en una mipyme cusqueña",
+   "enunciado": "<p><b>Kuntur Apps</b>, de Cusco, tiene 6 personas y hace apps turísticas. Nunca documentó su proceso: el gerente es también jefe de proyecto y programador. Datos de sus últimos 8 proyectos: 5 con retraso, promedio de 3,2 defectos críticos reportados por el cliente tras la entrega, 0 planes de prueba escritos. Tiene 4 meses, 160 horas-persona disponibles para la mejora y un consultor de una universidad. Quiere certificarse más adelante con NTP-ISO/IEC 29110.</p>",
+   "preguntas": [
+    "Asigne los roles de PmCOMPETISOFT a personas concretas.",
+    "Describa las cinco actividades del ciclo con semanas y productos.",
+    "Fije un objetivo de capacidad realista y su relación con 29110.",
+    "Relacione el ciclo con IDEAL y con el PDCA de S2.",
+    "Identifique tres riesgos y propongan tres KPI con meta."
+   ],
+   "solucion": "<h4>1. Roles</h4><ul><li><b>GGM</b>: gerente y responsable de proceso; el consultor asesora sin voto.</li><li><b>RMP</b>: consultor universitario.</li><li><b>RP</b>: desarrollador senior, responsable de APE y DS.</li><li><b>GMP</b>: dos practicantes capacitados.</li><li><b>E</b>: evaluadores formados en Light MECPDS, distintos del GMP para mayor objetividad.</li></ul><h4>2. Ciclo</h4><ol><li><b>Instalación</b>, semanas 1 y 2: convenio, compromiso, alcance del perfil base con APE y DS, plantilla de despegue.</li><li><b>Diagnóstico</b>, semanas 3 y 4: valoración con PvalCOMPETISOFT y Light MECPDS, perfil de capacidad y oportunidades.</li><li><b>Formulación</b>, semana 5: plan en 2 iteraciones; la primera con plan de proyecto y SRS, la segunda con plan de pruebas y control de versiones.</li><li><b>Ejecución</b>, semanas 6 a 14: definir procesos, pilotear en un proyecto, capacitar, medir.</li><li><b>Revisión</b>, semanas 15 y 16: revaloración, lecciones aprendidas y propuesta del segundo ciclo.</li></ol><h4>3. Objetivo</h4><p>Nivel 1, PA 1.1 en L o F, en APE y DS, e iniciar PA 2.1. Como APE y DS equivalen a PM y SI, se prepara el terreno para el perfil Basic.</p><h4>4. IDEAL y PDCA</h4><p>Instalación, Initiating; Diagnóstico, Diagnosing; Formulación, Establishing; Ejecución, Acting; Revisión, Learning. En PDCA: Planificar con Instalación, Diagnóstico y Formulación; Hacer con Ejecución; Verificar y Actuar con Revisión.</p><h4>5. Riesgos y KPI</h4><p>Riesgos: falta de tiempo del gerente multirol; abandono sin resultados rápidos; resistencia a documentar. En Popayán, 2 de 5 empresas no mejoraron por no ejecutar lo acordado. KPI: % de prácticas base implementadas, meta ≥ 80 %; defectos críticos tras entrega, de 3,2 a ≤ 1,5; esfuerzo de mejora, no más de 160 horas-persona; retraso actual 5/8 = 62,5 %, meta ≤ 30 %.</p>",
+   "criterios": [
+    "Asigna los cinco roles correctamente.",
+    "Ordena las cinco actividades con productos.",
+    "Objetivo realista de nivel 1 y vínculo APE y DS con PM y SI.",
+    "Mapea IDEAL y PDCA sin errores.",
+    "Calcula 62,5 % y propone KPI con meta."
+   ]
+  },
+  {
+   "id": "s7-c05",
+   "s": [
+    7,
+    3,
+    2
+   ],
+   "titulo": "IT Mark para un proveedor de billetera digital",
+   "enunciado": "<p><b>PagoSur</b>, de 15 personas, desarrolla la billetera de una caja municipal y quiere vender a Interbank. Ya está certificada en ISO/IEC 29110 Basic. Resultados IT Mark:</p><ul><li>Negocio: 58 % de criterios logrados.</li><li>Seguridad: procesos de SI documentados, pero sin institucionalizar; inventario de activos desactualizado.</li><li>Desarrollo: ningún proceso CMMI no implementado; 11 procesos largamente o totalmente implementados.</li></ul><p>El gerente afirma que tiene Elite porque el desarrollo supera 10 procesos, y que la 29110 ya cubre la seguridad.</p>",
+   "preguntas": [
+    "Determine el nivel IT Mark y justifique área por área.",
+    "Indique qué falta para Premium y para Elite.",
+    "Explique por qué la 29110 no cubre la seguridad de la información.",
+    "Proponga acciones de mejora usando herramientas de S3 y referencias de S2.",
+    "Defina tres KPI con meta."
+   ],
+   "solucion": "<h4>1. Nivel</h4><p><b>Basic</b>: negocio 58 % cumple Basic, que pide al menos 50 %, pero no Premium, que pide al menos 60 %. Seguridad en nivel 2, documentada, cumple Premium. Desarrollo cumple Elite. El global se limita por el área más baja.</p><h4>2. Brechas</h4><p>Premium: subir negocio a ≥ 60 %. Elite: negocio ≥ 75 % y SI institucionalizada de nivel 3.</p><h4>3. 29110 y SI</h4><p>La 29110 Basic cubre PM y SI de ingeniería; no exige un SGSI. Los hallazgos típicos en empresas con MPS-SW F y MoProSoft 2 confirman que los modelos de desarrollo no cubren SI. IT Mark usa ISO/IEC 27001/27002.</p><h4>4. Acciones</h4><ul><li>Inventario de activos y política de seguridad según ISO/IEC 27001.</li><li>SAST con SonarQube y DAST con OWASP ZAP, y OWASP SAMM para madurez de seguridad, de S3.</li><li>Negocio: plan estratégico y criterios EFQM de S2, como liderazgo, estrategia y resultados en clientes.</li></ul><h4>5. KPI</h4><ul><li>% de criterios de negocio logrados, meta ≥ 60 % en 6 meses.</li><li>% de activos inventariados y clasificados, meta 100 %.</li><li>Vulnerabilidades críticas abiertas por release, meta 0.</li></ul>",
+   "criterios": [
+    "Concluye Basic con la regla del área más baja.",
+    "Indica brechas exactas de Premium y Elite.",
+    "Explica que la 29110 no cubre SI.",
+    "Propone acciones con herramientas de S3 y EFQM de S2.",
+    "KPI con meta numérica."
+   ]
+  },
+  {
+   "id": "s7-c06",
+   "s": [
+    7,
+    4,
+    5
+   ],
+   "titulo": "Perfil Básico de la 29110 en un proyecto del MEF con SQAP",
+   "enunciado": "<p>Una VSE de 7 personas desarrolla para el <b>MEF</b> un tablero de seguimiento presupuestal. Tiene un SQAP según IEEE 730 de S4. Durante el proyecto ocurren: (a) revisión del SOW con el cliente; (b) análisis de impacto en costo de un nuevo reporte pedido por el MEF; (c) diseño de la arquitectura y de los casos de prueba; (d) firma del acta de aceptación; (e) revisión del Project Plan con el equipo al iniciar la implementación; (f) pruebas de integración y emisión del Test Report; (g) comparación de avance real y planificado con acciones correctivas; (h) entrega de la documentación de mantenimiento; (i) validación de la especificación de requisitos con el cliente; (j) respaldo del repositorio del proyecto.</p><p>Datos: 120 requisitos, 102 con trazabilidad completa; 14 Change Requests, 9 analizadas antes de implementarse; esfuerzo planificado 1 400 horas, real 1 610 horas.</p>",
+   "preguntas": [
+    "Asigne cada evento a PM.1 a PM.4 o SI.1 a SI.6.",
+    "Calcule trazabilidad, % de Change Requests analizadas y desviación de esfuerzo.",
+    "Relacione las actividades con procesos de la ISO/IEC/IEEE 12207:2017 y con el SQAP.",
+    "Indique los equivalentes en MoProSoft de PM y SI y de tres productos.",
+    "Proponga acciones correctivas con KPI."
+   ],
+   "solucion": "<h4>1. Asignación</h4><p>(a) PM.1; (b) PM.2; (c) SI.3; (d) PM.4; (e) SI.1; (f) SI.5; (g) PM.3; (h) SI.6; (i) SI.2; (j) PM.2.</p><h4>2. Cálculos</h4><ul><li>Trazabilidad: 102/120 = 85 %.</li><li>Change Requests analizadas: 9/14 = 64,3 %.</li><li>Desviación de esfuerzo: (1 610 − 1 400)/1 400 = 15 %.</li></ul><h4>3. 12207 y SQAP</h4><p>PM.1 y PM.3 corresponden a Planificación del Proyecto y Evaluación y Control del Proyecto; PM.2 con cambios, a Gestión de Configuración; SI.2 a Definición de Requisitos; SI.5 a Integración y Verificación; la validación de SI.2 a Validación. El SQAP documenta revisiones, auditorías y criterios de salida que respaldan las verificaciones de PM y SI.</p><h4>4. MoProSoft</h4><p>PM equivale a APE y SI a DMS. Project Plan a Plan del Proyecto y Plan de Desarrollo; Acceptance Record a Documento de Aceptación del Cliente; Traceability Record a Registro de Rastreo.</p><h4>5. Acciones</h4><ul><li>Toda Change Request pasa por análisis en PM.2 antes de implementarse; meta 100 %.</li><li>Completar trazabilidad en SI.3 y SI.4; meta ≥ 95 %.</li><li>Recalibrar estimación en PM.1 con datos históricos; desviación de esfuerzo ≤ 10 %.</li></ul>",
+   "criterios": [
+    "Asigna al menos 9 de 10 eventos; (e) es SI.1 y (b) es PM.2.",
+    "Calcula 85 %, 64,3 % y 15 %.",
+    "Relaciona con procesos de la 12207:2017 y con el SQAP.",
+    "Identifica APE y DMS y tres productos equivalentes.",
+    "Acciones con KPI y meta."
+   ]
+  }
+ ]
+}

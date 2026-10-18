@@ -1,0 +1,755 @@
+<h1>Normas y modelos de calidad · Ficha completa para el parcial (S1–S7)</h1>
+<p class="lead">Esta página junta en un solo lugar <b>todas las normas, estándares y modelos</b> que aparecen en las Semanas 1 a 7 del sílabo de Calidad de Software (20W0703, FISI-UNMSM, Mg. Ana María Huayna Dueñas). Cada norma tiene su <b>ficha</b> (código exacto, organismo emisor, versión, propósito, estructura, niveles o procesos, relación con otras normas y un ejemplo peruano) y un recuadro de <b>trampas de examen</b>. Primero vienen un <b>mapa general</b> y una <b>línea de tiempo</b>. Luego las fichas, en el orden en que aparecen en el curso: gestión de la calidad (ISO 9000/9001, TQM), calidad del <b>producto</b> (ISO 9126, SQuaRE/25010, 14598), normas IEEE de <b>aseguramiento, V&amp;V, revisiones y pruebas</b> (730, 1012, 1028, 829/29119), <b>procesos del ciclo de vida</b> (12207 y la NTP peruana), <b>evaluación de capacidad y madurez</b> (15504, 33000, CMMI) y <b>modelos para PYMEs y VSE</b> (MoProSoft, MPS.BR, COMPETISOFT, IT Mark, 29110). Al final hay comparativas cruzadas, un árbol de decisión para elegir norma y un glosario. Regla de oro: <b>en el examen manda lo que dice la profesora</b>. Cuando la norma oficial dice otra cosa, la diferencia va marcada en un recuadro «Ojo».</p>
+<div class="clave"><h4>Ideas clave</h4><ul>
+<li><b>Cinco tipos de norma o modelo:</b> de <b>gestión</b> (ISO 9001, ISO/IEC 27001), de <b>producto</b> (ISO/IEC 9126 → 25010), de <b>proceso</b> (ISO/IEC/IEEE 12207, NTP-ISO/IEC 12207:2016, ISO/IEC 29110), de <b>evaluación de capacidad o madurez</b> (ISO/IEC 15504 → 33000, CMMI, MoProSoft/EvalProSoft, MPS.BR) y de <b>plan o documento</b> (IEEE 730 SQAP, IEEE 1012 SVVP, IEEE 829 / 29119-3). La pregunta típica del examen es «¿de qué tipo es esta norma?».</li>
+<li><b>Modelos TQM (S2):</b> Deming (Japón, <b>1951</b>, JUSE, PHVA), Malcolm Baldrige (EE. UU., <b>1987</b>, NIST, 7 criterios), EFQM (Europa, <b>1991/1992</b>, RADAR), Iberoamericano (FUNDIBEQ, <b>1999</b>, se basa en EFQM), PNC Perú (CGC, secretaría técnica en CDI-SNI, se alinea con <b>Baldrige</b>), Six Sigma (Motorola, <b>3,4 DPMO</b>, DMAIC).</li>
+<li><b>Producto:</b> ISO 9126 tenía <b>6</b> características (la clase usa la regla FURPEM). ISO/IEC 25010:2011 tiene <b>8</b> (la versión de clase). ISO/IEC 25010:2023 tiene <b>9</b>: agrega <i>Safety</i>, «Usabilidad» pasa a llamarse «Capacidad de interacción» y «Portabilidad» pasa a «Flexibilidad».</li>
+<li><b>12207 en sus tres versiones:</b> <b>1995</b> con 3 categorías y 17 procesos · <b>2008</b> (equivale a la <b>NTP 2016</b>) con 7 grupos y 43 procesos · <b>2017</b> (ISO/IEC/IEEE) con 4 grupos y <b>30</b> procesos (2 + 6 + 8 + 14).</li>
+<li><b>NTP-ISO/IEC 12207:2016</b> (3.ª ed.): la aprobó <b>INACAL</b> el 16-jul-2016. La <b>RM N.° 041-2017-PCM</b> (feb-2017) la hizo de uso <b>obligatorio</b> en las entidades del <b>SNI</b>.</li>
+<li><b>Capacidad</b> (CL) se mide para UN proceso. <b>Madurez</b> (ML) se mide para la ORGANIZACIÓN. SPICE: CL0–5, 9 PA, escala N/P/L/F. CMMI v1.3: ML1–5 y CL0–3. CMMI V2.0/V3.0: ML0–5 y CL0–5.</li>
+<li><b>ISO/IEC 15504 fue retirada</b> y la reemplaza la familia <b>ISO/IEC 330xx</b> (33001–33004, 33020, 33061…). La 12207 cumple el papel de <b>PRM</b>.</li>
+<li><b>CMMI no es norma ISO</b>: es un <b>modelo</b> de SEI-CMU, hoy del CMMI Institute (ISACA). Formalmente se <i>valora</i> (SCAMPI A o Benchmark, vigente 3 años); no se «certifica».</li>
+<li><b>Modelos para PYMEs:</b> MoProSoft (México, NMX-I-059, 3 categorías y 9 procesos) · MPS.BR (Brasil, SOFTEX, 7 niveles de <b>G a A</b>) · COMPETISOFT (CYTED, 2006–2008, PUCP) · IT Mark (ESI-Tecnalia, 1★ a 3★) · ISO/IEC 29110 (VSE de ≤25 personas, perfiles; el Básico tiene <b>PM + SI</b>).</li>
+<li><b>IEEE:</b> 730 regula el SQA/SQAP · 1012 la V&amp;V por niveles de integridad · 1028 los 5 tipos de revisión y auditoría · 829 la documentación de pruebas, hoy reemplazada por <b>ISO/IEC/IEEE 29119</b>.</li>
+<li>Actualizaciones de 2026: salió <b>ISO 9001:2026</b> (16-sep-2026) y el marco <b>Baldrige 2026</b> pasó a 6 categorías. Para el parcial, contesta con la versión que se vio en clase (ISO 9001:2015, Baldrige con 7 criterios) y menciona la actualización solo como valor agregado.</li>
+</ul></div>
+
+<section id="mapa-general">
+<h2>1. Mapa general de normas y modelos</h2>
+<p>Siglas de organismos que aparecen en la tabla: <abbr title="International Organization for Standardization">ISO</abbr> (Organización Internacional de Normalización), <abbr title="International Electrotechnical Commission">IEC</abbr> (Comisión Electrotécnica Internacional), <abbr title="Institute of Electrical and Electronics Engineers">IEEE</abbr> (Instituto de Ingenieros Eléctricos y Electrónicos), <b>JTC 1/SC 7</b> (<i>Joint Technical Committee 1 / Subcommittee 7 – Software and Systems Engineering</i>), <b>SEI</b> (<i>Software Engineering Institute</i>), <b>CMU</b> (<i>Carnegie Mellon University</i>), <b>ISACA</b> (<i>Information Systems Audit and Control Association</i>), <b>JUSE</b> (<i>Union of Japanese Scientists and Engineers</i>), <b>NIST</b> (<i>National Institute of Standards and Technology</i>), <b>EFQM</b> (<i>European Foundation for Quality Management</i>), <b>FUNDIBEQ</b> (Fundación Iberoamericana para la Gestión de la Calidad), <b>CGC</b> (Comité de Gestión de la Calidad, Perú), <b>INACAL</b> (Instituto Nacional de Calidad, Perú), <b>NYCE</b> (Normalización y Certificación Electrónica, México), <b>SOFTEX</b> (Associação para Promoção da Excelência do Software Brasileiro), <b>CYTED</b> (Ciencia y Tecnología para el Desarrollo), <b>ESI</b> (<i>European Software Institute</i>).</p>
+<div class="tabla"><table>
+<thead><tr><th>Norma / modelo</th><th>Organismo</th><th>Año / versión de referencia</th><th>Tipo</th><th>Sesión</th><th>Para qué sirve</th></tr></thead>
+<tbody>
+<tr><td>ISO 9000 / ISO 9001</td><td>ISO (TC 176)</td><td>1987 · 1994 · 2000 · 2008 · <b>2015</b> (clase) · 2026</td><td>Gestión (SGC)</td><td>S2 (lectura), S3</td><td>Requisitos certificables de un SGC (Sistema de Gestión de la Calidad) con enfoque a procesos y PHVA</td></tr>
+<tr><td>ISO/IEC 90003</td><td>ISO/IEC/IEEE</td><td>2004 · 2014 · <b>2018</b></td><td>Gestión (guía)</td><td>S3</td><td>Guía para aplicar ISO 9001 al SW (no es certificable por sí sola)</td></tr>
+<tr><td>Premio Deming</td><td>JUSE (Japón)</td><td><b>1951</b></td><td>Gestión TQM (premio)</td><td>S2</td><td>Reconoce el TQC/TQM basado en estadística y PHVA</td></tr>
+<tr><td>Malcolm Baldrige (MBNQA)</td><td>NIST (EE. UU.)</td><td><b>1987</b> · marco 2025-26 · 2026 (6 categorías)</td><td>Gestión TQM (premio)</td><td>S2</td><td>Mide la excelencia del negocio con 7 criterios: liderazgo, estrategia, clientes, medición, fuerza laboral, operaciones y resultados</td></tr>
+<tr><td>Modelo EFQM</td><td>EFQM (Bruselas)</td><td>1991/92 · 1999 · 2003 · 2013 · <b>2020</b> · 2025</td><td>Gestión TQM (modelo/premio)</td><td>S2</td><td>Excelencia sostenible para los grupos de interés: Dirección, Ejecución, Resultados + RADAR</td></tr>
+<tr><td>Modelo Iberoamericano</td><td>FUNDIBEQ</td><td><b>1999</b> · rev. 2019 (AAPP)</td><td>Gestión TQM (modelo/premio)</td><td>S2</td><td>Adapta EFQM a la región; 9 criterios (5 agentes + 4 resultados)</td></tr>
+<tr><td>Premio Nacional a la Calidad (Perú)</td><td>CGC · secretaría técnica CDI-SNI</td><td>Desde <b>1991</b> (Semana de la Calidad)</td><td>Gestión TQM (premio)</td><td>S2</td><td>Modelo de Excelencia en la Gestión alineado con Baldrige; otorga la Medalla Líder en Calidad</td></tr>
+<tr><td>Six Sigma (6σ)</td><td>Motorola (metodología, no norma) · ISO 13053</td><td>1986 · ISO 13053:2011</td><td>Mejora de procesos (metodología)</td><td>S2</td><td>Reducir la variabilidad hasta 3,4 DPMO con proyectos DMAIC/DMADV</td></tr>
+<tr><td>ISO/IEC 9126</td><td>ISO/IEC JTC 1/SC 7</td><td>1991 · 9126-1:<b>2001</b> (4 partes)</td><td>Producto</td><td>S1</td><td>Modelo de calidad interna/externa (6 características) y de calidad en uso</td></tr>
+<tr><td>ISO/IEC 14598</td><td>ISO/IEC JTC 1/SC 7</td><td>1998–2001 (6 partes)</td><td>Producto (evaluación)</td><td>Complemento S1/S3</td><td>Proceso para <b>evaluar</b> productos de SW (lo complementa la 9126); hoy la reemplaza ISO/IEC 25040</td></tr>
+<tr><td>ISO/IEC 25000 SQuaRE / 25010</td><td>ISO/IEC JTC 1/SC 7</td><td>25000:2005/2014 · 25010:<b>2011</b> (clase) · 25010:2023</td><td>Producto</td><td>S3 (S4 en el SQAP)</td><td>Modelo de calidad del producto: 8 características en 2011, 9 en 2023</td></tr>
+<tr><td>ISO/IEC 27001</td><td>ISO/IEC JTC 1/SC 27</td><td>2005 · 2013 · <b>2022</b></td><td>Gestión (SGSI)</td><td>S3</td><td>Requisitos de un SGSI; Anexo A 2022 con 93 controles</td></tr>
+<tr><td>IEEE 730</td><td>IEEE Computer Society (S2ESC)</td><td>1979 … 2002 (<i>Plans</i>) · <b>2014</b> (<i>Processes</i>) · rev. 2026</td><td>Plan / proceso SQA</td><td>S4</td><td>Requisitos del proceso de SQA y contenido del SQAP</td></tr>
+<tr><td>IEEE 1012</td><td>IEEE</td><td>1986 · 1998 · 2004 · 2012 · 2016 · <b>2024</b></td><td>Plan / proceso V&amp;V</td><td>S4 (matriz V&amp;V), S5</td><td>V&amp;V de sistemas, SW y HW con rigor según el nivel de integridad; SVVP</td></tr>
+<tr><td>IEEE 1028</td><td>IEEE</td><td>1988 · 1997 · <b>2008</b></td><td>Proceso (revisiones)</td><td>S3 (técnicas estáticas), S5 (revisión conjunta, auditoría)</td><td>5 tipos de revisión: de gestión, técnica, inspección, walk-through y auditoría</td></tr>
+<tr><td>IEEE 829 → ISO/IEC/IEEE 29119</td><td>IEEE → ISO/IEC/IEEE</td><td>829: 1983, 1998, 2008 · 29119: 2013–2016, 2021–2022</td><td>Documento / proceso de pruebas</td><td>S3 (técnicas dinámicas), S4 (pruebas del SQAP)</td><td>Documentación (829) y conceptos, procesos, documentación, técnicas y pruebas por palabras clave (29119)</td></tr>
+<tr><td>ISO/IEC/IEEE 12207</td><td>ISO/IEC JTC 1/SC 7 (+ IEEE desde 2017)</td><td>1995 · Amd 2002/2004 · 2008 · <b>2017</b></td><td>Proceso (ciclo de vida)</td><td>S3, <b>S4</b>, S5</td><td>Marco común de procesos del ciclo de vida del SW, de la concepción al retiro</td></tr>
+<tr><td>NTP-ISO/IEC 12207:2016</td><td>INACAL (Perú)</td><td>NTP 2004 · 2006 · <b>2016 (3.ª ed.)</b></td><td>Proceso (ciclo de vida)</td><td><b>S5</b></td><td>Adopción peruana de la ISO/IEC 12207:2008; obligatoria en el SNI (RM 041-2017-PCM)</td></tr>
+<tr><td>ISO/IEC 15504 (SPICE)</td><td>ISO/IEC JTC 1/SC 7</td><td>TR 1998 · IS 2003–2012 (10 partes) · <b>retirada</b></td><td>Evaluación de capacidad/madurez</td><td><b>S6</b></td><td>Evaluar procesos para mejorarlos (SPI) o para determinar capacidad (CD); bidimensional</td></tr>
+<tr><td>ISO/IEC 33000 (330xx)</td><td>ISO/IEC JTC 1/SC 7</td><td>2013–2021 (33020:2019, 33061:2021)</td><td>Evaluación de capacidad/madurez</td><td><b>S6</b></td><td>Familia modular que reemplaza a la 15504</td></tr>
+<tr><td>CMMI</td><td>SEI-CMU → CMMI Institute (ISACA)</td><td>v1.1 2002 · v1.2 2006 · <b>v1.3 2010</b> · V2.0 2018 · V3.0 2023</td><td>Madurez / capacidad (modelo)</td><td>S3 (estrategia), <b>S6</b></td><td>Buenas prácticas para mejorar procesos; ML y CL; SCAMPI/Benchmark</td></tr>
+<tr><td>MoProSoft (NMX-I-059)</td><td>SE-PROSOFT, UNAM (Oktaba), NYCE</td><td>v1.3 2005 · NMX 2005 · rev. 2011</td><td>Proceso + capacidad (PYMEs)</td><td><b>S7</b></td><td>9 procesos en 3 categorías (DIR, GES, OPE); EvalProSoft</td></tr>
+<tr><td>MPS.BR (MR-MPS-SW)</td><td>SOFTEX (Brasil)</td><td>2003/2005 · 2012 · 2016 · 2021 · 2023 · 2024</td><td>Madurez (PYMEs)</td><td><b>S7</b></td><td>7 niveles G→A, escalones cortos y baratos, compatible con CMMI</td></tr>
+<tr><td>COMPETISOFT</td><td>CYTED (13 países; Piattini, Oktaba; PUCP)</td><td>2006–2008</td><td>Proceso + evaluación + mejora (PYMEs)</td><td><b>S7</b></td><td>Marco iberoamericano derivado de MoProSoft + PmCOMPETISOFT</td></tr>
+<tr><td>IT Mark</td><td>ESI → Tecnalia (España)</td><td>2005</td><td>Certificación integral (PYMEs)</td><td><b>S7</b></td><td>Negocio (10²) + seguridad (27001) + desarrollo (CMMI simplificado); 1★ a 3★</td></tr>
+<tr><td>ISO/IEC 29110</td><td>ISO/IEC JTC 1/SC 7 WG 24</td><td>2011 · rev. 2016–2025</td><td>Proceso (perfiles VSE)</td><td><b>S7</b></td><td>Perfiles Entry, Basic, Intermediate y Advanced para VSE de ≤25 personas</td></tr>
+</tbody></table></div>
+<div class="concepto"><h3>Tipo de norma: gestión, producto, proceso, madurez y plan</h3>
+<p>Una norma de <b>gestión</b> pone requisitos al sistema de gestión de toda la organización. Una de <b>producto</b> define qué características debe tener el SW y cómo medirlas. Una de <b>proceso</b> describe qué procesos, actividades y tareas deben existir. Una de <b>evaluación de capacidad o madurez</b> define cómo medir qué tan bien se ejecutan esos procesos. Una de <b>plan o documento</b> fija el contenido mínimo de un entregable (SQAP, SVVP, plan de pruebas).</p>
+<p class="ej"><b>Ej.:</b> en la app SINEACE móvil del G3, la ISO/IEC 25010 dice <i>qué</i> calidad debe tener la app (fiabilidad, seguridad…), la NTP-ISO/IEC 12207:2016 dice <i>qué procesos</i> seguir (requisitos, verificación…), IEEE 730 dice <i>qué debe tener el SQAP</i>, CMMI o la 33000 miden <i>qué tan maduro</i> es el equipo y la ISO 9001 certifica el <i>SGC</i> de la entidad.</p></div>
+<div class="ojo"><h4>Ojo en el examen</h4><p>La profesora titula la S5 «Modelo de Calidad ISO/IEC 12207». Aun así, la 12207 es una norma de <b>procesos</b>: no es un modelo de calidad del producto (eso es la 25010) ni un modelo de madurez (eso es CMMI o la 33000). Si te preguntan «tipo de norma», la respuesta es <b>proceso del ciclo de vida</b>.</p></div>
+</section>
+
+<section id="linea-de-tiempo">
+<h2>2. Línea de tiempo de normas y modelos</h2>
+<p>La tabla cruza los hitos de la calidad total (S2), del producto (S1/S3), de los procesos (S4/S5), de la madurez (S6) y de las PYMEs (S7). Las fases de la Figura 1 de la clase (Murrieta Saavedra et al., 2020) sirven de marco: <b>QC (Control de la Calidad) → QA (Aseguramiento de la Calidad) → Mejora → TQM (Gestión de la Calidad Total)</b>, y terminan en la «convergencia de normas y modelos».</p>
+<div class="tabla"><table>
+<thead><tr><th>Año</th><th>Hito</th><th>Tipo</th><th>Por qué importa</th></tr></thead>
+<tbody>
+<tr><td>1951</td><td>Premio Deming (JUSE)</td><td>TQM</td><td>Primer premio a la calidad; difunde el TQC y el PHVA en Japón</td></tr>
+<tr><td>1979</td><td>IEEE 730 (1.ª ed.) · Crosby, <i>Quality Management Maturity Grid</i></td><td>Plan SQA · madurez</td><td>Una de las primeras normas de ingeniería de SW; Crosby es la idea precursora de los «niveles de madurez»</td></tr>
+<tr><td>1983</td><td>IEEE 829 (documentación de pruebas)</td><td>Documento</td><td>Plantillas clásicas: plan de pruebas, casos, informe de incidentes</td></tr>
+<tr><td>1984</td><td>Se crea el SEI en CMU (con fondos del DoD)</td><td>Madurez</td><td>Germen del CMM</td></tr>
+<tr><td>1986</td><td>IEEE 1012 (1.ª ed.) · Motorola lanza Six Sigma · modelo de ciclo de vida de la OTAN</td><td>V&amp;V · mejora · proceso</td><td>Tres raíces de los temas S2, S4 y S5</td></tr>
+<tr><td>1987</td><td>ISO 9000/9001 (1.ª ed.) · Malcolm Baldrige · se forma el JTC 1 (ISO + IEC) · marco de madurez de Humphrey</td><td>Gestión · TQM · proceso</td><td>El año de las normas: en la Figura 1 de la clase aparecen juntos Baldrige, ISO 9000 e ISO 9004</td></tr>
+<tr><td>1988</td><td>Se funda la EFQM · IEEE 1028 (1.ª ed.)</td><td>TQM · revisiones</td><td>—</td></tr>
+<tr><td>1991</td><td>Modelo EFQM · SW-CMM v1.0 · ISO/IEC 9126 · IEEE 1074 · 1.ª Semana de la Calidad en el Perú (CGC)</td><td>TQM · madurez · producto</td><td>La clase pone EFQM en 1991 (Figura 1) y en 1992 (tabla). Ver el recuadro «Ojo» de EFQM</td></tr>
+<tr><td>1992</td><td>Primer Premio Europeo a la Calidad (EFQM)</td><td>TQM</td><td>—</td></tr>
+<tr><td>1993</td><td>SW-CMM v1.1 (18 KPA) · arranca el proyecto SPICE</td><td>Madurez</td><td>—</td></tr>
+<tr><td>Ago-1995</td><td>ISO/IEC 12207:1995 (1.ª ed.): 3 categorías y 17 procesos</td><td>Proceso</td><td>La versión del diagrama de 17 procesos de la S5</td></tr>
+<tr><td>1998</td><td>ISO/IEC TR 15504:1998 · se crea FUNDIBEQ · ISO/IEC 14598</td><td>Evaluación · TQM · producto</td><td>—</td></tr>
+<tr><td>1999</td><td>Modelo Iberoamericano de Excelencia en la Gestión</td><td>TQM</td><td>Se acordó en Cartagena de Indias con 17 países</td></tr>
+<tr><td>2000</td><td>ISO 9001:2000 (enfoque a procesos) · CMMI v1.0</td><td>Gestión · madurez</td><td>—</td></tr>
+<tr><td>2001</td><td>ISO/IEC 9126-1:2001 (6 características)</td><td>Producto</td><td>Versión de la diapositiva 11 de la S1</td></tr>
+<tr><td>2002</td><td>12207 Amd 1 (propósito y resultados) · CMMI v1.1 · IEEE 730-2002 · PROSOFT (México)</td><td>Proceso · madurez</td><td>La enmienda alinea la 12207 con SPICE</td></tr>
+<tr><td>2003</td><td>ISO/IEC 15504-2 (IS) · MPS.BR (dic.) · CTN-ISSI en Perú</td><td>Evaluación · PYMEs</td><td>—</td></tr>
+<tr><td>2004</td><td>NTP-ISO/IEC 12207:2004 (RM 179-2004-PCM, obligatoria en el SNI) · 12207 Amd 2</td><td>Proceso (Perú)</td><td>Primera adopción peruana</td></tr>
+<tr><td>2005</td><td>MoProSoft v1.3 = NMX-I-059-NYCE-2005 · IT Mark (ESI) · ISO/IEC 25000 (1.ª ed.) · ISO/IEC 27001:2005</td><td>PYMEs · producto · seguridad</td><td>—</td></tr>
+<tr><td>2006</td><td>CMMI v1.2 (constelaciones) · COMPETISOFT arranca · el WG24 elige MoProSoft como base de la futura 29110</td><td>Madurez · PYMEs</td><td>—</td></tr>
+<tr><td>Feb-2008</td><td>ISO/IEC 12207:2008 (7 grupos, 43 procesos, armonía con la 15288) · ISO 9001:2008 · IEEE 829-2008 · IEEE 1028-2008</td><td>Proceso · gestión</td><td>La base de la NTP peruana 2016</td></tr>
+<tr><td>2009</td><td>NTP-291.100-1:2009 (MoProSoft en el Perú)</td><td>PYMEs (Perú)</td><td>Numeración pensada para parecerse a la 29110</td></tr>
+<tr><td>Nov-2010</td><td>CMMI v1.3 (DEV, SVC, ACQ; CL0–3)</td><td>Madurez</td><td>La versión «clásica» que se enseña en la S6</td></tr>
+<tr><td>2011</td><td>ISO/IEC 25010:2011 (8 características) · ISO/IEC 29110 (primeras partes) · ISO 13053 (Six Sigma)</td><td>Producto · VSE</td><td>Versión de 25010 de la S3</td></tr>
+<tr><td>2012</td><td>NTP-ISO/IEC 29110 (partes 1, 3 y 5-1-2) en el Perú</td><td>VSE (Perú)</td><td>—</td></tr>
+<tr><td>2013</td><td>ISO/IEC 29119-1/2/3 · ISO/IEC 27001:2013</td><td>Pruebas · seguridad</td><td>La 29119 reemplaza a IEEE 829</td></tr>
+<tr><td>2014</td><td>IEEE 730-2014 (<i>SQA Processes</i>)</td><td>Proceso SQA</td><td>—</td></tr>
+<tr><td>2015</td><td>ISO 9001:2015 · ISO/IEC 33001–33004/33020 · INACAL asume la normalización</td><td>Gestión · evaluación</td><td>Reemplazo progresivo de la 15504</td></tr>
+<tr><td>16-jul-2016</td><td>NTP-ISO/IEC 12207:2016 (3.ª ed.) aprobada por INACAL · IEEE 1012-2016 · ISACA compra el CMMI Institute</td><td>Proceso (Perú)</td><td>—</td></tr>
+<tr><td>Feb-2017</td><td>RM N.° 041-2017-PCM: uso obligatorio de la NTP-ISO/IEC 12207:2016</td><td>Proceso (Perú)</td><td>—</td></tr>
+<tr><td>Nov-2017</td><td>ISO/IEC/IEEE 12207:2017 (4 grupos, 30 procesos)</td><td>Proceso</td><td>Versión de la S4</td></tr>
+<tr><td>Mar-2018</td><td>CMMI V2.0</td><td>Madurez</td><td>Practice Areas; Benchmark/Sustainment/Evaluation</td></tr>
+<tr><td>2019–2020</td><td>ISO/IEC 33020:2019 · Modelo EFQM 2020</td><td>Evaluación · TQM</td><td>EFQM 2020 introduce Dirección–Ejecución–Resultados (la versión de la diapositiva 33)</td></tr>
+<tr><td>2021</td><td>ISO/IEC 33061:2021 (PAM basado en 12207:2017) · MR-MPS-SW:2021 · ISO/IEC/IEEE 29119-2/3/4:2021</td><td>Evaluación · PYMEs · pruebas</td><td>—</td></tr>
+<tr><td>2022</td><td>ISO/IEC 27001:2022 · ISO/IEC/IEEE 29119-1:2022</td><td>Seguridad · pruebas</td><td>—</td></tr>
+<tr><td>6-abr-2023</td><td>CMMI V3.0 · ISO/IEC 25010:2023 (9 características)</td><td>Madurez · producto</td><td>—</td></tr>
+<tr><td>2024</td><td>Modelo EFQM 2025 (presentado en jun-2024) · IEEE 1012-2024 (publicado en 2025)</td><td>TQM · V&amp;V</td><td>—</td></tr>
+<tr><td>16-sep-2026</td><td>ISO 9001:2026 (6.ª ed.) · marco Baldrige 2026</td><td>Gestión · TQM</td><td>Transición de certificados hasta ~sep-2029</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuentes: diapositivas S2 (Figura 1, Murrieta Saavedra et al., 2020), S4 (mazo B, diap. 3), S5 (mazo A, diap. 3–6). Complementos verificados en la web: <a href="https://www.nqa.com/en-us/resources/news/iso-9001-2026-published">NQA, ISO 9001:2026 publicada</a>; <a href="https://baldrigefoundation.org/what-we-do/baldrige-excellence-framework/2026-baldrige-framework-key-changes.html">Baldrige Foundation, cambios del marco 2026</a>; <a href="https://standards.ieee.org/ieee/829/1218">IEEE SA, estado de IEEE 829</a>.</p>
+<div class="ojo"><h4>Ojo en el examen</h4><p>En la Figura 1 de la S2, «Premio Nacional de Calidad 1989», «Modelo Nacional para la Competitividad 2008» y «Modelo Nacional para PYMES 2011» son hitos <b>mexicanos</b> (la fuente es mexicana). No los confundas con el <b>Premio Nacional a la Calidad del Perú</b>, que entrega el CGC desde 1991. Tampoco mezcles «versión vigente internacional» (ISO/IEC/IEEE 12207:2017) con «versión vigente peruana» (NTP-ISO/IEC 12207:2016, que equivale a la ISO/IEC 12207:2008).</p></div>
+</section>
+<section id="iso-9000-9001">
+<h2>3. Familia ISO 9000 / ISO 9001 (y su guía para SW, ISO/IEC 90003)</h2>
+<p>La familia ISO 9000 es la base de la <b>gestión de la calidad</b> y se nombra varias veces en el curso: en la Figura 1 de la S2, en la lectura de la S2 (ISO 9001:2015), en la diapositiva 21 de la S3 (ISO/IEC 90003) y en la S5, donde el proceso de Mejora puede usar ISO 9001. Siglas de esta sección: <b>SGC</b> (Sistema de Gestión de la Calidad; en inglés QMS, <i>Quality Management System</i>), <b>HLS</b> (<i>High Level Structure</i> – estructura de alto nivel, hoy «Estructura Armonizada»), <b>PHVA/PDCA</b> (Planificar-Hacer-Verificar-Actuar / <i>Plan-Do-Check-Act</i>), <b>TC 176</b> (comité técnico de ISO para gestión de la calidad), <b>CB</b> (<i>Certification Body</i> – organismo de certificación), <b>INACAL</b>.</p>
+<div class="norma"><h4>ISO 9001:2015 — Sistemas de gestión de la calidad. Requisitos (y la familia ISO 9000)</h4>
+<ul>
+<li><b>Código exacto:</b> ISO 9001:2015 (5.ª ed.), con la Enmienda 1:2024 sobre cambio climático. En el Perú se adoptó como <b>NTP-ISO 9001:2015</b> (INACAL). La <b>ISO 9001:2026</b> (6.ª ed.) se publicó el <b>16-sep-2026</b> y da plazo de transición hasta ~sep-2029.</li>
+<li><b>Organismo:</b> ISO, comité técnico <b>ISO/TC 176</b>. No intervienen IEC ni IEEE: es una norma «solo ISO».</li>
+<li><b>Versiones:</b> 1987 (incluía 9001, 9002 y 9003, con enfoque de aseguramiento) · 1994 · <b>2000</b> (se fusionan en una sola 9001 con enfoque a procesos) · 2008 · <b>2015</b> (HLS, pensamiento basado en riesgos) · 2026.</li>
+<li><b>Familia:</b> ISO 9000 (fundamentos y vocabulario, con los 7 principios) · <b>ISO 9001</b> (requisitos; es la <b>única certificable</b>) · ISO 9004 (éxito sostenido; 2009, 2018) · ISO 19011 (directrices para auditar sistemas de gestión) · ISO/IEC/IEEE 90003 (guía para SW).</li>
+<li><b>Propósito:</b> que una organización demuestre que puede entregar productos y servicios que cumplen los requisitos del cliente y los legales, y que aumente la satisfacción del cliente mediante la mejora continua.</li>
+<li><b>Estructura (HLS, 10 cláusulas):</b> 1 Objeto y campo de aplicación · 2 Referencias normativas · 3 Términos · <b>4 Contexto de la organización</b> · <b>5 Liderazgo</b> · <b>6 Planificación</b> (riesgos y oportunidades) · <b>7 Apoyo</b> (recursos, competencia, información documentada) · <b>8 Operación</b> (8.3 diseño y desarrollo) · <b>9 Evaluación del desempeño</b> (auditoría interna, revisión por la dirección) · <b>10 Mejora</b> (no conformidad, acción correctiva). Las cláusulas 4 a 10 se recorren con el ciclo PHVA: P = 4-6, H = 7-8, V = 9, A = 10.</li>
+<li><b>7 principios (ISO 9000:2015):</b> enfoque al cliente · liderazgo · compromiso de las personas · enfoque a procesos · mejora · toma de decisiones basada en evidencia · gestión de las relaciones.</li>
+<li><b>Relación con otras normas:</b> MoProSoft y COMPETISOFT se mapean con ISO 9001:2000 (cobertura de ~92 %). IT Mark y EFQM la usan como referencia. La ISO/IEC/IEEE 90003:2018 la interpreta para SW. El proceso 6.2.5 «Gestión de la Calidad» de la 12207:2017 tiene el mismo espíritu a nivel organizacional.</li>
+<li><b>Ejemplo peruano:</b> una software factory de Lima que mantiene sistemas para SUNAT certifica su SGC con un CB acreditado. Para interpretar la cláusula 8.3 (diseño y desarrollo) en su ciclo Scrum usa la ISO/IEC/IEEE 90003. Su KPI de satisfacción (encuesta NPS) alimenta la revisión por la dirección (9.3).</li>
+<li><b>Trampa típica:</b> «la empresa se certificó en ISO 9000» → impreciso: se certifica en <b>ISO 9001</b>. La 9000 es vocabulario y la 9004 es una guía.</li>
+</ul></div>
+<div class="concepto"><h3>Proceso y enfoque a procesos (ISO 9001:2015)</h3>
+<p>En la lectura de la S2, un <b>proceso</b> es una serie de actividades relacionadas entre sí que convierten entradas en resultados. El <b>enfoque a procesos</b> consiste en gestionar esas actividades como un sistema, con el ciclo PHVA y el pensamiento basado en riesgos, para que el SGC sea eficaz.</p>
+<p class="ej"><b>Ej.:</b> en la mesa de ayuda del SUM-UNMSM, la entrada es un ticket del alumno y la salida es el incidente resuelto. Se planifica con un SLA de 24 h, se atiende, se mide el MTTR y se corrige la causa raíz.</p></div>
+<div class="concepto"><h3>ISO/IEC/IEEE 90003:2018 — guía de ISO 9001 para SW</h3>
+<p>Es una norma de <b>orientación</b>: explica cómo leer cada requisito de ISO 9001 cuando la organización adquiere, suministra, desarrolla, opera o mantiene SW. Hay ediciones de 2004, 2014 y 2018. No es certificable.</p>
+<p class="ej"><b>Ej.:</b> la cláusula «control de las salidas no conformes» se traduce en el SW a «gestión de defectos en Jira con severidad y criterio de liberación».</p></div>
+<div class="ojo"><h4>Ojo en el examen</h4><p>(1) ISO 9001 es una norma de <b>gestión</b> para cualquier sector: no define características del SW (eso es la 25010) ni procesos de ingeniería de SW (eso es la 12207). (2) En la diapositiva 39 de la S2, las definiciones de Planificar, Hacer, Chequear y Actuar son las de <b>ISO 9001</b>; la versión «estadística» del PHVA de los auditores Deming es la de la diapositiva 22. (3) La clase y la lectura trabajan con <b>ISO 9001:2015</b>. La 2026 salió después del dictado: menciónala solo como dato actualizado.</p></div>
+<p class="fuente">Fuentes: lectura S2 (diap. 6, ISO 2015; Vigo Pereyra, 2021); S3 diap. 21. Web: <a href="https://www.nqa.com/en-us/resources/news/iso-9001-2026-published">NQA</a>, <a href="https://www.dnv.us/news/2026/ba_new-edition-of-the-quality-management-system-standard-iso-9001-released/">DNV</a> (publicación de ISO 9001:2026).</p>
+</section>
+
+<section id="tqm-deming">
+<h2>4. Modelos TQM (I): Premio Deming</h2>
+<p>Siglas: <b>TQM</b> (<i>Total Quality Management</i> – Gestión de la Calidad Total), <b>TQC</b> (<i>Total Quality Control</i> – Control Total de la Calidad), <b>CWQC</b> (<i>Company-Wide Quality Control</i>), <b>JUSE</b>, <b>PHVA</b>, <b>SPC</b> (<i>Statistical Process Control</i> – Control Estadístico de Procesos), <b>7QC</b> (las 7 herramientas básicas de la calidad). En la diapositiva 15 de la S2, los modelos TQM son <b>marcos de referencia</b> que ayudan a estructurar procesos, a poner la estrategia en la satisfacción del cliente y a alcanzar la excelencia operativa con mejora continua.</p>
+<figure><img src="@img/semana-02-modelos-de-calidad-total/p16.png" alt="Tabla Principales Modelos de Calidad Total: Deming Japón 1951, Malcolm Baldrige EE. UU. 1987, EFQM Europa 1992 e Iberoamericanos 1999, con su origen, enfoque principal y característica clave"><figcaption>Tabla de la clase con los cuatro modelos de calidad total. Fíjate en los años y en el enfoque de cada uno (diapositiva 16, Semana 02).</figcaption></figure>
+<div class="norma"><h4>Premio Deming (Deming Prize) — JUSE, Japón, 1951</h4>
+<ul>
+<li><b>Organismo:</b> <b>JUSE</b> (Unión de Científicos e Ingenieros Japoneses). Lleva el nombre del Dr. W. Edwards Deming, que en 1950 enseñó control estadístico y PHVA en Japón.</li>
+<li><b>Versión/año:</b> se creó en <b>1951</b>. Es el premio a la calidad más antiguo del mundo.</li>
+<li><b>Propósito:</b> reconocer a las organizaciones que logran avances extraordinarios con el TQC/TQM y los métodos estadísticos. Pone el foco en <b>que la máquina y el proceso no fallen</b> (resumen de la diapositiva 44).</li>
+<li><b>Estructura (10 criterios de la clase, regla P-O-E-F-C-E-G-G-R-P):</b> 1 Políticas y objetivos · 2 Organización y su operación · 3 Educación y diseminación · 4 Flujo de información · 5 Calidad de productos y procesos · 6 Estandarización · 7 Gestión y control (SPC) · 8 Garantía de calidad · 9 Resultados y efectos · 10 Planes para el futuro.</li>
+<li><b>Núcleo:</b> el PHVA aplicado sin pausa. P = diseñar la solución matemática; H = prueba piloto a pequeña escala; V = medir con estadística; A = estandarizar o reiniciar el ciclo. Todo el personal debe dominar las <b>7QC</b> de Ishikawa.</li>
+<li><b>Categorías del premio (complemento):</b> Premio Deming para individuos, Premio Deming para organizaciones y Gran Premio Deming (el antiguo Japan Quality Medal), al que se postula después de haber ganado el Premio Deming.</li>
+<li><b>Relación:</b> es la raíz del TQM. El PHVA vuelve a aparecer en ISO 9001, en las estrategias de mejora de la S3 (PDCA) y en los ciclos de mejora de CMMI y PmCOMPETISOFT.</li>
+<li><b>Ejemplo (clase y Perú):</b> la clase usa Toyota y Komatsu: sensores, línea que se detiene ante una pérdida de control, Ishikawa y hojas de control. Adaptado al SW peruano: un equipo de Yape lleva un gráfico de control de la latencia p95 y, si un punto sale de los límites, detiene el despliegue (<i>stop-the-line</i>).</li>
+<li><b>Trampa típica:</b> no es un modelo de «resultados de negocio» (ese es Baldrige) ni de «sostenibilidad para los grupos de interés» (ese es EFQM).</li>
+</ul></div>
+<div class="concepto"><h3>PHVA / PDCA (ciclo de Deming o de Shewhart)</h3>
+<p>Ciclo de mejora continua en 4 fases: Planificar, Hacer, Verificar y Actuar. Shewhart lo formuló y Deming lo difundió en Japón. Es la lógica de fondo de ISO 9001 y de casi todos los modelos de mejora.</p>
+<p class="ej"><b>Ej.:</b> en la S3 (diap. 17), un equipo que depende de pruebas manuales aplica PDCA: P = automatizar la regresión con Selenium; H = piloto en un módulo; V = medir defectos escapados; A = estandarizar el pipeline CI/CD.</p></div>
+<div class="ojo"><h4>Ojo en el examen</h4><p>«Modelo Deming» y «Premio Deming» son lo mismo en la clase (diap. 18). Los <b>14 puntos de Deming</b> (lectura S2) son su filosofía de gestión; no son los «10 criterios» del premio. La 7.ª herramienta 7QC aparece como «Estratificación (o Diagrama de Flujo)». La profesora las trata como equivalentes, aunque en la literatura son herramientas distintas.</p></div>
+</section>
+
+<section id="tqm-baldrige">
+<h2>5. Modelos TQM (II): Malcolm Baldrige (MBNQA)</h2>
+<p>Siglas: <b>MBNQA</b> (<i>Malcolm Baldrige National Quality Award</i> – Premio Nacional a la Calidad Malcolm Baldrige), <b>NIST</b>, <b>BPEP</b> (<i>Baldrige Performance Excellence Program</i>), <b>ADLI</b> (<i>Approach, Deployment, Learning, Integration</i> – enfoque, despliegue, aprendizaje, integración), <b>LeTCI</b> (<i>Levels, Trends, Comparisons, Integration</i>: cómo se evalúan los resultados), <b>SLA</b>, <b>CEO</b>.</p>
+<div class="norma"><h4>Malcolm Baldrige National Quality Award / Baldrige Excellence Framework — NIST, EE. UU., 1987</h4>
+<ul>
+<li><b>Organismo:</b> lo administra el <b>NIST</b> (Departamento de Comercio de EE. UU.) a través del BPEP. Lo creó la Ley Malcolm Baldrige de Mejora de la Calidad Nacional de 1987 y lleva el nombre de un ex Secretario de Comercio.</li>
+<li><b>Versión/año:</b> desde <b>1987</b>, con criterios que se renuevan cada 2 años (marco 2025-2026). El marco <b>2026</b> pasó a <b>6 categorías</b>, integró los «resultados» dentro de cada categoría y renombró la categoría 4 como «Organizational Intelligence».</li>
+<li><b>Propósito:</b> mejorar la <b>competitividad</b> y el desempeño global. En la clase: «que el negocio gane».</li>
+<li><b>Estructura (versión de clase, 7 criterios conectados):</b> 1 Liderazgo · 2 Estrategia · 3 Clientes · 4 Medición, análisis y gestión del conocimiento · 5 Fuerza laboral · 6 Operaciones · 7 Resultados. Los criterios 1 a 6 son el «proceso» y el 7 son los «resultados». El total es de <b>1000 puntos</b> (en las versiones previas a 2026, los resultados pesaban ~450). Los procesos se evalúan con <b>ADLI</b> y los resultados con <b>LeTCI</b>.</li>
+<li><b>Relación:</b> el <b>PNC Perú</b> y su Modelo de Excelencia en la Gestión se <b>alinean con Baldrige</b> (diap. 34). Baldrige comparte con EFQM la lógica «agentes/procesos → resultados».</li>
+<li><b>Ejemplo:</b> en la clase, la Clínica Mayo y FedEx («escucha al cliente» que llega cada mes al directorio) e Indra (planes de carrera, SLA, rotación de personal, cuentas clave). En el Perú, una consultora TI que atiende a Interbank enlaza las metas de su CEO con los KPI de su fuerza laboral (rotación &lt; 10 %) y con el cumplimiento de SLA.</li>
+<li><b>Trampa típica:</b> Baldrige tiene <b>7</b> criterios (versión de clase); EFQM 2020/2025 tiene 7 criterios en <b>3</b> bloques; el Modelo Iberoamericano tiene <b>9</b>. No los mezcles.</li>
+</ul></div>
+<div class="ojo"><h4>Ojo en el examen</h4><p>Si un caso habla de «liderazgo estratégico, resultados de negocio y competitividad en el mercado», la respuesta es <b>Baldrige</b>. Si habla de «propósito, cocreación con grupos de interés y transformación», es <b>EFQM</b>. Si dice «autoevaluación anual con la guía de FUNDIBEQ/PNC para cerrar brechas», es <b>Iberoamericano/PNC</b>. Sobre el marco 2026 de 6 categorías: contesta con los 7 criterios de la clase y comenta el cambio solo si te piden lo más actual.</p></div>
+<p class="fuente">Fuentes: S2 diap. 16, 32, 41, 48–49. Web: <a href="https://baldrigefoundation.org/what-we-do/baldrige-excellence-framework/2026-baldrige-framework-key-changes.html">Baldrige Foundation, cambios del marco 2026</a>; <a href="https://www.nist.gov/news-events/news/2024/12/now-announcing-2025-baldrige-award-criteria">NIST, criterios 2025</a>.</p>
+</section>
+
+<section id="tqm-efqm">
+<h2>6. Modelos TQM (III): Modelo EFQM</h2>
+<p>Siglas: <b>EFQM</b>, <b>RADAR</b> (<i>Results, Approaches, Deploy, Assess &amp; Refine</i> – resultados, enfoques, despliegue, evaluación y perfeccionamiento), <b>ODS</b> (Objetivos de Desarrollo Sostenible de la ONU), <b>ESG</b> (<i>Environmental, Social and Governance</i>), <b>CEG</b> (Club Excelencia en Gestión, socio de EFQM en España).</p>
+<div class="norma"><h4>Modelo EFQM (EFQM Model 2020 / EFQM Model 2025) — EFQM, Bruselas</h4>
+<ul>
+<li><b>Organismo:</b> <b>EFQM</b> (Fundación Europea para la Gestión de la Calidad), creada en <b>1988</b> por 14 grandes empresas europeas, con apoyo de la Comisión Europea.</li>
+<li><b>Versiones:</b> modelo <b>1991</b> · primer Premio Europeo a la Calidad en <b>1992</b> · 1999 · 2003 · 2010 · 2013 · <b>2020</b> (estructura de la clase) · <b>2025</b> (presentado en junio de 2024; pone más peso en el rendimiento sostenido, la sostenibilidad y la IA).</li>
+<li><b>Propósito:</b> crear valor sostenible para todos los grupos de interés y gestionar la transformación. En la clase: «que la organización trascienda en la sociedad».</li>
+<li><b>Estructura (2020/2025):</b> 3 bloques que responden 3 preguntas. <b>Dirección</b> (¿por qué?): 1 Propósito, visión y estrategia · 2 Cultura y liderazgo. <b>Ejecución</b> (¿cómo?): 3 Implicar a los grupos de interés · 4 Crear valor sostenible · 5 Gestionar el funcionamiento y la transformación. <b>Resultados</b> (¿qué?): 6 Percepción de los grupos de interés · 7 Rendimiento estratégico y operativo. La evaluación usa <b>RADAR</b> y puntúa sobre 1000.</li>
+<li><b>Modelos anteriores (2013 y previos):</b> 9 criterios (5 agentes + 4 resultados). Esa estructura es la que heredó el Modelo Iberoamericano.</li>
+<li><b>Relación:</b> el <b>Modelo Iberoamericano</b> adapta EFQM. IT Mark agrupa sus criterios de negocio según los 9 criterios clásicos de EFQM. La lectura S2 lo cita junto a ISO 9001 como vía para implantar la gestión de la calidad.</li>
+<li><b>Ejemplo:</b> en la clase, la UNMSM (propósito «Liderar la transformación científica y social del Perú al 2030», mesas de cocreación, automatización de la matrícula en 20 facultades, empleabilidad a 12 meses, patentes en Indecopi). También Red Eléctrica de España y Bosch.</li>
+<li><b>Trampa típica:</b> EFQM no es certificable como ISO 9001. Se obtienen <b>reconocimientos</b> por puntaje («Recognised by EFQM» 3★ a 7★) y premios.</li>
+</ul></div>
+<div class="ojo"><h4>Ojo en el examen</h4><p>Los años de EFQM no cuadran entre las diapositivas: la tabla de la diapositiva 16 dice <b>1992</b> y la Figura 1 de la diapositiva 17 dice <b>1991</b>. Las dos tienen sustento: el modelo se lanzó en 1991 y el primer premio europeo se entregó en 1992. Si preguntan por «origen del modelo EFQM» según la tabla de clase, responde Europa 1992 y, si puedes, aclara la diferencia. La estructura Dirección–Ejecución–Resultados es la del modelo <b>2020</b>, no la de los 9 criterios clásicos.</p></div>
+<p class="fuente">Fuentes: S2 diap. 16, 17, 33, 42, 46–47. Web: <a href="https://clubexcelencia.org/sites/default/files/docs/press_release/241010_Modelo2025.pdf">Club Excelencia en Gestión, Modelo EFQM 2025</a>.</p>
+</section>
+
+<section id="tqm-iberoamericano">
+<h2>7. Modelos TQM (IV): Modelo Iberoamericano de Excelencia en la Gestión</h2>
+<p>Siglas: <b>FUNDIBEQ</b>, <b>AAPP</b> (Administraciones Públicas), <b>CLAD</b> (Centro Latinoamericano de Administración para el Desarrollo), <b>EFQM</b>.</p>
+<div class="norma"><h4>Modelo Iberoamericano de Excelencia en la Gestión — FUNDIBEQ, 1999</h4>
+<ul>
+<li><b>Organismo:</b> <b>FUNDIBEQ</b>, entidad sin fines de lucro fundada el <b>18-mar-1998</b> con organizaciones de 21 países iberoamericanos.</li>
+<li><b>Versión/año:</b> se acordó en <b>1999</b> en Cartagena de Indias con representantes de 17 países. Tiene revisiones posteriores; la versión para AAPP es de 2019.</li>
+<li><b>Propósito:</b> adaptar el modelo europeo a la realidad social y empresarial de la región, con foco en la <b>autoevaluación</b> y el desarrollo competitivo. Entrega el Premio Iberoamericano de la Calidad.</li>
+<li><b>Estructura:</b> <b>9 criterios</b>: 5 <b>procesos facilitadores</b> (liderazgo y estilo de gestión · política y estrategia · desarrollo de las personas · recursos y asociados · clientes/procesos) y 4 <b>resultados</b> (de clientes · de las personas · de la sociedad · globales). Total: 1000 puntos.</li>
+<li><b>Relación:</b> se basa en <b>EFQM</b>. Los premios nacionales de la región (incluido el PNC del Perú) lo usan junto con el Premio Iberoamericano.</li>
+<li><b>Ejemplo (clase):</b> TASA o Electroperú aplican cada año la guía de FUNDIBEQ/PNC. Un comité de RR. HH., Operaciones y Finanzas califica la madurez de la organización, encuentra que su punto débil es la «Gestión del Conocimiento» y lanza un proyecto para digitalizar los manuales.</li>
+<li><b>Trampa típica:</b> el Iberoamericano adapta <b>EFQM</b>; el PNC Perú se alinea con <b>Baldrige</b> (diap. 34). Son pares fáciles de cruzar en una pregunta de opción múltiple.</li>
+</ul></div>
+<p class="fuente">Fuentes: S2 diap. 16 y 43. Web: <a href="https://dialnet.unirioja.es/descarga/articulo/2387814.pdf">Dialnet, análisis del Modelo Iberoamericano</a>; <a href="https://campusvirtual.icap.ac.cr/pluginfile.php/201934/mod_resource/content/1/Modelo%20Iberoamericano%20V%202019%20Revisada_Portugues.pdf">FUNDIBEQ, Modelo V. 2019 AAPP</a>.</p>
+</section>
+
+<section id="tqm-pnc-peru">
+<h2>8. Modelos TQM (V): Premio Nacional a la Calidad del Perú (PNC)</h2>
+<p>Siglas: <b>PNC</b> (Premio Nacional a la Calidad), <b>CGC</b> (Comité de Gestión de la Calidad), <b>SNI</b> (Sociedad Nacional de Industrias), <b>CDI</b> (Centro de Desarrollo Industrial), <b>NPS</b>, <b>BCP</b>.</p>
+<div class="norma"><h4>Premio Nacional a la Calidad – Perú / Modelo de Excelencia en la Gestión — CGC (secretaría técnica CDI-SNI)</h4>
+<ul>
+<li><b>Organismo:</b> el <b>CGC</b>, un espacio de cooperación entre instituciones públicas y privadas (unas 24: gobierno, gremios, universidades y organismos técnicos). Su <b>secretaría técnica</b> está en el <b>CDI</b> de la <b>SNI</b>.</li>
+<li><b>Versión/año:</b> la Semana de la Calidad y el premio existen desde <b>1991</b>. En 2020 se celebró la 30.ª Semana de la Calidad.</li>
+<li><b>Propósito:</b> reconocer a organizaciones públicas y privadas con un desempeño sobresaliente en la gestión de sus procesos y promover una cultura de calidad en el país.</li>
+<li><b>Estructura (clase):</b> el <b>Modelo de Excelencia en la Gestión</b>, muy <b>alineado con Baldrige</b>, revisa 7 dimensiones de forma holística: Liderazgo, Estrategia, Clientes, Medición y Gestión del Conocimiento, Personal, Operaciones y Resultados. Los galardones son el <b>Premio Nacional a la Calidad</b> y la <b>Medalla Líder en Calidad</b> (Oro, Plata o Bronce), que se entregan en la Semana de la Calidad.</li>
+<li><b>Ganadores citados:</b> Electroperú, TASA y la Marina de Guerra del Perú (PNC y Medalla Oro en 2020). Otras entidades, como OSINERGMIN (2019) o la Compañía Minera Poderosa, recibieron medallas en otras ediciones.</li>
+<li><b>Ejemplo (clase, BCP):</b> el BCP usa el Modelo de Excelencia como <b>marco macro</b> (estrategia <i>customer centric</i> medida con NPS, Big Data, Yape, Banca Móvil, más del 50 % de la banca digital) y Six Sigma como <b>motor micro</b> (DMAIC en créditos hipotecarios: de 45 a 12 días).</li>
+<li><b>Trampa típica:</b> el nombre oficial es «Premio Nacional <b>a</b> la Calidad», aunque la diapositiva diga «de la». En este modelo, «Personal» equivale a la «Fuerza laboral» de Baldrige.</li>
+</ul></div>
+<figure><img src="@img/semana-02-modelos-de-calidad-total/p36.png" alt="Tabla La sinergia perfecta: Premio Nacional a la Calidad con enfoque estratégico macro, puntajes de madurez y benchmarking, frente a Six Sigma con enfoque operativo micro, nivel sigma, Cp y Cpk"><figcaption>PNC (mapa de ruta, macro) frente a Six Sigma (motor técnico, micro) (diapositiva 36, Semana 02).</figcaption></figure>
+<p class="fuente">Fuentes: S2 diap. 34, 36, 50–54. Web: <a href="https://sni.org.pe/la-marina-de-guerra-del-peru-obtuvo-el-premio-nacional-a-la-calidad-y-la-medalla-lider-en-calidad-categoria-oro/">SNI, Marina de Guerra PNC 2020</a>; <a href="https://www.bn.com.pe/noticias/2018/03102018-premio-por-mejorar-calidad.html">Banco de la Nación, Semana de la Calidad creada en 1991</a>.</p>
+</section>
+
+<section id="six-sigma">
+<h2>9. Six Sigma (6σ)</h2>
+<p>Siglas: <b>DMAIC</b> (<i>Define, Measure, Analyze, Improve, Control</i>), <b>DMADV</b> (<i>Define, Measure, Analyze, Design, Verify</i>), <b>DFSS</b> (<i>Design For Six Sigma</i>), <b>DPMO</b> (Defectos Por Millón de Oportunidades), <b>CTQ</b> (<i>Critical To Quality</i>), <b>VOC</b> (<i>Voice Of the Customer</i>), <b>Cp/Cpk</b> (índices de capacidad de proceso), <b>LSE/LIE</b> (límite superior/inferior de especificación), <b>MBB/BB/GB/YB</b> (cinturones <i>Master Black</i>, <i>Black</i>, <i>Green</i> y <i>Yellow Belt</i>).</p>
+<div class="norma"><h4>Six Sigma — Motorola (1986); normalizado en ISO 13053-1/-2:2011</h4>
+<ul>
+<li><b>Origen:</b> Motorola (Bill Smith, 1986). Lo popularizó General Electric (Jack Welch, década de 1990). Es una <b>metodología</b>, no una norma de certificación. ISO 13053 (2011) describe el método DMAIC, pero no se certifica a la organización.</li>
+<li><b>Propósito:</b> reducir la <b>variabilidad</b> de los procesos para minimizar o eliminar los defectos. Su meta es el nivel 6σ: <b>3,4 DPMO</b>, es decir, un rendimiento de <b>99,99966 %</b>.</li>
+<li><b>Estructura:</b> proyectos DMAIC (Definir, Medir, Analizar, Implementar/Mejorar, Controlar) para procesos que ya existen, y DMADV/DFSS para diseñar procesos nuevos. La jerarquía de roles va de <i>Champion</i> a MBB, BB, GB y YB.</li>
+<li><b>Fórmulas:</b> DPMO = defectos ÷ (unidades × oportunidades) × 10⁶. Con el desplazamiento convencional de 1,5σ: 3σ ≈ 66 807 DPMO · 4σ ≈ 6 210 · 5σ ≈ 233 · 6σ = 3,4. Cp = (LSE − LIE)/6σ; Cpk = mín[(LSE − μ)/3σ; (μ − LIE)/3σ].</li>
+<li><b>Relación:</b> es el «motor micro» de un modelo de excelencia (PNC/Baldrige). Comparte con CMMI ML4/ML5 la gestión cuantitativa y el control estadístico (QPM, CAR). Lean Six Sigma suma la eliminación de desperdicios (Kaizen, Lean).</li>
+<li><b>Ejemplo peruano (clase):</b> el BCP reduce de 45 a 12 días el desembolso hipotecario. En Medir encuentra que el 95 % del tiempo el expediente está en espera. En Analizar halla errores de digitación y áreas sin integrar. En Mejorar valida la identidad con RENIEC y usa IA. En Controlar pone dashboards con una alerta a las 24 h.</li>
+<li><b>Trampa típica:</b> la «I» de DMAIC en la literatura es <b>Improve (Mejorar)</b>; la profesora escribe «Implementar (Mejorar)». No confundas DMAIC (mejorar lo que existe) con DMADV (diseñar algo nuevo), ni DMAIC con PHVA (4 fases, sin la fase de Medir explícita).</li>
+</ul></div>
+<div class="concepto"><h3>Cálculo de DPMO y nivel sigma</h3>
+<p>Se cuentan los defectos frente a todas las oportunidades de defecto y se escala a un millón. El valor se compara con la tabla sigma, que asume el desplazamiento de 1,5σ.</p>
+<p class="ej"><b>Ej.:</b> la pasarela de pagos de una tienda peruana procesa 200 000 transacciones con 5 oportunidades de error cada una y registra 1 242 defectos. DPMO = 1 242 / (200 000 × 5) × 10⁶ = 1 242, que está entre 4σ (6 210) y 5σ (233): ≈ 4,5σ.</p></div>
+</section>
+<section id="iso-9126">
+<h2>10. ISO/IEC 9126 — Calidad del producto de SW (modelo anterior)</h2>
+<p>Siglas: <b>ISO/IEC</b>, <b>JTC 1/SC 7</b>, <b>TR</b> (<i>Technical Report</i> – informe técnico), <b>FURPEM</b> (regla para recordar las 6 características), <b>SQuaRE</b>.</p>
+<div class="norma"><h4>ISO/IEC 9126 — Software engineering — Product quality (partes 1 a 4)</h4>
+<ul>
+<li><b>Organismo:</b> ISO/IEC JTC 1/SC 7.</li>
+<li><b>Versiones:</b> ISO/IEC 9126:1991 (una sola parte) → <b>ISO/IEC 9126-1:2001</b> (modelo de calidad) + TR 9126-2:2003 (métricas externas) + TR 9126-3:2003 (métricas internas) + TR 9126-4:2004 (métricas de calidad en uso). <b>Reemplazada</b> por ISO/IEC 25010:2011 y la serie 2502n.</li>
+<li><b>Propósito:</b> definir un modelo jerárquico característica → subcaracterística → métrica para especificar y evaluar la calidad del producto de SW.</li>
+<li><b>Estructura:</b> <b>6 características</b> de calidad interna/externa, más 4 de calidad en uso (efectividad, productividad, seguridad física y satisfacción).</li>
+<li><b>Relación:</b> se usaba junto a la <b>ISO/IEC 14598</b> (proceso de evaluación). Las dos se fusionaron en <b>SQuaRE</b> (serie 25000).</li>
+<li><b>Ejemplo peruano:</b> en una licitación de RENIEC de los años 2000, las bases pedían «fiabilidad según ISO 9126» y se medía con la subcaracterística madurez (fallas por mes en producción).</li>
+<li><b>Trampa típica:</b> en la 9126, «seguridad» es una <b>subcaracterística de Funcionalidad</b>. En la 25010 pasa a ser <b>característica propia</b>, igual que Compatibilidad.</li>
+</ul></div>
+<div class="tabla"><table>
+<thead><tr><th>Característica (diap. 11, S1)</th><th>Subcaracterísticas según la diapositiva</th><th>Nombre normalizado ISO/IEC 9126-1:2001</th></tr></thead>
+<tbody>
+<tr><td>Funcionalidad</td><td>adaptabilidad, exactitud, interoperabilidad, cumplimiento, seguridad</td><td>Idoneidad, exactitud, interoperabilidad, seguridad de acceso, cumplimiento funcional</td></tr>
+<tr><td>Confiabilidad</td><td>madurez, tolerancia a fallas, robustez</td><td>Madurez, tolerancia a fallos, capacidad de recuperación, cumplimiento</td></tr>
+<tr><td>Usabilidad</td><td>entendible, intuitiva, operable</td><td>Comprensibilidad, facilidad de aprendizaje, operabilidad, atractivo, cumplimiento</td></tr>
+<tr><td>Eficiencia</td><td>comportamiento del tiempo y de los recursos</td><td>Comportamiento temporal, utilización de recursos, cumplimiento</td></tr>
+<tr><td>Facilidad de recibir mantenimiento</td><td>analizable, cambiable, estable, susceptible de pruebas</td><td>Analizabilidad, cambiabilidad, estabilidad, facilidad de prueba, cumplimiento</td></tr>
+<tr><td>Portabilidad</td><td>adaptable, instalable, conformidad, sustituible</td><td>Adaptabilidad, instalabilidad, coexistencia, reemplazabilidad, cumplimiento</td></tr>
+</tbody></table></div>
+<div class="ojo"><h4>Ojo en el examen</h4><p>La diapositiva escribe «robustez» donde la norma dice «capacidad de recuperación» y «adaptabilidad» (en Funcionalidad) donde la norma dice «idoneidad». Si el examen copia la diapositiva, contesta con sus palabras. La regla <b>FURPEM</b> sirve para recordar: <b>F</b>uncionalidad, <b>U</b>sabilidad, confiabilidad (<b>R</b>eliability), <b>P</b>ortabilidad, <b>E</b>ficiencia, <b>M</b>antenibilidad.</p></div>
+</section>
+
+<section id="iso-14598">
+<h2>11. ISO/IEC 14598 — Evaluación del producto de SW</h2>
+<div class="norma"><h4>ISO/IEC 14598 — Information technology — Software product evaluation (partes 1 a 6)</h4>
+<ul>
+<li><b>Organismo:</b> ISO/IEC JTC 1/SC 7.</li>
+<li><b>Versiones:</b> 1998–2001. Partes: 14598-1 visión general · -2 planificación y gestión · -3 proceso para desarrolladores · -4 proceso para adquirentes · -5 proceso para evaluadores · -6 documentación de los módulos de evaluación. <b>Reemplazada</b> por la división 2504n de SQuaRE: ISO/IEC 25040 (proceso de evaluación; 2011, rev. 2024) y 25041 (guía para desarrolladores, adquirentes y evaluadores independientes).</li>
+<li><b>Propósito:</b> definir el <b>proceso</b> para evaluar un producto de SW. La 9126 dice <i>qué</i> medir; la 14598 dice <i>cómo</i> organizar la evaluación.</li>
+<li><b>Estructura del proceso (idea que pasó a la 25040):</b> 1 establecer los requisitos de evaluación → 2 especificar la evaluación (métricas y criterios) → 3 diseñarla (plan) → 4 ejecutarla (medir, comparar, juzgar) → 5 concluirla (informe).</li>
+<li><b>Relación:</b> trabaja junto a la 9126. Su contenido continúa en 25040/25041. Está en la línea de la IV&amp;V (IEEE 1012), porque permite evaluaciones de un tercero independiente.</li>
+<li><b>Ejemplo peruano:</b> el MEF contrata a un laboratorio independiente para evaluar el SIAF antes de aceptarlo. El laboratorio sigue el proceso de evaluación (hoy 25040) con métricas de la 25023.</li>
+<li><b>Trampa típica:</b> la 14598 no es un modelo de calidad (eso es la 9126 o la 25010): es un <b>proceso de evaluación</b> del producto. Tampoco evalúa procesos de desarrollo (eso es la 15504/33000).</li>
+</ul></div>
+</section>
+
+<section id="square-25010">
+<h2>12. ISO/IEC 25000 SQuaRE e ISO/IEC 25010 — Calidad del producto (versión vigente)</h2>
+<p>Siglas: <b>SQuaRE</b> (<i>Systems and software Quality Requirements and Evaluation</i> – Requisitos y Evaluación de la Calidad de Sistemas y SW), <b>QiU</b> (<i>Quality in Use</i> – calidad en uso), <b>RUSP</b> (<i>Ready to Use Software Product</i>), <b>COTS</b> (<i>Commercial Off-The-Shelf</i>), <b>SonarQube</b> (mide mantenibilidad, fiabilidad y seguridad), <b>SAST/DAST</b>.</p>
+<div class="norma"><h4>ISO/IEC 25010:2011 (clase) / ISO/IEC 25010:2023 — Systems and software engineering — SQuaRE — Product quality model</h4>
+<ul>
+<li><b>Organismo:</b> ISO/IEC JTC 1/SC 7. En el Perú existe como NTP-ISO/IEC 25010 (INACAL).</li>
+<li><b>Versiones:</b> <b>25010:2011</b> (8 características y 31 subcaracterísticas; es la que enseña la profesora) · <b>25010:2023</b> (9 características; el modelo de calidad en uso se separó a la ISO/IEC 25019:2023).</li>
+<li><b>Propósito:</b> dar un modelo de calidad del <b>producto</b> que sirva para especificar requisitos de calidad, medirlos y evaluarlos.</li>
+<li><b>Divisiones SQuaRE:</b> <b>2500n</b> Gestión de la calidad (25000 guía, 25001 planificación) · <b>2501n</b> Modelo (25010 producto, 25012 datos, 25019 uso) · <b>2502n</b> Medición (25022, 25023, 25024) · <b>2503n</b> Requisitos (25030) · <b>2504n</b> Evaluación (25040, 25041, 25045) · <b>25050–25099</b> extensiones (25051 RUSP/COTS).</li>
+<li><b>8 características (2011):</b> Adecuación funcional · Eficiencia de desempeño · Compatibilidad · Usabilidad · Fiabilidad · Seguridad · Mantenibilidad · Portabilidad.</li>
+<li><b>Calidad en uso (2011):</b> efectividad, eficiencia, satisfacción, libertad de riesgo y cobertura de contexto.</li>
+<li><b>Relación:</b> reemplaza a la 9126 + la 14598. En la S4 la profesora la nombra en el SQAP: «<b>IEEE 730 para SQAP, ISO/IEC 25010 para calidad de producto</b>». En la S3 es la base de los <i>Quality Gates</i> de SonarQube (fiabilidad, seguridad, mantenibilidad).</li>
+<li><b>Ejemplo peruano:</b> para la app SINEACE móvil (G3), los requisitos no funcionales se escriben con la 25010: <i>Eficiencia de desempeño – comportamiento temporal</i>: p95 &lt; 2 s; <i>Seguridad – confidencialidad</i>: datos de acreditación cifrados con TLS 1.3; <i>Usabilidad – accesibilidad</i>: WCAG 2.1 AA.</li>
+<li><b>Trampa típica:</b> «seguridad» en la 25010:2011 es <i>security</i> (información: confidencialidad, integridad, no repudio, responsabilidad, autenticidad). La seguridad física (<i>safety</i>) estaba en calidad en uso («libertad de riesgo») y en la versión 2023 es una característica nueva.</li>
+</ul></div>
+<div class="tabla"><table>
+<thead><tr><th>Característica 2011</th><th>Subcaracterísticas 2011</th><th>Cambio en 2023</th></tr></thead>
+<tbody>
+<tr><td>Adecuación funcional</td><td>Completitud, corrección y pertinencia funcional</td><td>Se mantiene</td></tr>
+<tr><td>Eficiencia de desempeño</td><td>Comportamiento temporal, utilización de recursos, capacidad</td><td>Se mantiene</td></tr>
+<tr><td>Compatibilidad</td><td>Coexistencia, interoperabilidad</td><td>Se mantiene</td></tr>
+<tr><td>Usabilidad</td><td>Reconocimiento de adecuación, aprendizaje, operabilidad, protección contra errores, estética de la UI, accesibilidad</td><td>Pasa a llamarse <b>Capacidad de interacción</b> (agrega inclusividad, autodescriptividad y compromiso del usuario)</td></tr>
+<tr><td>Fiabilidad</td><td>Madurez, disponibilidad, tolerancia a fallos, recuperabilidad</td><td>«Madurez» pasa a llamarse «ausencia de fallos» (<i>faultlessness</i>)</td></tr>
+<tr><td>Seguridad</td><td>Confidencialidad, integridad, no repudio, responsabilidad, autenticidad</td><td>Agrega <b>resistencia</b></td></tr>
+<tr><td>Mantenibilidad</td><td>Modularidad, reusabilidad, analizabilidad, modificabilidad, capacidad de ser probado</td><td>Se mantiene</td></tr>
+<tr><td>Portabilidad</td><td>Adaptabilidad, instalabilidad, reemplazabilidad</td><td>Pasa a llamarse <b>Flexibilidad</b> (agrega <b>escalabilidad</b>)</td></tr>
+<tr><td>—</td><td>—</td><td><b>Protección (Safety)</b>, nueva: restricción operativa, identificación de riesgos, falla segura, advertencia de peligro, integración segura</td></tr>
+</tbody></table></div>
+<div class="concepto"><h3>Requisito de calidad medible con la 25010</h3>
+<p>Un requisito no funcional bien escrito nombra la <b>característica y la subcaracterística</b> de la 25010, la <b>métrica</b> (de la 25023) y el <b>umbral</b> de aceptación.</p>
+<p class="ej"><b>Ej.:</b> «Fiabilidad – disponibilidad: el portal de Mi Clave SOL de SUNAT tendrá una disponibilidad ≥ 99,9 % mensual, medida por el monitoreo de Grafana». Si solo se dice «el sistema será confiable», el requisito no se puede verificar.</p></div>
+<div class="ojo"><h4>Ojo en el examen</h4><p>Responde <b>8 características</b> (25010:2011, diap. 21 de la S3) salvo que pregunten expresamente por la versión 2023, que tiene 9. Otros pares que se confunden: 25010 (modelo del <b>producto</b>) frente a 12207 (<b>procesos</b>) y frente a 9126 (modelo anterior, con 6). La 27001 es un <b>sistema de gestión</b> de seguridad de la información (SGSI) para la organización; la característica «Seguridad» de la 25010 es una propiedad del <b>producto</b>.</p></div>
+<div class="concepto"><h3>ISO/IEC 27001 (SGSI) — referencia rápida de la S3</h3>
+<p>Norma certificable con los requisitos de un SGSI (Sistema de Gestión de Seguridad de la Información; ISMS en inglés), del ISO/IEC JTC 1/SC 27. La versión vigente es la <b>2022</b>, con 93 controles en el Anexo A agrupados en 4 temas: 37 organizacionales, 8 de personas, 14 físicos y 34 tecnológicos. Entre ellos están 8.25 (ciclo de vida de desarrollo seguro), 8.28 (codificación segura) y 8.29 (pruebas de seguridad).</p>
+<p class="ej"><b>Ej.:</b> en el Estado peruano la NTP-ISO/IEC 27001 es de uso obligatorio (la RM 004-2016-PCM la aprobó en su versión 2014). Por eso el equipo TI de un ministerio documenta su SGSI y la Oficina de Seguridad audita los controles de desarrollo seguro.</p></div>
+<p class="fuente">Fuentes: S1 diap. 11; S3 diap. 21; S4a diap. 18. Web: <a href="https://quality.arc42.org/articles/iso-25010-update-2023">arc42 Quality, cambios de ISO/IEC 25010:2023</a>; <a href="https://www.sonarsource.com/resources/library/iso-iec-25010-explained/">Sonar, ISO/IEC 25010 explicada</a>.</p>
+</section>
+
+<section id="ieee-730">
+<h2>13. IEEE 730 — Aseguramiento de la calidad del SW (SQA / SQAP)</h2>
+<p>Siglas: <b>SQA</b> (<i>Software Quality Assurance</i>), <b>SQAP</b> (<i>Software Quality Assurance Plan</i>), <b>S2ESC</b> (<i>Software &amp; Systems Engineering Standards Committee</i>), <b>SRS</b> (<i>Software Requirements Specification</i>), <b>SDD</b> (<i>Software Design Description</i>), <b>SVVP/SVVR</b> (<i>Software Verification and Validation Plan/Report</i>), <b>SCMP</b> (<i>Software Configuration Management Plan</i>), <b>SRR/PDR/CDR</b> (revisiones de requisitos, de diseño preliminar y de diseño crítico), <b>DoD/DoR</b> (<i>Definition of Done/Ready</i>).</p>
+<div class="norma"><h4>IEEE Std 730-2014 — IEEE Standard for Software Quality Assurance Processes (antes: SQA Plans)</h4>
+<ul>
+<li><b>Organismo:</b> IEEE Computer Society, comité S2ESC.</li>
+<li><b>Versiones:</b> 1979 · 1981 · 1984 · 1989 · 1998 · <b>2002</b> («<i>SQA Plans</i>», 16 secciones) · <b>2014</b> («<i>SQA Processes</i>»). Hay una revisión <b>IEEE 730-2026</b> reportada por catálogos de normas; su estado exacto hay que verificarlo en IEEE SA.</li>
+<li><b>Propósito:</b> fijar los requisitos para iniciar, planificar, controlar y ejecutar el SQA de un proyecto de desarrollo o mantenimiento. En la clase: «IEEE 730 para SQAP».</li>
+<li><b>Estructura 2002 (contenido mínimo del SQAP):</b> 1 Propósito · 2 Documentos de referencia · 3 Gestión · 4 Documentación (como mínimo SRS, SDD, SVVP, SVVR, documentación de usuario y SCMP) · 5 Estándares, prácticas, convenciones y métricas · 6 Revisiones (SRR, PDR, CDR, auditorías funcional y física…) · 7 Pruebas · 8 Reporte de problemas y acciones correctivas · 9 Herramientas, técnicas y metodologías · 10 Control de medios · 11 Control de proveedores · 12 Registros · 13 Capacitación · 14 Gestión de riesgos · 15 Glosario · 16 Procedimiento de cambios del SQAP.</li>
+<li><b>Estructura 2014:</b> 3 áreas: implementación del proceso de SQA, aseguramiento del <b>producto</b> y aseguramiento del <b>proceso</b>. El SQAP pasa a ser un producto de esos procesos (esquema en un anexo). Se armoniza con el proceso de QA de ISO/IEC/IEEE 12207.</li>
+<li><b>Versión didáctica de la clase:</b> 7 elementos clave del SQAP: propósito y alcance · roles y responsabilidades · estándares y metodologías · revisiones y auditorías · proceso de pruebas · gestión de configuración y cambios · métricas y herramientas.</li>
+<li><b>Relación:</b> en la 12207:2017 el SQA corresponde al proceso 6.3.8 (QA) y en la 1995 al 6.3. En CMMI es <b>PPQA</b> y en CMMI V2.0 es <b>PQA</b>. En MPS 2021 queda dentro de CP-F/GPC. Se usa junto con IEEE 1012 (V&amp;V), 1028 (revisiones), 828 (SCM) y 29119 (pruebas).</li>
+<li><b>Ejemplo peruano:</b> el SQAP del proyecto SINEACE móvil (G3) define la cobertura ≥ 80 %, el Quality Gate de SonarQube, una auditoría de proceso por sprint a cargo de un líder de SQA que reporta a la dirección (independencia) y un criterio de salida de «0 defectos críticos abiertos».</li>
+<li><b>Trampa típica:</b> IEEE 730 regula el <b>aseguramiento</b> (plan/proceso). No define la calidad del producto (25010), la V&amp;V detallada (1012) ni las pruebas (29119). Los «7 elementos» de la clase son una simplificación didáctica, no la numeración oficial.</li>
+</ul></div>
+<div class="concepto"><h3>SQAP (definición de clase)</h3>
+<p>Documento formal que describe los <b>métodos, herramientas, estándares y responsabilidades</b> necesarios para garantizar que un producto de SW cumpla los requisitos de calidad <b>a lo largo de todo su ciclo de vida</b> (diap. 4, S4).</p>
+<p class="ej"><b>Ej.:</b> el SQAP de «AlfaShop» (clase) fija como criterio de despliegue 0 defectos críticos, el 100 % de las pruebas E2E críticas aprobadas y una regresión ≥ 98 %, con GitHub Flow para la gestión de configuración.</p></div>
+<p class="fuente">Fuentes: S4a diap. 2–4, 17–20; mazo B (AlfaShop, SQAP ágil). Web: <a href="https://connect.snv.ch/en/ieee-730-2014">SNV, estado de IEEE 730-2014</a>.</p>
+</section>
+
+<section id="ieee-1012">
+<h2>14. IEEE 1012 — Verificación y Validación (V&amp;V)</h2>
+<p>Siglas: <b>V&amp;V</b> (Verificación y Validación), <b>IV&amp;V</b> (<i>Independent V&amp;V</i> – V&amp;V independiente), <b>SVVP</b>, <b>IL</b> (<i>Integrity Level</i> – nivel de integridad), <b>COTS</b>, <b>UAT</b> (<i>User Acceptance Testing</i>).</p>
+<div class="norma"><h4>IEEE Std 1012 — Standard for System, Software, and Hardware Verification and Validation (2016 → 2024)</h4>
+<ul>
+<li><b>Organismo:</b> IEEE (Computer Society).</li>
+<li><b>Versiones:</b> 1986 · 1998 · 2004 · 2012 (amplía el alcance a sistemas y HW) · 2016 · <b>2024</b> (la aprobó el IEEE SA Board el 12-nov-2024 y se publicó en 2025; reemplaza a la de 2016).</li>
+<li><b>Propósito:</b> definir los procesos, actividades y tareas de V&amp;V a lo largo de todo el ciclo de vida y el contenido del <b>SVVP</b>. Se aplica a productos nuevos, mantenidos o reutilizados (legados y COTS), y el firmware cuenta como SW.</li>
+<li><b>Estructura:</b> el rigor de las tareas depende del <b>nivel de integridad</b>. El esquema típico tiene 4 niveles (de 4 = consecuencias catastróficas a 1 = despreciables). Las tareas se agrupan según los procesos del ciclo de vida (Acuerdo, Habilitación organizacional, Gestión técnica, Técnicos, igual que la 12207/15288). La IV&amp;V exige independencia <b>técnica, gerencial y financiera</b>.</li>
+<li><b>Verificación vs. validación:</b> verificación = «¿construimos el producto <b>correctamente</b>?» (comparar con la especificación de la etapa anterior); validación = «¿construimos el producto <b>correcto</b>?» (comparar con la necesidad del usuario en su entorno).</li>
+<li><b>Relación:</b> procesos 6.4.9 Verificación y 6.4.11 Validación de la 12207:2017 (en la 1995 eran 6.4 y 6.5, de apoyo). En CMMI v1.3 son VER/VAL y en V2.0 son VV. En el SQAP es la sección 4 (SVVP/SVVR).</li>
+<li><b>Ejemplo peruano:</b> el SW del sistema de control de trenes del Metro de Lima tiene nivel de integridad 4, así que exige IV&amp;V con un tercero independiente. El app de citas de un consultorio sería nivel 1 o 2.</li>
+<li><b>Trampa típica:</b> en la matriz V&amp;V de la clase (S4, diap. 6), la trazabilidad y las pruebas unitarias aparecen en la columna de <b>validación</b>. IEEE 1012 las cataloga como <b>verificación</b>. En el examen sigue la tabla de clase y, si te piden justificar, explica la diferencia.</li>
+</ul></div>
+<p class="fuente">Fuentes: S4a diap. 6; S5 diap. 27–29. Web: <a href="https://webstore.ansi.org/standards/ieee/ieee10122024">ANSI Webstore, IEEE 1012-2024</a>; <a href="https://research-portal.uws.ac.uk/en/publications/ieee-standard-for-system-software-and-hardware-verification-and-v/">UWS Research Portal, IEEE 1012</a>.</p>
+</section>
+
+<section id="ieee-1028">
+<h2>15. IEEE 1028 — Revisiones y auditorías de SW</h2>
+<div class="norma"><h4>IEEE Std 1028-2008 — IEEE Standard for Software Reviews and Audits</h4>
+<ul>
+<li><b>Organismo:</b> IEEE. <b>Versiones:</b> 1988 · 1997 · <b>2008</b>. Algunos catálogos la listan como inactiva o reservada, pero sigue siendo la referencia clásica (SWEBOK).</li>
+<li><b>Propósito:</b> fijar los <b>requisitos mínimos</b> de las revisiones sistemáticas (participación de un equipo, resultados documentados y procedimientos documentados). No decide <i>cuándo</i> hace falta una revisión ni qué hacer con sus resultados.</li>
+<li><b>Estructura, 5 tipos:</b> (1) <b>Revisión de gestión</b>: evalúa el avance frente al plan y decide. (2) <b>Revisión técnica</b>: evalúa si un producto es adecuado para su uso. (3) <b>Inspección</b>: la más formal; la dirige un moderador con roles (lector, registrador, autor), usa checklists y métricas de defectos. (4) <b>Walk-through</b> (recorrido): el autor guía al equipo por el producto, para aprender y encontrar defectos. (5) <b>Auditoría</b>: evaluación <b>independiente</b> del cumplimiento de normas, contratos o planes.</li>
+<li><b>Relación:</b> son las <b>técnicas estáticas</b> de la S3 (code review, walkthrough, auditorías). En la 12207:1995 se corresponden con 6.6 Revisión conjunta y 6.7 Auditoría. En CMMI V2.0, PR (<i>Peer Reviews</i>). En el SQAP, la sección 6 (revisiones).</li>
+<li><b>Ejemplo peruano:</b> antes de liberar el módulo de pagos de Plaza Vea online, el equipo hace una <b>inspección</b> del código de cálculo del IGV con checklist (moderador, lector, registrador) y luego la Oficina de Auditoría Interna hace una <b>auditoría</b> independiente del cumplimiento del SQAP.</li>
+<li><b>Trampa típica:</b> walk-through ≠ inspección. En el walk-through el autor lidera y es menos formal; la inspección la lidera un moderador y es la más rigurosa. La auditoría es la única «independiente» por definición.</li>
+</ul></div>
+</section>
+
+<section id="ieee-829-29119">
+<h2>16. IEEE 829 e ISO/IEC/IEEE 29119 — Pruebas de SW</h2>
+<p>Siglas: <b>STP</b> (<i>Software Test Plan</i>), <b>MTP/LTP</b> (<i>Master/Level Test Plan</i>), <b>TCS</b> (<i>Test Case Specification</i>), <b>TIR</b> (<i>Test Incident Report</i>), <b>KDT</b> (<i>Keyword-Driven Testing</i>), <b>TDD/BDD</b>, <b>UAT</b>, <b>E2E</b>.</p>
+<div class="norma"><h4>IEEE Std 829-2008 (documentación de pruebas) → ISO/IEC/IEEE 29119 (partes 1 a 5)</h4>
+<ul>
+<li><b>IEEE 829:</b> «<i>Standard for Software and System Test Documentation</i>». Versiones 1983, 1998 y 2008. Define documentos como el plan maestro y de nivel, el diseño de pruebas, los casos y procedimientos, el log, el informe de incidentes y el informe resumen. Está <b>reemplazada</b> por la serie 29119 (IEEE SA la lista como superada).</li>
+<li><b>ISO/IEC/IEEE 29119:</b> 29119-1 Conceptos y definiciones (2013 → <b>2022</b>) · 29119-2 Procesos de prueba (2013 → <b>2021</b>; niveles organizacional, de gestión y dinámico) · 29119-3 Documentación de pruebas (2013 → <b>2021</b>; reemplaza a IEEE 829) · 29119-4 Técnicas de prueba (2015 → <b>2021</b>; caja negra, caja blanca y basadas en la experiencia) · 29119-5 Pruebas guiadas por palabras clave (2016).</li>
+<li><b>Propósito:</b> dar un vocabulario, procesos, documentación y técnicas de prueba aceptados internacionalmente, para cualquier ciclo de vida, ágil incluido.</li>
+<li><b>Relación:</b> las técnicas dinámicas de la S3 (unitarias, integración, sistema, regresión, UAT) y las basadas en la experiencia (exploratorias, error guessing) se definen en 29119-4. La ISO/IEC 33063 es el PAM para evaluar procesos de prueba. El SQAP (sección 7) y la pirámide de pruebas (S4) se apoyan en estos documentos.</li>
+<li><b>Ejemplo peruano:</b> el plan de pruebas del sistema de matrícula del SUM-UNMSM sigue la 29119-3: un plan de pruebas con alcance, riesgos y criterios de salida, especificaciones de casos con partición de equivalencia (29119-4) y un informe de incidentes en Jira.</li>
+<li><b>Trampa típica:</b> si preguntan por la norma <b>vigente</b> de documentación de pruebas, la respuesta es <b>ISO/IEC/IEEE 29119-3</b>, no IEEE 829.</li>
+</ul></div>
+<p class="fuente">Web: <a href="https://standards.ieee.org/ieee/829/1218">IEEE SA, IEEE 829 superada por la 29119</a>; <a href="https://www.microtool.de/en/document-management/test-documentation-with-iso-iec-ieee-29119-32021/">microTOOL, ISO/IEC/IEEE 29119-3:2021</a>.</p>
+</section>
+<section id="iso-12207">
+<h2>17. ISO/IEC/IEEE 12207 — Procesos del ciclo de vida del SW (1995, 2008, 2017)</h2>
+<p>Siglas: <b>SLCP</b> (<i>Software Life Cycle Processes</i>), <b>JTC 1/SC 7</b>, <b>PRM</b> (<i>Process Reference Model</i>), <b>SPICE</b>, <b>15288</b> (procesos del ciclo de vida de <i>sistemas</i>), <b>15289</b> (contenido de los productos de información), <b>DevOps</b>, <b>CI/CD</b>, <b>RFP</b> (<i>Request For Proposal</i>), <b>WBS</b>.</p>
+<div class="norma"><h4>ISO/IEC 12207:1995 / ISO/IEC 12207:2008 / ISO/IEC/IEEE 12207:2017 — Systems and software engineering — Software life cycle processes</h4>
+<ul>
+<li><b>Organismo:</b> ISO/IEC JTC 1/SC 7. Desde 2017 se suma el <b>IEEE</b> (norma conjunta ISO + IEC + IEEE).</li>
+<li><b>Versiones:</b> 1.ª ed. <b>agosto de 1995</b> · Amd 1:<b>2002</b> (cada proceso pasa a tener «propósito y resultados», para alinearse con la 15504) · Amd 2:<b>2004</b> · 2.ª ed. <b>febrero de 2008</b> (armonización con la ISO/IEC 15288) · 3.ª ed. <b>noviembre de 2017</b> (ISO/IEC/IEEE; reemplaza a ISO/IEC 12207:2008 y a IEEE 12207-2008).</li>
+<li><b>Propósito:</b> dar una <b>estructura y un lenguaje comunes</b> a compradores, proveedores, desarrolladores, mantenedores, operadores, gestores y técnicos. Es la base para establecer, evaluar y mejorar procesos, desde la concepción hasta el retiro.</li>
+<li><b>Destinatarios (S4):</b> una organización de SW (para establecer su entorno de trabajo), un proyecto (para elegir infraestructura y ciclo de vida), un comprador o proveedor (para acordar procesos) y los asesores o evaluadores (para mejorar procesos).</li>
+<li><b>Atributos de cada proceso (2017):</b> título · propósito · salidas (<i>outcomes</i>) · actividades · tareas. Jerarquía: <b>proceso → actividad → tarea</b>.</li>
+<li><b>Relación:</b> es el <b>PRM</b> de las evaluaciones 15504-5 y 33061. Es gemela de la ISO/IEC/IEEE 15288:2015. La 29110 es un <b>perfil</b> (subconjunto) de ella. MPS.BR se basa en la NBR ISO/IEC/IEEE 12207. IEEE 730 (QA) y 1012 (V&amp;V) se alinean con sus procesos.</li>
+<li><b>Ejemplo peruano:</b> EduTech (caso de la S4) mapea su pipeline DevOps a los procesos técnicos: build → Implementación; merge → Integración; pruebas unitarias + SonarQube → Verificación; UAT en Staging → Validación; Terraform/Kubernetes/AWS → Transición; Grafana/ELK → Operación.</li>
+<li><b>Trampa típica:</b> decir que la 12207:2017 tiene 43 procesos o 7 grupos (eso es la 2008) o 17 procesos en 3 categorías (eso es la 1995). La 2017 tiene <b>4 grupos y 30 procesos</b>.</li>
+</ul></div>
+<div class="tabla"><table>
+<thead><tr><th>Versión</th><th>Estructura</th><th>N.° procesos</th><th>Dónde aparece en clase</th></tr></thead>
+<tbody>
+<tr><td>ISO/IEC 12207:1995 (≡ NTP 2004)</td><td>3 categorías: Principales (5) · Apoyo (8) · Organizativos (4)</td><td><b>17</b></td><td>S5, diagrama de 17 procesos (diap. 18)</td></tr>
+<tr><td>ISO/IEC 12207:2008 (≡ <b>NTP 2016</b>)</td><td>7 grupos: 4 de contexto de sistema (Acuerdo 2, Habilitación organizacional del proyecto 5, Proyecto 7, Técnicos 11) + 3 específicos de SW (Implementación 7, Soporte 8, Reutilización 3)</td><td><b>43</b></td><td>S5, diap. 10 (7 grupos) y guía de la NTP (que lista 6)</td></tr>
+<tr><td>ISO/IEC/IEEE 12207:2017</td><td>4 grupos: Acuerdo (2) · Habilitación de proyectos organizacionales (6) · Gestión técnica (8) · Técnicos (14)</td><td><b>30</b></td><td>S4, mazo B (diap. 7–13) y mazo A</td></tr>
+</tbody></table></div>
+<figure><img src="@img/semana-04-modelos-de-mejora-del-proceso-de-sw/p07.png" alt="Diagrama de 2 por 2 con las cuatro categorías de procesos de la ISO/IEC/IEEE 12207:2017: Procesos de Acuerdo, Procesos de habilitación de proyectos organizacionales, Procesos de gestión técnica y Procesos técnicos"><figcaption>Las 4 categorías de la 12207:2017, que suman 30 procesos (diapositiva 7, Semana 04).</figcaption></figure>
+<div class="tabla"><table>
+<thead><tr><th>Grupo 2017 (cláusula)</th><th>Procesos oficiales</th></tr></thead>
+<tbody>
+<tr><td>6.1 Acuerdo (2)</td><td>6.1.1 Adquisición · 6.1.2 Suministro</td></tr>
+<tr><td>6.2 Habilitación de proyectos organizacionales (6)</td><td>Gestión del modelo de ciclo de vida · Infraestructura · Cartera (portafolio) · RR. HH. · Gestión de la calidad · Gestión del conocimiento</td></tr>
+<tr><td>6.3 Gestión técnica (8)</td><td>Planificación del proyecto · Evaluación y control del proyecto · Gestión de decisiones · Gestión de riesgos · Gestión de la configuración · Gestión de la información · Medición · Aseguramiento de la calidad</td></tr>
+<tr><td>6.4 Técnicos (14)</td><td>Análisis del negocio o misión · Necesidades y requisitos de las partes interesadas · Requisitos del sistema/SW · Arquitectura · Diseño · Análisis del sistema · Implementación · Integración · Verificación · Transición · Validación · Operación · Mantenimiento · Retirada (<i>Disposal</i>)</td></tr>
+</tbody></table></div>
+<div class="ojo"><h4>Ojo en el examen</h4><p>(1) La profesora llama a los grupos 6.2 y 6.3 «Procesos <b>Habilitadores del Ciclo de Vida Organizacional</b>» y «Procesos de <b>Gestión de Proyectos</b>»; la norma (y su propio diagrama de la diap. 7) dice «habilitación de proyectos organizacionales» y «gestión técnica». Son los mismos grupos. (2) Las viñetas de la clase suman 28 porque juntan 2 pares (Infraestructura/Cartera y Análisis del negocio/Necesidades de las partes interesadas); el total oficial es 30. (3) En la norma la <b>Transición</b> (6.4.10) va antes que la <b>Validación</b> (6.4.11); la clase pone V-V-T, que es el orden práctico de DevOps. (4) Gestión de la Calidad (6.2.5, organizacional) ≠ Aseguramiento de la Calidad (6.3.8, por proyecto). (5) Del 1995 al 2017, QA, Verificación y Validación dejaron de ser procesos «de apoyo»: QA pasó a Gestión técnica y V/V a Técnicos.</p></div>
+<p class="fuente">Fuentes: S4 mazos A, B y C; S5 mazo A diap. 3–6.</p>
+</section>
+
+<section id="ntp-12207-2016">
+<h2>18. NTP-ISO/IEC 12207:2016 — La norma peruana (INACAL, obligatoria en el Estado)</h2>
+<p>Siglas: <b>NTP</b> (Norma Técnica Peruana), <b>INACAL</b> (Instituto Nacional de Calidad, desde 2015), <b>INDECOPI</b> (antes a cargo de la normalización), <b>CTN</b> (Comité Técnico de Normalización), <b>PCM</b> (Presidencia del Consejo de Ministros), <b>RM</b> (Resolución Ministerial), <b>SNI</b> (Sistema Nacional de Informática), <b>ONGEI</b> (Oficina Nacional de Gobierno Electrónico e Informática), <b>SEGDI</b> (Secretaría de Gobierno Digital, sucesora de la ONGEI), <b>OGTI</b> (Oficina General de Tecnologías de la Información).</p>
+<div class="norma"><h4>NTP-ISO/IEC 12207:2016 — Ingeniería de Software y Sistemas. Procesos del ciclo de vida del software. 3.ª Edición</h4>
+<ul>
+<li><b>Organismo:</b> <b>INACAL</b> (Dirección de Normalización), que la aprobó el <b>16-jul-2016</b>. Es una <b>adopción</b> de la norma internacional y <b>equivale a ISO/IEC 12207:2008</b>, no a la de 2017.</li>
+<li><b>Ediciones peruanas:</b> NTP-ISO/IEC 12207:<b>2004</b> (1.ª; la RM N.° 179-2004-PCM la hizo obligatoria en el SNI) · NTP 2006 (2.ª, con las enmiendas) · <b>NTP 2016 (3.ª)</b>.</li>
+<li><b>Obligatoriedad (verificada):</b> la <b>RM N.° 041-2017-PCM</b>, publicada en <b>febrero de 2017</b>, aprueba el <b>uso obligatorio</b> de la «NTP-ISO/IEC 12207:2016 – Ingeniería de Software y Sistemas. Procesos del ciclo de vida del software. 3a Edición» en <b>todas las entidades integrantes del Sistema Nacional de Informática</b>. Ministerios y organismos (Senace, Vivienda, MIDIS, INGEMMET…) la citan en sus directivas de desarrollo de SW de 2020–2024, y no se encontró una derogación.</li>
+<li><b>Propósito (objetivos de la S5):</b> 1 estandarizar los procesos del ciclo de vida · 2 asegurar la calidad del SW <b>y de los procesos</b> · 3 facilitar la comunicación entre clientes, proveedores y desarrolladores · 4 dar una base para la evaluación y la mejora continua. Objetivo global: que quien desarrolla, adquiere, mantiene u opera SW lo haga de forma <b>controlada, medible y con calidad</b>.</li>
+<li><b>Estructura (7 grupos, 43 procesos):</b> Acuerdo · Habilitación organizacional del proyecto · Gestión de proyectos · Técnicos · Implementación de SW · Soporte de SW · Reutilización de SW. Anexo A: proceso de adaptación (<b>sastrería / <i>tailoring</i></b>). Conformidad <b>total</b> o <b>adaptada</b>.</li>
+<li><b>Campo de aplicación:</b> uso interno o externo (contractual), para sistemas independientes y para la parte lógica del firmware. <b>No impone</b> cascada ni ágil.</li>
+<li><b>Relación:</b> en la S5 la profesora explica además la estructura clásica de 3 categorías y 17 procesos (1995). La NTP es la entrada natural a CMMI o a la 33000 (proceso 7.3 Mejora) y a la 29110 para VSE. En el Perú convive con la NTP-ISO/IEC 27001 (seguridad) y con la NTP-ISO/IEC 29110.</li>
+<li><b>Ejemplo peruano (G3):</b> en el informe de la S5 sobre la app móvil del SINEACE, el G3 baja la norma a <b>proceso → actividades → tareas</b>. Por ejemplo, «Análisis de requisitos del SW» → actividad «Especificar requisitos» → tarea «Validar la SRS con la Dirección de Evaluación y Acreditación». Además justifica la norma por ser obligatoria para una entidad del SNI.</li>
+<li><b>Trampa típica:</b> los títulos de las diapositivas dicen «NORMA NTP 12207:2017», pero el código real es <b>NTP-ISO/IEC 12207:2016</b>, obligatoria <b>desde 2017</b>. Para una empresa privada es <b>voluntaria</b>, salvo que un contrato con el Estado la exija.</li>
+</ul></div>
+<figure><img src="@img/semana-05-modelo-de-calidad-iso-12207/p18.png" alt="Mapa de los 17 procesos de la 12207 en 3 categorías: Principales 5.1 Adquisición a 5.5 Mantenimiento, Apoyo 6.1 Documentación a 6.8 Solución de problemas, y Organizativos 7.1 Gestión a 7.4 Recursos Humanos"><figcaption>Estructura clásica de 17 procesos (12207:1995 / NTP 2004) que se ve en la S5 (diapositiva 18, Semana 05).</figcaption></figure>
+<div class="tabla"><table>
+<thead><tr><th>Categoría (1995)</th><th>Procesos</th><th>Idea clave</th></tr></thead>
+<tbody>
+<tr><td>Principales (5)</td><td>5.1 Adquisición · 5.2 Suministro · 5.3 Desarrollo · 5.4 Operación · 5.5 Mantenimiento</td><td>Hacen que el SW «nazca, funcione y se mantenga». Mantenimiento correctivo, perfectivo, adaptativo y preventivo</td></tr>
+<tr><td>Apoyo (8)</td><td>6.1 Documentación · 6.2 Gestión de la configuración · 6.3 QA · 6.4 Verificación · 6.5 Validación · 6.6 Revisión conjunta · 6.7 Auditoría · 6.8 Resolución de problemas</td><td>Transversales, corren en paralelo y no desarrollan SW</td></tr>
+<tr><td>Organizativos (4)</td><td>7.1 Gestión · 7.2 Infraestructura · 7.3 Mejora · 7.4 Formación / RR. HH.</td><td>«Mejora» puede usar CMMI, ISO/IEC 33000 o ISO 9001</td></tr>
+</tbody></table></div>
+<div class="ojo"><h4>Ojo en el examen</h4><p>«7 grupos» (diap. 10) vs. «3 grandes grupos» (diap. 17) vs. «6 grupos» (guía de la NTP) vs. «4 grupos» (2017): la respuesta depende de la <b>edición</b>. La NTP 2016 tiene 7. Si el enunciado da el diagrama de 17 procesos, contesta con 5 + 8 + 4. El proceso 7.4 aparece como «Recursos Humanos» (diap. 18) y como «Formación» (diap. 30): es el mismo proceso según la versión.</p></div>
+<p class="fuente">Fuentes: S5 mazo A diap. 5, 9, 10, 14–18; mazo B (guía NTP 2016). Web (resolución verificada): <a href="https://sbn.gob.pe/Repositorio/Normas_Legales/NORMA_LEGAL_1197_7bf3.pdf">SBN, texto de la RM 041-2017-PCM</a>; <a href="https://cdn.www.gob.pe/uploads/document/file/3604818/RD-005-2022-VIVIENDA-OGEI.pdf">Ministerio de Vivienda, RD 005-2022 (cita la RM 041-2017-PCM)</a>; <a href="https://cdn.www.gob.pe/uploads/document/file/3171228/Resoluci%C3%B3n%20de%20Gerencia%20General_00020_2022_SENACE_GG1.pdf.pdf">Senace, RGG 00020-2022</a>.</p>
+</section>
+<section id="iso-15504-spice">
+<h2>19. ISO/IEC 15504 (SPICE) — Evaluación de procesos</h2>
+<p>Siglas: <b>SPICE</b> (<i>Software Process Improvement and Capability dEtermination</i>), <b>SPI</b> (<i>Software Process Improvement</i>), <b>CD</b> (<i>Capability Determination</i>), <b>PRM</b>, <b>PAM</b> (<i>Process Assessment Model</i>), <b>PA</b> (<i>Process Attribute</i> – atributo de proceso), <b>CL</b> (<i>Capability Level</i>), <b>BP</b> (<i>Base Practice</i>), <b>WP</b> (<i>Work Product</i>), <b>GP/GR</b> (prácticas y recursos genéricos), <b>OU</b> (<i>Organizational Unit</i>), <b>NPLF</b> (escala <i>Not/Partially/Largely/Fully achieved</i>), <b>OMM</b> (<i>Organizational Maturity Model</i>), <b>ASPICE</b> (Automotive SPICE).</p>
+<div class="norma"><h4>ISO/IEC 15504 — Information technology — Process assessment (partes 1 a 10) — RETIRADA, reemplazada por la 330xx</h4>
+<ul>
+<li><b>Organismo:</b> ISO/IEC JTC 1/SC 7, a partir del proyecto SPICE (1993).</li>
+<li><b>Versiones:</b> ISO/IEC TR 15504:<b>1998</b> (informe técnico de 9 partes) → normas internacionales: parte 2 (<b>2003</b>), partes 1, 3 y 4 (2004), parte 5 (2006; 2012), 6 y 7 (2008), 8 a 10 (2011–2012). Desde 2015 se reemplaza por la familia ISO/IEC 330xx.</li>
+<li><b>Propósito:</b> evaluar procesos con dos fines: <b>SPI</b> (mejorar) y <b>CD</b> (determinar la capacidad, por ejemplo para elegir proveedores).</li>
+<li><b>Estructura bidimensional:</b> <b>dimensión de proceso</b> = un PRM <b>externo</b> (12207 para SW, 15288 para sistemas, 20000 para servicios) · <b>dimensión de capacidad</b> = CL0–5 con <b>9 PA</b>: CL1 PA1.1 Rendimiento · CL2 PA2.1 Gestión del rendimiento y PA2.2 Gestión de productos de trabajo · CL3 PA3.1 Definición y PA3.2 Despliegue · CL4 PA4.1 Medición y PA4.2 Control · CL5 PA5.1 Innovación y PA5.2 Optimización.</li>
+<li><b>Escala NPLF:</b> N 0–15 % · P &gt;15–50 % · L &gt;50–85 % · F &gt;85–100 %. Regla: para alcanzar el CL n, los PA del nivel n deben estar en <b>L o F</b> y todos los de niveles inferiores en <b>F</b>.</li>
+<li><b>Partes clave:</b> -2 requisitos normativos de la evaluación · -3 guía para realizarla · -4 uso de resultados (SPI/CD) · -5 PAM de SW basado en la 12207 · -7 madurez organizacional (ML0 Inmaduro a ML5 Innovador).</li>
+<li><b>Relación:</b> la Amd 1:2002 de la 12207 se hizo para que sirviera de PRM. EvalProSoft (MoProSoft), COMPETISOFT, MA-MPS, IT Mark y la 29110-3 evalúan «estilo 15504». Las variantes por dominio incluyen ASPICE (automotriz), Medi SPICE y SPICE 4 SPACE.</li>
+<li><b>Ejemplo peruano:</b> un evaluador competente revisa el proceso de pruebas de una fábrica de SW que atiende a Rímac. Califica PA1.1 = F, PA2.1 = L y PA2.2 = F, así que el proceso queda en <b>CL2</b>. Para CL3 necesitaría PA2.1 = F y PA3.1/PA3.2 ≥ L.</li>
+<li><b>Trampa típica:</b> «la 15504 define los procesos de SW» → no: los toma de la 12207 (PRM). Tampoco confundas PA = <i>Process Attribute</i> (SPICE) con PA = <i>Process Area</i> (CMMI v1.3) ni con PA = <i>Practice Area</i> (CMMI V2.0).</li>
+</ul></div>
+<div class="concepto"><h3>Capacidad vs. madurez</h3>
+<p>La <b>capacidad</b> mide qué tan bien UN proceso logra sus objetivos (CL). La <b>madurez</b> mide qué tan consistente es la OU al ejecutar un <b>conjunto predefinido</b> de procesos con capacidad creciente (ML).</p>
+<p class="ej"><b>Ej.:</b> en Interbank, «Pruebas está en CL3 y Requisitos en CL1» es un perfil de <b>capacidad</b>. «La fábrica de SW del BCP tiene ML3» es una afirmación de <b>madurez</b>.</p></div>
+</section>
+
+<section id="iso-33000">
+<h2>20. ISO/IEC 33000 (familia 330xx) — Evaluación de procesos (vigente)</h2>
+<div class="norma"><h4>ISO/IEC 33001…33099 — Information technology — Process assessment</h4>
+<ul>
+<li><b>Organismo:</b> ISO/IEC JTC 1/SC 7.</li>
+<li><b>Versiones:</b> 33001, 33002, 33003, 33004 y 33020 (2015) · 33014 (TR 2013) · 33063 (2015) · 33071/33072 (2016) · 33030 (TS 2017) · <b>33020:2019</b> (2.ª ed.) · 33060 (2020) · <b>33061:2021</b>.</li>
+<li><b>Propósito:</b> reemplazar a la 15504 con una arquitectura <b>modular</b>: los requisitos genéricos van separados de los marcos de medición, de los modelos (PRM/PAM/OMM) y de las guías.</li>
+<li><b>Estructura:</b> <b>33001</b> conceptos y terminología · <b>33002</b> requisitos para <i>realizar</i> una evaluación (clases 1, 2 y 3) · <b>33003</b> requisitos de los <i>marcos de medición</i> · <b>33004</b> requisitos de los PRM, PAM y modelos de madurez · 33010 guía para evaluar · 33014 guía de mejora · <b>33020</b> marco de medición de la <b>capacidad</b> (CL0–5, 9 PA, NPLF refinable P−/P+ y L−/L+, métodos de agregación R1–R3) · 33060 PAM de sistemas (15288) · <b>33061</b> PAM de SW basado en la <b>12207:2017</b> · 33063 PAM de pruebas (29119) · 33072 PAM de seguridad de la información (27001).</li>
+<li><b>Novedades frente a la 15504:</b> la «capacidad» se generaliza a «característica de calidad del proceso» (33003). La madurez organizacional queda formalizada (33004). Los PA 4.x y 5.x cambian de nombre (Análisis cuantitativo, Control cuantitativo, Innovación del proceso, Implementación de la innovación). Se fijan requisitos más precisos de competencia e independencia del evaluador.</li>
+<li><b>Relación:</b> MA-MPS (Brasil) es conforme con 33020/33002/33004. ASPICE 4.0 se apoya en la 330xx. En la S5, el proceso 7.3 «Mejora» de la 12207 puede usar la 33000.</li>
+<li><b>Ejemplo peruano:</b> el MTC exige al postor un perfil objetivo «Gestión de requisitos CL2, Gestión de configuración CL2» evaluado según la 33002 clase 1, con el PAM de la 33061.</li>
+<li><b>Trampa típica:</b> «SPICE = ISO 33000» es impreciso: SPICE es el nombre del proyecto y de la 15504. Además, 33020 es el <b>marco de medición</b> y 33061 es el <b>PAM</b>; no son intercambiables.</li>
+</ul></div>
+<p class="fuente">Fuentes: notas S6 (§6–§8). Web: <a href="https://committee.iso.org/standard/78526.html">ISO, ISO/IEC 33020:2019</a>; <a href="https://webstore.ansi.org/preview-pages/ISO/preview_ISO+IEC+33020-2019.pdf">vista previa de la 33020:2019</a>.</p>
+</section>
+
+<section id="cmmi">
+<h2>21. CMMI v1.3, V2.0 y V3.0 — Modelo de madurez y capacidad</h2>
+<p>Siglas: <b>CMMI</b> (<i>Capability Maturity Model Integration</i>), <b>SW-CMM</b>, <b>KPA</b> (<i>Key Process Area</i>), <b>DEV/SVC/ACQ</b> (constelaciones de Desarrollo, Servicios y Adquisición), <b>ML/CL</b>, <b>SG/SP</b> (metas y prácticas específicas), <b>GG/GP</b> (metas y prácticas genéricas), <b>SCAMPI</b> (<i>Standard CMMI Appraisal Method for Process Improvement</i>), <b>MDD</b> (<i>Method Definition Document</i>), <b>PARS</b> (<i>Published Appraisal Results System</i>), <b>FI/LI/PI/NI/NY</b>, <b>EPG/SEPG</b>, <b>OPAL</b>, <b>IDEAL</b>.</p>
+<div class="norma"><h4>CMMI for Development v1.3 (CMU/SEI-2010-TR-033) · CMMI V2.0 (2018) · CMMI V3.0 (2023)</h4>
+<ul>
+<li><b>Organismo:</b> <b>SEI</b> de Carnegie Mellon (con fondos del DoD) → <b>CMMI Institute</b> (2012–2013) → <b>ISACA</b> (2016). Es un <b>modelo propietario</b>, no una norma ISO.</li>
+<li><b>Versiones:</b> SW-CMM v1.0 1991 / v1.1 1993 · CMMI v1.0 2000 · v1.1 2002 · v1.2 2006 (constelaciones) · <b>v1.3 nov-2010</b> (DEV, SVC, ACQ) · <b>V2.0 mar-2018</b> · <b>V3.0 6-abr-2023</b> (8 dominios, 31 Practice Areas, se agrega <i>Managing Data</i>).</li>
+<li><b>Propósito:</b> guía de buenas prácticas para mejorar los procesos y el desempeño. Su premisa (Humphrey/SEI): la calidad del producto depende en gran medida de la calidad del proceso que lo produce.</li>
+<li><b>v1.3 (DEV):</b> <b>22 PA</b> en 4 categorías (Gestión de procesos 5, Gestión de proyectos 7, Ingeniería 5, Soporte 5). Representación <b>escalonada</b> ML1–5: ML2 tiene 7 PA (REQM, PP, PMC, SAM, MA, PPQA, CM); ML3 suma 11 (RD, TS, PI, VER, VAL, OPF, OPD, OT, IPM, RSKM, DAR); ML4 suma 2 (OPP, QPM); ML5 suma 2 (OPM, CAR). Representación <b>continua</b> CL0–3. Componentes requeridos: SG/GG; esperados: SP/GP; informativos: subprácticas y ejemplos.</li>
+<li><b>Niveles de madurez:</b> 1 Inicial (héroes) · 2 Gestionado (disciplina por <b>proyecto</b>) · 3 Definido (proceso estándar <b>organizacional</b> + tailoring) · 4 Gestionado cuantitativamente (causas especiales, SPC) · 5 En optimización (causas comunes, innovación).</li>
+<li><b>V2.0/V3.0:</b> las <i>Process Areas</i> se convierten en <b>Practice Areas</b> agrupadas en Capability Areas y Category Areas (Doing, Managing, Enabling, Improving). Las prácticas se organizan en <i>Practice Groups</i> por nivel. Desaparecen SG/SP/GG/GP: cada PA tiene <i>Intent</i>, <i>Value</i> y prácticas, y la institucionalización pasa por <b>GOV</b> e <b>II</b>. Escalas <b>ML0–5 y CL0–5</b>. Hay vistas (DEV, SVC, SPM, PPL, SEC, SAF…) y dominios en V3.0.</li>
+<li><b>Valoración:</b> v1.3 usa <b>SCAMPI A</b> (da rating, la lidera un Lead Appraiser certificado, se publica en PARS y vale <b>3 años</b>), B y C (sin rating). V2.0/V3.0 usan <b>Benchmark</b> (rating, 3 años), <b>Sustainment</b> (extiende el rating), <b>Evaluation</b> (sin rating) y <b>Action Plan Reappraisal</b>.</li>
+<li><b>Relación:</b> PA ↔ procesos 12207 (CM ↔ Gestión de la configuración; PPQA ↔ QA; DAR ↔ Gestión de decisiones; VER/VAL ↔ Verificación/Validación). Escalones equivalentes: MPS F ≈ ML2, MPS C ≈ ML3. Base de MoProSoft (CMM niveles 2–3), de IT Mark (CMMI simplificado 2–3) y de COMPETISOFT (CMMI v1.2). En la S3 aparece como estrategia de mejora frente al «código desorganizado».</li>
+<li><b>Ejemplo peruano:</b> Minsait (Indra) obtuvo CMMI ML5 en DEV y SVC (SCAMPI A, 2019) con un alcance que incluía Perú. Una consultora que licita en el SEACE puede encontrar en las bases el requisito «CMMI-DEV ML3 vigente (Benchmark &lt; 3 años)».</li>
+<li><b>Trampa típica:</b> CL4/CL5 <b>no existen</b> en la continua de v1.3 (sí en v1.1/v1.2 y en V2.0+). SCAMPI B/C no otorgan nivel. ML0 no existe en v1.3.</li>
+</ul></div>
+<div class="tabla"><table>
+<thead><tr><th>Rasgo</th><th>CMMI v1.3</th><th>CMMI V2.0</th><th>CMMI V3.0</th></tr></thead>
+<tbody>
+<tr><td>Año</td><td>Nov-2010</td><td>Mar-2018</td><td>Abr-2023</td></tr>
+<tr><td>Dueño</td><td>SEI-CMU</td><td>CMMI Institute (ISACA)</td><td>CMMI Institute (ISACA)</td></tr>
+<tr><td>Organización</td><td>3 constelaciones (DEV 22 PA, SVC 24, ACQ 22)</td><td>Modelo único + vistas; ~20 PA en la vista DEV</td><td>Modelo único + 8 dominios; 31 PA</td></tr>
+<tr><td>Componentes</td><td>SG, SP, GG, GP</td><td>Intent, Value, prácticas por Practice Group</td><td>Igual a V2.0 + Managing Data, EVW</td></tr>
+<tr><td>Niveles</td><td>ML1–5; CL0–3</td><td>ML0–5; CL0–5</td><td>ML0–5; CL0–5</td></tr>
+<tr><td>Método</td><td>SCAMPI A/B/C (MDD v1.3)</td><td>Benchmark, Sustainment, Evaluation</td><td>Igual a V2.0</td></tr>
+<tr><td>Fusiones típicas</td><td>REQM + RD; VER + VAL separadas</td><td>RDM = RD + REQM; VV = VER + VAL; PR (peer reviews) como PA propia</td><td>Igual + Data</td></tr>
+</tbody></table></div>
+<div class="ojo"><h4>Ojo en el examen</h4><p>(1) CMMI se <b>valora</b> (<i>appraisal</i>); ISO <b>evalúa</b> (<i>assessment</i>); ISO 9001 <b>certifica</b>. En el mercado igual se dice «certificación CMMI». (2) ML3 de CMMI se llama <i>Defined</i>; CL3 de SPICE se llama <i>Established</i>. ML4 de CMMI es <i>Quantitatively Managed</i>; CL4 de SPICE es <i>Predictable</i>. (3) REQM es de ML2 (Gestión de proyectos en v1.3) y RD es de ML3 (Ingeniería). (4) OPM reemplazó a OID en v1.3.</p></div>
+<p class="fuente">Fuentes: notas S6 (§2–§5, §9). Web: <a href="https://www.thecoresolution.com/cmmi-v3-update-explained">The Core Solution, CMMI V3.0</a>; <a href="https://valenciaplaza.com/valenciaplaza/minsait-indra-consigue-la-maxima-certificacion-en-espana-colombia-mexico-y-peru">Valencia Plaza, Minsait CMMI 5</a>; <a href="https://cmmiinstitute.com/pars">CMMI Institute, PARS</a>.</p>
+</section>
+<section id="moprosoft">
+<h2>22. MoProSoft (NMX-I-059-NYCE) — México</h2>
+<p>Siglas: <b>MoProSoft</b> (Modelo de Procesos para la Industria de Software), <b>PROSOFT</b> (Programa para el Desarrollo de la Industria de Software), <b>SE</b> (Secretaría de Economía), <b>UNAM</b>, <b>AMCIS</b> (Asociación Mexicana para la Calidad en Ingeniería de Software), <b>NYCE</b>, <b>NMX</b> (Norma Mexicana), <b>DIR/GES/OPE</b> (Alta Dirección, Gerencia/Gestión, Operación), <b>GN, GPR, GPY, GR, RHAT, BSI, CO, APE, DMS</b> (sus 9 procesos), <b>EvalProSoft</b>.</p>
+<div class="norma"><h4>NMX-I-059/01..04-NYCE-2005 (rev. NMX-I-059-NYCE-2011) — MoProSoft v1.3 y EvalProSoft</h4>
+<ul>
+<li><b>Organismo:</b> lo promovió la <b>SE</b> dentro de <b>PROSOFT</b> (2002). Lo redactó un grupo dirigido por la <b>Dra. Hanna Oktaba</b> (Facultad de Ciencias, UNAM; AMCIS). Normaliza y certifica <b>NYCE</b>.</li>
+<li><b>Versiones:</b> v1.1 (2003) · v1.2 · <b>v1.3 (ago-2005, «coloreada» por niveles)</b>. Fue declarada Norma Mexicana el 15-ago-2005 y revisada en 2011.</li>
+<li><b>Propósito:</b> ser un modelo fácil de entender, fácil de aplicar, barato de adoptar y que sirva de base para lograr evaluaciones exitosas con ISO 9000:2000 o CMM v1.1. Público: PYMEs y áreas internas de desarrollo y mantenimiento.</li>
+<li><b>Partes:</b> /01 conceptos y productos · <b>/02 requisitos de procesos (el modelo MoProSoft)</b> · /03 guía de implantación · <b>/04 directrices de evaluación (EvalProSoft)</b>.</li>
+<li><b>Estructura:</b> 3 categorías que reflejan los niveles de una empresa: <b>DIR</b> (Alta Dirección) → DIR.1 Gestión de Negocio (GN) · <b>GES/GER</b> (Gerencia) → GES.1 Gestión de Procesos (GPR), GES.2 Gestión de Proyectos (GPY), GES.3 Gestión de Recursos (GR) con sus subprocesos GES.3.1 RHAT, GES.3.2 BSI y GES.3.3 CO · <b>OPE</b> (Operación) → OPE.1 Administración de Proyectos Específicos (APE), OPE.2 Desarrollo y Mantenimiento de SW (DMS). En total, <b>9 procesos</b>.</li>
+<li><b>Patrón de procesos:</b> (1) definición general (propósito, objetivos O, indicadores I, metas cuantitativas, responsabilidad y autoridad, entradas y salidas) · (2) prácticas (roles, actividades A1…, diagrama UML, verificaciones y validaciones, mediciones M) · (3) guías de ajuste.</li>
+<li><b>Niveles:</b> de <b>capacidad</b> por proceso, del 0 al 5 (1 Realizado en amarillo, 2 Gestionado en azul, 3 Establecido en verde, 4 Predecible en rosa, 5 Optimizado). El nivel de la organización es el <b>mínimo</b> que alcanzan los 9 procesos (EvalProSoft, basado en la 15504-2).</li>
+<li><b>Relación:</b> se basa en ISO 9000:2000, CMM niveles 2–3, el marco 15504, PMBOK y SWEBOK. En 2006 el WG24 lo eligió como <b>base de la ISO/IEC 29110</b> (APE ≈ PM, DMS ≈ SI). Es la base de COMPETISOFT. En el Perú se adoptó como <b>NTP-291.100-1:2009</b>.</li>
+<li><b>Ejemplo peruano:</b> una fintech limeña de 30 personas: decidir si acepta el proyecto «app para Rímac» o «app para Plaza Vea» es <b>GPY</b> (cartera); armar el cronograma y el plan de riesgos del proyecto aceptado es <b>APE</b>; mantener el Confluence con plantillas y lecciones aprendidas es <b>CO</b>.</li>
+<li><b>Trampa típica:</b> la parte <b>02</b> es el modelo y la <b>04</b> la evaluación. MoProSoft no tiene «5 niveles de madurez como CMMI»: sus niveles son de <b>capacidad</b> por proceso.</li>
+</ul></div>
+<div class="concepto"><h3>Indicador, medición y meta (patrón de procesos)</h3>
+<p>El <b>indicador</b> dice qué se evalúa, la <b>medición</b> dice cómo se obtiene el dato y la <b>meta cuantitativa</b> da el valor esperado.</p>
+<p class="ej"><b>Ej.:</b> I1 «el tiempo real del proyecto corresponde al estimado»; M1 «desviación % = (real − estimado)/estimado»; meta «≤ 10 %». Lo mide el RAPE del proyecto SUM-UNMSM al cerrar cada ciclo.</p></div>
+</section>
+
+<section id="mps-br">
+<h2>23. MPS.BR (MR-MPS-SW) — Brasil</h2>
+<p>Siglas: <b>MPS.BR</b> (Melhoria de Processo do Software Brasileiro), <b>SOFTEX</b>, <b>MR-MPS-SW/SV/RH</b> (modelos de referencia para SW, servicios y RR. HH.), <b>MA-MPS</b> (método de evaluación), <b>MN-MPS</b> (modelo de negocio), <b>II/IA</b> (instituciones implementadoras y evaluadoras), <b>SEBRAE</b>, <b>FINEP</b>, <b>MCTI</b>, <b>BID</b>, <b>CP</b> (capacidad del proceso, 2021), <b>AP/RAP</b> (atributos de proceso y sus resultados, versión clásica).</p>
+<div class="norma"><h4>Programa MPS.BR — Modelo de Referencia MR-MPS-SW (Guia Geral MPS de Software: 2012, 2016, 2021, 2023, 2024)</h4>
+<ul>
+<li><b>Organismo:</b> <b>SOFTEX</b>, con apoyo de MCTI, FINEP, SEBRAE y BID/FUMIN.</li>
+<li><b>Versiones:</b> el programa nace en <b>diciembre de 2003</b>. Guías 2005, 2006, 2007, 2009, 2011, <b>2012</b>, <b>2016</b>, <b>2021</b> (arquitectura nueva), 2023 y 2024.</li>
+<li><b>Propósito:</b> aumentar la competitividad de las empresas brasileñas, sobre todo PYMEs, con <b>escalones de madurez más cortos y baratos</b> que CMMI. En 2003, Brasil tenía 214 empresas ISO 9000 y solo unas 30 con CMM.</li>
+<li><b>Componentes:</b> clásicos MR-MPS, MA-MPS y MN-MPS. Desde 2021 son 5: MR-MPS-SW, MR-MPS-SV, MR-MPS-RH, MA-MPS y MN-MPS.</li>
+<li><b>Niveles de madurez (7):</b> <b>G</b> Parcialmente gestionado · <b>F</b> Gestionado · <b>E</b> Parcialmente definido · <b>D</b> Ampliamente definido · <b>C</b> Definido · <b>B</b> Gestionado cuantitativamente · <b>A</b> En optimización. G es el más bajo.</li>
+<li><b>Procesos 2021:</b> de proyecto: GPR (gestión de proyectos), REQ (ingeniería de requisitos), PCP (diseño y construcción), ITP (integración), VV (verificación y validación); organizacionales: GCO (configuración), AQU (adquisición), MED (medición), GDE (decisiones), GRH (RR. HH.), GPC (procesos), ORG (gestión organizacional). La capacidad va de CP-G a CP-A.</li>
+<li><b>Relación:</b> se basa en la NBR ISO/IEC/IEEE 12207 y en la familia 330xx, y es compatible con CMMI-DEV. Equivalencias: G/F ≈ ML2 · E/D/C ≈ ML3 · B ≈ ML4 · A ≈ ML5. La evaluación MA-MPS es conforme con 33020/33002/33004 y vale 3 años.</li>
+<li><b>Ejemplo peruano:</b> una software factory de Arequipa que quiere venderle al gobierno brasileño empieza por el nivel <b>G</b> (GPR + REQ) en 6–12 meses, en lugar de pagar una valoración CMMI ML2 completa.</li>
+<li><b>Trampa típica:</b> en MPS 2021 la QA <b>ya no es un proceso</b>: pasa a la capacidad CP-F y a GPC. GRE + DRE se fusionan en REQ y VER + VAL en VV.</li>
+</ul></div>
+</section>
+
+<section id="competisoft">
+<h2>24. COMPETISOFT — Iberoamérica (CYTED)</h2>
+<p>Siglas: <b>CYTED</b>, <b>UCLM</b> (Universidad de Castilla-La Mancha), <b>PUCP</b>, <b>GIDIS-PUCP</b> (Grupo de Investigación y Desarrollo de Ingeniería de Software), <b>DS/MS</b> (Desarrollo de SW / Mantenimiento de SW), <b>PmCOMPETISOFT</b>, <b>MECPDS</b> (Método de Evaluación de la Capacidad de Procesos de Desarrollo de SW), <b>I-A</b> (investigación-acción), <b>MANTEMA</b>.</p>
+<div class="norma"><h4>COMPETISOFT — Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica (proyecto CYTED 506AC0287)</h4>
+<ul>
+<li><b>Organismo:</b> programa <b>CYTED</b>. Lo dirigió el Dr. Mario Piattini (UCLM), con la Dra. Hanna Oktaba (UNAM) como directora técnica. Participaron universidades, empresas y organismos de normalización de <b>13 países</b>, entre ellos la <b>PUCP</b> (GIDIS).</li>
+<li><b>Versión/año:</b> proyecto de <b>2006 a 2008</b>; COMPETISOFT-Perú siguió de 2009 a 2011. La obra de referencia es el libro de Oktaba, Piattini y otros (Ra-Ma, 2008).</li>
+<li><b>Propósito:</b> dar a las PYMEs iberoamericanas un marco <b>público y gratuito</b> para mejorar sus procesos, sin regalías y como escalón hacia CMMI o ISO.</li>
+<li><b>Estructura (3 modelos):</b> (1) <b>Modelo de Procesos</b>, derivado de MoProSoft (DIR: Gestión de Negocio; GER: Gestión de Procesos, <b>Gestión de Cartera de Proyectos</b>, Gestión de Recursos con RR. HH., BSI y Conocimiento; OPE: APE, <b>Desarrollo de SW</b> y <b>Mantenimiento de SW</b>) · (2) <b>Modelo de Evaluación</b>, conforme a la 15504-2/-4 (capacidad 0–5, Light MECPDS, EvalTOOL) · (3) <b>Modelo de Mejora</b>, con <b>PmCOMPETISOFT</b> (Instalación → Diagnóstico → Formulación → Ejecución → Revisión), que se deriva de Agile SPI (Colombia).</li>
+<li><b>Relación:</b> cobertura declarada de ISO 9001:2000 ≈ 92 %, del Anexo F de la 12207 ≈ 95 % y de CMMI nivel 2 ≈ 77 %. Se apoya en CMMI v1.2, PMBOK, MANTEMA y Métrica v3. PmCOMPETISOFT es una versión ligera de IDEAL.</li>
+<li><b>Ejemplo peruano:</b> en COMPETISOFT-Perú (PUCP) se intervinieron unas 22 pequeñas empresas. En <b>2010</b> el Instituto de Calidad de la PUCP certificó a <b>5 empresas</b> con la NTP-291.100-2.</li>
+<li><b>Trampa típica:</b> COMPETISOFT es un <b>proyecto</b> que produjo un <b>marco</b> de procesos, evaluación y mejora. PmCOMPETISOFT es su <b>proceso de mejora</b>, no el modelo de procesos. COMPETISOFT separa el DMS de MoProSoft en DS y MS.</li>
+</ul></div>
+</section>
+
+<section id="it-mark">
+<h2>25. IT Mark (ITMark) — ESI / Tecnalia</h2>
+<div class="norma"><h4>IT Mark — esquema de certificación para PYMEs TI (ESI, 2005)</h4>
+<ul>
+<li><b>Organismo:</b> <b>ESI</b> (Bilbao, País Vasco), hoy integrado en <b>Tecnalia</b>. Se lanzó en el mundo el <b>1-jun-2005</b> a través de la red ESICenter.</li>
+<li><b>Propósito:</b> dar una <b>certificación única e integral</b>, barata y rápida (en torno a 1 día para el nivel Basic), para PYMEs y micro-PYMEs que desarrollan o mantienen SW.</li>
+<li><b>Estructura (3 áreas):</b> (1) <b>Gestión del negocio</b> → modelo 10-Squared (10²), con criterios agrupados según EFQM · (2) <b>Seguridad de la información</b> → ISO/IEC 17799 → ISO/IEC 27001/27002 · (3) <b>Procesos de desarrollo</b> → CMMI-DEV simplificado (niveles 2 y 3). El método de evaluación sigue la 15504.</li>
+<li><b>Niveles:</b> <b>Basic</b> (1★: negocio ≥ 50 %, hasta 2 procesos sin implementar salvo PP y PMC) · <b>Premium</b> (2★: ≥ 60 %) · <b>Elite</b> (3★: ≥ 75 %, ningún proceso sin implementar y más de 10 ampliamente o totalmente implementados).</li>
+<li><b>Relación:</b> reutiliza 10², ISO 27001 y CMMI. Larrucea et al. (2016) lo mapearon con la ISO/IEC 29110 como método para evaluar VSE. El proyecto RELAIS lo difundió en México, Colombia y Perú (con la Cámara de Comercio de Lima).</li>
+<li><b>Ejemplo peruano:</b> una empresa de 15 personas que desarrolla la billetera digital de una caja municipal quiere mostrarle a Interbank, en una sola «foto», que programa bien (CMMI), protege datos (27001) y es sostenible (10²). IT Mark Basic se lo permite.</li>
+<li><b>Trampa típica:</b> IT Mark no es una norma ISO ni un modelo de procesos propio. Es un <b>esquema de certificación</b> que combina tres modelos. No evalúa solo desarrollo.</li>
+</ul></div>
+</section>
+
+<section id="iso-29110">
+<h2>26. ISO/IEC 29110 — Perfiles de ciclo de vida para VSE</h2>
+<p>Siglas: <b>VSE</b> (<i>Very Small Entity</i> – entidad muy pequeña, de hasta 25 personas), <b>WG 24</b> (grupo de trabajo 24 del SC 7), <b>PM</b> (<i>Project Management</i>), <b>SI</b> (<i>Software Implementation</i>), <b>DP</b> (<i>Deployment Packages</i> – paquetes de despliegue), <b>SOW</b> (<i>Statement of Work</i>), <b>CUS/PM/TL/WT</b> (roles: cliente, jefe de proyecto, líder técnico y equipo de trabajo).</p>
+<div class="norma"><h4>ISO/IEC 29110 — Systems and software engineering — Lifecycle profiles for Very Small Entities (VSEs)</h4>
+<ul>
+<li><b>Organismo:</b> ISO/IEC JTC 1/SC 7, <b>WG 24</b>. En el Perú existe como <b>NTP-ISO/IEC 29110</b> (desde 2012; hoy en el catálogo de INACAL).</li>
+<li><b>Versiones:</b> 2004 (Canadá plantea la necesidad) · 2005 (se crea el WG 24) · may-2006 (se elige MoProSoft como base) · <b>2011</b> (primeras partes y el perfil Básico, TR 29110-5-1-2) · Entry (2012) · Intermediate y Advanced (2017–2018) · revisiones de 2016 a 2025.</li>
+<li><b>Propósito:</b> llevar las buenas prácticas de la 12207/15288 a organizaciones, departamentos o proyectos de <b>hasta 25 personas</b>, con documentos <b>gratuitos</b> (los TR) y paquetes de despliegue.</li>
+<li><b>Partes:</b> 29110-1 visión general · 29110-2-1 marco de perfiles · 29110-3-x evaluación y certificación · <b>29110-4-x especificación del perfil (lo certificable)</b> · 29110-5-x guías de gestión e ingeniería (5-1-1 Entry, <b>5-1-2 Basic</b>, 5-1-3 Intermediate, 5-1-4 Advanced).</li>
+<li><b>Perfiles (acumulativos):</b> <b>Entry</b> (startups o proyectos de ≈ 6 personas-mes) · <b>Basic</b> (un proyecto y un equipo a la vez: <b>PM + SI</b>) · <b>Intermediate</b> (varios proyectos: se suma la gestión organizacional) · <b>Advanced</b> (crecimiento y gestión del negocio).</li>
+<li><b>Perfil Basic:</b> <b>PM</b>: PM.1 Planificación · PM.2 Ejecución del plan · PM.3 Evaluación y control · PM.4 Cierre. <b>SI</b>: SI.1 Inicio · SI.2 Requisitos · SI.3 Diseño arquitectónico y detallado · SI.4 Construcción · SI.5 Integración y pruebas · SI.6 Entrega del producto.</li>
+<li><b>Relación:</b> es un <b>perfil</b> (subconjunto) de la 12207/15288 con productos según la 15289. Se evalúa según la 15504/33000. Nace de MoProSoft (APE ≈ PM; DMS ≈ SI). ITMark puede servir para evaluar VSE.</li>
+<li><b>Ejemplo peruano:</b> en 2015 una startup peruana de 4 personas fue la <b>primera VSE peruana</b> certificada en ISO/IEC 29110 Basic. El proyecto ProCal-ProSer (GIDIS-PUCP, Innóvate Perú) lo implantó en 10 empresas. En un sistema de citas para una clínica limeña, el SOW firmado entra a PM.1 y el acta de conformidad final es el <i>Acceptance Record</i> de PM.4.</li>
+<li><b>Trampa típica:</b> «la 29110 tiene 5 niveles de madurez» → FALSO: tiene <b>perfiles</b>, no niveles. Tampoco reemplaza a la NTP-ISO/IEC 12207:2016: es su versión ligera para VSE.</li>
+</ul></div>
+<div class="ojo"><h4>Ojo en el examen (S7)</h4><p>(1) MPS.BR: <b>G es el nivel más bajo y A el más alto</b>, y tiene 7 niveles frente a los 5 de CMMI. (2) MoProSoft: 3 categorías y 9 procesos; <b>GPY (cartera) ≠ APE (un proyecto)</b>. (3) VSE = <b>≤ 25 personas</b>. (4) Ruta peruana: NTP-291.100 (2009, MoProSoft) → NTP-ISO/IEC 29110 (2012); la normalización pasó de INDECOPI a INACAL en 2015. (5) Ninguno de estos modelos «compite» con CMMI o ISO: todos se presentan como <b>escalón</b> hacia ellos.</p></div>
+<p class="fuente">Fuentes: notas S7 (§1–§8), con fuentes primarias: documento MoProSoft v1.3 (SE/UNAM), Guia Geral MPS de Software:2021 (SOFTEX), informe COMPETISOFT (CYTED), Silva &amp; Brancher (2016) sobre IT Mark y Laporte et al. (2016) sobre la 29110 en el Perú.</p>
+</section>
+<section id="comparativas-cruzadas">
+<h2>27. Comparativas cruzadas</h2>
+<h3>27.1 ISO/IEC/IEEE 12207 vs. ISO/IEC 15504/33000 vs. CMMI</h3>
+<div class="tabla"><table>
+<thead><tr><th>Criterio</th><th>ISO/IEC/IEEE 12207 (y la NTP 2016)</th><th>ISO/IEC 15504 / 33000 (SPICE)</th><th>CMMI (v1.3 / V2.0 / V3.0)</th></tr></thead>
+<tbody>
+<tr><td>Naturaleza</td><td>Norma internacional de <b>procesos</b> («qué procesos existen»)</td><td>Norma internacional de <b>evaluación</b> («cómo medir la capacidad»)</td><td><b>Modelo</b> propietario de buenas prácticas + método de valoración</td></tr>
+<tr><td>Emisor</td><td>ISO/IEC JTC 1/SC 7 (+ IEEE en 2017); INACAL en el Perú</td><td>ISO/IEC JTC 1/SC 7</td><td>SEI-CMU → CMMI Institute (ISACA)</td></tr>
+<tr><td>Pregunta que responde</td><td>¿Qué procesos, actividades y tareas debe tener el ciclo de vida?</td><td>¿Qué tan capaz es cada proceso? ¿Qué tan madura es la OU?</td><td>¿Qué prácticas implementar para subir de nivel y mejorar el desempeño?</td></tr>
+<tr><td>Unidad</td><td>Proceso (título, propósito, salidas, actividades, tareas)</td><td>Proceso del PRM, calificado con 9 PA (<i>attributes</i>)</td><td>PA (<i>Process</i>/<i>Practice Area</i>)</td></tr>
+<tr><td>Niveles</td><td>No tiene; la conformidad es total o adaptada</td><td>CL0–5; ML0–5 (15504-7/33004)</td><td>v1.3: ML1–5, CL0–3 · V2.0+: ML0–5, CL0–5</td></tr>
+<tr><td>Escala de calificación</td><td>—</td><td>N/P/L/F (con %)</td><td>FI/LI/PI/NI/NY → meta satisfecha o no</td></tr>
+<tr><td>Nivel 3</td><td>—</td><td><i>Established</i></td><td><i>Defined</i></td></tr>
+<tr><td>Nivel 4</td><td>—</td><td><i>Predictable</i></td><td><i>Quantitatively Managed</i></td></tr>
+<tr><td>Cómo se relacionan</td><td>Hace de <b>PRM</b> de la 15504-5 / 33061</td><td>Usa la 12207 como PRM</td><td>Se mapea indirectamente con la 12207 (CM ↔ Configuración, PPQA ↔ QA…)</td></tr>
+<tr><td>Resultado formal</td><td>Declaración de conformidad; obligatoria en el Estado peruano (NTP)</td><td>Perfil de capacidad / registro de evaluación</td><td>Rating ML/CL publicado en PARS, vigente 3 años</td></tr>
+<tr><td>Sesión</td><td>S4, S5</td><td>S6</td><td>S3, S6</td></tr>
+</tbody></table></div>
+<h3>27.2 CMMI vs. MoProSoft vs. MPS.BR vs. ISO/IEC 29110 (más COMPETISOFT e IT Mark)</h3>
+<div class="tabla"><table>
+<thead><tr><th>Criterio</th><th>CMMI-DEV</th><th>MoProSoft</th><th>MPS.BR (MR-MPS-SW)</th><th>ISO/IEC 29110</th><th>COMPETISOFT</th><th>IT Mark</th></tr></thead>
+<tbody>
+<tr><td>Origen</td><td>EE. UU., 2000/2002</td><td>México, 2002–2005</td><td>Brasil, 2003</td><td>Internacional, 2011</td><td>Iberoamérica, 2006–2008</td><td>España/Europa, 2005</td></tr>
+<tr><td>Emisor</td><td>SEI → CMMI Institute/ISACA</td><td>SE-PROSOFT, UNAM, NYCE</td><td>SOFTEX</td><td>ISO/IEC JTC 1/SC 7 WG 24</td><td>CYTED (UCLM, UNAM, PUCP…)</td><td>ESI → Tecnalia</td></tr>
+<tr><td>Público</td><td>Medianas y grandes</td><td>PYMEs y áreas internas</td><td>Todas, con foco en PYMEs</td><td>VSE ≤ 25 personas</td><td>PYMEs iberoamericanas</td><td>PYMEs y micro TI</td></tr>
+<tr><td>Estructura</td><td>22 PA (v1.3)</td><td>3 categorías, 9 procesos</td><td>12 procesos en 2 conjuntos (2021)</td><td>Basic: PM + SI</td><td>3 categorías, 10 procesos</td><td>3 áreas</td></tr>
+<tr><td>Escala</td><td>ML1–5 / CL0–3</td><td>Capacidad 0–5 por proceso</td><td>Madurez G→A (7)</td><td>4 perfiles</td><td>Capacidad 0–5</td><td>1★–3★</td></tr>
+<tr><td>Evaluación</td><td>SCAMPI / Benchmark</td><td>EvalProSoft (NMX-I-059/04)</td><td>MA-MPS (IA acreditadas)</td><td>29110-3 / auditoría de certificación</td><td>Light MECPDS, PvalCOMPETISOFT</td><td>Evaluador ESI (estilo 15504)</td></tr>
+<tr><td>Costo</td><td>Alto</td><td>Bajo–medio</td><td>Bajo–medio (subsidio SEBRAE)</td><td>Muy bajo (TR gratuitos, DP)</td><td>Muy bajo (público)</td><td>Bajo</td></tr>
+<tr><td>Gestionar un proyecto</td><td>PP, PMC</td><td>APE</td><td>GPR</td><td>PM</td><td>APE</td><td>PP, PMC (CMMI)</td></tr>
+<tr><td>Ingeniería</td><td>RD, TS, PI, VER, VAL</td><td>DMS</td><td>REQ, PCP, ITP, VV</td><td>SI</td><td>DS, MS</td><td>CMMI 2–3</td></tr>
+<tr><td>Versión peruana</td><td>— (se pide en licitaciones)</td><td>NTP-291.100 (2009)</td><td>—</td><td>NTP-ISO/IEC 29110 (2012)</td><td>COMPETISOFT-Perú (PUCP)</td><td>RELAIS con la CCL</td></tr>
+</tbody></table></div>
+<h3>27.3 Modelos TQM entre sí</h3>
+<div class="tabla"><table>
+<thead><tr><th>Criterio</th><th>Deming</th><th>Malcolm Baldrige</th><th>EFQM</th><th>Iberoamericano</th><th>PNC Perú</th><th>Six Sigma</th></tr></thead>
+<tbody>
+<tr><td>Origen / año</td><td>Japón, 1951</td><td>EE. UU., 1987</td><td>Europa, 1991/1992</td><td>Iberoamérica, 1999</td><td>Perú, 1991</td><td>Motorola, 1986</td></tr>
+<tr><td>Organismo</td><td>JUSE</td><td>NIST</td><td>EFQM</td><td>FUNDIBEQ</td><td>CGC (CDI-SNI)</td><td>(metodología; ISO 13053)</td></tr>
+<tr><td>Enfoque</td><td>Estadística, PHVA, control de procesos</td><td>Liderazgo, resultados de negocio, competitividad</td><td>Sostenibilidad, grupos de interés, transformación</td><td>Adaptación de EFQM; autoevaluación</td><td>Excelencia en la gestión (alineado con Baldrige)</td><td>Reducir la variabilidad (3,4 DPMO)</td></tr>
+<tr><td>Estructura</td><td>10 criterios</td><td>7 criterios (2026: 6 categorías)</td><td>3 bloques, 7 criterios + RADAR</td><td>9 criterios (5 + 4)</td><td>7 dimensiones</td><td>DMAIC / DMADV</td></tr>
+<tr><td>Nivel</td><td>Proceso / organización</td><td>Organización (macro)</td><td>Organización (macro)</td><td>Organización</td><td>Organización (macro)</td><td>Proyecto / proceso (micro)</td></tr>
+<tr><td>Frase de la clase</td><td>«Que la máquina y el proceso no fallen»</td><td>«Que el negocio gane»</td><td>«Que la organización trascienda en la sociedad»</td><td colspan="2">«Que las empresas locales aprendan a medirse y mejorar paso a paso»</td><td>«Motor técnico» del PNC</td></tr>
+<tr><td>Ejemplo de clase</td><td>Toyota, Komatsu</td><td>Clínica Mayo, FedEx, Indra</td><td>UNMSM, Red Eléctrica, Bosch</td><td>TASA, Electroperú</td><td>BCP, Marina de Guerra</td><td>BCP hipotecario</td></tr>
+</tbody></table></div>
+<h3>27.4 Calidad del producto vs. calidad del proceso</h3>
+<div class="tabla"><table>
+<thead><tr><th>Criterio</th><th>Calidad del producto</th><th>Calidad del proceso</th></tr></thead>
+<tbody>
+<tr><td>Pregunta</td><td>¿El SW tiene las características requeridas?</td><td>¿El modo de construir el SW es capaz, repetible y mejora?</td></tr>
+<tr><td>Normas</td><td>ISO/IEC 9126 → 25010 (modelo), 14598 → 25040 (evaluación), 25023 (métricas)</td><td>12207 / NTP 2016, 15504 → 33000, CMMI, MoProSoft, MPS.BR, 29110, IEEE 730</td></tr>
+<tr><td>Enfoque</td><td>Más cercano al <b>QC</b>: detectar defectos en el producto</td><td>Más cercano al <b>QA</b>: prevenir defectos desde el proceso</td></tr>
+<tr><td>Técnicas (S3)</td><td>Pruebas dinámicas, SAST/DAST, métricas de defectos/KLOC, cobertura, MTTR</td><td>Auditorías de proceso, revisiones (IEEE 1028), PDCA, CMMI, mejora con SPI</td></tr>
+<tr><td>Quién</td><td>Testers, QC, laboratorio de evaluación</td><td>SQA, SEPG, auditor de PPQA, evaluador SPICE</td></tr>
+<tr><td>Ejemplo</td><td>Medir la disponibilidad de la app Yape (25010 – Fiabilidad)</td><td>Verificar que todos los equipos de Yape siguen el proceso estándar de CM (CMMI ML3)</td></tr>
+</tbody></table></div>
+<div class="ojo"><h4>Ojo en el examen</h4><p>La premisa de Humphrey une las dos columnas: un buen proceso <b>tiende</b> a producir un buen producto, pero no lo garantiza. El caso Ariane 5 (S1/S3) lo muestra: había procesos, pero se reutilizó código del Ariane 4 sin <b>validar</b> el nuevo entorno. Una respuesta completa combina normas de producto (25010) y de proceso (12207/CMMI).</p></div>
+</section>
+
+<section id="como-elegir-norma">
+<h2>28. Cómo elegir una norma o modelo (árbol de decisión)</h2>
+<p>Usa este árbol para los casos de desarrollo del examen. Primero ubica <b>qué problema</b> se quiere resolver, luego el <b>tamaño y el contexto</b> de la organización y al final la <b>exigencia externa</b> (contrato, ley, cliente).</p>
+<ul>
+<li><b>¿El problema es la calidad del PRODUCTO (el SW falla, es lento, inseguro, poco usable)?</b>
+<ul>
+<li>Para especificar requisitos de calidad medibles → <b>ISO/IEC 25010</b> (8 características) + métricas de la 25023.</li>
+<li>Para evaluar formalmente un producto, por ejemplo uno de un proveedor → proceso de <b>ISO/IEC 25040</b> (antes 14598).</li>
+<li>Si el problema es de seguridad de la información en toda la organización → <b>ISO/IEC 27001</b> (SGSI) + OWASP SAMM (S3).</li>
+<li>Para documentar y organizar las pruebas → <b>ISO/IEC/IEEE 29119</b> (antes IEEE 829).</li>
+</ul></li>
+<li><b>¿El problema es el PROYECTO (no hay plan de calidad, no se audita, no hay V&amp;V)?</b>
+<ul>
+<li>Plan de aseguramiento → <b>IEEE 730</b> (SQAP).</li>
+<li>Plan de V&amp;V según la criticidad → <b>IEEE 1012</b> (niveles de integridad).</li>
+<li>Revisiones y auditorías formales → <b>IEEE 1028</b>.</li>
+</ul></li>
+<li><b>¿El problema son los PROCESOS del ciclo de vida (cada equipo trabaja a su manera)?</b>
+<ul>
+<li>¿Es una entidad del Estado peruano (SNI)? → <b>NTP-ISO/IEC 12207:2016</b>, obligatoria por la RM 041-2017-PCM.</li>
+<li>¿Es privada y grande, o trabaja con clientes internacionales? → <b>ISO/IEC/IEEE 12207:2017</b> (30 procesos), adaptada con tailoring.</li>
+<li>¿Es una VSE (≤ 25 personas)?
+<ul>
+<li>Un proyecto a la vez → <b>ISO/IEC 29110 Basic</b> (PM + SI; NTP en el Perú).</li>
+<li>Startup muy pequeña → 29110 <b>Entry</b>.</li>
+<li>Varios proyectos en paralelo → 29110 <b>Intermediate</b>.</li>
+</ul></li>
+</ul></li>
+<li><b>¿Se necesita DEMOSTRAR madurez o capacidad ante terceros?</b>
+<ul>
+<li>Licitación o cliente que exige «nivel 3» (banca, outsourcing a EE. UU.) → <b>CMMI ML2–3</b> con <b>Benchmark</b> (antes SCAMPI A).</li>
+<li>Se quiere un perfil por proceso con norma ISO pública (automotriz, Europa, selección de proveedores) → <b>ISO/IEC 33000</b> (33002 + 33020 + PAM 33061).</li>
+<li>PYME con presupuesto reducido:
+<ul>
+<li>Vende a Brasil → <b>MPS.BR</b> (empieza por G).</li>
+<li>Vende a México → <b>MoProSoft / NMX-I-059</b>, o la 29110 certificada por NYCE.</li>
+<li>Quiere mejorar sin certificar todavía → <b>COMPETISOFT + PmCOMPETISOFT</b>.</li>
+<li>Debe mostrar negocio + seguridad + desarrollo a la vez → <b>IT Mark</b>.</li>
+</ul></li>
+</ul></li>
+<li><b>¿El problema es de GESTIÓN de toda la organización (clientes insatisfechos, falta de cultura de calidad)?</b>
+<ul>
+<li>Se busca una certificación reconocida de su SGC → <b>ISO 9001</b> (para SW, guía 90003).</li>
+<li>Se busca la excelencia y un premio:
+<ul>
+<li>Foco en resultados de negocio y competitividad → <b>Baldrige</b>; en el Perú, el <b>PNC</b>.</li>
+<li>Foco en la sostenibilidad y los grupos de interés (universidad, sector público) → <b>EFQM</b> o el <b>Modelo Iberoamericano</b>.</li>
+<li>Foco en el control estadístico de la operación → <b>Deming</b>.</li>
+</ul></li>
+<li>Hay un problema operativo puntual y medible (tiempos, defectos) → un proyecto <b>Six Sigma (DMAIC)</b> dentro del modelo macro.</li>
+</ul></li>
+</ul>
+<div class="concepto"><h3>Combinación de normas (respuesta «de nota alta»)</h3>
+<p>En la práctica nunca se usa una sola norma: se arma una <b>pila</b> coherente de gestión, proceso, producto y madurez, y cada norma cubre una pregunta distinta.</p>
+<p class="ej"><b>Ej.:</b> para el SINEACE móvil (G3): la NTP-ISO/IEC 12207:2016 (obligatoria, procesos) + IEEE 730 (SQAP del proyecto) + ISO/IEC 25010 (requisitos de calidad de la app) + IEEE 1012 (V&amp;V por nivel de integridad) + NTP-ISO/IEC 27001 (SGSI de la entidad), y a mediano plazo una evaluación con la 33000 o CMMI para medir la madurez de la OTI.</p></div>
+<div class="ojo"><h4>Ojo en el examen</h4><p>En calidad <b>no hay una única solución</b>. Te califican por la <b>justificación</b>: problema → tipo de norma → norma concreta (código exacto y versión) → proceso o característica específica → KPI. Una respuesta que dice «aplicar ISO» sin código, versión ni proceso pierde puntos.</p></div>
+</section>
+
+<section id="glosario">
+<h2>Glosario de términos</h2>
+<dl class="glos">
+<dt>ADLI</dt><dd>Factores con que Baldrige evalúa los procesos: enfoque, despliegue, aprendizaje e integración. Ej.: un proceso de atención al cliente puntúa bajo en «despliegue» si solo existe en una sede.</dd>
+<dt>APE (Administración de Proyectos Específicos)</dt><dd>Proceso OPE.1 de MoProSoft que gestiona UN proyecto: plan, calendario, riesgos y cierre. Ej.: el cronograma del módulo de matrícula del SUM.</dd>
+<dt>Appraisal (valoración)</dt><dd>Término de CMMI para la evaluación formal de prácticas frente al modelo. Ej.: un Benchmark que otorga ML3 a una fábrica de SW limeña.</dd>
+<dt>Benchmark Appraisal</dt><dd>Método de CMMI V2.0/V3.0 que otorga un rating oficial vigente por 3 años (equivale a la antigua SCAMPI A). Ej.: el que piden las bases de una licitación bancaria.</dd>
+<dt>Capacidad del proceso (CL)</dt><dd>Grado en que UN proceso logra sus objetivos; va de 0 a 5 en SPICE. Ej.: «Gestión de configuración en CL2».</dd>
+<dt>CMMI</dt><dd>Modelo de madurez y capacidad del SEI, hoy del CMMI Institute (ISACA); no es una norma ISO. Ej.: CMMI-DEV v1.3 con 22 PA.</dd>
+<dt>COMPETISOFT</dt><dd>Proyecto CYTED 2006–2008 que creó un marco de procesos, evaluación y mejora para PYMEs, a partir de MoProSoft. Ej.: COMPETISOFT-Perú en la PUCP.</dd>
+<dt>Conformidad adaptada (tailored conformance)</dt><dd>Cumplimiento de la 12207 tras seleccionar solo los procesos que aplican y justificarlo. Ej.: excluir «Adquisición» si no se compra SW.</dd>
+<dt>DMAIC</dt><dd>Fases de un proyecto Six Sigma: Definir, Medir, Analizar, Mejorar (la clase dice Implementar) y Controlar. Ej.: el proyecto hipotecario del BCP.</dd>
+<dt>DPMO</dt><dd>Defectos por millón de oportunidades; 6σ equivale a 3,4 DPMO. Ej.: 1 242 DPMO ≈ 4,5σ.</dd>
+<dt>EFQM</dt><dd>Fundación y modelo europeo de excelencia con Dirección, Ejecución, Resultados y lógica RADAR. Ej.: el modelo propuesto para la UNMSM.</dd>
+<dt>EvalProSoft</dt><dd>Método de evaluación de MoProSoft (NMX-I-059/04), basado en la 15504-2. Ej.: la evaluación de capacidades de un proveedor que pide un cliente.</dd>
+<dt>FUNDIBEQ</dt><dd>Fundación Iberoamericana para la Gestión de la Calidad (1998), dueña del Modelo Iberoamericano. Ej.: la guía de autoevaluación que usa TASA.</dd>
+<dt>IEEE 1012</dt><dd>Norma de V&amp;V de sistemas, SW y HW con rigor según el nivel de integridad (vigente: 2024). Ej.: IV&amp;V del SW de señalización de un metro.</dd>
+<dt>IEEE 1028</dt><dd>Norma de revisiones y auditorías con 5 tipos: de gestión, técnica, inspección, walk-through y auditoría. Ej.: la inspección del cálculo del IGV.</dd>
+<dt>IEEE 730</dt><dd>Norma de procesos de SQA y del SQAP (2002: plans; 2014: processes). Ej.: el SQAP del SINEACE móvil.</dd>
+<dt>INACAL</dt><dd>Instituto Nacional de Calidad del Perú, organismo de normalización desde 2015. Ej.: aprobó la NTP-ISO/IEC 12207:2016 el 16-jul-2016.</dd>
+<dt>Integridad, nivel de (IL)</dt><dd>Clasificación de la criticidad de un elemento que define el rigor de la V&amp;V en IEEE 1012. Ej.: nivel 4 para un SW médico de dosis de radiación (lección del Therac-25).</dd>
+<dt>ISO 9001</dt><dd>Norma certificable de requisitos de un SGC (vigente en clase: 2015; nueva: 2026). Ej.: el SGC de una software factory que atiende a SUNAT.</dd>
+<dt>ISO/IEC 15504 (SPICE)</dt><dd>Norma retirada de evaluación de procesos, bidimensional, con CL0–5 y escala NPLF. Ej.: un PAM 15504-5 basado en la 12207.</dd>
+<dt>ISO/IEC 25010</dt><dd>Modelo de calidad del producto de SQuaRE: 8 características (2011) o 9 (2023). Ej.: «Fiabilidad – disponibilidad ≥ 99,9 %».</dd>
+<dt>ISO/IEC 29110</dt><dd>Perfiles de ciclo de vida para VSE (≤ 25 personas); el Basic tiene PM + SI. Ej.: la primera VSE peruana certificada (2015).</dd>
+<dt>ISO/IEC 33020</dt><dd>Marco de medición de la capacidad de procesos de la familia 330xx (2.ª ed. 2019). Ej.: calificar PA2.1 como L+.</dd>
+<dt>ISO/IEC/IEEE 12207:2017</dt><dd>Norma de procesos del ciclo de vida del SW con 4 grupos y 30 procesos. Ej.: mapear un pipeline DevOps a Implementación, Integración, Verificación…</dd>
+<dt>IT Mark</dt><dd>Certificación de ESI-Tecnalia (2005) que combina negocio (10²), seguridad (27001) y desarrollo (CMMI); de 1★ a 3★. Ej.: IT Mark Basic para una PYME fintech.</dd>
+<dt>Madurez organizacional (ML)</dt><dd>Grado en que una OU ejecuta de forma consistente un conjunto predefinido de procesos. Ej.: CMMI ML3 «Definido».</dd>
+<dt>Malcolm Baldrige (MBNQA)</dt><dd>Premio y marco de excelencia de EE. UU. (NIST, 1987) con 7 criterios (6 categorías en 2026). Ej.: la referencia del PNC Perú.</dd>
+<dt>MoProSoft</dt><dd>Modelo mexicano de procesos para PYMEs (NMX-I-059): 3 categorías y 9 procesos. Ej.: GPY decide la cartera y APE gestiona cada proyecto.</dd>
+<dt>MPS.BR</dt><dd>Programa brasileño de SOFTEX con 7 niveles de madurez, de G (bajo) a A (alto). Ej.: el nivel F equivale aproximadamente a CMMI ML2.</dd>
+<dt>NTP-ISO/IEC 12207:2016</dt><dd>Norma peruana (3.ª ed., INACAL) equivalente a la ISO/IEC 12207:2008, con 7 grupos y 43 procesos; obligatoria en el SNI por la RM 041-2017-PCM. Ej.: la base del informe del G3.</dd>
+<dt>PAM (Process Assessment Model)</dt><dd>Modelo de evaluación: PRM + indicadores (BP, WP, GP). Ej.: la ISO/IEC 33061 para SW.</dd>
+<dt>PHVA / PDCA</dt><dd>Ciclo de mejora continua Planificar-Hacer-Verificar-Actuar. Ej.: automatizar pruebas como piloto y luego estandarizar.</dd>
+<dt>PmCOMPETISOFT</dt><dd>Proceso ligero de mejora de COMPETISOFT: Instalación, Diagnóstico, Formulación, Ejecución y Revisión. Ej.: dos iteraciones de mejora en APE y DS.</dd>
+<dt>PNC Perú</dt><dd>Premio Nacional a la Calidad del CGC (secretaría técnica en CDI-SNI), alineado con Baldrige; incluye la Medalla Líder en Calidad. Ej.: la Marina de Guerra, Oro en 2020.</dd>
+<dt>PRM (Process Reference Model)</dt><dd>Modelo que define procesos con propósito y resultados, usado como base de una evaluación. Ej.: la 12207 como PRM de SPICE.</dd>
+<dt>RADAR</dt><dd>Lógica de evaluación de EFQM: Resultados, Enfoques, Despliegue, Evaluación y Perfeccionamiento. Ej.: puntuar el criterio «Crear valor sostenible».</dd>
+<dt>SCAMPI</dt><dd>Método de valoración de CMMI v1.3: la clase A da rating y vale 3 años; B y C no dan rating. Ej.: el SCAMPI A de Minsait en 2019.</dd>
+<dt>Six Sigma (6σ)</dt><dd>Metodología estadística para reducir la variabilidad hasta 3,4 DPMO. Ej.: el «motor micro» del Modelo de Excelencia del BCP.</dd>
+<dt>SQAP</dt><dd>Plan de Aseguramiento de la Calidad del SW: métodos, herramientas, estándares y responsabilidades a lo largo del ciclo de vida. Ej.: el SQAP de AlfaShop.</dd>
+<dt>SQuaRE</dt><dd>Serie ISO/IEC 25000 que reemplaza a la 9126 y la 14598, con divisiones 2500n a 2504n. Ej.: 25010 (modelo) + 25040 (evaluación).</dd>
+<dt>Tailoring (sastrería)</dt><dd>Adaptación de los procesos de una norma a la escala, complejidad y criticidad del proyecto. Ej.: aplicar la 12207 en Scrum sin documentación excesiva.</dd>
+<dt>VSE (Very Small Entity)</dt><dd>Empresa, área o proyecto de hasta 25 personas, foco de la ISO/IEC 29110. Ej.: una startup arequipeña de 8 personas.</dd>
+</dl>
+</section>
+<!--FIN-->

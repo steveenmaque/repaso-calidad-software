@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S5 Práctica · NTP-ISO/IEC 12207:2016 · Repaso Calidad de SW</title>
+<meta name="description" content="Norma Técnica Peruana, obligatoriedad en el Estado y aplicación proceso-actividad-tarea.">
+<link rel="stylesheet" href="assets/css/style.css"></head>
+<body>
+<header class="top"><a class="brand" href="index.html">Repaso Parcial · Calidad de SW</a><nav class="menu"><a href="index.html">Inicio</a><a href="s1-teoria.html">S1</a><a href="s2-teoria.html">S2</a><a href="s3-teoria.html">S3</a><a href="s4-teoria.html">S4</a><a href="s5-teoria.html" class=on>S5</a><a href="s6-teoria.html">S6</a><a href="s7-teoria.html">S7</a><a href="normas.html">Normas</a><a href="siglas.html">Siglas</a><a href="examen.html">Examen</a></nav></header>
+<div class="wrap"><aside class="toc"><details open><summary>Índice</summary><ol><li><a href="#caso-1">Caso 1 · Sistema web para un banco: actores, procesos principales y su traducción a 2008/2017</a></li><li><a href="#caso-2">Caso 2 · SUM-UNMSM: ¿QA, Verificación, Validación, Auditoría o Revisión conjunta?</a></li><li><a href="#caso-3">Caso 3 · Operación y mantenimiento de la plataforma SUNAT Operaciones en Línea</a></li><li><a href="#caso-4">Caso 4 · &quot;El testing es débil&quot;: de la auditoría a la mejora organizativa (nivel 3 en V&amp;V)</a></li><li><a href="#caso-5">Caso 5 · Caso de estudio de clase: proceso de pruebas funcionales en una consultora (Chinarro, 2019)</a></li><li><a href="#caso-6">Caso 6 · Corregir un informe de investigación contra la rúbrica de la Práctica S5</a></li><li><a href="#caso-7">Caso 7 · SINEACE Móvil: Scrum + ISO/IEC/IEEE 12207:2017 bajo una directiva basada en la NTP 2016</a></li><li><a href="#caso-8">Caso 8 · MPCH Chiclayo: método en cascada con 12 procesos técnicos, 2 programadores y 40 áreas usuarias</a></li><li><a href="#caso-9">Caso 9 · Auditoría de bases normativas: RM 179-2004-PCM, NTP 2006, RD 013-2016/INACAL-DN y RM 041-2017-PCM</a></li><li><a href="#caso-10">Caso 10 · Diagnóstico de brechas: Directiva SINEACE 2020 (Scrum + NTP 2016) frente a los 43 procesos</a></li><li><a href="#caso-11">Caso 11 · El procedimiento de control de calidad del MEF (PR-CONTCALID-001): ¿QC o QA?</a></li><li><a href="#caso-12">Caso 12 · Mezcla de ediciones en una metodología ministerial (MVCS, RD 005-2022-VIVIENDA-OGEI)</a></li><li><a href="#caso-13">Caso 13 · Microempresa peruana: capacidad antes/después con ISO/IEC 15504-5 (Horna Merino, 2015)</a></li><li><a href="#caso-14">Caso 14 · Validación de requisitos en una OTI pública: diseño cuasiexperimental (Canchari, 2020)</a></li><li><a href="#caso-15">Caso 15 · Paradoja de KPI en la CSJ Tacna (AUP + ETL) y correlaciones en la UNAS</a></li><li><a href="#caso-16">Caso 16 · Operación y mantenimiento de SINEACE Móvil en 2026: clasificar solicitudes y formalizar 6.4.13</a></li></ol></details></aside><main>
+<div class="tabs"><a class="" href="s5-teoria.html">📖 Teoría S5</a><a class="on" href="s5-practica.html">🧩 Práctica S5</a><a href="examen.html?s=5">📝 Examen S5</a></div><h1>Sesión 5 · Práctica</h1>
+<p class="lead">Casos de examen sobre la <b>NTP-ISO/IEC 12207:2016</b> (<abbr title="Norma Técnica Peruana">NTP</abbr> – Norma Técnica Peruana; 3.ª ed., aprobada por <abbr title="Instituto Nacional de Calidad (Perú)">INACAL</abbr> – Instituto Nacional de Calidad, ≡ <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 12207:2008, 7 grupos y 43 procesos, obligatoria en el <abbr title="Sociedad Nacional de Industrias (Perú)">SNI</abbr> – Sistema Nacional de Informática por la <abbr title="Resolución Ministerial">RM</abbr> – Resolución Ministerial N.° 041-2017-PCM) y su relación con la estructura clásica de 17 procesos (ISO/IEC 12207:1995 ≡ NTP 2004) que usa la profesora en las diapositivas y con la internacional vigente <b>ISO/IEC/IEEE 12207:2017</b> (4 grupos, 30 procesos) que pide la práctica. El orden es: (1) los <b>casos y ejemplos de clase</b> (diapositivas 24–33 del Mazo A y enunciado de la práctica, Mazo C); (2) los <b>casos de los entregables</b>: primero el G3 (SINEACE Móvil, luego su versión anterior MPCH Chiclayo y las técnicas/casos de éxito de su estado del arte) y después el G6; (3) <b>casos NUEVOS de complejidad muy alta</b> adaptados de documentos públicos peruanos (RM <abbr title="Presidencia del Consejo de Ministros">PCM</abbr>, Directiva SINEACE 2020, procedimiento <abbr title="Quality Control – Control de Calidad">QC</abbr> del MEF, metodología del MVCS, Canchari 2020) o creados para el repaso. Cada solución trae tabla de causa raíz, al menos dos alternativas (en calidad la solución <b>no es única</b>: la 12207 se cumple por <i>tailoring</i>), justificación normativa con número de proceso en la edición correcta, <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> (Key Performance Indicator – Indicador Clave de Desempeño) con fórmula y meta, y errores frecuentes. <b>Regla de oro de la S5:</b> antes de responder, pregunta siempre "¿de qué <i>edición</i> me hablan?" — 1995 (5/8/4 = 17), 2008/NTP 2016 (7 grupos = 43) o 2017 (2/6/8/14 = 30).</p>
+
+<section id="caso-1" class="caso">
+<h2>Caso 1 · Sistema web para un banco: actores, procesos principales y su traducción a 2008/2017</h2>
+<p class="origen">Origen: Diapositiva 24 (clase, Mazo A "Modelo de Calidad <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 12207") · ampliado para el repaso</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>La diapositiva 24 plantea: "una empresa desarrolla un sistema web para un banco: el banco realiza la adquisición; la empresa de <abbr title="Software – Software / soporte lógico">SW</abbr> (Software) hace el suministro y el desarrollo; cuando el sistema funciona, el banco lo opera; si hay fallas o se requiere actualizar, se realiza el mantenimiento".</p>
+<figure><a href="assets/img/s5-modelo/p18.webp" target="_blank" rel="noopener"><img src="assets/img/s5-modelo/p18.webp" width="1000" height="563" loading="lazy" decoding="async" alt="Mapa de los 17 procesos de la 12207 clásica: Principales 5.1 a 5.5, Apoyo 6.1 a 6.8 y Organizativos 7.1 a 7.4"></a><figcaption>Los 17 procesos de la estructura clásica (diap. 18, Mazo A). Es la numeración 1995/NTP 2004, no la de la NTP 2016.</figcaption></figure>
+<p>Concretamos el ejemplo: <b>Interbank</b> licita en 2026 una banca web de préstamos personales. Gana <b>SoftAndes S.A.C.</b> (consultora de 60 personas). Hechos:</p>
+<ul>
+<li><b>H1</b> Interbank redacta el <abbr title="Request for Proposal – Solicitud de propuesta">RFP</abbr> (Request for Proposal – Solicitud de Propuesta), evalúa 4 ofertas y firma el contrato con <abbr title="Service Level Agreement – Acuerdo de Nivel de Servicio">SLA</abbr> (Service Level Agreement – Acuerdo de Nivel de Servicio) de 99,5 % de disponibilidad.</li>
+<li><b>H2</b> SoftAndes prepara su oferta técnico-económica y, ya adjudicada, entrega los hitos pactados.</li>
+<li><b>H3</b> SoftAndes elabora el <abbr title="Software Requirements Specification – Especificación de Requisitos de Software">SRS</abbr> (Software Requirements Specification), la arquitectura, el código y las pruebas.</li>
+<li><b>H4</b> En marzo, la Gerencia de Operaciones de Interbank pone el sistema en producción y su mesa de ayuda atiende a 12 000 clientes/día.</li>
+<li><b>H5</b> En junio la SBS (Superintendencia de Banca, Seguros y AFP) cambia el cálculo de la TCEA (Tasa de Costo Efectivo Anual); el contrato dice que el mantenimiento lo hace SoftAndes durante 12 meses.</li>
+<li><b>H6</b> Interbank y SoftAndes se reúnen en cada hito para revisar el avance y los entregables.</li>
+<li><b>H7</b> La <abbr title="Oficina Central de Informática (UNMSM)">OCI</abbr> (Órgano de Control Institucional)… no aplica: Interbank es privado. Pero su auditoría interna revisa en agosto si SoftAndes cumplió el contrato y las normas pactadas.</li>
+</ul>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Asigne a cada hecho H1–H7 el proceso de la estructura clásica (diap. 18) y el <b>actor/rol</b> que lo ejecuta.</li>
+<li>Traduzca esos procesos a la NTP-ISO/IEC 12207:2016 (≡ 2008, 7 grupos) y a la ISO/IEC/IEEE 12207:2017 (4 grupos).</li>
+<li>¿Es obligatoria la <abbr title="Norma Técnica Peruana">NTP</abbr> para este contrato? Justifique.</li>
+<li>Proponga dos formas de organizar el mantenimiento (H5) y un <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> para el SLA.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Confundir actor con proceso (creer que "el banco hace el desarrollo porque lo paga")</td><td>No distinguir rol de adquirente vs proveedor</td><td>H1–H3</td><td>Claridad contractual (proceso de Acuerdo)</td></tr>
+<tr><td>Mantenimiento regulatorio sin dueño claro</td><td>Contrato que no fija tipo de mantenimiento ni plazos</td><td>H5 (cambio de TCEA por la SBS)</td><td>Cumplimiento normativo; mantenibilidad (modificabilidad, ISO/IEC 25010)</td></tr>
+<tr><td>Revisión conjunta confundida con auditoría</td><td>Ambas "revisan", pero con distinto propósito e independencia</td><td>H6 vs H7</td><td>Objetividad del control</td></tr>
+<tr><td>Disponibilidad operativa sin medición</td><td>SLA firmado sin KPI ni monitoreo</td><td>H1, H4</td><td>Fiabilidad (disponibilidad)</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 1 y 2 (mapeo triple):</b></p>
+<div class="tabla"><table>
+<thead><tr><th>H</th><th>Clásica 1995 (diap. 18)</th><th>Actor</th><th>NTP 2016 (≡ 2008)</th><th>ISO/IEC/IEEE 12207:2017</th></tr></thead>
+<tbody>
+<tr><td>H1</td><td>5.1 Adquisición (principal)</td><td>Adquirente: Interbank</td><td>6.1.1 Adquisición (grupo Acuerdo)</td><td>6.1.1 Adquisición (Acuerdo)</td></tr>
+<tr><td>H2</td><td>5.2 Suministro (principal)</td><td>Proveedor: SoftAndes</td><td>6.1.2 Suministro (Acuerdo)</td><td>6.1.2 Suministro (Acuerdo)</td></tr>
+<tr><td>H3</td><td>5.3 Desarrollo (principal)</td><td>Desarrollador: SoftAndes</td><td>Técnicos 6.4.x + Implementación de SW 7.1.1–7.1.7</td><td>Técnicos 6.4.2–6.4.9</td></tr>
+<tr><td>H4</td><td>5.4 Operación (principal)</td><td>Operador: Gerencia de Operaciones de Interbank</td><td>6.4.9 Operación del SW (Técnicos)</td><td>6.4.12 Operación</td></tr>
+<tr><td>H5</td><td>5.5 Mantenimiento (principal), tipo <b>adaptativo</b> (cambio de entorno regulatorio) — algunos lo llaman perfectivo; ver ojo</td><td>Mantenedor: SoftAndes (por contrato)</td><td>6.4.10 Mantenimiento del SW</td><td>6.4.13 Mantenimiento</td></tr>
+<tr><td>H6</td><td>6.6 Revisión conjunta (apoyo)</td><td>Adquirente + proveedor</td><td>7.2.6 Revisión del SW (Soporte de SW)</td><td>Sin proceso propio: 6.3.2 Evaluación y control + 6.3.3 Decisiones (revisiones de hito)</td></tr>
+<tr><td>H7</td><td>6.7 Auditoría (apoyo)</td><td>Auditor independiente</td><td>7.2.7 Auditoría del SW</td><td>6.3.8 Aseguramiento de la calidad (evaluaciones independientes)</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 3:</b> no. La <abbr title="Resolución Ministerial">RM</abbr> 041-2017-PCM obliga a las entidades del <b><abbr title="Sociedad Nacional de Industrias (Perú)">SNI</abbr></b> (sector público). Interbank es privado → uso <b>voluntario</b>. Solo sería exigible si el contrato lo pacta (uso "externo" de la norma, entre dos partes).</p>
+<div class="alt"><h4>Alternativa A · Mantenimiento contratado al proveedor (modelo de la diapositiva)</h4>
+<p>Cláusula de mantenimiento 12 meses con SoftAndes: catálogo por tipo (correctivo &lt; 24 h para severidad 1; adaptativo regulatorio en ≤ 30 días desde la circular SBS), bolsa de horas para perfectivo. Ventaja: conocimiento del código. Riesgo: <i>lock-in</i>.</p></div>
+<div class="alt"><h4>Alternativa B · Transición a mantenimiento interno de Interbank</h4>
+<p>Aplicar 6.4.10 Transición (2017) con transferencia de conocimiento, línea base en <abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr> (Software Configuration Management) del banco y documentación (6.3.6 Gestión de la información). Interbank asume 6.4.13. Ventaja: autonomía; costo: formación (6.2.4 <abbr title="Human Resources – Recursos Humanos">RR. HH.</abbr>).</p></div>
+<h4>Justificación normativa</h4>
+<p>Diap. 24 (actores ↔ procesos principales); en la 1995 cada proceso principal tiene un rol: adquirente, proveedor, desarrollador, operador, mantenedor. En la 2008/NTP 2016 los principales desaparecen como categoría y se reparten en <b>Acuerdo</b> (6.1) y <b>Técnicos</b> (6.4) + <b>Implementación de SW</b> (7.1). Tipos de mantenimiento: diap. 23 y ISO/IEC/IEEE 14764.</p>
+<div class="norma"><h4>ISO/IEC 12207:1995 (≡ NTP-ISO/IEC 12207:2004)</h4>
+<p><b>Emisor:</b> ISO/IEC <abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr> (Joint Technical Committee 1 / Subcommittee 7); en Perú, <abbr title="Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual">INDECOPI</abbr> (CRT) la adoptó en 2004 y la RM 179-2004-PCM la hizo obligatoria. <b>Propósito:</b> marco común de procesos del ciclo de vida del SW. <b>Estructura:</b> 3 categorías, 17 procesos: Principales 5.1–5.5; Apoyo 6.1–6.8; Organizativos 7.1–7.4. <b>Trampa:</b> las diapositivas la titulan "NTP 12207:2017": no existe NTP 2017; la estructura 5/8/4 es la de 1995.</p></div>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>Disponibilidad</b> = (tiempo pactado − tiempo caído) / tiempo pactado × 100. Meta ≥ 99,5 % mensual (SLA).</li>
+<li><b>Lead time de mantenimiento adaptativo regulatorio</b> = fecha de pase − fecha de circular SBS. Meta ≤ 30 días.</li>
+<li><b><abbr title="Mean Time To Repair – Tiempo Medio de Reparación">MTTR</abbr></b> (Mean Time To Repair) de incidentes severidad 1. Meta ≤ 4 h.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes.</b> (1) Decir que el banco "desarrolla": el que paga adquiere; el que construye desarrolla. (2) Llamar "Revisión conjunta" a la auditoría: la revisión conjunta es <b>entre adquirente y proveedor</b>; la auditoría es <b>independiente</b> y contra contrato/normas. (3) Usar la numeración 5.x con la NTP 2016: en 2008 "5.x" no existe como procesos. (4) H5 admite discusión: si el cambio de TCEA es una nueva regla de negocio, varios autores lo clasifican como <b>perfectivo</b> (nueva funcionalidad); si se ve como cambio del "entorno" regulatorio, <b>adaptativo</b>. Lo que se califica es la <b>justificación</b>, no la etiqueta.</div>
+</details>
+</section>
+
+<section id="caso-2" class="caso">
+<h2>Caso 2 · SUM-UNMSM: ¿QA, Verificación, Validación, Auditoría o Revisión conjunta?</h2>
+<p class="origen">Origen: Diapositivas 25–29 (clase, Mazo A: procesos de soporte y ejemplos de <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr>, Verificación y Validación) · ampliado para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>La <abbr title="Oficina General de Tecnologías de la Información">OGTI</abbr> (Oficina General de Tecnologías de la Información) de la <abbr title="Universidad Nacional Mayor de San Marcos">UNMSM</abbr> reemplaza el módulo de matrícula del <abbr title="Sistema Unificado de Matrícula (UNMSM)">SUM</abbr> (Sistema Único de Matrícula). La profesora definió: QA "provee mecanismos para verificar que productos y procesos cumplan estándares, requisitos y políticas de calidad"; Verificación = "¿estamos construyendo el producto <b>correctamente</b>?" (producto intermedio vs especificación de la etapa anterior); Validación = "¿estamos construyendo el producto <b>correcto</b>?" (producto final vs necesidades del usuario); Auditoría = evaluación <b>independiente</b> contra requisitos, contratos o normas.</p>
+<figure><a href="assets/img/s5-modelo/p29.webp" target="_blank" rel="noopener"><img src="assets/img/s5-modelo/p29.webp" width="1000" height="563" loading="lazy" decoding="async" alt="Diapositiva con ejemplos de los procesos de Aseguramiento de la Calidad, Verificación y Validación"></a><figcaption>Ejemplos de QA, Verificación y Validación (diap. 29, Mazo A).</figcaption></figure>
+<p>Durante el proyecto ocurren 10 actividades:</p>
+<ol>
+<li><b>A1</b> Un arquitecto revisa el <abbr title="Software Design Description – Descripción del Diseño del Software">SDD</abbr> (Software Design Description) para confirmar que los 48 RF (requisitos funcionales) del <abbr title="Software Requirements Specification – Especificación de Requisitos de Software">SRS</abbr> están reflejados en el modelo de <abbr title="Base de Datos">BD</abbr> (Base de Datos).</li>
+<li><b>A2</b> El equipo QA revisa los <i>pull requests</i> del mes para constatar que se siguió el procedimiento de revisión de código del <abbr title="Software Quality Assurance Plan – Plan de Aseguramiento de la Calidad del Software">SQAP</abbr> (Software Quality Assurance Plan).</li>
+<li><b>A3</b> 30 estudiantes de 5 facultades usan una beta en un entorno de pruebas y se matriculan en cursos con cruce de horarios, retiro y rezagados.</li>
+<li><b>A4</b> La <abbr title="Oficina Central de Informática (UNMSM)">OCI</abbr> (Órgano de Control Institucional) de la UNMSM evalúa si el proyecto cumplió la NTP-ISO/IEC 12207:2016 y la directiva de la OGTI.</li>
+<li><b>A5</b> Se ejecutan 1 200 pruebas unitarias JUnit con 82 % de cobertura de ramas.</li>
+<li><b>A6</b> La OGTI y la empresa contratista revisan juntos el avance del hito 2 y aprueban el SRS v1.3.</li>
+<li><b>A7</b> Se registra en Jira el defecto "doble cobro de derecho de matrícula", se analiza la causa, se corrige y se cierra tras verificar.</li>
+<li><b>A8</b> Se etiqueta en Git la versión v2.0.0-rc1 y se registra qué versión está en pruebas y cuál en producción.</li>
+<li><b>A9</b> Se redacta el manual del usuario de matrícula para secretarías académicas.</li>
+<li><b>A10</b> La Dirección de Matrícula comprueba que, con el nuevo módulo, el tiempo promedio de matrícula baja de 25 a 8 min, que era la necesidad que originó el proyecto.</li>
+</ol>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Clasifique A1–A10 en los 8 procesos de soporte de la diapositiva 25 y justifique con la pregunta clave cuando aplique.</li>
+<li>Dé el número de proceso en la estructura clásica (diap. 18), en la <abbr title="Norma Técnica Peruana">NTP</abbr> 2016 (≡ 2008) y en la <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr>/IEEE 12207:2017.</li>
+<li>Explique por qué A5 es verificación aunque se "ejecute" el <abbr title="Software – Software / soporte lógico">SW</abbr>, y por qué A10 es validación aunque no haya "prueba".</li>
+<li>Proponga <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> para <abbr title="Verification and Validation – Verificación y Validación">V&amp;V</abbr> (Verificación y Validación).</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema (confusión típica)</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Llamar "validación" a toda prueba dinámica</td><td>Confundir técnica (dinámica/estática) con propósito (especificación vs necesidad)</td><td>A5</td><td>Corrección del proceso de V&amp;V</td></tr>
+<tr><td>Llamar "QA" a las pruebas</td><td>Confundir QA (proceso) con <abbr title="Quality Control – Control de Calidad">QC</abbr> (Quality Control, producto)</td><td>A2 vs A5</td><td>Independencia y objetividad</td></tr>
+<tr><td>Llamar "auditoría" a cualquier revisión</td><td>Ignorar el criterio de independencia</td><td>A4 vs A6</td><td>Objetividad</td></tr>
+<tr><td>Validación tardía</td><td>Usuarios solo al final</td><td>A3, A10</td><td>Adecuación funcional / satisfacción (calidad en uso)</td></tr>
+</tbody></table></div>
+<div class="tabla"><table>
+<thead><tr><th>Act.</th><th>Proceso (diap. 25)</th><th>Por qué</th><th>1995</th><th>NTP 2016 (2008)</th><th>2017</th></tr></thead>
+<tbody>
+<tr><td>A1</td><td>Verificación</td><td>Producto intermedio (SDD) vs etapa anterior (SRS): "¿correctamente?"</td><td>6.4</td><td>7.2.4 Verificación del SW</td><td>6.4.9 Verificación</td></tr>
+<tr><td>A2</td><td>Aseguramiento de la calidad</td><td>Mira el <b>proceso</b> contra el plan de calidad (es el ejemplo literal de la diap. 29)</td><td>6.3</td><td>7.2.3 QA del SW</td><td>6.3.8 QA</td></tr>
+<tr><td>A3</td><td>Validación</td><td>Usuario real, casos de uso críticos, beta: "¿correcto?"</td><td>6.5</td><td>7.2.5 Validación del SW</td><td>6.4.11 Validación</td></tr>
+<tr><td>A4</td><td>Auditoría</td><td>Independiente, contra norma y directiva</td><td>6.7</td><td>7.2.7 Auditoría del SW</td><td>6.3.8 QA (evaluación independiente)</td></tr>
+<tr><td>A5</td><td>Verificación</td><td>Código vs diseño/especificación de unidad</td><td>6.4</td><td>7.2.4 (y 7.1.5 Construcción)</td><td>6.4.9 (y 6.4.7)</td></tr>
+<tr><td>A6</td><td>Revisión conjunta</td><td>Adquirente (OGTI) + proveedor revisan estado y productos</td><td>6.6</td><td>7.2.6 Revisión del SW</td><td>6.3.2 Evaluación y control</td></tr>
+<tr><td>A7</td><td>Resolución de problemas</td><td>Ciclo cerrado registro → análisis → corrección → cierre</td><td>6.8</td><td>7.2.8 Resolución de problemas</td><td>6.3.8 (tarea "tratar incidentes y problemas")</td></tr>
+<tr><td>A8</td><td>Gestión de la configuración</td><td>Ejemplo literal de la diap. 26 (versión en pruebas vs producción)</td><td>6.2</td><td>7.2.2 <abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr> (y 6.3.6 del grupo Proyecto)</td><td>6.3.5 Gestión de la configuración</td></tr>
+<tr><td>A9</td><td>Documentación</td><td>Ejemplo literal de la diap. 26 (manual de matrícula)</td><td>6.1</td><td>7.2.1 Gestión de la documentación</td><td>6.3.6 Gestión de la información</td></tr>
+<tr><td>A10</td><td>Validación</td><td>Producto final vs la <b>necesidad</b> que originó el proyecto</td><td>6.5</td><td>7.2.5</td><td>6.4.11</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 3:</b> A5 ejecuta código, pero compara contra la <b>especificación</b> (lo que el diseño dice que la unidad debe hacer) → verificación. A10 no ejecuta casos de prueba, pero compara contra la <b>necesidad del usuario</b> (reducir el tiempo de matrícula) → validación. El criterio es el <b>referente</b>, no la técnica.</p>
+<div class="alt"><h4>Alternativa A · Plan V&amp;V por niveles (modelo en V)</h4><p>Cada nivel del lado izquierdo (SRS, SDD, código) tiene su verificación (inspección <abbr title="Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos">IEEE</abbr> 1028, pruebas unitarias/integración); la validación se planifica desde el SRS con criterios de aceptación y se ejecuta con usuarios (<abbr title="User Acceptance Testing – Pruebas de Aceptación del Usuario">UAT</abbr> – User Acceptance Testing).</p></div>
+<div class="alt"><h4>Alternativa B · Validación continua ágil</h4><p>Sprint Review con delegados estudiantiles cada 2 semanas (validación incremental) + <abbr title="Definition of Done – Definición de Terminado">DoD</abbr> (Definition of Done) que exige verificación automatizada en <abbr title="Configuration Item – Elemento de Configuración">CI</abbr> (Continuous Integration). QA independiente de la OGTI muestrea el cumplimiento del SQAP.</p></div>
+<h4>Justificación normativa</h4>
+<p>Diap. 27–29 (definiciones y preguntas clave); en la 2017 V&amp;V dejan de ser "soporte" y pasan a <b>Técnicos</b> (6.4.9 y 6.4.11), mientras QA y SCM pasan a <b>Gestión técnica</b> (6.3.8 y 6.3.5). IEEE 1012 (V&amp;V) y IEEE 730 (<abbr title="Software Quality Assurance – Aseguramiento de la Calidad del Software">SQA</abbr>) como normas complementarias.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b><abbr title="Defect Removal Efficiency – Eficiencia de Remoción de Defectos">DRE</abbr></b> (Defect Removal Efficiency) = defectos hallados antes de producción / (antes + después) × 100. Meta ≥ 90 %.</li>
+<li><b>% RF verificados</b> = RF con trazabilidad SRS→SDD→caso de prueba / RF totales × 100. Meta 100 %.</li>
+<li><b>Tasa de aceptación UAT</b> = casos de uso críticos aceptados / críticos totales. Meta 100 % antes del pase.</li>
+<li><b>Tiempo medio de matrícula</b> (validación de negocio). Meta ≤ 10 min.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes.</b> (1) "Validación = pruebas con el sistema funcionando": falso, A5 es dinámica y es verificación. (2) Asignar la numeración 2017 a "procesos de soporte": en 2017 <b>no hay</b> grupo de soporte. (3) Poner "Revisión conjunta" como proceso de 2017: no existe como proceso propio. (4) La diap. 28 numera Auditoría como "6" (orden de exposición), pero en el diagrama clásico es <b>6.7</b>. (5) Una misma actividad puede tener dos lecturas (A7 también es insumo de QA); se acepta si se justifica el <b>propósito</b> principal.</div>
+</details>
+</section>
+
+<section id="caso-3" class="caso">
+<h2>Caso 3 · Operación y mantenimiento de la plataforma SUNAT Operaciones en Línea</h2>
+<p class="origen">Origen: Diapositivas 20–23 (clase, Mazo A: Proceso de Operación, actividades y tipos de mantenimiento) · datos creados para el repaso</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<figure><a href="assets/img/s5-modelo/p23.webp" target="_blank" rel="noopener"><img src="assets/img/s5-modelo/p23.webp" width="1000" height="563" loading="lazy" decoding="async" alt="Tabla de los cuatro tipos de mantenimiento: correctivo, perfectivo, adaptativo y preventivo"></a><figcaption>Tipos de mantenimiento (diap. 23, Mazo A).</figcaption></figure>
+<p>La Intendencia Nacional de Sistemas de Información de la SUNAT (Superintendencia Nacional de Aduanas y de Administración Tributaria) opera SOL (SUNAT Operaciones en Línea). En abril (mes de la DJ – Declaración Jurada anual de renta) registra:</p>
+<ul>
+<li><b>S1</b> Se amplían a 40 los nodos del clúster y se configura el balanceador antes del 1 de abril.</li>
+<li><b>S2</b> El NOC (Network Operations Center) vigila con un <abbr title="Application Performance Monitoring – Monitoreo del rendimiento de aplicaciones">APM</abbr> (Application Performance Monitoring) el <abbr title="Toyota Production System – Sistema de Producción Toyota">TPS</abbr> (transacciones por segundo) y la tasa de HTTP 5xx.</li>
+<li><b>S3</b> La mesa de ayuda recibe 18 400 tickets; 62 % son dudas de uso del formulario virtual 709.</li>
+<li><b>S4</b> Se genera un informe diario de uso e incidentes para la alta dirección.</li>
+<li><b>S5</b> El cálculo de la deducción adicional de 3 UIT (Unidad Impositiva Tributaria) suma mal cuando hay gastos de arrendamiento: se corrige.</li>
+<li><b>S6</b> Se migra el servicio de firma digital a Java 21 porque el proveedor dejará de dar soporte a Java 8.</li>
+<li><b>S7</b> Se reduce el tiempo de carga del formulario de 6,2 s a 2,1 s; no había error funcional.</li>
+<li><b>S8</b> Se refactoriza el módulo de validación de RUC (Registro Único de Contribuyentes) con complejidad ciclomática 48 antes de que genere fallas.</li>
+<li><b>S9</b> Tras cada cambio se ejecuta una suite de regresión de 3 500 casos.</li>
+<li><b>S10</b> Se actualizan el manual técnico y el manual de usuario con los cambios S5–S8.</li>
+</ul>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Clasifique S1–S4 en las 5 actividades del Proceso de Operación (diap. 21) y diga quién es el responsable según la diap. 20.</li>
+<li>Clasifique S5–S8 por tipo de mantenimiento (diap. 23) y S9–S10 en las actividades de mantenimiento (diap. 22).</li>
+<li>Indique qué proceso de soporte invoca S9 y por qué esto demuestra la relación principal ↔ soporte.</li>
+<li>Proponga dos estrategias para reducir el 62 % de tickets de uso y sus <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Saturación de mesa de ayuda</td><td>Formulario poco autoexplicativo (no hubo validación de usabilidad)</td><td>S3: 62 % de 18 400 tickets son dudas de uso</td><td>Usabilidad / capacidad de interacción (aprendizaje, operabilidad – <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 25010)</td></tr>
+<tr><td>Error de cálculo tributario</td><td>Regla de negocio mal especificada o sin caso de prueba límite</td><td>S5</td><td>Adecuación funcional (corrección)</td></tr>
+<tr><td>Obsolescencia tecnológica</td><td>Dependencia de plataforma sin plan de ciclo de vida</td><td>S6</td><td>Portabilidad (adaptabilidad)</td></tr>
+<tr><td>Deuda técnica</td><td>Código con alta complejidad</td><td>S8: CC = 48</td><td>Mantenibilidad (analizabilidad, modificabilidad)</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 1:</b> S1 = preparar el entorno operativo; S2 = monitorear el sistema; S3 = atender consultas o incidentes; S4 = registrar y reportar datos. La actividad "ejecutar el software" es la operación normal de SOL durante la campaña. Responsable: <b>Gerente de Operaciones o Administrador de Sistemas</b> (diap. 20).</p>
+<p><b>Respuesta 2:</b> S5 <b>correctivo</b> (error presente); S6 <b>adaptativo</b> (nuevo entorno de <abbr title="Software – Software / soporte lógico">SW</abbr>); S7 <b>perfectivo</b> (mejora de rendimiento sin error); S8 <b>preventivo</b> (anticiparse a fallos). S9 = "verificación de que los cambios no afecten negativamente al SW" (regresión); S10 = "mantener la documentación actualizada".</p>
+<p><b>Respuesta 3:</b> S9 invoca <b>Verificación</b> (6.4 clásica / 7.2.4 <abbr title="Norma Técnica Peruana">NTP</abbr> 2016 / 6.4.9 en 2017) y S10 invoca <b>Documentación</b> (6.1 / 7.2.1 / 6.3.6). El proceso principal de Mantenimiento no "trae" sus propias pruebas: usa los procesos de soporte, que son transversales y "se ejecutan en paralelo" (diap. 25).</p>
+<div class="alt"><h4>Alternativa A · Mantenimiento perfectivo de UX (User Experience)</h4><p>Rediseño del formulario 709 con pruebas de usabilidad (5 usuarios por ronda, SUS – System Usability Scale), ayudas contextuales y mensajes de error accionables. Es mantenimiento perfectivo (6.4.13 en 2017) con validación (6.4.11).</p></div>
+<div class="alt"><h4>Alternativa B · Autoservicio en operación</h4><p>Base de conocimiento, chatbot con NLP (Natural Language Processing) y videos; analizar los tickets por categoría con Pareto (S2 del curso) para atacar el 20 % de causas que generan el 80 % de tickets. Es actividad de operación (soporte al usuario, 6.4.12).</p></div>
+<h4>Justificación normativa</h4>
+<p>Diap. 20–23; en la NTP 2016 Operación = 6.4.9 y Mantenimiento = 6.4.10 (grupo Técnicos); en 2017, 6.4.12 y 6.4.13. Tipos de mantenimiento: ISO/IEC/IEEE 14764 (correctivo y preventivo = "corrección"; adaptativo y perfectivo = "mejora").</p>
+<div class="norma"><h4>ISO/IEC/IEEE 14764:2022 (Mantenimiento del SW)</h4><p><b>Emisor:</b> ISO/IEC <abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr> + <abbr title="Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos">IEEE</abbr>. <b>Versión:</b> 2006, revisada en 2022. <b>Propósito:</b> detallar el proceso de mantenimiento de la 12207. <b>Estructura:</b> implementación del proceso, análisis de problemas y modificaciones, implementación de la modificación, revisión/aceptación, migración y retiro; 4 tipos (correctivo, adaptativo, perfectivo, preventivo). <b>Trampa:</b> perfectivo = mejora <b>sin</b> error; preventivo = corregir fallas <b>latentes</b> antes de que se manifiesten.</p></div>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>Tickets de uso por 1 000 declaraciones</b> = tickets categoría "uso" / declaraciones × 1 000. Meta: −40 % respecto a 2026.</li>
+<li><b>FCR</b> (First Contact Resolution) = tickets resueltos en el primer contacto / total. Meta ≥ 80 %.</li>
+<li><b>Tasa de regresión</b> = defectos introducidos por cambios / cambios liberados. Meta ≤ 2 %.</li>
+<li><b>Disponibilidad en campaña</b> ≥ 99,9 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes.</b> (1) S7 como "preventivo": no anticipa fallo alguno, mejora rendimiento → perfectivo. (2) S8 como "perfectivo": el objetivo es evitar fallas futuras → preventivo. (3) S6 como "correctivo": no hay error, cambia el entorno → adaptativo. (4) Creer que la mesa de ayuda es "mantenimiento": atender consultas es <b>operación</b>; solo si la consulta revela un defecto o pedido de cambio se abre una solicitud de mantenimiento.</div>
+</details>
+</section>
+<section id="caso-4" class="caso">
+<h2>Caso 4 · "El testing es débil": de la auditoría a la mejora organizativa (nivel 3 en V&amp;V)</h2>
+<p class="origen">Origen: Diapositivas 30–31 (clase, Mazo A: procesos organizativos y ejemplos de Infraestructura, Formación y Mejora) · datos creados para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>La diap. 31 dice: "después de auditar los proyectos, el equipo de Calidad decide que el proceso de <i>testing</i> es débil y lanza un proyecto de Mejora de Procesos para alcanzar el Nivel 3 de madurez en las prácticas de verificación y validación"; y "la empresa capacita a su equipo en metodologías ágiles (formación) y actualiza sus servidores de desarrollo (infraestructura)".</p>
+<p><b>Datos creados.</b> Una fábrica de <abbr title="Software – Software / soporte lógico">SW</abbr> limeña de 45 personas (clientes: Rímac Seguros y Plaza Vea) auditó 6 proyectos en 2026:</p>
+<div class="tabla"><table>
+<thead><tr><th>Proyecto</th><th>Defectos antes de entrega</th><th>Defectos reportados por el cliente (90 días)</th><th>% RF con caso de prueba</th><th>¿Ambiente de pruebas propio?</th></tr></thead>
+<tbody>
+<tr><td>P1 Rímac siniestros</td><td>120</td><td>40</td><td>55 %</td><td>No</td></tr>
+<tr><td>P2 Rímac cotizador</td><td>80</td><td>20</td><td>70 %</td><td>Sí</td></tr>
+<tr><td>P3 Plaza Vea app</td><td>150</td><td>75</td><td>40 %</td><td>No</td></tr>
+<tr><td>P4 Plaza Vea inventario</td><td>60</td><td>15</td><td>75 %</td><td>Sí</td></tr>
+<tr><td>P5 interno <abbr title="Human Resources – Recursos Humanos">RR. HH.</abbr></td><td>30</td><td>10</td><td>60 %</td><td>No</td></tr>
+<tr><td>P6 interno facturación</td><td>90</td><td>30</td><td>50 %</td><td>No</td></tr>
+</tbody></table></div>
+<p>Además: solo 8 de 45 personas tienen formación en pruebas; los servidores de desarrollo usan una versión de <abbr title="Base de Datos">BD</abbr> distinta a la de producción; no existe un procedimiento organizacional de pruebas (cada <abbr title="Jefe de Proyecto">JP</abbr> – Jefe de Proyecto decide).</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule el <abbr title="Defect Removal Efficiency – Eficiencia de Remoción de Defectos">DRE</abbr> de cada proyecto y el global; identifique la correlación con la cobertura de requisitos y con el ambiente de pruebas.</li>
+<li>Ubique cada acción (auditoría, capacitación, actualización de servidores, proyecto de mejora) en el proceso organizativo o de soporte correspondiente (clásica, <abbr title="Norma Técnica Peruana">NTP</abbr> 2016 y 2017).</li>
+<li>Explique qué significa "Nivel 3 de madurez en <abbr title="Verification and Validation – Verificación y Validación">V&amp;V</abbr>" y qué modelo lo define.</li>
+<li>Proponga dos planes de mejora con <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> y meta.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>Respuesta 1 (DRE = antes / (antes + cliente)):</b> P1 120/160 = 75,0 %; P2 80/100 = 80,0 %; P3 150/225 = 66,7 %; P4 60/75 = 80,0 %; P5 30/40 = 75,0 %; P6 90/120 = 75,0 %. Global = 530/720 = <b>73,6 %</b>. Los proyectos con ambiente propio (P2, P4) tienen DRE 80 % y las coberturas más altas (70–75 %); P3, con 40 % de cobertura y sin ambiente, tiene el peor DRE. Patrón coherente (no prueba causalidad con n = 6).</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Muchos defectos escapan al cliente</td><td>Sin procedimiento organizacional de pruebas (cada JP improvisa)</td><td>DRE global 73,6 %</td><td>Fiabilidad (madurez); <abbr title="Cost of Poor Quality – Costo de la Mala Calidad">CoPQ</abbr> (Cost of Poor Quality) por fallas externas</td></tr>
+<tr><td>Cobertura de requisitos baja</td><td>Casos de prueba no derivados del <abbr title="Software Requirements Specification – Especificación de Requisitos de Software">SRS</abbr>; sin <abbr title="Requirements Traceability Matrix – Matriz de trazabilidad de requisitos">RTM</abbr></td><td>40–75 %</td><td>Completitud de la verificación</td></tr>
+<tr><td>Ambiente no representativo</td><td>Infraestructura no gestionada</td><td>Versión de BD distinta; 4 de 6 sin ambiente</td><td>Validez de las pruebas</td></tr>
+<tr><td>Brecha de competencias</td><td>Sin plan de formación</td><td>8/45 = 17,8 % formados</td><td>Capacidad del personal</td></tr>
+</tbody></table></div>
+<div class="tabla"><table>
+<thead><tr><th>Acción</th><th>Clásica (diap. 18)</th><th>NTP 2016 (≡ 2008)</th><th>2017</th></tr></thead>
+<tbody>
+<tr><td>Auditar los 6 proyectos</td><td>6.7 Auditoría (apoyo)</td><td>7.2.7 Auditoría del SW</td><td>6.3.8 <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr></td></tr>
+<tr><td>Capacitar en pruebas/ágil</td><td>7.4 Formación / RR. HH. (organizativo)</td><td>6.2.4 Gestión de RR. HH.</td><td>6.2.4 Gestión de RR. HH.</td></tr>
+<tr><td>Actualizar servidores y crear ambiente de pruebas</td><td>7.2 Infraestructura</td><td>6.2.2 Gestión de la infraestructura</td><td>6.2.2 Gestión de la infraestructura</td></tr>
+<tr><td>Proyecto de mejora de procesos</td><td>7.3 Mejora</td><td>6.2.1 Gestión del modelo de ciclo de vida (evaluar y mejorar procesos)</td><td>6.2.1 Gestión del modelo de ciclo de vida</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 3:</b> "Nivel 3" es lenguaje de <b><abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr></b> (Capability Maturity Model Integration). En <abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> v1.3 escalonado, <abbr title="Verification – Verificación">VER</abbr> (Verification) y <abbr title="Validation – Validación">VAL</abbr> (Validation) son <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> (Process Areas) de <b>ML3 – Definido</b>: procesos estandarizados a nivel organización y adaptados por proyecto. La 12207 no define niveles; la diap. 30 dice que el proceso de Mejora "puede aplicar modelos como CMMI, <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 33000, <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> 9001". Puente con S6.</p>
+<div class="alt"><h4>Alternativa A · Ruta CMMI (ML2 → ML3)</h4><p>Primero estabilizar <abbr title="Configuration Management – Gestión de la Configuración">CM</abbr>, <abbr title="Process and Product Quality Assurance – Aseguramiento de la Calidad del Proceso y del Producto">PPQA</abbr> y <abbr title="Requirements Management – Gestión de Requisitos">REQM</abbr> (ML2), luego definir el proceso organizacional de pruebas (<abbr title="Organizational Process Definition – Definición del Proceso Organizacional">OPD</abbr>, <abbr title="Organizational Process Focus – Enfoque en el Proceso Organizacional">OPF</abbr>) y VER/VAL (ML3), con evaluación <abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr> (Standard CMMI Appraisal Method for Process Improvement) B intermedia y A final. Ventaja: reconocida por clientes corporativos. Costo alto.</p></div>
+<div class="alt"><h4>Alternativa B · Ruta ISO (12207 + 29119 + 33020)</h4><p>Definir el proceso organizacional de pruebas según ISO/IEC/IEEE 29119-2, adaptarlo a cada proyecto (tailoring de la 12207), y medir capacidad de 6.4.9/6.4.11 con ISO/IEC 33020 (meta: nivel de capacidad 3 "establecido"). Más barata y alineada con la norma de la sesión.</p></div>
+<div class="alt"><h4>Alternativa C · Mejora mínima PDCA (Plan-Do-Check-Act) en 2 proyectos piloto</h4><p>Plan: plantilla de RTM y ambiente de pruebas en contenedores (Docker) con la misma versión de BD; Do: piloto en P1 y P3; Check: DRE y cobertura a los 90 días; Act: institucionalizar. Para quien no puede pagar CMMI.</p></div>
+<h4>Justificación normativa</h4>
+<p>Diap. 30–31 (Gestión, Infraestructura, Mejora, Formación); NTP 2016 grupo <b>Habilitación Organizacional del Proyecto</b> (6.2.1–6.2.5); CMMI-DEV v1.3 (VER y VAL en ML3); ISO/IEC 33020 (niveles de capacidad 0–5).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>DRE organizacional</b>: meta ≥ 85 % en 12 meses (desde 73,6 %).</li>
+<li><b>Cobertura de requisitos</b> = RF con caso de prueba trazado / RF × 100. Meta ≥ 95 %.</li>
+<li><b>% personal formado en pruebas</b>: meta ≥ 60 % (27/45).</li>
+<li><b>% proyectos con ambiente de pruebas equivalente a producción</b>: meta 100 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes.</b> (1) Decir que la 12207 "tiene nivel 3": los niveles son de CMMI o de 15504/33020. (2) En CMMI v1.3, nivel 3 es de <b>madurez</b> (<abbr title="Maturity Level – Nivel de madurez (CMMI)">ML</abbr>) en representación escalonada; si se habla de un solo proceso (V&amp;V) en representación continua sería nivel de <b>capacidad</b> (<abbr title="Capability Level – Nivel de capacidad">CL</abbr>). (3) Promediar los DRE de cada proyecto (75,3 %) en lugar de sumar defectos (73,6 %): el promedio simple ignora el tamaño. (4) Ubicar "Formación" en 2017 como proceso propio: allí es parte de 6.2.4 Gestión de RR. HH.</div>
+</details>
+</section>
+
+<section id="caso-5" class="caso">
+<h2>Caso 5 · Caso de estudio de clase: proceso de pruebas funcionales en una consultora (Chinarro, 2019)</h2>
+<p class="origen">Origen: Diapositivas 32–33 (clase, Mazo A, caso de estudio) | Entregable Grupo 06 (Semana 05) | citado por el G3 (avance) · Fuente: <a href="https://hdl.handle.net/20.500.12672/10587">Chinarro Morales (2019), tesis UNMSM</a></p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Una consultora de <abbr title="Software – Software / soporte lógico">SW</abbr> de Lima tiene un área de <abbr title="Quality Control – Control de Calidad">QC</abbr> (Control de Calidad) que prueba <b>manualmente</b> y con <b>criterio personal</b>; los evaluadores conocen poco el negocio del cliente; las incidencias se registran en <b>Excel</b>; solo se prueban <b>flujos conocidos</b>; la ejecución manual de un plan toma <b>≈ 3 semanas</b>; los usuarios reportan incidencias <b>después de la entrega</b>. Las pruebas se hacían en los equipos de los desarrolladores.</p>
+<p>La autora define un proceso de pruebas funcionales "basado en la NTP-ISO/IEC 12207:2016 según el principio de verificación y validación" con 4 roles (Analista de Pruebas, Jefe de Proyecto, Programador, Usuario) y 9 actividades: (1) definir requerimientos (Lista de Requerimientos); (2) elaborar casos de prueba (escenario básico, alternos, excepciones); (3) evaluar casos de prueba (<abbr title="Jefe de Proyecto">JP</abbr> revisa matriz vs Lista de Requerimientos y autoriza); (4) preparar entorno similar a producción; (5) ejecutar casos con <b>Selenium <abbr title="Integrated Development Environment – Entorno de desarrollo integrado">IDE</abbr></b>; (6) pruebas con el usuario en su ambiente; (7) firmar acta de aceptación; (8) registrar y corregir errores (Matriz de Observaciones); (9) histórico de casos exitosos en <b>TestLink</b>.</p>
+<p>Piloto: Sistema Web de Cartas de Garantía (Java web), <b>2 suites, 7 casos</b> (4 de flujo básico, 3 alternos). Resultado: ejecución de <b>3 semanas → 1 semana</b>. No se midieron defectos antes/después.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Construya la tabla de problemas con causa raíz y un Ishikawa <abbr title="Manpower, Machinery, Methods, Materials, Measurement, Mother nature – Mano de obra, Maquinaria, Métodos, Materiales, Medición, Medio ambiente (categorías del Ishikawa)">6M</abbr>.</li>
+<li>Mapee las 9 actividades a procesos de la <abbr title="Norma Técnica Peruana">NTP</abbr> 2016 (≡ 2008) y de la 12207:2017; separe qué es Verificación y qué es Validación.</li>
+<li>Derive los escenarios y casos de prueba del caso de uso "Registrar usuario" (campos: código, nombre, rol).</li>
+<li>Construya una matriz de decisión ponderada UFT vs Selenium IDE vs MTM.</li>
+<li>Critique el <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> usado y proponga KPI de eficacia.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Defectos llegan a producción</td><td>Sin proceso de pruebas definido; solo flujos conocidos</td><td>Incidencias reportadas por usuarios tras la entrega</td><td>Adecuación funcional; fiabilidad (madurez)</td></tr>
+<tr><td>Pruebas lentas</td><td>Ejecución 100 % manual y repetitiva</td><td>≈ 3 semanas por plan</td><td>Eficiencia del proceso de pruebas</td></tr>
+<tr><td>Baja cobertura de escenarios</td><td>Requisitos no documentados; criterio personal</td><td>No se probaban alternos ni excepciones</td><td>Completitud de <abbr title="Verification and Validation – Verificación y Validación">V&amp;V</abbr></td></tr>
+<tr><td>Sin trazabilidad ni histórico</td><td>Excel como herramienta de gestión</td><td>Matriz Excel</td><td>Gestión de configuración e información</td></tr>
+<tr><td>Ambiente no representativo</td><td>Pruebas en el equipo del desarrollador</td><td>Necesidad de "entorno similar a producción"</td><td>Infraestructura</td></tr>
+</tbody></table></div>
+<p><b>Ishikawa 6M (efecto: defectos detectados por el cliente después de la entrega).</b> Método: pruebas manuales sin plan, solo flujos conocidos. Mano de obra: evaluadores sin conocimiento del negocio; programadores que prueban su propio código. Máquina: sin herramienta de automatización ni de gestión; sin ambiente separado. Materiales: requisitos no documentados; casos no derivados de casos de uso; incidencias en Excel. Medición: sin métricas de casos pasados/fallidos ni defectos por severidad. Medio ambiente: presión de cronograma; consultora pequeña; clientes públicos que exigen la NTP.</p>
+<p><b>Respuesta 2 (remapeo, la tesis/G6 usan numeración clásica):</b></p>
+<div class="tabla"><table>
+<thead><tr><th>Act.</th><th>G6 (clásica)</th><th>NTP 2016 (≡ 2008)</th><th>2017</th><th>V o V</th></tr></thead>
+<tbody>
+<tr><td>1 Definir requerimientos</td><td>5.3 Desarrollo*</td><td>7.1.2 Análisis de requisitos del SW</td><td>6.4.2 / 6.4.3</td><td>—</td></tr>
+<tr><td>2 Elaborar casos</td><td>5.3*</td><td>7.1.7 Pruebas de calificación (diseño)</td><td>6.4.9 (preparar la verificación) y 6.4.11 (preparar validación)</td><td>Preparación</td></tr>
+<tr><td>3 Evaluar casos (JP)</td><td>6.4 Verificación</td><td>7.2.4 Verificación del SW</td><td>6.4.9</td><td><b>Verificación</b> (casos vs requisitos)</td></tr>
+<tr><td>4 Preparar entorno</td><td>7.2 Infraestructura*</td><td>6.2.2 Gestión de infraestructura</td><td>6.2.2</td><td>—</td></tr>
+<tr><td>5 Ejecutar con Selenium</td><td>6.5 Validación</td><td>7.1.7 + 7.2.4</td><td>6.4.9</td><td><b>Verificación</b> (contra la especificación) — discrepa del G6</td></tr>
+<tr><td>6 Pruebas con el usuario</td><td>6.5</td><td>7.2.5 Validación del SW; 6.4.8 Soporte a la aceptación</td><td>6.4.11</td><td><b>Validación</b></td></tr>
+<tr><td>7 Acta de aceptación</td><td>6.5</td><td>6.4.8 Soporte a la aceptación</td><td>6.4.11 / 6.4.10 Transición</td><td><b>Validación</b></td></tr>
+<tr><td>8 Registrar y corregir</td><td>6.8 Solución de problemas*</td><td>7.2.8 Resolución de problemas</td><td>6.3.8 <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> (incidentes/problemas)</td><td>—</td></tr>
+<tr><td>9 Histórico en TestLink</td><td>6.2 Gestión de configuración*</td><td>7.2.2 <abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr>; 7.2.1 Documentación</td><td>6.3.5 / 6.3.6</td><td>—</td></tr>
+</tbody></table></div>
+<p>(*) = correspondencia interpretativa (el G6 la marcó así; solo V&amp;V las declara la autora).</p>
+<p><b>Respuesta 3 (técnica de la tesis: escenario = instancia del caso de uso):</b> Escenario 1 básico: datos válidos → "usuario registrado". Escenario 2 alterno: código ya existe → "Error: Código de Usuario ya registrado". Escenario 3 excepción: nombre vacío → "Ingrese el Nombre del usuario". Escenario 4 alterno: rol no seleccionado → mensaje de obligatoriedad. Escenario 5 límite: nombre con longitud máxima + 1 → rechazo. Depurar (paso 2): eliminar repetidos. Cada escenario = 1 caso con entradas exactas, salida esperada y condiciones (campos obligatorios, tipos de datos).</p>
+<p><b>Respuesta 4 (matriz ponderada, puntaje 1–5):</b></p>
+<div class="tabla"><table>
+<thead><tr><th>Criterio</th><th>Peso</th><th>UFT</th><th>Selenium IDE</th><th>MTM</th></tr></thead>
+<tbody>
+<tr><td>Costo de licencia</td><td>0,30</td><td>1</td><td>5</td><td>2</td></tr>
+<tr><td>Soporte del tipo de app (web Java)</td><td>0,25</td><td>5</td><td>4</td><td>4</td></tr>
+<tr><td>Multiplataforma (<abbr title="Operating System – Sistema Operativo">SO</abbr>)</td><td>0,15</td><td>1</td><td>5</td><td>1</td></tr>
+<tr><td>Curva de aprendizaje (graba/reproduce)</td><td>0,15</td><td>3</td><td>5</td><td>3</td></tr>
+<tr><td>Mantenibilidad de scripts</td><td>0,15</td><td>4</td><td>2</td><td>4</td></tr>
+<tr><td><b>Total ponderado</b></td><td>1,00</td><td><b>2,65</b></td><td><b>4,35</b></td><td><b>2,80</b></td></tr>
+</tbody></table></div>
+<p>Selenium IDE gana, coherente con la tesis. La tabla de la tesis (todo "Sí") no discriminaba; la ponderación sí.</p>
+<div class="alt"><h4>Alternativa A · La de la autora (V&amp;V + automatización graba/reproduce)</h4><p>Proceso de 9 actividades, Selenium IDE + TestLink, roles definidos. Barata y rápida de adoptar; débil en mantenibilidad de scripts ante cambios de <abbr title="User Interface – Interfaz de Usuario">UI</abbr> (User Interface).</p></div>
+<div class="alt"><h4>Alternativa B · Automatización mantenible en CI/CD</h4><p>Selenium WebDriver con patrón Page Object, ejecución de regresión en cada <i>merge</i> (Jenkins/GitLab <abbr title="Configuration Item – Elemento de Configuración">CI</abbr>), gestión de casos y defectos en Jira + Xray. Mayor costo inicial, menor costo de mantenimiento de la automatización.</p></div>
+<div class="alt"><h4>Alternativa C · Proceso ISO/IEC/IEEE 29119 + pruebas basadas en riesgo</h4><p>Priorizar casos por riesgo (impacto × probabilidad) y definir criterios de salida cuantitativos; útil si el tiempo de pruebas es limitado y no todo puede automatizarse.</p></div>
+<h4>Justificación normativa</h4>
+<p>NTP-ISO/IEC 12207:2016 (≡ 2008): Implementación de SW 7.1.7 Pruebas de calificación; Soporte de SW 7.2.4 Verificación, 7.2.5 Validación, 7.2.8 Resolución de problemas, 7.2.2 SCM; Técnicos 6.4.8 Soporte a la aceptación; Habilitación 6.2.2 Infraestructura. La norma no prescribe ciclo de vida ni herramienta (tailoring, Mazo B).</p>
+<div class="norma"><h4>NTP-ISO/IEC 12207:2016</h4><p><b>Emisor:</b> <abbr title="Instituto Nacional de Calidad (Perú)">INACAL</abbr> (Dirección de Normalización; <abbr title="Requirements Development – Desarrollo de Requisitos">RD</abbr> N.° 013-2016/INACAL-DN, 16-07-2016). <b>Versión:</b> 3.ª edición, adopción de <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 12207:2008. <b>Propósito:</b> marco de referencia de procesos del ciclo de vida del SW, obligatorio en el <abbr title="Sociedad Nacional de Industrias (Perú)">SNI</abbr> por la <abbr title="Resolución Ministerial">RM</abbr> 041-2017-PCM. <b>Estructura:</b> 7 grupos, 43 procesos: Acuerdo (2), Habilitación organizacional (5), Proyecto (7), Técnicos (11), Implementación de SW (7), Soporte de SW (8), Reutilización de SW (3); Anexo A: proceso de adaptación. <b>Trampa:</b> no es "NTP 12207:2017" ni tiene 30 procesos; la guía del Mazo B lista solo 6 grupos (omite Implementación de SW).</p></div>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>KPI usado por la autora: <b>tiempo de ejecución</b> = (3 − 1)/3 = <b>−66,7 %</b>. Es KPI de <b>eficiencia</b>, no de eficacia.</li>
+<li><b>DDP</b> (Defect Detection Percentage) = defectos detectados en pruebas / (en pruebas + post-entrega) × 100. Meta ≥ 90 %. Ataca el problema central (incidencias post-entrega).</li>
+<li><b>Densidad de defectos post-release</b> = defectos en 90 días / <abbr title="Kilo Lines of Code – Miles de Líneas de Código">KLOC</abbr> (miles de líneas de código) o / PF (puntos de función). Meta: −50 % vs línea base.</li>
+<li><b>% de casos alternos/excepción</b> = casos no básicos / total. Meta ≥ 40 % (en el piloto: 3/7 = 42,9 %).</li>
+<li><b>Tasa de reutilización</b> de casos desde TestLink en mantenimientos. Meta ≥ 70 %.</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<div class="tabla"><table>
+<thead><tr><th>Aspecto</th><th>G6 (entregable completo sobre Chinarro)</th><th>G3 (lo cita en su avance MPCH)</th></tr></thead>
+<tbody>
+<tr><td>Edición de la norma</td><td>NTP 2016, pero con numeración clásica 1995 (5.3, 6.4, 6.5, 6.8, 7.2) tomada de la diap. 18</td><td>Mapea a 2017 (6.4.9, 6.4.11, 6.3.8)</td></tr>
+<tr><td>Rigor interpretativo</td><td>Marca con (*) lo inferido: buena práctica</td><td>Indica "análisis de los autores del informe"</td></tr>
+<tr><td>V vs V</td><td>Clasifica la ejecución con Selenium como Validación (discutible)</td><td>Usa Chinarro como técnica de V&amp;V y automatización (6.3.8 QA en su Tabla 18)</td></tr>
+<tr><td>Tamaño del proceso</td><td>9 actividades</td><td>Lo describe con "18 actividades" (discrepancia a verificar en la tesis)</td></tr>
+<tr><td>Casos de éxito</td><td>1 artículo externo (Mas et al., 2020) + 2 tomados de la propia tesis (CES Uruguay, MANTEMA)</td><td>—</td></tr>
+<tr><td>Limitaciones</td><td>Declara: 1 app, 7 casos, sin diseño experimental (mérito)</td><td>—</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes.</b> (1) Clasificar toda ejecución de casos como validación: si el referente es la Lista de Requerimientos (especificación) es <b>verificación</b>; validación es con el usuario, en su ambiente, contra su necesidad. (2) Presentar el −67 % como "mejora de calidad": es mejora de <b>eficiencia</b>; la calidad del producto no se midió. (3) Generalizar desde 7 casos. (4) Copiar la numeración 5.x/6.x/7.x de la diap. 18 diciendo que es la NTP 2016. (5) No hay una única respuesta: G6 privilegió fidelidad a la clase; una solución con 29119 o <abbr title="Continuous Integration / Continuous Delivery-Deployment – Integración y Entrega/Despliegue Continuos">CI/CD</abbr> es igual de válida si se justifica con tailoring.</div>
+</details>
+</section>
+
+<section id="caso-6" class="caso">
+<h2>Caso 6 · Corregir un informe de investigación contra la rúbrica de la Práctica S5</h2>
+<p class="origen">Origen: Mazo C (enunciado "Sesión 05 – Práctica · Norma de Calidad <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 12207:2017", clase) · borrador ficticio creado para el repaso</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>La práctica pide: elegir un caso de estudio (<abbr title="Scientific Electronic Library Online – Biblioteca científica electrónica en línea">SciELO</abbr> – Scientific Electronic Library Online, WoS – Web of Science, Scopus, tesis, Google Scholar) y un informe con Cap. I Planteamiento del problema (realidad problemática, definición, objetivos general y específicos, delimitación, justificación); Cap. <abbr title="Implementation Infrastructure – Infraestructura de Implementación (Practice Area V2.0)">II</abbr> Estado del arte (técnicas previas con <b>una tabla/figura de la más representativa</b>, herramientas, <b>3 casos de éxito</b> de distintos autores); Cap. III Metodología <b>desagregada por proceso → actividades → tareas de la ISO/IEC 12207:2017</b>; Cap. IV Conclusiones y recomendaciones; Referencias <abbr title="American Psychological Association – Asociación Americana de Psicología (formato de citas v7)">APA</abbr> 7. Entrega por el <abbr title="Jefe de Proyecto">JP</abbr> el 12/10/2026 hasta las 21:59.</p>
+<p>El <b>Grupo 99</b> (ficticio) envía un borrador sobre "Sistema de citas del Hospital Dos de Mayo" con estas características:</p>
+<ul>
+<li><b>B1</b> El caso es una tesis que <b>propone</b> un sistema de citas; nunca menciona la 12207 (el grupo "la aplica" por su cuenta).</li>
+<li><b>B2</b> PG: "¿Qué es la <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> 12207?"; OG: "Conocer la norma".</li>
+<li><b>B3</b> Cap. II: 5 técnicas descritas en texto, ninguna tabla ni figura; casos de éxito: 2 artículos del mismo autor y 1 blog.</li>
+<li><b>B4</b> Cap. III: tabla con "Proceso de Desarrollo → programar → codificar" y "6.5 Validación → probar".</li>
+<li><b>B5</b> Conclusión: "la norma es muy útil"; recomendaciones sin vínculo con los hallazgos.</li>
+<li><b>B6</b> Referencias con formato APA 6 y sin DOI/handle.</li>
+<li><b>B7</b> El correo lo envía un integrante que no es JP, el 12/10/2026 a las 23:40.</li>
+</ul>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Construya la rúbrica implícita del enunciado (criterios, evidencia, puntaje) y califique el borrador.</li>
+<li>Reescriba PG/OG y un fragmento correcto del Cap. III (un proceso con actividad y 3 tareas).</li>
+<li>Proponga dos caminos para salvar el informe y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> de calidad del entregable.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Criterio de la rúbrica afectado</th></tr></thead>
+<tbody>
+<tr><td>Caso que no aplica la norma</td><td>Selección de caso sin filtro "aplica 12207"</td><td>B1</td><td>(a) Pertinencia del caso</td></tr>
+<tr><td>Problema/objetivo conceptuales, no de investigación aplicada</td><td>Confundir "estudiar la norma" con "analizar su aplicación"</td><td>B2</td><td>Cap. I coherencia</td></tr>
+<tr><td>Estado del arte sin técnica representativa visual y casos débiles</td><td>Búsqueda no sistemática</td><td>B3</td><td>(b) tabla/figura; (c) 3 artículos de autores distintos</td></tr>
+<tr><td>Desagregado con edición equivocada y sin tareas</td><td>Usar la numeración clásica (6.5) y verbos genéricos</td><td>B4</td><td>(d) proceso → actividad → tarea con numeración 2017</td></tr>
+<tr><td>Conclusiones no responden a objetivos</td><td>Ausencia de matriz de consistencia</td><td>B5</td><td>(e)</td></tr>
+<tr><td>Referencias y entrega fuera de norma</td><td>Sin control de calidad del entregable (sin revisión de pares)</td><td>B6, B7</td><td>(f) APA 7; cumplimiento de plazo</td></tr>
+</tbody></table></div>
+<div class="tabla"><table>
+<thead><tr><th>Criterio</th><th>Peso</th><th>Nota borrador (0–4)</th></tr></thead>
+<tbody>
+<tr><td>(a) El caso aplica realmente la 12207</td><td>15 %</td><td>0</td></tr>
+<tr><td>Cap. I completo y coherente (PG/OG/OE, delimitación, justificación)</td><td>15 %</td><td>1</td></tr>
+<tr><td>(b) Técnica representativa con tabla/figura</td><td>10 %</td><td>0</td></tr>
+<tr><td>(c) 3 casos de éxito de autores distintos, revisados por pares</td><td>15 %</td><td>1</td></tr>
+<tr><td>(d) Cap. III a nivel tarea con numeración 2017</td><td>25 %</td><td>1</td></tr>
+<tr><td>(e) Conclusiones ↔ objetivos; recomendaciones ↔ hallazgos</td><td>10 %</td><td>1</td></tr>
+<tr><td>(f) APA 7 + entrega por el JP en plazo</td><td>10 %</td><td>0</td></tr>
+<tr><td><b>Ponderado</b></td><td></td><td>0,15·0+0,15·1+0,10·0+0,15·1+0,25·1+0,10·1+0,10·0 = <b>0,80/4 = 20 %</b></td></tr>
+</tbody></table></div>
+<p><b>Respuesta 2.</b> PG: "¿De qué manera se aplicaron los procesos técnicos y de gestión técnica de la ISO/IEC/IEEE 12207:2017 en el desarrollo del sistema de citas X para reducir el tiempo de espera de asignación de citas?". OG: "Analizar la aplicación de…". Fragmento de Cap. III: <b>6.4.11 Validación</b> → actividad "Realizar la validación" → tareas: (1) ejecutar <abbr title="User Acceptance Testing – Pruebas de Aceptación del Usuario">UAT</abbr> con 15 pacientes y 3 admisionistas en el ambiente de admisión; (2) registrar resultados vs criterios de aceptación de la HU-03 "reservar cita"; (3) firmar acta de conformidad por el jefe de admisión. Artefacto: acta UAT.</p>
+<div class="alt"><h4>Alternativa A · Cambiar de caso</h4><p>Buscar en repositorios (Cybertesis <abbr title="Universidad Nacional Mayor de San Marcos">UNMSM</abbr>, RENATI – Registro Nacional de Trabajos de Investigación, Alicia de CONCYTEC) tesis cuyo título o metodología declare la <abbr title="Norma Técnica Peruana">NTP</abbr> 2016 o la 12207:2017 (como Chinarro 2019 o Valderrama Zapata 2026). Es lo que hizo el G3 al pasar de MPCH (método propuesto) a SINEACE (implementado con KPI).</p></div>
+<div class="alt"><h4>Alternativa B · Conservar el caso como "estudio de mapeo retrospectivo"</h4><p>Declarar explícitamente que el autor no usó la norma y que el informe <b>mapea</b> sus actividades a la 12207:2017 con la escala de cobertura de Núñez Marín et al. (100/50/25/0), marcando todo con (*) interpretativo. Más débil, pero honesto.</p></div>
+<h4>Justificación normativa</h4><p>Enunciado del Mazo C; la jerarquía <b>proceso → actividad → tarea</b> es propia de la 12207 (diap. 8 de la Semana 04: título, propósito, resultados, actividades, tareas); APA 7.ª edición.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>Cumplimiento de rúbrica</b> = puntaje ponderado / 4 × 100. Meta ≥ 85 %.</li>
+<li><b>% de procesos del Cap. III con ≥ 3 tareas y artefacto</b>. Meta 100 %.</li>
+<li><b>% de referencias APA 7 con DOI/handle</b>. Meta ≥ 90 %.</li>
+<li><b>Puntualidad</b>: entrega ≤ 21:59 del 12/10 por el JP (sí/no).</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes.</b> (1) El encabezado del Mazo C dice "CURSO: Investigación Formativa" (error de plantilla): la práctica es de Calidad de Software. (2) El enunciado pide la <b>2017</b>; si el caso usa la NTP 2016 hay que <b>mapear</b> y decirlo, no mezclar. (3) Un informe "aplicando la norma" a un caso que nunca la usó no es aplicación sino interpretación: hay que declararlo. (4) "3 casos de éxito" ≠ 3 citas de la misma tesis.</div>
+</details>
+</section>
+
+<section id="caso-7" class="caso">
+<h2>Caso 7 · SINEACE Móvil: Scrum + ISO/IEC/IEEE 12207:2017 bajo una directiva basada en la NTP 2016</h2>
+<p class="origen">Origen: Entregable G3 (Semana 05, versión final) · Fuente del caso: <a href="https://hdl.handle.net/20.500.14005/17930">Valderrama Zapata (2026), TSP (Trabajo de Suficiencia Profesional), USIL</a></p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>El <b>SINEACE</b> (Sistema Nacional de Evaluación, Acreditación y Certificación de la Calidad Educativa; Ley N.° 28740, sede San Isidro, 167 trabajadores) informa qué programas universitarios están <b>acreditados</b> (DEA – Dirección de Evaluación y Acreditación, datos en el <b>SIGIA</b> – Sistema de Gestión de la Información de Aseguramiento de la Calidad) y qué personas <b>certificaron competencias</b> (DEC – Dirección de Evaluación y Certificación, datos en el <b>SIGICE</b>). La información está en <b>resoluciones PDF</b> estáticas y en portales no <i>responsive</i>; no hay buscador unificado; las consultas se atienden por teléfono, correo y presencialmente (Uaged – Unidad de Atención al Ciudadano y Gestión Documentaria) con un costo estimado de <b>S/ 45 000/año</b>.</p>
+<p>La <b>Otic</b> (Oficina de Tecnologías de la Información y Comunicaciones) se rige por la <b>Directiva N.° 000006-2020-SINEACE/P-ST</b>, "basada en la NTP-ISO/IEC 12207:2016 y Scrum", con formatos F-OTIC-27 (<abbr title="Software Requirements Specification (SRS) – Especificación de Requisitos de Software">ERS</abbr> – Especificación de Requerimientos de <abbr title="Software – Software / soporte lógico">SW</abbr>), F-OTIC-30 (diseño de arquitectura), F-OTIC-33 (registro de pruebas), F-OTIC-35 (acta de conformidad <abbr title="User Acceptance Testing – Pruebas de Aceptación del Usuario">UAT</abbr> – User Acceptance Testing), F-OTIC-36/37 (plan y acta de pase a producción). El autor declara alinear el proyecto con la <b><abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr>/IEEE 12207:2017</b>.</p>
+<p>Datos del proyecto (6 meses; lanzamiento Android en sep-2024):</p>
+<ul>
+<li><abbr title="Work Breakdown Structure (WBS) – Estructura de Desglose del Trabajo">EDT</abbr> (Estructura de Desglose del Trabajo, <abbr title="Work Breakdown Structure – Estructura de desglose del trabajo (EDT)">WBS</abbr> – Work Breakdown Structure): <b>3 fases y 8 actividades</b>. F1 Diagnóstico y requerimientos (F1-A1 análisis de procesos con <abbr title="Business Process Model and Notation – Modelo y notación de procesos de negocio">BPMN</abbr> – Business Process Model and Notation 2.0; F1-A2 <abbr title="User Story – Historia de Usuario">HU</abbr> – Historias de Usuario validadas con INVEST). F2 Diseño y desarrollo (F2-A1 arquitectura 3 capas, SOA – Service-Oriented Architecture, SSOT – Single Source of Truth; F2-A2 <abbr title="User Interface – Interfaz de Usuario">UI</abbr>/UX con Material Design 3; F2-A3 <abbr title="Base de Datos">BD</abbr> SQLite/Room + <abbr title="Application Programming Interface – Interfaz de programación de aplicaciones">API</abbr> REST con Retrofit). F3 Validación y despliegue (F3-A1 pruebas piloto; F3-A2 capacitación; F3-A3 despliegue con AAB – Android App Bundle firmado y <i>Phased Rollout</i> en Google Play).</li>
+<li>Product Backlog: HU-01 geolocalización (pins en radio de 5 km), HU-02 búsqueda y filtros, HU-03 detalle institucional, HU-04 certificación, HU-05 transparencia/FAQ.</li>
+<li>Diccionario de datos: <code>tb_programa</code> (id_programa, id_institucion FK, nombre_programa, resolucion_vig, <b>estado_acredit BOOLEAN</b>); no hay campo de fecha de vencimiento.</li>
+<li>Registro de defectos (F-OTIC-33): BUG-014 la app se cierra si el usuario deniega el permiso GPS (Alta); BUG-022 latencia &gt; 5 s con red 3G (Media); BUG-027 <i>clipping</i> de texto en pantallas &lt; 5" (Baja); BUG-031 la caché SQLite seguía mostrando como vigente un programa cuya acreditación caducó en el servidor (<b>Crítica</b>).</li>
+<li>Resultados: cobertura de código <b>87 %</b> (umbral 80 %) reportada con pruebas de <b>caja negra</b> y estrés, sin herramienta de cobertura declarada; 100 % de defectos críticos/altos mitigados; 100 % de conformidad UAT; capacitación 32/33 asistentes; ≈ <b>5 000 descargas</b> el primer mes ("5 000 consultas absorbidas").</li>
+<li>Finanzas: inversión S/ 37 000; ahorro proyectado S/ 32 000/año creciendo 5 %/año; costos de mantenimiento/nube S/ 4 500/año (+5 %); COK (Costo de Oportunidad del Capital) 10 %; FCN (Flujo de Caja Neto) −37 000 / 27 500 / 28 875 / 30 318,75. El informe reporta VAN (Valor Actual Neto) S/ 34 642,57, TIR (Tasa Interna de Retorno) 57,5 % y payback 1,34 años.</li>
+<li>El G3 cuenta <b>15 procesos</b> de la 2017 evidenciados (4 de gestión técnica: 6.3.1, 6.3.2, 6.3.3, 6.3.8; 11 técnicos: 6.4.1–6.4.5 y 6.4.7–6.4.12). No hay proceso formal de mantenimiento (6.4.13) ni de <abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr> (6.3.5), aunque el flujo de caja presupuesta mantenimiento.</li>
+</ul>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Construya la tabla de problemas con causa raíz y un Ishikawa <abbr title="Manpower, Machinery, Methods, Materials, Measurement, Mother nature – Mano de obra, Maquinaria, Métodos, Materiales, Medición, Medio ambiente (categorías del Ishikawa)">6M</abbr> (el G3 usó árbol de problemas).</li>
+<li>Mapee las 8 actividades de la EDT y los elementos Scrum a procesos de la 12207:2017 y de la <abbr title="Norma Técnica Peruana">NTP</abbr> 2016 (≡ 2008), hasta el nivel tarea para tres procesos.</li>
+<li>Calcule la cobertura de la norma (total, técnicos, gestión técnica) e identifique tres procesos ausentes críticos con su riesgo.</li>
+<li>Clasifique los cuatro BUG por característica ISO/IEC 25010 y proponga la acción <b>preventiva</b> (no solo correctiva) del BUG-031.</li>
+<li>Verifique VAN, TIR y payback; critique la equivalencia "descarga = consulta" y el "87 % de cobertura".</li>
+<li>Proponga <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> de 6.3.7 Medición con fórmula y meta.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Información de acreditación dispersa y desactualizada</td><td>Datos publicados como PDF; sin servicio que exponga SIGIA en tiempo real</td><td>Matriz As-Is/To-Be (Tabla 3 de la tesis)</td><td>Calidad de datos: exactitud y actualidad (ISO/IEC 25012); adecuación funcional (ISO/IEC 25010)</td></tr>
+<tr><td>Portales no usables en móvil</td><td>Sin canal móvil ni diseño <i>responsive</i></td><td>Limitación práctica 2.7.2</td><td>Capacidad de interacción (usabilidad); flexibilidad/portabilidad</td></tr>
+<tr><td>Alto costo de atención manual</td><td>Dependencia de procesos manuales</td><td>≈ S/ 45 000/año</td><td><abbr title="Cost of Poor Quality – Costo de la Mala Calidad">CoPQ</abbr> (Cost of Poor Quality – Costo de la Mala Calidad) del proceso de servicio</td></tr>
+<tr><td>Datos caducos mostrados como vigentes (BUG-031)</td><td>Diseño: estado booleano sin fecha de vencimiento + caché local tratada como "verdad" temporal (contradice la SSOT real, que es SIGIA)</td><td>Diccionario de datos; BUG-031 crítico</td><td>Adecuación funcional (corrección); riesgo reputacional en una entidad de calidad</td></tr>
+<tr><td>Brecha conceptual de la Otic</td><td>Silos Otic–DEA–DEC</td><td>Limitación teórica 2.7.1</td><td>Proceso 6.4.2 (partes interesadas)</td></tr>
+<tr><td>Mantenimiento presupuestado pero no gestionado</td><td>6.4.13 y 6.3.5 no definidos</td><td>S/ 4 500/año en el flujo; sin proceso</td><td>Mantenibilidad; sostenibilidad del servicio</td></tr>
+<tr><td>Beneficio no demostrable</td><td>Sin 6.3.7 Medición ni línea base de consultas/tiempos</td><td>"5 000 descargas = 5 000 consultas"</td><td>Validez de la evidencia (no se puede probar la mejora)</td></tr>
+</tbody></table></div>
+<p><b>Ishikawa 6M</b> (efecto: <i>acceso limitado y poco confiable a la información de acreditación y certificación</i>). <b>Método:</b> consulta manual por teléfono/correo; publicación por resoluciones PDF; sin buscador. <b>Mano de obra:</b> Otic con brecha del negocio; sobrecarga (apoyo externo); mesa de ayuda saturada. <b>Máquina:</b> portales no <i>responsive</i>; sin app; sin capa de presentación sobre SIGIA/SIGICE; sin API Gateway. <b>Materiales:</b> datos en PDF; BD que tuvo que reorganizarse; registros no actualizados. <b>Medición:</b> sin KPI de consultas ni tiempos; costo S/ 45 000 solo estimado. <b>Medio ambiente:</b> Política Nacional de Gobierno Digital al 2030 y DL (Decreto Legislativo) N.° 1412; sin presupuesto para App Store; baja cultura digital.</p>
+<p><b>Respuesta 2 · mapeo EDT/Scrum → procesos.</b></p>
+<div class="tabla"><table>
+<thead><tr><th>Actividad EDT / elemento Scrum</th><th>ISO/IEC/IEEE 12207:2017</th><th>NTP 2016 (≡ 2008)</th></tr></thead>
+<tbody>
+<tr><td>EDT + Gantt + Sprint Backlog</td><td>6.3.1 Planificación del proyecto</td><td>6.3.1 Planificación del proyecto (grupo Proyecto)</td></tr>
+<tr><td>F1-A1 análisis As-Is/To-Be en BPMN</td><td>6.4.1 Análisis del negocio o misión</td><td>6.4.1 Definición de requisitos de las partes interesadas</td></tr>
+<tr><td>F1-A2 HU, INVEST, criterios UAT, F-OTIC-27</td><td>6.4.2 + 6.4.3</td><td>6.4.1 + 6.4.2 Análisis de requisitos del sistema + 7.1.2 Análisis de requisitos del SW</td></tr>
+<tr><td>F2-A1 arquitectura 3 capas, F-OTIC-30</td><td>6.4.4 Definición de la arquitectura</td><td>6.4.3 Diseño arquitectónico del sistema + 7.1.3 Diseño arquitectónico del SW</td></tr>
+<tr><td>F2-A2 UI/UX, F2-A3 diccionario y endpoints</td><td>6.4.5 Definición del diseño</td><td>7.1.4 Diseño detallado del SW</td></tr>
+<tr><td>Codificación Kotlin/Retrofit/Room</td><td>6.4.7 Implementación</td><td>7.1.5 Construcción del SW</td></tr>
+<tr><td>Conexión con SIGIA/SIGICE</td><td>6.4.8 Integración</td><td>7.1.6 Integración del SW + 6.4.5 Integración del sistema</td></tr>
+<tr><td>F3-A1 caja negra, estrés, F-OTIC-33</td><td>6.4.9 Verificación</td><td>7.1.7 Pruebas de calificación del SW + 7.2.4 Verificación</td></tr>
+<tr><td>F3-A1 UAT con <abbr title="Product Owner – Dueño del producto (Scrum)">PO</abbr> y direcciones, F-OTIC-35; Sprint Review</td><td>6.4.11 Validación</td><td>7.2.5 Validación + 6.4.8 Soporte a la aceptación</td></tr>
+<tr><td>F3-A2 capacitación + F3-A3 AAB, Phased Rollout, F-OTIC-36/37</td><td>6.4.10 Transición</td><td>6.4.7 Instalación del SW + 6.4.8 Soporte a la aceptación</td></tr>
+<tr><td>Soporte niveles 1 y 2, guía in-app</td><td>6.4.12 Operación</td><td>6.4.9 Operación del SW</td></tr>
+<tr><td>Daily y retrospectivas</td><td>6.3.2 Evaluación y control (daily); <b>6.2.1</b> Gestión del modelo de ciclo de vida (retrospectiva = mejora del proceso)</td><td>6.3.2 Evaluación y control; 6.2.1 Gestión del modelo de ciclo de vida</td></tr>
+<tr><td>Formatos obligatorios + "100 % críticos/altos mitigados antes del pase"</td><td>6.3.8 Aseguramiento de la calidad</td><td>7.2.3 Aseguramiento de la calidad del SW</td></tr>
+</tbody></table></div>
+<p><b>Nivel tarea (tres procesos):</b> <b>6.4.9 Verificación</b> — T1 preparar estrategia (caja negra + estrés); T2 instalar RC (Release Candidate) en Android físicos; T3 ejecutar y registrar en F-OTIC-33; T4 priorizar y corregir defectos; T5 reverificar y cerrar. <b>6.4.11 Validación</b> — T1 acordar criterios de aceptación por HU con el PO (Product Owner); T2 ejecutar UAT con DEA/DEC; T3 validar usabilidad de mapa, filtros y certificación; T4 firmar F-OTIC-35. <b>6.4.10 Transición</b> — T1 plan de pase (F-OTIC-36); T2 capacitar Otic (5/5), DEA (19/20), mesa de ayuda (8/8) en <i>staging</i>; T3 firmar AAB con Keystore; T4 <i>Phased Rollout</i>; T5 acta F-OTIC-37 y transferencia a operaciones.</p>
+<p><b>Respuesta 3 · cobertura.</b> Total: 15/30 = <b>50 %</b>. Técnicos: 11/14 = <b>78,6 %</b>. Gestión técnica: 4/8 = <b>50 %</b>. Acuerdo 0/2, habilitadores 0/6 (o 1/6 si se acepta la retrospectiva como 6.2.1). Con la escala de Núñez Marín et al. (100/50/25/0) la cobertura técnica sería menor si varios procesos solo están "parcialmente" cubiertos (p. ej., 6.4.12 al 50 %).</p>
+<div class="tabla"><table>
+<thead><tr><th>Proceso ausente</th><th>Riesgo concreto en SINEACE</th><th>Prioridad</th></tr></thead>
+<tbody>
+<tr><td>6.4.13 Mantenimiento</td><td>El "Plan de Gobierno y Transformación Digital 2025–2027" pide actualizar la app en 2026; sin proceso, cada cambio (iOS, SDK, Android nuevo) es improvisado</td><td>1</td></tr>
+<tr><td>6.3.5 Gestión de la configuración (SCM)</td><td>Sin líneas base ni control de versiones del AAB y de la API → no se sabe qué versión tiene el ciudadano; regresiones como BUG-031</td><td>1</td></tr>
+<tr><td>6.3.7 Medición</td><td>No se puede demostrar el ahorro S/ 32 000 ni el uso real</td><td>2</td></tr>
+<tr><td>6.3.4 Gestión de riesgos</td><td>Riesgos de saturación, presupuesto y datos caducos se manejaron de forma reactiva</td><td>2</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 4 · BUG vs ISO/IEC 25010:</b> BUG-014 → fiabilidad (tolerancia a fallos); BUG-022 → eficiencia de desempeño (comportamiento temporal); BUG-027 → capacidad de interacción (estética de UI) y flexibilidad (adaptabilidad); BUG-031 → adecuación funcional (corrección funcional). <b>Acción preventiva del BUG-031</b> (atacar la causa, no el síntoma): (a) añadir <code>fecha_vencimiento</code> y calcular la vigencia en el cliente (vigente = hoy ≤ fecha_vencimiento) aunque no haya red; (b) TTL (Time To Live) de caché ≤ 24 h con invalidación por <i>ETag</i>; (c) mostrar "dato actualizado al dd/mm" (transparencia); (d) prueba de regresión automatizada "programa caducado" en el pipeline; (e) registrar el patrón en 6.2.6 Gestión del conocimiento.</p>
+<p><b>Respuesta 5 · verificación financiera.</b> VAN = −37 000 + 27 500/1,1 + 28 875/1,1² + 30 318,75/1,1³ = −37 000 + 25 000 + 23 863,64 + 22 778,93 = <b>S/ 34 642,57</b> ✔. TIR: con r = 57,2 % el VAN ≈ 0 → el 57,5 % es redondeo. Payback: tras el año 1 faltan 9 500; 9 500/28 875 × 12 = 3,95 meses → <b>1,33 años</b> (el resumen dice 1,34: inconsistencia menor). Si el beneficio no creciera 5 %/año, el VAN baja a ≈ S/ 31 388. Críticas: (i) <b>descarga ≠ consulta</b>: una descarga puede no usarse nunca o generar cientos de consultas; hay que medir sesiones y consultas por la API; (ii) la <b>cobertura de código</b> es métrica de <b>caja blanca</b> (requiere instrumentar con JaCoCo u otra); con caja negra solo puede reportarse cobertura de requisitos/HU; (iii) el ahorro es proyectado, no medido.</p>
+<div class="alt"><h4>Alternativa A · Cerrar brechas dentro del marco actual (Scrum + directiva)</h4>
+<p>Agregar a la directiva dos procedimientos: <b>gestión de cambios y versiones</b> (Gitflow, etiquetas semánticas, línea base por <i>release</i>, <abbr title="Functional Configuration Audit – Auditoría funcional de configuración">FCA</abbr>/PCA – Functional/Physical Configuration Audit) → 6.3.5; y <b>mantenimiento</b> por tipo (correctivo, adaptativo, perfectivo, preventivo, según ISO/IEC/IEEE 14764) → 6.4.13. Añadir un tablero de KPI (6.3.7) alimentado por Google Play Console y los logs del API Gateway. Bajo costo; mantiene la cultura ágil.</p></div>
+<div class="alt"><h4>Alternativa B · DevOps/DevSecOps con CI/CD y observabilidad (lo que recomienda el autor y el caso PUCP de Davila Meneses)</h4>
+<p>Pipeline <abbr title="Continuous Integration / Continuous Delivery-Deployment – Integración y Entrega/Despliegue Continuos">CI/CD</abbr> (Continuous Integration/Continuous Delivery) con pruebas unitarias instrumentadas (cobertura real), <abbr title="Static Application Security Testing – Pruebas Estáticas de Seguridad de Aplicaciones">SAST</abbr> (Static Application Security Testing) y prueba de regresión del BUG-031; despliegue automatizado por etapas; observabilidad (logs estandarizados, métricas, trazas). Cubre a la vez 6.3.5, 6.4.9, 6.4.10, 6.4.13 y 6.3.7. Mayor inversión inicial y formación (6.2.4).</p></div>
+<div class="alt"><h4>Alternativa C · Evaluar capacidad antes de mejorar</h4>
+<p>Aplicar un diagnóstico ISO/IEC 33020/15504 (escala N/P/L/F) a 6.3.5, 6.3.8, 6.4.9 y 6.4.13, priorizar con matriz impacto–esfuerzo y mejorar en ciclos <abbr title="Plan-Do-Check-Act – Planificar-Hacer-Verificar-Actuar (PHVA)">PDCA</abbr> (Plan-Do-Check-Act). Es la ruta de Horna Merino (2015) y conecta con la S6.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC/IEEE 12207:2017: la norma no prescribe ciclo de vida, por lo que Scrum es válido si se documenta el <b>tailoring</b> (Anexo A) y se cumplen propósito y resultados de cada proceso seleccionado. La conformidad "adaptada" exige justificar las exclusiones: el informe no justifica la ausencia de 6.3.5 ni de 6.4.13. La Directiva SINEACE descansa en la NTP 2016 (obligatoria por <abbr title="Resolución Ministerial">RM</abbr> 041-2017-PCM), por lo que la evidencia ante un auditor del Estado debe expresarse también con la numeración 2008 (p. ej., <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> = 7.2.3, no 6.3.8).</p>
+<div class="norma"><h4>ISO/IEC/IEEE 12207:2017</h4><p><b>Emisor:</b> ISO/IEC <abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr> + <abbr title="Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos">IEEE</abbr> Computer Society. <b>Versión:</b> 2017 (reemplaza a la 2008; armonizada con ISO/IEC/IEEE 15288:2015). <b>Propósito:</b> procesos del ciclo de vida del SW con título, propósito, resultados, actividades y tareas. <b>Estructura:</b> 4 grupos, 30 procesos: Acuerdo 6.1 (2), Habilitadores organizacionales 6.2 (6), Gestión técnica 6.3 (8), Técnicos 6.4 (14); Anexo A tailoring. <b>Trampa:</b> no existe NTP de la 2017; QA pasa a ser proceso de gestión técnica (6.3.8) y desaparecen los grupos "Implementación de SW" y "Reutilización".</p></div>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>Tasa de autoservicio</b> = consultas resueltas en la app / (consultas en app + consultas manuales) × 100. Meta ≥ 70 % al año 1 (requiere línea base de consultas manuales).</li>
+<li><b>Ahorro real</b> = (consultas manuales As-Is − consultas manuales To-Be) × costo unitario por consulta. Meta ≥ S/ 32 000/año.</li>
+<li><b>Frescura del dato</b> = % de registros en caché con antigüedad ≤ 24 h al abrir la app. Meta ≥ 99 %.</li>
+<li><b>Tasa de escape de defectos</b> = defectos reportados en producción / total de defectos × 100. Meta ≤ 10 %.</li>
+<li><b>Crash-free users</b> (Play Console). Meta ≥ 99,5 %.</li>
+<li><b>Cobertura de código real</b> (JaCoCo) ≥ 80 % y <b>cobertura de requisitos</b> = HU con caso de prueba aprobado / HU totales = 100 %.</li>
+<li><b><abbr title="Mean Time To Repair – Tiempo Medio de Reparación">MTTR</abbr></b> de incidentes de datos (desde reporte hasta corrección en producción). Meta ≤ 48 h.</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<div class="tabla"><table>
+<thead><tr><th>Aspecto</th><th>G3 final (SINEACE)</th><th>Lo que haría falta / otros enfoques</th></tr></thead>
+<tbody>
+<tr><td>Diagrama del problema</td><td>Árbol de problemas de la tesis + matriz As-Is/To-Be con columna de procesos 2017 (aporte del G3)</td><td>Ishikawa 6M (herramienta de la S2) como en el avance MPCH</td></tr>
+<tr><td>Técnica representativa</td><td>Mapeo de cobertura (Núñez Marín et al., 2025) con tabla 100/50/25/0 y figura</td><td>G6 usó generación de casos desde casos de uso; G3-avance, evaluación 15504-5</td></tr>
+<tr><td>Casos de éxito</td><td>Cuba (Díaz Figueredo 2021, <abbr title="Nonconformity – No conformidad">NC</abbr> 75 → 10), Argentina (Panizzi 2023, DepProMod), Perú (Davila Meneses 2026)</td><td>G3-avance: OSINFOR, CSJ Tacna, UNAS</td></tr>
+<tr><td>Rigor</td><td>Marca "análisis de los autores del informe" en cada mapeo Scrum↔proceso</td><td>G6 usa asterisco (*): equivalente</td></tr>
+<tr><td>Huecos reconocidos</td><td>6.4.13 y 6.3.5 (R1)</td><td>Faltó discutir la mezcla NTP 2016 / 2017 y la falta de 6.3.7</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes.</b> (1) Decir que la directiva SINEACE "aplica la 12207:2017": se basa en la <b>NTP 2016 (≡ 2008)</b>. (2) Mapear las retrospectivas a 6.3.2: la retrospectiva mejora el <b>proceso</b> → 6.2.1. (3) Mapear el Product Backlog a 6.3.3 Gestión de decisiones como proceso principal: su núcleo es 6.4.2/6.4.3. (4) Llamar "cobertura de código" a lo medido con caja negra. (5) Confundir verificación (F-OTIC-33, contra la ERS) con validación (F-OTIC-35, con el usuario). (6) El anexo F-OTIC-37 "para iOS" cuando no hubo versión iOS: inconsistencia documental de la fuente. (7) El DL 1412 es Decreto <b>Legislativo</b>, no "Decreto Supremo". No hay solución única: A, B y C son defendibles si se justifica el tailoring.</div>
+</details>
+</section>
+
+<section id="caso-8" class="caso">
+<h2>Caso 8 · MPCH Chiclayo: método en cascada con 12 procesos técnicos, 2 programadores y 40 áreas usuarias</h2>
+<p class="origen">Origen: Entregable G3 (Semana 05, avance y versión corta) · Fuente del caso: <a href="https://hdl.handle.net/20.500.12893/9369">Lozano Alarcón y Montenegro Risco (2021), tesis UNPRG</a></p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>La <b>Sección de Desarrollo de Sistemas</b> de la MPCH (Municipalidad Provincial de Chiclayo, Gerencia de Sistemas e Informática) tiene <b>2 trabajadores</b> dedicados solo a programar; atiende cambios y nuevos requerimientos de <b>más de 40 áreas usuarias</b>; se rige por un MAPRO (Manual de Procedimientos) de <b>agosto de 2010</b>; usa <abbr title="User Story – Historia de Usuario">HU</abbr> sin proceso definido; no controla cambios, problemas de prueba ni liberación de versiones; no documenta por fase; incumple la <abbr title="Resolución Ministerial">RM</abbr> N.° 041-2017-PCM.</p>
+<p>Las autoras proponen (sin implementarlo) un método en <b>cascada</b> de <b>6 fases, 20 actividades (fichas AnP6.4.x), 19 formatos y 5 roles</b> (jefe de sistemas, analista de sistemas, desarrollador, analista de calidad, usuario; además un jefe de proyectos definido sin ficha) que cubre <b>12 procesos técnicos de la 12207:2017</b> (6.4.2–6.4.13). Excluyen 6.1, 6.2 y 6.3 "porque están orientados a empresas que desarrollan <abbr title="Software – Software / soporte lógico">SW</abbr> para terceros", y 6.4.1 y 6.4.14 sin justificar. El orden de la fase 2 es 6.4.6 → 6.4.4 → 6.4.5. El título de la tesis cita la "<abbr title="Norma Técnica Peruana">NTP</abbr> <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 12207:2006".</p>
+<p>Estimación por UCP (Use Case Points – Puntos de Casos de Uso, Karner) del Anexo 23: UUCP (Unadjusted UCP) = 169; TCF (Technical Complexity Factor) = 1,02; ΣEF (suma ponderada de factores de entorno) = 22; la tesis imprime EF = 1,4 <b>+</b> 0,03·ΣEF; PF (factor de productividad) = 20 h-h/UCP. Las autoras asignan el esfuerzo resultante solo a "programación (40 %)" y extrapolan el total.</p>
+<p>Validación: <b>3 expertos</b> (11–31 años de experiencia), escala 1–4, 5 dimensiones "ISO/IEC 25010" (funcionalidad, rendimiento, fiabilidad, usabilidad, mantenibilidad) con 21 indicadores (incluye "atractividad" e "inteligibilidad"). Promedios: mantenibilidad 3,7; usabilidad 3,55; funcionalidad 3,3; rendimiento 3,28; mínimo 3,0 (rendimiento en F1). El tercer experto calificó casi todo con 3. No se reporta coeficiente de concordancia.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Elabore la tabla de problemas y complete el Ishikawa del G3 (5M) a <abbr title="Manpower, Machinery, Methods, Materials, Measurement, Mother nature – Mano de obra, Maquinaria, Métodos, Materiales, Medición, Medio ambiente (categorías del Ishikawa)">6M</abbr>.</li>
+<li>Justifique o refute la exclusión de 6.1, 6.2, 6.3, 6.4.1 y 6.4.14.</li>
+<li>Calcule EF, UCP y esfuerzo; detecte la errata y critique la regla del 40 %. ¿Cuántos días tomaría con 2 personas a 8 h/día?</li>
+<li>Evalúe la validez de usar ISO/IEC 25010 y 3 expertos para validar un <b>método de proceso</b>.</li>
+<li>Resuelva el conflicto "5 roles / 2 personas" sin perder independencia de pruebas.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Sin procedimentación del ciclo de vida</td><td>MAPRO 2010 no actualizado a la NTP 2016</td><td>4 carencias declaradas; RM 041-2017-PCM</td><td>Cumplimiento normativo; madurez del proceso</td></tr>
+<tr><td>Cambios tardíos y descontrolados</td><td>Sin línea base ni control de cambios (<abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr>)</td><td>&gt; 40 áreas con requerimientos cambiantes</td><td>Mantenibilidad; estabilidad de requisitos</td></tr>
+<tr><td>Pruebas débiles</td><td>Desarrolladores prueban su propio código sin plan</td><td>"no le dan importancia al testeo"</td><td>Fiabilidad (madurez); adecuación funcional</td></tr>
+<tr><td>No se mide avance ni calidad</td><td>Sin documentación por fase ni medición</td><td>Carencia 4</td><td>Controlabilidad del proyecto</td></tr>
+<tr><td>Sobrecarga y acumulación de roles</td><td>2 personas para 5 roles</td><td>Analista con 11/20 actividades; desarrollador 10/20</td><td>Independencia de <abbr title="Verification and Validation – Verificación y Validación">V&amp;V</abbr>; riesgo de persona clave</td></tr>
+<tr><td>Estimación inflada</td><td>Errata de signo en EF + uso del esfuerzo de Karner como "40 %"</td><td>Anexo 23: 6 378 h-h ≈ 399 días</td><td>Planificación (6.3.1) poco realista</td></tr>
+</tbody></table></div>
+<p><b>Ishikawa 6M</b> (efecto: <i>gestión deficiente del proceso de desarrollo → retrasos e insatisfacción de las áreas</i>). Método: MAPRO 2010, sin control de cambios. Mano de obra: 2 programadores, sin responsable de documentación ni de pruebas. Medición: sin documentación por fase ni indicadores. Medio ambiente: &gt; 40 áreas con cambios tardíos; exigencia de la <abbr title="Presidencia del Consejo de Ministros">PCM</abbr>. Materiales: requerimientos que cambian en etapas avanzadas; sin formatos. <b>Máquina</b> (lo que faltaba): sin herramienta de control de versiones adoptada (la tesis solo compara Subversion/Git), sin herramienta de gestión de requisitos ni de pruebas automatizadas.</p>
+<p><b>Respuesta 2 · exclusiones.</b> El argumento "solo desarrolla para áreas internas" es <b>parcialmente falso</b>:</p>
+<ul>
+<li><b>6.1 Acuerdo</b>: la exclusión es defendible <i>solo</i> si no hay contrataciones; pero toda municipalidad adquiere SW o servicios (licencias, consultoras, nube) → 6.1.1 Adquisición sí aplica. Además, un acuerdo <b>interno</b> (área usuaria ↔ sección de sistemas) puede formalizarse con 6.1.2.</li>
+<li><b>6.2 Habilitadores</b>: la propia carencia "MAPRO 2010" es un problema de <b>6.2.1 Gestión del modelo de ciclo de vida</b>; la sobrecarga de 2 personas es de <b>6.2.4 <abbr title="Human Resources – Recursos Humanos">RR. HH.</abbr></b>; y la calidad institucional de <b>6.2.5</b>. Excluirlos deja sin dueño la causa raíz.</li>
+<li><b>6.3 Gestión técnica</b>: es el grupo <b>más</b> necesario: control de cambios (6.3.5 SCM), medición (6.3.7), planificación (6.3.1 — la propia estimación UCP es un insumo de 6.3.1) y <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> (6.3.8). Excluirlo contradice las 4 carencias.</li>
+<li><b>6.4.1 Análisis del negocio</b>: con 40 áreas es imprescindible para priorizar solicitudes. <b>6.4.14 Disposición</b>: aplica al retirar sistemas legados y migrar datos.</li>
+</ul>
+<p>Cobertura del método: 12/14 técnicos = <b>85,7 %</b>; 12/30 total = <b>40 %</b>. Toda exclusión en una conformidad adaptada debe <b>justificarse por escrito</b> (Anexo A).</p>
+<p><b>Respuesta 3 · UCP.</b> EF correcto (Karner) = 1,4 − 0,03 × 22 = 1,4 − 0,66 = <b>0,74</b> (con "+" daría 2,06, absurdo). UCP = 169 × 1,02 × 0,74 = <b>127,56</b>. E = 127,56 × 20 = <b>2 551,2 h-h</b>. Las autoras tratan esto como el 40 % (programación) → total = 2 551,2 / 0,40 = <b>6 378 h-h</b> → 6 378 / (2 × 8) ≈ <b>399 días</b>. Crítica: en Karner, UCP × PF ya es el esfuerzo <b>total</b> del proyecto; usarlo como 40 % lo infla <b>×2,5</b>. Correcto: 2 551,2 / 16 ≈ <b>159,5 días hábiles</b> (≈ 8 meses), repartidos 10 % análisis (255 h-h), 20 % diseño (510), 40 % programación (1 020), 15 % pruebas (383), 15 % sobrecarga (383). Además, PF = 20 h-h es el valor por defecto; hay que calibrarlo con datos históricos (6.3.7).</p>
+<p><b>Respuesta 4 · validez de la validación.</b> (a) <b>Error de objeto</b>: ISO/IEC 25010 evalúa calidad de <b>producto</b> de SW; un método de proceso se evalúa con modelos de <b>capacidad de procesos</b> (ISO/IEC 33020/15504: N/P/L/F) o con indicadores de resultado (defectos, plazos). (b) <b>Mezcla de ediciones</b>: "funcionalidad", "atractividad", "inteligibilidad" son vocabulario de ISO/IEC <b>9126</b>, no de 25010 (que usa adecuación funcional, capacidad de interacción/usabilidad, etc.). (c) <b>Estadística</b>: n = 3 sin W de Kendall o V de Aiken; un experto que puntúa todo con 3 sugiere sesgo de tendencia central. (d) Es <b>juicio</b>, no evidencia de implementación: la evidencia más débil de la jerarquía (implementado con <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> &gt; pre/post &gt; correlacional &gt; expertos).</p>
+<p><b>Respuesta 5 · roles.</b> Separar <b>rol</b> de <b>persona</b>: Dev A analiza/codifica el módulo X y Dev B lo verifica (y viceversa) → <b>verificación cruzada</b>; el <b>usuario clave</b> del área ejecuta la validación (6.4.11); el jefe de sistemas asume la planificación y el control; QA (6.3.8) por revisión periódica de la <abbr title="Oficina Central de Informática (UNMSM)">OCI</abbr> (Órgano de Control Institucional) o de la Unidad de Modernización. Si crece la demanda, solicitar 1 plaza CAS (Contrato Administrativo de Servicios) de analista de calidad.</p>
+<div class="alt"><h4>Alternativa A · El método de las autoras + tres procesos de gestión técnica mínimos</h4>
+<p>Mantener la cascada y las 20 fichas, pero añadir fichas de 6.3.5 SCM (Git, línea base de requisitos, petición de cambio Anexo 13 promovida a proceso), 6.3.7 Medición (UCP calibrado, defectos por fase) y 6.3.8 QA (checklist mensual). Corrige la causa "sin control de cambios" sin rehacer el método.</p></div>
+<div class="alt"><h4>Alternativa B · Perfil básico ISO/IEC 29110 (VSE – Very Small Entity)</h4>
+<p>Para equipos de &lt; 25 personas, la ISO/IEC 29110-5-1-2 (perfil básico) reduce todo a 2 procesos: <b><abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr></b> (Project Management) e <b><abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr></b> (Software Implementation), con productos de trabajo mínimos; luego se mapea a la NTP 2016 para demostrar conformidad ante la PCM. Menos burocracia que 19 formatos; muy adecuado a 2 personas (puente con la S7).</p></div>
+<div class="alt"><h4>Alternativa C · Kanban + directiva interna (enfoque CSJ Tacna / GR La Libertad)</h4>
+<p>Tablero Kanban único para las 40 áreas con políticas WIP (Work In Progress), clases de servicio y priorización en comité mensual (6.4.1 + 6.3.3); institucionalizar con directiva que reemplace el MAPRO. Vilchez Valdez (2022) reporta procesos técnicos 27,50 % → 97,50 % con Scrum alineado a la NTP 2016.</p></div>
+<h4>Justificación normativa</h4>
+<p>RM 041-2017-PCM: la NTP-ISO/IEC 12207:2016 es obligatoria en el <abbr title="Sociedad Nacional de Industrias (Perú)">SNI</abbr> → la MPCH debe demostrarla (en numeración 2008: 7.1 Implementación de SW, 7.2.2 SCM, 7.2.3 QA, 7.2.4 Verificación…). La tesis usa cláusulas 2017 con un título que cita la NTP 2006: hay que declarar la edición base y mapear. Ciclo de vida: la norma no impone cascada; la elección es válida si se documenta la adaptación.</p>
+<div class="norma"><h4>ISO/IEC 29110 (serie)</h4><p><b>Emisor:</b> ISO/IEC <abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr> (WG 24). <b>Versión:</b> partes desde 2011; perfil básico 29110-5-1-2. <b>Propósito:</b> ingeniería de SW para <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> (≤ 25 personas). <b>Estructura:</b> perfiles Entrada, Básico, Intermedio, Avanzado; el básico tiene 2 procesos (PM y SI). <b>Trampa:</b> no es un modelo de madurez por niveles como <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr>; los "perfiles" no son "niveles de capacidad".</p></div>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>% de solicitudes con petición de cambio registrada</b> = solicitudes con Anexo 13 / total de solicitudes × 100. Meta 100 %.</li>
+<li><b>Lead time por solicitud</b> = fecha de puesta en producción − fecha de solicitud (mediana). Meta: −30 % vs línea base 2026.</li>
+<li><b>Error de estimación (MRE – Magnitude of Relative Error)</b> = |real − estimado| / real. Meta ≤ 25 %.</li>
+<li><b>Defectos encontrados por usuarios en producción / mes</b>. Meta: −50 % al año.</li>
+<li><b>Cobertura de procesos</b> = procesos con evidencia / procesos aplicables tras tailoring. Meta ≥ 80 %.</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<div class="tabla"><table>
+<thead><tr><th>Aspecto</th><th>G3 avance (MPCH)</th><th>G3 final (SINEACE)</th><th>G6 (Chinarro)</th></tr></thead>
+<tbody>
+<tr><td>Tipo de evidencia</td><td>Método propuesto + 3 expertos</td><td>Implementado con KPI</td><td>Implementado en 1 app</td></tr>
+<tr><td>Ciclo de vida</td><td>Cascada (6 fases)</td><td>Scrum</td><td>Modelo en V</td></tr>
+<tr><td>Cobertura</td><td>12/30 (0 de gestión técnica)</td><td>15/30</td><td>V&amp;V + 5 interpretativos</td></tr>
+<tr><td>Técnica representativa</td><td>Evaluación 15504-5 (Horna Merino 2015, figura N/P/L/F)</td><td>Mapeo de cobertura</td><td>Casos de prueba desde casos de uso</td></tr>
+<tr><td>Diagrama</td><td>Ishikawa 5M + matriz deficiencia → proceso</td><td>Árbol de problemas</td><td>Ninguno</td></tr>
+<tr><td>Hallazgos sobre la fuente</td><td>Errata del EF, A2.FTV sin ficha, responsables inconsistentes</td><td>Falta 6.4.13 y 6.3.5</td><td>Limitaciones metodológicas</td></tr>
+</tbody></table></div>
+<p>Inferencia razonable: el G3 cambió de caso para pasar de un método <b>propuesto</b> a uno <b>implementado con KPI</b>, que responde mejor a "aplicación de la norma".</p>
+<div class="ojo"><b>Errores frecuentes.</b> (1) Aceptar la exclusión de 6.3 "porque no es una software factory": los procesos de gestión técnica aplican a <b>cualquier</b> proyecto. (2) Copiar la fórmula EF con "+". (3) Validar un proceso con ISO/IEC 25010 (producto). (4) Creer que un método con 20 fichas "cumple la NTP": la conformidad se demuestra con evidencia de ejecución, no con plantillas. (5) Olvidar la independencia: quien codifica no debe ser el único que prueba. Las tres alternativas son válidas: la calidad depende del contexto (tamaño, demanda, presupuesto).</div>
+</details>
+</section>
+
+<section id="caso-9" class="caso">
+<h2>Caso 9 · Auditoría de bases normativas: RM 179-2004-PCM, NTP 2006, RD 013-2016/INACAL-DN y RM 041-2017-PCM</h2>
+<p class="origen">Origen: Web: <a href="https://fcs.unac.edu.pe/wp-content/uploads/2023/06/NORMA_0_RESOLUCION_MINISTERIAL_179-2004-PCM.pdf">RM N.° 179-2004-PCM</a> y <a href="https://cdn.www.gob.pe/uploads/document/file/1481520/Resoluci%C3%B3n%20de%20Secretar%C3%ADa%20T%C3%A9cnica%20N%C2%B0%20022-2020-SINEACE-P-ST.pdf.pdf">Directiva SINEACE 2020</a> (adaptado; datos de entidades creados para el repaso)</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>En octubre de 2026 la Contraloría encarga a un auditor de <abbr title="Information Technology (IT) – Tecnologías de la Información">TI</abbr> (Tecnologías de la Información) revisar la base normativa del ciclo de vida del <abbr title="Software – Software / soporte lógico">SW</abbr> en tres entidades del <abbr title="Sociedad Nacional de Industrias (Perú)">SNI</abbr>:</p>
+<ul>
+<li><b>E1 · Municipalidad distrital</b>: su MAPRO de 2010 cita "NTP-ISO/IEC 12207:2004, de uso obligatorio por <abbr title="Resolución Ministerial">RM</abbr> 179-2004-PCM" y organiza sus procedimientos en "5 procesos principales, 8 de apoyo y 4 organizativos".</li>
+<li><b>E2 · Oficina de sistemas de un ministerio</b>: su procedimiento de control de calidad (2015) toma como base la "NTP-ISO/IEC 12207:2006".</li>
+<li><b>E3 · Organismo público</b>: su directiva de 2020 cita la "<abbr title="Requirements Development – Desarrollo de Requisitos">RD</abbr> N.° 013-2016/INACAL-DN" y la "RM N.° 041-2017-PCM".</li>
+</ul>
+<p>Un analista de E3 afirma: "la <abbr title="Norma Técnica Peruana">NTP</abbr> 2016 es la adopción de la <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr>/IEEE 12207:2017; por eso tiene 4 grupos y 30 procesos, y como la RM es de 2017, todo cuadra".</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Reconstruya la línea de tiempo (organismo normalizador, edición, equivalencia internacional, instrumento de obligatoriedad, plazo).</li>
+<li>Dictamine la vigencia de la base normativa de E1, E2 y E3.</li>
+<li>Refute al analista con datos de estructura.</li>
+<li>Indique el sujeto obligado y qué instrumento de planificación exigía la RM de 2004.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>E1 con base normativa derogada en la práctica</td><td>MAPRO no actualizado desde 2010 (sin dueño de 6.2.1 Gestión del modelo de ciclo de vida)</td><td>Cita NTP 2004 y estructura 5/8/4</td><td>Cumplimiento normativo</td></tr>
+<tr><td>E2 desactualizada y solo <abbr title="Quality Control – Control de Calidad">QC</abbr></td><td>Procedimiento escrito antes de la NTP 2016</td><td>Base NTP 2006</td><td>Cumplimiento; alcance del aseguramiento</td></tr>
+<tr><td>Confusión de ediciones en E3</td><td>Asociar el año de la RM (2017) con la edición <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> (2017)</td><td>Afirmación del analista</td><td>Competencia del personal (6.2.4)</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 1 · línea de tiempo.</b></p>
+<div class="tabla"><table>
+<thead><tr><th>Año</th><th>Hito</th><th>Organismo</th><th>Equivale a</th><th>Estructura</th></tr></thead>
+<tbody>
+<tr><td>1995</td><td>ISO/IEC 12207, 1.ª ed. (enmiendas 2002 y 2004)</td><td>ISO/IEC <abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr></td><td>—</td><td>3 categorías, 17 procesos (5/8/4)</td></tr>
+<tr><td>2004</td><td>NTP-ISO/IEC 12207:2004 (1.ª ed.), Res. 0048-2004/CRT-INDECOPI; <b>RM 179-2004-PCM</b> (14-06-2004) la hace obligatoria; plazo <b>18 meses</b>; actividades en el <b>POI</b> (Plan Operativo Informático); propuesta de la <abbr title="Oficina Nacional de Gobierno Electrónico e Informática">ONGEI</abbr> (Oficina Nacional de Gobierno Electrónico e Informática)</td><td><abbr title="Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual">INDECOPI</abbr> (CRT)</td><td>ISO/IEC 12207:1995 + Amd</td><td>17 procesos</td></tr>
+<tr><td>2006</td><td>NTP-ISO/IEC 12207:2006 (2.ª ed.)</td><td>INDECOPI</td><td>1995 + Amd 1:2002 + Amd 2:2004</td><td>17 procesos + propósito/resultados</td></tr>
+<tr><td>2008</td><td>ISO/IEC 12207:2008 (armonizada con 15288)</td><td>ISO/IEC</td><td>—</td><td>7 grupos, 43 procesos</td></tr>
+<tr><td>2016</td><td>NTP-ISO/IEC 12207:2016 (3.ª ed.), RD 013-2016/INACAL-DN (16-07-2016)</td><td><abbr title="Instituto Nacional de Calidad (Perú)">INACAL</abbr></td><td>ISO/IEC 12207:2008</td><td>7 grupos, 43 procesos</td></tr>
+<tr><td>2017</td><td><b>RM 041-2017-PCM</b>: uso obligatorio en todas las entidades del SNI</td><td><abbr title="Presidencia del Consejo de Ministros">PCM</abbr></td><td>—</td><td>—</td></tr>
+<tr><td>2017</td><td>ISO/IEC/IEEE 12207:2017 (internacional vigente, sin NTP)</td><td>ISO/IEC/IEEE</td><td>—</td><td>4 grupos, 30 procesos</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 2:</b> E1 <b>desactualizada</b> (NTP 2004 sustituida; su estructura 5/8/4 no refleja los 7 grupos). E2 <b>desactualizada</b> (2006) y además solo cubre QC. E3 <b>vigente y correcta</b>.</p>
+<p><b>Respuesta 3:</b> falso. La NTP 2016 ≡ ISO/IEC 12207:<b>2008</b>: 7 grupos y 43 procesos (Acuerdo 2 + Habilitación organizacional 5 + Proyecto 7 + Técnicos 11 + Implementación de SW 7 + Soporte de SW 8 + Reutilización 3 = 43). Los 4 grupos/30 procesos (2 + 6 + 8 + 14) son de la ISO/IEC/IEEE 12207:2017, que no tiene NTP. La coincidencia es solo del año de la RM.</p>
+<p><b>Respuesta 4:</b> sujetos obligados = entidades del <b>SNI</b> (ente rector: PCM, hoy a través de la <abbr title="Secretaría de Gobierno y Transformación Digital (PCM)">SeGDi</abbr> – Secretaría de Gobierno y Transformación Digital). En 2004 se exigía incluir la implantación en el <b>POI</b>.</p>
+<div class="alt"><h4>Alternativa A · Actualización documental</h4><p>Ordenar a E1 y E2 actualizar MAPRO y procedimiento a la NTP 2016 con una tabla de correspondencia 1995 → 2008 y un registro de tailoring. Rápida; no garantiza práctica real.</p></div>
+<div class="alt"><h4>Alternativa B · Actualización + evaluación de capacidad</h4><p>Además del documento, exigir un diagnóstico de capacidad (ISO/IEC 33020, N/P/L/F) de 5 procesos críticos (7.1.2, 7.1.7, 7.2.2, 7.2.3, 7.2.4) y un plan de mejora en el POI/PEI. Más costosa; demuestra cumplimiento efectivo.</p></div>
+<h4>Justificación normativa</h4>
+<p>RM 179-2004-PCM y RM 041-2017-PCM (obligatoriedad en el SNI); RD 013-2016/INACAL-DN (aprobación técnica); Anexo A de la NTP 2016 (adaptación). Mazo A de la profesora: 3.ª ed., INACAL, 16-07-2016, ≡ 2008.</p>
+<div class="norma"><h4>RM N.° 041-2017-PCM</h4><p><b>Emisor:</b> PCM. <b>Año:</b> 2017. <b>Propósito:</b> aprobar el uso obligatorio de la NTP-ISO/IEC 12207:2016 (3.ª ed.) en las entidades del SNI. <b>Estructura:</b> resolución de pocos artículos que remite a la NTP. <b>Trampa:</b> la RM es de 2017 pero la norma que obliga es la NTP <b>2016</b> (≡ 2008); no hace obligatoria la ISO/IEC/IEEE 12207:2017.</p></div>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>% de documentos normativos internos con base vigente</b> = documentos que citan NTP 2016 / documentos del ciclo de vida × 100. Meta 100 % en 12 meses.</li>
+<li><b>% de procesos NTP aplicables con evidencia</b> = procesos con evidencia / procesos seleccionados en el tailoring. Meta ≥ 80 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes.</b> (1) "NTP 12207:2017" no existe. (2) INDECOPI normalizaba en 2004; desde la creación del INACAL (2014) es INACAL. (3) La obligatoriedad no alcanza a empresas privadas (salvo contrato). (4) La estructura 5/8/4 de las diapositivas es la de 1995: útil para entender, pero no es la numeración de la NTP 2016.</div>
+</details>
+</section>
+
+<section id="caso-10" class="caso">
+<h2>Caso 10 · Diagnóstico de brechas: Directiva SINEACE 2020 (Scrum + NTP 2016) frente a los 43 procesos</h2>
+<p class="origen">Origen: Web: <a href="https://cdn.www.gob.pe/uploads/document/file/1481520/Resoluci%C3%B3n%20de%20Secretar%C3%ADa%20T%C3%A9cnica%20N%C2%B0%20022-2020-SINEACE-P-ST.pdf.pdf">Resolución de Secretaría Técnica N.° 022-2020-SINEACE/P-ST (Directiva N.° 000006-2020)</a> (adaptado) · conecta con el Caso 7 (G3)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>La Directiva "Marco de procesos del ciclo de vida del software en el Sineace" (D-OTIC-001, v01, 69 páginas) declara basarse en la NTP-ISO/IEC 12207:2016 y Scrum. Define <b>3 procesos</b>: <b>desarrollo</b> (9 procedimientos: solicitud de requerimientos vía SGD – Sistema de Gestión Documental con F-OTIC-24; especificación de requerimientos y diseño de arquitectura; planificación del <i>sprint</i>; ejecución del <i>sprint</i>; demostración y pruebas de aceptación; piloto; instalación y despliegue; retrospectiva y cierre; gestión de cambios), <b>mantenimiento</b> y <b>adquisición</b>.</p>
+<p>Roles: Jefe Otic, Coordinador de desarrollo, Jefe de área usuaria, Líder usuario, <abbr title="Product Owner – Dueño del producto (Scrum)">PO</abbr>, SM (Scrum Master), Equipo de desarrollo (Arquitecto, Analista programador, <b>Analista de pruebas y calidad</b>, Operador de infraestructura), DBA (Database Administrator) y Oficial de seguridad (alineado a la NTP-ISO/IEC 27001). El analista de pruebas y calidad <b>pertenece al equipo de desarrollo</b>. Tras las pruebas "se corrigen observaciones y se vuelve a probar <b>hasta que no existan más observaciones</b>". La conformidad la firma el Líder usuario (F-OTIC-35). Formatos F-OTIC-24 a F-OTIC-35. No se mencionan indicadores, riesgos, auditorías ni retiro de sistemas.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Mapee lo cubierto a la <abbr title="Norma Técnica Peruana">NTP</abbr> 2016 (numeración 2008).</li>
+<li>Identifique al menos 6 brechas con proceso y riesgo.</li>
+<li>Califique con la escala N/P/L/F (<abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 15504/33020) cuatro procesos clave.</li>
+<li>Proponga dos planes de cierre priorizados con <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Brecha</th><th>Causa raíz</th><th>Proceso NTP 2016 (≡ 2008)</th><th>Riesgo / atributo afectado</th></tr></thead>
+<tbody>
+<tr><td><abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> no independiente</td><td>Analista de calidad dentro del equipo que construye; sin auditorías de proceso</td><td>7.2.3 Aseguramiento de la calidad; 7.2.7 Auditoría</td><td>Falta de objetividad (<abbr title="Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos">IEEE</abbr> 730-2014: independencia técnica, gerencial y financiera)</td></tr>
+<tr><td>Criterio de salida "hasta que no haya observaciones"</td><td>Sin umbral cuantitativo ni severidad</td><td>7.1.7 Pruebas de calificación; 7.2.4 Verificación</td><td>Bucle indefinido o salida arbitraria</td></tr>
+<tr><td>Sin resolución de problemas con estados, severidad y tendencias</td><td>Observaciones tratadas solo dentro del <i>sprint</i></td><td>7.2.8 Resolución de problemas</td><td>Reincidencia; sin <abbr title="Root Cause Analysis – Análisis de causa raíz">RCA</abbr> (Root Cause Analysis)</td></tr>
+<tr><td>Gestión de cambios sin <abbr title="Configuration Item – Elemento de Configuración">CI</abbr> (Configuration Item), líneas base ni <abbr title="Functional Configuration Audit – Auditoría funcional de configuración">FCA</abbr>/PCA</td><td>Procedimiento de cambios orientado a requisitos, no a configuración</td><td>7.2.2 Gestión de la configuración del <abbr title="Software – Software / soporte lógico">SW</abbr></td><td>Versiones inconsistentes (ver BUG-031 del Caso 7)</td></tr>
+<tr><td>Sin medición</td><td>Directiva sin indicadores</td><td>6.3.7 Medición</td><td>No se puede demostrar mejora</td></tr>
+<tr><td>Riesgos no gestionados</td><td>Omisión</td><td>6.3.4 Gestión de riesgos</td><td>Sorpresas en despliegue y presupuesto</td></tr>
+<tr><td>Sin revisiones formales</td><td>Solo <i>sprint review</i></td><td>7.2.6 Revisión del SW</td><td>Defectos de requisitos tardíos</td></tr>
+<tr><td>Sin reutilización ni retiro</td><td>Alcance limitado a construir</td><td>7.3.x Reutilización; 6.4.11 Retiro del SW</td><td>Deuda técnica; datos huérfanos</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 1 · cobertura:</b> 6.1.1 Adquisición (proceso de adquisición); 6.4.10 Mantenimiento del SW; 7.1.2 Análisis de requisitos del SW (<abbr title="User Story – Historia de Usuario">HU</abbr>, criterios de aceptación); 7.1.3 Diseño arquitectónico (F-OTIC-30); 7.1.5 Construcción (estándares F-OTIC-34); 7.1.6–7.1.7 Integración y pruebas de calificación (F-OTIC-33); 6.4.7 Instalación y 6.4.8 Soporte a la aceptación (piloto, <i>sprint review</i>, F-OTIC-35); 6.3.1 Planificación y 6.3.2 Evaluación y control (cronograma, <i>daily</i>); gestión de cambios (parcialmente 7.2.2).</p>
+<p><b>Respuesta 3 · calificación (juicio sobre evidencia documental):</b> 7.1.2 Requisitos <b>L</b> (51–85 %: formatos y roles, falta trazabilidad bidireccional); 7.1.7 Pruebas <b>P</b> (16–50 %: casos definidos, sin criterio de salida ni independencia); 7.2.3 QA <b>N</b> (≤ 15 %); 7.2.2 <abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr> <b>P</b>. Solo 7.1.2 alcanzaría nivel de capacidad 1 (<abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> 1.1 en L o F).</p>
+<div class="alt"><h4>Alternativa A · Plan mínimo (6 meses)</h4><p>1.º criterio de salida cuantitativo: 100 % de casos críticos ejecutados y 0 defectos de severidad 1–2 abiertos; 2.º procedimiento 7.2.8 con estados (Abierto, En análisis, Corregido, Verificado, Cerrado) y RCA de 5 porqués; 3.º QA ejercida por la Oficina de Planeamiento/Modernización con checklist trimestral. Bajo costo.</p></div>
+<div class="alt"><h4>Alternativa B · Plan estructural (12–18 meses)</h4><p>Crear función <abbr title="Software Quality Assurance – Aseguramiento de la Calidad del Software">SQA</abbr> independiente con <abbr title="Software Quality Assurance Plan – Plan de Aseguramiento de la Calidad del Software">SQAP</abbr> (IEEE 730) por proyecto; SCM con GitLab, CI, líneas base y FCA/PCA por <i>release</i>; medición con GQM (Goal-Question-Metric); gestión de riesgos con matriz probabilidad × impacto; procedimiento de retiro con migración de datos. Mayor costo; prepara una evaluación de capacidad formal.</p></div>
+<h4>Justificación normativa</h4>
+<p>NTP 2016 (≡ 2008): en esta edición QA, Verificación, Validación, Revisión, Auditoría y Resolución de problemas son procesos de <b>Soporte de SW</b> (7.2.x); Medición y Riesgos son de <b>Proyecto</b> (6.3.x). En la 2017 casi todos pasan a <b>Gestión técnica</b> (QA 6.3.8; SCM 6.3.5) y la Verificación/Validación a <b>Técnicos</b> (6.4.9/6.4.11). La escala N/P/L/F proviene de ISO/IEC 15504-2 / 33020 (S6).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>% de procesos clave con calificación ≥ L</b>. Meta ≥ 75 % (3 de 4) en 12 meses.</li>
+<li><b>Tasa de escape de defectos</b> = defectos en producción / (pruebas + producción) × 100. Meta ≤ 10 %.</li>
+<li><b>% de <i>sprints</i> con auditoría SQA</b>. Meta ≥ 25 % (muestreo).</li>
+<li><b>Reincidencia</b> = problemas reabiertos / problemas cerrados × 100. Meta ≤ 5 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes.</b> (1) Numerar las brechas con la 2017 (6.3.8) cuando la directiva declara la NTP 2016: el auditor del Estado espera 7.2.3. (2) Creer que el analista de calidad del equipo "es QA": hace <abbr title="Quality Control – Control de Calidad">QC</abbr>/verificación; QA exige independencia. (3) Calificar "F" porque existe un formato: la calificación mide la ejecución evidenciada. La prioridad (A o B) depende del presupuesto y del riesgo: no hay respuesta única.</div>
+</details>
+</section>
+
+<section id="caso-11" class="caso">
+<h2>Caso 11 · El procedimiento de control de calidad del MEF (PR-CONTCALID-001): ¿QC o QA?</h2>
+<p class="origen">Origen: Web: <a href="https://mef.gob.pe/contenidos/archivos-descarga/Anexo_10_RD120_2015EF4301.pdf">MEF, Anexo 10 "Procedimiento para Control de Calidad de los Sistemas de Información", PR-CONTCALID-001 v1.0 (2015)</a> (adaptado; cifras de la pregunta 5 creadas)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>El área de Control de Calidad de la Oficina de Sistemas del MEF (Ministerio de Economía y Finanzas) prueba cada versión de los aplicativos (p. ej., SIAF-SP – Sistema Integrado de Administración Financiera del Sector Público) que construye el área de Arquitectura y Construcción. Su procedimiento (base: NTP-ISO/IEC 12207:2006):</p>
+<ol>
+<li>Recibe el documento final de análisis de requerimientos.</li>
+<li>Define el alcance: "no todas las opciones se prueban con la misma importancia; algunas quedan fuera".</li>
+<li>Estima tiempos "según revisiones anteriores y experiencia"; asigna analistas; elabora el Plan de Pruebas (Anexo A).</li>
+<li>Pide copias de datos: archivos .dbf, <abbr title="Base de Datos">BD</abbr> Oracle, <b>datos reales</b> o BD vacía.</li>
+<li>Prueba por módulo y luego integración. Registra observaciones en el Sistema de Gestión de Versiones con estados <b>Pendiente → Superada / Anulada / Siguiente Versión</b>.</li>
+<li>Conformidad: todas las pruebas planificadas ejecutadas y todas las observaciones resueltas <b>o pasadas a "Siguiente Versión"</b>. Luego pase a producción, Formato de Entrega de Versión (Anexo B), Resumen de Cambios (Anexo C) e Informe Final.</li>
+</ol>
+<p>Problemas reportados: cambios de normas de los órganos rectores, requerimientos mal definidos "que obligan a iniciar nuevamente las pruebas", retrasos de cronograma.</p>
+<p><b>Dato creado:</b> en 2025 se liberaron 24 versiones; en 9 de ellas se difirieron observaciones de severidad alta; en producción aparecieron 130 defectos frente a 520 encontrados en pruebas; 7 ciclos de prueba se reiniciaron por requisitos mal definidos.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>¿Es un proceso de <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> o de <abbr title="Quality Control – Control de Calidad">QC</abbr>? Justifique con la <abbr title="Norma Técnica Peruana">NTP</abbr> 2016.</li>
+<li>Identifique 6 problemas con causa raíz y proceso NTP 2016 afectado.</li>
+<li>Evalúe el criterio de conformidad.</li>
+<li>Proponga una alternativa mínima y una estructural.</li>
+<li>Calcule <abbr title="Defect Removal Efficiency – Eficiencia de Remoción de Defectos">DRE</abbr> y el % de versiones con diferimiento riesgoso; fije metas.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>Respuesta 1:</b> es predominantemente <b>QC</b> (detección de defectos en el producto mediante pruebas): 7.1.7 Pruebas de calificación del <abbr title="Software – Software / soporte lógico">SW</abbr> y 7.2.4 Verificación. No hay actividades de <b>QA</b> (7.2.3: evaluar que los <i>procesos</i> se sigan; 7.2.7 Auditoría). Además, la base (NTP 2006) está desactualizada frente a la <abbr title="Resolución Ministerial">RM</abbr> 041-2017-PCM.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Proceso NTP 2016 / atributo</th></tr></thead>
+<tbody>
+<tr><td>Reinicio de pruebas por requisitos mal definidos</td><td>No se verifican ni revisan los requisitos antes de construir (<abbr title="Verification and Validation – Verificación y Validación">V&amp;V</abbr> tardía)</td><td>"obligan a iniciar nuevamente las pruebas"; 7 reinicios</td><td>7.1.2 Análisis de requisitos; 7.2.6 Revisión</td></tr>
+<tr><td>Alcance de pruebas discrecional</td><td>Sin análisis de riesgos para priorizar</td><td>"algunas opciones quedan fuera"</td><td>6.3.4 Gestión de riesgos</td></tr>
+<tr><td>Estimación por experiencia</td><td>Sin datos históricos</td><td>"según revisiones anteriores"</td><td>6.3.7 Medición</td></tr>
+<tr><td>Datos reales en pruebas</td><td>Sin política de datos de prueba ni anonimización</td><td>Pide "datos reales"</td><td>7.2.2 <abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr>/ambientes; Ley N.° 29733 de Protección de Datos Personales; NTP-ISO/IEC 27001 (seguridad)</td></tr>
+<tr><td>Observaciones diferidas sin criterio</td><td>Estado "Siguiente Versión" sin umbral de severidad</td><td>Criterio de conformidad; 9/24 versiones</td><td>7.2.8 Resolución de problemas</td></tr>
+<tr><td>Cambios normativos frecuentes</td><td>Sin control formal de cambios de requisitos</td><td>"cambio de normas y procedimientos"</td><td>7.2.2 SCM (control de cambios); 6.3.1</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 3:</b> el criterio permite liberar con defectos de severidad alta pasados a "Siguiente Versión" → no es un criterio de salida objetivo. Debe exigir <b>0 defectos críticos/altos abiertos</b> y que todo diferimiento tenga <i>waiver</i> (dispensa) firmado por el dueño del negocio con análisis de riesgo.</p>
+<p><b>Respuesta 5:</b> DRE (Defect Removal Efficiency) = 520 / (520 + 130) × 100 = <b>80 %</b>. Versiones con diferimiento riesgoso = 9/24 = <b>37,5 %</b>. Tasa de reinicio = 7/24 = <b>29,2 %</b>. Metas: DRE ≥ 95 %; diferimiento de severidad alta sin <i>waiver</i> = 0 %; reinicios ≤ 5 %.</p>
+<div class="alt"><h4>Alternativa A · Mínima (QC mejorado)</h4><p>Matriz de severidad + regla de salida; <i>checklist</i> de inspección de requisitos con el órgano rector (<abbr title="Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos">IEEE</abbr> 1028); enmascaramiento de datos personales; pruebas basadas en riesgo para definir el alcance.</p></div>
+<div class="alt"><h4>Alternativa B · Estructural (QA real)</h4><p>Crear la función <abbr title="Software Quality Assurance – Aseguramiento de la Calidad del Software">SQA</abbr> independiente con <abbr title="Software Quality Assurance Plan – Plan de Aseguramiento de la Calidad del Software">SQAP</abbr> IEEE 730; alinear el procedimiento a la NTP 2016 (7.2.3 QA, 7.2.4, 7.2.5, 7.2.7, 7.2.8); automatizar regresión en <abbr title="Configuration Item – Elemento de Configuración">CI</abbr>; medir DRE y densidad de defectos por versión; auditorías de proceso trimestrales.</p></div>
+<h4>Justificación normativa</h4>
+<p>NTP 2016: QA (7.2.3) aporta confianza de que productos y <b>procesos</b> cumplen lo establecido; Verificación (7.2.4) confirma que cada producto cumple sus requisitos; Resolución de problemas (7.2.8) exige que todo problema se analice y resuelva y que se identifiquen tendencias. Diapositivas: QA ≠ Auditoría (la auditoría es independiente y contra contrato/normas).</p>
+<div class="norma"><h4>IEEE 730-2014</h4><p><b>Emisor:</b> IEEE (Computer Society). <b>Versión:</b> 2014. <b>Propósito:</b> requisitos para iniciar, planificar, controlar y ejecutar SQA en un proyecto (SQAP). <b>Estructura:</b> 3 áreas de actividad y 16 tareas (6 de implementación del proceso SQA, 5 de aseguramiento del producto, 5 de aseguramiento del proceso); anexos A–L (A: mapeo con 12207). <b>Trampa:</b> SQA no es <i>testing</i> ni una "puerta" al final.</p></div>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>DRE</b> = defectos en pruebas / (pruebas + producción) × 100. Meta ≥ 95 %.</li>
+<li><b>% de requisitos inspeccionados antes de construir</b>. Meta 100 % para módulos críticos.</li>
+<li><b>Defectos críticos diferidos por versión</b>. Meta 0.</li>
+<li><b>% de juegos de datos de prueba anonimizados</b>. Meta 100 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes.</b> (1) Creer que un área llamada "Control de Calidad" hace QA: el nombre no define el proceso. (2) Ignorar el riesgo legal de usar datos reales (Ley 29733). (3) Aceptar "Siguiente Versión" como cierre de un defecto. La alternativa A es suficiente para una mejora rápida; la B es la que demuestra conformidad con la NTP: ambas son válidas según presupuesto.</div>
+</details>
+</section>
+
+<section id="caso-12" class="caso">
+<h2>Caso 12 · Mezcla de ediciones en una metodología ministerial (MVCS, RD 005-2022-VIVIENDA-OGEI)</h2>
+<p class="origen">Origen: Web: <a href="https://cdn.www.gob.pe/uploads/document/file/3604818/RD-005-2022-VIVIENDA-OGEI.pdf">RD N.° 005-2022-VIVIENDA-OGEI, Metodología de Gestión de Proyectos para el Ciclo de Vida de Software v1.0</a> (adaptado)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>La <abbr title="Oficina de Tecnologías de la Información">OTI</abbr> (Oficina de Tecnologías de la Información) del MVCS (Ministerio de Vivienda, Construcción y Saneamiento), "en base a la NTP-ISO/IEC 12207:2016", define <b>9 etapas</b>: A Concepción de ideas, B Formulación de propuesta, C Constitución del proyecto, D Planificación, E Ejecución, F Cierre, G Operación del producto, H Baja del producto, I Seguimiento y control. Luego las relaciona con "<b>Procesos Principales <abbr title="Norma Técnica Peruana">NTP</abbr> 12207</b>": 01 Adquisición, 02 Desarrollo, 03 Mantenimiento, 04 Operación, 05 Suministro. La metodología de gestión solo actúa sobre algunas etapas; el resto queda para una futura "Metodología de Ciclo de Vida de <abbr title="Software – Software / soporte lógico">SW</abbr>" y la gestión del portafolio para otra metodología de la OGEI (Oficina General de Estadística e Informática).</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>¿A qué edición corresponde "5 procesos principales"? ¿Es coherente con la NTP 2016?</li>
+<li>Reubique cada etapa A–I en la NTP 2016 (≡ 2008) y en la <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr>/IEEE 12207:2017.</li>
+<li>Identifique los riesgos de fragmentar la metodología en tres documentos.</li>
+<li>Redacte la observación de auditoría y dos alternativas de corrección.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>Respuesta 1:</b> "Procesos principales: adquisición, suministro, desarrollo, operación, mantenimiento" es la taxonomía de la ISO/IEC 12207:<b>1995</b> (NTP 2004: 5 + 8 + 4 = 17). En la NTP 2016 (≡ 2008) esa categoría <b>no existe</b>: hay 7 grupos. Incoherencia: cita 2016 pero usa la estructura 1995 (la misma que muestran las diapositivas A-18 como estructura "clásica").</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Taxonomía de 1995 con cita de 2016</td><td>Uso de materiales de capacitación antiguos; sin revisión normativa</td><td>"Procesos Principales NTP 12207"</td><td>Conformidad declarada no demostrable</td></tr>
+<tr><td>Sin procesos de soporte</td><td>Enfoque solo de gestión de proyectos</td><td>No aparecen <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr>, <abbr title="Verification and Validation – Verificación y Validación">V&amp;V</abbr>, <abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr>, resolución de problemas</td><td>Aseguramiento de la calidad del producto</td></tr>
+<tr><td>Fragmentación en 3 documentos</td><td>Metodologías por unidad orgánica, no por proceso</td><td>Ciclo de vida "posterior"; portafolio en otra metodología</td><td>Interfaces entre procesos indefinidas</td></tr>
+<tr><td>Tailoring no documentado</td><td>Desconocimiento del Anexo A</td><td>No hay registro de exclusiones</td><td>Conformidad adaptada imposible</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 2:</b></p>
+<div class="tabla"><table>
+<thead><tr><th>Etapa MVCS</th><th>NTP 2016 (≡ 12207:2008)</th><th>ISO/IEC/IEEE 12207:2017</th></tr></thead>
+<tbody>
+<tr><td>A Concepción / B Formulación</td><td>6.2.3 Gestión del portafolio de proyectos; 6.4.1 Definición de requisitos de las partes interesadas</td><td>6.2.3 Gestión del portafolio; 6.4.1 Análisis del negocio o misión</td></tr>
+<tr><td>C Constitución / D Planificación</td><td>6.3.1 Planificación del proyecto (grupo Proyecto)</td><td>6.3.1 (grupo Gestión técnica)</td></tr>
+<tr><td>E Ejecución</td><td>7.1 Implementación de SW (7.1.1–7.1.7)</td><td>6.4.3–6.4.9</td></tr>
+<tr><td>F Cierre</td><td>6.3.2 Evaluación y control; 6.4.8 Soporte a la aceptación</td><td>6.3.2; 6.4.10 Transición; 6.4.11 Validación</td></tr>
+<tr><td>G Operación</td><td>6.4.9 Operación del SW</td><td>6.4.12 Operación</td></tr>
+<tr><td>H Baja</td><td>6.4.11 Retiro del SW</td><td>6.4.14 Disposición</td></tr>
+<tr><td>I Seguimiento y control</td><td>6.3.2 Evaluación y control; 6.3.7 Medición</td><td>6.3.2; 6.3.7</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 3:</b> interfaces no definidas entre documentos (la 12207 diseña procesos con <b>alta cohesión y acoplamiento débil</b>, pero con entradas/salidas claras); vacíos temporales (la metodología "posterior" no existe aún); roles duplicados; imposibilidad de demostrar conformidad adaptada.</p>
+<p><b>Observación de auditoría:</b> "La metodología MET-OTI_GP_V1.0 declara base en la NTP-ISO/IEC 12207:2016 pero emplea la taxonomía de procesos principales de la edición 1995; no documenta el proceso de adaptación ni cubre los procesos de soporte de SW (7.2), en particular 7.2.3 QA y 7.2.8 Resolución de problemas. Recomendación: rehacer la correspondencia con los 43 procesos y registrar las exclusiones justificadas".</p>
+<div class="alt"><h4>Alternativa A · Corregir la tabla y anexar el tailoring</h4><p>Mantener las 9 etapas, sustituir "procesos principales" por la correspondencia con los 7 grupos y añadir un registro de adaptación (proceso, aplica/no aplica, justificación). Rápido.</p></div>
+<div class="alt"><h4>Alternativa B · Marco único de procesos</h4><p>Integrar las tres metodologías en un "Marco de procesos del ciclo de vida" (como hizo el SINEACE en 2020) con mapa de procesos, matriz <abbr title="Responsible, Accountable, Consulted, Informed – Responsable, Aprobador, Consultado, Informado">RACI</abbr> (Responsible, Accountable, Consulted, Informed) y formatos únicos. Más trabajo; elimina interfaces rotas.</p></div>
+<h4>Justificación normativa</h4>
+<p>NTP 2016 ≡ ISO/IEC 12207:2008: 7 grupos (Acuerdo, Habilitación organizacional del proyecto, Proyecto, Técnicos, Implementación de SW, Soporte de SW, Reutilización de SW); Anexo A (adaptación). <abbr title="Resolución Ministerial">RM</abbr> 041-2017-PCM (obligatoriedad).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>% de los 43 procesos con decisión de tailoring documentada</b>. Meta 100 %.</li>
+<li><b>% de procesos seleccionados con dueño y formato</b>. Meta 100 %.</li>
+<li><b>N.° de interfaces sin definir entre documentos</b>. Meta 0.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes.</b> (1) Ver "procesos principales" y pensar en la 2016. (2) Ubicar la planificación en "Gestión técnica" con la NTP 2016: en 2008 el grupo se llama <b>Proyecto</b>. (3) Olvidar el retiro (H Baja = 6.4.11 en 2008, 6.4.14 en 2017).</div>
+</details>
+</section>
+
+<section id="caso-13" class="caso">
+<h2>Caso 13 · Microempresa peruana: capacidad antes/después con ISO/IEC 15504-5 (Horna Merino, 2015)</h2>
+<p class="origen">Origen: Entregable G3 (versión corta MPCH, técnica representativa) · Web: <a href="http://hdl.handle.net/20.500.12404/6298">Horna Merino (2015), tesis PUCP</a> (adaptado; ítem 4 con dato creado)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Una microempresa de <abbr title="Software – Software / soporte lógico">SW</abbr> de 8 personas con clientes del sector público implementa procesos de la <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 12207:2008. Diagnostica con cuestionarios ISO/IEC 15504-5, prioriza con matrices COMPETISOFT-PUCP y técnica de grupo nominal, mejora tres procesos en un piloto y reevalúa. Resultados del atributo <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> 1.1 (realización del proceso):</p>
+<div class="tabla"><table>
+<thead><tr><th>Proceso</th><th>Antes</th><th>Después</th></tr></thead>
+<tbody>
+<tr><td>Gestión de riesgos</td><td>41 %</td><td>79 %</td></tr>
+<tr><td>Soporte a la aceptación</td><td>43 %</td><td>78 %</td></tr>
+<tr><td>Gestión de activos de reúso</td><td>17 %</td><td>52 %</td></tr>
+</tbody></table></div>
+<p>Escala: N (0–15 %), P (&gt; 15–50 %), L (&gt; 50–85 %), F (&gt; 85–100 %). Un consultor afirma: "con 79 % la gestión de riesgos ya está en nivel 2". <b>Dato creado:</b> en la reevaluación, para gestión de riesgos, PA 2.1 (gestión de la realización) = 55 % y PA 2.2 (gestión de productos de trabajo) = 40 %.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Califique cada proceso antes y después y determine su nivel de capacidad.</li>
+<li>Refute al consultor y diga si, con los datos creados, se alcanzaría nivel 2.</li>
+<li>Ubique los tres procesos en la <abbr title="Norma Técnica Peruana">NTP</abbr> 2016 y en la 12207:2017.</li>
+<li>¿Por qué la autora pudo usar la 2008 si la NTP vigente en 2015 era la 2006?</li>
+<li>Proponga dos rutas para llegar a nivel 2 y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Procesos realizados de forma incompleta</td><td>Prácticas informales en una <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr></td><td>PA 1.1 en P antes del piloto</td><td>Capacidad de proceso (nivel 0)</td></tr>
+<tr><td>Reúso casi inexistente</td><td>Sin repositorio ni <abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr> de activos</td><td>17 % (P por solo 2 puntos)</td><td>Productividad; mantenibilidad (reusabilidad)</td></tr>
+<tr><td>Gestión de productos de trabajo débil</td><td>Sin control de versiones de planes y registros de riesgos</td><td>PA 2.2 = 40 %</td><td>Nivel 2 bloqueado</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 1:</b> Riesgos 41 % <b>P</b> → 79 % <b>L</b>; Aceptación 43 % <b>P</b> → 78 % <b>L</b>; Reúso 17 % <b>P</b> (no N, por 2 puntos) → 52 % <b>L</b> (por 2 puntos). Nivel 1 exige PA 1.1 en L o F → los tres pasan de <b>nivel 0 a nivel 1</b> (realizado).</p>
+<p><b>Respuesta 2:</b> nivel 2 exige PA 1.1 en <b>F</b> (&gt; 85 %) y PA 2.1 y PA 2.2 en <b>L o F</b>. Con 79 % (L) en PA 1.1, no hay nivel 2. Con los datos creados, además PA 2.2 = 40 % (P) lo impide. Resultado: nivel 1.</p>
+<p><b>Respuesta 3:</b> en la NTP 2016 (≡ 2008): Gestión de riesgos 6.3.4 (Proyecto); Soporte a la aceptación 6.4.8 (Técnicos); Gestión de activos de reúso 7.3.2 (Reutilización de SW). En la 2017: 6.3.4 Gestión de riesgos; Soporte a la aceptación se absorbe en 6.4.10 Transición/6.4.11 Validación; el grupo Reutilización desaparece (lo más cercano: 6.2.6 Gestión del conocimiento).</p>
+<p><b>Respuesta 4:</b> la empresa es <b>privada</b> (no obligada por la <abbr title="Resolución Ministerial">RM</abbr>, que rige al <abbr title="Sociedad Nacional de Industrias (Perú)">SNI</abbr>); la ISO/IEC 12207:2008 existía internacionalmente; la NTP 2016 (≡ 2008) llegó después, por lo que la tesis estaba "adelantada" en estructura.</p>
+<div class="alt"><h4>Alternativa A · Continuar con 15504/33000 + COMPETISOFT</h4><p>Ciclo de mejora de <abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr> (diagnóstico, planificación, ejecución, revisión) enfocado en PA 2.1 (planificar y monitorear cada proceso) y PA 2.2 (identificar, controlar y revisar productos de trabajo con SCM). Mantiene la línea de la autora (puente con S6 y S7).</p></div>
+<div class="alt"><h4>Alternativa B · Migrar a ISO/IEC 29110 perfil básico</h4><p>Para 8 personas, adoptar 29110-5-1-2 (<abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr> + <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr>) y buscar la certificación del perfil; los productos de trabajo de 29110 cubren gran parte de PA 2.2. Más directo para una VSE; menor granularidad.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC 15504-2 / 33020: nivel 1 = PA 1.1 ≥ L; nivel 2 = PA 1.1 = F y PA 2.1, PA 2.2 ≥ L. La 15504-5 contiene el <abbr title="Process Assessment Model – Modelo de evaluación de procesos">PAM</abbr> (Process Assessment Model) ejemplar basado en el <abbr title="Process Reference Model – Modelo de referencia de procesos">PRM</abbr> (Process Reference Model) de la 12207. La 12207 aporta propósito y resultados (desde la enmienda de 2002).</p>
+<div class="norma"><h4>ISO/IEC 15504 (SPICE) → ISO/IEC 33000</h4><p><b>Emisor:</b> ISO/IEC <abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr>. <b>Versión:</b> 15504 (2003–2006), reemplazada por la familia 33000 desde 2015. <b>Propósito:</b> evaluar capacidad de procesos. <b>Estructura:</b> niveles 0–5 (incompleto, realizado, gestionado, establecido, predecible, en optimización), atributos PA 1.1 a PA 5.2, escala N/P/L/F. <b>Trampa:</b> "capacidad" es por proceso; "madurez" es de la organización.</p></div>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>% de procesos objetivo en nivel ≥ 2</b>. Meta 3/3 en 12 meses.</li>
+<li><b>% de riesgos con plan de respuesta y seguimiento</b>. Meta ≥ 90 %.</li>
+<li><b>Tasa de reúso</b> = componentes reutilizados / componentes entregados × 100. Meta ≥ 30 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes.</b> (1) Calificar 17 % como N o 52 % como P: revise los límites (&gt; 15 % y &gt; 50 %). (2) Pensar que un % alto en PA 1.1 da nivel 2. (3) Confundir nivel de capacidad (15504/33000) con nivel de madurez de <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr>.</div>
+</details>
+</section>
+
+<section id="caso-14" class="caso">
+<h2>Caso 14 · Validación de requisitos en una OTI pública: diseño cuasiexperimental (Canchari, 2020)</h2>
+<p class="origen">Origen: Web: <a href="https://cris.continental.edu.pe/es/publications/requirements-validation-in-the-information-systems-software-devel/">Canchari (2020), CIMPS 2019, Springer AISC</a> (adaptado; las cifras son creadas porque el resumen no las publica)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>La <abbr title="Oficina de Tecnologías de la Información">OTI</abbr> de una institución pública de Lima compara <b>6 proyectos sin</b> validación de requisitos (control) con <b>6 proyectos con</b> validación (revisión con usuarios + prototipos + criterios de aceptación). Promedios:</p>
+<div class="tabla"><table>
+<thead><tr><th>Indicador</th><th>Sin validación</th><th>Con validación</th></tr></thead>
+<tbody>
+<tr><td>Requisitos modificados después de la línea base</td><td>31 %</td><td>12 %</td></tr>
+<tr><td>Defectos de requisitos en <abbr title="User Acceptance Testing – Pruebas de Aceptación del Usuario">UAT</abbr> por caso de uso</td><td>2,4</td><td>0,9</td></tr>
+<tr><td>Esfuerzo de retrabajo (% del total)</td><td>22 %</td><td>9 %</td></tr>
+<tr><td>Satisfacción del usuario (1–5)</td><td>3,1</td><td>4,2</td></tr>
+</tbody></table></div>
+<p>Los proyectos "con validación" fueron elegidos por el jefe de la OTI entre los de áreas más colaborativas y los midió el mismo equipo. El jefe concluye: "la validación causó todas las mejoras; ya cumplimos la <abbr title="Norma Técnica Peruana">NTP</abbr> 12207".</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule la mejora relativa de cada indicador.</li>
+<li>Identifique las amenazas a la validez del diseño.</li>
+<li>¿La "validación de requisitos" es verificación o validación según la NTP 2016? Ubíquela.</li>
+<li>Rebata "ya cumplimos la NTP" y proponga dos diseños de evaluación mejores.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>Respuesta 1:</b> cambios post-línea base (31 − 12)/31 = <b>−61,3 %</b>; defectos en UAT (2,4 − 0,9)/2,4 = <b>−62,5 %</b>; retrabajo (22 − 9)/22 = <b>−59,1 %</b>; satisfacción (4,2 − 3,1)/3,1 = <b>+35,5 %</b>.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema (amenaza)</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Sesgo de selección</td><td>Asignación no aleatoria</td><td>El jefe eligió áreas "colaborativas"</td><td>Validez interna</td></tr>
+<tr><td>Baja potencia estadística</td><td>n = 6 por grupo</td><td>Sin prueba de significancia</td><td>Validez de conclusión estadística</td></tr>
+<tr><td>Sesgo del evaluador / Hawthorne</td><td>El mismo equipo aplica y mide</td><td>Sin medición independiente</td><td>Validez de constructo</td></tr>
+<tr><td>Variables confusoras</td><td>Complejidad, experiencia del equipo, tipo de área</td><td>No controladas</td><td>Validez interna</td></tr>
+<tr><td>Sobregeneralización normativa</td><td>Confundir un proceso mejorado con conformidad</td><td>"ya cumplimos la NTP"</td><td>Conformidad</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 3:</b> es mayormente <b>validación</b> (¿los requisitos expresan la necesidad real del usuario? → 7.2.5 Validación aplicada a requisitos + 6.4.1 Definición de requisitos de las partes interesadas). La revisión de la calidad del documento (completo, consistente, verificable) es <b>verificación</b> (7.2.4) mediante revisión (7.2.6). En la 2017: 6.4.2 (necesidades y requisitos de partes interesadas) incluye validar requisitos con las partes; 6.4.9/6.4.11 para <abbr title="Verification and Validation – Verificación y Validación">V&amp;V</abbr> del sistema. En <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110-5-1-2 la validación de requisitos es una tarea explícita de <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr>.</p>
+<p><b>Respuesta 4:</b> mejorar un proceso ≠ conformidad con 43 procesos: hace falta evidencia de los procesos seleccionados o una conformidad <b>adaptada</b> con tailoring documentado, demostrada por evaluación (15504/33000), no por 4 indicadores.</p>
+<div class="alt"><h4>Alternativa A · Cuasiexperimento con emparejamiento</h4><p>Emparejar proyectos por tamaño (PF), complejidad y área; medición por un tercero (<abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr>); prueba U de Mann-Whitney (muestras pequeñas, no normales). Viable en una OTI.</p></div>
+<div class="alt"><h4>Alternativa B · Serie temporal interrumpida</h4><p>Medir los mismos indicadores mensualmente 12 meses antes y 12 después de institucionalizar la validación en toda la OTI; controla maduración y tendencia. Requiere 6.3.7 Medición sostenida.</p></div>
+<h4>Justificación normativa</h4>
+<p>NTP 2016: 7.2.5 Validación ("¿construimos el producto correcto?") y 7.2.4 Verificación ("¿construimos el producto correctamente?"), tal como enfatiza la profesora; 6.4.1 incluye obtener, analizar y validar requisitos de las partes interesadas. Boehm: corregir en requisitos es 5 a 200 veces más barato que en producción (citado por el G3).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>Volatilidad de requisitos</b> = requisitos modificados tras línea base / requisitos totales × 100. Meta ≤ 15 %.</li>
+<li><b>Densidad de defectos de requisitos en UAT</b> = defectos de requisitos / casos de uso. Meta ≤ 1,0.</li>
+<li><b>% de retrabajo</b> = horas de retrabajo / horas totales × 100. Meta ≤ 10 %.</li>
+<li><b><abbr title="Customer Satisfaction Score – Índice de Satisfacción del Cliente">CSAT</abbr></b> (Customer Satisfaction Score) ≥ 4,0/5.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes.</b> (1) Llamar "verificación" a la revisión con usuarios: si el referente es la necesidad, es validación. (2) Afirmar causalidad con n = 6 y sin aleatorizar. (3) Restar porcentajes en vez de calcular la variación relativa (31 → 12 no es "−19 %", es −61,3 %). Ambos diseños (A y B) son defendibles.</div>
+</details>
+</section>
+
+<section id="caso-15" class="caso">
+<h2>Caso 15 · Paradoja de KPI en la CSJ Tacna (AUP + ETL) y correlaciones en la UNAS</h2>
+<p class="origen">Origen: Entregable G3 (avance MPCH, casos de éxito: Flor Rodríguez et al., 2022; Delgado Malpartida, 2025) · reformulado como caso nuevo para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><b>Parte A.</b> En 4 juzgados civiles de la CSJ (Corte Superior de Justicia) de Tacna, bajo la Directiva N.° 002-2019-CE-PJ (alineada a la <abbr title="Norma Técnica Peruana">NTP</abbr> 12207:2016), se desarrolla con AUP (Agile Unified Process: iniciación, elaboración, construcción, transición) un sistema de indicadores con ETL (Extract, Transform, Load) quincenal desde 4 <abbr title="Base de Datos">BD</abbr> del Sistema Integrado Judicial. Línea base 2018: <b>1 370</b> sentencias/autos; <b>KPI1</b> (días hasta la calificación) = 26,72; <b>KPI2</b> (días hasta la sentencia) = 171,13. Post: 1 535 sentencias; KPI1 = 26,07; KPI2 = 178,08. Sin grupo control ni prueba de significancia.</p>
+<p><b>Parte B.</b> En la UNAS (Universidad Nacional Agraria de la Selva), un estudio correlacional transversal con <b>n = 11</b> (población = muestra), Likert de 5 puntos, α de Cronbach &gt; 0,70 y Rho de Spearman obtiene: calidad global del proceso Rho = 0,609 (p &lt; 0,05); revisión 0,900; auditoría 0,879; resolución de problemas 0,820; validación 0,818 (p &lt; 0,01); <b>verificación 0,576 (no significativa)</b>. El 90,9 % cree que su área "cumple la norma".</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Parte A: calcule las variaciones; ¿mejoró o empeoró? Explique la paradoja KPI2 ↑ con producción ↑.</li>
+<li>Parte A: mapee las fases AUP a procesos de la NTP 2016 y de la 2017.</li>
+<li>Parte B: interprete la significancia y diga qué no se puede concluir con n = 11.</li>
+<li>Parte B: reubique las 5 dimensiones (procesos de apoyo de 1995) en la NTP 2016 y en la 2017.</li>
+<li>Proponga <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> corregidos y dos alternativas de evaluación.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>Respuesta 1:</b> KPI1 (26,07 − 26,72)/26,72 = <b>−2,4 %</b> (mejora leve); KPI2 (178,08 − 171,13)/171,13 = <b>+4,1 %</b> (empeora); producción (1 535 − 1 370)/1 370 = <b>+12,0 %</b>. Paradoja: si se sentencian más expedientes <b>antiguos</b> (descarga de carga procesal), el promedio de días hasta sentencia sube aunque el desempeño mejore. El promedio es sensible a la mezcla: conviene la <b>mediana</b> y segmentar por año de ingreso.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>KPI2 engañoso</td><td>Promedio afectado por la antigüedad de la cartera</td><td>+4,1 % con +12 % de producción</td><td>Validez del indicador (6.3.7)</td></tr>
+<tr><td>Causalidad no demostrada (A)</td><td>Pre/post sin control ni significancia</td><td>Diseño preexperimental</td><td>Validez interna</td></tr>
+<tr><td>Procesos NTP no detallados (A)</td><td>Artículo centrado en el producto</td><td>No lista procesos cubiertos</td><td>Trazabilidad a la norma</td></tr>
+<tr><td>Percepción ≠ cumplimiento (B)</td><td>Encuesta de opinión</td><td>90,9 % "cumple"</td><td>Validez de constructo</td></tr>
+<tr><td>Muestra mínima (B)</td><td>n = 11</td><td>Verificación no significativa</td><td>Potencia estadística</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 2:</b> Iniciación → 6.4.1 Definición de requisitos de las partes interesadas, 6.3.1 (2017: 6.4.1, 6.4.2, 6.3.1); Elaboración → 7.1.2, 7.1.3 (2017: 6.4.3, 6.4.4); Construcción → 7.1.4–7.1.7 (2017: 6.4.5–6.4.9); Transición → 6.4.7 Instalación, 6.4.8 Soporte a la aceptación (2017: 6.4.10, 6.4.11). El ETL alimenta 6.3.7 Medición.</p>
+<p><b>Respuesta 3:</b> Rho = 0,609 indica correlación positiva moderada-alta; p &lt; 0,05 → improbable que sea azar. Verificación 0,576 no significativa: con n = 11 el valor crítico de Rho (α = 0,05, bilateral) es ≈ 0,62, por eso un 0,576 no alcanza. <b>No</b> se puede concluir causalidad ni generalizar; correlación ≠ causa; el instrumento mide percepción.</p>
+<p><b>Respuesta 4:</b></p>
+<div class="tabla"><table>
+<thead><tr><th>Dimensión UNAS (1995)</th><th>NTP 2016 (≡ 2008)</th><th>ISO/IEC/IEEE 12207:2017</th></tr></thead>
+<tbody>
+<tr><td>Revisión conjunta</td><td>7.2.6 Revisión del <abbr title="Software – Software / soporte lógico">SW</abbr></td><td>6.3.2 Evaluación y control (revisiones)</td></tr>
+<tr><td>Auditoría</td><td>7.2.7 Auditoría del SW</td><td>6.3.8 <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> (evaluaciones independientes)</td></tr>
+<tr><td>Resolución de problemas</td><td>7.2.8 Resolución de problemas</td><td>6.3.8 QA (tratar incidentes y problemas)</td></tr>
+<tr><td>Validación</td><td>7.2.5 Validación</td><td>6.4.11 Validación</td></tr>
+<tr><td>Verificación</td><td>7.2.4 Verificación</td><td>6.4.9 Verificación</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Rediseñar los indicadores</h4><p>Reemplazar promedios por mediana y percentil 90; añadir tasa de resolución (clearance rate) = expedientes resueltos / ingresados × 100 y antigüedad de la cartera pendiente. Para la UNAS, complementar la encuesta con evidencias objetivas (actas, registros de auditoría).</p></div>
+<div class="alt"><h4>Alternativa B · Diseño con control</h4><p>Comparar los 4 juzgados intervenidos con 4 juzgados civiles no intervenidos de otra CSJ (diferencias en diferencias); en la UNAS, evaluación de capacidad de procesos (N/P/L/F) en lugar de percepción.</p></div>
+<h4>Justificación normativa</h4>
+<p>6.3.7 Medición (NTP 2016 y 2017): las medidas deben ser válidas para la necesidad de información; un KPI que empeora cuando el desempeño mejora no cumple ese propósito. Directiva 002-2019-CE-PJ: institucionalización en el Poder Judicial. Equivalencias 1995 → 2008 → 2017 según la diapositiva A-18 y la NTP 2016.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>Mediana de días hasta sentencia</b> por cohorte de ingreso. Meta: −10 % anual.</li>
+<li><b>Clearance rate</b> ≥ 100 % (se resuelve al menos lo que ingresa).</li>
+<li><b>% de dimensiones de proceso con evidencia documental</b> (UNAS). Meta ≥ 80 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes.</b> (1) Concluir "el sistema empeoró" por KPI2: hay que leer la mezcla de casos. (2) Leer Rho = 0,900 como "90 % de cumplimiento". (3) Ubicar "revisión conjunta" como proceso propio en la 2017: allí no existe; se reparte en 6.3.2/6.3.8. (4) Decir que el 90,9 % de percepción demuestra conformidad.</div>
+</details>
+</section>
+
+<section id="caso-16" class="caso">
+<h2>Caso 16 · Operación y mantenimiento de SINEACE Móvil en 2026: clasificar solicitudes y formalizar 6.4.13</h2>
+<p class="origen">Origen: Creado para el repaso a partir del entregable G3 (recomendación R1) y de las diapositivas 21–23 (clase, Mazo A: operación y tipos de mantenimiento); técnica MANTEMA citada por el G6</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>Un año después del lanzamiento, la Otic del SINEACE recibe 10 solicitudes (SC – Solicitudes de Cambio) para la app:</p>
+<ol>
+<li>SC-01: corregir que los programas caducados se muestran como vigentes (reaparece BUG-031 tras una actualización).</li>
+<li>SC-02: adaptar la app a Android 16, que cambia la política de permisos de ubicación.</li>
+<li>SC-03: publicar la versión iOS en App Store (presupuesto aprobado).</li>
+<li>SC-04: añadir notificaciones <i>push</i> cuando un programa favorito pierde la acreditación.</li>
+<li>SC-05: actualizar Retrofit y el SDK de Google Maps antes de su fin de soporte.</li>
+<li>SC-06: refactorizar el sincronizador para reducir la deuda técnica detectada por SonarQube (complejidad ciclomática alta).</li>
+<li>SC-07: la SUNEDU (Superintendencia Nacional de Educación Superior Universitaria) cambia el formato de su código de licenciamiento.</li>
+<li>SC-08: la app falla cuando la <abbr title="Application Programming Interface – Interfaz de programación de aplicaciones">API</abbr> devuelve una lista vacía de sedes.</li>
+<li>SC-09: un chatbot con <abbr title="Artificial Intelligence (AI) – Inteligencia Artificial">IA</abbr>/NLP (Inteligencia Artificial / Natural Language Processing) para preguntas frecuentes.</li>
+<li>SC-10: monitorear la disponibilidad de la API y atender consultas de la mesa de ayuda.</li>
+</ol>
+<p>Presupuesto anual de mantenimiento: S/ 4 725 (año 2 del flujo de caja). Equipo: 1 analista programador al 50 %.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Clasifique cada SC por tipo de mantenimiento (correctivo, adaptativo, perfectivo, preventivo) o como actividad de operación.</li>
+<li>Diseñe el proceso 6.4.13 (2017) / 6.4.10 (<abbr title="Norma Técnica Peruana">NTP</abbr> 2016) en actividades y tareas.</li>
+<li>Priorice las SC con un criterio explícito.</li>
+<li>Proponga dos alternativas de organización del mantenimiento y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>Respuesta 1:</b></p>
+<div class="tabla"><table>
+<thead><tr><th>SC</th><th>Tipo</th><th>Por qué</th></tr></thead>
+<tbody>
+<tr><td>SC-01</td><td>Correctivo (regresión)</td><td>Defecto conocido que reaparece: además falla 6.3.5 <abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr>/regresión</td></tr>
+<tr><td>SC-02</td><td>Adaptativo</td><td>Cambio del entorno (<abbr title="Operating System – Sistema Operativo">SO</abbr>)</td></tr>
+<tr><td>SC-03</td><td>Adaptativo (nueva plataforma); algunos lo tratan como nuevo desarrollo</td><td>Llevar el <abbr title="Software – Software / soporte lógico">SW</abbr> a otro entorno; por tamaño puede requerir un proyecto propio</td></tr>
+<tr><td>SC-04</td><td>Perfectivo</td><td>Nueva funcionalidad pedida por usuarios</td></tr>
+<tr><td>SC-05</td><td>Preventivo</td><td>Evita fallas futuras por obsolescencia</td></tr>
+<tr><td>SC-06</td><td>Preventivo (o perfectivo según <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr>/IEEE 14764, que incluye mejoras de mantenibilidad)</td><td>Reduce deuda técnica sin cambiar funcionalidad</td></tr>
+<tr><td>SC-07</td><td>Adaptativo</td><td>Cambio del entorno externo (regulador/interfaz)</td></tr>
+<tr><td>SC-08</td><td>Correctivo</td><td>Defecto en producción</td></tr>
+<tr><td>SC-09</td><td>Perfectivo (evolutivo)</td><td>Nueva capacidad</td></tr>
+<tr><td>SC-10</td><td>No es mantenimiento: <b>Operación</b> (6.4.12 / NTP 6.4.9)</td><td>Monitorear y atender consultas (diap. 21)</td></tr>
+</tbody></table></div>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Regresión del BUG-031</td><td>Sin prueba de regresión automatizada ni línea base</td><td>SC-01</td><td>Fiabilidad; adecuación funcional</td></tr>
+<tr><td>Demanda &gt; capacidad</td><td>0,5 FTE (Full-Time Equivalent) y S/ 4 725/año para 9 SC de mantenimiento</td><td>Presupuesto</td><td>Sostenibilidad</td></tr>
+<tr><td>Sin proceso de mantenimiento</td><td>6.4.13 no definido (hueco reconocido por el G3)</td><td>Entregable G3, C4/R1</td><td>Mantenibilidad (modificabilidad, analizabilidad)</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 2 · 6.4.13 (2017) ≡ 6.4.10 (NTP 2016):</b> A1 Preparar el mantenimiento (estrategia, presupuesto, ambiente, <abbr title="Service Level Agreement – Acuerdo de Nivel de Servicio">SLA</abbr> por severidad); A2 Analizar la solicitud (registrar, clasificar tipo, evaluar impacto con trazabilidad <abbr title="User Story – Historia de Usuario">HU</abbr>↔código↔pruebas, estimar); A3 Implementar la modificación (rama de Gitflow, cambios, pruebas unitarias); A4 Revisar/aceptar (regresión, verificar que no afecte otras funciones, aceptación del <abbr title="Product Owner – Dueño del producto (Scrum)">PO</abbr>); A5 Distribuir (nueva versión con <i>Phased Rollout</i>); A6 Actualizar documentación y registrar lecciones. Coincide con las 6 actividades de mantenimiento de la diap. 23 (identificar/analizar, modificar, verificar que no afecte, distribuir, adaptar a nuevos entornos, actualizar documentación).</p>
+<p><b>Respuesta 3 · priorización</b> (riesgo = impacto × urgencia, 1–5): SC-01 (25) &gt; SC-08 (20) &gt; SC-02 (20, fecha fija del SO) &gt; SC-07 (16, regulatorio) &gt; SC-05 (12) &gt; SC-06 (9) &gt; SC-04 (8) &gt; SC-03 (proyecto aparte) &gt; SC-09 (proyecto aparte).</p>
+<div class="alt"><h4>Alternativa A · Mantenimiento interno con Kanban y clases de servicio</h4><p>Clase "expedita" (correctivos críticos), "fecha fija" (adaptativos de SO/regulador), "estándar" (perfectivos), "intangible" (preventivos, 20 % de la capacidad). Barato; depende de una sola persona (riesgo de persona clave).</p></div>
+<div class="alt"><h4>Alternativa B · Contrato de mantenimiento con SLA (6.1.1 Adquisición)</h4><p>Tercerizar correctivo y adaptativo con SLA (severidad 1 en ≤ 24 h) y bolsa de horas para perfectivo; la Otic conserva <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> y SCM. Más costoso; reduce el riesgo de capacidad. Los grandes (iOS, chatbot) como proyectos con su propio ciclo.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC/IEEE 12207:2017 6.4.13 Mantenimiento y 6.4.12 Operación; NTP 2016 6.4.10 Mantenimiento del SW y 6.4.9 Operación del SW; tipos según ISO/IEC/IEEE 14764 y diap. 23; MANTEMA como tailoring de la 12207 para mantenimiento (citado por el G6).</p>
+<div class="norma"><h4>ISO/IEC/IEEE 14764:2022</h4><p><b>Emisor:</b> ISO/IEC <abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr> + <abbr title="Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos">IEEE</abbr>. <b>Versión:</b> 2022 (antes 2006). <b>Propósito:</b> detallar el proceso de mantenimiento de la 12207. <b>Estructura:</b> categorías correctivo, preventivo (correcciones), adaptativo, perfectivo (mejoras), y aditivo en la versión 2022. <b>Trampa:</b> la profesora usa los 4 tipos clásicos; el "preventivo" es corrección anticipada, no "nueva funcionalidad".</p></div>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>Backlog de mantenimiento</b> = SC abiertas al cierre del mes. Meta: tendencia decreciente.</li>
+<li><b>Tiempo medio de resolución por tipo</b> (correctivo crítico ≤ 48 h; adaptativo ≤ 30 días).</li>
+<li><b>Tasa de regresión</b> = defectos reabiertos / defectos corregidos × 100. Meta ≤ 3 %.</li>
+<li><b>% de capacidad en preventivo</b>. Meta ≈ 20 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes.</b> (1) Clasificar SC-10 como mantenimiento: es operación. (2) Llamar "preventivo" a una funcionalidad nueva. (3) Tratar SC-03 o SC-09 como un mantenimiento menor: su tamaño exige planificación (6.3.1) propia. La clasificación de SC-03 y SC-06 admite discusión; se califica la justificación.</div>
+</details>
+</section>
+
+<div class="pn"><a href="s4-practica.html">← S4 · SQAP e ISO/IEC 12207:2017</a><a href="s6-practica.html">S6 · SPICE (15504) y CMMI →</a></div>
+</main></div>
+<footer>Calidad de Software 20W0703 · FISI-UNMSM 2026-II · Repaso de estudio (Semanas 1–7) basado en el material de clase y entregables.</footer>
+<script src="assets/js/app.js" defer></script>
+</body></html>

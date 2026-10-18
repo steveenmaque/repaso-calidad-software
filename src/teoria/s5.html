@@ -1,0 +1,885 @@
+<h1>Sesión 5 · Normas Técnicas Peruanas para mejorar los procesos del SW: NTP-ISO/IEC 12207:2016</h1>
+<p class="lead">El sílabo pide para la Semana 5 conocer las <b>NTP (Normas Técnicas Peruanas)</b> que sirven para mejorar los procesos del SW (Software), en especial la <b>NTP-ISO/IEC 12207:2016</b>, la adopción peruana de la norma internacional de <b>procesos del ciclo de vida del SW</b>. La clase de la Mg. Huayna (mazo «Modelo de Calidad ISO/IEC 12207», 33 diapositivas) recorre la historia de la norma (IEEE 1979 → ISO/IEC/IEEE 2017), su definición, objetivos, campo de aplicación, la sastrería (<i>tailoring</i>) y, sobre todo, la <b>estructura de procesos</b>: los 7 grupos de la NTP 2016 (≡ ISO/IEC 12207:2008) y las 3 categorías clásicas <b>Principales (5) + Apoyo (8) + Organizativos (4) = 17 procesos</b> con su numeración 5.x / 6.x / 7.x. Se cierra con la guía de referencia de la NTP 2016 (INACAL, RM N.° 041-2017-PCM), el caso de estudio de Chinarro Morales (UNMSM, 2019) y la práctica de informe de investigación. Esta página integra todo eso y lo conecta con S3 (ISO/IEC 25010), S4 (SQAP e ISO/IEC/IEEE 12207:2017) y S6 (SPICE, ISO/IEC 33000, CMMI).</p>
+<div class="clave"><h4>Ideas clave</h4><ul>
+<li><b>NTP-ISO/IEC 12207:2016</b> = <b>3.ª edición</b>, aprobada por <b>INACAL</b> el <b>16-jul-2016</b>, <b>uso obligatorio desde 2017</b> (RM N.° 041-2017-PCM) para las entidades del <b>SNI</b> (Sistema Nacional de Informática); es <b>equivalente a ISO/IEC 12207:2008</b>.</li>
+<li>Título: «Ingeniería de SW – Procesos del ciclo de vida del SW». Es una norma de <b>procesos</b> (no de producto como ISO/IEC 25010 ni de madurez como CMMI).</li>
+<li>Jerarquía: <b>Proceso → Actividad → Tarea</b>; cubre de la <b>concepción</b> al <b>retiro</b> (<i>disposal</i>).</li>
+<li>Línea de tiempo: IEEE 730/1074 (1979–85) · OTAN 1986 · JTC 1987 · inicio 1989 · 1.ª ed. <b>agosto 1995</b> · Amd <b>2002</b> (Propósito y Resultados → SPICE) · <b>NTP 2004</b> · <b>2008</b> (armonía con ISO/IEC 15288) · <b>NTP 2016</b> · <b>ISO/IEC/IEEE 2017</b>.</li>
+<li>Estructura según edición: <b>1995 → 3 categorías / 17 procesos</b>; <b>2008 = NTP 2016 → 7 grupos / 43 procesos</b>; <b>2017 → 4 grupos / 30 procesos</b>.</li>
+<li>Los 7 grupos (A-10): Acuerdo · Habilitación Organizacional del Proyecto · Gestión de Proyectos · Técnicos · Implementación de SW · Soporte de SW · Reutilización de SW.</li>
+<li>Principales (5): 5.1 Adquisición · 5.2 Suministro · 5.3 Desarrollo · 5.4 Operación · 5.5 Mantenimiento.</li>
+<li>Apoyo (8): 6.1 Documentación · 6.2 SCM · 6.3 QA · 6.4 Verificación · 6.5 Validación · 6.6 Revisión conjunta · 6.7 Auditoría · 6.8 Resolución de problemas. Son <b>transversales</b>, corren <b>en paralelo</b> y <b>no desarrollan SW</b>.</li>
+<li>Organizativos (4): 7.1 Gestión · 7.2 Infraestructura · 7.3 Mejora (CMMI, ISO/IEC 33000, ISO 9001) · 7.4 Formación/RR. HH.</li>
+<li>Verificación = «¿construimos el producto <b>correctamente</b>?» (intermedio vs. etapa anterior); Validación = «¿construimos el producto <b>correcto</b>?» (final vs. usuario).</li>
+<li>4 tipos de mantenimiento: <b>correctivo, perfectivo, adaptativo, preventivo</b>.</li>
+<li><b>Sastrería</b>: la norma no impone cascada ni ágil; se seleccionan procesos/actividades/tareas según <b>escala, complejidad y criticidad</b>.</li>
+</ul></div>
+
+<section id="que-es-la-12207">
+<h2>1. ¿Qué es la ISO/IEC 12207 y la NTP-ISO/IEC 12207?</h2>
+<p>La clase arranca con un mapa de contenidos (A-02) en dos bloques: <b>Visión general de la norma</b> (antecedentes históricos, objetivos, conceptos, introducción) y <b>Norma 12207</b> (procesos principales, de soporte y organizacionales). Ese esquema es la columna vertebral de esta página.</p>
+<figure>
+<img src="@img/semana-05-modelo-de-calidad-iso-12207/p02.png" alt="Esquema de contenido de la clase: bloque Visión General de la Norma con Antecedentes históricos, Objetivos de la norma, Definir conceptos e Introducción; bloque Norma 12207 con Procesos principales, Procesos de soporte y Procesos organizacionales">
+<figcaption>Agenda de la sesión: primero la visión general (historia, objetivos, conceptos, introducción) y luego la norma descompuesta en sus <b>3 categorías clásicas</b> de procesos (principales, soporte, organizacionales).</figcaption>
+</figure>
+<p class="fuente">Fuente: diapositiva 2, Semana 05 «Modelo de Calidad ISO/IEC 12207» (Mg. Huayna).</p>
+
+<div class="concepto"><h3>ISO/IEC 12207 (norma internacional de procesos del ciclo de vida del SW)</h3>
+<p>Norma internacional desarrollada conjuntamente por la <b>ISO</b> (International Organization for Standardization – Organización Internacional de Normalización) y la <b>IEC</b> (International Electrotechnical Commission – Comisión Electrotécnica Internacional), cuyo título completo es <b>«Ingeniería de Software – Procesos del Ciclo de Vida del Software»</b>. Publicada por primera vez en <b>1995</b> y revisada varias veces; su última versión internacional es la <b>ISO/IEC/IEEE 12207:2017</b> (ya con el IEEE, Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos, como coeditor).</p>
+<p class="ej"><b>Ej.:</b> cuando la OGTI (Oficina General de TI) de la UNMSM licita el nuevo SUM, puede exigir en los TDR (Términos de Referencia) que el proveedor siga los procesos de la ISO/IEC 12207 para que «desarrollo», «QA» y «mantenimiento» signifiquen lo mismo para ambas partes.</p>
+</div>
+
+<div class="concepto"><h3>Marco de referencia de procesos (PRM implícito)</h3>
+<p>La 12207 <b>proporciona un marco de referencia para establecer y mejorar los procesos de ingeniería de SW</b> de una organización (A-08). No dice <i>cómo</i> programar ni qué herramienta usar: define <b>qué procesos</b> deben existir, su propósito, sus resultados y sus actividades. Desde la enmienda de 2002 cada proceso se expresa con <b>propósito + resultados</b>, lo que la convierte en un <b>PRM</b> (Process Reference Model – Modelo de Referencia de Procesos) apto para evaluaciones con un <b>PAM</b> (Process Assessment Model – Modelo de Evaluación de Procesos) de ISO/IEC 15504/33000.</p>
+<p class="ej"><b>Ej.:</b> una software factory limeña que quiere una evaluación SPICE usa los procesos de la 12207 como PRM y la ISO/IEC 15504-5 como PAM para medir el nivel de capacidad (CL, Capability Level) de su proceso de QA.</p>
+</div>
+
+<div class="concepto"><h3>Proceso, actividad y tarea (jerarquía de la 12207)</h3>
+<p>La norma «establece un <b>conjunto de actividades y tareas</b> que deben realizarse en cada fase de desarrollo y operación del SW» (A-08). La jerarquía es: <b>Proceso</b> (conjunto de actividades interrelacionadas que transforman entradas en salidas con un propósito) → <b>Actividad</b> (conjunto cohesivo de tareas de un proceso) → <b>Tarea</b> (acción concreta, requisito, recomendación o acción permitida que contribuye a los resultados). La práctica de la sesión exige desagregar exactamente así la metodología del caso de estudio.</p>
+<p class="ej"><b>Ej.:</b> Proceso <i>Mantenimiento</i> → actividad «Análisis de problemas y modificaciones» → tarea «replicar y verificar el incidente reportado en el SUM antes de modificar el código».</p>
+</div>
+
+<div class="concepto"><h3>Cobertura de todo el ciclo de vida del SW</h3>
+<p>La 12207 define procesos que cubren <b>todo el ciclo de vida del SW</b>, «desde la <b>concepción y especificación</b> del sistema hasta la <b>operatividad, mantenimiento y eventual desactivación</b>» (A-08). Por eso no es solo una norma de «desarrollo»: incluye adquirir, suministrar, operar, mantener y retirar.</p>
+<p class="ej"><b>Ej.:</b> el sistema de trámite documentario de RENIEC pasa por adquisición (licitación), desarrollo, operación diaria, mantenimiento por cambios normativos y, años después, retiro con migración de datos al nuevo SGD (Sistema de Gestión Documental).</p>
+</div>
+
+<div class="concepto"><h3>NTP (Norma Técnica Peruana)</h3>
+<p>Documento normativo aprobado por el organismo nacional de normalización del Perú —hoy el <b>INACAL</b> (Instituto Nacional de Calidad)— que establece, para uso común y repetido, reglas, directrices o características. Muchas NTP son <b>adopciones idénticas</b> (traducción) de normas ISO/IEC; en ese caso el código conserva el origen: <b>NTP-ISO/IEC 12207</b>. Por sí misma una NTP es <b>voluntaria</b>; se vuelve <b>obligatoria</b> cuando una norma legal (p. ej., una RM, Resolución Ministerial) así lo dispone.</p>
+<p class="ej"><b>Ej.:</b> la NTP-ISO/IEC 27001 (SGSI, Sistema de Gestión de Seguridad de la Información) y la NTP-ISO/IEC 12207 son ambas adopciones ISO/IEC que la PCM (Presidencia del Consejo de Ministros) volvió obligatorias para el sector público.</p>
+</div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>La profesora titula su mazo «<b>Modelo de Calidad</b> ISO/IEC 12207», pero técnicamente la 12207 es una <b>norma de procesos del ciclo de vida</b>: NO es un modelo de calidad del <b>producto</b> (eso es ISO/IEC 25010, visto en S3) ni un modelo de <b>madurez/capacidad</b> (eso es CMMI o ISO/IEC 15504/33000, S6). Si una pregunta pide «qué norma define las características de calidad del producto (usabilidad, fiabilidad…)», la respuesta es 25010, no 12207. Si pide «qué norma define el proceso de Verificación», es la 12207.</p></div>
+</section>
+<section id="antecedentes-historicos">
+<h2>2. Antecedentes históricos: de IEEE 730 a ISO/IEC/IEEE 12207:2017</h2>
+<p>Las diapositivas A-03 a A-06 presentan la historia como una línea de tiempo en cintas. Es materia típica de preguntas de «ordena cronológicamente» o «qué aportó la versión X». Siglas de la sección: IEEE (Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos), OTAN (Organización del Tratado del Atlántico Norte; NATO en inglés), JTC (Joint Technical Committee – Comité Técnico Conjunto), SPICE (Software Process Improvement and Capability dEtermination – Mejora de Procesos y Determinación de la Capacidad), PCM, SNI, INACAL.</p>
+
+<div class="tabla"><table>
+<thead><tr><th>Año</th><th>Hito</th><th>Idea clave para el examen</th></tr></thead>
+<tbody>
+<tr><td>1979–1985</td><td>IEEE desarrolla normas de documentación y gestión del ciclo de vida: <b>IEEE 730</b> y <b>IEEE 1074</b></td><td>Documentación y ciclo de vida del SW (IEEE 730 = SQAP, visto en S4)</td></tr>
+<tr><td>1986</td><td>La <b>OTAN</b> publica un modelo de <i>software life cycle</i> para proyectos militares</td><td>Uniformidad en la <b>adquisición</b> de SW</td></tr>
+<tr><td>1987</td><td>Se forma el <b>JTC</b> (ISO + IEC)</td><td>Estandarizar los procesos del SW (ISO/IEC JTC 1, subcomité SC 7)</td></tr>
+<tr><td>1989</td><td>Se inicia el desarrollo de la ISO/IEC 12207</td><td>Seis años de trabajo hasta su publicación</td></tr>
+<tr><td>Agosto 1995</td><td><b>ISO/IEC 12207:1995</b>, 1.ª edición</td><td>3 categorías, <b>17 procesos</b> (5 + 8 + 4)</td></tr>
+<tr><td>2002</td><td><b>Enmienda</b> (Amd 1) a la versión 1995</td><td>Introduce <b>Propósito y Resultados</b> de los procesos → alinea con <b>ISO/IEC 15504 (SPICE)</b></td></tr>
+<tr><td>2004</td><td><b>NTP-ISO/IEC 12207:2004</b></td><td><b>1.ª adopción formal</b> en Perú; RM de la PCM la hace <b>obligatoria</b> en el SNI</td></tr>
+<tr><td>2008</td><td><b>ISO/IEC 12207:2008</b></td><td><b>Armonización estructural profunda</b> con <b>ISO/IEC 15288</b> (clasificación idéntica)</td></tr>
+<tr><td>16-jul-2016</td><td><b>NTP-ISO/IEC 12207:2016</b> (3.ª ed.) aprobada por <b>INACAL</b></td><td>Basada en / equivalente a ISO/IEC 12207:2008; <b>versión peruana vigente</b></td></tr>
+<tr><td>2017</td><td>Uso obligatorio de la NTP 2016 (RM N.° 041-2017-PCM) · publicación de <b>ISO/IEC/IEEE 12207:2017</b></td><td>Marco oficial del Estado peruano · <b>versión internacional vigente</b>, con auspicio del IEEE</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuente: reconstrucción a partir de las diapositivas 3, 4, 5 y 6, Semana 05; complementos (SC 7, Amd 1, RM) de las notas de normas.</p>
+
+<div class="concepto"><h3>IEEE 730 e IEEE 1074 (antecedentes del IEEE)</h3>
+<p>Entre 1979 y 1985 el IEEE produjo las primeras normas sobre <b>documentación y gestión del ciclo de vida</b> del SW. <b>IEEE 730</b> regula el <b>SQAP</b> (Software Quality Assurance Plan – Plan de Aseguramiento de la Calidad del SW) e <b>IEEE 1074</b> es el <i>Standard for Developing Software Life Cycle Processes</i> (cómo construir un ciclo de vida a medida a partir de actividades).</p>
+<p class="ej"><b>Ej.:</b> el SQAP que el G3 armó en S4 para el SINEACE móvil se basa en IEEE 730; la 12207 hereda de ese linaje la idea de «proceso de QA» como proceso de apoyo.</p>
+</div>
+
+<div class="concepto"><h3>Modelo de ciclo de vida de la OTAN (1986)</h3>
+<p>La OTAN (NATO, North Atlantic Treaty Organization) publicó en 1986 un modelo de <i>software life cycle</i> para sus proyectos militares con el objetivo de lograr <b>uniformidad en la adquisición de SW</b> entre países miembros. Es un antecedente directo de los procesos de <b>Adquisición</b> y <b>Suministro</b> de la 12207. (Complemento: en paralelo el DoD, Department of Defense de EE. UU., publicaba DoD-STD-2167A en 1988 y MIL-STD-498 en 1994.)</p>
+<p class="ej"><b>Ej.:</b> igual que la OTAN uniformizaba contratos entre ejércitos, hoy el OSCE (Organismo Supervisor de las Contrataciones del Estado) y la NTP buscan que todas las entidades peruanas compren SW con el mismo lenguaje de procesos.</p>
+</div>
+
+<div class="concepto"><h3>JTC 1 / SC 7 (Comité Técnico Conjunto ISO/IEC)</h3>
+<p>En 1987 se formó el <b>JTC</b> que reúne a ISO e IEC para estandarizar las Tecnologías de la Información. Dentro del <b>ISO/IEC JTC 1</b>, el <b>SC 7</b> (Subcommittee 7 – <i>Software and Systems Engineering</i>) es el que redacta la 12207, la 15288, la 15504/33000, la 25010 y la 29110.</p>
+<p class="ej"><b>Ej.:</b> el código «ISO/IEC» de la 12207 delata su origen en el JTC 1; cuando en 2017 el IEEE se suma, el código pasa a «ISO/IEC/IEEE».</p>
+</div>
+
+<div class="concepto"><h3>ISO/IEC 12207:1995 (1.ª edición)</h3>
+<p>Primera edición, publicada en <b>agosto de 1995</b> tras iniciarse su desarrollo en 1989. Organiza <b>17 procesos</b> en <b>3 categorías</b>: Principales (5, cláusula 5), de Apoyo (8, cláusula 6) y Organizativos (4, cláusula 7). La numeración 5.1…7.4 del diagrama A-18 proviene de esas cláusulas. Fue adoptada en Perú como NTP-ISO/IEC 12207:2004.</p>
+<p class="ej"><b>Ej.:</b> «6.3 Aseguramiento de la Calidad» significa «cláusula 6 (Apoyo), proceso 3»; si en el examen ves «6.4», piensa en Verificación.</p>
+</div>
+
+<div class="concepto"><h3>Enmienda 2002: Propósito y Resultados (Amd 1)</h3>
+<p>La <b>ISO/IEC 12207:1995/Amd 1:2002</b> introdujo el concepto de <b>Propósito y Resultados de los procesos</b> (<i>purpose and outcomes</i>), con el fin de alinear la 12207 con los requisitos de evaluación de la <b>ISO/IEC 15504 (SPICE)</b>. Un evaluador necesita resultados observables para juzgar si un proceso se ejecuta. (Complemento: hubo una Amd 2:2004.)</p>
+<p class="ej"><b>Ej.:</b> el propósito de SCM es «establecer y mantener la integridad de los productos»; un resultado verificable es «se mantiene una línea base de cada CI (Configuration Item)», que un evaluador SPICE puede comprobar en el repositorio Git.</p>
+</div>
+
+<div class="concepto"><h3>NTP-ISO/IEC 12207:2004 (1.ª adopción peruana)</h3>
+<p><b>Primera adopción formal</b>: el estándar internacional se traduce y adopta como NTP. Una <b>RM</b> de la <b>PCM</b> (complemento: RM N.° 179-2004-PCM) aprueba su <b>uso obligatorio</b> en el <b>SNI</b> (sector público). Se basa en la edición 1995 (con enmiendas), por eso usa la estructura de 17 procesos.</p>
+<p class="ej"><b>Ej.:</b> desde 2004 una municipalidad que desarrollaba su sistema de rentas debía documentarlo con los procesos de la NTP 12207:2004 (adquisición, desarrollo, QA…).</p>
+</div>
+
+<div class="concepto"><h3>ISO/IEC 12207:2008 (armonización con ISO/IEC 15288)</h3>
+<p>Su principal objetivo fue la <b>armonización estructural profunda</b> con la <b>ISO/IEC 15288</b> (procesos del ciclo de vida de <b>sistemas</b>): ambas comparten una <b>clasificación idéntica de procesos</b> para asegurar coherencia entre el desarrollo de SW y el de sistemas complejos. Introduce los <b>7 grupos</b> (4 de contexto de sistema + 3 específicos de SW) y <b>43 procesos</b>. Es la base de la NTP 2016.</p>
+<p class="ej"><b>Ej.:</b> en un proyecto de cajeros del BCP, el HW (Hardware) del ATM se gestiona con la 15288 y el SW del ATM con la 12207, y ambos equipos usan los mismos nombres de procesos técnicos.</p>
+</div>
+
+<div class="concepto"><h3>ISO/IEC/IEEE 12207:2017 (versión internacional vigente)</h3>
+<p>Mantiene la armonización con la 15288 pero se publica también bajo el auspicio del <b>IEEE</b>, y <b>simplifica la clasificación de los procesos</b>, siendo la base de las mejores prácticas modernas de ingeniería de sistemas y SW. Estructura: <b>4 grupos y 30 procesos</b> (Acuerdo 2 · Habilitación organizacional del proyecto 6 · Gestión técnica 8 · Técnicos 14), vista en detalle en S4.</p>
+<p class="ej"><b>Ej.:</b> la práctica de la sesión pide desagregar la metodología según «ISO/IEC 12207:2017»; si el caso peruano cita la NTP 2016, hay que mapear sus procesos 2008 a los 30 de la versión 2017.</p>
+</div>
+
+<div class="norma"><h4>ISO/IEC 12207 (ediciones 1995, 2008) e ISO/IEC/IEEE 12207:2017</h4>
+<ul>
+<li><b>Código exacto:</b> ISO/IEC 12207:1995 (+ Amd 1:2002, Amd 2:2004) · ISO/IEC 12207:2008 · ISO/IEC/IEEE 12207:2017.</li>
+<li><b>Organismo emisor:</b> ISO e IEC a través del JTC 1/SC 7; desde 2017 también el IEEE.</li>
+<li><b>Versión/año:</b> 1.ª ed. ago-1995; 2.ª ed. 2008; 3.ª ed. 2017 (vigente internacional).</li>
+<li><b>Propósito:</b> marco común de <b>procesos del ciclo de vida del SW</b> (adquirir, suministrar, desarrollar, operar, mantener y retirar SW) con terminología bien definida.</li>
+<li><b>Estructura:</b> 1995 → 3 categorías / 17 procesos; 2008 → 7 grupos / 43 procesos; 2017 → 4 grupos / 30 procesos. Cada proceso: propósito, resultados, actividades y tareas.</li>
+<li><b>Trampa típica:</b> preguntar «cuántos procesos tiene la 12207» sin edición; la respuesta correcta depende de la versión (17 / 43 / 30).</li>
+</ul></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>«Versión vigente» aparece <b>dos veces</b> en el mazo: la <b>internacional</b> vigente es <b>ISO/IEC/IEEE 12207:2017</b> (A-06, A-07) y la <b>peruana</b> vigente es <b>NTP-ISO/IEC 12207:2016</b>, equivalente a la <b>ISO/IEC 12207:2008</b> (A-05, A-09). No es contradicción: el Perú aún no ha adoptado la edición 2017. Además, la diapositiva ubica IEEE 1074 en 1979–1985, pero su 1.ª edición formal es de <b>1991</b> (complemento): si te piden el año exacto, la profesora dice el bloque 1979–1985.</p></div>
+</section>
+
+<section id="ntp-12207-2016">
+<h2>3. La NTP-ISO/IEC 12207:2016: datos duros, marco legal y guía de referencia</h2>
+<p>Siglas de la sección: NTP (Norma Técnica Peruana), INACAL (Instituto Nacional de Calidad), SNI (Sistema Nacional de Informática), PCM (Presidencia del Consejo de Ministros), RM (Resolución Ministerial), SeGDi (Secretaría de Gobierno y Transformación Digital), ONGEI (Oficina Nacional de Gobierno Electrónico e Informática), TI (Tecnologías de la Información).</p>
+
+<div class="concepto"><h3>NTP-ISO/IEC 12207:2016 (3.ª edición)</h3>
+<p>Es el <b>marco oficial e institucional</b> en el Perú que establece un estándar común para los <b>procesos del ciclo de vida del SW</b>. Aprobada por el <b>INACAL</b> el <b>16 de julio de 2016</b>; su uso es <b>obligatorio desde 2017</b> para todas las entidades del <b>SNI</b> del Estado peruano. Está <b>basada y es equivalente</b> a la <b>ISO/IEC 12207:2008</b> (A-09). Subtítulo en la guía: «Ingeniería de Software y Sistemas – Procesos del Ciclo de Vida del Software (3.ª Edición)».</p>
+<p class="ej"><b>Ej.:</b> la OTI del MEF que desarrolla un módulo del SIAF (Sistema Integrado de Administración Financiera) debe evidenciar ante una auditoría de la CGR (Contraloría General de la República) que sigue los procesos de la NTP 12207:2016.</p>
+</div>
+
+<div class="concepto"><h3>INACAL (Instituto Nacional de Calidad)</h3>
+<p>Organismo técnico especializado (adscrito al Ministerio de la Producción) que es el ente rector del Sistema Nacional para la Calidad y, a través de su Dirección de Normalización, <b>aprueba las NTP</b>. Reemplazó en esas funciones al antiguo INDECOPI (Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual) desde 2015. Las NTP de INACAL están protegidas por <b>derechos de autor</b>.</p>
+<p class="ej"><b>Ej.:</b> la NTP 2004 la aprobó INDECOPI; la NTP 2016 ya la aprobó INACAL (16-07-2016).</p>
+</div>
+
+<div class="concepto"><h3>SNI (Sistema Nacional de Informática)</h3>
+<p>Conjunto de entidades públicas (ministerios, organismos, gobiernos regionales y locales) y sus órganos de TI, sujetos a la rectoría informática del Estado (antes ONGEI-PCM, hoy SeGDi-PCM). La obligatoriedad de la NTP 12207 se limita a este ámbito: es el «uso obligatorio en el sector público».</p>
+<p class="ej"><b>Ej.:</b> SUNAT, RENIEC, SINEACE y la UNMSM (universidad pública) están en el SNI; Interbank o Rímac no, para ellos la NTP es voluntaria.</p>
+</div>
+
+<div class="concepto"><h3>RM N.° 041-2017-PCM (obligatoriedad)</h3>
+<p>Resolución Ministerial de la PCM que aprueba el <b>uso obligatorio</b> de la NTP-ISO/IEC 12207:2016 en las entidades del SNI. La guía (Mazo B) la cita como la normativa vigente. Con ella la NTP se convierte en el <b>marco oficial para la gestión de proyectos de SW</b> en las entidades estatales (A-05).</p>
+<p class="ej"><b>Ej.:</b> un comité de selección del Gobierno Regional de Lima puede fundamentar en la RM 041-2017-PCM la exigencia de entregables alineados a la NTP 12207 (plan de SCM, informes de QA, actas de revisión conjunta).</p>
+</div>
+
+<div class="concepto"><h3>Aspectos legales y licenciamiento de las NTP</h3>
+<p>Según la guía (Mazo B), las NTP emitidas por INACAL están protegidas por <b>derechos de autor y propiedad intelectual</b>: su comercialización y distribución oficial en texto íntegro está <b>restringida a canales de pago autorizados</b>. Por eso en clase se trabaja con una guía estructurada / resumen ejecutivo con fines educativos y profesionales.</p>
+<p class="ej"><b>Ej.:</b> subir el PDF íntegro de la NTP al aula virtual sería una infracción; citar y resumir sus grupos de procesos en el informe del G3 con referencia APA 7 es legítimo.</p>
+</div>
+
+<div class="concepto"><h3>Vocabulario común (función de la NTP)</h3>
+<p>La guía define la NTP como el <b>marco de referencia regulatorio fundamental</b> para la gestión de proyectos de SW en las instituciones gubernamentales del Perú; ofrece un <b>vocabulario común</b> y define las actividades para <b>concebir, desarrollar, operar, mantener y retirar</b> productos de SW.</p>
+<p class="ej"><b>Ej.:</b> cuando SINEACE y su proveedor escriben «revisión conjunta» en el contrato, ambos entienden la misma reunión de hito adquirente–proveedor, sin ambigüedades.</p>
+</div>
+
+<figure>
+<img src="@img/semana-05-ntp-12207-2016-resumen-y-guia/p01.png" alt="Guía de Referencia Técnica NTP-ISO/IEC 12207:2016 con secciones de aspectos legales, introducción, tabla de grupos de procesos clave y principio de sastrería">
+<figcaption>Guía de referencia de la NTP 2016: (1) aspectos legales (INACAL, RM N.° 041-2017-PCM), (2) ámbito, (3) tabla de <b>6 grupos</b> de procesos (Acuerdo, Habilitación organizacional, Gestión de proyectos, Técnicos, Soporte de SW, Reutilización de SW) y (4) principio de sastrería. Ojo: omite el grupo «Implementación de SW».</figcaption>
+</figure>
+<p class="fuente">Fuente: «Guía de Referencia Técnica: NTP-ISO/IEC 12207:2016», Semana 05 (Mazo B).</p>
+
+<div class="norma"><h4>NTP-ISO/IEC 12207:2016</h4>
+<ul>
+<li><b>Código exacto:</b> NTP-ISO/IEC 12207:2016 (3.ª edición). Ediciones previas: NTP-ISO/IEC 12207:2004 (1.ª) y 2006 (2.ª, complemento).</li>
+<li><b>Organismo emisor:</b> INACAL (aprobación 16-07-2016); obligatoriedad: PCM mediante RM N.° 041-2017-PCM.</li>
+<li><b>Versión/año:</b> 2016, obligatoria desde 2017; equivalente a ISO/IEC 12207:2008.</li>
+<li><b>Propósito:</b> estándar común y obligatorio en el SNI para los procesos del ciclo de vida del SW (desarrollar, adquirir, mantener, operar con control, medición y calidad).</li>
+<li><b>Estructura:</b> 7 grupos (Acuerdo · Habilitación Organizacional del Proyecto · Gestión de Proyectos · Técnicos · Implementación de SW · Soporte de SW · Reutilización de SW), 43 procesos; Anexo A de adaptación (<i>tailoring</i>).</li>
+<li><b>Trampa típica:</b> llamarla «NTP 12207:2017» (como en los títulos de A-09 y A-19…A-31) o decir que es equivalente a la ISO/IEC/IEEE 12207:2017. Lo correcto: <b>2016</b>, equivalente a la <b>2008</b>.</li>
+</ul></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>Varias diapositivas se titulan «<b>NORMA NTP 12207:2017</b>», pero <b>no existe</b> una NTP con año 2017. El código correcto es <b>NTP-ISO/IEC 12207:2016</b>; «2017» es (a) el año desde el que es <b>obligatoria</b> y (b) el año de la internacional <b>ISO/IEC/IEEE 12207:2017</b>. En una pregunta de opción múltiple, «NTP-ISO/IEC 12207:2016 equivalente a ISO/IEC 12207:2008» es la opción defendible.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>La NTP es obligatoria <b>solo</b> para el sector público (entidades del SNI). Para una empresa privada (BCP, Yape, Plaza Vea) es <b>voluntaria</b>, salvo que un contrato con el Estado la exija (aplicación «externa»). Afirmar «toda empresa peruana de SW está obligada a la NTP 12207» es falso.</p></div>
+</section>
+<section id="vision-general-ciclo-de-vida">
+<h2>4. Visión general de la norma y ciclo de vida del SW (SDLC)</h2>
+<p>Siglas de la sección: SDLC (System/Software Development Life Cycle – Ciclo de Vida del Desarrollo de Sistemas/SW), SW, HW, CI/CD (Continuous Integration / Continuous Delivery – Integración y Entrega Continuas), UAT (User Acceptance Testing – Pruebas de Aceptación de Usuario).</p>
+
+<div class="concepto"><h3>Marco de trabajo estandarizado para el desarrollo, operación y mantenimiento</h3>
+<p>La NTP ISO/IEC 12207 proporciona un <b>marco de trabajo estandarizado</b> para todas las actividades involucradas en el <b>desarrollo, operación y mantenimiento</b> del SW. Su objetivo es establecer un <b>marco claro y coherente</b> para <b>garantizar la calidad del SW</b> a través de todas las etapas de su ciclo de vida, desde la <b>concepción</b> hasta la <b>retirada</b> (A-12).</p>
+<p class="ej"><b>Ej.:</b> Yape no «termina» al publicarse en Play Store: su calidad se gestiona también en operación (monitoreo 24×7) y en mantenimiento (versiones quincenales vía CI/CD).</p>
+</div>
+
+<div class="concepto"><h3>Ciclo de vida del SW</h3>
+<p>El ciclo de vida de un sistema de SW <b>comienza en el momento en que se concibe su idea o necesidad</b>; comprende <b>planificación, desarrollo, operación y mantenimiento</b>, y <b>no concluye hasta que el sistema deja de utilizarse y es definitivamente retirado</b> (A-13). Es más amplio que el «ciclo de desarrollo»: la mayor parte del costo total (TCO, Total Cost of Ownership) suele estar en operación y mantenimiento (Pressman, Sommerville).</p>
+<p class="ej"><b>Ej.:</b> el ciclo de vida del antiguo SUM-UNMSM empezó con la necesidad de matrícula en línea y recién termina cuando se apaga definitivamente y sus datos se migran al nuevo sistema.</p>
+</div>
+
+<div class="concepto"><h3>Modelo de ciclo de vida del SW</h3>
+<p>Su propósito es <b>guiar la creación, implementación y mantenimiento del SW de manera organizada y controlada</b> (A-13). Ejemplos de modelos: cascada, V, incremental, espiral, Scrum, DevOps. La 12207 <b>no impone</b> ninguno: los procesos se «colocan» dentro del modelo que la organización elija (el proceso «Gestión del Modelo de Ciclo de Vida» de 2008 se encarga de definirlo).</p>
+<p class="ej"><b>Ej.:</b> Interbank usa Scrum con sprints de 2 semanas; dentro de cada sprint ejecuta los procesos 12207 de análisis de requisitos, construcción, verificación (revisión de código en el PR, Pull Request) y validación (demo con el PO, Product Owner).</p>
+</div>
+
+<div class="concepto"><h3>Rueda SDLC de 9 etapas</h3>
+<p>El gráfico de A-12/A-13 muestra la rueda «<b>System Development Lifecycle</b>» con 9 segmentos en sentido horario: <b>1 Analysis</b> (análisis) · <b>2 Planning</b> (planificación) · <b>3 Design</b> (diseño) · <b>4 Development</b> (desarrollo) · <b>5 Testing</b> (pruebas) · <b>6 Deployment</b> (despliegue) · <b>7 Maintenance</b> (mantenimiento) · <b>8 Evaluation</b> (evaluación) · <b>9 Disposal</b> (retiro/desactivación). Mensaje: el ciclo es <b>iterativo</b> (la evaluación realimenta nuevos análisis) y termina con el <b>retiro</b>, etapa que la 12207 también cubre.</p>
+<p class="ej"><b>Ej.:</b> en la app SUNAT Operaciones en Línea, la etapa 8 (Evaluation) detecta con métricas de UX (User Experience) que el flujo de boletas es lento y dispara un nuevo Analysis (vuelta a la etapa 1).</p>
+</div>
+
+<figure>
+<img src="@img/semana-05-modelo-de-calidad-iso-12207/p13.png" alt="Diapositiva Ciclo de vida del software con tres viñetas y la rueda System Development Lifecycle de nueve etapas: Analysis, Planning, Design, Development, Testing, Deployment, Maintenance, Evaluation y Disposal">
+<figcaption>Ciclo de vida del SW (A-13): empieza con la idea o necesidad, incluye planificación, desarrollo, operación y mantenimiento, y termina con el retiro definitivo. La rueda SDLC numera 9 etapas y cierra en <b>Disposal</b> (retiro).</figcaption>
+</figure>
+<p class="fuente">Fuente: diapositiva 13, Semana 05.</p>
+
+<figure>
+<img src="@img/semana-05-modelo-de-calidad-iso-12207/p12.png" alt="Diapositiva Visión general de la norma con flecha gris de Concepción a Final de su vida útil y la rueda System Development Lifecycle">
+<figcaption>Visión general (A-12): la flecha «<b>Concepción → Final de su vida útil</b>» resume que la norma cubre la línea de tiempo completa del producto, no solo su construcción; a la derecha la misma rueda SDLC.</figcaption>
+</figure>
+<p class="fuente">Fuente: diapositiva 12, Semana 05.</p>
+
+<div class="concepto"><h3>Retiro o disposición del SW (<i>Software Disposal</i>)</h3>
+<p>Proceso que da fin a la existencia de una entidad de SW de forma controlada: notificar a usuarios, operar en paralelo si es necesario, archivar datos y documentación, migrar, y retirar el soporte. En la 12207:2008 es el proceso técnico «Disposición del SW»; en la 2017 es «<i>Disposal</i>».</p>
+<p class="ej"><b>Ej.:</b> al apagar el antiguo sistema de planillas del MEF, la OTI archiva 10 años de datos según la normativa de archivos y opera 3 meses en paralelo con el nuevo SIGA (Sistema Integrado de Gestión Administrativa).</p>
+</div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>«Ciclo de vida del SW» ≠ «ciclo de desarrollo». Si una alternativa dice que el ciclo de vida «termina con la entrega/despliegue al cliente», es <b>falsa</b>: según A-13 termina cuando el sistema <b>deja de utilizarse y es definitivamente retirado</b>. En la rueda, la última etapa es <b>Disposal</b>, no Maintenance.</p></div>
+</section>
+
+<section id="objetivos-y-campo-de-aplicacion">
+<h2>5. Objetivos, campo de aplicación y sastrería (<i>tailoring</i>)</h2>
+<p>Siglas de la sección: NTP, ISO, IEC, SW, PRM, SPICE, CMMI (Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades), DevOps (Development + Operations – Desarrollo y Operaciones), PYME (Pequeña y Mediana Empresa), VSE (Very Small Entity – Entidad Muy Pequeña).</p>
+
+<div class="concepto"><h3>Objetivo general de la NTP 12207</h3>
+<p>«<b>Definir y estandarizar los procesos, actividades y tareas</b> que deben realizarse durante el ciclo de vida del SW, de modo que todas las organizaciones que <b>desarrollan, adquieren, mantienen u operan</b> SW lo hagan de forma <b>controlada, medible y con calidad</b>» (A-14). Nótense los <b>4 verbos</b> (roles) y los <b>3 adjetivos</b> (controlada, medible, con calidad).</p>
+<p class="ej"><b>Ej.:</b> el RENIEC (adquiere), su proveedor (desarrolla), la OTI del RENIEC (opera) y una consultora (mantiene) quedan todos cubiertos por el mismo objetivo.</p>
+</div>
+
+<figure>
+<img src="@img/semana-05-modelo-de-calidad-iso-12207/p15.png" alt="Diagrama de cuatro flechas numeradas con los objetivos de la NTP 12207 junto al logo NTP ISO/IEC 12207:2016">
+<figcaption>Los <b>4 objetivos específicos</b> (A-15): 1) estandarizar los procesos del ciclo de vida; 2) asegurar la calidad del SW <b>y de los procesos</b>; 3) facilitar la comunicación entre clientes, proveedores y desarrolladores; 4) proporcionar una base para la evaluación y mejora continua.</figcaption>
+</figure>
+<p class="fuente">Fuente: diapositiva 15, Semana 05 (el título dice «NPT», errata de NTP).</p>
+
+<div class="concepto"><h3>Objetivo 1 · Estandarizar los procesos del ciclo de vida</h3>
+<p>Dar nombres, propósitos y resultados uniformes a los procesos para que sean comparables entre proyectos y organizaciones.</p>
+<p class="ej"><b>Ej.:</b> dos proyectos del MINSA (uno en Java, otro en .NET) reportan el mismo KPI (Key Performance Indicator) «% de CI bajo SCM» porque ambos siguen el proceso estándar de gestión de la configuración.</p>
+</div>
+
+<div class="concepto"><h3>Objetivo 2 · Asegurar la calidad del SW y de los procesos</h3>
+<p>La norma parte de la premisa de la calidad del proceso: un proceso definido y controlado produce un producto de calidad predecible. Por eso asegura <b>ambos</b>: producto (verificación, validación) y proceso (QA, auditoría, mejora).</p>
+<p class="ej"><b>Ej.:</b> en el BCP, el proceso de QA revisa que se haya hecho la revisión de código (proceso) y la validación UAT confirma que la funcionalidad de Plin sirva al cliente (producto).</p>
+</div>
+
+<div class="concepto"><h3>Objetivo 3 · Facilitar la comunicación cliente–proveedor–desarrollador</h3>
+<p>Proveer un <b>vocabulario común</b> (Mazo B) para contratos, entregables y revisiones, reduciendo malentendidos en las relaciones de adquisición.</p>
+<p class="ej"><b>Ej.:</b> el contrato SINEACE–consultora dice «acta de revisión conjunta del SRS (Software Requirements Specification)» y ambas partes saben qué evento y qué evidencia significa.</p>
+</div>
+
+<div class="concepto"><h3>Objetivo 4 · Base para la evaluación y mejora continua</h3>
+<p>Al definir propósito y resultados, la norma sirve como PRM para evaluar la capacidad de procesos (ISO/IEC 15504/33000) y como insumo para la mejora (PDCA/PHVA, CMMI). Conecta directamente con S6.</p>
+<p class="ej"><b>Ej.:</b> una empresa evalúa su proceso de Verificación con SPICE (nivel 1), aplica un ciclo PDCA (Plan-Do-Check-Act) y en la siguiente evaluación alcanza nivel 3 (establecido).</p>
+</div>
+
+<div class="concepto"><h3>Campo de aplicación: interna o externa</h3>
+<p>La norma «se aplica de manera <b>interna o externa</b>» (A-11). <b>Interna</b>: la organización la adopta para sus propios procesos (autoimposición). <b>Externa</b>: se usa en una relación contractual entre adquirente y proveedor (dos partes), normalmente referenciada en un contrato.</p>
+<p class="ej"><b>Ej.:</b> interna → la OTI del MEF organiza su fábrica de SW según la NTP; externa → SUNAT contrata a una consultora y exige en el contrato cumplir los procesos de Suministro y QA de la NTP 12207.</p>
+</div>
+
+<div class="concepto"><h3>Campo de aplicación: sistemas independientes y parte lógica del firmware</h3>
+<p>Aplica tanto a <b>sistemas de SW independientes</b> como a la <b>parte lógica (SW) del firmware</b> embebido en un dispositivo. El HW en sí se rige por la ISO/IEC 15288 (sistemas).</p>
+<p class="ej"><b>Ej.:</b> el firmware de los POS (Point of Sale – punto de venta) de Niubiz que procesa pagos con tarjeta puede gestionarse con procesos 12207; la placa electrónica del POS, no.</p>
+</div>
+
+<div class="concepto"><h3>No impone un modelo de ciclo de vida</h3>
+<p>La 12207 <b>no impone un modelo de ciclo de vida específico</b> (como cascada o ágiles); proporciona el <b>marco conceptual</b> y los procesos que deben adaptarse a cada proyecto (A-11). La guía insiste: puede aplicarse tanto en <b>cascada</b> como en entornos <b>ágiles Scrum/DevOps</b>.</p>
+<p class="ej"><b>Ej.:</b> el G3 puede declarar que el SINEACE móvil se desarrolla con Scrum y aun así ser conforme con la NTP, mapeando la <i>Sprint Review</i> al proceso de Validación y la DoD (Definition of Done) a criterios de QA.</p>
+</div>
+
+<div class="concepto"><h3>Sastrería o adaptación (<i>tailoring</i>)</h3>
+<p>Proceso (Anexo A normativo de la 12207:2008) mediante el cual se <b>seleccionan únicamente los procesos, actividades y tareas adecuados a la escala, complejidad y criticidad</b> del proyecto, eliminando o ajustando lo que no aporta y documentando la justificación. La guía afirma que <b>la conformidad se logra mediante la sastrería</b>.</p>
+<p class="ej"><b>Ej.:</b> una app interna de reservas de salas del SINEACE omite el proceso de Reutilización de SW y simplifica la auditoría; el sistema de pagos de Yape (crítico) mantiene IV&amp;V (Independent Verification and Validation) y auditorías formales.</p>
+</div>
+
+<div class="concepto"><h3>Conformidad total vs. conformidad adaptada (complemento)</h3>
+<p>La 12207 admite dos formas de declarar cumplimiento: <b>conformidad total</b> (se demuestran todos los resultados de los procesos declarados) y <b>conformidad adaptada</b> (<i>tailored conformance</i>), cuando se aplicó el proceso de adaptación y se documentan los procesos/actividades eliminados con su justificación.</p>
+<p class="ej"><b>Ej.:</b> una startup peruana de 6 personas declara conformidad adaptada (sin Gestión de Cartera de Proyectos); para VSE como ella existe además la ISO/IEC 29110 (perfiles para entidades muy pequeñas, S7).</p>
+</div>
+
+<div class="tabla"><table>
+<thead><tr><th>Criterio de sastrería</th><th>Pregunta guía</th><th>Ejemplo de decisión</th></tr></thead>
+<tbody>
+<tr><td><b>Escala</b></td><td>¿Cuánta gente, cuántos CI, cuánto presupuesto?</td><td>Equipo de 4 → revisión conjunta informal por sprint; equipo de 80 → revisiones formales por hito</td></tr>
+<tr><td><b>Complejidad</b></td><td>¿Cuántas integraciones, tecnologías, interesados?</td><td>Integración con RENIEC, SUNAT y bancos → SCM y verificación de interfaces reforzados</td></tr>
+<tr><td><b>Criticidad</b></td><td>¿Qué pasa si falla? (vidas, dinero, reputación)</td><td>Sistema de pagos o salud → IV&amp;V, auditoría externa; intranet → QA ligero</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuente: principio de sastrería, Guía de referencia NTP 2016 (Mazo B), diapositiva 11; ejemplos elaborados para el repaso.</p>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>Distractor frecuente: «La NTP 12207 obliga a usar el modelo en cascada porque define procesos secuenciales». <b>Falso</b>: la norma no impone ciclo de vida; los procesos no son fases. Otro distractor: «la sastrería permite excluir cualquier proceso sin justificar». También falso: la adaptación debe <b>documentar y justificar</b> las exclusiones según escala, complejidad y criticidad.</p></div>
+</section>
+<section id="estructura-7-grupos">
+<h2>6. Estructura de la NTP 2016: los 7 grupos de procesos (ISO/IEC 12207:2008)</h2>
+<p>La diapositiva A-10 afirma que la norma organiza las actividades del ciclo de vida en <b>7 grupos de procesos</b>. Es la estructura de la ISO/IEC 12207:2008 y, por tanto, de la NTP 2016. Siglas: SCM (Software Configuration Management – Gestión de la Configuración del SW), QA (Quality Assurance – Aseguramiento de la Calidad), SQA (Software QA), V&amp;V (Verificación y Validación), RR. HH. (Recursos Humanos).</p>
+
+<div class="concepto"><h3>Procesos de contexto de sistema vs. procesos específicos de SW</h3>
+<p>Los 7 grupos se reparten en dos bloques (complemento): <b>grupos 1–4 = procesos de contexto de sistema</b> (<i>System Context Processes</i>), idénticos a los de la ISO/IEC 15288:2008; <b>grupos 5–7 = procesos específicos de SW</b> (<i>Software Specific Processes</i>), propios de la 12207. Así un proyecto que mezcla HW y SW usa el mismo «contexto» y solo el SW baja al detalle de implementación.</p>
+<p class="ej"><b>Ej.:</b> en un sistema de peajes electrónicos del MTC (Ministerio de Transportes y Comunicaciones), Adquisición y Gestión de Riesgos son de contexto (aplican a todo el sistema); Diseño Detallado del SW solo aplica al SW de cobro.</p>
+</div>
+
+<div class="concepto"><h3>Grupo 1 · Procesos de Acuerdo (Adquisición y Suministro)</h3>
+<p>Definen las actividades para <b>adquirir</b> un producto o servicio de SW, así como para <b>proveerlo</b> (A-10). La guía agrega: regulan los <b>contratos</b>, la adquisición de productos/servicios y las <b>obligaciones del proveedor</b>. Procesos (2): Adquisición · Suministro.</p>
+<p class="ej"><b>Ej.:</b> SINEACE redacta los TDR y evalúa propuestas (Adquisición); la consultora elabora su propuesta técnica y firma el contrato (Suministro).</p>
+</div>
+
+<div class="concepto"><h3>Grupo 2 · Habilitación Organizacional del Proyecto</h3>
+<p>Gestiona la <b>infraestructura</b>, los <b>recursos humanos</b> y la <b>gestión de la calidad a nivel corporativo</b> (A-10); la guía añade capacitación y <b>modelos de ciclo de vida</b>. Procesos (5, complemento): Gestión del Modelo de Ciclo de Vida · Gestión de Infraestructura · Gestión de la Cartera de Proyectos · Gestión de RR. HH. · Gestión de la Calidad.</p>
+<p class="ej"><b>Ej.:</b> la gerencia de TI de Rímac define el ciclo de vida corporativo (Scrum + DevOps), compra licencias de SonarQube (infraestructura) y fija la política de calidad (Gestión de la Calidad).</p>
+</div>
+
+<div class="concepto"><h3>Grupo 3 · Gestión de Proyectos (procesos de proyecto)</h3>
+<p><b>Planificación, medición, control y gestión de riesgos</b> del desarrollo de SW (A-10); la guía menciona también monitoreo, control de calidad, mitigación de riesgos y aseguramiento de la entrega. Procesos (7, complemento): Planificación del Proyecto · Evaluación y Control del Proyecto · Gestión de Decisiones · Gestión de Riesgos · Gestión de la Configuración · Gestión de la Información · Medición.</p>
+<p class="ej"><b>Ej.:</b> el JP (Jefe de Proyecto) del G3 mantiene un registro de riesgos («rechazo de la API de SINEACE») y mide el SPI (Schedule Performance Index) semanal.</p>
+</div>
+
+<div class="concepto"><h3>Grupo 4 · Procesos Técnicos</h3>
+<p><b>Definición de requisitos, análisis de arquitectura, diseño, implementación, integración y pruebas</b> (A-10); la guía: análisis de requerimientos, diseño de arquitectura, codificación, integración, pruebas y validación. Procesos (11, complemento): Definición de Requisitos de las Partes Interesadas · Análisis de Requisitos del Sistema · Diseño Arquitectónico del Sistema · Implementación · Integración del Sistema · Pruebas de Calificación del Sistema · Instalación del SW · Soporte a la Aceptación del SW · <b>Operación del SW</b> · <b>Mantenimiento del SW</b> · Disposición del SW.</p>
+<p class="ej"><b>Ej.:</b> para la app de Plaza Vea se levantan requisitos con clientes (partes interesadas), se diseña la arquitectura de microservicios y se instala en la nube (Instalación del SW).</p>
+</div>
+
+<div class="concepto"><h3>Grupo 5 · Implementación de SW</h3>
+<p><b>Actividades específicas de construcción del código</b> (A-10). Procesos (7, complemento): Implementación del SW · Análisis de Requisitos del SW · Diseño Arquitectónico del SW · Diseño Detallado del SW · Construcción del SW · Integración del SW · Pruebas de Calificación del SW. Este es el grupo que la guía del Mazo B <b>omite</b>.</p>
+<p class="ej"><b>Ej.:</b> el equipo escribe el SDD (Software Design Description), programa el módulo de autoevaluación del SINEACE móvil y ejecuta pruebas de calificación contra el SRS.</p>
+</div>
+
+<div class="concepto"><h3>Grupo 6 · Soporte de SW</h3>
+<p>Procesos de <b>aseguramiento de calidad, verificación, validación y gestión de la configuración</b> (A-10); la guía: QA, verificación cruzada, auditorías y SCM (versiones). Procesos (8, complemento): Gestión de la Documentación del SW · SCM · SQA · Verificación del SW · Validación del SW · Revisión del SW · Auditoría del SW · Resolución de Problemas del SW. Son los herederos directos de los <b>8 procesos de apoyo</b> de 1995.</p>
+<p class="ej"><b>Ej.:</b> en Interbank, el analista de QA audita que cada PR tenga dos aprobaciones y el pipeline etiquete la versión (SCM).</p>
+</div>
+
+<div class="concepto"><h3>Grupo 7 · Reutilización de SW</h3>
+<p>Procesos orientados a definir la <b>ingeniería de dominio</b> y la <b>reutilización de activos</b> (A-10); la guía: reutilización sistemática de activos de SW entre proyectos. Procesos (3, complemento): Ingeniería de Dominio · Gestión de Activos de Reutilización · Gestión del Programa de Reutilización.</p>
+<p class="ej"><b>Ej.:</b> la PCM crea un componente reutilizable de autenticación con DNI electrónico (activo) que usan gob.pe, SUNAT y RENIEC (ingeniería de dominio «identidad digital»).</p>
+</div>
+
+<div class="tabla"><table>
+<thead><tr><th>#</th><th>Grupo (A-10)</th><th>Bloque</th><th>N.° procesos (complemento)</th><th>¿Está en la guía (Mazo B)?</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Acuerdo</td><td>Contexto de sistema</td><td>2</td><td>Sí</td></tr>
+<tr><td>2</td><td>Habilitación Organizacional del Proyecto</td><td>Contexto de sistema</td><td>5</td><td>Sí («Habilitación Organizacional»)</td></tr>
+<tr><td>3</td><td>Gestión de Proyectos</td><td>Contexto de sistema</td><td>7</td><td>Sí</td></tr>
+<tr><td>4</td><td>Técnicos</td><td>Contexto de sistema</td><td>11</td><td>Sí</td></tr>
+<tr><td>5</td><td>Implementación de SW</td><td>Específico de SW</td><td>7</td><td><b>No (omitido)</b></td></tr>
+<tr><td>6</td><td>Soporte de SW</td><td>Específico de SW</td><td>8</td><td>Sí</td></tr>
+<tr><td>7</td><td>Reutilización de SW</td><td>Específico de SW</td><td>3</td><td>Sí</td></tr>
+<tr><td colspan="3"><b>Total</b></td><td><b>43</b></td><td>6 de 7</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuente: diapositiva 10, Semana 05; Guía NTP 2016 (Mazo B); conteo de procesos según ISO/IEC 12207:2008 (complemento).</p>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>A-10 dice <b>7 grupos</b>, la guía (Mazo B) lista <b>6</b> (omite «Implementación de SW») y la ISO/IEC/IEEE 12207:2017 de S4 tiene <b>4</b>. Para la <b>NTP-ISO/IEC 12207:2016</b> la respuesta correcta es <b>7 grupos</b>. Y en 2008 la <b>Gestión de la Configuración</b> aparece <b>dos veces</b>: como proceso de proyecto (grupo 3) y como SCM del SW (grupo 6).</p></div>
+</section>
+
+<section id="estructura-3-categorias">
+<h2>7. La estructura clásica: 3 categorías y 17 procesos (ISO/IEC 12207:1995)</h2>
+<p>Desde A-16 la profesora usa la estructura clásica de la 1.ª edición (1995, adoptada como NTP 2004): <b>Procesos Principales</b>, <b>Procesos de Apoyo o Soporte</b> y <b>Procesos Organizacionales</b>. Es la que más se pregunta (numeración 5.x / 6.x / 7.x). Siglas: QA, SCM, V&amp;V, CI (Configuration Item – Elemento de Configuración).</p>
+
+<figure>
+<img src="@img/semana-05-modelo-de-calidad-iso-12207/p16.png" alt="Diagrama de árbol: caja Norma NTP ISO/IEC 12207 con tres ramas hacia Procesos principales, Procesos de soporte y Procesos organizacionales">
+<figcaption>Mapa mental (A-16): la norma se divide en <b>3 ramas</b>: principales, de soporte y organizacionales. (La caja dice «IESO», errata de ISO.)</figcaption>
+</figure>
+<p class="fuente">Fuente: diapositiva 16, Semana 05.</p>
+
+<div class="concepto"><h3>Procesos Principales (primarios)</h3>
+<p>Procesos <b>esenciales</b> relacionados con <b>adquisición, suministro, desarrollo, operación y mantenimiento</b> del SW (A-17). Se encargan directamente de las actividades más importantes del ciclo de vida y representan las <b>interacciones clave</b> entre actores (clientes, proveedores, desarrolladores, usuarios). Son los «responsables de que el SW <b>nazca, funcione y se mantenga</b>» (A-19).</p>
+<p class="ej"><b>Ej.:</b> en el SUM-UNMSM: la UNMSM adquiere, la OGTI desarrolla, opera y mantiene; los 5 procesos principales están presentes.</p>
+</div>
+
+<div class="concepto"><h3>Procesos de Apoyo o Soporte</h3>
+<p><b>Actividades transversales</b> que se ejecutan <b>en paralelo</b> a los procesos principales y aseguran que cada actividad cumpla con los estándares de calidad (A-17). Ayudan o aseguran la calidad, pero <b>no desarrollan SW directamente</b> (A-25). Un proceso de apoyo es <b>invocado</b> por otro proceso (principal u otro de apoyo).</p>
+<p class="ej"><b>Ej.:</b> mientras se desarrolla la app de Yape (principal), SCM versiona cada commit y QA revisa el cumplimiento del plan (apoyo), sin escribir funcionalidades.</p>
+</div>
+
+<div class="concepto"><h3>Procesos Organizacionales (organizativos)</h3>
+<p>Procesos que <b>gestionan y mejoran los recursos y actividades de la organización</b>, asegurando que los proyectos de SW estén alineados con las <b>metas de la organización</b> (A-17). Establecen el <b>marco organizativo</b>: entorno, estructura y recursos bajo los cuales se ejecutan todos los proyectos (A-30). Trascienden a un proyecto individual.</p>
+<p class="ej"><b>Ej.:</b> la gerencia de TI del BCP define la infraestructura cloud común y el programa de mejora CMMI para todos sus proyectos, no solo para uno.</p>
+</div>
+
+<figure>
+<img src="@img/semana-05-modelo-de-calidad-iso-12207/p17.png" alt="Tabla de la estructura de la NTP 12207 con tres categorías: Procesos Principales, Procesos de Apoyo o Soporte y Procesos Organizacionales con su descripción breve">
+<figcaption>Las 3 categorías con su descripción (A-17): principales = esenciales (adquisición a mantenimiento); apoyo = <b>transversales y en paralelo</b>; organizacionales = alinean los proyectos con las metas de la organización.</figcaption>
+</figure>
+<p class="fuente">Fuente: diapositiva 17, Semana 05.</p>
+
+<figure>
+<img src="@img/semana-05-modelo-de-calidad-iso-12207/p18.png" alt="Mapa de los 17 procesos: Procesos principales 5.1 a 5.5, Procesos de Apoyo 6.1 a 6.8 con un recuadro interno para 6.3 a 6.6, y Procesos Organizativos 7.1 a 7.4">
+<figcaption><b>La imagen más importante del mazo</b> (A-18): Principales (5) 5.1 Adquisición, 5.2 Suministro, 5.3 Desarrollo, 5.4 Operación, 5.5 Mantenimiento · Apoyo (8) 6.1 Documentación, 6.2 Gestión de la Configuración, 6.7 Auditoría, 6.8 Solución de problemas, y en un <b>recuadro interno</b> 6.3 QA, 6.4 Verificación, 6.5 Validación, 6.6 Revisión conjunta (los orientados a evaluar calidad del producto) · Organizativos (4) 7.1 Gestión, 7.2 Infraestructura, 7.3 Mejora, 7.4 Recursos Humanos. Total 17.</figcaption>
+</figure>
+<p class="fuente">Fuente: diapositiva 18, Semana 05.</p>
+
+<div class="tabla"><table>
+<thead><tr><th>Categoría</th><th>N.°</th><th>Procesos (numeración de cláusula)</th><th>Pregunta que responde</th></tr></thead>
+<tbody>
+<tr><td>Principales</td><td>5</td><td>5.1 Adquisición · 5.2 Suministro · 5.3 Desarrollo · 5.4 Operación · 5.5 Mantenimiento</td><td>¿Quién pide, construye, usa y mantiene el SW?</td></tr>
+<tr><td>Apoyo / Soporte</td><td>8</td><td>6.1 Documentación · 6.2 Gestión de la Configuración · 6.3 Aseguramiento de la Calidad · 6.4 Verificación · 6.5 Validación · 6.6 Revisión Conjunta · 6.7 Auditoría · 6.8 Resolución/Solución de Problemas</td><td>¿Cómo aseguramos que lo principal se haga bien?</td></tr>
+<tr><td>Organizativos</td><td>4</td><td>7.1 Gestión · 7.2 Infraestructura · 7.3 Mejora · 7.4 Formación / Recursos Humanos</td><td>¿Con qué entorno, recursos y mejora trabaja la organización?</td></tr>
+<tr><td colspan="2"><b>Total</b></td><td colspan="2"><b>17 procesos</b></td></tr>
+</tbody></table></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Edición</th><th>Equivale en Perú a</th><th>Estructura</th><th>N.° procesos</th><th>Dónde aparece en clase</th></tr></thead>
+<tbody>
+<tr><td>ISO/IEC 12207:1995</td><td>NTP-ISO/IEC 12207:2004</td><td>3 categorías: Principales 5 · Apoyo 8 · Organizativos 4</td><td>17</td><td>A-16 a A-31 (diagrama A-18)</td></tr>
+<tr><td>ISO/IEC 12207:2008</td><td><b>NTP-ISO/IEC 12207:2016</b> (vigente)</td><td>7 grupos: 4 de contexto de sistema + 3 específicos de SW</td><td>43</td><td>A-10; guía Mazo B (6 grupos)</td></tr>
+<tr><td>ISO/IEC/IEEE 12207:2017</td><td>— (no adoptada aún como NTP)</td><td>4 grupos: Acuerdo 2 · Habilitación organizacional 6 · Gestión técnica 8 · Técnicos 14</td><td>30</td><td>A-06, A-07; S4; título de la práctica</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuente: diapositivas 10, 16–18, Semana 05; S4; complemento normativo.</p>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>A-10 dice «7 grupos» y A-17 dice «3 grandes grupos»: son <b>dos ediciones distintas</b> (2008 vs. 1995) mezcladas en el mismo mazo. Si la pregunta da la numeración 5.x/6.x/7.x o habla de «procesos de apoyo», estás en la estructura de 1995 (17 procesos). Si menciona «Reutilización de SW» o «Habilitación Organizacional del Proyecto», estás en 2008/NTP 2016.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>Movimiento de procesos entre ediciones: en 1995 <b>QA, Verificación y Validación</b> son procesos de <b>apoyo</b>; en 2017 QA pasa a <b>Gestión técnica</b> y Verificación/Validación pasan a <b>Técnicos</b>. La <b>Gestión de la Configuración</b>: apoyo (1995) → proyecto + soporte de SW (2008) → gestión técnica (2017). Una afirmación tipo «en la 12207:2017 la Verificación es un proceso de soporte» es <b>falsa</b>.</p></div>
+</section>
+<section id="procesos-principales">
+<h2>8. Procesos principales: Adquisición, Suministro, Desarrollo, Operación y Mantenimiento</h2>
+<p>Cada proceso principal tiene un <b>rol</b> o actor asociado (complemento de la 12207:1995): adquirente, proveedor, desarrollador, operador y mantenedor. La profesora desarrolla en detalle 5.4 y 5.5 (con diapositivas propias) y da un ejemplo integrador (A-24). Siglas: TDR (Términos de Referencia), RFP (Request for Proposal – Solicitud de Propuesta), SLA (Service Level Agreement – Acuerdo de Nivel de Servicio), APM (Application Performance Monitoring – Monitoreo del Rendimiento de Aplicaciones), TPS (Transacciones Por Segundo), ITIL (Information Technology Infrastructure Library), OGTI.</p>
+
+<div class="concepto"><h3>5.1 Adquisición (rol: adquirente)</h3>
+<p>Proceso por el cual una organización (el <b>adquirente</b>) obtiene un sistema, producto o servicio de SW: definir la necesidad, preparar requisitos y solicitud (TDR/RFP), seleccionar proveedor, gestionar el contrato y <b>aceptar</b> el producto. No tiene diapositiva propia en clase.</p>
+<p class="ej"><b>Ej.:</b> SINEACE publica en el SEACE (Sistema Electrónico de Contrataciones del Estado) los TDR de la app móvil, elige al postor y firma el acta de conformidad al final.</p>
+</div>
+
+<div class="concepto"><h3>5.2 Suministro (rol: proveedor)</h3>
+<p>Proceso del <b>proveedor</b> (<i>supplier</i>) que responde a la solicitud, prepara la propuesta, firma el contrato, planifica, ejecuta y controla la provisión, y <b>entrega</b> el producto o servicio conforme a lo acordado.</p>
+<p class="ej"><b>Ej.:</b> una consultora limeña presenta su oferta técnico-económica a SINEACE, firma el contrato y planifica las entregas por hito.</p>
+</div>
+
+<div class="concepto"><h3>5.3 Desarrollo (rol: desarrollador)</h3>
+<p>Proceso que contiene las actividades del <b>desarrollador</b>: análisis de requisitos del sistema y del SW, diseño arquitectónico y detallado, codificación y pruebas, integración, pruebas de calificación, instalación y soporte a la aceptación. En 2008 se desagrega en los grupos Técnicos e Implementación de SW.</p>
+<p class="ej"><b>Ej.:</b> el equipo del G3 escribe el SRS, diseña la arquitectura (Flutter + API REST), codifica, integra y ejecuta pruebas de calificación del SINEACE móvil.</p>
+</div>
+
+<div class="concepto"><h3>5.4 Operación (rol: operador)</h3>
+<p>Proceso responsable de <b>utilizar el SW en su entorno operativo real</b> para que cumpla su propósito, <b>brindando soporte al usuario</b> y asegurando que funcione correctamente en el día a día. Su objetivo: que el SW funcione de forma <b>continua, eficiente y conforme a lo esperado durante su uso real</b> por el cliente o usuarios finales (A-20). <b>Encargado: Gerente de Operaciones o Administrador de Sistemas.</b></p>
+<p class="ej"><b>Ej.:</b> el administrador de sistemas de la OGTI-UNMSM opera el SUM durante la matrícula, vigilando que siga disponible pese a 30 000 accesos concurrentes.</p>
+</div>
+
+<div class="tabla"><table>
+<thead><tr><th>Actividad del Proceso de Operación (A-21)</th><th>Descripción</th><th>Ejemplo SUM-UNMSM en matrícula</th></tr></thead>
+<tbody>
+<tr><td><b>Preparar el entorno operativo</b></td><td>Configurar sistemas, redes y HW necesarios para que el SW funcione</td><td>Escalar servidores y configurar el balanceador de carga</td></tr>
+<tr><td><b>Ejecutar el software</b></td><td>Hacer funcionar el sistema según las operaciones normales</td><td>Abrir el proceso de matrícula según cronograma</td></tr>
+<tr><td><b>Monitorear el sistema</b></td><td>Supervisar desempeño, uso, errores o incidentes</td><td>APM midiendo TPS y tasa de errores HTTP 5xx</td></tr>
+<tr><td><b>Atender consultas o incidentes</b></td><td>Brindar soporte a usuarios y solucionar problemas operativos</td><td>La mesa de ayuda (Service Desk, ITIL) atiende tickets</td></tr>
+<tr><td><b>Registrar y reportar datos</b></td><td>Generar reportes de uso, rendimiento o incidentes</td><td>Reporte diario de disponibilidad vs. SLA del 99,5 %</td></tr>
+</tbody></table></div>
+
+<figure>
+<img src="@img/semana-05-modelo-de-calidad-iso-12207/p21.png" alt="Tabla de las cinco actividades del Proceso de Operación: preparar el entorno operativo, ejecutar el software, monitorear el sistema, atender consultas o incidentes y registrar y reportar datos">
+<figcaption>Las <b>5 actividades del Proceso de Operación</b> (A-21). Memoriza el orden lógico: preparar → ejecutar → monitorear → atender → registrar/reportar.</figcaption>
+</figure>
+<p class="fuente">Fuente: diapositiva 21, Semana 05.</p>
+
+<div class="concepto"><h3>5.5 Mantenimiento (rol: mantenedor)</h3>
+<p>Proceso del <b>mantenedor</b> que gestiona las modificaciones del SW (código y documentación) tras su entrega, debidas a problemas o a necesidades de mejora/adaptación, preservando su integridad. Actividades (A-22): <b>identificar y analizar</b> problemas y solicitudes de cambio · <b>realizar modificaciones</b>, correcciones y mejoras · <b>verificar</b> que los cambios no afecten negativamente al SW · <b>distribuir</b> las actualizaciones · <b>adaptar</b> a nuevos entornos · <b>mantener la documentación actualizada</b>.</p>
+<p class="ej"><b>Ej.:</b> llega una RFC (Request for Change – Solicitud de Cambio) para agregar pago con Yape en el portal de trámites de la SUNARP; se analiza el impacto, se modifica, se ejecuta regresión, se publica la versión 3.2 y se actualiza el manual.</p>
+</div>
+
+<div class="concepto"><h3>Pruebas de regresión dentro del mantenimiento</h3>
+<p>La actividad «verificar que los cambios no afecten negativamente al SW» equivale a <b>pruebas de regresión</b>: re-ejecutar casos de prueba existentes para detectar defectos introducidos por el cambio. Muestra que el proceso principal de Mantenimiento <b>invoca</b> un proceso de apoyo (Verificación).</p>
+<p class="ej"><b>Ej.:</b> tras corregir el cálculo de cuotas en la app de Interbank, el pipeline CI ejecuta 1 200 pruebas automatizadas de regresión antes del despliegue.</p>
+</div>
+
+<figure>
+<img src="@img/semana-05-modelo-de-calidad-iso-12207/p22.png" alt="Diapositiva de actividades del proceso de mantenimiento con el cuadro de procesos principales y 5.5 Mantenimiento resaltado en rojo">
+<figcaption>Actividades del Mantenimiento (A-22) con el cuadro de procesos principales y <b>5.5 resaltado</b>: identificar/analizar, modificar, verificar, distribuir, adaptar, documentar.</figcaption>
+</figure>
+<p class="fuente">Fuente: diapositiva 22, Semana 05.</p>
+
+<div class="concepto"><h3>Mantenimiento correctivo</h3>
+<p><b>Corregir errores</b> que se presentan en el funcionamiento del SW (A-23): modificación reactiva tras detectar una falla.</p>
+<p class="ej"><b>Ej.:</b> Yape cobra doble una transferencia por un bug de concurrencia; se corrige el defecto (hotfix).</p>
+</div>
+
+<div class="concepto"><h3>Mantenimiento perfectivo</h3>
+<p><b>Mejorar el rendimiento, usabilidad o eficiencia sin que haya errores</b> (A-23). Responde a nuevas necesidades o mejoras de atributos de calidad (ISO/IEC 25010).</p>
+<p class="ej"><b>Ej.:</b> la app del BCP reduce el tiempo de login de 4 s a 1,5 s aunque no había falla alguna.</p>
+</div>
+
+<div class="concepto"><h3>Mantenimiento adaptativo</h3>
+<p><b>Modificar el SW para que funcione en nuevos entornos</b> (HW o SW): nuevo SO (Sistema Operativo), nueva BD (Base de Datos), nueva normativa técnica, nueva plataforma.</p>
+<p class="ej"><b>Ej.:</b> el SUM se migra a Android 15 y a un nuevo motor de BD porque el anterior pierde soporte del fabricante.</p>
+</div>
+
+<div class="concepto"><h3>Mantenimiento preventivo</h3>
+<p><b>Anticiparse a posibles fallos y mejorar la estabilidad</b> del sistema (A-23): corrige defectos latentes antes de que se manifiesten; incluye refactorización y reducción de deuda técnica.</p>
+<p class="ej"><b>Ej.:</b> SUNAT refactoriza un módulo con complejidad ciclomática 45 detectada por SonarQube antes de que cause incidentes en la campaña de renta.</p>
+</div>
+
+<figure>
+<img src="@img/semana-05-modelo-de-calidad-iso-12207/p23.png" alt="Tabla de los cuatro tipos de mantenimiento: correctivo, perfectivo, adaptativo y preventivo con su descripción">
+<figcaption>Los <b>4 tipos de mantenimiento</b> (A-23). Clave para clasificar escenarios: ¿hay error presente? → correctivo; ¿no hay error y se mejora? → perfectivo; ¿cambió el entorno? → adaptativo; ¿se anticipa a un fallo latente? → preventivo.</figcaption>
+</figure>
+<p class="fuente">Fuente: diapositiva 23, Semana 05.</p>
+
+<div class="tabla"><table>
+<thead><tr><th>Tipo</th><th>Disparador</th><th>¿Existe falla visible?</th><th>Categoría ISO/IEC/IEEE 14764</th><th>Ejemplo</th></tr></thead>
+<tbody>
+<tr><td>Correctivo</td><td>Error reportado</td><td>Sí</td><td>Corrección (reactiva)</td><td>Bug de doble cobro en Yape</td></tr>
+<tr><td>Preventivo</td><td>Defecto latente / deuda técnica</td><td>No (aún)</td><td>Corrección (proactiva)</td><td>Refactorizar módulo SUNAT</td></tr>
+<tr><td>Adaptativo</td><td>Cambio de entorno HW/SW</td><td>No</td><td>Mejora (reactiva)</td><td>Migrar SUM a Android 15</td></tr>
+<tr><td>Perfectivo</td><td>Deseo de mejor rendimiento/usabilidad</td><td>No</td><td>Mejora (proactiva)</td><td>Login BCP de 4 s a 1,5 s</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuente: diapositiva 23, Semana 05; categorías según ISO/IEC/IEEE 14764 (complemento).</p>
+
+<div class="norma"><h4>ISO/IEC/IEEE 14764:2022 (complemento)</h4>
+<ul>
+<li><b>Código exacto:</b> ISO/IEC/IEEE 14764 (ediciones 1999, 2006 y 2022).</li>
+<li><b>Organismo emisor:</b> ISO/IEC JTC 1/SC 7 junto con el IEEE.</li>
+<li><b>Versión/año:</b> vigente 2022.</li>
+<li><b>Propósito:</b> detallar el <b>proceso de mantenimiento</b> de la 12207 (planificación, análisis de modificaciones, implementación, revisión/aceptación, migración y retiro).</li>
+<li><b>Estructura:</b> 4 tipos de mantenimiento agrupados en <b>corrección</b> (correctivo + preventivo) y <b>mejora</b> (adaptativo + perfectivo).</li>
+<li><b>Trampa típica:</b> creer que el perfectivo «corrige errores»; por definición se hace <b>sin que haya errores</b>.</li>
+</ul></div>
+
+<div class="concepto"><h3>Ejemplo integrador de procesos principales (sistema web para un banco)</h3>
+<p>A-24: una empresa desarrolla un sistema web para un banco. El banco realiza la <b>adquisición</b>; la empresa de SW hace el <b>suministro</b> y el <b>desarrollo</b>; cuando el sistema funciona, el banco lo <b>opera</b>; si hay fallas o se requiere actualizar, se realiza el <b>mantenimiento</b>. Lección: <b>un mismo actor puede ejecutar varios procesos</b> (empresa = Suministro + Desarrollo; banco = Adquisición + Operación) y el mantenimiento lo hace quien diga el contrato.</p>
+<p class="ej"><b>Ej.:</b> el BBVA Perú (adquirente/operador) contrata a una software factory (proveedor/desarrollador) para su banca web; el SLA del contrato asigna el mantenimiento correctivo a la factory durante 12 meses.</p>
+</div>
+
+<div class="tabla"><table>
+<thead><tr><th>Proceso principal</th><th>Rol</th><th>En el ejemplo del banco (A-24)</th><th>En el caso SINEACE móvil (G3)</th></tr></thead>
+<tbody>
+<tr><td>5.1 Adquisición</td><td>Adquirente</td><td>Banco</td><td>SINEACE</td></tr>
+<tr><td>5.2 Suministro</td><td>Proveedor</td><td>Empresa de SW</td><td>Consultora / equipo G3</td></tr>
+<tr><td>5.3 Desarrollo</td><td>Desarrollador</td><td>Empresa de SW</td><td>Equipo G3</td></tr>
+<tr><td>5.4 Operación</td><td>Operador</td><td>Banco</td><td>OTI de SINEACE</td></tr>
+<tr><td>5.5 Mantenimiento</td><td>Mantenedor</td><td>Banco o empresa, según contrato</td><td>Según contrato de garantía</td></tr>
+</tbody></table></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>Encargado del Proceso de Operación según la profesora: <b>Gerente de Operaciones o Administrador de Sistemas</b> (no el JP ni el desarrollador). Y no confundir Operación con Mantenimiento: <b>atender un incidente</b> y restablecer el servicio es Operación; <b>modificar el código</b> para eliminar la causa es Mantenimiento (correctivo).</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>Perfectivo vs. preventivo: ambos se hacen «sin falla visible», pero el <b>perfectivo</b> mejora atributos (rendimiento, usabilidad, eficiencia) y el <b>preventivo</b> se anticipa a fallos latentes (estabilidad). «Agregar modo oscuro a la app» → perfectivo; «actualizar una librería con vulnerabilidad conocida antes de un ataque» → preventivo; «adaptar a la nueva versión del API de RENIEC» → adaptativo.</p></div>
+</section>
+<section id="procesos-de-soporte">
+<h2>9. Procesos de soporte (apoyo): los 8 procesos transversales</h2>
+<p>«El estándar contiene un grupo de <b>8 procesos de soporte</b>» que son <b>actividades transversales</b> ejecutadas <b>en paralelo</b> a los principales; ayudan o aseguran la calidad y el correcto funcionamiento de los principales; <b>no desarrollan SW directamente</b>, pero son esenciales para hacerlo bien (A-25). Siglas: QA, SQA, SQAP, SCM, SCMP (SCM Plan), CI, V&amp;V, IV&amp;V, UAT, SRS, SDD, BD, IEEE.</p>
+
+<div class="concepto"><h3>6.1 Documentación</h3>
+<p><b>Propósito:</b> desarrollar y mantener toda la documentación necesaria del SW y del proyecto (A-26): planificar, diseñar, producir, editar, distribuir y mantener los documentos que requieren gestores, ingenieros y usuarios.</p>
+<p class="ej"><b>Ej.:</b> crear el manual de usuario del sistema de matrícula universitaria (ejemplo de clase); en el SINEACE móvil, el SRS, el SDD y la guía de uso para evaluadores.</p>
+</div>
+
+<div class="concepto"><h3>6.2 Gestión de la Configuración (SCM)</h3>
+<p><b>Propósito:</b> controlar las versiones del SW y de todos sus componentes para evitar confusiones o pérdidas de información (A-26). Formalmente: identificar los CI, establecer líneas base, controlar cambios, registrar el estado (<i>status accounting</i>), auditar la configuración y gestionar entregas (complemento; norma asociada IEEE 828).</p>
+<p class="ej"><b>Ej.:</b> controlar qué versión del código fuente está en producción y cuál en pruebas (ejemplo de clase): en GitLab, la etiqueta v2.4.1 está en producción y la rama <code>release/2.5</code> en QA.</p>
+</div>
+
+<div class="concepto"><h3>6.3 Aseguramiento de la Calidad (QA / SQA)</h3>
+<p><b>Propósito:</b> «proveer de <b>mecanismos</b> para verificar que los <b>productos y procesos</b> cumplan los <b>estándares, requisitos y políticas de calidad</b>» (A-27). Da confianza objetiva de conformidad; se apoya en el SQAP (IEEE 730, S4).</p>
+<p class="ej"><b>Ej.:</b> revisar si las pruebas se ejecutaron conforme al plan de calidad (A-27); el equipo de QA revisa los registros de desarrollo para comprobar que siguen el <b>procedimiento de revisión de código</b> del plan de calidad (A-29).</p>
+</div>
+
+<div class="concepto"><h3>6.4 Verificación</h3>
+<p><b>Propósito:</b> confirmar que <b>cada producto intermedio</b> cumple con las especificaciones de <b>la etapa anterior</b> (A-27). <b>Pregunta clave: ¿Estamos construyendo el producto correctamente?</b> Técnicas típicas: revisiones, inspecciones, análisis estático, trazabilidad (RTM, Requirements Traceability Matrix), pruebas unitarias y de integración.</p>
+<p class="ej"><b>Ej.:</b> revisar si el diseño técnico cumple los requisitos del análisis (A-27); un arquitecto revisa el documento de diseño para confirmar que todos los requisitos del cliente quedaron plasmados en el diseño de la BD y la arquitectura (A-29).</p>
+</div>
+
+<div class="concepto"><h3>6.5 Validación</h3>
+<p><b>Propósito:</b> confirmar que el <b>producto final</b> satisface las <b>necesidades y expectativas del usuario</b> (A-28). <b>Pregunta clave: ¿Estamos construyendo el producto correcto?</b> Técnicas: pruebas de aceptación (UAT), pruebas beta, prototipos evaluados por usuarios, pruebas en entorno real o simulado.</p>
+<p class="ej"><b>Ej.:</b> validar que el sistema de matrícula sea realmente útil para estudiantes y personal administrativo (A-28); el cliente usa una <b>versión beta</b> en un <b>entorno de prueba</b> probando <b>casos de uso críticos</b> para confirmar que satisface la necesidad de negocio (A-29).</p>
+</div>
+
+<div class="concepto"><h3>6.6 Revisión conjunta</h3>
+<p>(Complemento: la profesora solo la lista.) Proceso para <b>evaluar el estado y los productos de una actividad</b> de un proyecto <b>entre adquirente y proveedor</b> (u otras partes interesadas), mediante revisiones de <b>gestión</b> (avance, costos, riesgos) y <b>técnicas</b> (calidad de productos). Norma asociada a revisiones: IEEE 1028.</p>
+<p class="ej"><b>Ej.:</b> reunión de hito entre SINEACE y la consultora para revisar y aprobar el SRS, con acta firmada por ambas partes.</p>
+</div>
+
+<div class="concepto"><h3>6.7 Auditoría</h3>
+<p><b>Propósito:</b> evaluar <b>de manera independiente</b> si las actividades y productos cumplen con los <b>requisitos, contratos o normas</b> (A-28). La independencia (el auditor no participa en lo auditado) es su rasgo distintivo frente a QA.</p>
+<p class="ej"><b>Ej.:</b> una auditoría interna revisa si el proceso de pruebas siguió los estándares ISO (A-28); el OCI (Órgano de Control Institucional) de la UNMSM audita si el contrato del nuevo SUM se ejecutó según la NTP.</p>
+</div>
+
+<div class="concepto"><h3>6.8 Resolución (solución) de problemas</h3>
+<p>(Complemento: la profesora solo la lista.) Proceso para <b>analizar y resolver los problemas</b> (incluidas las no conformidades) de cualquier naturaleza u origen, descubiertos en cualquier proceso, mediante un ciclo <b>cerrado</b>: registro → análisis de causa → solución → seguimiento → cierre y análisis de tendencias.</p>
+<p class="ej"><b>Ej.:</b> un defecto reportado en Jira pasa por <i>triage</i>, se le asigna severidad, se corrige, QA verifica el cierre y se analiza su causa raíz con un Ishikawa 6M (S2).</p>
+</div>
+
+<div class="concepto"><h3>Invocación entre procesos (relación principal ↔ soporte)</h3>
+<p>Los procesos de soporte no se ejecutan «por sí solos»: son <b>invocados</b> por los principales (o por otros de soporte) cuando se necesitan. Esto explica que sean transversales y paralelos.</p>
+<p class="ej"><b>Ej.:</b> el Mantenimiento (5.5) invoca Verificación (regresión), SCM (nueva línea base), Documentación (manual actualizado) y Resolución de problemas (cierre del ticket).</p>
+</div>
+
+<div class="concepto"><h3>V&amp;V independiente (IV&amp;V)</h3>
+<p>V&amp;V realizada por una organización <b>técnica, gerencial y financieramente independiente</b> del equipo de desarrollo; se aplica en SW de alta criticidad (complemento; IEEE 1012). Lleva la independencia de la auditoría a la verificación y validación.</p>
+<p class="ej"><b>Ej.:</b> el BCRP (Banco Central de Reserva del Perú) contrata a un tercero para hacer IV&amp;V del sistema de pagos LBTR (Liquidación Bruta en Tiempo Real) antes de su puesta en producción.</p>
+</div>
+
+<div class="tabla"><table>
+<thead><tr><th>Aspecto</th><th>Verificación (6.4)</th><th>Validación (6.5)</th></tr></thead>
+<tbody>
+<tr><td>Pregunta clave (literal)</td><td>¿Estamos construyendo el producto <b>correctamente</b>?</td><td>¿Estamos construyendo el producto <b>correcto</b>?</td></tr>
+<tr><td>Objeto</td><td>Cada producto <b>intermedio</b></td><td>Producto <b>final</b></td></tr>
+<tr><td>Se compara contra</td><td>Especificaciones de la <b>etapa anterior</b></td><td><b>Necesidades y expectativas del usuario</b></td></tr>
+<tr><td>Quién lo hace (ejemplo A-29)</td><td>Arquitecto de SW revisa el diseño vs. requisitos</td><td>Cliente final usa la beta en entorno de prueba</td></tr>
+<tr><td>Técnicas típicas</td><td>Inspecciones, revisiones, análisis estático, RTM, pruebas unitarias</td><td>UAT, beta, pruebas de casos de uso críticos, prototipos</td></tr>
+<tr><td>Cuándo</td><td>Al cierre de cada etapa</td><td>Sobre todo al final (y con prototipos en etapas tempranas)</td></tr>
+<tr><td>Norma de apoyo</td><td colspan="2">IEEE 1012 (V&amp;V del SW, sistemas y HW); en CMMI v1.3: áreas VER y VAL, nivel 3</td></tr>
+</tbody></table></div>
+
+<figure>
+<img src="@img/semana-05-modelo-de-calidad-iso-12207/p18.png" alt="Detalle del mapa de procesos: recuadro interno de los procesos de apoyo con 6.3 Aseguramiento de la Calidad, 6.4 Verificación, 6.5 Validación y 6.6 Revisión Conjunta">
+<figcaption>Dentro de los procesos de apoyo, el diagrama agrupa en un <b>recuadro interno</b> 6.3 QA, 6.4 Verificación, 6.5 Validación y 6.6 Revisión conjunta: los procesos orientados a <b>evaluar la calidad</b>; quedan sueltos 6.1, 6.2, 6.7 y 6.8.</figcaption>
+</figure>
+<p class="fuente">Fuente: diapositiva 18, Semana 05 (reutilizada para el detalle del soporte).</p>
+
+<div class="tabla"><table>
+<thead><tr><th>Proceso</th><th>Qué evalúa</th><th>Contra qué</th><th>Quién</th><th>Independencia</th><th>Ejemplo de clase</th></tr></thead>
+<tbody>
+<tr><td>6.3 QA</td><td>Productos <b>y procesos</b></td><td>Estándares, requisitos, políticas de calidad (plan de calidad)</td><td>Equipo de QA del proyecto/organización</td><td>Organizacional (reporta fuera de desarrollo)</td><td>QA revisa registros vs. procedimiento de revisión de código</td></tr>
+<tr><td>6.4 Verificación</td><td>Producto intermedio</td><td>Etapa anterior</td><td>Técnicos (arquitecto, revisores)</td><td>No necesaria</td><td>Diseño vs. requisitos</td></tr>
+<tr><td>6.5 Validación</td><td>Producto final</td><td>Necesidad del usuario</td><td>Usuario/cliente con el equipo</td><td>No necesaria</td><td>Beta con casos de uso críticos</td></tr>
+<tr><td>6.6 Revisión conjunta</td><td>Estado y productos de una actividad</td><td>Acuerdos del contrato/plan</td><td>Adquirente + proveedor</td><td>Bilateral</td><td>(Complemento) reunión de hito SINEACE–consultora</td></tr>
+<tr><td>6.7 Auditoría</td><td>Actividades y productos</td><td>Requisitos, <b>contratos o normas</b></td><td>Auditor</td><td><b>Independiente</b></td><td>Auditoría interna del proceso de pruebas vs. ISO</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuente: diapositivas 27, 28 y 29, Semana 05; complementos (revisión conjunta, independencia) de la ISO/IEC 12207:1995.</p>
+
+<div class="norma"><h4>IEEE 730 (SQAP) — relación con el proceso 6.3</h4>
+<ul>
+<li><b>Código exacto:</b> IEEE Std 730-2014 (ediciones desde 1979).</li>
+<li><b>Organismo emisor:</b> IEEE Computer Society.</li>
+<li><b>Versión/año:</b> 2014 vigente; es uno de los antecedentes de 1979–1985 citados en A-03.</li>
+<li><b>Propósito:</b> requisitos para iniciar, planificar, controlar y ejecutar los procesos de SQA de un proyecto; su producto es el <b>SQAP</b>.</li>
+<li><b>Estructura:</b> actividades de implementación del proceso SQA, aseguramiento del producto y aseguramiento del proceso (alineadas al proceso QA de la 12207).</li>
+<li><b>Trampa típica:</b> pensar que IEEE 730 compite con la 12207; en realidad <b>detalla</b> el proceso de QA que la 12207 solo enuncia.</li>
+</ul></div>
+
+<div class="norma"><h4>IEEE 1012 (V&amp;V) — relación con 6.4 y 6.5</h4>
+<ul>
+<li><b>Código exacto:</b> IEEE Std 1012-2016 «System, Software, and Hardware Verification and Validation».</li>
+<li><b>Organismo emisor:</b> IEEE.</li>
+<li><b>Versión/año:</b> 2016 (ediciones 1986, 1998, 2004, 2012).</li>
+<li><b>Propósito:</b> definir procesos, actividades y tareas de V&amp;V, el plan SVVP (Software V&amp;V Plan) y niveles de integridad que fijan el rigor (y la necesidad de IV&amp;V).</li>
+<li><b>Estructura:</b> 4 niveles de integridad del SW; tareas de V&amp;V por proceso del ciclo de vida (alineado a 12207/15288).</li>
+<li><b>Trampa típica:</b> creer que V&amp;V es solo «probar al final»; la verificación ocurre en <b>cada</b> etapa.</li>
+</ul></div>
+
+<div class="norma"><h4>IEEE 1028 (revisiones y auditorías) — relación con 6.6 y 6.7</h4>
+<ul>
+<li><b>Código exacto:</b> IEEE Std 1028-2008 «Software Reviews and Audits».</li>
+<li><b>Organismo emisor:</b> IEEE.</li>
+<li><b>Versión/año:</b> 2008.</li>
+<li><b>Propósito:</b> definir procedimientos sistemáticos de revisión y auditoría de SW.</li>
+<li><b>Estructura:</b> 5 tipos: revisión de gestión, revisión técnica, inspección, <i>walk-through</i> (recorrido) y auditoría.</li>
+<li><b>Trampa típica:</b> tratar auditoría como sinónimo de revisión; la auditoría es <b>independiente</b> y contrasta con criterios objetivos (normas, contratos).</li>
+</ul></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>Verificación = «¿construimos el producto <b>correctamente</b>?» (adverbio, cómo se construye; intermedio vs. etapa anterior). Validación = «¿construimos el producto <b>correcto</b>?» (adjetivo, qué se construye; final vs. usuario). El distractor clásico invierte las preguntas. Truco: «Validación → Valor para el usuario».</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>QA ≠ Auditoría ≠ Revisión conjunta. QA provee <b>mecanismos</b> y revisa el cumplimiento del <b>plan de calidad</b>; la Auditoría es una evaluación <b>independiente</b> contra <b>requisitos, contratos o normas</b>; la Revisión conjunta la hacen <b>adquirente y proveedor juntos</b>. Además: «6.8 Solución de problemas» (A-18) = «Resolución de problemas» (A-25), y Auditoría aparece como «6» en A-28 pero es <b>6.7</b> en A-18 (6.6 es Revisión conjunta).</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>«Los procesos de soporte desarrollan componentes de SW reutilizables» → <b>falso</b> en la estructura de 1995: los procesos de soporte <b>no desarrollan SW directamente</b> (A-25). La reutilización es un grupo aparte (grupo 7) en la 2008/NTP 2016.</p></div>
+</section>
+<section id="procesos-organizativos">
+<h2>10. Procesos organizativos del ciclo de vida</h2>
+<p>Procesos que establecen el <b>marco organizativo</b>: definen el <b>entorno, la estructura y los recursos</b> bajo los cuales se llevarán a cabo <b>todos</b> los proyectos de SW (A-30). Siglas: CMMI, ML (Maturity Level – Nivel de Madurez), VER/VAL (áreas de proceso Verification/Validation de CMMI v1.3), SPI (Software Process Improvement – Mejora del Proceso de SW), PDCA/PHVA (Plan-Do-Check-Act / Planificar-Hacer-Verificar-Actuar), SGC (Sistema de Gestión de la Calidad), RR. HH.</p>
+
+<div class="concepto"><h3>7.1 Gestión</h3>
+<p>Asegurar que los proyectos de SW se <b>planifiquen, ejecuten, controlen y cierren</b> de manera ordenada y eficaz (A-30). Contiene las actividades genéricas de gestión que cualquier otro proceso puede usar: inicio y alcance, planificación, ejecución y control, revisión y evaluación, cierre.</p>
+<p class="ej"><b>Ej.:</b> el JP del G3 elabora el cronograma del SINEACE móvil, controla el avance en reuniones semanales y cierra el proyecto con un acta de lecciones aprendidas.</p>
+</div>
+
+<div class="concepto"><h3>7.2 Infraestructura</h3>
+<p>Asegura que la infraestructura necesaria —<b>tecnología, herramientas, redes, servicios</b>— para desarrollar, probar, entregar y mantener SW esté <b>disponible y sea adecuada</b> (A-30).</p>
+<p class="ej"><b>Ej.:</b> la empresa actualiza sus servidores de desarrollo (A-31); la OGTI-UNMSM provisiona ambientes de DEV, QA y PROD en la nube y licencias de Jira y SonarQube.</p>
+</div>
+
+<div class="concepto"><h3>7.3 Mejora</h3>
+<p><b>Medir, evaluar y mejorar continuamente</b> los procesos del ciclo de vida del SW de la organización (A-30). Puede aplicar modelos como <b>CMMI, ISO/IEC 33000 e ISO 9001</b>. Es el proceso que materializa el objetivo 4 de la norma (base para evaluación y mejora).</p>
+<p class="ej"><b>Ej.:</b> tras auditar los proyectos, el equipo de Calidad decide que el proceso de <i>testing</i> es débil y lanza un proyecto de Mejora de Procesos para alcanzar el <b>Nivel 3 de madurez</b> en las prácticas de verificación y validación (A-31).</p>
+</div>
+
+<div class="concepto"><h3>7.4 Formación / Recursos Humanos</h3>
+<p>Proporcionar la <b>formación y el desarrollo de habilidades</b> necesarios para el personal de la organización (A-30). En el diagrama A-18 se llama «<b>Recursos Humanos</b>» y en A-30 «<b>Formación</b>»: en la edición 1995 era <i>Training</i>; con la Amd 1:2002 se amplió a <i>Human Resource</i> (incluye formación). Ambos nombres son válidos según la versión.</p>
+<p class="ej"><b>Ej.:</b> la empresa capacita a su equipo en nuevas metodologías ágiles (A-31); Interbank certifica a sus analistas en ISTQB (International Software Testing Qualifications Board) como parte de su plan de RR. HH.</p>
+</div>
+
+<div class="concepto"><h3>Cadena Auditoría → Mejora → Nivel de madurez</h3>
+<p>El ejemplo de A-31 encadena un proceso de <b>soporte</b> (Auditoría detecta debilidad) con uno <b>organizativo</b> (Mejora lanza el proyecto) y con un <b>modelo de madurez</b> (CMMI nivel 3). En CMMI v1.3 escalonado, <b>VER y VAL</b> son áreas de proceso de <b>nivel 3 «Definido»</b>; por eso la meta es «nivel 3 en V&amp;V». Puente directo con S6.</p>
+<p class="ej"><b>Ej.:</b> una software factory de San Isidro audita 5 proyectos, encuentra 40 % de defectos fugados a producción, aplica PDCA sobre su proceso de pruebas y se evalúa con SCAMPI (Standard CMMI Appraisal Method for Process Improvement) para ML 3.</p>
+</div>
+
+<div class="concepto"><h3>Ejemplo combinado de Infraestructura y Formación</h3>
+<p>A-31: «la empresa de SW capacita a su equipo en nuevas metodologías ágiles (<b>formación</b>) y actualiza sus servidores de desarrollo (<b>infraestructura</b>)». Ambos son organizativos porque benefician a <b>todos los proyectos</b>, no a uno solo.</p>
+<p class="ej"><b>Ej.:</b> el MEF capacita a 60 desarrolladores en Scrum y migra su plataforma de integración continua: dos procesos organizativos distintos en una misma iniciativa.</p>
+</div>
+
+<div class="tabla"><table>
+<thead><tr><th>Proceso organizativo</th><th>Propósito (A-30)</th><th>Ejemplo (A-31)</th><th>Nombre en 2008 / NTP 2016</th></tr></thead>
+<tbody>
+<tr><td>7.1 Gestión</td><td>Planificar, ejecutar, controlar y cerrar proyectos</td><td>—</td><td>Procesos de proyecto (Planificación, Evaluación y Control…)</td></tr>
+<tr><td>7.2 Infraestructura</td><td>Tecnología, herramientas, redes y servicios disponibles y adecuados</td><td>Actualizar servidores de desarrollo</td><td>Gestión de Infraestructura (Habilitación organizacional)</td></tr>
+<tr><td>7.3 Mejora</td><td>Medir, evaluar y mejorar continuamente (CMMI, ISO/IEC 33000, ISO 9001)</td><td>Proyecto de mejora para nivel 3 en V&amp;V</td><td>Gestión del Modelo de Ciclo de Vida (incluye mejora)</td></tr>
+<tr><td>7.4 Formación / RR. HH.</td><td>Formación y desarrollo de habilidades</td><td>Capacitar en metodologías ágiles</td><td>Gestión de RR. HH.</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuente: diapositivas 30 y 31, Semana 05; correspondencia con 2008 como complemento.</p>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>7.1 «Gestión» (organizativo) no es lo mismo que 6.3 «Aseguramiento de la Calidad» (apoyo) ni que «Gestión de la Calidad» (habilitación organizacional en 2008/2017). Y «7.4 Recursos Humanos» (A-18) = «Formación» (A-30): si una opción dice que son procesos distintos de la 12207:1995, es falsa. La Mejora (7.3) «<b>puede</b> aplicar» CMMI/ISO 33000/ISO 9001: la 12207 no obliga a ninguno.</p></div>
+</section>
+
+<section id="relacion-con-otras-normas">
+<h2>11. Relación de la 12207 con otras normas y modelos</h2>
+<p>La 12207 es el «mapa de procesos» del que se alimentan otras normas del curso. Siglas: PRM, PAM, SPICE, CMMI, SEI (Software Engineering Institute), SGC, QMS (Quality Management System), VSE, NMX (Norma Mexicana), MoProSoft (Modelo de Procesos para la Industria de SW), SC 7.</p>
+
+<div class="concepto"><h3>Armonización 12207 ↔ 15288</h3>
+<p>Desde 2008 la 12207 (SW) y la 15288 (sistemas) comparten una clasificación idéntica de procesos de contexto de sistema; en 2017 ambas tienen los mismos 4 grupos y casi los mismos 30 procesos.</p>
+<p class="ej"><b>Ej.:</b> en un proyecto del MTC de semáforos inteligentes, el equipo de HW sigue la 15288 y el de SW la 12207 sin traducir términos entre ellos.</p>
+</div>
+
+<div class="concepto"><h3>12207 como PRM para SPICE / ISO/IEC 33000</h3>
+<p>Gracias a «propósito y resultados» (Amd 2002), la 12207 actúa como <b>PRM</b>; un <b>PAM</b> (ISO/IEC 15504-5, hoy ISO/IEC 33061) añade prácticas base e indicadores para medir la <b>capacidad</b> (niveles 0–5) de cada proceso.</p>
+<p class="ej"><b>Ej.:</b> un evaluador SPICE mide el proceso «Gestión de la Configuración del SW» del RENIEC con la ISO/IEC 33061 y le asigna nivel de capacidad 2 (gestionado).</p>
+</div>
+
+<div class="concepto"><h3>12207 (procesos) vs. 25010 (producto)</h3>
+<p>La 12207 dice <b>qué procesos</b> ejecutar; la ISO/IEC 25010 (S3) dice <b>qué características de calidad del producto</b> medir (adecuación funcional, eficiencia de desempeño, compatibilidad, usabilidad/capacidad de interacción, fiabilidad, seguridad, mantenibilidad, portabilidad…). Se complementan: la Validación (12207) usa atributos de la 25010 como criterios.</p>
+<p class="ej"><b>Ej.:</b> en el SINEACE móvil, el proceso de Validación comprueba la <b>usabilidad</b> (25010) con 10 evaluadores en una UAT.</p>
+</div>
+
+<div class="norma"><h4>ISO/IEC/IEEE 15288 (procesos del ciclo de vida de sistemas)</h4>
+<ul>
+<li><b>Código exacto:</b> ISO/IEC 15288:2002 / 2008 · ISO/IEC/IEEE 15288:2015 / 2023.</li>
+<li><b>Organismo emisor:</b> ISO/IEC JTC 1/SC 7 (+ IEEE desde 2015).</li>
+<li><b>Versión/año:</b> vigente 2023.</li>
+<li><b>Propósito:</b> marco común de procesos del ciclo de vida de <b>sistemas</b> creados por el ser humano (HW + SW + personas + procesos).</li>
+<li><b>Estructura:</b> 4 grupos (Acuerdo, Habilitación organizacional del proyecto, Gestión técnica, Técnicos), mismos que la 12207:2017.</li>
+<li><b>Trampa típica:</b> decir que la 12207:2008 se armonizó con la «ISO 9001» o con la «15504»; la armonización estructural fue con la <b>15288</b>.</li>
+</ul></div>
+
+<div class="norma"><h4>ISO/IEC 15504 (SPICE) → ISO/IEC 33000</h4>
+<ul>
+<li><b>Código exacto:</b> ISO/IEC 15504 (partes 1–10, 2003–2012), reemplazada por la familia ISO/IEC 330xx (desde 2015; 33001, 33002, 33004, 33020, 33061…).</li>
+<li><b>Organismo emisor:</b> ISO/IEC JTC 1/SC 7.</li>
+<li><b>Versión/año:</b> 33000 vigente desde 2015.</li>
+<li><b>Propósito:</b> evaluación de procesos (capacidad y madurez organizacional) y mejora.</li>
+<li><b>Estructura:</b> PRM (p. ej., 12207) + PAM + marco de medición con 6 niveles de capacidad (0 incompleto a 5 innovador/optimizado).</li>
+<li><b>Trampa típica:</b> creer que la 12207 «mide niveles»; quien mide es la 15504/33000 usando la 12207 como PRM (S6).</li>
+</ul></div>
+
+<div class="norma"><h4>CMMI (Capability Maturity Model Integration)</h4>
+<ul>
+<li><b>Código exacto:</b> CMMI for Development v1.3 (2010), CMMI v2.0 (2018), CMMI v3.0 (2023).</li>
+<li><b>Organismo emisor:</b> SEI de Carnegie Mellon; hoy CMMI Institute / ISACA.</li>
+<li><b>Versión/año:</b> v3.0, 2023.</li>
+<li><b>Propósito:</b> modelo de buenas prácticas para mejorar procesos y evaluar <b>madurez</b> (niveles 1–5) o capacidad.</li>
+<li><b>Estructura:</b> en v1.3, 22 áreas de proceso; VER y VAL en nivel 3 «Definido»; evaluación con SCAMPI.</li>
+<li><b>Trampa típica:</b> confundir «nivel 3 de madurez» (CMMI) con un nivel de la 12207; la 12207 no tiene niveles, solo procesos.</li>
+</ul></div>
+
+<div class="norma"><h4>ISO 9001 (Sistema de Gestión de la Calidad)</h4>
+<ul>
+<li><b>Código exacto:</b> ISO 9001:2015 (con Amd 1:2024 sobre cambio climático); guía para SW: ISO/IEC/IEEE 90003:2018.</li>
+<li><b>Organismo emisor:</b> ISO/TC 176; en Perú adoptada como NTP-ISO 9001.</li>
+<li><b>Versión/año:</b> 2015.</li>
+<li><b>Propósito:</b> requisitos de un SGC (QMS) certificable para cualquier organización.</li>
+<li><b>Estructura:</b> estructura de alto nivel de 10 cláusulas; ciclo PDCA y enfoque a procesos y riesgos.</li>
+<li><b>Trampa típica:</b> pensar que ISO 9001 define los procesos del ciclo de vida del SW; no lo hace, por eso la 90003 la interpreta usando la 12207.</li>
+</ul></div>
+
+<div class="norma"><h4>ISO/IEC 25010 (modelo de calidad del producto)</h4>
+<ul>
+<li><b>Código exacto:</b> ISO/IEC 25010:2011 y ISO/IEC 25010:2023 (familia SQuaRE, Systems and software Quality Requirements and Evaluation).</li>
+<li><b>Organismo emisor:</b> ISO/IEC JTC 1/SC 7.</li>
+<li><b>Versión/año:</b> 2023 (9 características de calidad del producto).</li>
+<li><b>Propósito:</b> definir características y subcaracterísticas de calidad del producto y de calidad en uso.</li>
+<li><b>Estructura:</b> 2011: 8 características; 2023: 9 (se agrega seguridad física/<i>safety</i>, usabilidad pasa a «capacidad de interacción»).</li>
+<li><b>Trampa típica:</b> atribuirle a la 12207 el modelo de características de calidad; eso es la 25010 (S3).</li>
+</ul></div>
+
+<div class="norma"><h4>ISO/IEC 29110 (perfiles para VSE)</h4>
+<ul>
+<li><b>Código exacto:</b> ISO/IEC 29110 (series de partes, desde 2011); adoptada en Perú como NTP-ISO/IEC 29110.</li>
+<li><b>Organismo emisor:</b> ISO/IEC JTC 1/SC 7.</li>
+<li><b>Versión/año:</b> desde 2011, actualizaciones posteriores.</li>
+<li><b>Propósito:</b> perfiles de ciclo de vida para <b>entidades muy pequeñas</b> (hasta 25 personas), derivados de la 12207 y la 15289.</li>
+<li><b>Estructura:</b> perfiles Entrada, Básico, Intermedio y Avanzado; el Básico tiene 2 procesos: Gestión del Proyecto (PM) e Implementación del SW (SI).</li>
+<li><b>Trampa típica:</b> creer que una VSE no puede alinearse a la 12207; la 29110 es precisamente su «sastrería» oficial (S7).</li>
+</ul></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Norma / modelo</th><th>Qué responde</th><th>Tipo</th><th>Sesión</th></tr></thead>
+<tbody>
+<tr><td>ISO/IEC 12207 / NTP 12207:2016</td><td>¿Qué procesos del ciclo de vida del SW existen?</td><td>Modelo de referencia de procesos</td><td>S4, S5</td></tr>
+<tr><td>IEEE 730</td><td>¿Cómo planifico el QA de un proyecto?</td><td>Norma de plan (SQAP)</td><td>S4</td></tr>
+<tr><td>ISO/IEC 25010</td><td>¿Qué características de calidad debe tener el producto?</td><td>Modelo de calidad de producto</td><td>S3</td></tr>
+<tr><td>ISO/IEC 15504 / 33000</td><td>¿Qué tan capaz es cada proceso?</td><td>Modelo de evaluación</td><td>S6</td></tr>
+<tr><td>CMMI</td><td>¿Qué tan madura es la organización?</td><td>Modelo de madurez y mejora</td><td>S6</td></tr>
+<tr><td>ISO 9001</td><td>¿Tengo un SGC certificable?</td><td>Norma de sistema de gestión</td><td>S2</td></tr>
+<tr><td>ISO/IEC 29110 · MoProSoft</td><td>¿Cómo aplica una pequeña empresa estos procesos?</td><td>Perfiles / modelos para pymes</td><td>S7</td></tr>
+</tbody></table></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>La 12207 <b>no certifica</b> organizaciones ni otorga niveles. Una empresa puede declarar conformidad o ser evaluada (SPICE/33000) usando la 12207 como PRM, o certificarse en ISO 9001; pero «certificación nivel 3 en NTP 12207» no existe.</p></div>
+</section>
+
+<section id="caso-de-estudio-y-practica">
+<h2>12. Caso de estudio (Chinarro, 2019) y práctica de la sesión</h2>
+<p>Siglas: V&amp;V, UNMSM, FISI, APA (American Psychological Association), JP, WoS (Web of Science), SciELO (Scientific Electronic Library Online), QA, CI/CD.</p>
+
+<div class="concepto"><h3>Caso de estudio: proceso de pruebas basado en la NTP 2016</h3>
+<p>Tesis «<b>Definición e implementación del proceso de pruebas de SW basado en la NTP-ISO/IEC 12207:2016 aplicado a una empresa consultora de SW</b>», autora <b>Chinarro Morales, Evelyn Joanna</b>, <b>2019</b>, repositorio Cybertesis UNMSM (A-32). Según su resumen (A-33): (1) desarrolla e implementa un proceso para las <b>pruebas funcionales</b> basado en la NTP 2016; (2) define las actividades según el <b>principio de verificación y validación</b>; (3) <b>documenta todos los procesos de negocio</b> para facilitar la definición de <b>casos de prueba</b>; (4) <b>evalúa y selecciona una herramienta</b> de <b>automatización</b> de pruebas funcionales; (5) <b>disminuye el tiempo de ejecución de las pruebas</b>. Palabras clave: pruebas de SW, casos de prueba, automatización de pruebas.</p>
+<p class="ej"><b>Ej.:</b> la misma lógica aplicada a Plaza Vea online: modelar el proceso de compra (BPMN, Business Process Model and Notation), derivar casos de prueba de cada flujo, automatizarlos con Selenium y medir la reducción del tiempo de regresión.</p>
+</div>
+
+<div class="tabla"><table>
+<thead><tr><th>Acción de la tesis</th><th>Proceso 12207:1995 (3 categorías)</th><th>Proceso 2008 / NTP 2016</th></tr></thead>
+<tbody>
+<tr><td>Definir proceso de pruebas funcionales con principio V&amp;V</td><td>6.4 Verificación · 6.5 Validación (apoyo)</td><td>Verificación del SW · Validación del SW (Soporte de SW); Pruebas de Calificación del SW (Implementación de SW)</td></tr>
+<tr><td>Documentar procesos de negocio → casos de prueba</td><td>6.1 Documentación (apoyo)</td><td>Gestión de la Documentación del SW</td></tr>
+<tr><td>Evaluar y seleccionar herramienta de automatización</td><td>7.2 Infraestructura (organizativo)</td><td>Gestión de Infraestructura</td></tr>
+<tr><td>Disminuir el tiempo de ejecución de pruebas</td><td>7.3 Mejora (organizativo)</td><td>Gestión del Modelo de Ciclo de Vida / Medición</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuente: diapositivas 32 y 33, Semana 05; mapeo a procesos elaborado para el repaso. Tesis: https://cybertesis.unmsm.edu.pe/backend/api/core/bitstreams/40d83683-8952-4592-ae00-2fc62b400d8d/content</p>
+
+<div class="concepto"><h3>Caso de prueba y automatización de pruebas</h3>
+<p><b>Caso de prueba</b>: conjunto de precondiciones, entradas, acciones y resultados esperados diseñado para verificar un requisito o un flujo concreto. <b>Automatización de pruebas</b>: uso de herramientas que ejecutan casos de prueba y comparan resultados sin intervención manual, reduciendo tiempo y error humano (ISO/IEC/IEEE 29119 es la norma de pruebas).</p>
+<p class="ej"><b>Ej.:</b> CP-015 «matricularse en curso con cruce de horario → el SUM muestra mensaje de error»; automatizado con Selenium se ejecuta en 8 s en vez de 3 min manuales.</p>
+</div>
+
+<div class="concepto"><h3>Práctica Sesión 05: informe de investigación aplicando la 12207</h3>
+<p>Enunciado (Mazo C): (1) seleccionar un <b>caso de estudio</b> donde se aplique la norma (SciELO, WoS, Scopus, tesis de repositorios, Google Académico); (2) redactar en Word el <b>Informe del Proyecto de Investigación</b>: <b>Cap. I Planteamiento del problema</b> (realidad problemática, definición del problema, objetivos general y específicos, delimitación, justificación) · <b>Cap. II Estado del arte</b> (técnicas previas con tabla/figura representativa, herramientas, <b>3 casos de éxito</b>) · <b>Cap. III Metodología</b> (lo que aplicó el autor, <b>desagregado por proceso → actividades → tareas</b> de la ISO/IEC 12207:2017) · <b>Cap. IV Conclusiones y recomendaciones</b> · <b>Referencias APA 7</b>; (3) entrega <b>12/10/2026 hasta las 21:59</b>, enviada por el <b>JP</b> con asunto «GRUPO XX – Norma de Calidad ISO/IEC 12207».</p>
+<p class="ej"><b>Ej.:</b> el G3 eligió el caso SINEACE móvil y en el Cap. III desagregó, p. ej., Validación → actividad «preparar validación» → tarea «definir escenarios de UAT con evaluadores externos».</p>
+</div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>La práctica se titula «Norma de Calidad ISO/IEC 12207:<b>2017</b>» (la internacional), mientras el caso de Chinarro usa la <b>NTP 2016</b> (≡ 2008). Si debes desagregar la metodología, aclara a qué edición mapeas. También: el encabezado de la hoja dice curso «Investigación Formativa», pero la práctica corresponde a Calidad de SW.</p></div>
+</section>
+<section id="glosario">
+<h2>Glosario de términos</h2>
+<dl class="glos">
+<dt>Actividad</dt><dd>Conjunto cohesivo de tareas dentro de un proceso de la 12207. Ej.: «monitorear el sistema» dentro de Operación.</dd>
+<dt>Adquirente</dt><dd>Parte que obtiene un producto o servicio de SW (proceso 5.1). Ej.: SINEACE al contratar su app móvil.</dd>
+<dt>Adquisición (5.1)</dt><dd>Proceso principal para definir la necesidad, seleccionar proveedor, gestionar el contrato y aceptar el SW. Ej.: TDR publicados en el SEACE.</dd>
+<dt>Auditoría (6.7)</dt><dd>Evaluación independiente del cumplimiento de requisitos, contratos o normas. Ej.: el OCI audita el proceso de pruebas.</dd>
+<dt>Caso de prueba</dt><dd>Precondiciones, entradas, pasos y resultado esperado para verificar un requisito. Ej.: matrícula con cruce de horario en el SUM.</dd>
+<dt>Ciclo de vida del SW</dt><dd>Periodo desde la concepción de la idea hasta el retiro definitivo del SW. Ej.: el SUM desde su creación hasta su apagado.</dd>
+<dt>Conformidad adaptada</dt><dd>Cumplimiento declarado tras aplicar el proceso de sastrería y justificar exclusiones. Ej.: startup sin Gestión de Cartera.</dd>
+<dt>Desarrollo (5.3)</dt><dd>Proceso principal del desarrollador: requisitos, diseño, codificación, integración, pruebas e instalación. Ej.: el G3 construyendo el SINEACE móvil.</dd>
+<dt>Disposición / retiro (<i>Disposal</i>)</dt><dd>Fin controlado de la vida del SW, con archivo y migración de datos. Ej.: apagado del antiguo sistema de planillas del MEF.</dd>
+<dt>Documentación (6.1)</dt><dd>Proceso de apoyo que desarrolla y mantiene la documentación del SW y del proyecto. Ej.: manual de usuario del sistema de matrícula.</dd>
+<dt>Enmienda (Amd)</dt><dd>Modificación formal publicada sobre una norma vigente. Ej.: ISO/IEC 12207:1995/Amd 1:2002 (propósito y resultados).</dd>
+<dt>Firmware</dt><dd>SW embebido en un dispositivo de HW; la 12207 aplica a su parte lógica. Ej.: SW de un POS de pagos.</dd>
+<dt>Formación / Recursos Humanos (7.4)</dt><dd>Proceso organizativo que desarrolla las habilidades del personal. Ej.: capacitar al equipo en metodologías ágiles.</dd>
+<dt>Gestión (7.1)</dt><dd>Proceso organizativo para planificar, ejecutar, controlar y cerrar proyectos. Ej.: el JP controla el cronograma semanal.</dd>
+<dt>Gestión de la Configuración (6.2, SCM)</dt><dd>Control de versiones y cambios de los CI para evitar confusiones o pérdidas. Ej.: v2.4.1 en producción, release 2.5 en QA.</dd>
+<dt>Grupo de procesos</dt><dd>Agrupación de procesos afines en la 12207:2008 (7 grupos) o 2017 (4 grupos). Ej.: Soporte de SW.</dd>
+<dt>Habilitación Organizacional del Proyecto</dt><dd>Grupo que gestiona infraestructura, RR. HH., calidad corporativa y modelos de ciclo de vida. Ej.: política de calidad de Rímac.</dd>
+<dt>INACAL</dt><dd>Instituto Nacional de Calidad; aprueba las NTP. Ej.: aprobó la NTP-ISO/IEC 12207:2016 el 16-07-2016.</dd>
+<dt>Infraestructura (7.2)</dt><dd>Proceso organizativo que asegura tecnología, herramientas, redes y servicios adecuados. Ej.: actualizar servidores de desarrollo.</dd>
+<dt>Ingeniería de dominio</dt><dd>Proceso de reutilización que modela un dominio para producir activos reutilizables. Ej.: componente de identidad digital de la PCM.</dd>
+<dt>IV&amp;V</dt><dd>Verificación y validación hecha por una organización independiente del desarrollo. Ej.: tercero que evalúa el sistema LBTR del BCRP.</dd>
+<dt>JTC 1 / SC 7</dt><dd>Comité técnico conjunto ISO/IEC y su subcomité de ingeniería de SW y sistemas que redacta la 12207. Ej.: también redacta la 25010.</dd>
+<dt>Mantenimiento (5.5)</dt><dd>Proceso principal que modifica el SW entregado por problemas o mejoras, preservando su integridad. Ej.: RFC para pagar con Yape en SUNARP.</dd>
+<dt>Mantenimiento adaptativo</dt><dd>Modificación para operar en un nuevo entorno de HW o SW. Ej.: migrar el SUM a Android 15.</dd>
+<dt>Mantenimiento correctivo</dt><dd>Corrección de errores presentes en el funcionamiento. Ej.: bug de doble cobro en Yape.</dd>
+<dt>Mantenimiento perfectivo</dt><dd>Mejora de rendimiento, usabilidad o eficiencia sin que haya errores. Ej.: login del BCP de 4 s a 1,5 s.</dd>
+<dt>Mantenimiento preventivo</dt><dd>Anticipación a fallos latentes para mejorar la estabilidad. Ej.: refactorizar módulo complejo de SUNAT.</dd>
+<dt>Mejora (7.3)</dt><dd>Proceso organizativo para medir, evaluar y mejorar continuamente los procesos (CMMI, ISO/IEC 33000, ISO 9001). Ej.: proyecto para nivel 3 en V&amp;V.</dd>
+<dt>Modelo de ciclo de vida</dt><dd>Marco que organiza las etapas del SW de forma controlada; la 12207 no impone ninguno. Ej.: Scrum en Interbank.</dd>
+<dt>NTP</dt><dd>Norma Técnica Peruana aprobada por INACAL; voluntaria salvo disposición legal. Ej.: NTP-ISO/IEC 12207:2016.</dd>
+<dt>NTP-ISO/IEC 12207:2016</dt><dd>3.ª edición peruana, equivalente a ISO/IEC 12207:2008, obligatoria desde 2017 en el SNI. Ej.: exigida a la OTI del MEF.</dd>
+<dt>Operación (5.4)</dt><dd>Proceso principal de uso del SW en su entorno real con soporte al usuario; encargado: Gerente de Operaciones o Administrador de Sistemas. Ej.: SUM en matrícula.</dd>
+<dt>PAM</dt><dd>Modelo de evaluación de procesos que añade indicadores a un PRM. Ej.: ISO/IEC 33061 para evaluar la 12207.</dd>
+<dt>PRM</dt><dd>Modelo de referencia de procesos con propósito y resultados. Ej.: la 12207 como base de una evaluación SPICE.</dd>
+<dt>Proceso</dt><dd>Conjunto de actividades interrelacionadas que transforman entradas en salidas con un propósito. Ej.: Verificación.</dd>
+<dt>Procesos de apoyo / soporte</dt><dd>8 procesos transversales que corren en paralelo y aseguran la calidad sin desarrollar SW. Ej.: QA, SCM.</dd>
+<dt>Procesos organizativos</dt><dd>4 procesos que fijan el entorno, estructura y recursos de todos los proyectos. Ej.: Infraestructura.</dd>
+<dt>Procesos principales</dt><dd>5 procesos esenciales que hacen que el SW nazca, funcione y se mantenga. Ej.: Adquisición a Mantenimiento.</dd>
+<dt>Propósito y resultados</dt><dd>Forma de expresar cada proceso introducida en 2002 para alinearse con SPICE. Ej.: resultado «existe línea base de cada CI».</dd>
+<dt>Pruebas de regresión</dt><dd>Re-ejecución de pruebas tras un cambio para detectar efectos adversos. Ej.: 1 200 pruebas en el pipeline de Interbank.</dd>
+<dt>QA / Aseguramiento de la Calidad (6.3)</dt><dd>Proceso que provee mecanismos para verificar que productos y procesos cumplen estándares, requisitos y políticas. Ej.: QA revisa el cumplimiento del procedimiento de revisión de código.</dd>
+<dt>Resolución de problemas (6.8)</dt><dd>Proceso de ciclo cerrado para analizar y resolver problemas y no conformidades. Ej.: ticket en Jira desde triage hasta cierre.</dd>
+<dt>Reutilización de SW</dt><dd>Grupo 7 de la 2008: ingeniería de dominio, gestión de activos y programa de reutilización. Ej.: librería común de autenticación.</dd>
+<dt>Revisión conjunta (6.6)</dt><dd>Evaluación del estado y productos de una actividad entre adquirente y proveedor. Ej.: hito de aprobación del SRS.</dd>
+<dt>RM N.° 041-2017-PCM</dt><dd>Resolución Ministerial que hace obligatoria la NTP 12207:2016 en el SNI. Ej.: base legal citada en TDR estatales.</dd>
+<dt>Sastrería (<i>tailoring</i>)</dt><dd>Selección de procesos, actividades y tareas según escala, complejidad y criticidad. Ej.: intranet sin IV&amp;V; pagos con IV&amp;V.</dd>
+<dt>SDLC</dt><dd>Ciclo de vida del desarrollo de sistemas; en clase, rueda de 9 etapas de Analysis a Disposal. Ej.: Evaluation realimenta un nuevo Analysis.</dd>
+<dt>SNI</dt><dd>Sistema Nacional de Informática del Estado peruano, ámbito de obligatoriedad de la NTP. Ej.: SUNAT, RENIEC, UNMSM.</dd>
+<dt>Suministro (5.2)</dt><dd>Proceso principal del proveedor que prepara la propuesta, firma el contrato y entrega el SW. Ej.: consultora contratada por SINEACE.</dd>
+<dt>Tarea</dt><dd>Acción concreta dentro de una actividad. Ej.: replicar el incidente reportado antes de modificar el código.</dd>
+<dt>Validación (6.5)</dt><dd>Confirmar que el producto final satisface las necesidades del usuario: ¿construimos el producto correcto? Ej.: beta con casos de uso críticos.</dd>
+<dt>Verificación (6.4)</dt><dd>Confirmar que cada producto intermedio cumple la especificación de la etapa anterior: ¿construimos el producto correctamente? Ej.: diseño vs. requisitos.</dd>
+</dl>
+</section>
+<!--FIN-->

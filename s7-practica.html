@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S7 Práctica · MoProSoft, MPS.BR y más · Repaso Calidad de SW</title>
+<meta name="description" content="Modelos para PYMEs: MoProSoft, MPS.BR, COMPETISOFT, IT Mark e ISO/IEC 29110.">
+<link rel="stylesheet" href="assets/css/style.css"></head>
+<body>
+<header class="top"><a class="brand" href="index.html">Repaso Parcial · Calidad de SW</a><nav class="menu"><a href="index.html">Inicio</a><a href="s1-teoria.html">S1</a><a href="s2-teoria.html">S2</a><a href="s3-teoria.html">S3</a><a href="s4-teoria.html">S4</a><a href="s5-teoria.html">S5</a><a href="s6-teoria.html">S6</a><a href="s7-teoria.html" class=on>S7</a><a href="normas.html">Normas</a><a href="siglas.html">Siglas</a><a href="examen.html">Examen</a></nav></header>
+<div class="wrap"><aside class="toc"><details open><summary>Índice</summary><ol><li><a href="#caso-1">Caso 1 · AndesCode: elegir modelo para licitar con el Estado peruano</a></li><li><a href="#caso-2">Caso 2 · Quipu Labs: asignar actividades a procesos y categorías de MoProSoft</a></li><li><a href="#caso-3">Caso 3 · EvalProSoft: la &quot;falacia del promedio&quot; en una PYME de Arequipa</a></li><li><a href="#caso-4">Caso 4 · Pampa Sistemas: nivel MPS.BR con MA-MPS (Guia Geral 2012)</a></li><li><a href="#caso-5">Caso 5 · MR-MPS-SW:2021: nivel de una empresa de São Paulo y brecha hacia D</a></li><li><a href="#caso-6">Caso 6 · Grupo cooperado: MPS.BR vs CMMI para 6 PYMEs peruanas</a></li><li><a href="#caso-7">Caso 7 · Kuntur Apps: primer ciclo PmCOMPETISOFT en una micro empresa cusqueña</a></li><li><a href="#caso-8">Caso 8 · Segundo ciclo COMPETISOFT con 600 h-persona: priorizar y repartir</a></li><li><a href="#caso-9">Caso 9 · ISO/IEC 29110 PM en una VSE ecuatoriana: desviaciones, EVM e inconsistencias</a></li><li><a href="#caso-10">Caso 10 · ISO/IEC 29110: Entry vs Basic y ubicación de tareas y productos en PM/SI</a></li><li><a href="#caso-11">Caso 11 · IT Mark: nivel de una fintech y brecha hacia Elite</a></li><li><a href="#caso-12">Caso 12 · Migración MoProSoft nivel 2 → ISO/IEC 29110 Basic</a></li><li><a href="#caso-13">Caso 13 · Patrón de procesos MoProSoft: documentar &quot;OPE.3 Gestión de Incidentes&quot;</a></li><li><a href="#caso-14">Caso 14 · Chasqui Software: matriz multicriterio y análisis de sensibilidad</a></li><li><a href="#caso-15">Caso 15 · Integración S5–S7: PYME de 60 personas con mercados mixtos</a></li></ol></details></aside><main>
+<div class="tabs"><a class="" href="s7-teoria.html">📖 Teoría S7</a><a class="on" href="s7-practica.html">🧩 Práctica S7</a><a href="examen.html?s=7">📝 Examen S7</a></div><h1>Sesión 7 · Práctica</h1>
+<p class="lead">Casos de examen sobre los <b>otros modelos de calidad de procesos</b> pensados para PYMEs (Pequeñas y Medianas Empresas) y <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> (Very Small Entities – Entidades Muy Pequeñas): <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> (Modelo de Procesos para la Industria de Software, NMX-I-059-NYCE) con su método <abbr title="Método de Evaluación de Procesos para la Industria de Software (NMX-I-059/04-NYCE)">EvalProSoft</abbr>, <abbr title="Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño">MPS.BR</abbr> / <abbr title="Modelo de Referência MPS para Software (también -SV Serviços y -RH Gestão de Pessoas)">MR-MPS-SW</abbr> (Melhoria de Processo do Software Brasileiro – Modelo de Referencia MPS para Software) con <abbr title="Método de Avaliação MPS – Método de Evaluación MPS">MA-MPS</abbr> y <abbr title="Modelo de Negócio MPS – Modelo de Negocio MPS">MN-MPS</abbr>, <abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr> (proyecto <abbr title="Programa Iberoamericano de Ciencia y Tecnología para el Desarrollo">CYTED</abbr>) con PmCOMPETISOFT, IT Mark (<abbr title="European Software Institute – Instituto Europeo de Software (hoy Tecnalia)">ESI</abbr>–Tecnalia) e <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110 (perfiles Entry, Basic, Intermediate y Advanced). <b>Aviso:</b> para la Semana 07 no se cuenta todavía con diapositivas de la profesora ni con entregables de los grupos (G3 y otros); por eso todos los casos son <b>nuevos</b>, de complejidad MUY ALTA, adaptados de ejercicios públicos (se cita la URL en cada origen) o creados para el repaso con base en los documentos oficiales (MoProSoft v1.3, Guia Geral MPS de Software:2021, informe final COMPETISOFT, <abbr title="Technical Report – Informe Técnico (ISO)">TR</abbr> 29110-5-1-2). Si en la clase aparecen ejemplos de la profesora, ellos mandan. Cada solución trae: tabla de problemas con causa raíz, al menos dos alternativas, justificación normativa con proceso/actividad/nivel exacto, <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> (Key Performance Indicator – Indicador Clave de Desempeño) con fórmula y meta, y errores frecuentes. <b>Regla de oro:</b> en estos modelos no se califica "el nombre del modelo elegido", sino la coherencia <i>contexto (tamaño, mercado, presupuesto) → proceso/nivel del modelo → evidencia → KPI</i>.</p>
+
+<section id="caso-1" class="caso">
+<h2>Caso 1 · AndesCode: elegir modelo para licitar con el Estado peruano</h2>
+<p class="origen">Origen: Creado para el repaso, inspirado en los casos del proyecto ProCal-ProSer de GIDIS-PUCP (Laporte et al., 2016) resumidos en <a href="https://spicenter.vse.cz/wp-content/uploads/2018/08/semestralni_prace/17_11/The_Peruvian_Software_Industry_Evolution_and_the_ISOIEC_29110.pdf">The Peruvian Software Industry Evolution and the ISO/IEC 29110</a></p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><b>AndesCode S.A.C.</b> (Lima) tiene <b>18</b> colaboradores y factura S/ 2,4 M al año. Ejecuta <b>un</b> proyecto grande a la vez (Sistema de Trámite Documentario, STD, para municipalidades distritales) con <b>un único</b> equipo Scrum de 9 personas; el resto es soporte y administración. Datos del último año (10 proyectos/entregas):</p>
+<div class="tabla"><table>
+<thead><tr><th>Indicador</th><th>Valor observado</th></tr></thead>
+<tbody>
+<tr><td>Proyectos con retraso &gt; 20 % del plazo</td><td>4 de 10 (40 %)</td></tr>
+<tr><td>Proyectos con <abbr title="Software Requirements Specification – Especificación de Requisitos de Software">SRS</abbr> (Software Requirements Specification) formal y firmada</td><td>0 de 10</td></tr>
+<tr><td>Documento de requisitos con control de versiones (Git/SharePoint)</td><td>No; se envían "STD_requisitos_final_v7_ahora_si.docx" por correo</td></tr>
+<tr><td>Actas de aceptación del cliente firmadas</td><td>2 de 10</td></tr>
+<tr><td>CR (Change Requests – Solicitudes de Cambio) registradas y evaluadas antes de implementarse</td><td>≈ 15 %</td></tr>
+<tr><td>Defectos reportados por el cliente en los 30 días post-entrega</td><td>promedio 23 por entrega</td></tr>
+</tbody></table></div>
+<p>Las bases de un concurso público del <abbr title="Organismo Supervisor de las Contrataciones del Estado">OSCE</abbr> (Organismo Supervisor de las Contrataciones del Estado) que se convocará en <b>12 meses</b> otorgan puntaje adicional a postores con "certificación de procesos de <abbr title="Software – Software / soporte lógico">SW</abbr> reconocida internacionalmente". Presupuesto de mejora: <b>S/ 60 000</b>. En el directorio hay tres propuestas: (1) <abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> ML3 (Capability Maturity Model Integration – Maturity Level 3) con evaluación Benchmark; (2) MPS-SW nivel G; (3) <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110 perfil Básico con NTP-ISO/IEC 29110 de <abbr title="Instituto Nacional de Calidad (Perú)">INACAL</abbr> (Instituto Nacional de Calidad).</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Identifique los problemas, su causa raíz y el atributo/dimensión de calidad afectado.</li>
+<li>Elija el modelo justificando con al menos 4 criterios (tamaño, estructura de proyectos, costo, plazo, reconocimiento).</li>
+<li>Mapee cada problema a la actividad exacta del modelo elegido.</li>
+<li>Proponga 3 <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> con fórmula y meta a 12 meses.</li>
+<li>Indique qué haría si en 3 años la empresa crece a 40 personas con 3 proyectos paralelos.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Retrasos &gt; 20 % en 40 % de proyectos</td><td>Estimación sin base histórica ni gestión de riesgos; no se compara real vs plan</td><td>4/10 proyectos retrasados; no hay Progress Status Record</td><td>Cumplimiento de plazo (eficacia del proceso de gestión de proyecto)</td></tr>
+<tr><td>Requisitos ambiguos e inestables</td><td>No existe actividad de análisis de requisitos con verificación y validación con el cliente</td><td>0/10 SRS firmadas; 23 defectos post-entrega</td><td>Adecuación funcional (ISO/IEC 25010), satisfacción del cliente</td></tr>
+<tr><td>Pérdida de versiones del documento de requisitos</td><td>Sin estrategia de control de versiones ni repositorio del proyecto</td><td>Archivos "final_v7" por correo</td><td>Integridad/trazabilidad de la configuración (<abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr> – Software Configuration Management)</td></tr>
+<tr><td>Cambios implementados sin evaluar impacto</td><td>Sin procedimiento de CR (costo, plazo, impacto técnico)</td><td>Solo ≈15 % de CR evaluadas</td><td>Control del alcance, mantenibilidad</td></tr>
+<tr><td>Entregas sin aceptación formal</td><td>No hay cierre formal del proyecto según instrucciones de entrega</td><td>2/10 actas</td><td>Conformidad contractual, riesgo legal en contratos con el Estado</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · ISO/IEC 29110 perfil Básico (recomendada)</h4>
+<ul>
+<li><b>Tamaño:</b> 18 ≤ 25 personas → es <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> según ISO/IEC 29110-1.</li>
+<li><b>Estructura:</b> un proyecto a la vez y un solo equipo = definición exacta del perfil <b>Basic</b> (<abbr title="Technical Report – Informe Técnico (ISO)">TR</abbr> 29110-5-1-2).</li>
+<li><b>Costo/plazo:</b> TR y <abbr title="Deployment Package – Paquete de Despliegue (ISO/IEC 29110)">DP</abbr> (Deployment Packages – Paquetes de Despliegue) gratuitos; auditoría de certificación de 1–2 días; se logra en 6–9 meses con S/ 60 000 (consultoría + auditoría + horas internas).</li>
+<li><b>Reconocimiento:</b> es norma <b>internacional</b> ISO/IEC y existe como <abbr title="Norma Técnica Peruana">NTP</abbr> en el catálogo de INACAL → cumple "reconocida internacionalmente".</li>
+<li><b>Compatibilidad con Scrum:</b> 29110 es neutral al ciclo de vida; las ceremonias Scrum generan evidencias (sprint review = Meeting Record de <abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr>.2).</li>
+</ul>
+<p><b>Mapeo:</b> retrasos → <b>PM.1</b> (estimar duración, esfuerzo, costo; identificar riesgos) + <b>PM.3</b> (comparar avance real vs plan, Correction Register); requisitos → <b><abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr>.2</b> (Requirements Specification verificada por el equipo y validada con el cliente, incorporada a la línea base); versiones → <b>PM.1</b> (estrategia de control de versiones, crear Project Repository) + <b>PM.2</b> (respaldo y recuperación del repositorio); CR → <b>PM.2</b> (analizar y evaluar Change Requests por costo, plazo e impacto técnico); actas → <b>PM.4</b> (Acceptance Record firmado).</p></div>
+<div class="alt"><h4>Alternativa B · MoProSoft/NTP 291.100 como modelo operativo + certificación 29110</h4>
+<p>Usar el patrón de procesos de <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> (<abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr> y <abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr>) para documentar los procesos internos —muy detallado en roles, productos y mediciones— y certificar luego contra 29110 Basic, que nació de MoProSoft (APE ≈ PM, DMS ≈ SI). Ventaja: deja la puerta abierta a procesos de gestión (<abbr title="Gestión de Proyectos – cartera (MoProSoft GES.2)">GPY</abbr>, <abbr title="Conocimiento de la Organización (MoProSoft GES.3.3)">CO</abbr>) útiles al crecer. Desventaja: más documentación de la estrictamente exigida en 12 meses.</p></div>
+<div class="alt"><h4>Alternativa C · Descartadas (y por qué)</h4>
+<p><b><abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> ML3:</b> desproporcionado (22 <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> en v1.3 / áreas de práctica en v2.0; 18–24 meses; evaluación Benchmark con Lead Appraiser certificado cuesta varias decenas de miles de USD) → no cabe en S/ 60 000 ni en 12 meses. <b>MPS-SW G:</b> técnicamente adecuado (<abbr title="Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)">GPR</abbr> + <abbr title="Engenharia de Requisitos – Ingeniería de Requisitos (MPS 2021)">REQ</abbr>) pero poco reconocido por el OSCE y con pocas <abbr title="Artificial Intelligence (AI) – Inteligencia Artificial">IA</abbr> (Instituições Avaliadoras) en Perú.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC 29110-1 (definición de VSE ≤ 25 personas), ISO/IEC 29110-4-1 (especificación del perfil, lo certificable), ISO/IEC TR 29110-5-1-2 (guía de gestión e ingeniería del perfil Básico: procesos PM y SI con objetivos PM.O1–PM.O7 y SI.O1–SI.O7). 29110 es un <b>perfil</b> (subconjunto) de ISO/IEC/IEEE 12207, por lo que también se alinea con la NTP-ISO/IEC 12207:2016 vista en la S5.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Línea base</th><th>Meta 12 meses</th></tr></thead>
+<tbody>
+<tr><td>Desviación de plazo</td><td>(Fecha real − Fecha plan) / Duración plan × 100</td><td>40 % de proyectos &gt; 20 %</td><td>≥ 80 % de proyectos con desviación ≤ 10 %</td></tr>
+<tr><td>Cobertura de trazabilidad</td><td>Requisitos con enlace en Traceability Record / Requisitos totales × 100</td><td>0 %</td><td>100 %</td></tr>
+<tr><td>CR evaluadas antes de implementar</td><td>CR con análisis de impacto aprobado / CR totales × 100</td><td>15 %</td><td>100 %</td></tr>
+<tr><td>Defectos post-entrega</td><td>Defectos reportados por el cliente en 30 días / entrega</td><td>23</td><td>≤ 10 (−55 %)</td></tr>
+</tbody></table></div>
+<p><b>Pregunta 5:</b> con 40 personas deja de ser VSE como organización (sí lo serían sus departamentos o proyectos ≤ 25). Con varios proyectos paralelos conviene evolucionar a <b>29110 Intermediate</b> (agrega gestión organizacional: cartera, recursos, procesos) si se mantiene la unidad ≤ 25, o migrar a <b>CMMI ML2</b>/MPS-SW F si el mercado lo exige.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) proponer "29110 nivel 3": la 29110 <b>no tiene niveles de madurez</b>, tiene <b>perfiles</b>; (2) creer que Scrum es incompatible con 29110; (3) olvidar que el criterio de la licitación es <i>comercial</i> (reconocimiento) y no solo técnico; (4) elegir CMMI "porque es el mejor": la calidad no tiene solución única, el mejor modelo es el que resuelve la causa raíz con los recursos disponibles.</div>
+</details>
+</section>
+
+<section id="caso-2" class="caso">
+<h2>Caso 2 · Quipu Labs: asignar actividades a procesos y categorías de MoProSoft</h2>
+<p class="origen">Origen: Web: <a href="https://www.uv.mx/personal/ermeneses/files/2018/05/5-ClaseMoprosoft.pdf">clase MoProSoft, Universidad Veracruzana</a> y <a href="https://kualikaans.fciencias.unam.mx/images/kuali/documentos/MoProSoft.pdf">MoProSoft v1.3 (UNAM)</a>; datos creados para el repaso</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p><b>Quipu Labs</b> (Lima, 18 personas) desarrolla <abbr title="Software – Software / soporte lógico">SW</abbr> a medida para aseguradoras (Rímac, Pacífico) y retail (Plaza Vea). Decide adoptar <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> (NMX-I-059/02-NYCE) para luego certificarse. El SEPG (Software Engineering Process Group) levantó estas 15 actividades reales de la empresa y debe asignar cada una a su proceso (código y sigla) y categoría:</p>
+<ol type="a">
+<li>Definir misión, visión y el Plan Estratégico 2027 con sus "Procesos Requeridos".</li>
+<li>Elaborar el Plan de Ventas y decidir si se presenta propuesta a Rímac o a Plaza Vea.</li>
+<li>Contratar un <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> senior y aplicar la encuesta de clima laboral.</li>
+<li>Comprar licencias de SonarQube Enterprise y renovar el servidor de <abbr title="Continuous Integration / Continuous Delivery-Deployment – Integración y Entrega/Despliegue Continuos">CI/CD</abbr> (Continuous Integration / Continuous Delivery).</li>
+<li>Estimar costo, calendario y Plan de Manejo de Riesgos del proyecto Rímac ya aceptado.</li>
+<li>Escribir la Especificación de Requerimientos y el Plan de Pruebas de Sistema.</li>
+<li>Ejecutar pruebas unitarias con JUnit.</li>
+<li>Auditar si los proyectos siguen el proceso de pruebas definido y formular el Plan de Mejora.</li>
+<li>Administrar el repositorio de plantillas y lecciones aprendidas (Confluence).</li>
+<li>Analizar una Solicitud de Cambio enviada por Rímac en el sprint 4.</li>
+<li>Atender una queja formal de Plaza Vea sobre el trato comercial de la empresa.</li>
+<li>Investigar tendencias tecnológicas (<abbr title="Artificial Intelligence (AI) – Inteligencia Artificial">IA</abbr> generativa para testing).</li>
+<li>Analizar el desempeño agregado de todos los proyectos del semestre para reportarlo a Dirección.</li>
+<li>Elaborar el Manual de Usuario final.</li>
+<li>Obtener el Documento de Aceptación del Cliente al terminar el proyecto Rímac.</li>
+</ol>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Asigne cada actividad a proceso (<abbr title="Categoría Alta Dirección (MoProSoft)">DIR</abbr>.1, GES.1, GES.2, GES.3, GES.3.1, GES.3.2, GES.3.3, <abbr title="Categoría Operación (MoProSoft)">OPE</abbr>.1, OPE.2) y categoría (DIR, <abbr title="Categoría Gerencia / Gestión (MoProSoft)">GER/GES</abbr>, OPE).</li>
+<li>Explique las tres parejas más confusas.</li>
+<li>Indique el rol responsable de MoProSoft para (e), (h) y (i).</li>
+<li>Diga qué problema de calidad aparece si (b) y (e) los hace la misma persona sin distinguir procesos.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Confusión cartera vs proyecto</td><td>No se separa <abbr title="Gestión de Proyectos – cartera (MoProSoft GES.2)">GPY</abbr> (cartera, estrategia) de <abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr> (un proyecto)</td><td>Actividades (b), (e), (m) mezcladas en el mismo "jefe"</td><td>Alineación estratégica de proyectos</td></tr>
+<tr><td>Confusión mejora de procesos vs conocimiento</td><td><abbr title="Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)">GPR</abbr> evalúa/mejora procesos; <abbr title="Conocimiento de la Organización (MoProSoft GES.3.3)">CO</abbr> custodia la Base de Conocimiento</td><td>(h) e (i) asignadas al mismo "<abbr title="Project Management Office – Oficina de gestión de proyectos">PMO</abbr>"</td><td>Mejora continua (<abbr title="Plan-Do-Check-Act – Planificar-Hacer-Verificar-Actuar (PHVA)">PDCA</abbr> – Plan-Do-Check-Act)</td></tr>
+<tr><td>Confusión queja comercial vs cambio de proyecto</td><td>La CR es de un proyecto (APE O3); la queja sobre la relación es de GPY (O4)</td><td>(j) vs (k)</td><td>Satisfacción del cliente</td></tr>
+</tbody></table></div>
+<div class="tabla"><table>
+<thead><tr><th>Act.</th><th>Proceso</th><th>Categoría</th><th>Actividad interna / objetivo</th></tr></thead>
+<tbody>
+<tr><td>a</td><td>DIR.1 <abbr title="Gestión de Negocio (MoProSoft DIR.1)">GN</abbr> – Gestión de Negocio</td><td>DIR</td><td>A1 Planificación Estratégica</td></tr>
+<tr><td>b</td><td>GES.2 GPY – Gestión de Proyectos</td><td>GER/GES</td><td>A1 Planificación (Plan de Ventas, alternativas de proyectos)</td></tr>
+<tr><td>c</td><td>GES.3.1 <abbr title="Recursos Humanos y Ambiente de Trabajo (MoProSoft GES.3.1)">RHAT</abbr></td><td>GER/GES</td><td>A2 Instrumentación (selección, evaluación del ambiente)</td></tr>
+<tr><td>d</td><td>GES.3.2 <abbr title="British Standards Institution – Instituto Británico de Normalización">BSI</abbr></td><td>GER/GES</td><td>A2 Instrumentación (adquisiciones, infraestructura)</td></tr>
+<tr><td>e</td><td>OPE.1 APE</td><td>OPE</td><td>A1 Planificación</td></tr>
+<tr><td>f</td><td>OPE.2 <abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr></td><td>OPE</td><td>A2 Requerimientos</td></tr>
+<tr><td>g</td><td>OPE.2 DMS</td><td>OPE</td><td>A4 Construcción</td></tr>
+<tr><td>h</td><td>GES.1 GPR – Gestión de Procesos</td><td>GER/GES</td><td>A3 Evaluación y Control</td></tr>
+<tr><td>i</td><td>GES.3.3 CO</td><td>GER/GES</td><td>A2 Realización (Base de Conocimiento)</td></tr>
+<tr><td>j</td><td>OPE.1 APE</td><td>OPE</td><td>A2 Realización (objetivo O3: Solicitudes de Cambio)</td></tr>
+<tr><td>k</td><td>GES.2 GPY</td><td>GER/GES</td><td>Objetivo O4: Comentarios y Quejas del Cliente</td></tr>
+<tr><td>l</td><td>GES.3 <abbr title="Generic Resource – Recurso genérico">GR</abbr> (proceso padre)</td><td>GER/GES</td><td>A3 Investigación de Tendencias Tecnológicas</td></tr>
+<tr><td>m</td><td>GES.2 GPY</td><td>GER/GES</td><td>A3 Evaluación y Control (Reporte Cuantitativo y Cualitativo a GN)</td></tr>
+<tr><td>n</td><td>OPE.2 DMS</td><td>OPE</td><td>A5 Integración y Pruebas (versión final de manuales)</td></tr>
+<tr><td>o</td><td>OPE.1 APE</td><td>OPE</td><td>A4 Cierre</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Asignación estricta según MoProSoft v1.3</h4><p>La tabla anterior. Roles: (e) <b>RAPE</b> (Responsable de Administración del Proyecto Específico); (h) <b>RGP</b> (Responsable de Gestión de Procesos) con el <b>EV</b> (Evaluador); (i) <b>RCO</b> (Responsable de Conocimiento de la Organización).</p></div>
+<div class="alt"><h4>Alternativa B · Asignación justificada por alcance (también válida)</h4><p>(k) podría ir a <b>DIR.1 GN</b> si la queja revela un problema de estrategia comercial que obliga a cambiar el Plan Estratégico (A3 Valoración y Mejora Continua); (n) podría ubicarse en <b>A6 Cierre</b> si el manual se termina al integrar la Configuración de SW. Lo que se califica es la justificación, no la etiqueta.</p></div>
+<h4>Justificación normativa</h4>
+<p>NMX-I-059/02-NYCE (MoProSoft v1.3): 3 categorías (DIR, GER, OPE) y 9 procesos (GN, GPR, GPY, GR, RHAT, BSI, CO, APE, DMS). Relación 1..n: <b>GPY (1) → APE (n)</b>. Pregunta 4: si (b) y (e) los hace la misma persona sin distinguirlos, se pierde la <b>independencia</b> entre la decisión de aceptar proyectos (cartera) y la planificación realista de cada uno: se aceptan proyectos sin capacidad y luego se "comprime" el cronograma → retrasos (la causa raíz típica de los casos peruanos).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>% de actividades asignadas a un proceso con rol responsable</b> = actividades con proceso y rol definidos / actividades inventariadas × 100. Meta: 100 % antes de la evaluación.</li>
+<li><b>% de proyectos aceptados con evaluación de capacidad previa (GPY)</b> = proyectos con análisis de recursos antes de firmar / proyectos firmados × 100. Meta: ≥ 90 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) poner (l) en BSI: la investigación de tendencias es del proceso padre <b>GR</b>; (2) poner (j) en GPY: una CR de un proyecto concreto es <b>APE</b>; (3) decir que la categoría se llama solo "Gestión": el documento v1.3 la llama <b>Gerencia (GER)</b> pero numera <b>GES.1–GES.3</b>; en examen escriba "GER/GES"; (4) contar 6 procesos: son <b>9</b> (GR y sus 3 subprocesos cuentan por separado).</div>
+</details>
+</section>
+
+<section id="caso-3" class="caso">
+<h2>Caso 3 · EvalProSoft: la "falacia del promedio" en una PYME de Arequipa</h2>
+<p class="origen">Origen: Web: <a href="https://www.uv.mx/personal/ermeneses/files/2018/05/5-ClaseMoprosoft.pdf">clase MoProSoft (UV)</a>, <a href="https://dspace.uclv.edu.cu/handle/123456789/5587">evaluación EvalProSoft en la UCLV</a> y <a href="https://bibdigital.epn.edu.ec:443/bitstream/15000/4491/1/CD-4107.pdf">tesis EPN</a>; datos creados</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><b>Misti Soft</b> (Arequipa, 30 personas) contrató una autoevaluación con <abbr title="Método de Evaluación de Procesos para la Industria de Software (NMX-I-059/04-NYCE)">EvalProSoft</abbr> (NMX-I-059/04-NYCE). El evaluador entregó el perfil de nivel de capacidad (escala 0–5, basada en NMX-I-15504/02 ≈ <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 15504-2) y el detalle de atributos de proceso (<abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> – Process Attributes) con escala NPLF (N 0–15 %, P &gt;15–50 %, L &gt;50–85 %, F &gt;85–100 %):</p>
+<div class="tabla"><table>
+<thead><tr><th>Proceso</th><th>PA 1.1</th><th>PA 2.1</th><th>PA 2.2</th><th>PA 3.1</th><th>PA 3.2</th><th>Nivel reportado</th></tr></thead>
+<tbody>
+<tr><td><abbr title="Gestión de Negocio (MoProSoft DIR.1)">GN</abbr></td><td>F</td><td>P</td><td>P</td><td>N</td><td>N</td><td>1</td></tr>
+<tr><td><abbr title="Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)">GPR</abbr></td><td>P</td><td>N</td><td>N</td><td>N</td><td>N</td><td>0</td></tr>
+<tr><td><abbr title="Gestión de Proyectos – cartera (MoProSoft GES.2)">GPY</abbr></td><td>F</td><td>P</td><td>N</td><td>N</td><td>N</td><td>1</td></tr>
+<tr><td><abbr title="Generic Resource – Recurso genérico">GR</abbr></td><td>L</td><td>P</td><td>N</td><td>N</td><td>N</td><td>1</td></tr>
+<tr><td><abbr title="Recursos Humanos y Ambiente de Trabajo (MoProSoft GES.3.1)">RHAT</abbr></td><td>F</td><td>L</td><td>P</td><td>N</td><td>N</td><td>1</td></tr>
+<tr><td><abbr title="British Standards Institution – Instituto Británico de Normalización">BSI</abbr></td><td>P</td><td>N</td><td>N</td><td>N</td><td>N</td><td>0</td></tr>
+<tr><td><abbr title="Conocimiento de la Organización (MoProSoft GES.3.3)">CO</abbr></td><td>F</td><td>P</td><td>P</td><td>N</td><td>N</td><td>1</td></tr>
+<tr><td><abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr></td><td>F</td><td>L</td><td>L</td><td>P</td><td>N</td><td>2</td></tr>
+<tr><td><abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr></td><td>F</td><td>F</td><td>L</td><td>L</td><td>P</td><td>2</td></tr>
+</tbody></table></div>
+<p>El gerente afirma: <i>"El promedio es 1,0, así que somos nivel 1; y como APE y DMS ya están en 2, casi somos nivel 2. Además DMS tiene PA 3.1 en L, o sea que DMS ya es nivel 3"</i>. Tiene 10 meses y 900 h-persona para mejorar y quiere presentarse a una <b>evaluación para la acreditación de capacidades</b> ante <abbr title="Normalización y Certificación Electrónica, A.C. (México)">NYCE</abbr>.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Verifique el nivel de cada proceso con la regla de capacidad de ISO/IEC 15504 y detecte si hay algún error en el reporte.</li>
+<li>Determine el nivel de madurez de capacidades de la organización y refute las tres afirmaciones del gerente.</li>
+<li>Diseñe un plan de mejora en 2 ciclos con objetivos medibles y reparto de horas.</li>
+<li>Indique cuál de los 3 usos de EvalProSoft corresponde a cada etapa.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>GR reportado como nivel 1 con PA 1.1 = L</td><td>Regla de 15504: para CL1 basta PA 1.1 en L o F → <b>correcto</b>; pero para subir a CL2 GR necesita PA 1.1 = F</td><td>Fila GR</td><td>Exactitud de la evaluación</td></tr>
+<tr><td>GPR y BSI en nivel 0</td><td>No hay procesos documentados ni plan de adquisiciones; se compra "cuando falta"</td><td>PA 1.1 = P</td><td>Capacidad organizacional, mejora continua</td></tr>
+<tr><td>DMS "nivel 3" según el gerente</td><td>Confunde PA 3.1 en L con CL3: falta PA 2.2 en F y PA 3.2 en L/F</td><td>DMS PA 2.2 = L, PA 3.2 = P</td><td>Interpretación de la escala de capacidad</td></tr>
+<tr><td>APE reportado nivel 2</td><td>PA 2.1 y 2.2 en L con PA 1.1 en F → CL2 <b>correcto</b></td><td>Fila APE</td><td>—</td></tr>
+<tr><td>Falacia del promedio</td><td>EvalProSoft usa el <b>mínimo común</b>, no el promedio</td><td>Discurso del gerente</td><td>Validez del diagnóstico</td></tr>
+</tbody></table></div>
+<p><b>1)</b> Regla: un proceso alcanza <abbr title="Capability Level – Nivel de capacidad">CL</abbr> n si los PA del nivel n están en L o F y todos los PA de niveles inferiores están en F. GN: PA 1.1 = F, PA 2.x = P → CL1 ✓. GPR: PA 1.1 = P → CL0 ✓. GPY CL1 ✓. GR CL1 ✓. RHAT: PA 2.2 = P → CL1 ✓. BSI CL0 ✓. CO CL1 ✓. APE: PA 1.1 F, PA 2.1 L, PA 2.2 L → CL2 ✓. DMS: PA 1.1 F, PA 2.1 F, PA 2.2 L → CL2; <b>no</b> CL3 porque PA 2.2 debe estar en F y PA 3.2 en L/F. El reporte es consistente.</p>
+<p><b>2)</b> Nivel organizacional = máximo nivel alcanzado por <b>todos</b> los procesos = mín(1,0,1,1,1,0,1,2,2) = <b>0</b>. Refutación: (i) el promedio (9/9 = 1,0) no es criterio del modelo; (ii) "casi nivel 2" es falso: 7 de 9 procesos están por debajo; (iii) DMS es CL2, no CL3.</p>
+<div class="alt"><h4>Alternativa A · "Piso primero": levantar el mínimo (recomendada para acreditar)</h4>
+<p><b>Ciclo 1 (meses 1–4, 360 h):</b> GPR y BSI a CL1 (documentar procesos con el patrón <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr>, nombrar RGP y RBSI, inventario y Plan de Adquisiciones) → organización <b>nivel 1</b>. Reparto: GPR 180 h, BSI 120 h, revaloración 60 h. <b>Ciclo 2 (meses 5–10, 540 h):</b> los 7 procesos en CL1 a CL2 (PA 2.1 planificar y monitorear; PA 2.2 productos de trabajo controlados y versionados), empezando por GN, GPY y CO, que impactan a los demás. Reparto ≈ 70 h por proceso + 50 h de evaluación final. Meta: nivel 2 si todos llegan; si no, nivel 1 acreditado.</p></div>
+<div class="alt"><h4>Alternativa B · "Valor al cliente primero"</h4>
+<p>Si el objetivo inmediato es comercial (un cliente pide evaluación de capacidades del <b>proveedor</b> solo de APE y DMS), invertir 500 h en llevar APE y DMS a CL3 (proceso estándar + adaptación) y 400 h en GPR/BSI a CL1. No eleva el nivel organizacional a 2, pero gana el contrato. Es válida si se declara el objetivo de negocio: la calidad no tiene solución única.</p></div>
+<h4>Justificación normativa</h4>
+<p>NMX-I-059/04-NYCE (EvalProSoft): obtiene el perfil por proceso usando NMX-I-059/02 + cap. 5 de NMX-I-15504/02 (≈ ISO/IEC 15504-2:2003). Usos: <b>autoevaluación</b> (diagnóstico actual, sin Organismo Rector), <b>evaluación de capacidades del proveedor</b> (el cliente elige procesos; Alternativa B) y <b>evaluación para la acreditación de capacidades</b> (Evaluador Certificado; meta final).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>Nivel mínimo del perfil</b> = mín(CL<sub>i</sub>), i = 1..9. Meta: 1 al mes 4; 2 al mes 10.</li>
+<li><b>% de PA objetivo en L/F</b> = PA del nivel objetivo calificados L o F / PA del nivel objetivo × 100. Meta: 100 %.</li>
+<li><b>Consumo de esfuerzo de mejora</b> = h reales / h planificadas (900). Meta: 0,9–1,1.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) promediar o tomar el máximo; (2) confundir nivel de <b>capacidad</b> de un proceso (0–5) con nivel de <b>madurez</b> <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> (1–5): en MoProSoft el nivel organizacional es "nivel de madurez de capacidades" = mínimo del perfil; (3) olvidar que para CL n los PA inferiores deben estar en <b>F</b> (no basta L); (4) confundir la parte 02 (modelo) con la 04 (EvalProSoft).</div>
+</details>
+</section>
+<section id="caso-4" class="caso">
+<h2>Caso 4 · Pampa Sistemas: nivel MPS.BR con MA-MPS (Guia Geral 2012)</h2>
+<p class="origen">Origen: Web: <a href="https://homepages.dcc.ufmg.br/~figueiredo/disciplinas/aulas/mps-br_v01.pdf">apuntes MPS.BR, UFMG</a> y <a href="https://www.cin.ufpe.br/~processos/TAES3/slides-2012.2/O%20Modelo%20MPS-BR.pdf">O Modelo MPS-BR (CIn-UFPE)</a>; datos creados</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><b>Pampa Sistemas</b> (Porto Alegre, 45 personas; tiene filial en Lima) contrató una <abbr title="Artificial Intelligence (AI) – Inteligencia Artificial">IA</abbr> (Instituição Avaliadora) acreditada por <abbr title="Associação para Promoção da Excelência do Software Brasileiro">SOFTEX</abbr> para una evaluación <abbr title="Método de Avaliação MPS – Método de Evaluación MPS">MA-MPS</abbr> con meta <b>nivel E</b>, usando el <abbr title="Modelo de Referência MPS para Software (también -SV Serviços y -RH Gestão de Pessoas)">MR-MPS-SW</abbr> <b>2012</b>. Escala de implementación de resultados: T (totalmente), L (largamente), P (parcialmente), N (no implementado). Resultados por proceso y <abbr title="Process Attribute – Atributo de Processo – Atributo de Proceso (MPS clásico)">AP</abbr> (Atributo de Proceso):</p>
+<div class="tabla"><table>
+<thead><tr><th>Proceso (nivel donde entra)</th><th>AP 1.1</th><th>AP 2.1</th><th>AP 2.2</th><th>AP 3.1</th><th>AP 3.2</th></tr></thead>
+<tbody>
+<tr><td><abbr title="Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)">GPR</abbr>, GRE (G)</td><td>T</td><td>T</td><td>T</td><td>L</td><td>L</td></tr>
+<tr><td><abbr title="Aquisição – Adquisición (MPS)">AQU</abbr> (F)</td><td colspan="5">Excluido: la empresa no adquiere <abbr title="Software – Software / soporte lógico">SW</abbr> ni componentes (justificado en el Plan de Avaliação)</td></tr>
+<tr><td><abbr title="Gerência de Configuração – Gestión de Configuración (MPS)">GCO</abbr>, GPP, <abbr title="Medição – Medición (MPS)">MED</abbr> (F)</td><td>T</td><td>T</td><td>T</td><td>L</td><td>T</td></tr>
+<tr><td><abbr title="Garantia da Qualidade – Aseguramiento de la Calidad (MPS clásico)">GQA</abbr> (F)</td><td>T</td><td>T</td><td>L</td><td>L</td><td>L</td></tr>
+<tr><td>AMP, <abbr title="Gerência de Recursos Humanos (MPS)">GRH</abbr>, GRU (E)</td><td>T</td><td>T</td><td>L</td><td>L</td><td>L</td></tr>
+<tr><td>DFP (E)</td><td>T</td><td>L</td><td>L</td><td><b>P</b></td><td>L</td></tr>
+<tr><td><abbr title="Defect Removal Efficiency – Eficiencia de Remoción de Defectos">DRE</abbr>, <abbr title="Projeto e Construção do Produto – Diseño y Construcción del Producto (MPS)">PCP</abbr>, <abbr title="Integração do Produto – Integración del Producto (MPS)">ITP</abbr>, <abbr title="Verification – Verificación">VER</abbr>, <abbr title="Validation – Validación">VAL</abbr> (D)</td><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td></tr>
+</tbody></table></div>
+<p>El director comercial ya imprimió folletos con "Pampa – MPS nivel D", argumentando que "todos los procesos de D están en T".</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Determine el nivel MPS alcanzado aplicando los AP exigidos por nivel.</li>
+<li>Explique por qué no es nivel D aunque los procesos de D estén en T.</li>
+<li>Indique qué AP aplican en cada nivel G–A y la equivalencia con <abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr>.</li>
+<li>¿Es válida la exclusión de AQU? ¿Qué pasaría si la filial de Lima subcontratara un módulo?</li>
+<li>Proponga acciones para alcanzar E en 6 meses y un <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> de seguimiento.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>DFP no logra AP 3.1</td><td>No existe un proceso padrón organizacional con directrices de adaptación; cada proyecto define el suyo</td><td>DFP AP 3.1 = P</td><td>Proceso definido (institucionalización)</td></tr>
+<tr><td>Publicidad engañosa "nivel D"</td><td>Desconocimiento de la acumulatividad de niveles</td><td>Folletos impresos</td><td>Ética/transparencia (las evaluaciones MPS se publican en el sitio de SOFTEX)</td></tr>
+<tr><td>Riesgo sobre AQU</td><td>Exclusión depende del alcance real: si hay subcontratación, AQU es obligatorio</td><td>Filial Lima</td><td>Conformidad del alcance evaluado</td></tr>
+</tbody></table></div>
+<p><b>1)</b> <b>G</b>: GPR y GRE con AP 1.1 y 2.1 en T/L → ✓. <b>F</b>: procesos G+F con AP 1.1, 2.1, 2.2 en T/L → ✓ (GQA AP 2.2 = L es aceptable; AQU excluido). <b>E</b>: procesos G+F+E con AP 1.1–3.2 en T/L → ✗ (DFP AP 3.1 = P). Nivel = <b>F (Gerenciado)</b>.</p>
+<p><b>2)</b> Los niveles son <b>acumulativos</b>: para D se exige cumplir todo lo de G, F y E más los procesos de D; además DFP es prerrequisito lógico, porque D pide procesos de ingeniería ejecutados a partir del proceso padrón que DFP debe definir.</p>
+<p><b>3)</b> G: AP 1.1, 2.1 · F: + AP 2.2 · E, D, C: + AP 3.1, 3.2 · B: + AP 4.1, 4.2 · A: + AP 5.1, 5.2. Equivalencias aproximadas: F ≈ <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> ML2, C ≈ ML3, B ≈ ML4, A ≈ ML5; G, E y D son escalones intermedios.</p>
+<p><b>4)</b> Sí es válida si la unidad organizacional evaluada no adquiere nada y la IA la acepta en el Plan de Avaliação. Si la filial subcontrata un módulo <b>dentro del alcance</b>, AQU deja de ser excluible y debería evaluarse (como <abbr title="Supplier Agreement Management – Gestión de Acuerdos con Proveedores">SAM</abbr> en CMMI ML2).</p>
+<div class="alt"><h4>Alternativa A · Cerrar la brecha de DFP (6 meses)</h4>
+<p>Definir el proceso padrón (activos: descripciones, plantillas, guías de adaptación, biblioteca de activos), pilotarlo en 2 proyectos, y que AMP lo evalúe; luego reevaluar E. Retirar los folletos y comunicar "nivel F".</p></div>
+<div class="alt"><h4>Alternativa B · Migrar a MR-MPS-SW:2021/2024 en la reevaluación</h4>
+<p>Aprovechar el cambio de versión: en 2021 DFP+AMP se integran en <b><abbr title="Gerência de Processos – Gestión de Procesos (MPS 2021)">GPC</abbr></b>, la capacidad se expresa como <b>CP-E/D/C</b> y GQA pasa a la capacidad CP-F. Exige un gap analysis adicional (las evidencias se reagrupan) pero evita evaluar con una versión obsoleta.</p></div>
+<h4>Justificación normativa</h4>
+<p>Guia Geral MPS de Software:2012 (procesos y AP por nivel) y Guia de Avaliação MA-MPS (conforme <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 15504-2, hoy ISO/IEC 33020/33002). La validez de una evaluación es de 3 años.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>% de resultados de DFP en T/L</b> = resultados esperados DFP calificados T o L / total de resultados DFP × 100. Meta: 100 % antes de la reevaluación.</li>
+<li><b>% de proyectos que usan el proceso padrón adaptado</b> = proyectos con plan derivado del padrón / proyectos activos × 100. Meta: ≥ 90 % al mes 6.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) creer que G es el nivel más alto: <b>G es el más bajo y A el más alto</b>; (2) "saltar" niveles; (3) pensar que un AP en L reprueba (L es aceptable; P o N reprueban); (4) mezclar procesos de la versión 2012 (GRE, GQA, DFP) con los de 2021 (<abbr title="Engenharia de Requisitos – Ingeniería de Requisitos (MPS 2021)">REQ</abbr>, GPC, <abbr title="Gerência Organizacional – Gestión Organizacional (MPS 2021)">ORG</abbr>) en una misma respuesta: declare siempre la versión.</div>
+</details>
+</section>
+
+<section id="caso-5" class="caso">
+<h2>Caso 5 · MR-MPS-SW:2021: nivel de una empresa de São Paulo y brecha hacia D</h2>
+<p class="origen">Origen: Adaptado de la Tabla 1 de la <a href="https://www.editorasolucao.com.br/editorasolucao/apostilas/18537/33711/mps-br-guia-geral-software-2021.pdf">Guia Geral MPS de Software:2021</a> y del relato <a href="https://sol.sbc.org.br/index.php/wamps/article/download/27315/27129">FSBR nivel F (WAMPS)</a>; datos creados</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><b>Ipê Software</b> (São Paulo, 70 personas) fue evaluada con el <abbr title="Modelo de Referência MPS para Software (también -SV Serviços y -RH Gestão de Pessoas)">MR-MPS-SW</abbr>:2021. El Avaliador Líder reporta:</p>
+<ul>
+<li>Procesos de proyecto <b><abbr title="Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)">GPR</abbr></b> y <b><abbr title="Engenharia de Requisitos – Ingeniería de Requisitos (MPS 2021)">REQ</abbr></b>: ejecutados con capacidad <b>CP-F</b> (planificación, monitoreo, personas preparadas, verificación objetiva de adherencia y <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> de productos con no conformidades resueltas).</li>
+<li>Procesos organizacionales <b><abbr title="Gerência de Configuração – Gestión de Configuración (MPS)">GCO</abbr></b>, <b><abbr title="Medição – Medición (MPS)">MED</abbr></b>, <b><abbr title="Gerência de Processos – Gestión de Procesos (MPS 2021)">GPC</abbr></b> y <b><abbr title="Gerência Organizacional – Gestión Organizacional (MPS 2021)">ORG</abbr></b>: capacidad CP-F. <b><abbr title="Aquisição – Adquisición (MPS)">AQU</abbr></b> excluido y justificado. ORG 8–10 (portafolio) excluidos porque hay un solo producto.</li>
+<li><b><abbr title="Gerência de Recursos Humanos (MPS)">GRH</abbr></b>: no implementado (la capacitación la decide cada jefe).</li>
+<li><b><abbr title="Projeto e Construção do Produto – Diseño y Construcción del Producto (MPS)">PCP</abbr></b>, <b><abbr title="Integração do Produto – Integración del Producto (MPS)">ITP</abbr></b> y <b><abbr title="Verification and Validation – Verificación y Validación (Practice Area V2.0)">VV</abbr></b>: ejecutados y gestionados (CP-F), pero no hay proceso padrón organizacional ni directrices de adaptación.</li>
+<li>Indicadores: 31 % de los defectos se detectan en producción; 12 % de las CR se implementan sin análisis de impacto.</li>
+</ul>
+<p>La gerencia quiere el nivel <b>D</b> en 12 meses porque un cliente público brasileño lo pide en su pliego.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Determine el nivel obtenido y su equivalente <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr>.</li>
+<li>Liste todo lo que falta para E y para D (procesos y capacidad).</li>
+<li>Relacione los dos indicadores con procesos del modelo 2021.</li>
+<li>¿En qué difiere este análisis si se hubiese usado la versión 2012?</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Sin GRH</td><td>Capacitación no planificada a nivel organizacional; depende de cada jefe</td><td>GRH no implementado</td><td>Competencia del personal (requisito para CP-E/D/C)</td></tr>
+<tr><td>Sin proceso padrón</td><td>GPC solo en CP-F: no hay activos de proceso ni adaptación</td><td>PCP/ITP/VV "a gusto de cada proyecto"</td><td>Proceso definido</td></tr>
+<tr><td>31 % de defectos en producción</td><td>VV no es sistemático (revisiones por pares y pruebas definidas faltan)</td><td>Indicador de fuga de defectos</td><td>Fiabilidad, madurez (<abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 25010)</td></tr>
+<tr><td>12 % de CR sin análisis</td><td>GPR/REQ no controlan cambios de requisitos con trazabilidad</td><td>Indicador de CR</td><td>Control del alcance</td></tr>
+</tbody></table></div>
+<p><b>1)</b> G: GPR + REQ con CP-G (cumplido, tienen CP-F). F: + GCO, MED, AQU (excluido), GPC, ORG con CP-F → ✓. E: exige GRH → ✗. Nivel = <b>F</b> ≈ <b>CMMI ML2</b>. PCP/ITP/VV no "suman" porque pertenecen a D.</p>
+<p><b>2)</b> Para <b>E</b>: implantar GRH; evolucionar GPC y ORG; elevar todos los procesos a <b>CP-E/D/C</b> (proceso padrón + directrices de adaptación, verificación de adherencia y <b>efectividad</b>, oportunidades de mejora identificadas en QA, activos disponibles). Para <b>D</b>: además evolucionar GPR y REQ, y ejecutar PCP, ITP y VV con CP-E/D/C.</p>
+<p><b>3)</b> Defectos en producción → <b>VV</b> (Verificação e Validação) e <b>ITP</b>; CR sin análisis → <b>REQ</b> (gestión de cambios de requisitos) y <b>GPR</b> (impacto en plan); el monitoreo de ambos → <b>MED</b>.</p>
+<div class="alt"><h4>Alternativa A · Ruta E → D en 12 meses (dos evaluaciones)</h4><p>Meses 1–5: GRH + proceso padrón vía GPC; evaluación E al mes 6. Meses 7–12: PCP/ITP/VV con CP-E/D/C y revisiones por pares; evaluación D al mes 12. Ventaja: hito visible a mitad de camino. Costo: dos evaluaciones.</p></div>
+<div class="alt"><h4>Alternativa B · Ir directo a D (una sola evaluación)</h4><p>Trabajar en paralelo GRH, GPC y los procesos de D, con un solo gap analysis al mes 9 y la evaluación D al mes 12. Más barato, pero con mayor riesgo: si falla GRH, el resultado vuelve a F. Recomendable solo si hay patrocinio fuerte de ORG.</p></div>
+<h4>Justificación normativa</h4>
+<p>MR-MPS-SW:2021 (Tabla 1): G = GPR, REQ (CP-G); F = + GCO, MED, AQU, GPC, ORG (CP-F); E = + GRH, evolución GPC/ORG (CP-E/D/C); D = evolución GPR/REQ + PCP, ITP, VV; C = + <abbr title="Gerência de Decisões – Gestión de Decisiones (MPS)">GDE</abbr>; B y A = capacidad CP-B / CP-A en procesos seleccionados. <abbr title="Método de Avaliação MPS – Método de Evaluación MPS">MA-MPS</abbr> conforme ISO/IEC 33020/33002/33004.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b><abbr title="Defect Removal Efficiency – Eficiencia de Remoción de Defectos">DRE</abbr> (Defect Removal Efficiency – Eficiencia de Remoción de Defectos)</b> = defectos antes de la entrega / (defectos antes + defectos en producción) × 100. Línea base 69 %; meta ≥ 85 %.</li>
+<li><b>% de CR con análisis de impacto</b> = CR analizadas / CR totales × 100. Línea base 88 %; meta 100 %.</li>
+<li><b>% del personal con plan de capacitación cumplido (GRH)</b>. Meta ≥ 90 %.</li>
+</ul>
+<p><b>4)</b> En 2012 se diría que en F faltan/están <b><abbr title="Garantia da Qualidade – Aseguramiento de la Calidad (MPS clásico)">GQA</abbr></b> y <b>GPP</b>, en E <b>DFP, AMP, GRU</b> y que en D están <b>DRE, <abbr title="Verification – Verificación">VER</abbr>, <abbr title="Validation – Validación">VAL</abbr></b> separados. En 2021: QA está dentro de CP-F y GPC; GPP en ORG; DFP+AMP en GPC; VER+VAL en VV; GRE+DRE en REQ.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) decir que QA es "un proceso del nivel F" en la versión 2021 (ya no lo es); (2) olvidar que <b>ORG</b> aparece desde F; (3) creer que la exclusión de ORG 8–10 baja el nivel; (4) sumar procesos de D para "compensar" la falta de GRH: no hay compensación entre niveles. Además, la Guía 2021 rotula D/C con nombres distintos a la versión clásica ("Largamente Definido"/"Definido"): use la clásica y mencione la variación.</div>
+</details>
+</section>
+
+<section id="caso-6" class="caso">
+<h2>Caso 6 · Grupo cooperado: MPS.BR vs CMMI para 6 PYMEs peruanas</h2>
+<p class="origen">Origen: Web: <a href="https://blog.grancursosonline.com.br/t-i-em-foco-mps-br/amp/">análisis MPS.BR, Gran Cursos</a> y <a href="https://sol.sbc.org.br/index.php/sbqs/article/download/15420/15263">artículo SBQS</a>; enunciado creado</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Seis PYMEs peruanas de <abbr title="Software – Software / soporte lógico">SW</abbr> (entre 15 y 40 personas), socias comerciales de una integradora brasileña, evalúan certificarse. Datos por empresa:</p>
+<div class="tabla"><table>
+<thead><tr><th>Opción</th><th>Costo por empresa (USD)</th><th>Plazo</th><th>Reconocimiento</th></tr></thead>
+<tbody>
+<tr><td><abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> ML2 individual (consultoría + evaluación Benchmark/SCAMPI A)</td><td>45 000</td><td>14–18 meses</td><td>Global, exigido por bancos de EE. UU.</td></tr>
+<tr><td>MPS-SW nivel G en modalidad cooperada (<abbr title="Modelo de Negócio MPS – Modelo de Negocio MPS">MN-MPS</abbr>: grupo de empresas, <abbr title="Implementation Infrastructure – Infraestructura de Implementación (Practice Area V2.0)">II</abbr> compartida)</td><td>12 000</td><td>6–9 meses</td><td>Alto en Brasil (compras públicas); bajo en Perú</td></tr>
+<tr><td>MPS-SW nivel F cooperado (después de G)</td><td>+ 14 000</td><td>+ 8 meses</td><td>≈ <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> ML2</td></tr>
+</tbody></table></div>
+<p>Uno de los socios afirma: "Con MPS nivel G ya somos equivalentes a CMMI nivel 2 y nos ahorramos 33 000 dólares cada uno". Otro advierte que un banco de Miami, cliente de la integradora, exige CMMI ML3 en 3 años.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule el ahorro total del grupo con G y con G+F frente a CMMI ML2.</li>
+<li>Corrija la afirmación de equivalencia.</li>
+<li>Ventajas y riesgos de <abbr title="Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño">MPS.BR</abbr> fuera de Brasil.</li>
+<li>Proponga una hoja de ruta compatible con la exigencia del banco.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Comparación de costos sesgada</td><td>Se compara G con ML2, cuando ML2 ≈ F</td><td>Afirmación del socio</td><td>Validez de la decisión</td></tr>
+<tr><td>Reconocimiento local incierto</td><td>MPS.BR es programa brasileño; pocas <abbr title="Artificial Intelligence (AI) – Inteligencia Artificial">IA</abbr> y evaluadores en Perú</td><td>"bajo en Perú"</td><td>Valor comercial</td></tr>
+<tr><td>Exigencia futura de ML3</td><td>Contrato con cliente extranjero</td><td>Banco de Miami</td><td>Sostenibilidad de la inversión</td></tr>
+</tbody></table></div>
+<p><b>1)</b> Con G: (45 000 − 12 000) × 6 = <b>USD 198 000</b> (ahorro 73,3 % por empresa). Con G+F (equivalente real a ML2): costo MPS = 26 000; (45 000 − 26 000) × 6 = <b>USD 114 000</b> (ahorro 42,2 %).</p>
+<p><b>2)</b> G ≈ solo <b>parte</b> de ML2 (<abbr title="Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)">GPR</abbr> + <abbr title="Engenharia de Requisitos – Ingeniería de Requisitos (MPS 2021)">REQ</abbr> ≈ <abbr title="Project Planning – Planificación del Proyecto">PP</abbr>, <abbr title="Project Monitoring and Control – Monitoreo y Control del Proyecto">PMC</abbr>, <abbr title="Requirements Management – Gestión de Requisitos">REQM</abbr>); <b>F ≈ ML2</b> completo (agrega <abbr title="Gerência de Configuração – Gestión de Configuración (MPS)">GCO</abbr> ≈ <abbr title="Configuration Management – Gestión de la Configuración">CM</abbr>, <abbr title="Medição – Medición (MPS)">MED</abbr> ≈ <abbr title="Measurement and Analysis – Medición y Análisis">MA</abbr>, <abbr title="Aquisição – Adquisición (MPS)">AQU</abbr> ≈ <abbr title="Supplier Agreement Management – Gestión de Acuerdos con Proveedores">SAM</abbr>, <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> en CP-F ≈ <abbr title="Process and Product Quality Assurance – Aseguramiento de la Calidad del Proceso y del Producto">PPQA</abbr>).</p>
+<p><b>3)</b> Ventajas: escalones cortos (7 niveles), costo cooperado, compatibilidad con CMMI-DEV y conformidad con <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr>/IEEE 12207 y la familia 330xx, <abbr title="Método de Avaliação MPS – Método de Evaluación MPS">MA-MPS</abbr> basado en ISO/IEC 33020. Riesgos: reconocimiento limitado fuera de Brasil, idioma (guías en portugués), disponibilidad de IA, cambios de versión (2012 → 2021 → 2024).</p>
+<div class="alt"><h4>Alternativa A · MPS G → F cooperado y luego CMMI ML3</h4><p>Año 1: G (6–9 meses); año 2: F (≈ ML2); año 3: evolucionar a C (≈ ML3) y hacer una evaluación CMMI Benchmark ML3 solo en las empresas que atiendan al banco. Aprovecha que MPS es compatible con CMMI: gran parte de las evidencias se reutiliza.</p></div>
+<div class="alt"><h4>Alternativa B · CMMI directo solo para quien lo necesite</h4><p>Las 2 empresas que facturan al banco van a CMMI ML2→ML3 individual; las 4 restantes, que venden a Brasil y al Estado peruano, hacen MPS G→F cooperado o ISO/IEC 29110 (si son ≤ 25 personas). Optimiza costo por mercado.</p></div>
+<h4>Justificación normativa</h4>
+<p>MN-MPS (Modelo de Negócio): implementación por II (Instituições Implementadoras), evaluación por IA y modalidad de <b>grupos de empresas</b>; equivalencias MPS↔CMMI (F ≈ ML2, C ≈ ML3, B ≈ ML4, A ≈ ML5). CMMI V2.0/V3.0: evaluaciones Benchmark (antes <abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr> A) con Lead Appraiser certificado por <abbr title="Information Systems Audit and Control Association – Asociación de Auditoría y Control de Sistemas de Información">ISACA</abbr>/CMMI Institute.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>Costo por nivel equivalente</b> = costo total / nivel equivalente CMMI alcanzado. Meta: ≤ 60 % del costo CMMI directo.</li>
+<li><b>% de evidencias reutilizadas</b> en la evaluación CMMI = evidencias MPS reutilizadas / evidencias requeridas × 100. Meta ≥ 70 %.</li>
+<li><b><abbr title="Return on Investment – Retorno de la Inversión">ROI</abbr> (Return On Investment)</b> = (ingresos incrementales por contratos − costo de certificación) / costo × 100. Meta &gt; 0 al año 2.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) decir G = ML2; (2) olvidar que el criterio comercial (qué certificado pide el cliente) puede pesar más que el técnico; (3) suponer que MPS.BR "reemplaza" a CMMI: se declara compatible y escalón hacia él; (4) no declarar la versión del modelo (2012 vs 2021).</div>
+</details>
+</section>
+<section id="caso-7" class="caso">
+<h2>Caso 7 · Kuntur Apps: primer ciclo PmCOMPETISOFT en una micro empresa cusqueña</h2>
+<p class="origen">Origen: Adaptado de Aguirre et al., <a href="https://dialnet.unirioja.es/descarga/articulo/3274634.pdf">Reporte de experiencias de COMPETISOFT en cinco mipymes colombianas (Revista EIA, 2010)</a> y <a href="https://ces.com.uy/wp-content/uploads/2009/07/framework_metodologico_de_competisoft_compatibility_mode.pdf">Marco Metodológico COMPETISOFT (Pino, 2009)</a></p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><b>Kuntur Apps</b> (Cusco, 6 personas) desarrolla apps de turismo (reservas de Machu Picchu, tours en Valle Sagrado). Nunca documentó su proceso; el gerente es también jefe de proyecto y programador principal. Un grupo de investigación universitario le ofrece un consultor gratuito durante <b>4 meses</b> (16 semanas) y 2 practicantes. Datos del último trimestre:</p>
+<ul>
+<li>3 de 4 proyectos se entregaron con 3–5 semanas de retraso.</li>
+<li>No hay plan de proyecto escrito; los requisitos se acuerdan por WhatsApp.</li>
+<li>No hay control de versiones del código (se copia la carpeta a un USB "por si acaso").</li>
+<li>Un diagnóstico rápido con IDCompetiSoft dio: <abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr> <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> 1.1 = P; <abbr title="Desarrollo de Software (proceso COMPETISOFT)">DS</abbr> PA 1.1 = L; el resto de procesos N.</li>
+</ul>
+<p>El gerente pide "certificar todos los procesos <abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr> en 4 meses".</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Defina los roles de PmCOMPETISOFT y quién los ocupa en Kuntur.</li>
+<li>Describa el ciclo de 5 actividades con semanas y productos.</li>
+<li>Fije un objetivo de capacidad realista y justifique el alcance (perfil base).</li>
+<li>Identifique riesgos y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> del ciclo.</li>
+<li>Explique por qué la petición del gerente es inviable y conceptualmente errónea.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Retrasos recurrentes</td><td>No existe planificación ni seguimiento (APE inexistente)</td><td>3/4 proyectos tarde; APE PA 1.1 = P</td><td>Cumplimiento de plazo</td></tr>
+<tr><td>Requisitos informales</td><td>DS sin fase de requisitos verificada y validada</td><td>WhatsApp como "<abbr title="Software Requirements Specification – Especificación de Requisitos de Software">SRS</abbr>"</td><td>Adecuación funcional, trazabilidad</td></tr>
+<tr><td>Riesgo de pérdida de código</td><td>Sin gestión de configuración</td><td>Copia a USB</td><td>Integridad, disponibilidad</td></tr>
+<tr><td>Dependencia de una persona</td><td>Gerente multirol, sin especialización de roles</td><td>Gerente = <abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr> = programador</td><td>Sostenibilidad del proceso</td></tr>
+</tbody></table></div>
+<p><b>1) Roles:</b> <b><abbr title="Grupo de Gestión de la Mejora (PmCOMPETISOFT)">GGM</abbr></b> (Grupo de Gestión de la Mejora) = gerente + responsable de proceso, con el consultor como asesor sin voto; <b>RMP</b> (Responsable de la Dirección de la Mejora de Procesos) = consultor universitario; <b>RP</b> (Responsable del Proceso) = desarrollador senior para APE y DS; <b>GMP</b> (Grupo de Mejora de Procesos) = 2 practicantes capacitados + RP; <b>E</b> (Evaluador) = practicante formado en Light <abbr title="Método de Evaluación de la Capacidad de Procesos de Desarrollo de Software (Colombia)">MECPDS</abbr>, distinto de quien ejecuta la mejora del mismo proceso (objetividad).</p>
+<div class="tabla"><table>
+<thead><tr><th>Actividad PmCOMPETISOFT</th><th>Semanas</th><th>Productos</th></tr></thead>
+<tbody>
+<tr><td>1. Instalación</td><td>1–2</td><td>Convenio y compromiso de la dirección, alcance (perfil base APE + DS), plantilla de despegue, propuesta de mejora</td></tr>
+<tr><td>2. Diagnóstico</td><td>3–4</td><td>Reporte de valoración con PvalCOMPETISOFT/Light MECPDS, perfil de capacidad, oportunidades de mejora</td></tr>
+<tr><td>3. Formulación</td><td>5</td><td>Plan de mejora en 2 iteraciones (it-1: plan de proyecto + especificación de requisitos; it-2: plan de pruebas + Git), riesgos y contingencias</td></tr>
+<tr><td>4. Ejecución</td><td>6–14</td><td>Procesos APE/DS definidos con el patrón de procesos, plantillas, piloto en 1 proyecto, capacitación, reportes de iteración</td></tr>
+<tr><td>5. Revisión</td><td>15–16</td><td>Revaloración, lecciones aprendidas, propuesta del 2.º ciclo</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Perfil base: APE + DS a nivel 1 (recomendada)</h4><p>Objetivo: <b>PA 1.1 en L/F</b> en APE y DS e iniciar prácticas de PA 2.1 (planificar y monitorear). Es realista: en Popayán, 3 de 5 mipymes lograron <abbr title="Process Attribute – Atributo de Processo – Atributo de Proceso (MPS clásico)">AP</abbr> 1.1 y parte de AP 2.1 en ≈ 3 meses.</p></div>
+<div class="alt"><h4>Alternativa B · Solo APE con foco en planificación + Git como "victoria rápida"</h4><p>Si la causa raíz dominante es la planificación (retrasos), concentrar la iteración 1 en APE (plan, calendario, reuniones de avance) y usar Git como mejora técnica inmediata; DS se aborda en el 2.º ciclo. Menor alcance, mayor probabilidad de éxito y motivación temprana (criterio "entrega temprana y continua de mejoras").</p></div>
+<h4>Justificación normativa</h4>
+<p>COMPETISOFT (proyecto <abbr title="Programa Iberoamericano de Ciencia y Tecnología para el Desarrollo">CYTED</abbr> 506AC0287): modelo de procesos derivado de <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> (<abbr title="Categoría Alta Dirección (MoProSoft)">DIR</abbr>, GER, <abbr title="Categoría Operación (MoProSoft)">OPE</abbr>; OPE = APE, DS, <abbr title="Mantenimiento de Software (proceso COMPETISOFT)">MS</abbr>), modelo de evaluación conforme <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 15504-2 y -4 y modelo de mejora <b>PmCOMPETISOFT</b>, despliegue del proceso <b>Gestión de Procesos</b> y derivado de Agile SPI-Process (Colombia, SIMEP-SW). Equivale a una versión ligera del ciclo <abbr title="Initiating, Diagnosing, Establishing, Acting, Learning – Modelo de mejora del SEI: Iniciar, Diagnosticar, Establecer, Actuar, Aprender">IDEAL</abbr> del <abbr title="Software Engineering Institute – Instituto de Ingeniería de Software (Carnegie Mellon)">SEI</abbr> (Initiating ≈ Instalación, Diagnosing ≈ Diagnóstico, Establishing ≈ Formulación, Acting ≈ Ejecución, Learning ≈ Revisión).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>% de prácticas base implementadas</b> en APE y DS = prácticas en L/F / prácticas base × 100. Meta ≥ 70 %.</li>
+<li><b>Desviación de plazo del proyecto piloto</b> = (real − plan) / plan × 100. Meta ≤ 15 %.</li>
+<li><b>Esfuerzo de mejora</b> = h-persona invertidas por iteración. Meta: dentro de ±10 % del plan.</li>
+<li><b>% de commits con mensaje vinculado a requisito</b> (trazabilidad mínima). Meta ≥ 80 %.</li>
+</ul>
+<p><b>5)</b> COMPETISOFT fue un <b>proyecto de investigación</b> que produjo un marco, no un esquema de certificación propio; la certificación se obtiene por normas nacionales (en Perú, <abbr title="Norma Técnica Peruana">NTP</abbr> 291.100 y luego NTP-ISO/IEC 29110). Además, en 16 semanas no se pueden mejorar 10 procesos en una empresa de 6 personas.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) confundir PmCOMPETISOFT (proceso de <b>mejora</b>) con el modelo de procesos; (2) decir que COMPETISOFT tiene <abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr>: lo <b>divide</b> en DS (Desarrollo) y MS (Mantenimiento, inspirado en MANTEMA); (3) olvidar el compromiso del GGM: en Popayán fallaron las empresas que no ejecutaron lo acordado; (4) poner como evaluador a quien ejecuta la mejora.</div>
+</details>
+</section>
+
+<section id="caso-8" class="caso">
+<h2>Caso 8 · Segundo ciclo COMPETISOFT con 600 h-persona: priorizar y repartir</h2>
+<p class="origen">Origen: Web: tesis <abbr title="Pontificia Universidad Católica del Perú">PUCP</abbr> sobre el segundo ciclo de mejora en LIM.LAMBDA, <a href="https://repositorio.pucp.edu.pe/index/handle/123456789/149002">repositorio PUCP</a>; datos numéricos creados</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><b>Lambda <abbr title="Information Technology (IT) – Tecnologías de la Información">TI</abbr></b> (Lima, 25 personas; soluciones TI y BPO – Business Process Outsourcing) terminó un primer ciclo <abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr>. Perfil actual (escala 15504): <abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr> CL1, <abbr title="Desarrollo de Software (proceso COMPETISOFT)">DS</abbr> CL1, <abbr title="Mantenimiento de Software (proceso COMPETISOFT)">MS</abbr> CL1, Gestión de Cartera de Proyectos CL0, Gestión de Procesos CL0, Gestión de Negocio CL1, <abbr title="Human Resources – Recursos Humanos">RR. HH.</abbr> CL1, <abbr title="British Standards Institution – Instituto Británico de Normalización">BSI</abbr> CL1, Conocimiento CL1. Problemas del semestre:</p>
+<ul>
+<li>Dos proyectos se quedaron sin analistas porque se aceptó un tercer proyecto sin evaluar recursos.</li>
+<li>Desviación de esfuerzo promedio: 28 %.</li>
+<li>Densidad de defectos post-entrega: 4,2 defectos/KLOC (Kilo Lines Of Code).</li>
+<li>Uso real de plantillas del ciclo 1: 55 %.</li>
+</ul>
+<p>Presupuesto del ciclo 2: <b>600 h-persona en 5 meses</b>. El gerente quiere "subir todos los procesos a nivel 2".</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Priorice procesos con un criterio explícito (impacto × factibilidad) y fije objetivos de capacidad.</li>
+<li>Distribuya las 600 h entre las 5 actividades del ciclo.</li>
+<li>Defina <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> con línea base y meta.</li>
+<li>¿Con qué método se evalúa el resultado y por qué debe ser el mismo del inicio?</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Proyectos sin analistas</td><td>Gestión de Cartera en CL0: se aceptan proyectos sin balance de capacidad</td><td>3.er proyecto aceptado sin evaluación</td><td>Alineación cartera–recursos</td></tr>
+<tr><td>Desviación de esfuerzo 28 %</td><td>APE en CL1: no hay monitoreo y control (<abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> 2.1)</td><td>28 % promedio</td><td>Previsibilidad</td></tr>
+<tr><td>4,2 defectos/KLOC</td><td>DS en CL1: verificación no planificada ni controlada</td><td>Densidad post-entrega</td><td>Fiabilidad</td></tr>
+<tr><td>Adopción de plantillas 55 %</td><td>Gestión de Procesos en CL0: nadie da seguimiento a la implantación</td><td>55 %</td><td>Institucionalización</td></tr>
+</tbody></table></div>
+<p><b>1) Priorización</b> (impacto 1–5 × factibilidad 1–5): Cartera 5×4 = 20; APE 5×4 = 20; DS 4×4 = 16; Gestión de Procesos 4×3 = 12; MS 3×3 = 9; resto ≤ 6. Objetivos: Cartera CL0→CL1, APE CL1→CL2, DS CL1→CL2; Gestión de Procesos al ciclo 3.</p>
+<div class="tabla"><table>
+<thead><tr><th>Actividad</th><th>Horas</th><th>%</th></tr></thead>
+<tbody>
+<tr><td>Instalación</td><td>30</td><td>5 %</td></tr>
+<tr><td>Diagnóstico</td><td>60</td><td>10 %</td></tr>
+<tr><td>Formulación</td><td>60</td><td>10 %</td></tr>
+<tr><td>Ejecución (plantillas de plan, Git flow, revisiones entre pares, piloto en 2 proyectos)</td><td>360</td><td>60 %</td></tr>
+<tr><td>Revisión</td><td>60</td><td>10 %</td></tr>
+<tr><td>Contingencia</td><td>30</td><td>5 %</td></tr>
+<tr><td><b>Total</b></td><td><b>600</b></td><td><b>100 %</b></td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Cartera + APE + DS (recomendada)</h4><p>Ataca las tres causas raíz con mayor impacto en el cliente. Es el reparto de la tabla.</p></div>
+<div class="alt"><h4>Alternativa B · Gestión de Procesos primero</h4><p>Si el diagnóstico demuestra que el problema central es que las mejoras del ciclo 1 "no prenden" (55 % de adopción), dedicar el 40 % de la ejecución a Gestión de Procesos (responsables, seguimiento, auditorías ligeras) y el resto a APE. Más lento en resultados visibles, pero más sostenible.</p></div>
+<h4>Justificación normativa</h4>
+<p>PmCOMPETISOFT (5 actividades) + estrategia de selección y priorización de procesos del Modelo de Mejora; valoración con METvalCOMPETISOFT (PvalCOMPETISOFT + Light <abbr title="Método de Evaluación de la Capacidad de Procesos de Desarrollo de Software (Colombia)">MECPDS</abbr> + EvalTOOL), conforme <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 15504-2 (escala NPLF, PA 1.1–2.2). <b>4)</b> La evaluación final debe usar el mismo método que la inicial para que la diferencia de perfiles sea comparable (validez de la medición).</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Base</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Desviación de esfuerzo</td><td>|h reales − h plan| / h plan × 100</td><td>28 %</td><td>≤ 15 %</td></tr>
+<tr><td>Densidad de defectos post-entrega</td><td>Defectos en producción / <abbr title="Kilo Lines of Code – Miles de Líneas de Código">KLOC</abbr> entregadas</td><td>4,2</td><td>≤ 2,9 (−30 %)</td></tr>
+<tr><td>Adopción de plantillas</td><td>Proyectos que usan plantillas vigentes / proyectos activos × 100</td><td>55 %</td><td>≥ 90 %</td></tr>
+<tr><td>Proyectos aceptados con análisis de capacidad</td><td>Proyectos con balance de recursos / proyectos aceptados × 100</td><td>0 %</td><td>100 %</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) intentar "todo a nivel 2": dispersa el esfuerzo y suele fracasar; (2) asignar casi nada a Ejecución (el grueso del esfuerzo es ahí); (3) cambiar de método de evaluación entre ciclos; (4) olvidar la contingencia; (5) confundir Gestión de Cartera de Proyectos (nombre COMPETISOFT) con APE.</div>
+</details>
+</section>
+
+<section id="caso-9" class="caso">
+<h2>Caso 9 · ISO/IEC 29110 PM en una VSE ecuatoriana: desviaciones, EVM e inconsistencias</h2>
+<p class="origen">Origen: Web: <a href="https://ojs2.utp.edu.co/index.php/revistaciencia/article/download/24544/17416?inline=1">A viability analysis of the ISO/IEC 29110 project management process (Scientia et Technica, UTP)</a> y <a href="https://doras.dcu.ie/21121/">perfil básico ISO/IEC 29110 (DCU)</a>; enunciado adaptado</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Una <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> ecuatoriana de 4 personas (1 <abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr> + 3 WT; se omitió el rol TL – Technical Leader y el PM asumió sus tareas) implantó el proceso PM del perfil Básico en un sistema de postventa para un concesionario automotriz (ciclo de vida en cascada). Jornada: 4 h/día.</p>
+<div class="tabla"><table>
+<thead><tr><th>Actividad del proyecto</th><th>Días planificados</th><th>Días reales</th></tr></thead>
+<tbody>
+<tr><td>Declaración de alcance</td><td>2</td><td>4</td></tr>
+<tr><td>Planificación</td><td>14</td><td>21</td></tr>
+<tr><td>Ejecución del plan</td><td>60</td><td>69</td></tr>
+<tr><td>Evaluación y control</td><td>23</td><td>23</td></tr>
+<tr><td>Cierre</td><td>5</td><td>5</td></tr>
+</tbody></table></div>
+<p>Costo planificado USD 1 950; costo real USD 2 288,72. El artículo reporta 17,30 % de esfuerzo extra y 17,06 % de sobrecosto. La declaración de alcance se demoró porque el cliente no estuvo disponible.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule la desviación por actividad y total (días y horas).</li>
+<li>Verifique el sobrecosto reportado.</li>
+<li>Calcule CPI (Cost Performance Index) y <abbr title="Software Process Improvement – Mejora del Proceso de Software">SPI</abbr> (Schedule Performance Index) al cierre con <abbr title="Earned Value Management – Gestión del Valor Ganado">EVM</abbr> (Earned Value Management) e interprete la limitación del SPI.</li>
+<li>Mapee las actividades a PM.1–PM.4 e indique qué objetivos PM.O se ven débiles.</li>
+<li>Analice los riesgos de omitir el rol TL.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Alcance +100 %</td><td>Riesgo "disponibilidad del cliente" no identificado en PM.1</td><td>2 → 4 días</td><td>Gestión de riesgos, plazo</td></tr>
+<tr><td>Planificación +50 %</td><td>Sin datos históricos para estimar; PM sobrecargado (sin TL)</td><td>14 → 21 días</td><td>Exactitud de estimación</td></tr>
+<tr><td>Sobrecosto ≈ 17 %</td><td>Arrastre de las desviaciones iniciales</td><td>USD 338,72</td><td>Eficiencia en costo</td></tr>
+<tr><td>Dato publicado no reproducible</td><td>Error de cálculo o de redondeo en la fuente</td><td>17,06 % vs 17,37 %</td><td>Exactitud de la información (<abbr title="Software Quality Assurance – Aseguramiento de la Calidad del Software">SQA</abbr> debe reportarlo)</td></tr>
+</tbody></table></div>
+<p><b>1)</b> Alcance +100 %; Planificación +50 %; Ejecución +15 %; Evaluación y control 0 %; Cierre 0 %. Total: 104 → 122 días → (122 − 104)/104 = <b>17,31 %</b> (coincide con lo reportado). En horas: 416 → 488 h (+72 h).</p>
+<p><b>2)</b> 2 288,72 − 1 950 = 338,72; 338,72/1 950 = <b>17,37 %</b>, no 17,06 %. El valor publicado no se reproduce: un evaluador SQA (Software Quality Assurance) debe registrar la inconsistencia, no "ajustar" los datos.</p>
+<p><b>3)</b> Al cierre EV = BAC = 1 950 y AC = 2 288,72 → <b>CPI = EV/AC = 0,852</b> (cada dólar gastado produjo 0,85 de valor). SPI = EV/PV = 1 950/1 950 = <b>1,00</b> al terminar: el SPI clásico siempre converge a 1 al final, por eso es engañoso. Use el <b>SPI(t)</b> (Earned Schedule) = duración planificada / duración real = 104/122 = <b>0,852</b>, o la desviación de +18 días.</p>
+<p><b>4)</b> Declaración de alcance + Planificación → <b>PM.1</b> (revisar <abbr title="Statement of Work – Enunciado del Trabajo">SOW</abbr>, estimar, calendario, riesgos, Project Plan, Project Repository); Ejecución → <b>PM.2</b> (Progress Status Record, Meeting Records, Change Requests); Evaluación y control → <b>PM.3</b> (real vs plan, Correction Register); Cierre → <b>PM.4</b> (Acceptance Record). Objetivos débiles: <b>PM.O1</b> (plan acordado y aprobado con el cliente), <b>PM.O4</b> (revisiones con el cliente y el equipo), <b>PM.O5</b> (riesgos identificados y gestionados).</p>
+<p><b>5)</b> Sin TL se concentra en el PM la dirección técnica: cuello de botella, menor independencia en verificación del diseño, sobrecarga que explica el +50 % en planificación. La 29110 permite que una persona asuma varios roles, pero debe documentarse y mantenerse la competencia exigida.</p>
+<div class="alt"><h4>Alternativa A · Fortalecer PM.1 con gestión de riesgos y base histórica</h4><p>Registro de riesgos desde el SOW (incluir disponibilidad del cliente con plan de contingencia), estimación por analogía usando este proyecto como línea base, y aprobación formal del plan por el cliente.</p></div>
+<div class="alt"><h4>Alternativa B · Asignar formalmente el rol TL a un WT senior</h4><p>Separar dirección técnica de gestión: el TL revisa diseño y casos de prueba (<abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr>.3) y el PM se concentra en PM.2–PM.3. Costo: horas del WT; beneficio: verificación más independiente.</p></div>
+<h4>Justificación normativa</h4>
+<p><abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> <abbr title="Technical Report – Informe Técnico (ISO)">TR</abbr> 29110-5-1-2 (perfil Básico): PM.1 Project Planning, PM.2 Project Plan Execution, PM.3 Project Assessment and Control, PM.4 Project Closure; roles CUS, PM, TL, WT. EVM: <abbr title="Project Management Body of Knowledge – Cuerpo de Conocimientos de la Dirección de Proyectos">PMBOK</abbr>/ANSI EIA-748 (CPI = EV/AC; SPI = EV/PV; SPI(t) por Earned Schedule).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>CPI</b> = EV/AC. Meta ≥ 0,95 en el siguiente proyecto.</li>
+<li><b>SPI(t)</b> = ES/AT (Earned Schedule / Actual Time). Meta ≥ 0,95.</li>
+<li><b>% de riesgos materializados que estaban identificados</b> = riesgos ocurridos presentes en el registro / riesgos ocurridos × 100. Meta ≥ 80 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) usar el SPI clásico al cierre y concluir "proyecto a tiempo"; (2) aceptar el dato publicado sin verificarlo; (3) asignar la declaración de alcance a SI.2 (es PM.1: revisión del SOW); (4) creer que 29110 obliga a tener 7 personas para 7 roles.</div>
+</details>
+</section>
+<section id="caso-10" class="caso">
+<h2>Caso 10 · ISO/IEC 29110: Entry vs Basic y ubicación de tareas y productos en PM/SI</h2>
+<p class="origen">Origen: Web: <a href="https://research.aston.ac.uk/en/publications/the-implementation-of-isoiec-29110-software-engineering-standards/">siete pilotos ISO/IEC 29110 (Laporte, O'Connor, García Paucar)</a> y <a href="https://spicenter.vse.cz/wp-content/uploads/2018/08/semestralni_prace/15_02/ISO_TR_29110_Basic_Profile.pdf">traducción del TR 29110-5-1-2</a>; creado para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Dos <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> peruanas consultan a un auditor:</p>
+<ul>
+<li><b>Inti Startup</b> (Cusco, 5 personas, 1 año de vida): proyectos de ≈ 4 personas-mes (landing pages con pasarela de pago para hostales).</li>
+<li><b>Moche Dev</b> (Trujillo, 20 personas): un proyecto a la vez de ≈ 30 personas-mes; ahora desarrolla para el MEF (Ministerio de Economía y Finanzas) un tablero de seguimiento presupuestal.</li>
+</ul>
+<p>Moche Dev registró estas tareas y productos del proyecto MEF: (a) revisar el <abbr title="Statement of Work – Enunciado del Trabajo">SOW</abbr> con el MEF; (b) analizar el impacto en costo de un cambio pedido por el MEF; (c) diseñar la arquitectura y escribir casos y procedimientos de prueba; (d) firmar el Acceptance Record; (e) revisar el Project Plan con el equipo al iniciar la implementación; (f) ejecutar pruebas de integración y emitir el Test Report; (g) comparar avance real vs planificado y registrar acciones correctivas; (h) entregar la Maintenance Documentation; (i) validar la Requirements Specification con el MEF; (j) respaldar el Project Repository; (k) actualizar el Traceability Record tras construir componentes; (l) redactar la Product Operation Guide.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Indique el perfil adecuado para cada VSE y por qué no los otros.</li>
+<li>Asigne (a)–(l) a <abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr>.1–PM.4 o <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr>.1–SI.6.</li>
+<li>¿Qué documento de la serie se certifica y cuál es solo guía?</li>
+<li>Explique los dos casos más confusos.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Elegir el perfil por "prestigio"</td><td>Desconocer criterios de cada perfil (tamaño del proyecto, antigüedad, n.º de proyectos)</td><td>Startup de 1 año que pide Basic</td><td>Adecuación del modelo</td></tr>
+<tr><td>Confundir planificar con iniciar implementación</td><td>PM.1 crea el plan; SI.1 lo revisa con el equipo</td><td>Tarea (e)</td><td>Compromiso del equipo</td></tr>
+<tr><td>Confundir ejecución con control</td><td>PM.2 analiza CR; PM.3 compara real vs plan</td><td>Tareas (b) y (g)</td><td>Control del proyecto</td></tr>
+</tbody></table></div>
+<p><b>1)</b> Inti → <b>Entry</b> (startups de menos de 3 años o proyectos ≤ 6 personas-mes). Moche → <b>Basic</b> (un proyecto a la vez, un solo equipo). <b>Intermediate</b> sería para varios proyectos en paralelo; <b>Advanced</b>, para una VSE que quiere crecer y competir con gestión de negocio.</p>
+<div class="tabla"><table>
+<thead><tr><th>Tarea</th><th>Actividad</th><th>Tarea</th><th>Actividad</th></tr></thead>
+<tbody>
+<tr><td>a</td><td>PM.1 Project Planning</td><td>g</td><td>PM.3 Project Assessment and Control</td></tr>
+<tr><td>b</td><td>PM.2 Project Plan Execution</td><td>h</td><td>SI.6 Product Delivery</td></tr>
+<tr><td>c</td><td>SI.3 Architectural and Detailed Design</td><td>i</td><td>SI.2 Requirements Analysis</td></tr>
+<tr><td>d</td><td>PM.4 Project Closure</td><td>j</td><td>PM.2 (respaldo y recuperación)</td></tr>
+<tr><td>e</td><td>SI.1 Implementation Initiation</td><td>k</td><td>SI.4 Software Construction</td></tr>
+<tr><td>f</td><td>SI.5 Integration and Tests</td><td>l</td><td>SI.5 (o SI.6, según el momento de su verificación)</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Ubicación estricta según el TR 29110-5-1-2</h4><p>La tabla anterior. (e) es SI.1 porque el plan ya existe; en SI.1 se revisa con el equipo para lograr compromiso (igual que la fase Inicio de <abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr> en <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr>). (b) es PM.2 porque el análisis de CR ocurre durante la ejecución; PM.3 se ocupa de desviaciones.</p></div>
+<div class="alt"><h4>Alternativa B · Ubicaciones transversales justificadas</h4><p>Productos como el Traceability Record o la Software Configuration atraviesan SI.2–SI.6: se acepta ubicar (k) en SI.3 o SI.5 si se justifica el momento de actualización. Para Inti (Entry), varias tareas se simplifican (p. ej. sin plan de pruebas formal separado).</p></div>
+<h4>Justificación normativa</h4>
+<p><b>3)</b> Se certifica la conformidad con la <b>especificación del perfil</b> (<abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110-4-1, grupo de perfiles genéricos); la <b>guía</b> de gestión e ingeniería (<abbr title="Technical Report – Informe Técnico (ISO)">TR</abbr> 29110-5-1-1 Entry, 5-1-2 Basic) explica cómo implementarla y no es certificable por sí misma. La evaluación de capacidad está en 29110-3-1 (conforme ISO/IEC 15504/33000) y la certificación en 29110-3-2 y siguientes.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>Completitud de productos del perfil</b> = productos exigidos presentes y verificados / productos exigidos × 100. Meta 100 % antes de la auditoría.</li>
+<li><b>% de tareas con evidencia en el Project Repository</b>. Meta ≥ 95 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) decir que se certifica el TR 29110-5-1-2; (2) llamar "niveles" a los perfiles; (3) asignar (e) a PM.1 y (b) a PM.3; (4) creer que el perfil Entry "no sirve": es el adecuado para startups y es acumulativo hacia Basic.</div>
+</details>
+</section>
+
+<section id="caso-11" class="caso">
+<h2>Caso 11 · IT Mark: nivel de una fintech y brecha hacia Elite</h2>
+<p class="origen">Origen: Adaptado de Silva &amp; Brancher, <a href="https://revista.univem.edu.br/jadi/article/download/1286/432">Avaliação de Segurança da Informação Usando o Modelo ITMark (JADI, 2016)</a> y <a href="https://esicenter.bg/quality-mark-for-it-smes-a-worldwide-launch/">lanzamiento IT Mark (ESICenter Bulgaria)</a>; datos creados</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p><b>Wayna Pay</b> (Lima, 15 personas) desarrolla la billetera digital de una caja municipal y quiere mostrar a Interbank que es un proveedor integral. Contrata una evaluación IT Mark (1 día). Resultados:</p>
+<div class="tabla"><table>
+<thead><tr><th>Área</th><th>Referencia</th><th>Resultado</th></tr></thead>
+<tbody>
+<tr><td>Gestión del negocio</td><td>10-Squared (<abbr title="Ten-Squared (10-Squared) – Modelo de evaluación de la gestión del negocio usado por IT Mark">10²</abbr>)</td><td>63 % de criterios logrados</td></tr>
+<tr><td>Seguridad de la información</td><td><abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 27001/27002</td><td>Procesos de <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr> documentados, pero no institucionalizados; inventario de activos desactualizado</td></tr>
+<tr><td>Procesos de desarrollo</td><td><abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> simplificado (ML2–ML3)</td><td>0 procesos "no implementados"; 5 "largamente o totalmente implementados"</td></tr>
+</tbody></table></div>
+<p>La empresa ya tiene <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> nivel 2 y cree que eso "cubre la seguridad".</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Determine el nivel IT Mark por área y el global.</li>
+<li>Indique qué falta para Elite.</li>
+<li>¿Qué pasaría si Negocio fuera 55 %?</li>
+<li>Refute la creencia sobre MoProSoft y seguridad.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>SI no institucionalizada</td><td>Política de seguridad sin seguimiento ni auditoría</td><td>Inventario desactualizado</td><td>Seguridad: confidencialidad, integridad (ISO/IEC 25010)</td></tr>
+<tr><td>Pocos procesos de desarrollo L/T</td><td>Solo procesos de proyecto maduros</td><td>5 L/T</td><td>Capacidad del proceso</td></tr>
+<tr><td>Falsa cobertura de SI</td><td>Los modelos de desarrollo no cubren gestión de SI</td><td>Creencia sobre MoProSoft</td><td>Riesgo regulatorio (SBS)</td></tr>
+</tbody></table></div>
+<p><b>1)</b> Negocio 63 % ≥ 60 % → Premium; Seguridad nivel 2 (procesos documentados) → Premium; Desarrollo: 0 no implementados y &gt; 2 L/T → Premium. Global = <b>Premium (2★)</b>, porque el nivel global es el mínimo de las tres áreas.</p>
+<p><b>2)</b> Elite (3★): Negocio ≥ 75 %; SI institucionalizada (nivel 3); &gt; 10 procesos de desarrollo L/T y ninguno no implementado.</p>
+<p><b>3)</b> Con 55 % (≥ 50 % y &lt; 60 %) Negocio queda en Basic → global <b>Basic (1★)</b> aunque las otras áreas sean Premium.</p>
+<p><b>4)</b> MoProSoft, MPS-SW y CMMI-DEV evalúan procesos de <abbr title="Software – Software / soporte lógico">SW</abbr>; no exigen <abbr title="Sistema de Gestión de Seguridad de la Información (ISMS, ISO/IEC 27001)">SGSI</abbr> (Sistema de Gestión de Seguridad de la Información). Las empresas brasileñas evaluadas por Silva &amp; Brancher, aun con MPS-SW F y MoProSoft 2, tenían inventario de activos desactualizado y sin política de seguridad eficaz.</p>
+<div class="alt"><h4>Alternativa A · Subir a Elite con un plan por área</h4><p>Negocio: plan estratégico y financiero formal (+12 puntos); SI: SGSI con ciclo <abbr title="Plan-Do-Check-Act – Planificar-Hacer-Verificar-Actuar (PHVA)">PDCA</abbr>, auditoría interna y revisión por la dirección; Desarrollo: llevar 6 procesos más a L/T (p. ej. <abbr title="Requirements Development – Desarrollo de Requisitos">RD</abbr>, TS, <abbr title="Verification – Verificación">VER</abbr>, <abbr title="Validation – Validación">VAL</abbr>, <abbr title="Risk Management – Gestión de Riesgos">RSKM</abbr>, <abbr title="Decision Analysis and Resolution – Análisis y Resolución de Decisiones">DAR</abbr>).</p></div>
+<div class="alt"><h4>Alternativa B · Ir a ISO/IEC 27001 directamente</h4><p>Si Interbank exige certificación de seguridad formal (por la regulación de la SBS – Superintendencia de Banca, Seguros y AFP), la ISO/IEC 27001 da un certificado de SGSI con mayor reconocimiento que la estrella IT Mark; IT Mark queda como diagnóstico integral.</p></div>
+<h4>Justificación normativa</h4>
+<p>IT Mark (<abbr title="European Software Institute – Instituto Europeo de Software (hoy Tecnalia)">ESI</abbr>, hoy Tecnalia, 2005): esquema de <b>certificación</b> de 3 áreas (10², ISO/IEC 27001/27002, CMMI-DEV ML2–3), evaluación basada en ISO/IEC 15504; grados Basic, Premium y Elite. Criterios: Basic (Negocio ≥ 50 %, SI nivel 1, hasta 2 procesos no implementados excepto <abbr title="Project Planning – Planificación del Proyecto">PP</abbr> y <abbr title="Project Monitoring and Control – Monitoreo y Control del Proyecto">PMC</abbr>); Premium (≥ 60 %, SI nivel 2, ninguno N y &gt; 2 L/T); Elite (≥ 75 %, SI nivel 3, ninguno N y &gt; 10 L/T).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>% de criterios de negocio logrados</b>. Meta ≥ 75 %.</li>
+<li><b>% de activos de información inventariados y clasificados</b> = activos registrados / activos reales × 100. Meta 100 %.</li>
+<li><b>N.º de procesos de desarrollo en L/T</b>. Meta ≥ 11.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) promediar las áreas; (2) decir que IT Mark es "una norma <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr>" o un modelo de procesos propio; (3) decir que IT Mark evalúa solo desarrollo; (4) olvidar la excepción de PP y PMC en Basic.</div>
+</details>
+</section>
+
+<section id="caso-12" class="caso">
+<h2>Caso 12 · Migración MoProSoft nivel 2 → ISO/IEC 29110 Basic</h2>
+<p class="origen">Origen: Inspirado en <a href="https://ejbeta.clei.org/cleiej/article/view/131">From MoProSoft Level 2 to ISO/IEC 29110 Basic Profile: Bridging the Gap (CLEI EJ)</a>; datos creados</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><b>Tlaloc Software</b> (Puebla, México, 20 personas) está certificada por <abbr title="Normalización y Certificación Electrónica, A.C. (México)">NYCE</abbr> en <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> nivel 2 (NMX-I-059-NYCE). Su principal cliente, una cadena peruana de farmacias, exige "norma internacional", por lo que decide certificar <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110 Basic. El gerente propone: "Como el Basic solo pide <abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr> y <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr>, eliminemos <abbr title="Gestión de Negocio (MoProSoft DIR.1)">GN</abbr>, <abbr title="Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)">GPR</abbr>, <abbr title="Gestión de Proyectos – cartera (MoProSoft GES.2)">GPY</abbr>, <abbr title="Generic Resource – Recurso genérico">GR</abbr>, <abbr title="Recursos Humanos y Ambiente de Trabajo (MoProSoft GES.3.1)">RHAT</abbr>, <abbr title="British Standards Institution – Instituto Británico de Normalización">BSI</abbr> y <abbr title="Conocimiento de la Organización (MoProSoft GES.3.3)">CO</abbr> para ahorrar 300 h al año". Productos actuales: Plan del Proyecto, Plan de Desarrollo, Registro de Rastreo, Documento de Aceptación, Reporte de Seguimiento, Configuración de Software, Base de Conocimiento.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Mapee <abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr> y <abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr> a PM y SI (actividad por actividad).</li>
+<li>Establezca la correspondencia de productos MoProSoft ↔ 29110.</li>
+<li>Evalúe la propuesta del gerente.</li>
+<li>Recomiende el perfil objetivo a mediano plazo.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Riesgo de desinstitucionalizar</td><td>Ver la certificación como fin y no como medio</td><td>Propuesta de eliminar 7 procesos</td><td>Madurez organizacional, mejora continua</td></tr>
+<tr><td>Brecha de nomenclatura</td><td>Productos con nombres distintos en ambos modelos</td><td>Plan de Desarrollo vs Project Plan</td><td>Trazabilidad de evidencias para el auditor</td></tr>
+</tbody></table></div>
+<div class="tabla"><table>
+<thead><tr><th>MoProSoft</th><th>ISO/IEC 29110 Basic</th></tr></thead>
+<tbody>
+<tr><td>APE A1 Planificación</td><td>PM.1 Project Planning</td></tr>
+<tr><td>APE A2 Realización</td><td>PM.2 Project Plan Execution</td></tr>
+<tr><td>APE A3 Evaluación y Control</td><td>PM.3 Project Assessment and Control</td></tr>
+<tr><td>APE A4 Cierre</td><td>PM.4 Project Closure</td></tr>
+<tr><td>DMS A1 Inicio</td><td>SI.1 Initiation</td></tr>
+<tr><td>DMS A2 Requerimientos</td><td>SI.2 Requirements Analysis</td></tr>
+<tr><td>DMS A3 Análisis y Diseño</td><td>SI.3 Architectural and Detailed Design</td></tr>
+<tr><td>DMS A4 Construcción</td><td>SI.4 Construction</td></tr>
+<tr><td>DMS A5 Integración y Pruebas</td><td>SI.5 Integration and Tests</td></tr>
+<tr><td>DMS A6 Cierre</td><td>SI.6 Product Delivery</td></tr>
+</tbody></table></div>
+<p><b>2)</b> Plan del Proyecto + Plan de Desarrollo ↔ <b>Project Plan</b>; Registro de Rastreo ↔ <b>Traceability Record</b>; Documento de Aceptación ↔ <b>Acceptance Record</b>; Reporte de Seguimiento ↔ <b>Progress Status Record</b>; Configuración de Software ↔ <b>Software Configuration</b>; Base de Conocimiento (CO) ↔ <b>Project Repository</b> (parcial: el repositorio es por proyecto, la Base de Conocimiento es organizacional).</p>
+<div class="alt"><h4>Alternativa A · Mantener los 9 procesos y certificar Basic (recomendada)</h4><p>El auditor solo verificará PM y SI, pero mantener GN, GPY, CO, etc. conserva la capacidad organizacional lograda y prepara el paso a <b>Intermediate</b> (que agrega gestión organizacional). Costo: las 300 h anuales, que son inversión en madurez.</p></div>
+<div class="alt"><h4>Alternativa B · Simplificar sin eliminar</h4><p>Reducir la carga documental de los procesos de gestión (fusionar reportes, automatizar mediciones con Jira/Power BI) a ≈ 150 h/año, sin eliminar su ejecución. Equilibra costo y madurez.</p></div>
+<h4>Justificación normativa</h4>
+<p>En mayo de 2006 el <abbr title="Working Group 24 – Grupo de Trabajo 24 de ISO/IEC JTC 1/SC 7">WG24</abbr> de ISO/IEC <abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité Técnico Conjunto 1 / Subcomité 7 (Ingeniería de SW y Sistemas)">JTC1/SC7</abbr> eligió <b>MoProSoft como base</b> de la 29110 (APE ≈ PM; DMS ≈ SI). El perfil Basic no exige procesos organizacionales; el <b>Intermediate</b> y <b>Advanced</b> sí incorporan gestión organizacional y de negocio. <b>4)</b> Objetivo a mediano plazo: Intermediate (si mantienen ≤ 25 personas y pasan a varios proyectos).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>% de evidencias MoProSoft reutilizadas en la auditoría 29110</b>. Meta ≥ 85 %.</li>
+<li><b>No conformidades mayores en la auditoría</b>. Meta 0.</li>
+<li><b>Nivel de capacidad de GN/GPY tras 12 meses</b>. Meta: se mantiene ≥ 2.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) creer que MoProSoft y 29110 "compiten": 29110 deriva de MoProSoft y en México NYCE certifica ambas; (2) mapear DMS a PM; (3) asumir que lo "no exigido" es inútil: la calidad no se reduce a la auditoría; (4) olvidar ajustar nombres de productos para el auditor.</div>
+</details>
+</section>
+<section id="caso-13" class="caso">
+<h2>Caso 13 · Patrón de procesos MoProSoft: documentar "OPE.3 Gestión de Incidentes"</h2>
+<p class="origen">Origen: Creado para el repaso con base en el patrón de procesos de <a href="https://kualikaans.fciencias.unam.mx/images/kuali/documentos/MoProSoft.pdf">MoProSoft v1.3</a></p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><b>Salud Digital S.A.C.</b> (Lima, 12 personas) mantiene el app de citas que usa una red asistencial de EsSalud. El contrato fija un <abbr title="Service Level Agreement – Acuerdo de Nivel de Servicio">SLA</abbr> (Service Level Agreement – Acuerdo de Nivel de Servicio): incidentes críticos resueltos en ≤ 4 h y altos en ≤ 24 h. En el último trimestre hubo 120 incidentes: 84 dentro del SLA; 18 fueron recurrencias de incidentes ya "resueltos"; 2 caídas totales del servicio en horario de citas (7:00–9:00). No hay proceso escrito: "el que está de turno lo arregla". La empresa usa <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> y quiere agregar un proceso propio respetando el patrón de procesos.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Documente el proceso con las 3 partes del patrón: definición general (propósito, 2 objetivos, 2 indicadores, metas, responsabilidad y autoridad, entradas/salidas), prácticas (roles, 3 actividades, 1 verificación, 1 validación, 2 mediciones, 1 situación excepcional) y 1 guía de ajuste.</li>
+<li>Calcule los indicadores actuales.</li>
+<li>Diferencie indicador, medición y meta con su propio ejemplo.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Incumplimiento de SLA</td><td>Sin clasificación por prioridad ni escalamiento</td><td>84/120 = 70 % en SLA</td><td>Disponibilidad, fiabilidad</td></tr>
+<tr><td>Recurrencias</td><td>Se corrige el síntoma, no la causa raíz (sin análisis de problemas)</td><td>18/120 = 15 %</td><td>Madurez, mantenibilidad</td></tr>
+<tr><td>Caídas en hora punta</td><td>Sin plan de contingencia ni monitoreo proactivo</td><td>2 caídas 7:00–9:00</td><td>Disponibilidad (<abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 25010)</td></tr>
+</tbody></table></div>
+<div class="tabla"><table>
+<thead><tr><th>Elemento del patrón</th><th>Contenido</th></tr></thead>
+<tbody>
+<tr><td>Proceso / Categoría</td><td><abbr title="Categoría Operación (MoProSoft)">OPE</abbr>.3 Gestión de Incidentes / Operación (OPE)</td></tr>
+<tr><td>Propósito</td><td>Restaurar el servicio ante incidentes dentro del SLA y prevenir recurrencias</td></tr>
+<tr><td>Objetivos</td><td>O1 resolver incidentes dentro del SLA; O2 reducir incidentes recurrentes</td></tr>
+<tr><td>Indicadores</td><td>I1 (O1) % de incidentes resueltos dentro del SLA; I2 (O2) % de incidentes recurrentes</td></tr>
+<tr><td>Metas cuantitativas</td><td>I1 ≥ 95 %; I2 ≤ 3 %</td></tr>
+<tr><td>Responsabilidad y autoridad</td><td>Responsable: RS (Responsable de Soporte); Autoridad: RGPY</td></tr>
+<tr><td>Procesos relacionados</td><td><abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr>, <abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr> (corrección de defectos), <abbr title="Conocimiento de la Organización (MoProSoft GES.3.3)">CO</abbr> (lecciones aprendidas), <abbr title="Gestión de Proyectos – cartera (MoProSoft GES.2)">GPY</abbr> (quejas)</td></tr>
+<tr><td>Entradas / Salidas</td><td>Entrada: Reporte de Incidente (fuente: <abbr title="Capability Level – Nivel de capacidad">CL</abbr>/US o monitoreo). Salidas: Incidente cerrado (destino: CL), Solicitud de Cambio (destino: APE), Lección Aprendida (destino: CO)</td></tr>
+<tr><td>Roles</td><td>RS, Técnico de Soporte (TS), <abbr title="Requirements Development and Management – Desarrollo y Gestión de Requisitos">RDM</abbr>, Revisor (RE), CL</td></tr>
+<tr><td>Actividades</td><td>A1 Registro y clasificación (O1); A2 Diagnóstico y resolución (O1); A3 Análisis de causa raíz y cierre (O2)</td></tr>
+<tr><td>Verificación</td><td>Ver1: el RE verifica que el Reporte de Incidente tenga causa raíz y solución documentadas</td></tr>
+<tr><td>Validación</td><td>Val1: el CL confirma que el servicio funciona (validación externa)</td></tr>
+<tr><td>Mediciones</td><td>M1 (I1) = incidentes cerrados ≤ SLA / total × 100; M2 (I2) = incidentes con la misma causa raíz en 90 días / total × 100</td></tr>
+<tr><td>Situación excepcional</td><td>Caída total en horario de citas → escalar al Grupo Directivo y activar plan de contingencia (agenda telefónica)</td></tr>
+<tr><td>Guía de ajuste</td><td>Para clientes sin SLA formal, usar tiempos objetivo internos (sin eliminar O1 ni O2)</td></tr>
+</tbody></table></div>
+<p><b>2)</b> I1 actual = 84/120 = <b>70 %</b> (meta 95 %); I2 actual = 18/120 = <b>15 %</b> (meta 3 %).</p>
+<p><b>3)</b> Indicador = <i>qué</i> se evalúa (I1 "% en SLA"); medición = <i>cómo</i> se obtiene el dato (M1, conteo en la herramienta de tickets); meta = <i>valor esperado</i> (≥ 95 %).</p>
+<div class="alt"><h4>Alternativa A · Proceso nuevo en OPE (la anterior)</h4><p>Coherente porque el soporte es operación diaria de un producto entregado.</p></div>
+<div class="alt"><h4>Alternativa B · Usar ISO/IEC 20000 / ITIL o el perfil de servicios de 29110</h4><p>En lugar de inventar un proceso, adoptar las prácticas de gestión de incidentes y problemas de ISO/IEC 20000-1 / <abbr title="Information Technology Infrastructure Library – Biblioteca de infraestructura de TI">ITIL</abbr> 4, o el modelo de gestión de servicios para <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> (29110 + ISO/IEC 20000, como en ProCal-ProSer de la <abbr title="Pontificia Universidad Católica del Perú">PUCP</abbr>). En MPS se usaría MR-MPS-SV.</p></div>
+<h4>Justificación normativa</h4>
+<p>Patrón de procesos de MoProSoft v1.3: (1) definición general, (2) prácticas, (3) guías de ajuste, que <b>no deben afectar los objetivos</b> del proceso. Ver/Val calzan con <abbr title="Verification and Validation – Verificación y Validación">V&amp;V</abbr> de <abbr title="Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos">IEEE</abbr> 1012 / ISO/IEC/IEEE 12207.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>I1</b> = cerrados ≤ SLA / total × 100: de 70 % a ≥ 95 % en 6 meses.</li>
+<li><b>I2</b> = recurrentes / total × 100: de 15 % a ≤ 3 %.</li>
+<li><b><abbr title="Mean Time To Repair – Tiempo Medio de Reparación">MTTR</abbr> (Mean Time To Restore – Tiempo Medio de Restauración)</b> = Σ tiempos de restauración / n.º de incidentes. Meta: ≤ 2 h en críticos.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) poner como guía de ajuste "omitir el análisis de causa raíz" (afecta O2, prohibido); (2) confundir indicador con medición; (3) no indicar a qué objetivo responde cada indicador (I1 (O1)); (4) poner como Autoridad al mismo rol Responsable.</div>
+</details>
+</section>
+
+<section id="caso-14" class="caso">
+<h2>Caso 14 · Chasqui Software: matriz multicriterio y análisis de sensibilidad</h2>
+<p class="origen">Origen: Creado para el repaso a partir de las lecciones de los casos <abbr title="Pontificia Universidad Católica del Perú">PUCP</abbr> <abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr>, Ecuador 29110 y <abbr title="Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño">MPS.BR</abbr> cooperado (ver <a href="https://cris.pucp.edu.pe/es/publications/the-isoiec-29110-implementation-on-two-very-small-software-develo/">29110 en dos VSE de Lima, PUCP</a>)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><b>Chasqui Software</b> (Lima, 22 personas) debe elegir modelo. Pesos: costo 25 %, reconocimiento en licitaciones 20 %, adecuación al tamaño 20 %, esfuerzo documental 15 %, evaluadores disponibles en Perú 10 %, escalabilidad 10 %. Puntajes 1–5 (mayor = mejor):</p>
+<div class="tabla"><table>
+<thead><tr><th>Modelo</th><th>Costo</th><th>Licit.</th><th>Tamaño</th><th>Doc.</th><th>Evaluad.</th><th>Escal.</th></tr></thead>
+<tbody>
+<tr><td><abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> V2.0</td><td>1</td><td>5</td><td>2</td><td>1</td><td>3</td><td>5</td></tr>
+<tr><td><abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110</td><td>5</td><td>3</td><td>5</td><td>4</td><td>4</td><td>3</td></tr>
+<tr><td><abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr>/COMPETISOFT</td><td>4</td><td>2</td><td>4</td><td>3</td><td>3</td><td>3</td></tr>
+<tr><td>MPS.BR</td><td>4</td><td>1</td><td>4</td><td>3</td><td>1</td><td>4</td></tr>
+<tr><td><abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> 9001</td><td>3</td><td>4</td><td>3</td><td>3</td><td>5</td><td>2</td></tr>
+</tbody></table></div>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule el puntaje ponderado de cada modelo.</li>
+<li>Sensibilidad: licitaciones 40 % y costo 5 % (el resto igual).</li>
+<li>Si además el principal cliente (un banco) exige CMMI y el puntaje "Licit." de 29110 baja a 2, ¿cambia la decisión?</li>
+<li>Dé una recomendación argumentada.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Decisión dependiente de pesos subjetivos</td><td>Puntajes por juicio experto</td><td>Inversión del ranking en (3)</td><td>Robustez de la decisión</td></tr>
+<tr><td>Riesgo de elegir por costo y perder el cliente clave</td><td>No se modela la exigencia contractual como restricción</td><td>Banco exige CMMI</td><td>Valor de negocio</td></tr>
+</tbody></table></div>
+<div class="tabla"><table>
+<thead><tr><th>Modelo</th><th>(1) Base</th><th>(2) Licit. 40 % / Costo 5 %</th><th>(3) + 29110 Licit. = 2</th></tr></thead>
+<tbody>
+<tr><td>CMMI V2.0</td><td>2,60</td><td>3,40</td><td><b>3,40</b></td></tr>
+<tr><td>ISO/IEC 29110</td><td><b>4,15</b></td><td><b>3,75</b></td><td>3,35</td></tr>
+<tr><td>MoProSoft/COMPETISOFT</td><td>3,25</td><td>2,85</td><td>2,85</td></tr>
+<tr><td>MPS.BR</td><td>2,95</td><td>2,35</td><td>2,35</td></tr>
+<tr><td>ISO 9001</td><td>3,30</td><td>3,50</td><td>3,50</td></tr>
+</tbody></table></div>
+<p>Ej. de cálculo (1) 29110: 5×0,25 + 3×0,20 + 5×0,20 + 4×0,15 + 4×0,10 + 3×0,10 = 1,25 + 0,60 + 1,00 + 0,60 + 0,40 + 0,30 = 4,15. En (3): 0,25 + 0,80 + 1,00 + 0,60 + 0,40 + 0,30 = 3,35 &lt; CMMI 3,40 y &lt; ISO 9001 3,50 → <b>la decisión se invierte</b> (gana ISO 9001 por puntaje, aunque no satisface la exigencia CMMI).</p>
+<div class="alt"><h4>Alternativa A · ISO/IEC 29110 Basic como base (escenario 1 y 2)</h4><p>Adecuada a <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> ≤ 25 personas, <abbr title="Norma Técnica Peruana">NTP</abbr> adoptada por <abbr title="Instituto Nacional de Calidad (Perú)">INACAL</abbr>, <abbr title="Deployment Package – Paquete de Despliegue (ISO/IEC 29110)">DP</abbr> gratuitos y ruta hacia CMMI. Robusta ante el cambio de pesos (sigue primera en el escenario 2).</p></div>
+<div class="alt"><h4>Alternativa B · CMMI V2.0 ML2 como restricción + 29110 para el resto</h4><p>Si el banco es "cliente que no se puede perder", la exigencia CMMI es una <b>restricción</b> (no un criterio ponderable): se cumple CMMI ML2 para la línea de negocio bancaria y 29110 para el resto. La matriz se usa para elegir entre modelos que cumplen las restricciones.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC 29110-1 (VSE ≤ 25), CMMI V2.0 (Benchmark ML2), ISO 9001:2015 (<abbr title="Quality Management System (QMS) – Sistema de Gestión de la Calidad">SGC</abbr> – Sistema de Gestión de la Calidad, no específico de <abbr title="Software – Software / soporte lógico">SW</abbr>), NMX-I-059 / COMPETISOFT, <abbr title="Modelo de Referência MPS para Software (también -SV Serviços y -RH Gestão de Pessoas)">MR-MPS-SW</abbr>. Técnica de decisión multicriterio (suma ponderada) con análisis de sensibilidad, coherente con la toma de decisiones basada en evidencia de los principios de la ISO 9000.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>Margen de robustez</b> = puntaje del 1.º − puntaje del 2.º. Meta ≥ 0,30 en todos los escenarios evaluados (si no, decisión frágil).</li>
+<li><b>% de contratos ganados que pedían certificación</b> = contratos ganados con requisito / contratos postulados con requisito × 100. Meta ≥ 50 % al año 2.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) olvidar que los pesos deben sumar 100 %; (2) presentar el puntaje como "verdad objetiva": es juicio experto; la calidad no tiene solución única, pero la decisión debe ser trazable y sensible a supuestos explícitos; (3) tratar una exigencia contractual como un criterio más en lugar de una restricción; (4) comparar ISO 9001 como si fuera un modelo de procesos de SW.</div>
+</details>
+</section>
+
+<section id="caso-15" class="caso">
+<h2>Caso 15 · Integración S5–S7: PYME de 60 personas con mercados mixtos</h2>
+<p class="origen">Origen: Creado para el repaso (integra NTP-ISO/IEC 12207:2016 de la S5 y <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> de la S6); referencia: <a href="https://cris.pucp.edu.pe/en/publications/software-process-improvement-and-certification-of-a-small-company/">SPI y certificación con NTP 291.100 (PUCP, PROFES 2012)</a></p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><b>Misti Tech</b> (Arequipa, 60 personas, 4 equipos de 12–15) provee <abbr title="Software – Software / soporte lógico">SW</abbr> a 3 gobiernos regionales, que exigen alineamiento con la <b>NTP-ISO/IEC 12207:2016</b>. Planea exportar a Brasil (un cliente público pide MPS-SW) y a un banco de Miami (pide CMMI ML3 y controles de seguridad). Presupuesto de mejora: USD 120 000 en 3 años. Situación: cada equipo trabaja con su propio proceso; no hay medición organizacional; hubo una fuga de datos de un padrón regional por credenciales en un repositorio público.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>¿Aplica <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110 a la organización? ¿Y a sus equipos?</li>
+<li>Proponga una secuencia de modelos en 3 años con hitos.</li>
+<li>Relacione la fuga de datos con un modelo/área concreta.</li>
+<li>Defina <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> con fórmula y meta.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Procesos heterogéneos</td><td>Sin proceso organizacional estándar (Gestión del Modelo de Ciclo de Vida de 12207)</td><td>Cada equipo con su proceso</td><td>Consistencia, institucionalización</td></tr>
+<tr><td>Sin medición</td><td>No existe proceso de Medición</td><td>Sin datos organizacionales</td><td>Previsibilidad</td></tr>
+<tr><td>Fuga de datos</td><td>Sin gestión de secretos ni <abbr title="Static Application Security Testing – Pruebas Estáticas de Seguridad de Aplicaciones">SAST</abbr> (Static Application Security Testing) en el pipeline</td><td>Credenciales en repositorio público</td><td>Seguridad: confidencialidad (ISO/IEC 25010)</td></tr>
+<tr><td>Exigencias de 3 mercados</td><td>Clientes con certificaciones distintas</td><td><abbr title="Norma Técnica Peruana">NTP</abbr> 12207, MPS-SW, CMMI ML3</td><td>Valor comercial</td></tr>
+</tbody></table></div>
+<p><b>1)</b> Como organización <b>no</b> (60 &gt; 25 personas). Sí podría aplicarse a un <b>departamento o proyecto</b> de ≤ 25 personas, porque la definición de <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> incluye "organización, departamento o proyecto".</p>
+<div class="alt"><h4>Alternativa A · MoProSoft/COMPETISOFT → MPS-SW F → C/CMMI ML3</h4><p>Año 1: definir procesos con el patrón <abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr> (cobertura declarada de ISO/IEC 12207 Anexo F ≈ 95 %) para cumplir a los gobiernos regionales; año 2: MPS-SW <b>F</b> (≈ ML2) para Brasil; año 3: evolucionar a MPS C y evaluación <b>CMMI Benchmark ML3</b> para el banco, reutilizando evidencias. Seguridad: ISO/IEC 27001 o IT Mark como diagnóstico.</p></div>
+<div class="alt"><h4>Alternativa B · CMMI V2.0 directo + MPS por equivalencia</h4><p>Si el banco es el mercado prioritario: CMMI ML2 (año 1–2) → ML3 (año 3); para Brasil, una evaluación MPS aprovechando la compatibilidad CMMI–MPS. Más caro (puede exceder USD 120 000), pero un solo marco de referencia.</p></div>
+<p><b>3)</b> La fuga de datos no la resuelven <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr>, MPS-SW ni <abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> por sí solos: corresponde a <b>ISO/IEC 27001/27002</b> (controles de gestión de secretos, desarrollo seguro), al área de seguridad de <b>IT Mark</b>, o a prácticas de <abbr title="Open Worldwide Application Security Project – Proyecto Abierto Mundial de Seguridad de Aplicaciones">OWASP</abbr> <abbr title="Software Assurance Maturity Model – Modelo de Madurez del Aseguramiento del Software">SAMM</abbr> (Software Assurance Maturity Model) de la S3. En CMMI V2.0 existen además áreas de práctica de seguridad agregadas posteriormente (<abbr title="Securities and Exchange Commission – Comisión de Bolsa y Valores de EE.UU.">SEC</abbr> – Enabling Security / MST – Managing Security Threats and Vulnerabilities).</p>
+<h4>Justificación normativa</h4>
+<p>NTP-ISO/IEC 12207:2016 (S5) como marco de procesos exigido; ISO/IEC 29110-1 (VSE ≤ 25); COMPETISOFT/MoProSoft (cobertura 12207 ≈ 95 %, <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> 9001 ≈ 92 %, CMMI nivel 2 ≈ 77 %); <abbr title="Modelo de Referência MPS para Software (también -SV Serviços y -RH Gestão de Pessoas)">MR-MPS-SW</abbr> (F ≈ ML2, C ≈ ML3); CMMI (S6).</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Adopción del proceso estándar</td><td>Equipos que usan el proceso organizacional / equipos × 100</td><td>100 % al mes 12</td></tr>
+<tr><td>Secretos expuestos</td><td>N.º de credenciales detectadas por escáner en repositorios / mes</td><td>0</td></tr>
+<tr><td>Cumplimiento de hitos de certificación</td><td>Hitos logrados en fecha / hitos planificados × 100</td><td>≥ 90 %</td></tr>
+<tr><td>Desviación de costo del programa de mejora</td><td>(Costo real − 120 000) / 120 000 × 100</td><td>≤ 10 %</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) aplicar 29110 a una empresa de 60 personas como si fuera VSE; (2) creer que la 29110 o MoProSoft reemplazan a la NTP-ISO/IEC 12207:2016 (la 29110 es un <b>perfil</b> de la 12207); (3) suponer que un modelo de procesos de SW cubre la seguridad de la información; (4) dar una sola respuesta "correcta": la secuencia depende del mercado prioritario, el tamaño y el presupuesto.</div>
+</details>
+</section>
+
+<div class="pn"><a href="s6-practica.html">← S6 · SPICE (15504) y CMMI</a><a href="examen.html">Ir al examen →</a></div>
+</main></div>
+<footer>Calidad de Software 20W0703 · FISI-UNMSM 2026-II · Repaso de estudio (Semanas 1–7) basado en el material de clase y entregables.</footer>
+<script src="assets/js/app.js" defer></script>
+</body></html>

@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S6 Práctica · SPICE (15504) y CMMI · Repaso Calidad de SW</title>
+<meta name="description" content="Madurez y capacidad del proceso: ISO/IEC 15504/33000, CMMI v1.3, V2.0, V3.0 y SCAMPI.">
+<link rel="stylesheet" href="assets/css/style.css"></head>
+<body>
+<header class="top"><a class="brand" href="index.html">Repaso Parcial · Calidad de SW</a><nav class="menu"><a href="index.html">Inicio</a><a href="s1-teoria.html">S1</a><a href="s2-teoria.html">S2</a><a href="s3-teoria.html">S3</a><a href="s4-teoria.html">S4</a><a href="s5-teoria.html">S5</a><a href="s6-teoria.html" class=on>S6</a><a href="s7-teoria.html">S7</a><a href="normas.html">Normas</a><a href="siglas.html">Siglas</a><a href="examen.html">Examen</a></nav></header>
+<div class="wrap"><aside class="toc"><details open><summary>Índice</summary><ol><li><a href="#caso-1">Caso 1 · De la ISO/IEC/IEEE 12207:2017 a un PRM evaluable: auditoría de la app móvil SINEACE</a></li><li><a href="#caso-2">Caso 2 · Microempresa peruana evaluada con ISO/IEC 15504-5: antes y después de COMPETISOFT</a></li><li><a href="#caso-3">Caso 3 · Lab04 del G3: &quot;solo la mitad de las prácticas de planificación y de monitoreo&quot; (CMMI-DEV v1.3)</a></li><li><a href="#caso-4">Caso 4 · YapuPay: calificar PA con ponderación aditiva y análisis de sensibilidad (ISO/IEC 33020)</a></li><li><a href="#caso-5">Caso 5 · SUNAT: agregar instancias de proceso y comparar con el perfil objetivo</a></li><li><a href="#caso-6">Caso 6 · AndesSoft y la licitación del MEF: ¿qué ML otorga el SCAMPI A?</a></li><li><a href="#caso-7">Caso 7 · Equivalent staging: de un perfil de capacidad continuo a un ML</a></li><li><a href="#caso-8">Caso 8 · Agregación FI/LI/PI/NI/NY a nivel OU en un SCAMPI A</a></li><li><a href="#caso-9">Caso 9 · Inca Digital: elegir la clase de valoración correcta (SCAMPI v1.3 vs MDD V2.0)</a></li><li><a href="#caso-10">Caso 10 · Rímac Labs en CMMI V2.0: Practice Groups, CL por Practice Area y el papel de GOV/II</a></li><li><a href="#caso-11">Caso 11 · RENIEC selecciona proveedor: perfil objetivo y determinación de capacidad (CD)</a></li><li><a href="#caso-12">Caso 12 · Fintech de pagos móviles: elegir dominios de CMMI V3.0 para el Benchmark</a></li><li><a href="#caso-13">Caso 13 · Afirmaciones tipo concurso y reconocimiento del modelo por sus términos</a></li></ol></details></aside><main>
+<div class="tabs"><a class="" href="s6-teoria.html">📖 Teoría S6</a><a class="on" href="s6-practica.html">🧩 Práctica S6</a><a href="examen.html?s=6">📝 Examen S6</a></div><h1>Sesión 6 · Práctica</h1>
+<p class="lead">Casos de examen sobre <b>evaluación de la capacidad y la madurez del proceso de <abbr title="Software – Software / soporte lógico">SW</abbr> (Software)</b>: <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 15504 (<abbr title="Software Process Improvement and Capability dEtermination – Mejora y determinación de la capacidad del proceso de software (ISO/IEC 15504)">SPICE</abbr> – Software Process Improvement and Capability dEtermination), la familia ISO/IEC 330xx (33001, 33002, 33004, 33020, 33061) y <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> (Capability Maturity Model Integration) v1.3, V2.0 y V3.0 con sus métodos <abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr> (Standard CMMI Appraisal Method for Process Improvement) A/B/C y Benchmark/Sustainment/Evaluation. La Sesión 6 <b>no tiene diapositivas propias ni entregables</b>, por eso los tres primeros casos se construyen sobre material REAL del curso: las diapositivas 7–13 de la Semana 04 (atributos de cada proceso de la ISO/IEC/IEEE 12207:2017, que la hacen utilizable como <abbr title="Process Reference Model – Modelo de referencia de procesos">PRM</abbr> – Process Reference Model), el entregable de la Semana 05 del G3 (evaluación con ISO/IEC 15504-5 en una microempresa peruana) y el Lab04 del G3 (diagnóstico CMMI de planificación y monitoreo). Luego vienen <b>diez casos NUEVOS de complejidad muy alta</b> (cálculo NPLF con sensibilidad, agregación de instancias, determinación de <abbr title="Maturity Level – Nivel de madurez (CMMI)">ML</abbr> – Maturity Level, <i>equivalent staging</i>, agregación FI/LI/PI/NI/NY, elección de clase SCAMPI, CMMI V2.0 con <abbr title="Governance – Gobernanza (Practice Area V2.0)">GOV</abbr>/II, perfil objetivo para <abbr title="Capability Determination – Determinación de la capacidad">CD</abbr> – Capability Determination, dominios de CMMI V3.0 y un V/F tipo concurso). Cada solución trae tabla de causa raíz, al menos dos alternativas, justificación normativa con cláusula/nivel, <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> (Key Performance Indicator – Indicador Clave de Desempeño) con fórmula y meta, y errores frecuentes. <b>Regla de oro:</b> en evaluación de procesos no se califica la "nota" final sino la <i>trazabilidad evidencia → indicador → atributo/meta → nivel</i>.</p>
+
+<section id="caso-1" class="caso">
+<h2>Caso 1 · De la ISO/IEC/IEEE 12207:2017 a un PRM evaluable: auditoría de la app móvil SINEACE</h2>
+<p class="origen">Origen: Diapositivas 7–13 (clase, Semana 04 · "Modelos de Mejora del Proceso de <abbr title="Software – Software / soporte lógico">SW</abbr>") + caso SINEACE móvil del Entregable G3 (Semana 05) | Ampliado para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>En la Semana 04 la profesora presentó la <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr>/IEEE 12207:2017 como "modelo de mejora del proceso de desarrollo de SW" con <b>4 categorías y 30 procesos</b> (Acuerdo, Habilitadores organizacionales, Gestión de proyectos y Técnicos) y explicó que <b>cada proceso</b> se describe con <b>Título, Propósito, Salidas (resultados), Actividades y Tareas</b>.</p>
+<figure><a href="assets/img/s4-mejora/p08.webp" target="_blank" rel="noopener"><img src="assets/img/s4-mejora/p08.webp" width="1000" height="563" loading="lazy" decoding="async" alt="Diapositiva de la profesora que lista los atributos de cada proceso de la ISO/IEC/IEEE 12207:2017: Título, Propósito, Salidas, Actividades y Tareas"></a><figcaption>Atributos de cada proceso de la 12207:2017 (diap. 8, Semana 04). Propósito + Salidas (outcomes) son justo lo que ISO/IEC 15504-2 / 33004 exigen a un PRM.</figcaption></figure>
+<p>El G3 trabaja sobre la app móvil de SINEACE (Sistema Nacional de Evaluación, Acreditación y Certificación de la Calidad Educativa). Una auditoría interna de <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> (Quality Assurance) registró 8 hallazgos:</p>
+<ul>
+<li><b>H1</b> Los requisitos cambian por WhatsApp sin registro ni aprobación; no hay <abbr title="Requirements Traceability Matrix – Matriz de trazabilidad de requisitos">RTM</abbr> (Requirements Traceability Matrix).</li>
+<li><b>H2</b> No hay <i>baseline</i> de versiones del APK (Android Package); se publicó a Play Store un build compilado en la laptop de un desarrollador.</li>
+<li><b>H3</b> El cronograma no se compara con el avance real; el <abbr title="Software Process Improvement – Mejora del Proceso de Software">SPI</abbr> (Schedule Performance Index) nunca se calculó.</li>
+<li><b>H4</b> Nadie revisa objetivamente si se siguen los procedimientos del <abbr title="Software Quality Assurance Plan – Plan de Aseguramiento de la Calidad del Software">SQAP</abbr> (Software Quality Assurance Plan, <abbr title="Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos">IEEE</abbr> 730).</li>
+<li><b>H5</b> No se identificaron riesgos de la integración con el servicio de <abbr title="Registro Nacional de Identificación y Estado Civil">RENIEC</abbr> (Registro Nacional de Identificación y Estado Civil).</li>
+<li><b>H6</b> La elección Flutter vs nativo se hizo "por gusto" sin criterios ni alternativas documentadas.</li>
+<li><b>H7</b> No se mide la densidad de defectos por release.</li>
+<li><b>H8</b> Las pruebas de aceptación se hacen solo con el equipo, sin usuarios reales de las IES (Instituciones de Educación Superior).</li>
+</ul>
+<p>La jefatura de <abbr title="Information Technology (IT) – Tecnologías de la Información">TI</abbr> (Tecnologías de la Información) quiere <b>evaluar la capacidad</b> de esos procesos antes de contratar una mejora, y dudar entre "usar <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr>" o "usar la <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr>".</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Mapee cada hallazgo a: proceso de la 12207:2017 (con su grupo), <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> (Process Area) de <abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> v1.3 con su <abbr title="Maturity Level – Nivel de madurez (CMMI)">ML</abbr>, y Practice Area de CMMI V2.0.</li>
+<li>Explique por qué la 12207 <b>no es</b> por sí sola un modelo de evaluación y qué le falta (<abbr title="Process Reference Model – Modelo de referencia de procesos">PRM</abbr> vs <abbr title="Process Assessment Model – Modelo de evaluación de procesos">PAM</abbr> vs marco de medición vs método).</li>
+<li>Indique cuántos hallazgos bloquean un eventual CMMI-DEV ML2 y cuáles solo importan para ML3.</li>
+<li>Proponga dos caminos de evaluación y defina <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> de seguimiento.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>H</th><th>Causa raíz</th><th>Proceso 12207:2017 (grupo)</th><th>CMMI-DEV v1.3 (ML)</th><th>CMMI V2.0</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>H1</td><td>No existe procedimiento de control de cambios de requisitos</td><td>6.4.2 Definición de necesidades y requisitos de interesados / 6.4.3 Definición de requisitos del sistema/SW (Técnico)</td><td><abbr title="Requirements Management – Gestión de Requisitos">REQM</abbr> (ML2) + <abbr title="Requirements Development – Desarrollo de Requisitos">RD</abbr> (ML3)</td><td><abbr title="Requirements Development and Management – Desarrollo y Gestión de Requisitos">RDM</abbr></td><td>Adecuación funcional (ISO/IEC 25010)</td></tr>
+<tr><td>H2</td><td>Sin <abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr> (Software Configuration Management) ni <abbr title="Continuous Integration / Continuous Delivery-Deployment – Integración y Entrega/Despliegue Continuos">CI/CD</abbr> (Continuous Integration / Continuous Delivery)</td><td>6.3.5 Gestión de la configuración (Gestión de proyectos)</td><td><abbr title="Configuration Management – Gestión de la Configuración">CM</abbr> (ML2)</td><td>CM</td><td>Integridad, mantenibilidad</td></tr>
+<tr><td>H3</td><td>No hay medición del avance ni <abbr title="Earned Value Management – Gestión del Valor Ganado">EVM</abbr> (Earned Value Management)</td><td>6.3.2 Evaluación y control del proyecto</td><td><abbr title="Project Monitoring and Control – Monitoreo y Control del Proyecto">PMC</abbr> (ML2)</td><td>MC</td><td>Predictibilidad de plazo</td></tr>
+<tr><td>H4</td><td>No hay rol de QA independiente</td><td>6.3.8 Aseguramiento de la calidad</td><td><abbr title="Process and Product Quality Assurance – Aseguramiento de la Calidad del Proceso y del Producto">PPQA</abbr> (ML2)</td><td><abbr title="Process Quality Assurance – Aseguramiento de la Calidad del Proceso (CMMI)">PQA</abbr></td><td>Conformidad del proceso</td></tr>
+<tr><td>H5</td><td>Riesgo no identificado ni tratado</td><td>6.3.4 Gestión de riesgos</td><td><abbr title="Risk Management – Gestión de Riesgos">RSKM</abbr> (ML3)</td><td>RSK</td><td>Fiabilidad, disponibilidad</td></tr>
+<tr><td>H6</td><td>Decisiones técnicas sin criterios formales</td><td>6.3.3 Gestión de decisiones</td><td><abbr title="Decision Analysis and Resolution – Análisis y Resolución de Decisiones">DAR</abbr> (ML3)</td><td>DAR</td><td>Mantenibilidad, coste</td></tr>
+<tr><td>H7</td><td>Sin plan de medición GQM (Goal-Question-Metric)</td><td>6.3.7 Medición</td><td><abbr title="Measurement and Analysis – Medición y Análisis">MA</abbr> (ML2)</td><td><abbr title="Managing Performance and Measurement – Gestión del Rendimiento y la Medición">MPM</abbr></td><td>Capacidad de gestionar con datos</td></tr>
+<tr><td>H8</td><td><abbr title="Verification and Validation – Verificación y Validación">V&amp;V</abbr> (Verificación y Validación) confundidas; solo se verifica</td><td>6.4.11 Validación (Técnico)</td><td><abbr title="Validation – Validación">VAL</abbr> (ML3)</td><td><abbr title="Verification and Validation – Verificación y Validación (Practice Area V2.0)">VV</abbr></td><td>Satisfacción / usabilidad</td></tr>
+</tbody></table></div>
+<p><b>Respuesta 2:</b> la 12207 aporta la <b>dimensión de proceso</b>: título, propósito y resultados (diap. 8). Eso la convierte en <b>PRM</b>. Para evaluar faltan: (a) un <b>marco de medición</b> (ISO/IEC 33020: <abbr title="Capability Level – Nivel de capacidad">CL</abbr> – Capability Level 0–5, 9 PA – Process Attributes, escala NPLF – Not/Partially/Largely/Fully achieved); (b) un <b>PAM</b> (Process Assessment Model) con indicadores <abbr title="Base Practice – Práctica base">BP</abbr> (Base Practices), <abbr title="Work Product – Producto de Trabajo">WP</abbr> (Work Products), <abbr title="Generic Practice – Práctica genérica">GP</abbr> (Generic Practices) y <abbr title="Generic Resource – Recurso genérico">GR</abbr> (Generic Resources): ISO/IEC 33061:2021, basado precisamente en la 12207:2017; (c) un <b>proceso/método</b> de evaluación conforme (ISO/IEC 33002). <b>Respuesta 3:</b> bloquean ML2 los hallazgos H1 (parte REQM), H2, H3, H4 y H7 = <b>5</b>; H5, H6, H8 (y la parte RD de H1) son de ML3.</p>
+<div class="alt"><h4>Alternativa A · Evaluación ISO/IEC 330xx con PRM 12207 (representación continua)</h4>
+<p>Evaluar con ISO/IEC 33002 (clase 2) + PAM ISO/IEC 33061 los 8 procesos hasta CL2. Resultado: <b>perfil de capacidad</b> por proceso (p.ej. CM CL0, QA CL0, Medición CL0, Requisitos CL1). Ventaja: continúa directamente lo que el G3 ya trabajó con la NTP-ISO/IEC 12207:2016 (S5); norma pública, sin licencia del modelo. Desventaja: no da un "nivel" único para licitaciones.</p></div>
+<div class="alt"><h4>Alternativa B · SCAMPI C / Evaluation Appraisal de CMMI V2.0 con vista DEV ML2</h4>
+<p>Diagnóstico rápido (gap analysis) de RDM, CM, MC, PQA, MPM, PLAN, <abbr title="Estimating – Estimación (Practice Area V2.0)">EST</abbr>, <abbr title="Pull Request – Solicitud de integración de cambios (gatillo de code review)">PR</abbr>, <abbr title="Supplier Agreement Management – Gestión de Acuerdos con Proveedores">SAM</abbr> + <abbr title="Governance – Gobernanza (Practice Area V2.0)">GOV</abbr> e <abbr title="Implementation Infrastructure – Infraestructura de Implementación (Practice Area V2.0)">II</abbr>. Resultado: brechas y riesgos, <b>sin rating</b>. Ventaja: prepara un futuro Benchmark si SINEACE exigiera ML a proveedores. Desventaja: coste del modelo (licencia <abbr title="Information Systems Audit and Control Association – Asociación de Auditoría y Control de Sistemas de Información">ISACA</abbr>) y del Lead Appraiser.</p></div>
+<div class="alt"><h4>Alternativa C · Mejora primero, evaluación después (PDCA/PHVA)</h4>
+<p>Atacar H2 y H1 (los que más defectos generan aguas abajo) con Git + pipeline CI/CD + <abbr title="Change Control Board – Comité de Control de Cambios">CCB</abbr> (Configuration Control Board) y Jira con RTM; reevaluar a los 3 meses. Útil si el presupuesto es mínimo.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC 33004 (requisitos de PRM: cada proceso con propósito y resultados) → la 12207:2017 cumple (diap. 8). ISO/IEC 33020 cl. 5 (marco de medición, CL y PA). ISO/IEC 33061 (PAM SW). CMMI-DEV v1.3: REQM, <abbr title="Project Planning – Planificación del Proyecto">PP</abbr>, PMC, SAM, MA, PPQA, CM = ML2; RD, TS, PI, <abbr title="Verification – Verificación">VER</abbr>, VAL, <abbr title="Organizational Process Focus – Enfoque en el Proceso Organizacional">OPF</abbr>, <abbr title="Organizational Process Definition – Definición del Proceso Organizacional">OPD</abbr>, <abbr title="Organizational Training – Formación Organizacional">OT</abbr>, <abbr title="Integrated Project Management – Gestión Integrada del Proyecto">IPM</abbr>, RSKM, DAR = ML3.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>% requisitos trazados</td><td>requisitos con enlace a caso de prueba en RTM / total requisitos × 100</td><td>≥ 95 %</td></tr>
+<tr><td>% releases desde baseline</td><td>releases generados por el pipeline desde un tag aprobado / total releases × 100</td><td>100 %</td></tr>
+<tr><td>SPI</td><td>EV / PV</td><td>0,95–1,05</td></tr>
+<tr><td>Cobertura de auditorías QA</td><td>procesos auditados en el trimestre / procesos del alcance × 100</td><td>100 %</td></tr>
+<tr><td>Procesos en CL objetivo</td><td>procesos con CL ≥ 2 / 8 × 100</td><td>≥ 62,5 % (5/8) en 6 meses</td></tr>
+</tbody></table></div>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p>El G3 (S5) solo citó la evaluación de capacidad 15504-5 como técnica previa; aquí se completa con el mapeo explícito PRM → PAM → método, que es lo que suele preguntarse.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) decir que "la 12207 tiene niveles de capacidad" (no; los pone la 33020); (2) poner RSKM o DAR en ML2 (son ML3); (3) mapear H8 a VER: probar sin usuarios es VER, la falta de usuarios reales es un problema de <b>VAL</b>; (4) creer que solo hay una respuesta: elegir ISO o CMMI depende del objetivo de negocio (mejorar vs demostrar a un cliente).</div>
+</details>
+</section>
+<section id="caso-2" class="caso">
+<h2>Caso 2 · Microempresa peruana evaluada con ISO/IEC 15504-5: antes y después de COMPETISOFT</h2>
+<p class="origen">Origen: Entregable G3 (Semana 05, "Norma <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 12207", técnica a: evaluación de capacidad, con base en Horna Merino, 2015) | Preguntas ampliadas para el repaso</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>Una microempresa de <abbr title="Software – Software / soporte lógico">SW</abbr> de Lima con <b>8 personas</b>, cuyos clientes son entidades del sector público, hizo un diagnóstico con cuestionarios basados en el <abbr title="Process Assessment Model – Modelo de evaluación de procesos">PAM</abbr> ISO/IEC 15504-5 (<abbr title="Process Reference Model – Modelo de referencia de procesos">PRM</abbr>: ISO/IEC 12207:2008). Priorizó los procesos con las matrices de COMPETISOFT-PUCP (Pontificia Universidad Católica del Perú) y la técnica de grupo nominal, mejoró 3 procesos en un proyecto piloto y volvió a evaluarlos. El G3 reportó el <b>grado de alcance del <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> 1.1 (Process Performance)</b>:</p>
+<div class="tabla"><table>
+<thead><tr><th>Proceso (12207:2008)</th><th>Antes</th><th>Después</th></tr></thead>
+<tbody>
+<tr><td>Gestión de riesgos</td><td>41 %</td><td>79 %</td></tr>
+<tr><td>Soporte a la aceptación del SW</td><td>43 %</td><td>78 %</td></tr>
+<tr><td>Gestión de activos de reúso</td><td>17 %</td><td>52 %</td></tr>
+</tbody></table></div>
+<p>El gerente quiere anunciar en su web: "Somos nivel 1 de madurez <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr>". Un cliente (una municipalidad) exige en sus <abbr title="Technical Debt Ratio – Ratio de deuda técnica (SonarQube)">TDR</abbr> (Términos de Referencia) "procesos de riesgos y aceptación en CL2".</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Califique cada valor en NPLF y en la escala refinada de ISO/IEC 33020 (P−/P+, L−/L+).</li>
+<li>Determine el <abbr title="Capability Level – Nivel de capacidad">CL</abbr> antes y después de cada proceso y explique por qué "subieron a nivel 1".</li>
+<li>Critique el anuncio del gerente (capacidad vs madurez; 15504 vs 330xx).</li>
+<li>¿Qué debe ocurrir con PA 1.1, PA 2.1 y PA 2.2 para cumplir los TDR? Proponga dos rutas y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Proceso</th><th>Antes → Después (NPLF / refinada)</th><th>CL antes → después</th><th>Causa raíz de que no llegue a CL2</th><th>Atributo afectado</th></tr></thead>
+<tbody>
+<tr><td>Gestión de riesgos</td><td>P (P+) → L (L+)</td><td>CL0 → CL1</td><td>PA 1.1 en 79 %: aún hay resultados (outcomes) no logrados, p.ej. seguimiento de riesgos</td><td>PA 1.1 &lt; F; PA 2.x no evaluados</td></tr>
+<tr><td>Soporte a la aceptación</td><td>P (P+) → L (L+)</td><td>CL0 → CL1</td><td>Criterios de aceptación no acordados en todos los contratos</td><td>PA 1.1 &lt; F</td></tr>
+<tr><td>Gestión de activos de reúso</td><td>P (P−) → L (L−)</td><td>CL0 → CL1</td><td>Repositorio (Subversion) sin catálogo ni clasificación</td><td>PA 1.1 apenas sobre 50 %: CL1 frágil</td></tr>
+</tbody></table></div>
+<p><b>Por qué CL1:</b> CL1 exige PA 1.1 en L o F. 41 %, 43 % y 17 % están en P (&gt;15–50 %) → CL0; 79 %, 78 % y 52 % están en L (&gt;50–85 %) → CL1 "Performed/Realizado". Para CL2 se requiere <b>PA 1.1 = F (&gt;85 %)</b> y PA 2.1, PA 2.2 en L o F. <b>Anuncio del gerente:</b> incorrecto por tres motivos: (a) CL es <b>capacidad de un proceso</b>, no madurez de la <abbr title="Organizational Unit – Unidad organizacional">OU</abbr> (Organizational Unit); (b) solo 3 procesos fueron evaluados; (c) la madurez organizacional exige un <abbr title="Organizational Maturity Model – Modelo de madurez organizacional">OMM</abbr> (Organizational Maturity Model; 15504-7 → ISO/IEC 33004). Además la 15504 fue <b>reemplazada</b> por la familia 330xx; lo correcto sería "procesos X, Y, Z evaluados en CL1 según un PAM basado en 15504-5".</p>
+<div class="alt"><h4>Alternativa A · Consolidar CL1 → CL2 en los 2 procesos de los TDR</h4>
+<p>Riesgos: cubrir todos los outcomes (identificar, analizar, tratar, monitorear) para PA 1.1 &gt; 85 %; luego plan del proceso con responsables y recursos (PA 2.1) y control de versiones y revisión del registro de riesgos (PA 2.2). Igual con aceptación (criterios firmados, actas). Reevaluar con evaluación clase 2 (ISO/IEC 33002).</p></div>
+<div class="alt"><h4>Alternativa B · Adoptar ISO/IEC 29110 (perfil Básico) como marco PYME</h4>
+<p>Para una <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> (Very Small Entity, &lt;25 personas) el perfil Básico de ISO/IEC 29110 (S7) cubre <abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr> (Project Management) y <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr> (Software Implementation) con riesgos y aceptación incluidos; su evaluación también sigue el estilo 15504/330xx. Ventaja: certificable, más barata; desventaja: no es lo que piden literalmente los TDR, hay que justificar equivalencia.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC 15504-2 cl. 5 / ISO/IEC 33020 cl. 5.2–5.3: escala NPLF (N 0–15 %, P &gt;15–50 %, L &gt;50–85 %, F &gt;85–100 %) y regla de nivel (PA del nivel ≥ L, PA inferiores = F). ISO/IEC 15504-5 / 33061: PAM SW. ISO/IEC 33004 / 15504-7: madurez organizacional.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Logro PA 1.1</td><td>outcomes logrados (con evidencia) / outcomes del proceso × 100</td><td>&gt; 85 % (F)</td></tr>
+<tr><td>Riesgos con plan de respuesta</td><td>riesgos con respuesta y dueño / riesgos identificados × 100</td><td>≥ 90 %</td></tr>
+<tr><td>Entregas aceptadas a la primera</td><td>entregas aceptadas sin observaciones / entregas × 100</td><td>≥ 80 %</td></tr>
+<tr><td>Brecha al perfil objetivo</td><td>Σ (CL objetivo − CL actual) en procesos del TDR</td><td>0</td></tr>
+</tbody></table></div>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p>El G3 presentó este estudio como la "técnica más representativa" porque convierte la norma en referencia medible y muestra el antes/después. Le faltó explicitar que el salto es solo a CL1 y que <b>reúso (52 %)</b> quedó en el límite inferior de L.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) leer 79 % como F; (2) decir "nivel 1 de madurez" (es CL, capacidad); (3) creer que con L en PA 1.1 se puede tener CL2 si PA 2.1/2.2 son F (la regla acumulativa lo impide); (4) en una microempresa no hay una única ruta válida: CL2 en procesos puntuales o un perfil ISO/IEC 29110 son ambas defendibles.</div>
+</details>
+</section>
+
+<section id="caso-3" class="caso">
+<h2>Caso 3 · Lab04 del G3: "solo la mitad de las prácticas de planificación y de monitoreo" (CMMI-DEV v1.3)</h2>
+<p class="origen">Origen: Entregable G3 (Semana 04, Lab04 Actividad 01, sección 4.2 Auditorías de proceso) | Datos por práctica creados para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>En el <abbr title="Software Quality Assurance Plan – Plan de Aseguramiento de la Calidad del Software">SQAP</abbr> (<abbr title="Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos">IEEE</abbr> 730) del Lab04, el G3 escribió que "el diagnóstico con <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> mostró que solo se cumplía alrededor de la mitad de las prácticas sugeridas de planificación y de monitoreo y control". Un <abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr> C posterior en la <abbr title="Organizational Unit – Unidad organizacional">OU</abbr> (2 proyectos) caracterizó las <abbr title="Specific Practice – Práctica específica">SP</abbr> (Specific Practices) así (a nivel OU):</p>
+<div class="tabla"><table>
+<thead><tr><th>PA</th><th>SG1</th><th>SG2</th><th>SG3</th></tr></thead>
+<tbody>
+<tr><td><abbr title="Project Planning – Planificación del Proyecto">PP</abbr> (Project Planning)</td><td>SP1.1 FI · SP1.2 LI · SP1.3 FI · SP1.4 PI (esfuerzo estimado "a juicio" sin datos históricos)</td><td>SP2.1 FI · SP2.2 NI (no hay riesgos en el plan) · SP2.3 PI · SP2.4 LI · SP2.5 PI · SP2.6 NI · SP2.7 FI</td><td>SP3.1 LI · SP3.2 PI · SP3.3 PI</td></tr>
+<tr><td><abbr title="Project Monitoring and Control – Monitoreo y Control del Proyecto">PMC</abbr> (Project Monitoring and Control)</td><td>SP1.1 FI · SP1.2 LI · SP1.3 NI (riesgos no monitoreados) · SP1.4 PI · SP1.5 FI · SP1.6 FI · SP1.7 PI</td><td>SP2.1 LI · SP2.2 PI · SP2.3 NI (acciones correctivas no se cierran)</td><td>—</td></tr>
+</tbody></table></div>
+<p>El auditor de calidad mide indicadores semanales y mensuales. La gerencia pregunta si "con un poco más" ya podrían anunciar ML2.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Verifique cuantitativamente la frase "alrededor de la mitad" (% de SP en FI/LI por <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr>).</li>
+<li>Determine qué <abbr title="Specific Goal – Meta específica">SG</abbr> se satisfacen y si PP y PMC quedan satisfechas.</li>
+<li>¿Puede un SCAMPI C dar <abbr title="Maturity Level – Nivel de madurez (CMMI)">ML</abbr>? ¿Qué falta, además de PP y PMC, para un ML2?</li>
+<li>Identifique la causa raíz común entre PP y PMC y proponga dos alternativas con <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> PP: FI = 4, LI = 3, PI = 5, NI = 2 → (4+3)/14 = <b>50 %</b>. PMC: FI = 3, LI = 2, PI = 3, NI = 2 → 5/10 = <b>50 %</b>. La frase del G3 es exacta. <b>2.</b> Una SG se satisface solo si todas sus SP están FI o LI (sin debilidad significativa): PP SG1 ✘ (SP1.4 PI), SG2 ✘, SG3 ✘; PMC SG1 ✘, SG2 ✘ → <b>ninguna SG satisfecha; PP y PMC no satisfechas</b>. <b>3.</b> No: SCAMPI C (y B) no otorgan rating; solo SCAMPI A. Además ML2 exige las 7 PA (<abbr title="Requirements Management – Gestión de Requisitos">REQM</abbr>, PP, PMC, <abbr title="Supplier Agreement Management – Gestión de Acuerdos con Proveedores">SAM</abbr>, <abbr title="Measurement and Analysis – Medición y Análisis">MA</abbr>, <abbr title="Process and Product Quality Assurance – Aseguramiento de la Calidad del Proceso y del Producto">PPQA</abbr>, <abbr title="Configuration Management – Gestión de la Configuración">CM</abbr>) con sus SG y la <b>GG2</b> (GP2.1–GP2.10) satisfechas.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Meta/práctica afectada</th></tr></thead>
+<tbody>
+<tr><td>Estimaciones poco fiables</td><td>No existe repositorio histórico de medidas (MA inexistente)</td><td>PP SP1.4 PI</td><td>PP SG1</td></tr>
+<tr><td>Riesgos ausentes del plan y del monitoreo</td><td>No hay procedimiento de riesgos; se confía en la experiencia del jefe de proyecto</td><td>PP SP2.2 NI y PMC SP1.3 NI</td><td>PP SG2, PMC SG1</td></tr>
+<tr><td>Acciones correctivas abiertas indefinidamente</td><td>No hay dueño ni fecha de cierre en el registro de acciones</td><td>PMC SP2.3 NI</td><td>PMC SG2</td></tr>
+<tr><td>Compromiso débil con el plan</td><td>El plan no se revisa con interesados ni se reconcilian recursos</td><td>PP SP3.2–3.3 PI</td><td>PP SG3</td></tr>
+</tbody></table></div>
+<p><b>Causa raíz común:</b> ausencia de un ciclo "planificar con riesgos → monitorear riesgos → cerrar acciones", es decir, la gestión del riesgo y la medición no están institucionalizadas (GP2.2 Planificar el proceso y GP2.8 Monitorear y controlar el proceso).</p>
+<div class="alt"><h4>Alternativa A · Paquete mínimo ML2 en 6 meses</h4>
+<p>Plantilla de plan con sección de riesgos (PP SP2.2), registro de riesgos revisado en cada <i>sprint review</i> (PMC SP1.3), tablero de acciones con dueño y fecha (PMC SP2.3), base histórica de esfuerzo en Jira (PP SP1.4 apoyado por MA). Luego SCAMPI B para verificar despliegue y finalmente SCAMPI A.</p></div>
+<div class="alt"><h4>Alternativa B · Enfoque por capacidad (continua) solo en PP, PMC y MA</h4>
+<p>Si no se necesita ML (el cliente no lo exige), llevar PP, PMC y MA a CL2 y medir el impacto en desviación de plazo. Más barato; el resultado es un perfil, no un nivel.</p></div>
+<h4>Justificación normativa</h4>
+<p><abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> v1.3 (<abbr title="Carnegie Mellon University – Universidad Carnegie Mellon">CMU</abbr>/SEI-2010-TR-033): PP SG1–SG3 (14 SP), PMC SG1–SG2 (10 SP), regla de satisfacción de metas del <abbr title="Method Definition Document – Documento de Definición del Método">MDD</abbr> SCAMPI A v1.3; GG2 obligatoria para ML2. IEEE 730 (SQAP del Lab04) como instrumento de PPQA.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>% SP en FI/LI (PP+PMC)</td><td>(SP FI + SP LI) / 24 × 100</td><td>100 % antes de SCAMPI A</td></tr>
+<tr><td>Error de estimación (MRE)</td><td>|esfuerzo real − estimado| / real × 100</td><td>≤ 20 %</td></tr>
+<tr><td>Acciones correctivas cerradas a tiempo</td><td>acciones cerradas en plazo / acciones abiertas × 100</td><td>≥ 90 %</td></tr>
+<tr><td>Riesgos revisados por sprint</td><td>sprints con revisión del registro de riesgos / sprints × 100</td><td>100 %</td></tr>
+</tbody></table></div>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p>El G3 usó el diagnóstico solo como justificación del SQAP. Este caso muestra cómo convertir esa frase en una caracterización formal FI/LI/PI/NI, que es lo que un examen de la Sesión 6 pide.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) concluir "50 % de prácticas = medio nivel 2": en CMMI no hay niveles parciales; (2) aceptar que SCAMPI C da nivel; (3) olvidar GG2; (4) creer que "más prácticas FI" basta: una sola SP NI hace caer la SG. La mejora puede ir por ruta escalonada o continua; ninguna es la única correcta.</div>
+</details>
+</section>
+<section id="caso-4" class="caso">
+<h2>Caso 4 · YapuPay: calificar PA con ponderación aditiva y análisis de sensibilidad (ISO/IEC 33020)</h2>
+<p class="origen">Origen: Web: <a href="https://en.wikipedia.org/wiki/ISO/IEC_15504">ISO/IEC 15504 (escala NPLF)</a> y <a href="https://scholar.korea.ac.kr/handle/2021.sw.korea/108192">Jung, "Process attribute rating and sensitivity analysis"</a> | Datos creados para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Un equipo de evaluación (<i>lead assessor</i> + 2 evaluadores) aplica un <abbr title="Process Assessment Model – Modelo de evaluación de procesos">PAM</abbr> conforme a <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 15504-5 al proceso <b>Gestión de Requisitos</b> de la fintech limeña <i>YapuPay</i> (<abbr title="Organizational Unit – Unidad organizacional">OU</abbr> de 40 personas). Para cada indicador se registró el % de logro según evidencias objetivas (actas, <abbr title="Software Requirements Specification – Especificación de Requisitos de Software">SRS</abbr> – Software Requirements Specification, <abbr title="Requirements Traceability Matrix – Matriz de trazabilidad de requisitos">RTM</abbr>, tickets de Jira, entrevistas):</p>
+<div class="tabla"><table>
+<thead><tr><th>PA</th><th>Indicadores</th><th>% de logro</th></tr></thead>
+<tbody>
+<tr><td><abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> 1.1 Process Performance</td><td>BP1–BP5 (BP3 = trazabilidad)</td><td>100 · 90 · 80 · 85 · 70</td></tr>
+<tr><td>PA 2.1 Performance Management</td><td><abbr title="Generic Practice – Práctica genérica">GP</abbr> 2.1.1–2.1.7</td><td>90 · 80 · 60 · 50 · 100 · 70 · 40</td></tr>
+<tr><td>PA 2.2 Work Product Management</td><td>GP 2.2.1–2.2.4</td><td>60 · 50 · 80 · 30</td></tr>
+<tr><td>PA 3.1 Process Definition</td><td>GP 3.1.1–3.1.5</td><td>95 · 90 · 90 · 85 · 90</td></tr>
+</tbody></table></div>
+<p>Pesos iguales salvo indicación. El método de agregación debe documentarse en el registro de evaluación (<i>assessment record</i>).</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule el logro de cada PA, califíquelo en NPLF y en escala refinada.</li>
+<li>Determine el <abbr title="Capability Level – Nivel de capacidad">CL</abbr> del proceso.</li>
+<li>Recalcule PA 1.1 si BP3 (trazabilidad) pesa el doble. ¿Cambia el CL?</li>
+<li>¿Cuánto debe subir BP5 para que el CL cambie, con pesos iguales y con BP3 doble?</li>
+<li>¿Por qué PA 3.1 = F no ayuda? Proponga dos alternativas de mejora y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> PA 1.1 = 425/5 = <b>85,0 % → L</b> (F exige <i>más</i> de 85 %; refinada L+). PA 2.1 = 490/7 = <b>70,0 % → L</b> (L+). PA 2.2 = 220/4 = <b>55,0 % → L</b> (L−). PA 3.1 = 450/5 = <b>90 % → F</b>. <b>2.</b> CL1 exige PA 1.1 ∈ {L,F} ✔. CL2 exige PA 2.1 y 2.2 ∈ {L,F} <b>y</b> PA 1.1 = F ✘ → <b>CL1 (Performed)</b>. <b>3.</b> (100+90+2×80+85+70)/6 = 505/6 = <b>84,17 % → L</b>; sigue CL1 y se aleja del umbral. <b>4.</b> Pesos iguales: se necesita suma &gt; 425 → BP5 ≥ 71 % ⇒ 426/5 = 85,2 % → F → <b>CL2</b>. Con BP3 doble: suma &gt; 510 → BP5 ≥ 76 % (510+1 = 511 ⇒ 85,17 %). <b>5.</b> La regla es acumulativa: un PA superior no compensa uno inferior. PA 3.1 = F solo dice que existe un proceso estándar bien definido, pero no que se ejecute plenamente en el proyecto.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>PA afectado</th></tr></thead>
+<tbody>
+<tr><td>Validación con el cliente incompleta</td><td>No se agenda revisión del SRS con el <i>Product Owner</i></td><td>BP5 = 70 %</td><td>PA 1.1</td></tr>
+<tr><td>Recursos del proceso no asegurados</td><td>Analista de requisitos compartido con soporte</td><td>GP 2.1.7 = 40 %, GP 2.1.4 = 50 %</td><td>PA 2.1</td></tr>
+<tr><td><abbr title="Work Product – Producto de Trabajo">WP</abbr> sin control</td><td>SRS en Google Docs sin versión ni revisión formal</td><td>GP 2.2.4 = 30 %</td><td>PA 2.2</td></tr>
+<tr><td>Calificación frágil</td><td>Valores en el umbral de 85 %</td><td>PA 1.1 = 85,0 %</td><td>Fiabilidad de la evaluación</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · "Pasar el umbral" de PA 1.1 primero</h4><p>Institucionalizar la revisión del SRS con el <abbr title="Product Owner – Dueño del producto (Scrum)">PO</abbr> (Product Owner) en cada <i>sprint</i> (sube BP5) y completar RTM (BP3). Costo bajo, efecto inmediato en el CL: es la palanca de mayor rendimiento.</p></div>
+<div class="alt"><h4>Alternativa B · Robustecer PA 2.x para que CL2 no sea frágil</h4><p>Asignar analista dedicado (GP 2.1.7), mover SRS a Confluence/Git con versionado y revisiones por pares (GP 2.2.4). Más costoso, pero evita que el CL2 caiga en la siguiente evaluación.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC 33020:2019 cl. 5 (escala, PA, regla de nivel) y cl. 5.4 (métodos de agregación R1/R2/R3: el método y los pesos deben documentarse). ISO/IEC 33002 (registro de la evaluación, trazabilidad a evidencias).</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Logro PA 1.1</td><td>Σ (wᵢ × logroᵢ) / Σ wᵢ</td><td>≥ 90 % (margen de 5 puntos sobre el umbral)</td></tr>
+<tr><td>Requisitos validados con el PO</td><td>historias aceptadas en review / historias del sprint × 100</td><td>≥ 95 %</td></tr>
+<tr><td>Volatilidad de requisitos</td><td>cambios de requisitos / requisitos base × 100 por release</td><td>≤ 15 %</td></tr>
+<tr><td>Margen al umbral</td><td>logro PA − 85</td><td>≥ +5 en todos los PA de CL ≤ 2</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) tratar 85 % como F (el límite es abierto: &gt;85 %); (2) declarar CL2 "porque todo está en L o F"; (3) no documentar pesos: dos evaluadores con métodos distintos pueden dar CL distintos con la misma evidencia, por eso la calidad de la evaluación misma tampoco tiene una sola respuesta, sino una respuesta <i>trazable</i>.</div>
+</details>
+</section>
+
+<section id="caso-5" class="caso">
+<h2>Caso 5 · SUNAT: agregar instancias de proceso y comparar con el perfil objetivo</h2>
+<p class="origen">Origen: Web: <a href="https://en.wikipedia.org/wiki/ISO/IEC_15504">ISO/IEC 15504 → 33000</a> y <a href="https://webstore.ansi.org/standards/iso/isoiectr155042008">ficha ISO/IEC TR 15504 (ANSI)</a> | Datos creados para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>El Área de <abbr title="Information Technology (IT) – Tecnologías de la Información">TI</abbr> de una entidad pública tipo SUNAT (Superintendencia Nacional de Aduanas y de Administración Tributaria) evalúa 3 proyectos (instancias) del proceso <b><abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr></b>. Logro (%) de cada <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> por instancia:</p>
+<div class="tabla"><table>
+<thead><tr><th>PA</th><th>Proy. A (SIRE)</th><th>Proy. B (Clave SOL)</th><th>Proy. C (Factura electrónica)</th></tr></thead>
+<tbody>
+<tr><td>PA 1.1</td><td>95</td><td>90</td><td>88</td></tr>
+<tr><td>PA 2.1</td><td>90</td><td>60</td><td>40</td></tr>
+<tr><td>PA 2.2</td><td>88</td><td>70</td><td>55</td></tr>
+</tbody></table></div>
+<p>El pliego de un contrato con un operador exige el <b>perfil objetivo</b>: SCM CL2, <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> CL2, Planificación (<abbr title="Project Planning – Planificación del Proyecto">PP</abbr>) CL2 y Requisitos (<abbr title="Engenharia de Requisitos – Ingeniería de Requisitos (MPS 2021)">REQ</abbr>) CL2. Perfil actual de los otros procesos: PP = CL2, QA = CL1, REQ = CL0.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Califique cada PA a nivel <abbr title="Organizational Unit – Unidad organizacional">OU</abbr> promediando instancias y determine el <abbr title="Capability Level – Nivel de capacidad">CL</abbr> de SCM.</li>
+<li>Repita con el criterio "mínimo" y con la "mediana". ¿Qué oculta el promedio?</li>
+<li>Calcule la brecha frente al perfil objetivo y priorice.</li>
+<li>¿Puede afirmarse que "la entidad es nivel 2"? Proponga dos alternativas y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> PA 1.1 = 273/3 = 91 → <b>F</b>; PA 2.1 = 190/3 = 63,3 → <b>L</b> (L−); PA 2.2 = 213/3 = 71 → <b>L</b> (L+) ⇒ <b>SCM CL2</b>. <b>2.</b> Mínimo: PA 1.1 = 88 (F), PA 2.1 = 40 (P), PA 2.2 = 55 (L) → <b>CL1</b>. Mediana: 90 (F), 60 (L), 70 (L) → CL2. El promedio oculta que el Proy. C tiene PA 2.1 en P: es un CL2 <b>frágil</b>. <b>3.</b> Brechas (objetivo − actual): SCM 0 (frágil), PP 0, QA −1, REQ −2. Prioridad: REQ (mayor brecha y origen de defectos aguas abajo) → QA → vigilancia de SCM en el Proy. C. <b>4.</b> No en sentido <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr>: 15504/330xx producen <b>perfiles por proceso</b>; un <abbr title="Maturity Level – Nivel de madurez (CMMI)">ML</abbr> organizacional exige un <abbr title="Organizational Maturity Model – Modelo de madurez organizacional">OMM</abbr> (<abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 33004) o CMMI escalonado.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>SCM no gestionado en Factura electrónica</td><td>Proyecto heredado de un proveedor; sin plan <abbr title="Software Configuration Management Plan – Plan de gestión de la configuración del software">SCMP</abbr> (Software Configuration Management Plan)</td><td>PA 2.1 = 40 % en C</td><td>Capacidad (PA 2.1)</td></tr>
+<tr><td>REQ en CL0</td><td>Requisitos normativos (resoluciones de superintendencia) llegan por oficio, sin proceso de ingeniería de requisitos</td><td>Perfil actual REQ = 0</td><td>Adecuación funcional</td></tr>
+<tr><td>QA en CL1</td><td>Auditorías QA solo reactivas, sin plan</td><td>QA = 1</td><td>Conformidad</td></tr>
+<tr><td>Riesgo de evaluación engañosa</td><td>Método de agregación por media no declarado</td><td>Media vs mínimo dan CL distintos</td><td>Confiabilidad del resultado</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Cerrar brechas por riesgo (REQ → QA → SCM-C)</h4><p>Proceso de requisitos con trazabilidad norma→requisito→prueba; plan de QA con auditorías programadas; SCMP en el Proy. C. Cumple el pliego en ~9 meses.</p></div>
+<div class="alt"><h4>Alternativa B · Estandarizar SCM a nivel OU (apuntar a CL3)</h4><p>Definir un proceso SCM estándar (PA 3.1) y desplegarlo en A, B y C (PA 3.2). Elimina la dispersión de raíz, pero no resuelve REQ: debe combinarse con A.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC 33020 cl. 5.4 (agregación de instancias, métodos R1–R3); ISO/IEC 33004 (OMM) y 15504-9 (perfiles objetivo); ISO/IEC 33014 (guía de mejora de procesos) para priorizar brechas.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Brecha total de perfil</td><td>Σ max(0, CL objetivo − CL actual)</td><td>0 en 12 meses</td></tr>
+<tr><td>Dispersión de PA entre instancias</td><td>máx(logro) − mín(logro) por PA</td><td>≤ 20 puntos</td></tr>
+<tr><td>Instancias en CL objetivo</td><td>instancias con CL ≥ objetivo / instancias × 100</td><td>100 %</td></tr>
+<tr><td>Defectos por requisito mal definido</td><td>defectos con causa "requisito" / defectos totales × 100</td><td>≤ 15 %</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) reportar solo el promedio; (2) confundir perfil de capacidad con nivel de madurez; (3) priorizar el proceso "más fácil" en vez del de mayor brecha o riesgo. El orden A o B es discutible: lo que se evalúa es que la priorización esté justificada por brecha, riesgo y valor de negocio.</div>
+</details>
+</section>
+<section id="caso-6" class="caso">
+<h2>Caso 6 · AndesSoft y la licitación del MEF: ¿qué ML otorga el SCAMPI A?</h2>
+<p class="origen">Origen: Web: <a href="https://www.estudegratis.com.br/questoes-de-concurso/materia/ciencia-da-computacao/assunto/cmmi-e-mps-br?pag=42">banco de preguntas CMMI/MPS.BR (CESPE/FCC)</a> | Datos creados para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><i>AndesSoft SAC</i> (120 personas, Lima) postula a una licitación del MEF (Ministerio de Economía y Finanzas) vía <abbr title="Sistema Electrónico de Contrataciones del Estado">SEACE</abbr> (Sistema Electrónico de Contrataciones del Estado) cuyas bases exigen <b><abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> ML3 vigente</b>. Resultado del <abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr> A v1.3 (Lead Appraiser certificado, equipo de 5, <abbr title="Organizational Unit – Unidad organizacional">OU</abbr> = "Unidad de Desarrollo Lima", 4 proyectos muestreados):</p>
+<ul>
+<li><b><abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> de ML2:</b> <abbr title="Requirements Management – Gestión de Requisitos">REQM</abbr>, <abbr title="Project Planning – Planificación del Proyecto">PP</abbr>, <abbr title="Project Monitoring and Control – Monitoreo y Control del Proyecto">PMC</abbr>, <abbr title="Measurement and Analysis – Medición y Análisis">MA</abbr>, <abbr title="Process and Product Quality Assurance – Aseguramiento de la Calidad del Proceso y del Producto">PPQA</abbr>, <abbr title="Configuration Management – Gestión de la Configuración">CM</abbr> con todas sus <abbr title="Specific Goal – Meta específica">SG</abbr> y la GG2 satisfechas; <abbr title="Supplier Agreement Management – Gestión de Acuerdos con Proveedores">SAM</abbr> declarada <b>no aplicable</b> (no subcontratan).</li>
+<li><b>PA de ML3:</b> <abbr title="Requirements Development – Desarrollo de Requisitos">RD</abbr>, TS, PI, <abbr title="Verification – Verificación">VER</abbr>, <abbr title="Validation – Validación">VAL</abbr>, <abbr title="Organizational Process Focus – Enfoque en el Proceso Organizacional">OPF</abbr>, <abbr title="Organizational Process Definition – Definición del Proceso Organizacional">OPD</abbr>, <abbr title="Integrated Project Management – Gestión Integrada del Proyecto">IPM</abbr>, <abbr title="Risk Management – Gestión de Riesgos">RSKM</abbr>, <abbr title="Decision Analysis and Resolution – Análisis y Resolución de Decisiones">DAR</abbr> con SG y GG3 satisfechas; <b><abbr title="Organizational Training – Formación Organizacional">OT</abbr></b> con SG1 satisfecha y <b>SG2 (Provide Training) no satisfecha</b>.</li>
+<li>Hallazgo adicional: <b>MA y PPQA</b> satisfacen GG2 pero <b>no GG3</b>: cada proyecto mide y audita "a su manera", no con el proceso definido de la organización.</li>
+<li>El SCAMPI A fue en marzo de 2024; la licitación cierra en abril de 2027.</li>
+</ul>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Determine el <abbr title="Maturity Level – Nivel de madurez (CMMI)">ML</abbr> resultante y justifique por niveles.</li>
+<li>¿Es válido excluir SAM? ¿Cuándo dejaría de serlo?</li>
+<li>Ordene las acciones para llegar a ML3 y elija el método de valoración adecuado.</li>
+<li>¿Podrá AndesSoft presentar el resultado en abril de 2027? Proponga dos alternativas y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> ML2: las 7 PA de ML2 satisfechas (SAM n/a) con GG2 ✔ → <b>ML2</b>. ML3 exige todas las PA de ML2 <b>y</b> ML3 satisfechas <b>con GG3 en todas</b> (también en las de ML2): falla OT SG2 y GG3 de MA y PPQA → ✘. <b>Resultado: ML2.</b> <b>2.</b> Sí, si la OU no tiene acuerdos con proveedores en el alcance y el Lead Appraiser lo acepta y lo registra. Deja de serlo si, por ejemplo, contratan un <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> externo o un proveedor de desarrollo móvil. <b>3.</b> (a) Institucionalizar MA y PPQA como procesos definidos: GP3.1 (proceso definido desde la <abbr title="Organization&#x27;s Process Asset Library – Biblioteca de activos de proceso de la organización">OPAL</abbr> – Organization's Process Asset Library) y GP3.2 (recolectar experiencias); (b) OT SG2: ejecutar el plan de formación, registros y evaluación de efectividad; (c) SCAMPI B para verificar despliegue; (d) nuevo SCAMPI A. <b>4.</b> No con ML3: el rating obtenido es ML2. Además, un SCAMPI A de marzo de 2024 vence en <b>marzo de 2027</b> (vigencia 3 años): aun el ML2 estaría vencido en abril de 2027. Hoy la valoración debe hacerse con <b>V2.0/V3.0</b> (Benchmark), ya que v1.3 está retirada.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Meta afectada</th></tr></thead>
+<tbody>
+<tr><td>Formación no ejecutada</td><td>Plan de OT (Organizational Training) sin presupuesto ni registro</td><td>OT SG2 no satisfecha</td><td>OT SG2</td></tr>
+<tr><td>MA no estandarizada</td><td>No existe repositorio organizacional de medidas</td><td>Cada proyecto con KPI distintos</td><td>GG3 en MA</td></tr>
+<tr><td>PPQA no estandarizada</td><td>Checklists de auditoría propios por proyecto</td><td>No hay checklist en la OPAL</td><td>GG3 en PPQA</td></tr>
+<tr><td>Rating por vencer</td><td>No se planificó la renovación</td><td>SCAMPI A de 03/2024</td><td>Vigencia</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Benchmark V2.0/V3.0 vista DEV ML3 en el 1.er trimestre de 2027</h4><p>Corregir las 3 brechas en 6–8 meses, Evaluation Appraisal de verificación y Benchmark antes de abril de 2027. Requiere migrar evidencias de v1.3 (<abbr title="Generic Goal – Meta genérica">GG</abbr>/GP) a V2.0 (<abbr title="Governance – Gobernanza (Practice Area V2.0)">GOV</abbr>, <abbr title="Implementation Infrastructure – Infraestructura de Implementación (Practice Area V2.0)">II</abbr>, Practice Areas).</p></div>
+<div class="alt"><h4>Alternativa B · Consorcio con un socio ML3</h4><p>Postular en consorcio con una empresa que tenga Benchmark ML3 vigente en el <abbr title="Published Appraisal Results System – Sistema de Resultados de Valoraciones Publicados">PARS</abbr> (Published Appraisal Results System), verificando que su OU cubra a quienes harán el trabajo. Rápido, pero depende de un tercero y AndesSoft no mejora sus procesos.</p></div>
+<h4>Justificación normativa</h4>
+<p>CMMI-DEV v1.3: reglas de ML escalonado (ML3 = PA ML2+ML3 con GG3); <abbr title="Method Definition Document – Documento de Definición del Método">MDD</abbr> SCAMPI A v1.3 (aplicabilidad de SAM, vigencia 3 años, PARS); MDD V2.0 (Benchmark, Sustainment, Evaluation, <abbr title="Action Plan Reappraisal – Revaloración por plan de acción">APR</abbr> – Action Plan Reappraisal).</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Cumplimiento del plan de formación</td><td>horas de formación ejecutadas / horas planificadas × 100</td><td>≥ 95 %</td></tr>
+<tr><td>Proyectos con proceso estándar MA/PPQA</td><td>proyectos usando plantillas OPAL / proyectos activos × 100</td><td>100 %</td></tr>
+<tr><td>Prácticas FI/LI en evaluación previa</td><td>prácticas FI o LI / prácticas evaluadas × 100</td><td>100 % (sin PI/NI)</td></tr>
+<tr><td>Días de vigencia restante</td><td>fecha de expiración − fecha de cierre de licitación</td><td>&gt; 0</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) creer que GG3 solo se exige en PA de ML3; (2) afirmar que "SAM no aplica → no hay ML2"; (3) olvidar la vigencia de 3 años; (4) decir "ML2,5": no hay niveles intermedios. Las alternativas A y B son ambas válidas; la diferencia está en si la empresa busca mejorar o solo calificar.</div>
+</details>
+</section>
+
+<section id="caso-7" class="caso">
+<h2>Caso 7 · Equivalent staging: de un perfil de capacidad continuo a un ML</h2>
+<p class="origen">Origen: Web: <a href="https://www.estudegratis.com.br/questoes-de-concurso/materia/ciencia-da-computacao/assunto/cmmi-e-mps-br?pag=27">banco de preguntas CMMI (escala 0–5 vs 1–5)</a> | Datos creados para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Una consultora de Arequipa que trabaja para Interbank fue evaluada en <b>representación continua</b> (<abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> v1.3, CL0–CL3). Perfil obtenido (<i>achievement profile</i>):</p>
+<div class="tabla"><table>
+<thead><tr><th>Grupo</th><th>PA y CL</th></tr></thead>
+<tbody>
+<tr><td><abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> de ML2</td><td><abbr title="Requirements Management – Gestión de Requisitos">REQM</abbr> 3 · <abbr title="Project Planning – Planificación del Proyecto">PP</abbr> 3 · <abbr title="Project Monitoring and Control – Monitoreo y Control del Proyecto">PMC</abbr> 3 · <abbr title="Supplier Agreement Management – Gestión de Acuerdos con Proveedores">SAM</abbr> 3 · <abbr title="Measurement and Analysis – Medición y Análisis">MA</abbr> 3 · <abbr title="Process and Product Quality Assurance – Aseguramiento de la Calidad del Proceso y del Producto">PPQA</abbr> 3 · <b><abbr title="Configuration Management – Gestión de la Configuración">CM</abbr> 2</b></td></tr>
+<tr><td>PA de ML3</td><td><abbr title="Requirements Development – Desarrollo de Requisitos">RD</abbr> 3 · TS 3 · PI 3 · <abbr title="Verification – Verificación">VER</abbr> 3 · <abbr title="Validation – Validación">VAL</abbr> 3 · <abbr title="Organizational Process Focus – Enfoque en el Proceso Organizacional">OPF</abbr> 3 · <abbr title="Organizational Process Definition – Definición del Proceso Organizacional">OPD</abbr> 3 · <abbr title="Organizational Training – Formación Organizacional">OT</abbr> 3 · <abbr title="Integrated Project Management – Gestión Integrada del Proyecto">IPM</abbr> 3 · <abbr title="Risk Management – Gestión de Riesgos">RSKM</abbr> 3 · <abbr title="Decision Analysis and Resolution – Análisis y Resolución de Decisiones">DAR</abbr> 3</td></tr>
+<tr><td>PA de ML4</td><td><abbr title="Organizational Process Performance – Rendimiento del Proceso Organizacional">OPP</abbr> 3 · <abbr title="Quantitative Project Management – Gestión Cuantitativa del Proyecto">QPM</abbr> 3</td></tr>
+<tr><td>PA de ML5</td><td><b><abbr title="Organizational Performance Management – Gestión del Rendimiento Organizacional">OPM</abbr> 1</b> · <abbr title="Causal Analysis and Resolution – Análisis Causal y Resolución">CAR</abbr> 3</td></tr>
+</tbody></table></div>
+<p>El cliente pide "ML4 como mínimo" para un servicio de banca móvil.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Enuncie las reglas de equivalent staging para ML2–ML5.</li>
+<li>Determine el <abbr title="Maturity Level – Nivel de madurez (CMMI)">ML</abbr> equivalente actual.</li>
+<li>Determine el ML si CM sube a CL3, y qué falta para ML5.</li>
+<li>Explique por qué no existe ML0 en v1.3 y por qué no existe CL4 en la continua de v1.3. Proponga dos alternativas y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> Perfil 2: PA de ML2 en CL2. Perfil 3: PA de ML2 y ML3 en CL3. Perfil 4: perfil 3 + OPP y QPM en CL3. Perfil 5: perfil 4 + OPM y CAR en CL3. <b>2.</b> Perfil 2 ✔ (CM = 2 alcanza). Perfil 3 ✘ (CM = 2 &lt; 3) → <b>ML2</b>. ¡Un solo PA baja dos niveles posibles! <b>3.</b> Con CM = 3: perfil 3 ✔, perfil 4 ✔ (OPP, QPM = 3) → <b>ML4</b>; perfil 5 ✘ por OPM = 1. Falta llevar OPM a CL3 (seleccionar y desplegar mejoras incrementales e innovadoras con base en análisis cuantitativo, institucionalizado con GG2 y GG3). <b>4.</b> La escalonada va de ML1 (Initial, sin requisitos) a ML5; la continua de CL0 (Incomplete) a CL3 (Defined). En v1.1/v1.2 la continua tenía CL4–CL5, pero v1.3 los eliminó (y las GG4/GG5): lo "cuantitativo" se alcanza con las PA de alta madurez (OPP, QPM, OPM, CAR), no con niveles de capacidad. En V2.0+ sí hay ML0–ML5 y CL0–CL5.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Efecto</th></tr></thead>
+<tbody>
+<tr><td>CM no definido organizacionalmente</td><td>Cada proyecto usa su propio flujo Git (GitFlow, trunk-based) sin estándar en la <abbr title="Organization&#x27;s Process Asset Library – Biblioteca de activos de proceso de la organización">OPAL</abbr></td><td>CM = CL2 (falta GG3)</td><td>Bloquea ML3 y ML4</td></tr>
+<tr><td>OPM solo "realizado"</td><td>Las mejoras se implantan por iniciativa individual, sin análisis de beneficio ni pilotos</td><td>OPM = CL1</td><td>Bloquea ML5</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Corregir CM y pedir Benchmark ML4</h4><p>Estandarizar el flujo de ramas, la política de <i>baselines</i> y el <abbr title="Change Control Board – Comité de Control de Cambios">CCB</abbr> en la OPAL; desplegarlo en todos los proyectos (GP3.1, GP3.2). Costo bajo, beneficio máximo: dos niveles de golpe.</p></div>
+<div class="alt"><h4>Alternativa B · Ir directo a ML5</h4><p>Además de CM, institucionalizar OPM (pilotos de mejora con hipótesis estadística, p.ej. test A/B de pruebas automatizadas). Solo se justifica si hay un objetivo de negocio que lo pague; el cliente pide ML4.</p></div>
+<h4>Justificación normativa</h4>
+<p>CMMI-DEV v1.3, cap. "Equivalent Staging" (target profiles 2–5); componentes requeridos GG2/GG3; OPM sustituye a <abbr title="Organizational Innovation and Deployment – Innovación y Despliegue Organizacional (v1.2)">OID</abbr> en v1.3.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>% PA en CL3</td><td>PA con CL3 / 22 × 100</td><td>≥ 90,9 % (20/22) para ML4; 100 % para ML5</td></tr>
+<tr><td>Builds desde rama estándar</td><td>builds desde el flujo estándar / builds totales × 100</td><td>100 %</td></tr>
+<tr><td>Mejoras piloteadas con evidencia</td><td>mejoras con piloto y análisis estadístico / mejoras desplegadas × 100</td><td>≥ 80 % (si va a ML5)</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) calcular el ML con el promedio de <abbr title="Capability Level – Nivel de capacidad">CL</abbr> ("casi todo está en 3 → ML3"); (2) mezclar escalas (ML0 o CL5 en v1.3); (3) olvidar que las PA de ML2 deben estar en CL3 para el perfil 3. Las alternativas difieren en ambición, no en corrección.</div>
+</details>
+</section>
+<section id="caso-8" class="caso">
+<h2>Caso 8 · Agregación FI/LI/PI/NI/NY a nivel OU en un SCAMPI A</h2>
+<p class="origen">Origen: Web: <a href="https://www.cin.ufpe.br/~processos/TAES3/slides-2012.2/Standard%20CMMI%20Appraisal%20Method%20for%20Process%20Improvement%20A%20v1.3.pdf">MDD SCAMPI A v1.3 (SEI)</a> | Datos creados para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>En el <abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr> A de una fábrica de <abbr title="Software – Software / soporte lógico">SW</abbr> que atiende al <abbr title="Banco de Crédito del Perú">BCP</abbr> (Banco de Crédito del Perú), el equipo caracterizó por instancia (proyecto) tres prácticas de la muestra de 4 proyectos:</p>
+<div class="tabla"><table>
+<thead><tr><th>Práctica</th><th>P1 (banca móvil)</th><th>P2 (core de créditos)</th><th>P3 (nuevo portal, fase de requisitos)</th><th>P4 (CRM)</th></tr></thead>
+<tbody>
+<tr><td><abbr title="Verification – Verificación">VER</abbr> SP2.2 Conduct Peer Reviews</td><td>FI</td><td>LI</td><td>NY</td><td>FI</td></tr>
+<tr><td><abbr title="Process and Product Quality Assurance – Aseguramiento de la Calidad del Proceso y del Producto">PPQA</abbr> SP1.1 Objectively Evaluate Processes</td><td>FI</td><td>PI</td><td>FI</td><td>NI</td></tr>
+<tr><td><abbr title="Validation – Validación">VAL</abbr> SP2.1 Perform Validation</td><td>FI</td><td>FI</td><td>NY</td><td>LI</td></tr>
+</tbody></table></div>
+<p>Las demás prácticas de ML2 y ML3 están FI en todas las instancias, salvo lo indicado. La empresa aspira a ML3.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Explique qué significa cada código y por qué P3 tiene NY.</li>
+<li>Agregue cada práctica a nivel <abbr title="Organizational Unit – Unidad organizacional">OU</abbr> y diga qué meta se ve afectada.</li>
+<li>Determine el <abbr title="Maturity Level – Nivel de madurez (CMMI)">ML</abbr> resultante.</li>
+<li>Proponga dos alternativas para el plan de acción y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> FI = Fully Implemented (evidencia suficiente, sin debilidades); LI = Largely Implemented (con debilidades menores); PI = Partially Implemented (debilidades sustanciales); NI = Not Implemented; NY = Not Yet (el proyecto aún no llega a la fase en que se ejecuta la práctica: P3 no tiene productos de trabajo revisables ni nada que validar). <b>2.</b> VER SP2.2: todas FI/LI/NY con al menos una LI → <b>LI</b> (VER SG2 puede satisfacerse si la debilidad no es significativa). VAL SP2.1: FI, FI, NY, LI → <b>LI</b>. PPQA SP1.1: hay PI y NI → juicio del equipo; con 2 de 4 proyectos sin evaluación objetiva de procesos lo razonable es <b>PI</b> (o NI) → <b>PPQA SG1 no satisfecha</b>. <b>3.</b> PPQA es <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> de ML2: si no se satisface, no hay ML2 y, por tanto, tampoco ML3 → <b>ML1</b>, aunque el 99 % de las demás prácticas sea FI.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Meta afectada</th></tr></thead>
+<tbody>
+<tr><td>Sin auditoría de procesos en P2 y P4</td><td>El rol <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> se asigna "si sobra tiempo"; no hay calendario de auditorías en el <abbr title="Software Quality Assurance Plan – Plan de Aseguramiento de la Calidad del Software">SQAP</abbr></td><td>PI y NI en PPQA SP1.1</td><td>PPQA SG1 → ML2</td></tr>
+<tr><td>Revisiones por pares incompletas en P2</td><td>Revisiones solo de código, no de diseño</td><td>LI en VER SP2.2</td><td>VER SG2 (riesgo menor)</td></tr>
+<tr><td>Validación parcial en P4</td><td><abbr title="User Acceptance Testing – Pruebas de Aceptación del Usuario">UAT</abbr> (User Acceptance Testing) con usuarios clave del área, no con agencias</td><td>LI en VAL SP2.1</td><td>VAL SG2 (riesgo menor)</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · APR (Action Plan Reappraisal) / reevaluación focalizada</h4><p>Si la debilidad es aislada y el Lead Appraiser lo permite, documentar un plan de acción (auditorías QA en P2 y P4 durante 3 meses) y reevaluar solo PPQA. Rápido y barato.</p></div>
+<div class="alt"><h4>Alternativa B · QA independiente como servicio organizacional</h4><p>Crear un pool de auditores QA (independencia organizacional del SQAP, <abbr title="Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos">IEEE</abbr> 730) con calendario por proyecto y nueva SCAMPI A completa en 9 meses. Más caro, pero ataca la causa raíz (QA dependiente del proyecto).</p></div>
+<h4>Justificación normativa</h4>
+<p><abbr title="Method Definition Document – Documento de Definición del Método">MDD</abbr> SCAMPI A v1.3: caracterización de prácticas por instancia y agregación a nivel OU; reglas de satisfacción de metas; <abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> v1.3: PPQA es PA de soporte de ML2; IEEE 730-2014 (independencia del aseguramiento de calidad).</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Cobertura de auditorías de proceso</td><td>proyectos auditados en el mes / proyectos activos × 100</td><td>100 %</td></tr>
+<tr><td>No conformidades cerradas en plazo</td><td><abbr title="Nonconformity – No conformidad">NC</abbr> cerradas a tiempo / NC detectadas × 100</td><td>≥ 90 %</td></tr>
+<tr><td>Cobertura de revisión por pares</td><td><abbr title="Work Product – Producto de Trabajo">WP</abbr> revisados por pares / WP planificados para revisión × 100</td><td>≥ 95 %</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) tratar NY como NI (NY no penaliza); (2) promediar códigos ("dos FI y una PI = LI"): la agregación es por juicio del equipo y la debilidad significativa domina; (3) olvidar que una PA de ML2 bloquea todos los niveles superiores. A y B son válidas según el tiempo disponible y la profundidad del problema.</div>
+</details>
+</section>
+
+<section id="caso-9" class="caso">
+<h2>Caso 9 · Inca Digital: elegir la clase de valoración correcta (SCAMPI v1.3 vs MDD V2.0)</h2>
+<p class="origen">Origen: Web: <a href="https://spyro-soft.com/blog/what-is-cmmi-2-0-a-guide-to-cmmi-requirements-maturity-levels-and-appraisal-methods">Spyrosoft, métodos de valoración CMMI 2.0</a> y <a href="https://en.wikipedia.org/wiki/Standard_CMMI_Appraisal_Method_for_Process_Improvement">SCAMPI (Wikipedia)</a> | Caso creado para el repaso</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p><i>Inca Digital</i> (60 personas, Lima) tiene tres necesidades en 2026, con un presupuesto total de USD 45 000:</p>
+<ul>
+<li><b>(a) Marzo:</b> diagnóstico rápido y barato con un consultor para ver brechas frente a ML2; basta con revisar documentos.</li>
+<li><b>(b) Agosto:</b> verificar si las acciones del plan de mejora ya funcionan en 2 proyectos piloto, con entrevistas y documentos, sin publicar nada.</li>
+<li><b>(c) Noviembre:</b> obtener una calificación oficial para una licitación de Interbank que pide "ML2 o superior, publicado".</li>
+<li><b>(d) 2028:</b> mantener el nivel sin repetir una valoración completa.</li>
+</ul>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Asigne la clase <abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr> v1.3 y el método <abbr title="Method Definition Document – Documento de Definición del Método">MDD</abbr> V2.0/V3.0 a cada necesidad.</li>
+<li>Indique los requisitos mínimos de (c): equipo, evidencia, muestreo, publicación, vigencia.</li>
+<li>¿Qué ocurre si en (c) una sola Practice Area no alcanza nivel 2?</li>
+<li>Proponga dos estrategias de calendario y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<div class="tabla"><table>
+<thead><tr><th>Necesidad</th><th>SCAMPI v1.3</th><th>MDD V2.0/V3.0</th><th>¿Rating?</th><th>Por qué</th></tr></thead>
+<tbody>
+<tr><td>(a)</td><td>SCAMPI C</td><td>Evaluation Appraisal</td><td>No</td><td>Bajo rigor, puede usar un solo tipo de evidencia; ideal para <i>gap analysis</i></td></tr>
+<tr><td>(b)</td><td>SCAMPI B</td><td>Evaluation Appraisal</td><td>No</td><td>Más rigor: artefactos + afirmaciones; verifica despliegue</td></tr>
+<tr><td>(c)</td><td>SCAMPI A</td><td>Benchmark Appraisal</td><td>Sí</td><td>Única que otorga <abbr title="Maturity Level – Nivel de madurez (CMMI)">ML</abbr>/CL oficial y se publica en <abbr title="Published Appraisal Results System – Sistema de Resultados de Valoraciones Publicados">PARS</abbr></td></tr>
+<tr><td>(d)</td><td>(nueva SCAMPI A)</td><td>Sustainment Appraisal</td><td>Mantiene</td><td>Muestra reducida de Practice Areas; extiende la validez sin Benchmark completo</td></tr>
+</tbody></table></div>
+<p><b>2.</b> Lead Appraiser certificado por el <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> Institute (<abbr title="Information Systems Audit and Control Association – Asociación de Auditoría y Control de Sistemas de Información">ISACA</abbr>); equipo mínimo de 4 personas incluido el líder, formados y sin conflicto de interés; evidencia objetiva corroborada (artefactos + afirmaciones); muestreo de proyectos representativo (en V2.0, aleatorio, generado por el sistema del CMMI Institute); plan de valoración, hallazgos, <abbr title="Appraisal Disclosure Statement – Declaración de divulgación de la valoración">ADS</abbr> (Appraisal Disclosure Statement), publicación en PARS; vigencia <b>3 años</b>. <b>3.</b> No hay ML2 "parcial": la valoración no otorga el nivel. Si la debilidad es puntual, puede usarse un <b><abbr title="Action Plan Reappraisal – Revaloración por plan de acción">APR</abbr></b> en un plazo corto para reevaluar solo lo fallado.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Riesgo</th><th>Causa raíz</th><th>Evidencia</th><th>Impacto</th></tr></thead>
+<tbody>
+<tr><td>Gastar el presupuesto en (a) y (b)</td><td>Confundir rigor con utilidad</td><td>USD 45 000 totales</td><td>No alcanza para el Benchmark</td></tr>
+<tr><td>Muestra sesgada en (c)</td><td>La empresa quiere mostrar solo los "mejores" proyectos</td><td>V2.0 usa muestreo aleatorio</td><td>Caída del nivel</td></tr>
+<tr><td>Calendario apretado</td><td>Solo 3 meses entre (b) y (c)</td><td>Agosto → noviembre</td><td>Debilidades sin cerrar</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Ruta completa (C → B → A)</h4><p>Evaluation barata en marzo (consultor interno + 1 externo), Evaluation formal en agosto y Benchmark en noviembre; reservar ~60 % del presupuesto para el Benchmark.</p></div>
+<div class="alt"><h4>Alternativa B · Saltar (b) y usar ese dinero en mejora</h4><p>Tras el diagnóstico de marzo, invertir en mejora y hacer una autoevaluación interna con checklist V2.0; ir al Benchmark en noviembre. Más riesgosa (sin verificación externa intermedia), pero más barata.</p></div>
+<h4>Justificación normativa</h4>
+<p>ARC (Appraisal Requirements for CMMI) v1.3 y MDD SCAMPI A/B/C v1.3; MDD CMMI V2.0/V3.0 (Benchmark, Sustainment, Evaluation, APR).</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Brechas cerradas entre (a) y (c)</td><td>brechas cerradas / brechas detectadas en (a) × 100</td><td>100 % antes del Benchmark</td></tr>
+<tr><td>Costo de valoración por rating</td><td>costo total de valoraciones / ratings obtenidos</td><td>≤ USD 45 000</td></tr>
+<tr><td>Prácticas nivel 2 implementadas</td><td>prácticas nivel 2 implementadas / total del ML2 × 100</td><td>100 %</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) decir que SCAMPI B "da nivel provisional"; (2) creer que el rating es para toda la empresa (es para la <abbr title="Organizational Unit – Unidad organizacional">OU</abbr> definida); (3) confundir Sustainment con Evaluation. Ambas rutas son legítimas: la elección depende del riesgo que la empresa tolera.</div>
+</details>
+</section>
+<section id="caso-10" class="caso">
+<h2>Caso 10 · Rímac Labs en CMMI V2.0: Practice Groups, CL por Practice Area y el papel de GOV/II</h2>
+<p class="origen">Origen: Web: <a href="https://consulting.itgonline.com/cmmi-consulting/cmmi-v2/">ITG, CMMI V2.0 vs v1.3</a> y <a href="https://processgroup.com/improving-capability-and-performance-with-cmmi-v2-0-what-has-changed/">Process Group, qué cambió en V2.0</a> | Datos creados para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><i>Rímac Labs</i>, área de innovación de una aseguradora, encarga una Evaluation Appraisal con la vista DEV de <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> V2.0. Resultados por Practice Area (prácticas de cada Practice Group/nivel):</p>
+<div class="tabla"><table>
+<thead><tr><th>Practice Area</th><th>Nivel 1</th><th>Nivel 2</th><th>Nivel 3</th></tr></thead>
+<tbody>
+<tr><td>PLAN (Planning)</td><td>Completo</td><td>Completo</td><td>Parcial</td></tr>
+<tr><td><abbr title="Estimating – Estimación (Practice Area V2.0)">EST</abbr> (Estimating)</td><td>Completo</td><td>Completo</td><td>—</td></tr>
+<tr><td>MC (Monitor and Control)</td><td>Completo</td><td>Falta 1 práctica (acciones correctivas)</td><td>—</td></tr>
+<tr><td><abbr title="Requirements Development and Management – Desarrollo y Gestión de Requisitos">RDM</abbr>, <abbr title="Configuration Management – Gestión de la Configuración">CM</abbr>, <abbr title="Process Quality Assurance – Aseguramiento de la Calidad del Proceso (CMMI)">PQA</abbr>, <abbr title="Pull Request – Solicitud de integración de cambios (gatillo de code review)">PR</abbr>, <abbr title="Supplier Agreement Management – Gestión de Acuerdos con Proveedores">SAM</abbr>, <abbr title="Managing Performance and Measurement – Gestión del Rendimiento y la Medición">MPM</abbr>, PAD</td><td>Completo</td><td>Completo</td><td>—</td></tr>
+<tr><td><abbr title="Governance – Gobernanza (Practice Area V2.0)">GOV</abbr> (Governance)</td><td>Completo</td><td>Completo</td><td>—</td></tr>
+<tr><td><abbr title="Implementation Infrastructure – Infraestructura de Implementación (Practice Area V2.0)">II</abbr> (Implementation Infrastructure)</td><td>Completo</td><td>No implementado (no hay recursos ni formación asignados a los procesos)</td><td>—</td></tr>
+</tbody></table></div>
+<p>El gerente afirma: "En v1.3 ya teníamos GG2 en todo; II es burocracia nueva que podemos ignorar".</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Determine el <abbr title="Capability Level – Nivel de capacidad">CL</abbr> de PLAN, MC e II.</li>
+<li>¿Alcanzaría ML2 en un Benchmark? Justifique.</li>
+<li>Explique la equivalencia <abbr title="Generic Goal – Meta genérica">GG</abbr>/GP (v1.3) ↔ GOV/II (V2.0) y refute al gerente.</li>
+<li>Proponga dos alternativas y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> En V2.0 el CL de una Practice Area es el nivel más alto cuyo Practice Group <b>y todos los inferiores</b> están completos: PLAN = <b>CL2</b> (nivel 3 parcial), MC = <b>CL1</b>, II = <b>CL1</b>. <b>2.</b> <b>No.</b> ML2 exige nivel 2 completo en todas las Practice Areas predefinidas de ML2 de la vista, <b>incluidas GOV e II</b>. Fallan MC e II → ML1 (y esta Evaluation, además, no da rating). <b>3.</b> v1.3 institucionalizaba con GG2/GG3 y sus <abbr title="Generic Practice – Práctica genérica">GP</abbr> dentro de cada <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> (GP2.1 política, GP2.2 plan, GP2.3 recursos, GP2.5 formación, GP2.10 revisión con la dirección, GP3.1 proceso definido…). V2.0 trasladó eso a dos Practice Areas propias: <b>GOV</b> (la alta dirección patrocina, financia y supervisa los procesos ≈ GP2.1, GP2.10) e <b>II</b> (recursos, formación, uso efectivo y mantenimiento de los procesos ≈ GP2.2–GP2.8, GP3.1). Ignorar II es ignorar la institucionalización: el gerente se equivoca.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Practice Area</th></tr></thead>
+<tbody>
+<tr><td>Acciones correctivas sin seguimiento</td><td>El tablero solo muestra avance, no desviaciones ni acciones</td><td>MC nivel 2 incompleto</td><td>MC</td></tr>
+<tr><td>Procesos sin recursos ni formación</td><td>La dirección cree que "los procesos se sostienen solos"</td><td>II nivel 2 no implementado</td><td>II</td></tr>
+<tr><td>Modelo mental desactualizado</td><td>Migración de v1.3 a V2.0 sin capacitación</td><td>Declaración del gerente</td><td>GOV (patrocinio)</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Cerrar MC e II y pedir Benchmark ML2</h4><p>Asignar presupuesto y horas de formación por proceso (II 2), registro de acciones correctivas con dueño y fecha (MC 2). En 4–6 meses puede ir al Benchmark.</p></div>
+<div class="alt"><h4>Alternativa B · Usar el impulso de PLAN para ML3</h4><p>Completar además PLAN 3, PAD, <abbr title="Presidencia del Consejo de Ministros">PCM</abbr>, <abbr title="Organizational Training – Formación Organizacional">OT</abbr>, RSK, <abbr title="Decision Analysis and Resolution – Análisis y Resolución de Decisiones">DAR</abbr>, <abbr title="Verification and Validation – Verificación y Validación (Practice Area V2.0)">VV</abbr>, TS, PI en nivel 3 y GOV/II nivel 3. Mayor valor de negocio a 18 meses, pero retrasa la calificación.</p></div>
+<h4>Justificación normativa</h4>
+<p>CMMI V2.0 (CMMI Institute/ISACA, 2018): estructura Practice Area → Practice Groups (niveles 1–5); reglas de CL y <abbr title="Maturity Level – Nivel de madurez (CMMI)">ML</abbr>; GOV e II obligatorias en toda vista de madurez; <abbr title="Method Definition Document – Documento de Definición del Método">MDD</abbr> V2.0 (Evaluation sin rating).</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Procesos con recursos asignados</td><td>procesos con presupuesto y responsable / procesos del alcance × 100</td><td>100 %</td></tr>
+<tr><td>Personal formado en su proceso</td><td>personas formadas / personas que ejecutan el proceso × 100</td><td>≥ 90 %</td></tr>
+<tr><td>Desviaciones con acción correctiva</td><td>desviaciones &gt; umbral con acción registrada / desviaciones &gt; umbral × 100</td><td>100 %</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) buscar <abbr title="Specific Goal – Meta específica">SG</abbr>/SP/GG/GP en V2.0 (ya no existen; cada Practice Area tiene Intent, Value y prácticas); (2) olvidar GOV/II; (3) decir que V2.0 "no tiene representación por capacidad" (sí: CL0–CL5 y vistas de capacidad).</div>
+</details>
+</section>
+
+<section id="caso-11" class="caso">
+<h2>Caso 11 · RENIEC selecciona proveedor: perfil objetivo y determinación de capacidad (CD)</h2>
+<p class="origen">Origen: Web: <a href="https://webstore.ansi.org/preview-pages/ISO/preview_ISO+IEC+33020-2019.pdf">vista previa de ISO/IEC 33020:2019</a> y <a href="https://cmmiinstitute.com/pars">PARS del CMMI Institute</a> | Caso creado para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><abbr title="Registro Nacional de Identificación y Estado Civil">RENIEC</abbr> terceriza el desarrollo de un módulo biométrico crítico (cotejo de huellas para el DNIe – Documento Nacional de Identidad electrónico). Se presentan dos postores:</p>
+<div class="tabla"><table>
+<thead><tr><th>Proceso (PRM 12207:2017 vía 33061)</th><th>Postor X (evaluación ISO 330xx, clase 1)</th><th>Postor Y</th></tr></thead>
+<tbody>
+<tr><td>Definición de requisitos del <abbr title="Software – Software / soporte lógico">SW</abbr></td><td>CL3</td><td rowspan="6"><abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> ML3 (Benchmark V2.0, 2024) publicado en <abbr title="Published Appraisal Results System – Sistema de Resultados de Valoraciones Publicados">PARS</abbr>. <abbr title="Organizational Unit – Unidad organizacional">OU</abbr> valorada: "Unidad de Banca, Santiago de Chile". El equipo que trabajaría para RENIEC está en Lima.</td></tr>
+<tr><td>Verificación</td><td>CL2 (<abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> 3.2 = P)</td></tr>
+<tr><td>Validación</td><td>CL3</td></tr>
+<tr><td>Gestión de la configuración</td><td>CL3</td></tr>
+<tr><td>Aseguramiento de la calidad</td><td>CL3</td></tr>
+<tr><td>Gestión de riesgos</td><td>CL2</td></tr>
+</tbody></table></div>
+<p>RENIEC define el perfil objetivo: Requisitos, Verificación, <abbr title="Configuration Management – Gestión de la Configuración">CM</abbr> y <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> en <b>CL3</b>; el resto en <b>CL2</b>.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule la brecha del postor X y tradúzcala a riesgo de proceso.</li>
+<li>Evalúe la validez del rating del postor Y para este contrato.</li>
+<li>Recomiende y justifique; proponga dos alternativas contractuales y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> Postor X: única brecha en <b>Verificación</b> (CL2 vs CL3; PA 3.2 Process Deployment = P → el proceso estándar de verificación no se despliega en todos los proyectos). Riesgo de proceso (<abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 33015 / 15504-4): defectos no detectados antes de la integración en un módulo biométrico ⇒ falsos rechazos o falsas aceptaciones de identidad. Riesgos y validación cumplen (CL2 y CL3 ≥ objetivo). <b>2.</b> Postor Y: el ML3 es real y vigente, pero el <b>alcance (OU)</b> no incluye al equipo de Lima; el rating no es transferible. Además, ML3 en <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> no dice nada directo sobre el <abbr title="Capability Level – Nivel de capacidad">CL</abbr> de "Verificación" con <abbr title="Process Reference Model – Modelo de referencia de procesos">PRM</abbr> 12207, aunque <abbr title="Verification and Validation – Verificación y Validación (Practice Area V2.0)">VV</abbr> y <abbr title="Pull Request – Solicitud de integración de cambios (gatillo de code review)">PR</abbr> estén en el modelo.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>X: verificación no desplegada</td><td>Proceso estándar de inspecciones aplicado solo en proyectos grandes</td><td>PA 3.2 = P</td><td>Fiabilidad / exactitud funcional</td></tr>
+<tr><td>Y: alcance no coincide</td><td>Rating de otra OU y otro país</td><td>Ficha PARS</td><td>Confianza en la <abbr title="Capability Determination – Determinación de la capacidad">CD</abbr></td></tr>
+<tr><td>RENIEC: comparación de modelos distintos</td><td>Pliego que acepta "CMMI o <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr>" sin equivalencia definida</td><td>Postores con evidencias no comparables</td><td>Transparencia de la selección</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Adjudicar a X con cláusula de mejora</h4><p>Exigir plan de acción para Verificación (inspecciones obligatorias en todos los <i>sprints</i>, cobertura de pruebas ≥ 85 %) y reevaluación de ese proceso a los 6 meses; penalidad si PA 3.2 no llega a L.</p></div>
+<div class="alt"><h4>Alternativa B · Exigir a Y una valoración de la OU de Lima</h4><p>Pedir un Benchmark o Sustainment que incluya al equipo de Lima, o una evaluación ISO 330xx de los 6 procesos. Más lento, pero hace comparables las evidencias.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC 15504-4 / ISO/IEC 33015 (determinación de capacidad y riesgo de proceso); ISO/IEC 15504-9 / 33004 (perfiles objetivo); ISO/IEC 33002 (clases de evaluación); <abbr title="Method Definition Document – Documento de Definición del Método">MDD</abbr> CMMI V2.0 (alcance de la OU y PARS).</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Brecha de perfil del proveedor</td><td>Σ max(0, CL objetivo − CL evaluado)</td><td>0 a los 6 meses</td></tr>
+<tr><td>Eficacia de eliminación de defectos (<abbr title="Defect Removal Efficiency – Eficiencia de Remoción de Defectos">DRE</abbr>)</td><td>defectos antes de la entrega / (antes + después) × 100</td><td>≥ 95 %</td></tr>
+<tr><td>Tasa de falso rechazo biométrico (FRR)</td><td>rechazos de personas legítimas / intentos legítimos × 100</td><td>≤ 1 %</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) aceptar cualquier "certificado CMMI" sin revisar la OU y la fecha en PARS; (2) creer que ML3 equivale a "todos los procesos en CL3 ISO"; (3) usar la evaluación solo como <abbr title="Software Process Improvement – Mejora del Proceso de Software">SPI</abbr> cuando aquí el propósito es CD (selección de proveedor).</div>
+</details>
+</section>
+<section id="caso-12" class="caso">
+<h2>Caso 12 · Fintech de pagos móviles: elegir dominios de CMMI V3.0 para el Benchmark</h2>
+<p class="origen">Origen: Web: <a href="https://www.thecoresolution.com/cmmi-v3-update-explained">The Core Solution, CMMI V3.0</a> y <a href="https://consulting.itgonline.com/cmmi-consulting/cmmi-v3-and-the-transition-from-cmmi-v2/">ITG, transición a V3.0</a> | Caso creado para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><i>PagaYa</i>, fintech peruana de pagos P2P (Peer-to-Peer) tipo Yape/Plin supervisada por la SBS (Superintendencia de Banca, Seguros y AFP), tiene 180 personas, <b>100 % remotas</b>. Desarrolla su app, opera una mesa de ayuda 24/7, depende de una pasarela de pagos y de un proveedor de nube, y procesa datos personales (Ley 29733). Indicadores del último año: disponibilidad 99,2 % (<abbr title="Service Level Agreement – Acuerdo de Nivel de Servicio">SLA</abbr> – Service Level Agreement comprometido: 99,9 %), 14 incidentes de seguridad, 3,1 % de transacciones con datos inconsistentes. Presupuesto: alcanza para un Benchmark con <b>3 dominios</b> como máximo.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Enumere los 8 dominios de <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> V3.0 y señale cuáles aplican a PagaYa.</li>
+<li>Elija 3 dominios para el Benchmark priorizando por riesgo y justifique con los datos.</li>
+<li>Indique Practice Areas clave de cada dominio elegido.</li>
+<li>Proponga dos alternativas de alcance y <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> Data, Development (DEV), People (PPL), Safety (SAF), Security (<abbr title="Securities and Exchange Commission – Comisión de Bolsa y Valores de EE.UU.">SEC</abbr>), Services (SVC), Suppliers (SPM), Virtual (VRT). Aplican todos menos Safety (no hay riesgo de daño físico): DEV (app), SVC (mesa 24/7), SEC (incidentes), Data (inconsistencias), Suppliers (pasarela, nube), Virtual (100 % remoto), People (180 personas). Una valoración requiere al menos 1 dominio.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz probable</th><th>Evidencia</th><th>Dominio / Practice Area</th></tr></thead>
+<tbody>
+<tr><td>Incumplimiento del SLA</td><td>Sin gestión de capacidad ni continuidad</td><td>99,2 % vs 99,9 %</td><td>SVC: SDM, <abbr title="Incident Resolution and Prevention – Resolución y Prevención de Incidentes">IRP</abbr>, CONT</td></tr>
+<tr><td>Incidentes de seguridad</td><td>Amenazas y vulnerabilidades no gestionadas</td><td>14 incidentes/año</td><td>SEC: ESEC, MST</td></tr>
+<tr><td>Datos inconsistentes</td><td>Sin reglas de calidad de datos ni propietarios</td><td>3,1 % de transacciones</td><td>Data: DM, DQ</td></tr>
+<tr><td>Dependencia de terceros</td><td>Acuerdos sin métricas de servicio</td><td>Caídas de la pasarela</td><td>Suppliers: <abbr title="Supplier Agreement Management – Gestión de Acuerdos con Proveedores">SAM</abbr>, SSS</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · SEC + SVC + Data (riesgo regulatorio y operativo)</h4><p>Ataca los tres indicadores críticos (seguridad, SLA, datos) que vigila la SBS. DEV queda fuera del rating, pero sus prácticas igual se trabajan.</p></div>
+<div class="alt"><h4>Alternativa B · DEV + SEC + SVC (mercado)</h4><p>Si los clientes corporativos piden "ML3 en desarrollo", DEV es casi obligatorio; Data se aborda con <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 25012 (calidad de datos) fuera de CMMI.</p></div>
+<h4>Justificación normativa</h4>
+<p>CMMI V3.0 (CMMI Institute/ISACA, 6-abr-2023): 8 dominios, 31 Practice Areas, nueva Capability Area <i>Managing Data</i> (DM, DQ) y EVW (Enabling Virtual Work); <abbr title="Method Definition Document – Documento de Definición del Método">MDD</abbr> V3.0 (Benchmark con dominios seleccionados).</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Disponibilidad</td><td>(tiempo total − tiempo caído) / tiempo total × 100</td><td>≥ 99,9 %</td></tr>
+<tr><td><abbr title="Mean Time To Repair – Tiempo Medio de Reparación">MTTR</abbr> (Mean Time To Restore)</td><td>Σ tiempo de restauración / n.º de incidentes</td><td>≤ 30 min</td></tr>
+<tr><td>Incidentes de seguridad</td><td>n.º de incidentes confirmados por trimestre</td><td>≤ 1</td></tr>
+<tr><td>Transacciones con datos inconsistentes</td><td>transacciones inconsistentes / transacciones × 100</td><td>≤ 0,1 %</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) decir que V3.0 eliminó los niveles (mantiene ML0–ML5 y CL0–CL5); (2) creer que hay que valorar los 8 dominios; (3) confundir Safety (seguridad física/funcional) con Security (seguridad de la información). A y B son defendibles: depende de si manda el regulador o el mercado.</div>
+</details>
+</section>
+
+<section id="caso-13" class="caso">
+<h2>Caso 13 · Afirmaciones tipo concurso y reconocimiento del modelo por sus términos</h2>
+<p class="origen">Origen: Web: <a href="https://www.aprovaconcursos.com.br/questoes-de-concurso/questoes/assunto/cmmi-capability-maturity-model-integration/quantidade-por-pagina/15/pagina/6">Aprova Concursos, preguntas CMMI</a> y <a href="https://www.estudegratis.com.br/questoes-de-concurso/materia/ciencia-da-computacao/assunto/cmmi-e-mps-br?pag=42">Estude Grátis, CMMI y MPS.BR</a> (parafraseadas) | Adaptado para el repaso</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p><b>Parte I.</b> Un informe de auditoría de una consultora del Callao contiene estas frases: (i) "<abbr title="Key Process Area – Área clave de proceso (SW-CMM)">KPA</abbr> <i>Software Quality Assurance</i> satisfecha"; (ii) "Practice Area <i>Peer Reviews</i> en nivel 2"; (iii) "GG2 satisfecha en <abbr title="Risk Management – Gestión de Riesgos">RSKM</abbr>"; (iv) "<abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> 2.2 = L en el proceso de Gestión de la configuración".</p>
+<p><b>Parte <abbr title="Implementation Infrastructure – Infraestructura de Implementación (Practice Area V2.0)">II</abbr>.</b> Califique V/F: (a) Los <abbr title="Maturity Level – Nivel de madurez (CMMI)">ML</abbr> de <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> v1.3 van de 0 (Incompleto) a 5 (En optimización). (b) La representación escalonada permite a la <abbr title="Organizational Unit – Unidad organizacional">OU</abbr> elegir qué PA mejorar según el negocio. (c) Una PA de CMMI es un conjunto de prácticas que, ejecutadas juntas, satisfacen un conjunto de metas. (d) En 15504 un proceso con PA 1.1 = L puede tener CL2 si PA 2.1 y PA 2.2 son F. (e) Solo <abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr> A otorga calificación. (f) <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 33000 hizo inutilizables los <abbr title="Process Assessment Model – Modelo de evaluación de procesos">PAM</abbr> derivados de 15504-5. (g) ML3 exige GG3 solo en las PA de ML3. (h) El CL3 de <abbr title="Software Process Improvement and Capability dEtermination – Mejora y determinación de la capacidad del proceso de software (ISO/IEC 15504)">SPICE</abbr> se llama "Defined", igual que en CMMI.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Identifique el modelo y la versión de cada frase de la Parte I.</li>
+<li>Califique y justifique cada afirmación de la Parte II.</li>
+<li>Proponga dos estrategias de estudio/evaluación para evitar estas confusiones en un equipo de <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> y un <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr>.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>Parte I.</b> (i) "KPA" → <b><abbr title="Capability Maturity Model for Software – CMM para Software">SW-CMM</abbr></b> v1.1 (1993). (ii) Peer Reviews como Practice Area con niveles → <b>CMMI V2.0/V3.0</b> (en v1.3 era parte de <abbr title="Verification – Verificación">VER</abbr>). (iii) GG2 por PA → <b>CMMI v1.2/v1.3</b>. (iv) PA 2.2 con escala NPLF → <b>ISO/IEC 15504 / 33020</b> (Process Attribute <i>Work Product Management</i>).</p>
+<p><b>Parte II.</b> (a) <b>F</b>: ML1–ML5; el 0 es de <abbr title="Capability Level – Nivel de capacidad">CL</abbr> (Incomplete). (b) <b>F</b>: eso describe la continua. (c) <b>V</b>. (d) <b>F</b>: CL2 exige PA 1.1 = F. (e) <b>V</b> en v1.3 (en V2.0: Benchmark y Sustainment). (f) <b>F</b>: hay transición; modelos como Automotive SPICE siguen la lógica de 15504-5 y ahora se alinean a 330xx. (g) <b>F</b>: GG3 se exige en todas las PA de ML2 y ML3. (h) <b>F</b>: en SPICE el CL3 es <b>Established</b> (y el CL4 <b>Predictable</b>).</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Confusión</th><th>Causa raíz</th><th>Evidencia</th><th>Concepto afectado</th></tr></thead>
+<tbody>
+<tr><td>Sigla PA con 3 significados</td><td>Process Area (v1.x) / Practice Area (V2+) / Process Attribute (<abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr>)</td><td>Frases (ii), (iv)</td><td>Unidad de evaluación</td></tr>
+<tr><td>Mezcla de escalas</td><td>ML1–5 vs CL0–3 (v1.3) vs 0–5 (V2.0, ISO)</td><td>Afirmación (a)</td><td>Niveles</td></tr>
+<tr><td>Escalonada vs continua</td><td>Se memoriza sin entender quién elige el orden de mejora</td><td>Afirmación (b)</td><td>Representación</td></tr>
+<tr><td>Nombres de niveles</td><td>CMMI y SPICE usan nombres distintos para 3 y 4</td><td>Afirmación (h)</td><td>Terminología</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Glosario comparativo vivo</h4><p>Tabla CMMI v1.3 / V2.0 / ISO 330xx con siglas y nombres de niveles en la wiki del equipo, revisada por QA.</p></div>
+<div class="alt"><h4>Alternativa B · Simulacros de evaluación</h4><p>Ejercicios mensuales de calificación (NPLF y FI/LI/PI/NI) con evidencias reales del proyecto; aprender con casos, no con definiciones.</p></div>
+<h4>Justificación normativa</h4>
+<p>SW-CMM v1.1 (KPA); <abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> v1.3 (PA, <abbr title="Generic Goal – Meta genérica">GG</abbr>/GP, ML1–5, CL0–3); CMMI V2.0/V3.0 (Practice Areas, ML/CL0–5); ISO/IEC 15504-2 / 33020 (PA 1.1–5.2, NPLF, CL0–5 con nombres Incomplete, Performed, Managed, Established, Predictable, Optimizing).</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Concordancia entre evaluadores</td><td>calificaciones coincidentes / calificaciones comparadas × 100</td><td>≥ 85 %</td></tr>
+<tr><td>Aciertos en simulacro</td><td>respuestas correctas / preguntas × 100</td><td>≥ 90 %</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> responder V/F sin justificar (en el examen la justificación vale más que la letra); confundir Established con Defined; creer que "PA" siempre significa lo mismo.</div>
+</details>
+</section>
+
+<div class="pn"><a href="s5-practica.html">← S5 · NTP-ISO/IEC 12207:2016</a><a href="s7-practica.html">S7 · MoProSoft, MPS.BR y más →</a></div>
+</main></div>
+<footer>Calidad de Software 20W0703 · FISI-UNMSM 2026-II · Repaso de estudio (Semanas 1–7) basado en el material de clase y entregables.</footer>
+<script src="assets/js/app.js" defer></script>
+</body></html>

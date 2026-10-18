@@ -1,0 +1,402 @@
+[
+ {
+  "sigla": "2FA",
+  "en": "Two-Factor Authentication",
+  "es": "Autenticación de Dos Factores"
+ },
+ {
+  "sigla": "AECL",
+  "en": "Atomic Energy of Canada Limited",
+  "es": "Energía Atómica de Canadá (fabricante del Therac-25)"
+ },
+ {
+  "sigla": "ASIL",
+  "en": "Automotive Safety Integrity Level",
+  "es": "Nivel de Integridad de Seguridad Automotriz (ISO 26262)"
+ },
+ {
+  "sigla": "BDD",
+  "en": "Behavior-Driven Development",
+  "es": "Desarrollo Guiado por el Comportamiento"
+ },
+ {
+  "sigla": "CCB",
+  "en": "Change Control Board",
+  "es": "Comité de Control de Cambios"
+ },
+ {
+  "sigla": "CI",
+  "en": "Configuration Item",
+  "es": "Elemento de Configuración"
+ },
+ {
+  "sigla": "CI/CD",
+  "en": "Continuous Integration / Continuous Delivery-Deployment",
+  "es": "Integración y Entrega/Despliegue Continuos"
+ },
+ {
+  "sigla": "CISQ",
+  "en": "Consortium for Information & Software Quality",
+  "es": "Consorcio para la Calidad de la Información y el Software"
+ },
+ {
+  "sigla": "CMMI",
+  "en": "Capability Maturity Model Integration",
+  "es": "Integración de Modelos de Madurez de Capacidades"
+ },
+ {
+  "sigla": "COCOMO",
+  "en": "Constructive Cost Model",
+  "es": "Modelo Constructivo de Costos"
+ },
+ {
+  "sigla": "CoGQ",
+  "en": "Cost of Good Quality",
+  "es": "Costo de la Buena Calidad"
+ },
+ {
+  "sigla": "CoPQ",
+  "en": "Cost of Poor Quality",
+  "es": "Costo de la Mala Calidad"
+ },
+ {
+  "sigla": "CoQ",
+  "en": "Cost of Quality",
+  "es": "Costo de la Calidad"
+ },
+ {
+  "sigla": "CSAT",
+  "en": "Customer Satisfaction Score",
+  "es": "Índice de Satisfacción del Cliente"
+ },
+ {
+  "sigla": "DAL",
+  "en": "Design Assurance Level",
+  "es": "Nivel de Aseguramiento del Diseño (DO-178C)"
+ },
+ {
+  "sigla": "DevOps",
+  "en": "Development + Operations",
+  "es": "Desarrollo + Operaciones"
+ },
+ {
+  "sigla": "DoD",
+  "en": "Definition of Done",
+  "es": "Definición de Terminado"
+ },
+ {
+  "sigla": "DRE",
+  "en": "Defect Removal Efficiency",
+  "es": "Eficiencia de Remoción de Defectos"
+ },
+ {
+  "sigla": "EMS",
+  "en": "Energy Management System",
+  "es": "Sistema de Gestión de Energía"
+ },
+ {
+  "sigla": "ESA",
+  "en": "European Space Agency",
+  "es": "Agencia Espacial Europea"
+ },
+ {
+  "sigla": "FDA",
+  "en": "Food and Drug Administration",
+  "es": "Administración de Alimentos y Medicamentos de EE.UU."
+ },
+ {
+  "sigla": "FMEA",
+  "en": "Failure Mode and Effects Analysis",
+  "es": "Análisis de Modos de Falla y sus Efectos"
+ },
+ {
+  "sigla": "FTR",
+  "en": "Formal Technical Review",
+  "es": "Revisión Técnica Formal"
+ },
+ {
+  "sigla": "FURPS",
+  "en": "Functionality, Usability, Reliability, Performance, Supportability",
+  "es": "Funcionalidad, Usabilidad, Fiabilidad, Desempeño, Soportabilidad"
+ },
+ {
+  "sigla": "GE",
+  "en": "General Electric",
+  "es": "General Electric (GE Energy, caso del apagón)"
+ },
+ {
+  "sigla": "HFT",
+  "en": "High-Frequency Trading",
+  "es": "Negociación de Alta Frecuencia"
+ },
+ {
+  "sigla": "HH",
+  "en": "",
+  "es": "Horas-Hombre"
+ },
+ {
+  "sigla": "HU",
+  "en": "User Story",
+  "es": "Historia de Usuario"
+ },
+ {
+  "sigla": "HW",
+  "en": "Hardware",
+  "es": "Hardware / soporte físico"
+ },
+ {
+  "sigla": "IaC",
+  "en": "Infrastructure as Code",
+  "es": "Infraestructura como Código"
+ },
+ {
+  "sigla": "IEC",
+  "en": "International Electrotechnical Commission",
+  "es": "Comisión Electrotécnica Internacional"
+ },
+ {
+  "sigla": "IEEE",
+  "en": "Institute of Electrical and Electronics Engineers",
+  "es": "Instituto de Ingenieros Eléctricos y Electrónicos"
+ },
+ {
+  "sigla": "INACAL",
+  "en": "",
+  "es": "Instituto Nacional de Calidad (Perú)"
+ },
+ {
+  "sigla": "ISO",
+  "en": "International Organization for Standardization",
+  "es": "Organización Internacional de Normalización"
+ },
+ {
+  "sigla": "ISTQB",
+  "en": "International Software Testing Qualifications Board",
+  "es": "Junta Internacional de Calificaciones de Pruebas de Software"
+ },
+ {
+  "sigla": "IV&V",
+  "en": "Independent Verification and Validation",
+  "es": "Verificación y Validación Independientes"
+ },
+ {
+  "sigla": "JUSE",
+  "en": "Union of Japanese Scientists and Engineers",
+  "es": "Unión de Científicos e Ingenieros Japoneses"
+ },
+ {
+  "sigla": "KLOC",
+  "en": "Kilo Lines of Code",
+  "es": "Miles de Líneas de Código"
+ },
+ {
+  "sigla": "KPI",
+  "en": "Key Performance Indicator",
+  "es": "Indicador Clave de Desempeño"
+ },
+ {
+  "sigla": "MTBF",
+  "en": "Mean Time Between Failures",
+  "es": "Tiempo Medio Entre Fallos"
+ },
+ {
+  "sigla": "MTTR",
+  "en": "Mean Time To Repair",
+  "es": "Tiempo Medio de Reparación"
+ },
+ {
+  "sigla": "NIST",
+  "en": "National Institute of Standards and Technology",
+  "es": "Instituto Nacional de Estándares y Tecnología de EE.UU."
+ },
+ {
+  "sigla": "NPS",
+  "en": "Net Promoter Score",
+  "es": "Índice de Promotores Netos"
+ },
+ {
+  "sigla": "NTP",
+  "en": "",
+  "es": "Norma Técnica Peruana"
+ },
+ {
+  "sigla": "NYSE",
+  "en": "New York Stock Exchange",
+  "es": "Bolsa de Valores de Nueva York"
+ },
+ {
+  "sigla": "OBC",
+  "en": "On-Board Computer",
+  "es": "Computador de a Bordo"
+ },
+ {
+  "sigla": "OWASP",
+  "en": "Open Worldwide Application Security Project",
+  "es": "Proyecto Abierto Mundial de Seguridad de Aplicaciones"
+ },
+ {
+  "sigla": "PAF",
+  "en": "Prevention-Appraisal-Failure",
+  "es": "Prevención-Evaluación-Falla (modelo de costos)"
+ },
+ {
+  "sigla": "PDCA/PHVA",
+  "en": "Plan-Do-Check-Act",
+  "es": "Planificar-Hacer-Verificar-Actuar"
+ },
+ {
+  "sigla": "PQA",
+  "en": "Process Quality Assurance",
+  "es": "Aseguramiento de la Calidad del Proceso (CMMI)"
+ },
+ {
+  "sigla": "QA",
+  "en": "Quality Assurance",
+  "es": "Aseguramiento de la Calidad"
+ },
+ {
+  "sigla": "QC",
+  "en": "Quality Control",
+  "es": "Control de Calidad"
+ },
+ {
+  "sigla": "QM",
+  "en": "Quality Management",
+  "es": "Gestión de la Calidad"
+ },
+ {
+  "sigla": "QMS / SGC",
+  "en": "Quality Management System",
+  "es": "Sistema de Gestión de la Calidad"
+ },
+ {
+  "sigla": "RLP",
+  "en": "Retail Liquidity Program",
+  "es": "Programa de Liquidez Minorista"
+ },
+ {
+  "sigla": "ROI",
+  "en": "Return on Investment",
+  "es": "Retorno de la Inversión"
+ },
+ {
+  "sigla": "RTF",
+  "en": "Formal Technical Review",
+  "es": "Revisión Técnica Formal"
+ },
+ {
+  "sigla": "SAST",
+  "en": "Static Application Security Testing",
+  "es": "Pruebas Estáticas de Seguridad de Aplicaciones"
+ },
+ {
+  "sigla": "SCM",
+  "en": "Software Configuration Management",
+  "es": "Gestión de la Configuración del Software"
+ },
+ {
+  "sigla": "SDD",
+  "en": "Software Design Description",
+  "es": "Descripción del Diseño del Software"
+ },
+ {
+  "sigla": "SDLC / CVDS",
+  "en": "Software Development Life Cycle",
+  "es": "Ciclo de Vida del Desarrollo de Software"
+ },
+ {
+  "sigla": "SEC",
+  "en": "Securities and Exchange Commission",
+  "es": "Comisión de Bolsa y Valores de EE.UU."
+ },
+ {
+  "sigla": "SIL",
+  "en": "Safety Integrity Level",
+  "es": "Nivel de Integridad de Seguridad (IEC 61508)"
+ },
+ {
+  "sigla": "SLA",
+  "en": "Service Level Agreement",
+  "es": "Acuerdo de Nivel de Servicio"
+ },
+ {
+  "sigla": "SPI",
+  "en": "Software Process Improvement",
+  "es": "Mejora del Proceso de Software"
+ },
+ {
+  "sigla": "SQA",
+  "en": "Software Quality Assurance",
+  "es": "Aseguramiento de la Calidad del Software"
+ },
+ {
+  "sigla": "SQAP",
+  "en": "Software Quality Assurance Plan",
+  "es": "Plan de Aseguramiento de la Calidad del Software"
+ },
+ {
+  "sigla": "SQuaRE",
+  "en": "Systems and software Quality Requirements and Evaluation",
+  "es": "Requisitos y Evaluación de la Calidad de Sistemas y Software"
+ },
+ {
+  "sigla": "SRI / IRS",
+  "en": "Inertial Reference System",
+  "es": "Sistema de Referencia Inercial"
+ },
+ {
+  "sigla": "SRS",
+  "en": "Software Requirements Specification",
+  "es": "Especificación de Requisitos de Software"
+ },
+ {
+  "sigla": "SVVP",
+  "en": "Software Verification and Validation Plan",
+  "es": "Plan de Verificación y Validación del Software"
+ },
+ {
+  "sigla": "SW",
+  "en": "Software",
+  "es": "Software / soporte lógico"
+ },
+ {
+  "sigla": "SWEBOK",
+  "en": "Software Engineering Body of Knowledge",
+  "es": "Cuerpo de Conocimiento de la Ingeniería de Software"
+ },
+ {
+  "sigla": "TQM",
+  "en": "Total Quality Management",
+  "es": "Gestión de la Calidad Total"
+ },
+ {
+  "sigla": "UAT",
+  "en": "User Acceptance Testing",
+  "es": "Pruebas de Aceptación del Usuario"
+ },
+ {
+  "sigla": "UI",
+  "en": "User Interface",
+  "es": "Interfaz de Usuario"
+ },
+ {
+  "sigla": "UML",
+  "en": "Unified Modeling Language",
+  "es": "Lenguaje Unificado de Modelado"
+ },
+ {
+  "sigla": "UX",
+  "en": "User Experience",
+  "es": "Experiencia del Usuario"
+ },
+ {
+  "sigla": "V&V",
+  "en": "Verification and Validation",
+  "es": "Verificación y Validación"
+ },
+ {
+  "sigla": "WP",
+  "en": "Work Product",
+  "es": "Producto de Trabajo"
+ }
+]

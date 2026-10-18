@@ -1,0 +1,1180 @@
+<h1>Sesión 1 · Práctica</h1>
+<p class="lead">Práctica de la Semana 1 (<b>Calidad de SW: importancia, conceptos, QC vs SQA, técnicas y casos históricos</b>). Primero se resuelven los casos y ejercicios de las diapositivas de la Mg. Ana María Huayna Dueñas (test de atributos p12, curva de costos p13, cuadro de tres lentes p21, Therac-25 p25); luego los casos trabajados en los entregables (primero el <b>Apagón 2003 del G3</b>, comparado con G1 y G2; después Ariane 5 de G4/G7 y Knight Capital de G5/G6); y al final siete casos NUEVOS de complejidad MUY ALTA (CoQ, DRE/PCE, ROI de inspecciones, DRE en serie, clasificación cruzada QA/QC/V&amp;V/CoQ, CrowdStrike vs Ariane 5 y matriz forense de cinco desastres). Cada caso tiene enunciado de examen con datos, "Se pide" y solución desplegable con tabla de causa raíz, al menos dos alternativas (en calidad la solución NO es única), justificación normativa (IEEE 730, IEEE 828, IEEE 1012, IEEE 1028, ISO 9000, ISO/IEC 9126, ISO/IEC 25010, ISO/IEC/IEEE 12207:2017, IEC 61508, IEC 62304, ISO 14971…), KPI con fórmula y meta, y errores frecuentes.</p>
+<div class="clave"><h4>Ideas clave para resolver casos de la S1</h4><ul>
+<li><b>Regla de oro (p20–p21):</b> si la actividad se <i>ejecuta sobre el producto</i> es QC; si <i>define, exige, audita o mejora el proceso</i> que lo produce es SQA; si es la <i>meta o atributo</i> que se quiere lograr es Calidad de SW (SQ).</li>
+<li><b>Mismo hecho, distinta lente:</b> un defecto (race condition, overflow, código muerto) es el <i>síntoma</i> en el producto; la <i>causa raíz</i> casi siempre está en el proceso (requisitos, revisiones, SCM, gestión de riesgos).</li>
+<li><b>Plantilla de 4 pilares (p14–p15):</b> métodos de ingeniería (requisitos/diseño) · administración de proyectos (estimación, riesgo) · QC (revisión, inspección, métricas) · SQA (infraestructura, auditoría, informes).</li>
+<li><b>Defensa en profundidad:</b> prevenir (SQA) + detectar (QC) + contener (monitoreo, watchdog, circuit breaker). Ninguna sola basta.</li>
+<li><b>Curva de Boehm (p13):</b> $139 → $455 → $977 → $7 136 → $14 102; mantenimiento/requisitos ≈ 101× (la "Ley de Boehm" de p03: hasta 100×).</li>
+<li><b>CoQ = CoGQ + CoPQ</b> = (Prevención + Evaluación) + (Falla interna + Falla externa). La auditoría es QA por naturaleza pero <b>Evaluación</b> en CoQ.</li>
+<li><b>DRE</b> = defectos removidos antes del release / defectos totales; <b>PCE</b> de fase = defectos de la fase detectados en esa misma fase / defectos originados en ella.</li>
+<li><b>Redundancia idéntica = falla de modo común</b> (Ariane 5 SRI, apagón 2003 servidor de respaldo): la redundancia HW no protege contra defectos SW.</li>
+<li><b>Cifras de la profesora</b> para el examen: Knight $440 M en 45 min; apagón 50 M personas, 2 días, ~$6 000 M; Ariane 37 s, 64→16 bits, $370 M; Therac-25 ≥ 6 pacientes, "Malfunction 54".</li>
+<li><b>Debilidad común de los 7 grupos:</b> ninguno citó normas, ninguno definió KPI, ninguno usó Ishikawa/RCA y nadie tomó el Therac-25: el examen puede premiar exactamente eso.</li>
+</ul></div>
+
+<section id="caso-1" class="caso">
+<h2>Caso 1 · Test de comprobación de atributos de un prototipo UI (SUM-UNMSM)</h2>
+<p class="origen">Origen: Diapositiva 12 (clase) "Test de Comprobación de Atributos (i)" + diapositiva 11 (ISO 9126)</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>La OGTI (Oficina General de Tecnologías de la Información) de la UNMSM rediseña la pantalla de <b>matrícula del SUM</b> (Sistema Único de Matrícula). Antes de codificar, el equipo UX (User Experience – Experiencia de Usuario) presenta un prototipo UI (User Interface – Interfaz de Usuario) en Figma y lo prueba con 10 estudiantes de la FISI con la tarea "matricularse en 6 cursos y retirar 1". Resultados:</p>
+<div class="tabla"><table>
+<thead><tr><th>Indicador observado</th><th>Valor medido</th><th>Valor de referencia / meta</th></tr></thead>
+<tbody>
+<tr><td>Estudiantes que completan la tarea sin ayuda</td><td>7 de 10</td><td>≥ 9 de 10</td></tr>
+<tr><td>Clics promedio para completar la tarea</td><td>38</td><td>14 (ruta óptima diseñada)</td></tr>
+<tr><td>Tiempo promedio de tarea</td><td>7,5 min</td><td>≤ 3 min</td></tr>
+<tr><td>Estudiantes que encuentran "Retirar curso" sin ayuda</td><td>4 de 10</td><td>≥ 8 de 10</td></tr>
+<tr><td>Campos ingresados con error (sobre 60 campos digitados en total)</td><td>12</td><td>≤ 3 (5 %)</td></tr>
+<tr><td>Iconografía</td><td>El botón "Confirmar" usa un ícono de disquete y está en la esquina superior izquierda</td><td>Patrón esperado: botón primario abajo a la derecha</td></tr>
+<tr><td>Reporte final (constancia)</td><td>Tabla de 14 columnas sin agrupar por ciclo, fuente de 9 px</td><td>Legible en móvil (≥ 14 px)</td></tr>
+</tbody></table></div>
+<p>El jefe de proyecto afirma: "El prototipo cumple el SRS (Software Requirements Specification) porque permite matricular y retirar cursos; por tanto es de alta calidad".</p>
+</div>
+<h3>Se pide</h3><ol>
+<li>Aplicar las 4 preguntas del test de la p12 (intuitiva ×2, eficiencia ×2) al prototipo y responder cada una con evidencia numérica.</li>
+<li>Convertir cada pregunta en una métrica objetiva (fórmula) y calcular su valor.</li>
+<li>Ubicar cada hallazgo en la característica/subcaracterística de ISO/IEC 9126 (versión de la profesora, p11) y su equivalente en ISO/IEC 25010.</li>
+<li>Refutar la afirmación del jefe de proyecto usando la definición de calidad de SW de la p9 (requisitos explícitos + expectativas implícitas).</li>
+<li>Indicar si aplicar el test es una actividad de QC o de SQA y qué cambiaría para que sea SQA.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Respuesta a las 4 preguntas del test (p12)</h4>
+<div class="tabla"><table>
+<thead><tr><th>Pregunta p12</th><th>Respuesta</th><th>Métrica (fórmula)</th><th>Valor</th></tr></thead>
+<tbody>
+<tr><td>Intuitiva: ¿todas las operaciones son fáciles de localizar e iniciar?</td><td>NO</td><td>Tasa de localización = usuarios que hallan la función sin ayuda / usuarios</td><td>"Retirar curso": 4/10 = 40 % (meta ≥ 80 %)</td></tr>
+<tr><td>Intuitiva: ¿usa patrones esperados de uso?</td><td>NO</td><td>N.º de violaciones de patrones/heurísticas de Nielsen detectadas en la revisión</td><td>≥ 2 (ícono de disquete obsoleto, botón primario fuera de posición)</td></tr>
+<tr><td>Eficiencia: ¿economía de movimientos para entrada de datos y operaciones?</td><td>NO</td><td>Economía de movimientos = clics óptimos / clics reales</td><td>14/38 = 36,8 % (meta ≥ 80 %)</td></tr>
+<tr><td>Eficiencia: ¿datos de salida legibles?</td><td>NO</td><td>% de pantallas de salida que cumplen tamaño mínimo y agrupación</td><td>0 % (constancia de 14 columnas a 9 px)</td></tr>
+</tbody></table></div>
+<p>Métricas complementarias: <b>eficacia</b> = tareas completadas / intentos = 7/10 = <b>70 %</b>; <b>tasa de error</b> = 12/60 = <b>20 %</b> (meta 5 %); <b>eficiencia temporal</b> = 7,5 / 3 = <b>2,5×</b> el tiempo meta.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO 9126 (p11) → ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Función "Retirar curso" difícil de encontrar</td><td>Arquitectura de información diseñada sin card sorting ni usuarios reales</td><td>40 % la encuentra</td><td>Usabilidad → entendible / Capacidad de interacción → reconocibilidad de la adecuación, aprendizaje</td></tr>
+<tr><td>Patrones no estándar (disquete, botón arriba-izquierda)</td><td>No existe guía de estilo UI institucional (estándar de diseño)</td><td>Revisión heurística</td><td>Usabilidad → intuitiva / operabilidad</td></tr>
+<tr><td>38 clics vs 14 óptimos</td><td>Flujo con confirmaciones redundantes por curso; sin selección múltiple</td><td>Economía 36,8 %</td><td>Eficiencia → comportamiento del tiempo / Eficiencia de desempeño</td></tr>
+<tr><td>20 % de campos con error</td><td>Sin validación en línea ni autocompletado del código de curso</td><td>12/60</td><td>Usabilidad → operable / Protección contra errores de usuario (25010)</td></tr>
+<tr><td>Constancia ilegible</td><td>Requisito implícito de legibilidad móvil no especificado en el SRS</td><td>9 px, 14 columnas</td><td>Usabilidad → entendible / Estética de la interfaz</td></tr>
+</tbody></table></div>
+<p><b>Refutación al jefe de proyecto:</b> la p9 define la calidad de SW como el grado en que el sistema cumple los <b>requisitos explícitos</b> del usuario <b>y las expectativas implícitas</b> (eficiencia, rapidez, seguridad). El prototipo cumple lo explícito (matricula y retira) pero falla lo implícito (rapidez, facilidad, legibilidad). Además, ISO 9000 habla de "grado": la calidad es una escala, no un sí/no; y desde la perspectiva del usuario (p8, Juran) la calidad es "adecuación al uso", que aquí es baja (30 % no completa la tarea).</p>
+<div class="alt"><h4>Alternativa A · QC centrado en el producto (rediseño iterativo del prototipo)</h4>
+<ul><li>Rediseñar el flujo con selección múltiple de cursos y una sola confirmación (meta ≤ 16 clics).</li>
+<li>Mover el botón primario a la posición estándar y reemplazar íconos ambiguos por texto + ícono.</li>
+<li>Validación en línea del código de curso (autocompletado desde el plan de estudios).</li>
+<li>Repetir la prueba con otros 10 estudiantes (nueva muestra) hasta cumplir todas las metas. Es QC: inspecciona y corrige ESTE entregable.</li></ul></div>
+<div class="alt"><h4>Alternativa B · SQA centrado en el proceso (institucionalizar el test)</h4>
+<ul><li>Convertir el test de la p12 (más robustez y riqueza de Pressman) en un <b>checklist obligatorio</b> dentro del SQAP (Software Quality Assurance Plan, IEEE 730) para todo prototipo de la OGTI.</li>
+<li>Definir una <b>guía de estilo UI</b> (estándar) y un criterio de salida: ningún prototipo pasa a codificación con eficacia &lt; 90 % o economía de movimientos &lt; 80 %.</li>
+<li>Auditar trimestralmente que los proyectos apliquen el checklist (evidencia: actas de prueba con usuarios).</li>
+<li>Incorporar requisitos no funcionales de usabilidad medibles en la plantilla del SRS (p.ej. "tarea de matrícula ≤ 3 min para el percentil 90").</li></ul></div>
+<div class="alt"><h4>Alternativa C · Enfoque UCD (User-Centered Design – Diseño Centrado en el Usuario)</h4>
+<p>Aplicar ISO 9241-210 (diseño centrado en el humano): investigación con usuarios antes del prototipo, pruebas en cada iteración y métrica SUS (System Usability Scale) ≥ 70. Es preventivo (SQA) y a la vez produce evidencia QC en cada iteración.</p></div>
+<div class="norma"><h4>ISO/IEC 9126 (→ reemplazada por ISO/IEC 25010)</h4>
+<p><b>Organismo:</b> ISO (International Organization for Standardization) + IEC (International Electrotechnical Commission). <b>Versión:</b> 1991; revisada como ISO/IEC 9126-1:2001 (4 partes: 9126-1 modelo, 9126-2 métricas externas, 9126-3 métricas internas, 9126-4 calidad en uso). <b>Propósito:</b> modelo de calidad del producto SW. <b>Estructura:</b> 6 características internas/externas (Funcionalidad, Confiabilidad, Usabilidad, Eficiencia, Mantenibilidad, Portabilidad) + 4 de calidad en uso. Sucesora: ISO/IEC 25010:2011 (8 características, familia SQuaRE) y ISO/IEC 25010:2023 (9: Usabilidad pasa a "Capacidad de interacción", se añade "Protección/Safety").</p>
+<p><b>Trampa de examen:</b> en la p11 la profesora lista Confiabilidad = madurez, tolerancia a fallas y <i>robustez</i>; la norma dice <i>recuperabilidad</i>. En el examen respeta la versión de la profesora, pero si preguntan "según la norma", es recuperabilidad.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC 9126-1 (Usabilidad: comprensibilidad, operabilidad; Eficiencia: comportamiento temporal) e ISO/IEC 25010 (Capacidad de interacción, Eficiencia de desempeño) dan el vocabulario de atributos; ISO 9241-11 define usabilidad como eficacia, eficiencia y satisfacción en un contexto de uso; IEEE 730 permite incluir el checklist como "estándar, práctica y convención" del SQAP; IEEE 1028 clasifica la revisión del prototipo como <i>revisión técnica</i> de un producto intermedio.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Línea base</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Eficacia de tarea</td><td>tareas completadas sin ayuda / intentos × 100</td><td>70 %</td><td>≥ 90 %</td></tr>
+<tr><td>Economía de movimientos</td><td>clics óptimos / clics reales × 100</td><td>36,8 %</td><td>≥ 80 %</td></tr>
+<tr><td>Tasa de error de entrada</td><td>campos erróneos / campos digitados × 100</td><td>20 %</td><td>≤ 5 %</td></tr>
+<tr><td>Tiempo de tarea (p90)</td><td>percentil 90 del tiempo de la tarea</td><td>7,5 min (media)</td><td>≤ 3 min</td></tr>
+<tr><td>SUS</td><td>cuestionario estándar de 10 ítems (0–100)</td><td>no medido</td><td>≥ 70</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) responder el test con "sí/no" sin evidencia: la profesora pide preguntas verificables, por eso hay que medir; (2) clasificar el test como SQA: <b>aplicarlo</b> a un prototipo es QC (revisión de un entregable intermedio); <b>exigirlo y auditarlo</b> para todos los proyectos es SQA; (3) confundir la "Eficiencia" de la p12 (economía de movimientos del usuario) con la Eficiencia de ISO 9126 (uso de tiempo y recursos del SW): están relacionadas pero no son idénticas; (4) creer que cumplir el SRS basta: la p9 exige también expectativas implícitas. Solución no única: un equipo puede priorizar la Alternativa A (rápida) y otro la B (sostenible); la mejor respuesta combina ambas.</div>
+</details>
+</section>
+<section id="caso-2" class="caso">
+<h2>Caso 2 · Costo de la calidad con la curva de Boehm (p13)</h2>
+<p class="origen">Origen: Diapositivas 3 y 13 (clase) "Ley de Barry Boehm" y "El costo de la Calidad"</p> <span class="tag">Dificultad: Muy alta (numérico)</span>
+<div class="enunciado">
+<figure><img src="@img/semana-01-calidad-de-software/p13.png" alt="Gráfico de líneas del costo de corrección de un error según la fase de detección: requerimientos 139, diseño 455, codificación 977, pruebas 7136 y mantenimiento 14102 dólares"><figcaption>Curva de costo de corrección por fase de detección usada en clase.</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 13, Semana 01.</p>
+<p>Un proyecto de la Caja Municipal "Huancayo Digital" (core de créditos, 45 KLOC) registró <b>40 defectos</b> durante todo su ciclo de vida, según la fase en que fueron <b>detectados</b>: 10 en requerimientos, 8 en diseño, 12 en codificación, 7 en pruebas y 3 en mantenimiento (producción). Usa los costos unitarios de la p13 (US$ por defecto). La gerencia evalúa un programa SQA de <b>RTF (Revisiones Técnicas Formales)</b> de requisitos y diseño que cuesta <b>US$ 12 000</b> y que, según datos históricos, haría que el <b>50 %</b> de los defectos hoy detectados en pruebas y en mantenimiento se detecten en <b>diseño</b>.</p>
+</div>
+<h3>Se pide</h3><ol>
+<li>Calcular el costo total actual de corrección y el costo promedio por defecto.</li>
+<li>Calcular los múltiplos de cada fase respecto de requerimientos y verificar la "Ley de Boehm" (p03: hasta 100×).</li>
+<li>Calcular el ahorro bruto, el ahorro neto y el ROI (Return On Investment – Retorno de la Inversión) del programa de RTF.</li>
+<li>Clasificar cada costo en las categorías del CoQ (Cost of Quality – Costo de la Calidad).</li>
+<li>Explicar qué pasaría si el programa se descarta "para no retrasar el time-to-market" (p06).</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. Costo actual</h4>
+<div class="tabla"><table>
+<thead><tr><th>Fase de detección</th><th>Defectos</th><th>Costo unitario (p13)</th><th>Subtotal US$</th><th>Múltiplo vs requerimientos</th></tr></thead>
+<tbody>
+<tr><td>Requerimientos</td><td>10</td><td>139</td><td>1 390</td><td>1,0×</td></tr>
+<tr><td>Diseño</td><td>8</td><td>455</td><td>3 640</td><td>3,3×</td></tr>
+<tr><td>Codificación</td><td>12</td><td>977</td><td>11 724</td><td>7,0×</td></tr>
+<tr><td>Pruebas</td><td>7</td><td>7 136</td><td>49 952</td><td>51,3×</td></tr>
+<tr><td>Mantenimiento</td><td>3</td><td>14 102</td><td>42 306</td><td>101,5×</td></tr>
+<tr><td><b>Total</b></td><td><b>40</b></td><td>—</td><td><b>109 012</b></td><td>—</td></tr>
+</tbody></table></div>
+<p>Costo promedio = 109 012 / 40 = <b>US$ 2 725,30 por defecto</b>. Solo 10 defectos (25 %) de pruebas y mantenimiento explican 92 258 / 109 012 = <b>84,6 %</b> del costo: es el patrón típico de una organización reactiva (QC tardío).</p>
+<h4>2. Verificación de la Ley de Boehm</h4>
+<p>14 102 / 139 = <b>101,5×</b> ≈ "hasta 100 veces más" (p03). Ojo: la p03 compara producción contra <i>diseño o desarrollo</i>; contra diseño el múltiplo es 14 102 / 455 = 31×, contra requerimientos 101×. Ambos expresan crecimiento casi exponencial.</p>
+<h4>3. Ahorro y ROI</h4>
+<p>Se mueven 3,5 defectos de pruebas y 1,5 de mantenimiento a diseño:</p>
+<ul><li>Ahorro por pruebas = 3,5 × (7 136 − 455) = 3,5 × 6 681 = <b>23 383,5</b></li>
+<li>Ahorro por mantenimiento = 1,5 × (14 102 − 455) = 1,5 × 13 647 = <b>20 470,5</b></li>
+<li>Ahorro bruto = <b>US$ 43 854</b> (40,2 % del costo total) → nuevo costo de corrección = 65 158 (US$ 1 628,95 por defecto).</li>
+<li>Ahorro neto = 43 854 − 12 000 = <b>US$ 31 854</b>; ROI = 31 854 / 12 000 = <b>265,5 %</b> (cada dólar en RTF devuelve ≈ 3,65 dólares de corrección evitada).</li>
+<li>Punto de equilibrio: 12 000 / 13 647 ≈ 0,88 → basta con "rescatar" <b>un solo defecto</b> de mantenimiento para pagar el programa.</li></ul>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>84,6 % del costo concentrado en pruebas y mantenimiento</td><td>Ausencia de técnicas estáticas tempranas (RTF, inspecciones) en el proceso</td><td>Tabla de costos</td><td>CoPQ (costo de la mala calidad); eficiencia del proceso</td></tr>
+<tr><td>3 defectos llegan al cliente</td><td>Sin criterio de salida de calidad antes del release</td><td>3 en mantenimiento</td><td>Confiabilidad → madurez; satisfacción del cliente (p05)</td></tr>
+<tr><td>PCE de requerimientos desconocido</td><td>No se registra la fase de <i>origen</i> de cada defecto</td><td>Solo hay fase de detección</td><td>Medición del proceso (p15: métricas con retroalimentación)</td></tr>
+</tbody></table></div>
+<h4>4. Clasificación CoQ</h4>
+<div class="tabla"><table>
+<thead><tr><th>Costo</th><th>Categoría CoQ</th><th>Grupo</th></tr></thead>
+<tbody>
+<tr><td>Programa de RTF (US$ 12 000)</td><td>Evaluación (appraisal)</td><td>CoGQ</td></tr>
+<tr><td>Capacitación del equipo en técnicas de revisión (si se agrega)</td><td>Prevención</td><td>CoGQ</td></tr>
+<tr><td>Corrección de defectos en requerimientos, diseño, codificación y pruebas</td><td>Falla interna (antes de entregar)</td><td>CoPQ</td></tr>
+<tr><td>Corrección en mantenimiento (producción)</td><td>Falla externa</td><td>CoPQ</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Shift-left con RTF de requisitos y diseño (SQA)</h4><p>La del enunciado: ROI 265,5 %. Se institucionaliza en el SQAP (IEEE 730) con criterios de entrada/salida de cada revisión y registro de la fase de origen de cada defecto.</p></div>
+<div class="alt"><h4>Alternativa B · Automatizar la detección en codificación (QC + CI/CD)</h4><p>Invertir los US$ 12 000 en SAST (Static Application Security Testing) y pruebas unitarias en el pipeline CI/CD (Continuous Integration / Continuous Delivery). Si mueve el mismo 50 % solo a <b>codificación</b> (977): ahorro = 3,5 × 6 159 + 1,5 × 13 125 = 21 556,5 + 19 687,5 = 41 244 → neto 29 244 (ROI 243,7 %). Algo menor que A, porque detecta más tarde, pero acelera el time-to-market (p06).</p></div>
+<div class="alt"><h4>Alternativa C · Combinación A + B (defensa en profundidad)</h4><p>RTF para defectos de requisitos/diseño (los que SAST no ve) y SAST para defectos de codificación; es la respuesta más completa, aunque el ROI marginal de la segunda inversión es decreciente por solapamiento de lo que detectan.</p></div>
+<h4>5. ¿Y si se descarta "para ganar velocidad"?</h4>
+<p>La p06 dice lo contrario: los controles de calidad <b>aceleran</b> el lanzamiento porque evitan el retrabajo ("menos retrabajo", p03). Sin RTF se siguen pagando US$ 109 012 y el equipo queda "apagando incendios" (p07, columna de baja calidad).</p>
+<h4>Justificación normativa</h4>
+<p>IEEE 1028 (revisiones técnicas e inspecciones con roles y criterios de salida); IEEE 730 (el SQAP debe definir las revisiones y la medición de la calidad); ISO/IEC/IEEE 12207:2017 proceso de Verificación (6.4.9) y proceso de Medición (6.3.7); el modelo de CoQ P-A-F de Feigenbaum/Juran (base de la ISO 10014 sobre beneficios financieros de la calidad).</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Costo medio de corrección</td><td>Σ (defectos fase × costo fase) / defectos</td><td>≤ US$ 1 700</td></tr>
+<tr><td>% de defectos detectados antes de pruebas</td><td>(req + dis + cod) / total × 100</td><td>de 75 % a ≥ 87,5 %</td></tr>
+<tr><td>CoPQ externo</td><td>costo de corrección en mantenimiento</td><td>≤ US$ 21 000 (≤ 1,5 defectos)</td></tr>
+<tr><td>ROI de la calidad</td><td>(ahorro bruto − inversión) / inversión</td><td>≥ 100 %</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) restar 139 en lugar de 455: los defectos se mueven a <b>diseño</b>, no a requerimientos; (2) olvidar restar la inversión y reportar el ahorro bruto como ROI; (3) clasificar la RTF como prevención: en CoQ las revisiones e inspecciones son <b>evaluación</b> (detectan defectos ya inyectados en un documento), aunque como actividad pertenezcan al plan SQA; la capacitación y los estándares sí son prevención; (4) decir "Ley de Boehm = 100× exacto": la p03 dice "<i>hasta</i> 100 veces"; la curva p13 da 101,5× contra requerimientos.</div>
+</details>
+</section>
+
+<section id="caso-3" class="caso">
+<h2>Caso 3 · Tres lentes (SQ, SQA, QC) y el impacto organizacional: colapso de una plataforma tributaria</h2>
+<p class="origen">Origen: Diapositivas 3–7 y 20–21 (clase) aplicadas a un escenario hipotético inspirado en el formato "tres lentes" del G4 | Creado para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><i>Escenario hipotético con fines didácticos.</i> Una administración tributaria peruana (tipo SUNAT) habilita el formulario virtual de Declaración Anual de Renta. Para el último día de vencimiento se esperaban <b>1,2 millones</b> de declaraciones. Datos del proyecto y del incidente:</p>
+<ul>
+<li>El SRS solo dice "el sistema debe permitir presentar la declaración"; no hay requisito de concurrencia ni de tiempo de respuesta.</li>
+<li>La prueba de carga se ejecutó con <b>20 000</b> sesiones concurrentes; el pico real fue de <b>85 000</b>.</li>
+<li>El equipo de 6 desarrolladores no tiene estándar de codificación; las revisiones de código son opcionales y se omitieron "por el plazo".</li>
+<li>La versión desplegada no pasó regresión: se corrigió un bug de cálculo de deducciones 4 h antes del pase.</li>
+<li>En la ventana crítica de <b>72 h</b> la plataforma estuvo caída <b>6 h</b>; el SLA (Service Level Agreement) interno exigía 99,5 % de disponibilidad.</li>
+<li>Se otorgó prórroga de 3 días; 38 000 reclamos en la mesa de ayuda; el congreso citó al jefe institucional; la prensa tituló "otra vez colapsa el sistema".</li>
+</ul>
+</div>
+<h3>Se pide</h3><ol>
+<li>Redactar el caso con las <b>tres lentes</b> de la p21: (a) falla de Calidad de SW (SQ, el objetivo), (b) falla de SQA (el proceso), (c) falla de QC (el producto), y responder la "pregunta que responde" de cada columna.</li>
+<li>Mapear las consecuencias a los 4 beneficios de la calidad (p03–p06) y a las filas de la tabla alta vs baja calidad (p07).</li>
+<li>Calcular la disponibilidad real, el downtime permitido por el SLA y la cobertura de la prueba de carga.</li>
+<li>Proponer al menos dos alternativas de mejora y KPI.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<figure><img src="@img/semana-01-calidad-de-software/p21.png" alt="Cuadro comparativo de tres columnas: Calidad de Software como objetivo, SQA como proceso y QC como producto, con filas naturaleza, foco, momento, actividades, pregunta que responde y responsabilidad"><figcaption>Cuadro de las tres lentes (p21) que estructura la respuesta.</figcaption></figure>
+<h4>1. Las tres lentes</h4>
+<div class="tabla"><table>
+<thead><tr><th>Criterio p21</th><th>SQ (objetivo)</th><th>SQA (proceso)</th><th>QC (producto)</th></tr></thead>
+<tbody>
+<tr><td>Redacción del caso</td><td>La institución nunca definió como <b>meta</b> la disponibilidad y la eficiencia bajo carga máxima; el SRS ignora la expectativa implícita "poder declarar el último día".</td><td>El proceso no exigía estándares de codificación, revisiones obligatorias, gestión de riesgos ("¿qué pasa si todos declaran el último día?", p14) ni control de cambios antes del pase.</td><td>Las pruebas de carga cubrieron solo 23,5 % del pico y la corrección de último minuto se desplegó sin regresión: el defecto de capacidad estaba en el producto y no se detectó.</td></tr>
+<tr><td>Pregunta que responde</td><td>¿El SW es confiable, eficiente y cumple lo que el contribuyente necesita? → <b>No</b></td><td>¿Estamos usando los procesos correctos para evitar errores? → <b>No</b></td><td>¿El producto construido funciona correctamente y está libre de fallos? → <b>No</b>, bajo carga real</td></tr>
+<tr><td>Responsabilidad</td><td>Toda la organización (alta dirección que fija metas)</td><td>Líderes de proyecto, analistas de calidad</td><td>Testers y desarrolladores (al corregir)</td></tr>
+<tr><td>Atributo ISO 9126 / 25010</td><td>Eficiencia (comportamiento del tiempo); Confiabilidad → Disponibilidad (25010)</td><td>(proceso)</td><td>Eficiencia de desempeño → capacidad</td></tr>
+</tbody></table></div>
+<h4>2. Impacto organizacional (p03–p07)</h4>
+<div class="tabla"><table>
+<thead><tr><th>Beneficio perdido</th><th>Evidencia en el caso</th><th>Fila p07 (baja calidad)</th></tr></thead>
+<tbody>
+<tr><td>(1) Reducción de costos – Boehm (p03)</td><td>Defecto de capacidad detectado en producción: el más caro de la curva</td><td>Gasto descontrolado en soporte (38 000 reclamos)</td></tr>
+<tr><td>(2) Continuidad del negocio (p04)</td><td>6 h de downtime en la ventana crítica, prórroga de 3 días (recaudación diferida)</td><td>Riesgo de auditorías y cuestionamiento legal</td></tr>
+<tr><td>(3) Satisfacción y retención (p05)</td><td>Pérdida de confianza en la marca institucional</td><td>Pérdida de reputación</td></tr>
+<tr><td>(4) Time-to-market (p06)</td><td>Parche sin regresión "para llegar": el atajo produjo la caída</td><td>Equipos apagando incendios</td></tr>
+</tbody></table></div>
+<h4>3. Cálculos</h4>
+<ul><li>Disponibilidad real = (72 − 6) / 72 = <b>91,67 %</b> (meta 99,5 %).</li>
+<li>Downtime permitido = 72 h × 0,5 % = 0,36 h = <b>21,6 min</b>; se excedió 16,7 veces (6 h = 360 min / 21,6).</li>
+<li>Cobertura de carga = 20 000 / 85 000 = <b>23,5 %</b> del pico real.</li></ul>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo afectado</th></tr></thead>
+<tbody>
+<tr><td>Colapso bajo carga</td><td>Requisito no funcional de capacidad inexistente en el SRS</td><td>SRS genérico</td><td>Eficiencia de desempeño (capacidad)</td></tr>
+<tr><td>Prueba de carga insuficiente</td><td>Escenario de prueba no derivado de datos históricos de demanda</td><td>23,5 % del pico</td><td>Confiabilidad → disponibilidad</td></tr>
+<tr><td>Parche sin regresión</td><td>Sin control de cambios ni criterio de "congelamiento" antes del vencimiento</td><td>4 h antes del pase</td><td>Mantenibilidad → estabilidad</td></tr>
+<tr><td>Revisiones omitidas</td><td>Revisiones opcionales; el plazo prima sobre el proceso</td><td>"por el plazo"</td><td>(proceso)</td></tr>
+<tr><td>Riesgo previsible no gestionado</td><td>Sin planificación del riesgo (p14)</td><td>El pico del último día es conocido cada año</td><td>(gestión de proyecto)</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · SQA: proceso de gestión de riesgos y de cambios</h4><ul><li>Registro de riesgos con "pico del último día" como riesgo de severidad alta y plan de contingencia (colas, escalado automático, apertura escalonada por último dígito del RUC).</li><li>Congelamiento de código (code freeze) 10 días antes del vencimiento; todo cambio posterior pasa por un CCB (Configuration Control Board) y regresión completa.</li><li>Revisiones de código obligatorias con checklist (IEEE 1028) y auditoría SQA de cumplimiento.</li></ul></div>
+<div class="alt"><h4>Alternativa B · QC: pruebas de rendimiento con perfil real</h4><ul><li>Prueba de carga y de estrés con JMeter/k6 al <b>150 %</b> del pico histórico (≥ 127 500 sesiones) y prueba de resistencia de 12 h.</li><li>Suite de regresión automatizada en CI que bloquee el pase si falla un caso de cálculo tributario.</li><li>Prueba de humo (smoke test) post-despliegue.</li></ul></div>
+<div class="alt"><h4>Alternativa C · SQ + operación: metas y monitoreo</h4><p>Fijar como objetivo institucional de calidad una disponibilidad ≥ 99,5 % y p95 de respuesta ≤ 3 s, con monitoreo en tiempo real (lección p26, casos 1 y 2) y autoescalado en la nube.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC 25010 (Eficiencia de desempeño: comportamiento temporal, utilización de recursos, <b>capacidad</b>; Fiabilidad: <b>disponibilidad</b>) para expresar la meta (SQ); ISO/IEC/IEEE 12207:2017 procesos de Gestión de riesgos (6.3.4), Gestión de la configuración (6.3.5) y Aseguramiento de la calidad (6.3.8) para el proceso (SQA); ISO/IEC/IEEE 29119 (procesos y técnicas de prueba) para la prueba de rendimiento (QC); en el Estado peruano, la NTP-ISO/IEC 12207:2016 es la referencia de procesos de SW.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Disponibilidad en ventana crítica</td><td>(tiempo total − downtime) / tiempo total</td><td>≥ 99,5 % (≤ 21,6 min en 72 h)</td></tr>
+<tr><td>Cobertura de prueba de carga</td><td>usuarios simulados / pico esperado</td><td>≥ 150 %</td></tr>
+<tr><td>Tiempo de respuesta p95</td><td>percentil 95 del envío de la declaración</td><td>≤ 3 s</td></tr>
+<tr><td>Cambios sin regresión</td><td>cambios desplegados sin regresión / cambios desplegados</td><td>0 %</td></tr>
+<tr><td>Tasa de reclamos</td><td>reclamos / declaraciones × 1 000</td><td>de 31,7 ‰ a ≤ 2 ‰</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) poner "pruebas de carga" bajo SQA: la prueba es QC; lo SQA es <b>exigir</b> que el plan de pruebas incluya rendimiento con perfil real y auditar que se cumpla; (2) confundir SQ con SQA: la calidad de SW es el <i>estado o atributo</i> (meta), no una actividad; (3) olvidar que la "pregunta que responde" es distinta en cada columna; (4) creer que la culpa es de los testers: la p10 y la p21 dicen que la calidad la consiguen <b>todos</b> los involucrados. La solución no es única: una institución con poco presupuesto puede empezar por la Alternativa A (barata, procedimental) y otra con nube por la C.</div>
+</details>
+</section>
+<section id="caso-4" class="caso">
+<h2>Caso 4 · Therac-25 (1985–1987): el caso que ningún grupo trabajó</h2>
+<p class="origen">Origen: Diapositivas 25 y 26 (clase) + complemento de Leveson &amp; Turner, IEEE Computer 1993 (<a href="https://web.stanford.edu/class/cs240/old/sp2014/readings/therac-25.pdf">fuente</a>)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>AECL (Atomic Energy of Canada Limited) fabrica el <b>Therac-25</b>, acelerador lineal de radioterapia controlado por SW. Datos del caso:</p>
+<ul>
+<li>Los modelos previos (Therac-6 y Therac-20) tenían <b>interbloqueos (interlocks) de HW</b> que impedían disparar el haz sin el escudo; el Therac-25 los <b>eliminó</b> y confió solo en el SW.</li>
+<li>El SW se <b>reutilizó</b> de los modelos previos; lo escribió un único programador y no tuvo revisión independiente (sin IV&amp;V – Independent Verification and Validation).</li>
+<li>Si el operador editaba el modo de tratamiento en la terminal en menos de ~8 s, una <b>condición de carrera</b> (race condition) dejaba el haz de electrones a <b>máxima potencia sin colocar el escudo</b>.</li>
+<li>Un segundo defecto: un contador de <b>1 byte</b> se desbordaba cada 256 pasadas y en ese instante se omitía un chequeo de seguridad.</li>
+<li>El SW mostraba "<b>Malfunction 54</b>", mensaje críptico no documentado en el manual; el operador podía reanudar con una sola tecla y lo hacía.</li>
+<li>El FTA (Fault Tree Analysis – Análisis de Árbol de Fallas) de AECL excluyó al SW. Tras los primeros accidentes AECL respondió que "era imposible" una sobredosis.</li>
+<li>Resultado (p25): al menos <b>seis pacientes</b> recibieron sobredosis masivas; lesiones graves y muertes.</li>
+</ul>
+</div>
+<h3>Se pide</h3><ol>
+<li>Identificar al menos 7 fallas y clasificarlas en QC / SQA / diseño / usabilidad / gestión.</li>
+<li>Explicar por qué un mensaje de error genérico es un defecto de <b>usabilidad</b> (p11–p12) con consecuencias de <b>seguridad física</b>.</li>
+<li>Explicar el rol de la IV&amp;V y por qué su ausencia es una falla de SQA.</li>
+<li>Calcular la probabilidad de que una pasada coincida con el desborde del contador y explicar por qué las pruebas "normales" no lo encontraban.</li>
+<li>Indicar qué normas actuales lo habrían impedido y relacionarlo con la lección del caso 4 en la p26.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>#</th><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo / lente</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Race condition al editar rápido</td><td>Diseño concurrente sin sincronización; sin estándar de programación concurrente</td><td>p25: "si el operador modificaba los comandos demasiado rápido"</td><td>Confiabilidad → madurez · QC no la detectó, SQA no exigía revisión de concurrencia</td></tr>
+<tr><td>2</td><td>Se eliminaron los interlocks de HW</td><td>Decisión de diseño de sistema basada en confianza excesiva en SW reutilizado</td><td>Therac-20 sí los tenía</td><td>Seguridad física (safety) · diseño</td></tr>
+<tr><td>3</td><td>Reutilización sin revalidación</td><td>No había procedimiento de reutilización que exija re-verificar en el nuevo contexto</td><td>SW de Therac-6/20</td><td>SQA (como Ariane 5)</td></tr>
+<tr><td>4</td><td>Contador de 1 byte que salta un chequeo</td><td>Sin análisis de valores límite ni inspección de código crítico</td><td>Desborde cada 256 pasadas</td><td>Confiabilidad · QC</td></tr>
+<tr><td>5</td><td>"Malfunction 54" críptico y reanudable con una tecla</td><td>Requisitos de interfaz sin análisis de error humano; sin documentación</td><td>Los operadores lo ignoraban (p25)</td><td>Usabilidad → entendible/operable; 25010: protección contra errores de usuario</td></tr>
+<tr><td>6</td><td>Un único programador, sin revisión independiente</td><td>Sin SQA independiente ni IV&amp;V</td><td>p25: análisis posterior apunta a desarrollo sin auditoría</td><td>SQA</td></tr>
+<tr><td>7</td><td>FTA sin el SW</td><td>Análisis de riesgos incompleto (se asumió que el SW no falla)</td><td>Leveson &amp; Turner</td><td>SQA / gestión de riesgos</td></tr>
+<tr><td>8</td><td>Negación tras los primeros accidentes</td><td>Sin proceso de gestión de incidentes ni RCA (Root Cause Analysis)</td><td>Respuesta "imposible"</td><td>Gestión organizacional</td></tr>
+</tbody></table></div>
+<h4>2. Usabilidad con consecuencias de seguridad</h4>
+<p>La p12 pregunta si las operaciones son fáciles de entender y si la salida es legible. "Malfunction 54" no dice qué pasó ni qué hacer: falla <i>entendible</i> (p11). Como el sistema permitía reanudar con una tecla, el diseño <b>indujo</b> el error humano: el operador no "ignoró" por negligencia, el SW lo empujó. En ISO/IEC 25010:2023 esto toca la <b>Capacidad de interacción</b> (protección contra errores del usuario) y la nueva característica <b>Protección/Safety</b> (fail safe, alerta de peligro).</p>
+<h4>3. IV&amp;V</h4>
+<p>La IV&amp;V es verificación y validación realizadas por una organización <b>técnica, administrativa y financieramente independiente</b> del equipo de desarrollo (IEEE 1012). En SW de alta integridad es obligatoria porque el autor tiende a probar lo que cree que hizo. Su ausencia es SQA porque es una decisión del <b>proceso</b> (quién verifica y con qué independencia), no un defecto del código.</p>
+<h4>4. Probabilidad del desborde</h4>
+<p>P(pasada coincide con el desborde) = 1/256 = <b>0,39 %</b>. Una prueba funcional típica de 20–50 ejecuciones tiene probabilidad 1 − (255/256)<sup>50</sup> ≈ <b>17,8 %</b> de toparse con él una sola vez, y aun así debe coincidir con la acción del operador. Por eso se necesitan técnicas <b>estáticas</b> (inspección, análisis de valores límite del tipo de dato) y no solo pruebas dinámicas.</p>
+<div class="alt"><h4>Alternativa A · Seguridad por diseño (defensa física + SW)</h4><ul><li>Restituir interlocks de HW independientes del SW (principio de "no confiar en un solo punto de falla").</li><li>Estado seguro por defecto (fail-safe): ante cualquier inconsistencia el haz se bloquea y exige intervención del físico médico, no una tecla.</li><li>Mensajes de error explícitos y documentados ("Dosis no entregada: escudo no posicionado. NO reanudar").</li></ul></div>
+<div class="alt"><h4>Alternativa B · SQA de alta integridad (proceso regulado)</h4><ul><li>Ciclo de vida según IEC 62304 con clase de seguridad C (puede causar muerte o lesión grave): plan de desarrollo, arquitectura segregada, verificación de unidades, pruebas de integración y de sistema documentadas.</li><li>Gestión de riesgos según ISO 14971 que incluya los peligros originados por SW; FTA/FMEA (Failure Mode and Effects Analysis) con el SW dentro del árbol.</li><li>IV&amp;V según IEEE 1012 con nivel de integridad 4 (máximo).</li><li>Vigilancia post-comercialización: todo incidente reportado activa un RCA en ≤ 48 h y comunicación a la autoridad (FDA – Food and Drug Administration; en Perú, DIGEMID).</li></ul></div>
+<div class="alt"><h4>Alternativa C · QC intensivo de concurrencia y límites</h4><p>Pruebas de estrés de la interfaz con ediciones a velocidad de operador experto, análisis estático de data races, inspección formal de todo contador y variable de control, pruebas de valores límite (255, 256, 257).</p></div>
+<div class="norma"><h4>IEC 62304:2006 + Amd 1:2015</h4>
+<p><b>Organismo:</b> IEC (International Electrotechnical Commission). <b>Propósito:</b> procesos del ciclo de vida del SW de dispositivos médicos. <b>Estructura:</b> procesos de desarrollo, mantenimiento, gestión de riesgos (remite a ISO 14971), gestión de la configuración y resolución de problemas; clases de seguridad A (sin lesión), B (lesión no grave) y C (muerte o lesión grave). <b>Trampa típica:</b> la IEC 62304 no define cómo gestionar el riesgo: lo delega a la <b>ISO 14971</b>; y la clase se decide por la severidad del daño posible, no por la probabilidad.</p></div>
+<div class="norma"><h4>IEEE 1012-2016 (V&amp;V de sistemas, SW y HW)</h4>
+<p><b>Organismo:</b> IEEE. <b>Versión:</b> 2016 (antes 1998, 2004, 2012). <b>Propósito:</b> procesos de verificación y validación. <b>Estructura:</b> 4 <b>niveles de integridad</b> (1 bajo a 4 alto) que determinan las tareas mínimas de V&amp;V; define la independencia técnica, administrativa y financiera de la IV&amp;V. <b>Trampa típica:</b> verificación = "¿construimos el producto correctamente?" (contra la especificación); validación = "¿construimos el producto correcto?" (contra la necesidad real).</p></div>
+<h4>Justificación normativa y lección p26</h4>
+<p>La p26 dice que este caso obligó a industrias críticas (médica, aeroespacial, automotriz) a adoptar <b>regulaciones estrictas</b>: hoy IEC 62304 + ISO 14971 (médica), DO-178C (aeronáutica), ISO 26262 (automotriz) e IEC 61508 (seguridad funcional genérica). Todas exigen lo que faltó: análisis de riesgos que incluya el SW, independencia de la verificación, trazabilidad requisito–prueba y gestión de incidentes.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Cobertura de peligros</td><td>peligros con control verificado / peligros identificados (ISO 14971)</td><td>100 %</td></tr>
+<tr><td>Cobertura de código crítico (MC/DC)</td><td>condiciones cubiertas / condiciones del módulo de dosis</td><td>100 %</td></tr>
+<tr><td>Mensajes de error documentados</td><td>códigos con causa y acción en el manual / códigos totales</td><td>100 %</td></tr>
+<tr><td>Tiempo de RCA de incidente</td><td>horas desde el reporte hasta la causa raíz</td><td>≤ 48 h</td></tr>
+<tr><td>Data races abiertas al release</td><td>conteo por análisis estático</td><td>0</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) culpar a los operadores ("ignoraban la advertencia"): el diseño del mensaje y la reanudación con una tecla son defectos del producto y del proceso; (2) decir que bastaba con "más pruebas": el desborde aparece con 0,39 % de probabilidad, las técnicas estáticas e IV&amp;V eran indispensables; (3) confundir IEC 62304 con ISO 13485 (sistema de gestión de calidad del fabricante, no ciclo de vida del SW); (4) olvidar la <b>reutilización</b>, que conecta el Therac-25 con el Ariane 5. La solución no es única: un regulador priorizaría la Alternativa B; un ingeniero de seguridad, la A; lo correcto en examen es combinarlas.</div>
+</details>
+</section>
+
+<section id="caso-5" class="caso">
+<h2>Caso 5 · Apagón del noreste de EE.UU. y Canadá (2003) — entregable del G3</h2>
+<p class="origen">Origen: Diapositiva 23 (clase) | Entregable G3 (grupo del alumno) | Grupo 01 | Grupo 02 | complemento: U.S.–Canada Power System Outage Task Force, informe final 2004</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>El 14 de agosto de 2003 la eléctrica FirstEnergy (Ohio) opera el EMS (Energy Management System – Sistema de Gestión de Energía) <b>XA/21</b> de General Electric Energy. Líneas de alta tensión sobrecargadas tocan <b>árboles sin podar</b> y salen de servicio, generando una ráfaga de eventos de telemetría SCADA (Supervisory Control And Data Acquisition). Una <b>condición de carrera</b> en el subsistema de alarmas congela el sistema en un bucle de eventos: la alarma <b>deja de funcionar sin avisar</b> (falla silenciosa). El servidor primario cae y el <b>servidor de respaldo, con el mismo SW</b>, hereda la cola de eventos y también cae. Durante más de una hora los operadores no reciben alertas; el personal de TI sabe que hay fallas de servidor pero no informa a la sala de control. El coordinador regional tampoco detecta el problema porque su herramienta de estimación de estado estaba fuera de servicio. La falla se propaga en cascada: <b>50 millones de personas sin luz durante dos días</b> en 8 estados y Ontario, pérdidas de <b>US$ 6 000 millones</b>.</p>
+<p>La consigna de la Semana 1 pidió: (a) explicar qué pasó y su consecuencia, (b) identificar fallas en la gestión de la calidad y (c) justificar si es un problema de SQA o de QC "modificando" el caso.</p>
+</div>
+<h3>Se pide</h3><ol>
+<li>Redactar un "párrafo añadido" (técnica del G3) que convierta el caso en un problema de SQA y justificarlo con las p16–p21.</li>
+<li>Elaborar la tabla problema – causa raíz – evidencia – atributo ISO 9126 y clasificar cada problema en QC, SQA u operación.</li>
+<li>Construir un Ishikawa 6M (integra con S2) del efecto "operadores sin alarmas".</li>
+<li>Usar los 4 pilares de "Lograr la calidad" (p14–p15) para mostrar qué falló en cada uno.</li>
+<li>Proponer al menos tres alternativas de solución, elegir una con presupuesto limitado, citar normas y definir KPI con umbral.</li>
+<li>Comparar cómo lo resolvieron G1, G2 y G3.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. Párrafo añadido del G3 y justificación</h4>
+<blockquote>Párrafo del G3 (parafraseado): el incidente evidenció que no se establecieron controles suficientes para <b>identificar y prevenir</b> errores de concurrencia antes de pasar a producción; la ausencia de <b>estándares</b> de revisión, procedimientos de <b>verificación</b> y <b>mecanismos de seguimiento</b> de escenarios críticos permitió que la condición de carrera permaneciera en el sistema.</blockquote>
+<p><b>Justificación (versión mejorada para examen):</b> es un problema de SQA porque la race condition es solo el <i>síntoma en el producto</i>; la <i>causa raíz</i> es un proceso que (a) no exigía estándares de programación concurrente, (b) no obligaba a revisiones técnicas formales del código crítico, (c) no gestionó el riesgo "alarma silenciosa" desde los requisitos y (d) no planificó pruebas de estrés ni de failover. Un QC más intenso quizá habría detectado <i>este</i> defecto, pero sin corregir el proceso se inyectarían otros del mismo tipo. El SQA es proactivo y está orientado al proceso (p16, p20); su definición (p17) es aportar <b>confianza</b> de que el proceso cumple estándares: aquí no había estándares que cumplir.</p>
+<p>Mapeo de las palabras del G3: <b>estándares</b> de revisión → "definición de estándares de codificación" y "revisiones técnicas formales" (p17) → IEEE 1028 / IEEE 730; <b>verificación</b> → "auditorías de procesos" → IEEE 1012 / 12207 §6.4.9; <b>seguimiento</b> de escenarios críticos → "gestión de la configuración y análisis de riesgos" + "planificación del riesgo" (p14) → 12207 §6.3.4; <b>identificar y prevenir</b> → definición p16.</p>
+<h4>2. Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>#</th><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO 9126 / 25010</th><th>Lente</th></tr></thead>
+<tbody>
+<tr><td>P1</td><td>Race condition en el subsistema de alarmas</td><td>Sin estándar de programación concurrente ni inspección de código crítico</td><td>p23 "bucle de eventos"</td><td>Confiabilidad → madurez</td><td>QC detecta / SQA previene</td></tr>
+<tr><td>P2</td><td>Falla silenciosa</td><td>El SRS no exigía autodiagnóstico (watchdog/heartbeat); sin FMEA</td><td>G1: "dejó de emitir alertas en silencio"</td><td>Confiabilidad → tolerancia a fallas</td><td>SQA (requisitos)</td></tr>
+<tr><td>P3</td><td>El servidor de respaldo también cae</td><td>Redundancia con el mismo SW = falla de modo común; failover nunca probado bajo ráfaga</td><td>Task Force 2004; G1</td><td>Confiabilidad → robustez/recuperabilidad</td><td>QC + diseño</td></tr>
+<tr><td>P4</td><td>Sin pruebas de concurrencia/estrés</td><td>Plan de pruebas sin escenarios críticos</td><td>G2, G3</td><td>Eficiencia → comportamiento del tiempo</td><td>QC</td></tr>
+<tr><td>P5</td><td>Sin estándares de revisión ni verificación</td><td>No existía SQAP ni RTF obligatorias</td><td>Párrafo añadido G3</td><td>(proceso)</td><td>SQA</td></tr>
+<tr><td>P6</td><td>Sin seguimiento de escenarios críticos</td><td>Sin gestión de riesgos ni RTM (Requirements Traceability Matrix)</td><td>G3 "mecanismos de seguimiento"</td><td>(proceso)</td><td>SQA</td></tr>
+<tr><td>P7</td><td>TI no avisó a los operadores</td><td>Sin procedimiento de gestión de incidentes TI ↔ operación</td><td>Task Force 2004</td><td>(organización)</td><td>SQA / gestión</td></tr>
+<tr><td>P8</td><td>Árboles tocando líneas</td><td>Gestión de vegetación deficiente (disparador físico, no SW)</td><td>p23</td><td>—</td><td>Fuera del SW</td></tr>
+</tbody></table></div>
+<h4>3. Ishikawa 6M (efecto: operadores sin alarmas → apagón)</h4>
+<div class="tabla"><table>
+<thead><tr><th>M</th><th>Causas</th></tr></thead>
+<tbody>
+<tr><td>Mano de obra</td><td>Desarrolladores sin capacitación en concurrencia; operadores no entrenados para notar el "silencio anómalo"; TI que no escaló</td></tr>
+<tr><td>Método</td><td>Sin SQAP (IEEE 730), sin RTF/inspecciones (IEEE 1028), sin FMEA/HAZOP del subsistema de alarmas, sin procedimiento de incidentes</td></tr>
+<tr><td>Máquina</td><td>Primario y respaldo con el mismo SW; sin watchdog de la función de alarmas</td></tr>
+<tr><td>Material</td><td>SRS sin requisitos de concurrencia, latencia ni autodiagnóstico; ráfaga anómala de eventos SCADA</td></tr>
+<tr><td>Medición</td><td>Sin KPI de latencia de alarma, sin monitoreo del propio proceso de alarmas, sin DRE</td></tr>
+<tr><td>Medio ambiente</td><td>Verano de alta demanda, vegetación sin podar, normas NERC (North American Electric Reliability Corporation) voluntarias en 2003, silos entre TI y sala de control</td></tr>
+</tbody></table></div>
+<h4>4. Cuatro pilares de "Lograr la calidad" (p14–p15)</h4>
+<div class="tabla"><table>
+<thead><tr><th>Pilar</th><th>Qué falló</th></tr></thead>
+<tbody>
+<tr><td>Métodos de ingeniería (requisitos y diseño)</td><td>No se especificó el comportamiento ante eventos concurrentes ni el autodiagnóstico; diseño sin sincronización y redundancia no diversa</td></tr>
+<tr><td>Administración de proyectos (riesgo)</td><td>Nadie preguntó "¿qué puede salir mal si la alarma se cuelga sin avisar?" ni definió contingencia</td></tr>
+<tr><td>Control de calidad (revisión, inspección, métricas)</td><td>No se inspeccionó el código concurrente; no se midió la latencia de alarma</td></tr>
+<tr><td>Aseguramiento (infraestructura, auditoría, informes)</td><td>No hubo auditoría de proceso ni informes que obligaran a revisar escenarios críticos</td></tr>
+</tbody></table></div>
+<h4>5. Alternativas de solución</h4>
+<div class="alt"><h4>Alternativa A · SQA: prevenir en el proceso (la que defiende el G3)</h4><ol><li>SQAP según IEEE 730 para el EMS con estándar de programación concurrente (mutex/semáforos obligatorios, prohibido estado compartido sin sincronizar).</li><li>RTF e inspecciones según IEEE 1028 obligatorias para módulos críticos (alarmas, failover) con checklist de concurrencia.</li><li>Gestión de riesgos desde requisitos (12207 §6.3.4): FMEA del subsistema de alarmas con el modo de falla "alarma silenciosa" en severidad máxima.</li><li>RTM que ligue cada requisito de seguridad ("toda sobrecarga genera alarma en &lt; 2 s") con su caso de prueba y su revisión.</li><li>Auditorías SQA periódicas y capacitación (p17).</li></ol></div>
+<div class="alt"><h4>Alternativa B · QC: detectar en el producto (la que defiende el G2)</h4><ol><li>Pruebas de estrés y carga con "tormentas" de eventos simultáneos (lección p26).</li><li>Análisis estático de data races (SAST, p.ej. ThreadSanitizer, Helgrind, Coverity), inyección de fallas y prueba de failover del respaldo.</li><li>Pruebas de integración y sistema en un entorno réplica (staging) con datos SCADA reales.</li></ol></div>
+<div class="alt"><h4>Alternativa C · Operación y monitoreo: contener el daño (lección p26 "monitoreo en tiempo real")</h4><ol><li>Watchdog/heartbeat del proceso de alarmas: si deja de "latir", se dispara una alarma independiente ("la alarma de la alarma", diseño fail-safe).</li><li>Redundancia <b>diversa</b> (respaldo con SW distinto o versión N-1) para evitar el modo común.</li><li>Protocolo de gestión de incidentes TI ↔ operadores con escalamiento obligatorio en &lt; 5 min.</li></ol></div>
+<p><b>Con presupuesto limitado:</b> priorizar el watchdog (Alternativa C.1) porque es barato y convierte una falla silenciosa en una falla <i>visible</i>, lo que reduce el MTTD de &gt; 1 h a minutos; en paralelo, iniciar la Alternativa A, que es la única que ataca la causa raíz. La mejor respuesta de examen combina A + B + C (defensa en profundidad).</p>
+<div class="norma"><h4>IEEE 730-2014 (SQA Processes)</h4>
+<p><b>Organismo:</b> IEEE (Institute of Electrical and Electronics Engineers). <b>Versión:</b> IEEE Std 730-2014 (antes 730-1998/2002 "Standard for SQA Plans"). <b>Propósito:</b> requisitos para iniciar, planificar, controlar y ejecutar los procesos de SQA de un proyecto; alineada con ISO/IEC/IEEE 12207. <b>Estructura:</b> actividades de implementación del proceso SQA, aseguramiento del producto, aseguramiento del proceso y el contenido del <b>SQAP</b> (propósito, referencias, organización e independencia, estándares y prácticas, revisiones, medición, gestión de riesgos, registros). <b>Trampa típica:</b> el SQAP es un plan del <b>proyecto</b>, no de la organización; y exige independencia organizacional del SQA respecto del jefe de desarrollo (se ve a fondo en S4).</p></div>
+<div class="norma"><h4>IEC 61508 (seguridad funcional E/E/PE)</h4>
+<p><b>Organismo:</b> IEC. <b>Versión:</b> 2.ª edición 2010, 7 partes (la parte 3 trata el SW). <b>Propósito:</b> seguridad funcional de sistemas eléctricos, electrónicos y electrónicos programables. <b>Estructura:</b> ciclo de vida de seguridad y 4 niveles SIL (Safety Integrity Level 1–4) que fijan técnicas recomendadas (p.ej. diversidad, análisis estático, pruebas de fallas). <b>Trampa típica:</b> el SIL se asigna a la <b>función de seguridad</b> (p.ej. "alarmar ante sobrecarga"), no al sistema completo.</p></div>
+<h4>Justificación normativa</h4>
+<p>IEEE 730 (SQAP y estándares), IEEE 1028 (revisiones e inspecciones), IEEE 1012 (V&amp;V; el EMS tendría nivel de integridad alto), ISO/IEC/IEEE 12207:2017 (6.3.4 Gestión de riesgos, 6.3.8 Aseguramiento de la calidad, 6.4.9 Verificación, 6.4.11 Validación), ISO/IEC 9126/25010 (Confiabilidad: madurez, tolerancia a fallos, recuperabilidad) e IEC 61508 (función de alarma como función de seguridad). En el sector, tras el apagón la ley EPAct 2005 hizo obligatorias las normas de confiabilidad NERC.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Latencia de alarma p99</td><td>percentil 99 de (t alarma visible − t evento)</td><td>≤ 2 s</td></tr>
+<tr><td>MTTD (Mean Time To Detect) de falla del subsistema de alarmas</td><td>Σ tiempos de detección / n.º de fallas</td><td>≤ 1 min (en 2003 fue &gt; 1 h)</td></tr>
+<tr><td>Disponibilidad del heartbeat</td><td>tiempo con latido OK / tiempo total</td><td>≥ 99,99 %</td></tr>
+<tr><td>DRE</td><td>defectos pre-release / (pre + post) × 100</td><td>≥ 95 %</td></tr>
+<tr><td>Cobertura de inspección de módulos críticos</td><td>módulos críticos inspeccionados / módulos críticos</td><td>100 %</td></tr>
+<tr><td>Data races críticas abiertas al release</td><td>conteo SAST</td><td>0</td></tr>
+<tr><td>Éxito de failover bajo ráfaga</td><td>escenarios exitosos / escenarios del plan</td><td>100 %</td></tr>
+</tbody></table></div>
+<p><b>CoQ (p13):</b> un defecto atrapado en diseño cuesta ≈ US$ 455; el escapado costó a la región US$ 6 000 M. Aunque el programa SQA costara US$ 5 M, su costo sería 0,08 % de la pérdida.</p>
+<h4>Cómo lo resolvieron los grupos</h4>
+<div class="tabla"><table>
+<thead><tr><th>Criterio</th><th>G3 (alumno)</th><th>G1</th><th>G2</th></tr></thead>
+<tbody>
+<tr><td>Lente final</td><td>QC → SQA</td><td>QC → SQA (ambas)</td><td>Solo QC</td></tr>
+<tr><td>Técnica de modificación</td><td><b>Párrafo añadido</b> al caso original</td><td>Reescritura ("Caso modificado")</td><td>Contrafáctico ("habría sometido a pruebas")</td></tr>
+<tr><td>Causa raíz declarada</td><td>Ausencia de estándares de revisión, procedimientos de verificación y seguimiento de escenarios críticos</td><td>Proceso sin reglas de concurrencia, sin revisión de diseño, sin riesgos en requisitos ("el proceso jamás construyó filtros desde el inicio")</td><td>Falta de pruebas funcionales, de integración y de estrés</td></tr>
+<tr><td>Detalle técnico</td><td>Medio</td><td>Alto (XA/21, respaldo caído, falla silenciosa, 8 estados + Ontario)</td><td>Bajo (y error de título: "noroeste")</td></tr>
+<tr><td>Soluciones</td><td>Implícitas (revisión, pruebas, validación en entornos específicos)</td><td>QC: estrés/carga; SQA: reglas de concurrencia, revisión entre pares, riesgos desde requisitos</td><td>Pruebas funcionales, integración, estrés</td></tr>
+<tr><td>Fortaleza</td><td>Fiel a los hechos; vocabulario exacto de la profesora</td><td>El más técnico; complementariedad QC + SQA</td><td>Tres pruebas ligadas a tres requisitos verificables</td></tr>
+<tr><td>Debilidad</td><td>Sin normas, sin KPI, sin falla silenciosa ni modo común; mezcla "pruebas" dentro del argumento SQA</td><td>Sin normas ni KPI; sin monitoreo (p26)</td><td>No responde a la consigna SQA; QC reactivo respecto del defecto</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) el G3 incluyó "pruebas y validaciones" en la justificación SQA sin aclarar que el SQA las <b>planifica y exige</b> y el QC las <b>ejecuta</b>: es la repregunta típica de la profesora; (2) creer que la redundancia protegía: con el mismo SW, ambos servidores fallan igual (modo común); (3) culpar solo a los árboles: son el disparador, no la causa de que nadie se enterara; (4) decir que el operador era GE: GE Energy fue el <b>proveedor</b> del SW (así lo dice la p23); el operador era FirstEnergy; (5) la propuesta del G2 es QC "preventivo respecto del usuario" pero <b>reactivo respecto del defecto</b>: detecta un defecto ya inyectado, no impide escribirlo. Tres grupos, tres soluciones defendibles: la calidad no tiene solución única, lo que se evalúa es la coherencia entre causa raíz y lente.</div>
+</details>
+</section>
+<section id="caso-6" class="caso">
+<h2>Caso 6 · Ariane 5, vuelo 501 (1996): reutilización sin requalificación — entregables G4 y G7</h2>
+<p class="origen">Origen: Diapositivas 24 y 26 (clase) | Grupo 04 (tres lentes QC/SQA/SQ) | Grupo 07 (QC → SQA, "doble falla en cadena") | complemento: Informe de la Junta de Investigación (Lions) ESA/CNES, 1996</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<figure><img src="@img/semana-01-calidad-de-software/p24.png" alt="Diapositiva del caso histórico 3: explosión del cohete Ariane 5 en 1996 por desbordamiento de enteros al convertir la velocidad horizontal de 64 bits a 16 bits"><figcaption>Caso histórico 3 presentado en clase.</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 24, Semana 01.</p>
+<p>El 4 de junio de 1996 la ESA (European Space Agency – Agencia Espacial Europea) lanza desde Kourou el vuelo inaugural 501 del Ariane 5. Datos de la investigación:</p>
+<ul>
+<li>El SW del SRI (Sistema de Referencia Inercial) se <b>reutilizó del Ariane 4</b>, donde llevaba años sin fallas. Está escrito en Ada.</li>
+<li>Una función de <b>alineamiento</b>, útil solo antes del despegue, sigue ejecutándose unos <b>40 s</b> después del lanzamiento (herencia del Ariane 4).</li>
+<li>Esa función convierte el sesgo horizontal BH (Horizontal Bias, float de <b>64 bits</b>) a entero con signo de <b>16 bits</b> (máximo 32 767). De 7 variables de riesgo, <b>3 quedaron sin manejo de excepción</b> para no superar una meta de <b>80 %</b> de uso de CPU (Central Processing Unit).</li>
+<li>La trayectoria del Ariane 5 es más rápida: BH llega a valores ~5 veces mayores que en el Ariane 4. Las trayectorias del Ariane 5 <b>no se incluyeron en la especificación</b> del SRI.</li>
+<li>Al desbordarse la conversión (Operand Error), el SRI principal se apaga; el SRI de respaldo, con el <b>mismo SW</b>, había caído 72 ms antes por la misma razón.</li>
+<li>El OBC (On-Board Computer – computador de a bordo) interpreta el patrón de diagnóstico como datos de vuelo, ordena deflexión máxima de toberas y a los <b>37 s</b> el cohete se autodestruye. Pérdida: <b>US$ 370 M</b> y años de retraso (p24).</li>
+<li>No se hizo prueba de integración en lazo cerrado (HIL, Hardware-in-the-Loop) del SRI con el perfil de vuelo real del Ariane 5: se usaron datos simulados.</li>
+</ul>
+<p>Dos grupos analizaron el caso: el <b>G4</b> lo redactó con las tres lentes (QC, SQA y SQ) y el <b>G7</b> como "caso modificado" de QC a SQA con un cuadro aspecto por aspecto.</p>
+</div>
+<h3>Se pide</h3><ol>
+<li>Redactar el caso desde las tres lentes de la p21 (SQ, SQA, QC) y señalar la causa raíz de cada una.</li>
+<li>Elaborar el cuadro comparativo QC vs SQA aspecto por aspecto (formato G7).</li>
+<li>Explicar por qué la redundancia del SRI no protegió el vuelo y qué técnica sí lo habría hecho.</li>
+<li>Proponer un procedimiento SQA de <b>reutilización de componentes</b> con criterios de entrada y salida.</li>
+<li>Con la curva de la p13, estimar el costo relativo de haber detectado el defecto en requisitos frente a operación.</li>
+<li>Comparar las soluciones de G4 y G7 y decir qué le faltó a cada una.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. Las tres lentes (p21)</h4>
+<div class="tabla"><table>
+<thead><tr><th>Lente</th><th>Redacción del caso</th><th>Causa raíz</th><th>Pregunta p21 → respuesta</th></tr></thead>
+<tbody>
+<tr><td>SQ (objetivo)</td><td>Nunca se fijó como meta la confiabilidad y la seguridad del SRI <b>en el nuevo entorno</b>; se asumió que "si voló en el Ariane 4, vuela en el 5".</td><td>Atributos de calidad (confiabilidad: tolerancia a fallas; funcionalidad: exactitud) no redefinidos para el nuevo contexto de uso</td><td>¿Es confiable y seguro? → No para el Ariane 5</td></tr>
+<tr><td>SQA (proceso)</td><td>No había política de reutilización ni revisión formal de requisitos de <b>tipos y rangos de datos</b>; la decisión de dejar 3 variables sin protección no pasó por análisis de riesgos.</td><td>Proceso sin requalificación de componentes reutilizados ni RTF (Revisión Técnica Formal) de supuestos heredados</td><td>¿Usamos los procesos correctos? → No</td></tr>
+<tr><td>QC (producto)</td><td>No se probó el SRI integrado con la trayectoria real; ni análisis de valores límite de BH.</td><td>Plan de pruebas de integración con datos simulados del Ariane 4</td><td>¿El producto funciona libre de fallos? → No, con datos del Ariane 5</td></tr>
+</tbody></table></div>
+<h4>2. Cuadro QC vs SQA (formato G7, enriquecido)</h4>
+<div class="tabla"><table>
+<thead><tr><th>Aspecto</th><th>Caso inicial – QC</th><th>Caso modificado – SQA</th></tr></thead>
+<tbody>
+<tr><td>Problema</td><td>Overflow 64 → 16 bits en la variable BH</td><td>El defecto llegó al vuelo porque nadie revisó el supuesto de rango heredado</td></tr>
+<tr><td>Origen</td><td>Faltaron pruebas de integración avanzadas con datos reales (p24)</td><td>No existía procedimiento de reutilización ni revisión obligatoria de requisitos, diseño y código</td></tr>
+<tr><td>Momento</td><td>Fase de verificación (ya hay código)</td><td>Todo el ciclo (requisitos → diseño → integración)</td></tr>
+<tr><td>Técnica</td><td>HIL con perfil Ariane 5, análisis de valores límite, pruebas de robustez</td><td>Política de reutilización, análisis de riesgos, RTF de supuestos, auditoría</td></tr>
+<tr><td>Responsable</td><td>Equipo de pruebas e integración</td><td>Ingenieros de proceso, líder de proyecto, aseguramiento independiente</td></tr>
+</tbody></table></div>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO 9126 (p11) → ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Conversión 64 → 16 bits sin protección</td><td>Optimización de CPU (meta 80 %) priorizada sobre robustez sin análisis de riesgo documentado</td><td>3 de 7 variables sin manejador</td><td>Confiabilidad → tolerancia a fallas / Fiabilidad → tolerancia a fallos</td></tr>
+<tr><td>Supuesto de rango del Ariane 4 aplicado al Ariane 5</td><td>Reutilización sin requalificación; trayectorias nuevas fuera del SRS del SRI</td><td>BH ~5× mayor</td><td>Funcionalidad → exactitud / Adecuación funcional → corrección</td></tr>
+<tr><td>Función inútil ejecutándose en vuelo</td><td>Requisito heredado no revisado (código "vivo" sin propósito)</td><td>Alineamiento corre 40 s post despegue</td><td>Mantenibilidad → analizable / Mantenibilidad → analizabilidad</td></tr>
+<tr><td>Respaldo idéntico falla igual</td><td>Redundancia solo de HW: falla de modo común</td><td>Respaldo cae 72 ms antes</td><td>Confiabilidad → madurez / Fiabilidad → disponibilidad</td></tr>
+<tr><td>OBC toma diagnóstico como dato</td><td>Interfaz SRI–OBC sin contrato de datos robusto</td><td>Deflexión máxima de toberas</td><td>Funcionalidad → interoperabilidad / Compatibilidad → interoperabilidad</td></tr>
+<tr><td>Sin HIL con trayectoria real</td><td>Plan de integración con datos simulados heredados</td><td>p24: "no realizar pruebas de integración avanzadas"</td><td>Mantenibilidad → susceptible de pruebas / capacidad de ser probado</td></tr>
+</tbody></table></div>
+<h4>3. Redundancia y modo común</h4>
+<p>Dos SRI con el <b>mismo SW</b> y las <b>mismas entradas</b> fallan con el mismo defecto al mismo tiempo: la redundancia de HW protege contra fallas físicas aleatorias, no contra defectos sistemáticos de SW. Lo que sí protege: (a) <b>diversidad de diseño</b> (N-version programming), (b) manejo de excepción que no apague la unidad sino que devuelva un valor saturado (programación defensiva), (c) eliminar la función innecesaria en vuelo.</p>
+<div class="alt"><h4>Alternativa A · SQA: procedimiento de reutilización de componentes</h4>
+<ul><li><b>Criterio de entrada:</b> todo componente reutilizado requiere ficha de supuestos (rangos, unidades, perfil de uso, plataforma) firmada por el dueño del componente.</li>
+<li><b>Actividades:</b> análisis de impacto del nuevo contexto; RTF del SRS heredado contra el SRS del nuevo sistema; actualización de la RTM (Requirements Traceability Matrix); análisis de riesgos (FMEA, Failure Mode and Effects Analysis) de cada supuesto violado.</li>
+<li><b>Criterio de salida:</b> 100 % de supuestos re-verificados; repetir <b>todas</b> las pruebas de integración (lección p26, caso 3); auditoría SQA que verifique la evidencia antes del vuelo.</li>
+<li>Toda decisión de "no proteger por eficiencia" pasa por el comité de riesgos y queda registrada.</li></ul></div>
+<div class="alt"><h4>Alternativa B · QC: V&amp;V con datos reales y valores límite</h4>
+<ul><li>HIL en lazo cerrado con el perfil de vuelo del Ariane 5 (no solo simulación del Ariane 4).</li>
+<li>Análisis de valores límite y de clases de equivalencia de BH (0, 32 767, 32 768, máximo físico del Ariane 5).</li>
+<li>Análisis estático (SAST) para detectar conversiones con pérdida sin manejador; revisión de excepciones.</li>
+<li>IV&amp;V (Independent Verification and Validation) por un equipo externo para SW de criticidad máxima.</li></ul></div>
+<div class="alt"><h4>Alternativa C · Arquitectura: contención del fallo</h4>
+<p>Diversidad de diseño entre SRI principal y respaldo, saturación en vez de apagado, y un contrato de interfaz SRI–OBC que distinga "dato de vuelo" de "diagnóstico". Es diseño (método de ingeniería, p14) más que QC o SQA, y es la que habría salvado el vuelo aun con el defecto presente.</p></div>
+<h4>5. Costo relativo (curva p13)</h4>
+<p>Detectar el supuesto erróneo en requisitos: <b>US$ 139</b>; en mantenimiento/operación: <b>US$ 14 102</b> → razón 14 102 / 139 ≈ <b>101×</b> (la "Ley de Boehm" de la p03: hasta 100×). En el Ariane el costo real en operación fue de US$ 370 M: la curva es una media de proyectos comerciales; en sistemas críticos la cola de la distribución es órdenes de magnitud mayor (NASA reporta multiplicadores de operación de 29× a más de 1 500×).</p>
+<div class="norma"><h4>IEEE 1012 (System, Software, and Hardware Verification and Validation)</h4>
+<p><b>Organismo:</b> IEEE (Institute of Electrical and Electronics Engineers). <b>Versión:</b> IEEE 1012-2016 (antes 1998, 2004, 2012). <b>Propósito:</b> definir las actividades y tareas de V&amp;V (Verificación y Validación) por proceso del ciclo de vida y su intensidad según la criticidad. <b>Estructura:</b> 4 niveles de integridad (SIL/integrity levels 1–4); tareas mínimas por nivel; V&amp;V de adquisición, suministro, desarrollo, operación y mantenimiento; IV&amp;V con independencia técnica, gerencial y financiera; anexo sobre <b>reutilización</b> de SW (el SW reutilizado se evalúa en su nuevo contexto).</p>
+<p><b>Trampa de examen:</b> verificación = "¿construimos el producto correctamente?" (contra la especificación); validación = "¿construimos el producto correcto?" (contra la necesidad real). El SRI del Ariane 5 <b>pasaba la verificación</b> contra su especificación heredada y <b>fallaba la validación</b> contra la misión real.</p></div>
+<h4>Justificación normativa</h4>
+<p>IEEE 1012-2016 (V&amp;V proporcional al nivel de integridad; reutilización revalidada); ISO/IEC/IEEE 12207:2017 procesos técnicos de <b>Definición de requisitos del sistema</b> (6.4.3), <b>Integración</b> (6.4.8), <b>Verificación</b> (6.4.9) y <b>Validación</b> (6.4.11), y el proceso de gestión técnica <b>Gestión de riesgos</b> (6.3.4); IEEE 1028-2008 para la RTF/inspección de supuestos; ISO/IEC 25010 para la meta (Fiabilidad, Seguridad funcional en la versión 2023); en el sector espacial europeo, las normas ECSS-E-ST-40 (SW) y ECSS-Q-ST-80 (aseguramiento de producto de SW) nacieron reforzadas tras este caso.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Supuestos re-verificados de componentes reutilizados</td><td>supuestos verificados / supuestos listados × 100</td><td>100 %</td></tr>
+<tr><td>Cobertura de valores límite en variables críticas</td><td>variables críticas con casos de valor límite / variables críticas</td><td>100 %</td></tr>
+<tr><td>Conversiones sin protección (SAST)</td><td>n.º de conversiones con pérdida sin manejador</td><td>0</td></tr>
+<tr><td>Cobertura HIL con perfil real</td><td>escenarios de vuelo reales ejecutados / escenarios definidos</td><td>≥ 95 %</td></tr>
+<tr><td>Trazabilidad requisito–prueba (RTM)</td><td>requisitos con prueba de integración / requisitos</td><td>100 %</td></tr>
+</tbody></table></div>
+<h4>Cómo lo resolvieron los grupos</h4>
+<div class="tabla"><table>
+<thead><tr><th>Criterio</th><th>G4</th><th>G7</th></tr></thead>
+<tbody>
+<tr><td>Lentes</td><td>QC + SQA + <b>SQ</b> (las 3 columnas de p21)</td><td>QC vs SQA (cuadro por aspectos)</td></tr>
+<tr><td>Causa SQA</td><td>Reutilizar el código del Ariane 4 <b>sin plan ni normativa</b> de reutilización; auditorías y riesgos ausentes</td><td>Sin revisión formal de requisitos de <b>tipos y rangos de datos</b>, ni revisiones obligatorias de diseño/código antes de integrar</td></tr>
+<tr><td>Causa SQ</td><td>No se fijó la excelencia técnica ni los atributos de confiabilidad y seguridad; responsabilidad de toda la organización</td><td>—</td></tr>
+<tr><td>Solución QC</td><td>Pruebas de integración avanzadas con datos reales</td><td>Pruebas de integración con datos reales y <b>valores extremos</b></td></tr>
+<tr><td>Aporte distintivo</td><td>Distinguir SQ ≠ SQA ≠ QC</td><td>"Doble falla en cadena": primero SQA, luego QC</td></tr>
+<tr><td>Le faltó</td><td>SRI de respaldo y modo común; decisión de 3 variables sin protección; aplicar la tabla al caso (la copió de p21); normas y KPI</td><td>La <b>reutilización del Ariane 4</b> (la lección p26 caso 3); modo común; normas; residuos de plantilla en la última diapositiva</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) decir que el respaldo "no funcionó por mala suerte": fue <b>falla de modo común</b>; (2) atribuir todo a "falta de pruebas" (la versión literal de la p24) sin explicar <i>por qué</i> no se planificaron: esa es la causa SQA; (3) confundir SQ con SQA (G4 los separa bien: SQ es la meta, SQA el proceso); (4) afirmar que el SW "tenía un bug" en el Ariane 4: allí era correcto, el defecto surge del <b>cambio de contexto</b> (validación, no verificación); (5) olvidar que la propia profesora resume la lección como "no reutilizar código sin rehacer todas las pruebas de integración". G4 y G7 llegan a causas SQA distintas y ambas son defendibles: la calidad no tiene solución única.</div>
+</details>
+</section>
+<section id="caso-7" class="caso">
+<h2>Caso 7 · Knight Capital Group (2012): código muerto y control de configuraciones — entregables G5 y G6</h2>
+<p class="origen">Origen: Diapositivas 22 y 26 (clase) | Grupo 05 (QC → SQA organizacional) | Grupo 06 (QC técnico, 22 diapositivas) | complemento: orden de la SEC de 2013 (<a href="https://www.jrvarma.in/blog/Y2013/Knight-Capital.html">resumen</a>)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<figure><img src="@img/semana-01-calidad-de-software/p22.png" alt="Diapositiva del caso histórico 1: el bug de los 440 millones de dólares de Knight Capital Group en 2012 por código antiguo no desactivado"><figcaption>Caso histórico 1 presentado en clase.</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 22, Semana 01.</p>
+<p>Knight Capital, firma de HFT (High-Frequency Trading – negociación de alta frecuencia) que ejecutaba ~10 % del volumen de la NYSE (New York Stock Exchange), debe salir a producción el <b>1 de agosto de 2012</b> con el RLP (Retail Liquidity Program) en su enrutador de órdenes SMARS. Hechos:</p>
+<ul>
+<li>SMARS corre en un clúster de <b>8 servidores</b>; el despliegue es <b>manual</b>, sin segundo revisor ni procedimiento escrito; un técnico copia el código nuevo en 7 servidores y <b>olvida el 8.º</b>.</li>
+<li>Para activar el RLP se <b>reutiliza un flag</b> que, en el código antiguo, activaba "Power Peg", función de 2003 sin uso desde entonces pero <b>nunca eliminada</b> del repositorio (código muerto).</li>
+<li>En 2005 se modificó una función de conteo de cantidades acumuladas de la que dependía Power Peg sin volver a probarla (sin regresión).</li>
+<li>Antes de la apertura, el sistema envía <b>97 correos</b> automáticos de error "Power Peg disabled"; nadie los atiende porque no son alertas priorizadas.</li>
+<li>A las 9:30 el 8.º servidor activa Power Peg: <b>212</b> órdenes padre generan más de <b>4 millones</b> de ejecuciones en <b>154</b> acciones (~397 M de títulos). No hay <b>circuit breaker</b> ni kill switch automatizado; el equipo tarda <b>45 min</b> en detenerlo, y en un intento revierte el código bueno de los 7 servidores, empeorando el problema.</li>
+<li>Pérdida: <b>US$ 440 M</b> (p22; la SEC reporta &gt; US$ 460 M), multa SEC (Securities and Exchange Commission) de US$ 12 M por violar la regla 15c3-5; la firma queda insolvente y es adquirida.</li>
+<li>La profesora lo califica como "falla grave de <b>SQA y control de configuraciones</b>" (p22), y en la p26 lo agrupa con el apagón en la lección "monitoreo en tiempo real y pruebas de estrés (QC de rendimiento)".</li>
+</ul>
+</div>
+<h3>Se pide</h3><ol>
+<li>Clasificar cada falla (código muerto, flag reutilizado, cambio de 2005 sin regresión, despliegue manual, correos ignorados, falta de circuit breaker, reversión errónea) como QC, SQA/SCM (Software Configuration Management) o diseño/operación, justificando con p17, p19 y p20.</li>
+<li>Construir un Ishikawa 6M resumido (integración con la S2).</li>
+<li>Calcular la pérdida por minuto y el ahorro si un kill switch automático hubiese cortado a los 3 min.</li>
+<li>Proponer al menos dos alternativas con KPI, e indicar qué procesos de ISO/IEC/IEEE 12207:2017 se incumplieron.</li>
+<li>Resolver la aparente contradicción entre p22 (SQA) y p26 (QC de rendimiento).</li>
+<li>Comparar las soluciones de G5 y G6.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. Clasificación de las fallas</h4>
+<div class="tabla"><table>
+<thead><tr><th>Falla</th><th>Lente</th><th>Justificación (p17/p19/p20)</th></tr></thead>
+<tbody>
+<tr><td>Power Peg vivo 9 años en el repositorio</td><td>SQA / SCM</td><td>"Gestión de la configuración" es actividad SQA (p17): faltó política de retiro de código</td></tr>
+<tr><td>Flag reutilizado con semántica antigua</td><td>Diseño + SQA (control de cambios)</td><td>Ninguna revisión técnica formal del cambio (p17) evaluó el impacto</td></tr>
+<tr><td>Cambio de 2005 sin regresión</td><td>QC (y SQA por no exigirla)</td><td>Pruebas de regresión = QC (p19); el estándar que las exige = SQA</td></tr>
+<tr><td>Despliegue manual, 8.º servidor olvidado</td><td>SQA / SCM (y QC de despliegue)</td><td>Sin procedimiento estándar ni auditoría de configuración física</td></tr>
+<tr><td>97 correos no atendidos</td><td>Operación / monitoreo</td><td>Lección p26: monitoreo en tiempo real</td></tr>
+<tr><td>Sin circuit breaker</td><td>Requisito no funcional ausente (método de ingeniería, p14)</td><td>"¿Qué puede salir mal y cuál es su plan de contingencia?" (p14)</td></tr>
+<tr><td>Reversión que empeoró el incidente</td><td>SQA (gestión de incidentes / plan de rollback)</td><td>Sin runbook probado: no había plan de contingencia</td></tr>
+</tbody></table></div>
+<h4>2. Ishikawa 6M (resumen)</h4>
+<div class="tabla"><table>
+<thead><tr><th>M</th><th>Causa</th></tr></thead>
+<tbody>
+<tr><td>Método</td><td>Despliegue manual sin checklist; sin política de código muerto; sin regresión obligatoria</td></tr>
+<tr><td>Mano de obra</td><td>Un solo técnico sin segundo revisor; operadores sin runbook</td></tr>
+<tr><td>Máquina</td><td>Clúster de 8 nodos sin verificación de paridad de versiones (hash)</td></tr>
+<tr><td>Material</td><td>Código fuente con deuda técnica (Power Peg) y flag sobrecargado</td></tr>
+<tr><td>Medición</td><td>Correos de error sin severidad ni umbrales; sin métricas de exposición en tiempo real</td></tr>
+<tr><td>Medio ambiente</td><td>Plazo fijo del lanzamiento del RLP por la NYSE; mercado HFT donde 1 min = millones</td></tr>
+</tbody></table></div>
+<h4>3. Cálculos</h4>
+<ul><li>Pérdida por minuto = 440 / 45 ≈ <b>US$ 9,78 M/min</b> (con la cifra SEC: 460/45 ≈ 10,2 M/min).</li>
+<li>Corte a los 3 min: pérdida ≈ 3 × 9,78 = 29,3 M → ahorro ≈ <b>US$ 410,7 M</b> (93,3 %). Supuesto lineal; en la realidad la exposición crece con el tiempo (posiciones acumuladas), así que el ahorro real sería aún mayor.</li>
+<li>Comparación con la curva p13: un defecto en mantenimiento cuesta US$ 14 102 de media; aquí costó 440 M, ≈ 31 000 veces más: en sistemas críticos el CoPQ (Cost of Poor Quality) externo no tiene techo.</li></ul>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO 9126 (p11) → ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Código muerto activable</td><td>Sin proceso de disposición/retiro de funciones</td><td>Power Peg desde 2003</td><td>Mantenibilidad → analizable, estable / Mantenibilidad → analizabilidad, modificabilidad</td></tr>
+<tr><td>Infraestructura inconsistente</td><td>Despliegue manual sin auditoría de configuración</td><td>7 de 8 nodos actualizados</td><td>Portabilidad → instalable / Flexibilidad → instalabilidad</td></tr>
+<tr><td>Comportamiento destructivo no contenido</td><td>Sin requisito de seguridad operacional (límites de exposición)</td><td>4 M ejecuciones en 45 min</td><td>Confiabilidad → tolerancia a fallas / Seguridad funcional → fail safe (25010:2023)</td></tr>
+<tr><td>Alertas ignoradas</td><td>Monitoreo sin severidad ni responsable</td><td>97 correos</td><td>Usabilidad → operable / Capacidad de interacción</td></tr>
+<tr><td>Regresión inexistente desde 2005</td><td>Estándar de pruebas no exige regresión en cambios de dependencias</td><td>Cambio no reprobado</td><td>Mantenibilidad → susceptible de pruebas</td></tr>
+<tr><td>Incumplimiento regulatorio</td><td>Controles de riesgo de mercado inadecuados</td><td>Multa SEC 15c3-5</td><td>Funcionalidad → cumplimiento</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · SQA + SCM (lectura de la profesora, p22)</h4>
+<ul><li>SCMP (Software Configuration Management Plan, IEEE 828) con identificación de ítems, control de cambios vía CCB, contabilidad del estado y <b>auditorías FCA/PCA</b> (Functional / Physical Configuration Audit) antes de cada pase.</li>
+<li>Política de <b>retiro de código</b>: toda función sin uso &gt; 1 año se elimina; prohibido reutilizar flags (feature flags con ciclo de vida y fecha de expiración).</li>
+<li>Checklist de despliegue con doble firma y auditoría SQA independiente.</li>
+<li>Plan de contingencia y rollback probado trimestralmente (simulacro).</li></ul></div>
+<div class="alt"><h4>Alternativa B · QC + CI/CD (lectura del G6)</h4>
+<ul><li>SAST y linters con regla de código no referenciado; quality gate que bloquea el merge si hay código muerto.</li>
+<li>Suite de regresión automatizada en CI (Continuous Integration) que active cada flag y verifique el comportamiento.</li>
+<li>CD (Continuous Delivery) con despliegue automatizado idéntico en los N nodos, verificación por hash/checksum y smoke test post-despliegue.</li>
+<li>Pruebas de tolerancia a fallos que validen el circuit breaker en staging.</li></ul></div>
+<div class="alt"><h4>Alternativa C · Contención en operación (lección p26)</h4>
+<p>Monitoreo en tiempo real de exposición y P&amp;L (Profit and Loss) con umbrales; kill switch automático; alertas con severidad y SLA de respuesta (p.ej. ≤ 2 min); despliegue canary (1 nodo → 8 nodos) para limitar el radio de impacto.</p></div>
+<h4>5. ¿SQA (p22) o QC (p26)?</h4>
+<p>No hay contradicción: la <b>causa raíz</b> (código muerto, flag reutilizado, despliegue sin control) es de SQA/SCM; la <b>contención</b> (detectar y cortar en minutos) es de monitoreo y QC de rendimiento. La respuesta completa usa defensa en profundidad: prevenir (A), detectar (B), contener (C).</p>
+<div class="norma"><h4>IEEE 828-2012 (Configuration Management in Systems and Software Engineering)</h4>
+<p><b>Organismo:</b> IEEE. <b>Versión:</b> 828-2012 (antes 1983, 1990, 1998, 2005). <b>Propósito:</b> requisitos mínimos del proceso de gestión de la configuración y del contenido del SCMP. <b>Estructura de actividades:</b> (1) identificación de la configuración (ítems, líneas base), (2) control de cambios (solicitud, evaluación por CCB, aprobación), (3) contabilidad del estado, (4) <b>auditorías de configuración</b> (FCA y PCA), (5) gestión de liberaciones y entregas. Se alinea con el proceso 6.3.5 de ISO/IEC/IEEE 12207:2017.</p>
+<p><b>Trampa de examen:</b> la SCM <b>no es</b> "usar Git". Git es una herramienta de control de versiones; SCM incluye control de cambios formal, líneas base y auditorías. Knight usaba control de versiones y aun así falló la SCM.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC/IEEE 12207:2017: <b>Gestión de la configuración</b> (6.3.5), <b>Gestión de riesgos</b> (6.3.4), <b>Aseguramiento de la calidad</b> (6.3.8), <b>Transición</b> (6.4.10: instalar en el entorno operativo y verificar), <b>Mantenimiento</b> (6.4.13) y <b>Disposición</b> (6.4.14: retirar elementos del sistema; Power Peg nunca se retiró formalmente). IEEE 828 para el SCMP; IEEE 730-2014 para la auditoría SQA independiente; ISO/IEC 25010:2023 (Seguridad funcional: fail safe, restricción operativa); regulación SEC 15c3-5 (controles de riesgo previos a la orden). En Perú, la SMV (Superintendencia del Mercado de Valores) y la SBS (Superintendencia de Banca, Seguros y AFP) exigen gestión de riesgo operacional equivalente.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Despliegues automatizados</td><td>despliegues por pipeline / despliegues totales × 100</td><td>100 %</td></tr>
+<tr><td>Drift de configuración</td><td>nodos con hash distinto al de la línea base</td><td>0</td></tr>
+<tr><td>Código muerto en rama principal</td><td>funciones no referenciadas detectadas por SAST</td><td>0</td></tr>
+<tr><td>Flags vencidos</td><td>feature flags con fecha de expiración superada / flags activos</td><td>0 %</td></tr>
+<tr><td>MTTD (Mean Time To Detect)</td><td>Σ (detección − inicio) / n.º incidentes</td><td>≤ 1 min</td></tr>
+<tr><td>Tiempo de corte del circuit breaker</td><td>tiempo desde umbral superado hasta bloqueo</td><td>≤ 5 s</td></tr>
+<tr><td>Change failure rate (DORA)</td><td>despliegues que causan incidente / despliegues</td><td>≤ 15 %</td></tr>
+</tbody></table></div>
+<h4>Cómo lo resolvieron los grupos</h4>
+<div class="tabla"><table>
+<thead><tr><th>Criterio</th><th>G5</th><th>G6</th></tr></thead>
+<tbody>
+<tr><td>Lente</td><td><b>SQA organizacional</b> (proceso, cultura, riesgo)</td><td><b>QC técnico</b> (herramientas, pruebas, despliegue)</td></tr>
+<tr><td>Causa raíz</td><td>Presión de plazos, falta de personal, senior que ignora a los juniors y cancela auditorías (narrativa creada por el grupo)</td><td>Deuda técnica (Power Peg), flag reutilizado, despliegue manual, 8.º servidor, sin circuit breaker (hechos reales)</td></tr>
+<tr><td>Soluciones</td><td>Respetar auditorías y RTF; planificación del riesgo; metodologías formales</td><td>SAST/linters, regresión en CI, despliegue automatizado, checksums, smoke testing, circuit breakers, autoconservación</td></tr>
+<tr><td>Anclaje teórico</td><td>Muy alto (cita p14, p17, p20 casi textual)</td><td>Medio (marco QC propio)</td></tr>
+<tr><td>Fidelidad a los hechos</td><td>Baja (historia inventada)</td><td>Alta</td></tr>
+<tr><td>Le faltó</td><td>SCM concreta, código muerto, despliegue; normas y KPI</td><td>Reconocer que la gestión de configuración y el retiro de código son <b>SQA</b> (p22); llamó "QC preventivo" a políticas que son SQA</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) decir que es "solo QC porque faltaron pruebas": la profesora lo etiqueta como <b>SQA y control de configuraciones</b>; (2) confundir SCM con control de versiones (Git); (3) llamar "QC preventivo" a una política de bloqueo o al despliegue automatizado como estándar (error del G6): <b>ejecutar</b> SAST es QC, <b>exigirlo</b> como política es SQA; (4) inventar hechos (G5) en un examen sin advertirlo: si se modifica el caso, hay que marcarlo como supuesto; (5) usar US$ 460 M sin aclarar que la cifra de la profesora es US$ 440 M. G5 y G6 analizan el mismo incidente y llegan a causas distintas (cultura vs herramientas): ambas son defendibles y la mejor respuesta las integra.</div>
+</details>
+</section>
+<section id="caso-8" class="caso">
+<h2>Caso 8 · Variante del G5: presión de plazos, alertas ignoradas e independencia del SQA</h2>
+<p class="origen">Origen: Grupo 05 (narrativa "QC → SQA" creada sobre Knight Capital) + diapositivas 14, 17 y 20 (clase) | ampliado para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Una fábrica de SW limeña desarrolla para un banco (tipo Interbank) el nuevo módulo de transferencias inmediatas CCE (Cámara de Compensación Electrónica). El contrato fija la salida a producción el 30 de noviembre con penalidad de <b>S/ 25 000 por día</b> de retraso (tope 20 días). Hechos:</p>
+<ul>
+<li>La estimación inicial era de 14 semanas con 8 desarrolladores; el proyecto arrancó con 5 y 10 semanas (esfuerzo disponible = 50 persona-semana vs 112 estimadas).</li>
+<li>Dos desarrolladores junior envían correos al líder alertando "alta probabilidad de fallos estructurales" en el manejo de reintentos (idempotencia).</li>
+<li>El desarrollador senior, que actúa también como "responsable de calidad" y reporta al mismo gerente del proyecto, ordena <b>saltarse la auditoría interna</b> y las RTF "porque con mi experiencia ya habríamos visto los errores".</li>
+<li>En producción, un reintento duplica transferencias: <b>3 200</b> operaciones duplicadas por un monto de <b>S/ 4,1 M</b>; el banco tarda 2 días en revertirlas, paga S/ 180 000 en atención y compensaciones, la SBS abre un proceso sancionador y el banco rescinde el contrato de mantenimiento (S/ 1,2 M anuales).</li>
+<li>Una auditoría posterior estima que cumplir las RTF y la auditoría habría costado <b>12 días</b> de retraso.</li>
+</ul>
+</div>
+<h3>Se pide</h3><ol>
+<li>Identificar qué actividades SQA de la p17 y qué técnicas de administración de proyectos de la p14 se anularon.</li>
+<li>Calcular la brecha de capacidad y comparar el costo de retrasar 12 días con el costo de la falla (CoQ).</li>
+<li>Proponer mecanismos de <b>independencia</b> y escalamiento del SQA.</li>
+<li>Explicar por qué, según la p20, este caso es de SQA y no de QC, aunque el defecto (falta de idempotencia) esté en el producto.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Pilar p14–p15 / atributo</th></tr></thead>
+<tbody>
+<tr><td>Subdimensionamiento</td><td>Estimación no usada para verificar que la fecha era cumplible</td><td>50 vs 112 persona-semana (44,6 %)</td><td>Administración de proyectos → estimaciones (p14)</td></tr>
+<tr><td>Alertas ignoradas</td><td>Sin registro de riesgos ni canal de escalamiento</td><td>Correos de juniors</td><td>Planificación del riesgo (p14)</td></tr>
+<tr><td>Cancelación de auditoría y RTF</td><td>Falta de independencia: el "SQA" reporta al mismo gerente que sufre la penalidad</td><td>Orden del senior</td><td>Auditorías y revisiones técnicas formales (p17)</td></tr>
+<tr><td>Decisión por intuición</td><td>Ausencia de metodología y estándares formales</td><td>"con mi experiencia…"</td><td>Definición de estándares y metodologías (p17)</td></tr>
+<tr><td>Transferencias duplicadas</td><td>Requisito de idempotencia no especificado ni revisado</td><td>3 200 duplicados</td><td>Funcionalidad → exactitud; Confiabilidad → tolerancia a fallas</td></tr>
+</tbody></table></div>
+<h4>2. Cálculos de CoQ</h4>
+<ul><li>Brecha de capacidad = 1 − 50/112 = <b>55,4 %</b> del esfuerzo faltante.</li>
+<li>Costo de cumplir el proceso (retraso de 12 días) = 12 × 25 000 = <b>S/ 300 000</b> (inversión en CoGQ, Cost of Good Quality).</li>
+<li>CoPQ observado (sin contar los S/ 4,1 M revertidos, que se recuperan) = S/ 180 000 + S/ 1 200 000 (contrato perdido, primer año) + multa SBS (no cuantificada) ≥ <b>S/ 1 380 000</b>.</li>
+<li>Razón CoPQ / CoGQ ≥ 1 380 000 / 300 000 = <b>4,6×</b>: "ahorrar" la penalidad costó al menos 4,6 veces más, sin contar la reputación (fila "pérdida de reputación" de la p07).</li></ul>
+<div class="alt"><h4>Alternativa A · Independencia organizacional del SQA</h4>
+<ul><li>Crear la función SQA con <b>línea de reporte distinta</b> del gerente del proyecto (a la gerencia de calidad o a la dirección), como exige IEEE 730 (independencia organizacional, técnica y financiera).</li>
+<li>Las auditorías y RTF del SQAP son <b>puntos de control no negociables</b>: solo el comité de dirección puede exceptuarlas, por escrito y con aceptación formal del riesgo.</li>
+<li>Escalamiento: toda no conformidad no resuelta en 5 días hábiles escala un nivel.</li></ul></div>
+<div class="alt"><h4>Alternativa B · Gestión de riesgos y renegociación temprana</h4>
+<ul><li>Registro de riesgos abierto a todo el equipo (los juniors registran, no solo escriben correos); revisión semanal con probabilidad × impacto.</li>
+<li>Con la brecha de 55 % visible en la semana 1, renegociar alcance (MVP, Minimum Viable Product) o fecha con el cliente: el costo de una adenda es menor que el de una falla.</li>
+<li>Requisitos de idempotencia y reintentos como requisitos no funcionales en el SRS, revisados por RTF.</li></ul></div>
+<div class="alt"><h4>Alternativa C · Cultura de calidad</h4>
+<p>Política de "andon" (cualquiera puede detener la línea ante un riesgo grave, tomada de Toyota/TQM, S2), retrospectivas sin culpa y métricas de calidad en los incentivos del líder, no solo métricas de plazo.</p></div>
+<div class="norma"><h4>IEEE 730-2014 (Software Quality Assurance Processes)</h4>
+<p><b>Organismo:</b> IEEE. <b>Versión:</b> 730-2014 (antes 1981, 1989, 1998, 2002). <b>Propósito:</b> requisitos para iniciar, planificar, controlar y ejecutar el proceso SQA de un proyecto; se alinea con el proceso de Aseguramiento de la calidad de ISO/IEC/IEEE 12207. <b>Estructura:</b> tres grupos de actividades: (1) implementación del proceso SQA (incluye el SQAP), (2) aseguramiento del producto, (3) aseguramiento del proceso; exige que el SQA tenga <b>independencia organizacional</b> respecto de quienes desarrollan.</p>
+<p><b>Trampa de examen:</b> en IEEE 730 el SQA no es "el equipo de pruebas": la prueba es QC; el SQA <b>asegura</b> que el producto y el proceso cumplan lo planificado, y debe poder reportar sin depender del jefe de proyecto.</p></div>
+<h4>Justificación normativa</h4>
+<p>IEEE 730-2014 (independencia, SQAP, auditorías); ISO/IEC/IEEE 12207:2017 procesos de Gestión de riesgos (6.3.4), Evaluación y control del proyecto (6.3.2) y Aseguramiento de la calidad (6.3.8); CMMI-DEV v1.3 área PPQA (Process and Product Quality Assurance – Aseguramiento de la calidad del proceso y del producto), que exige evaluación <b>objetiva</b> y comunicación de no conformidades a la gerencia; IEEE 1028-2008 para las RTF y auditorías.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Cumplimiento del plan de auditorías</td><td>auditorías ejecutadas / auditorías planificadas en el SQAP</td><td>100 %</td></tr>
+<tr><td>Excepciones al SQAP sin aprobación formal</td><td>n.º de puntos de control omitidos sin acta</td><td>0</td></tr>
+<tr><td>Riesgos con respuesta a tiempo</td><td>riesgos con plan en ≤ 5 días / riesgos registrados</td><td>≥ 95 %</td></tr>
+<tr><td>Índice de capacidad</td><td>esfuerzo disponible / esfuerzo estimado</td><td>≥ 0,9 o renegociar</td></tr>
+<tr><td>Razón CoPQ / CoGQ</td><td>costos de falla / (prevención + evaluación)</td><td>&lt; 1</td></tr>
+</tbody></table></div>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p>El G5 creó esta narrativa para "modificar" el caso Knight y la justificó con 4 argumentos anclados en la profesora: abandono del enfoque en el proceso (p17), cancelación de RTF (p17), nula gestión de riesgos (p14) y pérdida de la estrategia proactiva (p20). Fue el entregable mejor anclado en la teoría, pero no propuso el mecanismo de independencia ni cuantificó el CoQ; este caso completa ambos.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) decir que es QC porque "el bug estaba en el código": la p20 define QC como reactivo sobre el producto; aquí lo que falló fue la estrategia proactiva sobre el <b>proceso</b>; (2) pensar que el senior puede ser "el SQA": sin independencia no hay aseguramiento; (3) sumar los S/ 4,1 M revertidos como pérdida (se recuperan; lo que cuesta es la atención, la multa y el contrato); (4) creer que la solución única es "más tiempo": renegociar alcance también es una respuesta válida. Varias soluciones son defendibles si atacan la causa raíz.</div>
+</details>
+</section>
+<section id="caso-9" class="caso">
+<h2>Caso 9 · Clasificación y optimización del CoQ en una fintech peruana</h2>
+<p class="origen">Origen: Web: adaptado de <a href="https://arxiv.org/pdf/1405.4824">"Measuring Cost of Quality (CoQ) on SDLC Projects"</a> y del método de <a href="https://qualitytrainingportal.com/resources/cost-quality/cost-quality-approximation-values/">Quality Training Portal</a> | Caso nuevo</p> <span class="tag">Dificultad: Muy alta (numérico)</span>
+<div class="enunciado">
+<p>La fintech "PagaYa" (billetera tipo Yape/Plin, ingresos anuales <b>S/ 40 M</b>) registró estos costos anuales en miles de soles:</p>
+<div class="tabla"><table>
+<thead><tr><th>#</th><th>Ítem</th><th>Miles S/</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Capacitación en codificación segura OWASP (Open Worldwide Application Security Project) Top 10</td><td>120</td></tr>
+<tr><td>2</td><td>Elaboración de estándares de codificación y checklists de revisión</td><td>45</td></tr>
+<tr><td>3</td><td>Talleres JAD (Joint Application Design) de requisitos y prototipos UX validados</td><td>80</td></tr>
+<tr><td>4</td><td>Licencias SonarQube y configuración de QG (Quality Gates)</td><td>60</td></tr>
+<tr><td>5</td><td>Ejecución de pruebas de regresión automatizadas en CI/CD</td><td>210</td></tr>
+<tr><td>6</td><td>Auditoría externa ISO 9001 del proceso de desarrollo</td><td>50</td></tr>
+<tr><td>7</td><td>Inspecciones Fagan de código</td><td>95</td></tr>
+<tr><td>8</td><td>Retrabajo por defectos detectados antes del release</td><td>260</td></tr>
+<tr><td>9</td><td>Re-pruebas tras las correcciones</td><td>70</td></tr>
+<tr><td>10</td><td>Tiempo muerto por builds rotos en el ambiente de pruebas</td><td>30</td></tr>
+<tr><td>11</td><td>Mesa de ayuda por reclamos de bugs en producción</td><td>180</td></tr>
+<tr><td>12</td><td>Penalidades por incumplir el SLA con un banco aliado</td><td>150</td></tr>
+<tr><td>13</td><td>Devoluciones a usuarios por cobros duplicados</td><td>220</td></tr>
+<tr><td>14</td><td>Hotfixes de emergencia en producción</td><td>140</td></tr>
+<tr><td>15</td><td>Churn estimado (clientes perdidos por reputación)</td><td>400</td></tr>
+<tr><td>16</td><td>Elaboración del SQAP según IEEE 730</td><td>35</td></tr>
+<tr><td>17</td><td>Mantenimiento de ambientes y datos de prueba</td><td>40</td></tr>
+</tbody></table></div>
+<p>La gerencia propone invertir <b>S/ 300 000</b> adicionales en prevención (modelado de amenazas, RTF de requisitos, TDD – Test-Driven Development). Según benchmark, eso reduce la falla interna (FI) en <b>30 %</b> y la falla externa (FE) en <b>45 %</b>, sin cambiar la evaluación.</p>
+</div>
+<h3>Se pide</h3><ol>
+<li>Clasificar cada ítem en Prevención (P), Evaluación (A, appraisal), Falla interna (FI) o Falla externa (FE).</li>
+<li>Calcular CoGQ, CoPQ, CoQ total, CoQ / ingresos y % de CoPQ, y diagnosticar la madurez.</li>
+<li>Calcular el nuevo CoQ, el ahorro neto y el ROI (Return On Investment) de la inversión.</li>
+<li>Discutir el efecto de excluir el churn del análisis.</li>
+<li>Indicar cuáles ítems son QA (proceso) y cuáles QC (producto), y por qué esa clasificación no coincide con la del CoQ.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1–2. Clasificación y cálculo</h4>
+<div class="tabla"><table>
+<thead><tr><th>Categoría CoQ</th><th>Ítems</th><th>Total (miles S/)</th></tr></thead>
+<tbody>
+<tr><td>P – Prevención</td><td>1, 2, 3, 16</td><td>120 + 45 + 80 + 35 = <b>280</b></td></tr>
+<tr><td>A – Evaluación</td><td>4, 5, 6, 7, 17</td><td>60 + 210 + 50 + 95 + 40 = <b>455</b></td></tr>
+<tr><td>FI – Falla interna</td><td>8, 9, 10</td><td>260 + 70 + 30 = <b>360</b></td></tr>
+<tr><td>FE – Falla externa</td><td>11, 12, 13, 14, 15</td><td>180 + 150 + 220 + 140 + 400 = <b>1 090</b></td></tr>
+</tbody></table></div>
+<ul><li>CoGQ = P + A = <b>735</b>; CoPQ = FI + FE = <b>1 450</b>; CoQ = <b>2 185</b> mil = 2 185 / 40 000 = <b>5,46 %</b> de los ingresos.</li>
+<li>CoPQ / CoQ = 1 450 / 2 185 = <b>66,4 %</b>; FE / FI ≈ <b>3,0</b>: los defectos escapan al cliente (DRE baja). Diagnóstico: organización <b>reactiva</b> ("apagando incendios", p07).</li></ul>
+<h4>3. Escenario con inversión</h4>
+<ul><li>P' = 280 + 300 = 580; A' = 455; FI' = 360 × 0,70 = 252; FE' = 1 090 × 0,55 = 599,5.</li>
+<li>CoQ' = 580 + 455 + 252 + 599,5 = <b>1 886,5</b> mil → ahorro neto = 2 185 − 1 886,5 = <b>298,5</b> mil.</li>
+<li>Fallas evitadas = 108 + 490,5 = 598,5 → ROI = (598,5 − 300) / 300 = <b>99,5 %</b> (cada sol en prevención devuelve ≈ 2 soles de falla evitada).</li>
+<li>Nuevo CoPQ = 851,5 → 45,1 % del CoQ': la estructura se invierte hacia el CoGQ.</li></ul>
+<h4>4. Sin churn</h4>
+<p>CoQ = 1 785 y CoPQ = 1 050 (58,8 %): el diagnóstico se mantiene pero la urgencia baja. Omitir costos intangibles subestima la FE: es la parte sumergida del <b>iceberg</b> del costo de la mala calidad (Juran, Feigenbaum). Por eso el churn debe medirse con un KPI, no ignorarse.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>CoPQ domina el CoQ</td><td>Inversión en prevención muy baja (12,8 % del CoQ)</td><td>280 de 2 185</td><td>Costo (beneficio 1, p03)</td></tr>
+<tr><td>FE triplica FI</td><td>Filtros de evaluación poco efectivos o tardíos</td><td>1 090 vs 360</td><td>Satisfacción y retención (p05)</td></tr>
+<tr><td>Cobros duplicados</td><td>Requisito de idempotencia no especificado ni revisado</td><td>220 mil en devoluciones</td><td>Funcionalidad → exactitud</td></tr>
+<tr><td>Penalidades SLA</td><td>Disponibilidad no gestionada como meta de calidad</td><td>150 mil</td><td>Confiabilidad → disponibilidad (25010)</td></tr>
+<tr><td>Churn alto</td><td>Pérdida de confianza tras incidentes</td><td>400 mil</td><td>Reputación (p07)</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Desplazar a la izquierda (shift-left) con prevención</h4><p>Aprobar los S/ 300 000: modelado de amenazas, RTF de requisitos (idempotencia, límites), TDD. ROI ≈ 99,5 %, aunque con un supuesto de benchmark que hay que validar con un piloto de 1 trimestre.</p></div>
+<div class="alt"><h4>Alternativa B · Mejorar la eficacia de la evaluación existente</h4><p>Sin gasto nuevo de prevención: reorientar las inspecciones Fagan a módulos de pagos (Pareto de defectos), endurecer el QG de SonarQube y añadir pruebas de contrato y de idempotencia en CI. Menor inversión, pero ataca la detección, no la inyección: reduce FE a costa de subir FI.</p></div>
+<div class="alt"><h4>Alternativa C · Mixta y escalonada</h4><p>Invertir S/ 150 000 en prevención focalizada (solo el flujo de pagos, que concentra 13 y 12) y medir cada trimestre; liberar el resto si el KPI CoPQ / CoQ baja de 55 %.</p></div>
+<h4>5. QA/QC vs CoQ</h4>
+<p>Son <b>ejes distintos</b>: QA/QC dice <i>sobre qué</i> actúa (proceso o producto); CoQ dice <i>para qué</i> se gasta (prevenir, evaluar o pagar fallas). Ej.: la auditoría ISO 9001 (6) es QA por naturaleza (evalúa el proceso) pero en CoQ es <b>Evaluación</b>; SonarQube (4) es una herramienta de QC (SAST sobre el producto) y en CoQ es <b>Evaluación</b>, no prevención; el SQAP (16) es QA y <b>Prevención</b> (planificación de la calidad).</p>
+<h4>Justificación normativa</h4>
+<p>El modelo PAF (Prevention–Appraisal–Failure) de Feigenbaum, adoptado por ASQ (American Society for Quality) y BS 6143-2; ISO 9001:2015 cláusula 9.1 (seguimiento, medición, análisis y evaluación) y 10.3 (mejora continua) exigen usar datos como estos para decidir; ISO 9004 recomienda los costos de calidad como herramienta de gestión; IEEE 730-2014 (el SQAP como prevención).</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Línea base</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>CoQ / ingresos</td><td>CoQ / ingresos × 100</td><td>5,46 %</td><td>≤ 4,5 %</td></tr>
+<tr><td>Participación del CoPQ</td><td>CoPQ / CoQ × 100</td><td>66,4 %</td><td>≤ 45 %</td></tr>
+<tr><td>Razón FE / FI</td><td>FE / FI</td><td>3,0</td><td>≤ 1,5</td></tr>
+<tr><td>ROI de prevención</td><td>(fallas evitadas − inversión) / inversión</td><td>—</td><td>≥ 50 %</td></tr>
+<tr><td>Churn post-incidente</td><td>clientes que abandonan en 30 días tras incidente / clientes afectados</td><td>no medido</td><td>≤ 2 %</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) poner SonarQube en Prevención: detecta defectos ya escritos → Evaluación; (2) poner la auditoría en Prevención porque "es QA": en CoQ es Evaluación; (3) clasificar el tiempo muerto por build roto como FE: ocurre antes de entregar → FI; (4) calcular ROI con el ahorro neto (298,5 / 300 = 99,5 % coincide aquí solo porque A no cambia; conceptualmente es (beneficio − inversión) / inversión); (5) creer que el CoQ óptimo es "cero fallas a cualquier costo": el modelo clásico tiene un mínimo y el moderno (Juran) lo desplaza hacia más prevención. La decisión no es única: A, B y C son defendibles según el apetito de riesgo.</div>
+</details>
+</section>
+<section id="caso-10" class="caso">
+<h2>Caso 10 · Matriz de contención de defectos por fase (DRE y PCE)</h2>
+<p class="origen">Origen: Web: adaptado de RIT SWEN-350, <a href="https://www.se.rit.edu/~swen-350/activities/class/DefectRemovalMetricsClassActivity.htm">"Defect Removal Metrics – class activity"</a> | Caso nuevo</p> <span class="tag">Dificultad: Muy alta (numérico)</span>
+<div class="enunciado">
+<p>El sistema de recaudación de una municipalidad distrital de Lima (SAT, Servicio de Administración Tributaria, 30 KLOC) registró sus defectos según la fase de <b>origen</b> (columnas) y la fase de <b>detección</b> (filas). Fases: Req (inspección de requisitos), Dis (inspección de diseño), Cod (inspección de código), UT (Unit Testing), IT (Integration Testing), ST (System Testing) y Campo (producción).</p>
+<div class="tabla"><table>
+<thead><tr><th>Detectado \ Origen</th><th>Req</th><th>Dis</th><th>Cod</th><th>UT</th><th>IT</th><th>ST</th><th>Campo</th><th>Total</th></tr></thead>
+<tbody>
+<tr><td>Req</td><td>5</td><td></td><td></td><td></td><td></td><td></td><td></td><td>5</td></tr>
+<tr><td>Dis</td><td>2</td><td>14</td><td></td><td></td><td></td><td></td><td></td><td>16</td></tr>
+<tr><td>Cod</td><td>3</td><td>9</td><td>49</td><td></td><td></td><td></td><td></td><td>61</td></tr>
+<tr><td>UT</td><td>0</td><td>2</td><td>22</td><td>8</td><td></td><td></td><td></td><td>32</td></tr>
+<tr><td>IT</td><td>0</td><td>3</td><td>5</td><td>0</td><td>5</td><td></td><td></td><td>13</td></tr>
+<tr><td>ST</td><td>1</td><td>3</td><td>16</td><td>0</td><td>0</td><td>1</td><td></td><td>21</td></tr>
+<tr><td>Campo</td><td>4</td><td>7</td><td>6</td><td>0</td><td>0</td><td>0</td><td>1</td><td>18</td></tr>
+<tr><td>Total</td><td>15</td><td>38</td><td>98</td><td>8</td><td>5</td><td>1</td><td>1</td><td>166</td></tr>
+</tbody></table></div>
+<p>Densidad por módulo: M1 23 defectos/1 KLOC; M2 36/15; M3 21/8; M4 32/1; M5 19/3; M6 20/2.</p>
+</div>
+<h3>Se pide</h3><ol>
+<li>DRE (Defect Removal Efficiency) de fase de la inspección de código, de UT, de IT y de ST.</li>
+<li>PCE (Phase Containment Effectiveness) de requisitos, diseño y codificación.</li>
+<li>DRE global antes del release y densidad de defectos liberados (defectos/KLOC).</li>
+<li>Tasa de inyección en codificación y módulos candidatos a rediseño.</li>
+<li>Con la curva p13, estimar el costo de los 18 defectos de campo y el ahorro si los 4 de requisitos se hubieran contenido en su fase.</li>
+<li>Proponer mejoras (al menos 2 alternativas) y KPI.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>Regla:</b> DRE de fase = defectos removidos en la fase / defectos <b>presentes</b> al entrar (originados en esa fase o antes y aún no removidos). PCE de fase = defectos originados en la fase y detectados en ella / defectos originados en la fase.</p>
+<h4>1. DRE por fase</h4>
+<div class="tabla"><table>
+<thead><tr><th>Fase</th><th>Presentes al entrar</th><th>Removidos</th><th>DRE</th></tr></thead>
+<tbody>
+<tr><td>Cod (inspección)</td><td>originados Req+Dis+Cod = 151 − removidos antes (5 + 16) = <b>130</b></td><td>61</td><td><b>46,9 %</b></td></tr>
+<tr><td>UT</td><td>originados ≤ UT = 159 − 82 = <b>77</b></td><td>32</td><td><b>41,6 %</b></td></tr>
+<tr><td>IT</td><td>originados ≤ IT = 164 − 114 = <b>50</b></td><td>13</td><td><b>26,0 %</b></td></tr>
+<tr><td>ST</td><td>originados ≤ ST = 165 − 127 = <b>38</b></td><td>21</td><td><b>55,3 %</b></td></tr>
+</tbody></table></div>
+<p>Comprobación de Cod: 61 + 24 (UT) + 8 (IT) + 20 (ST) + 17 (Campo) = 130 ✔.</p>
+<h4>2–4. PCE, DRE global, densidades</h4>
+<ul><li>PCE_Req = 5/15 = <b>33,3 %</b>; PCE_Dis = 14/38 = <b>36,8 %</b>; PCE_Cod = 49/98 = <b>50,0 %</b>.</li>
+<li>DRE global = (166 − 18) / 166 = <b>89,2 %</b> (referencia de Capers Jones para mejores prácticas: &gt; 95 %).</li>
+<li>Densidad liberada = 18 / 30 = <b>0,60 defectos/KLOC</b>; inyección en codificación = 98 / 30 = <b>3,27 defectos/KLOC</b>.</li>
+<li>Densidades: M1 23,0; M2 2,4; M3 2,6; M4 32,0; M5 6,3; M6 10,0 (media ponderada 151/30 ≈ 5,0) → <b>M4 y M1</b> a rediseño (&gt; 4× la media), M6 a inspección reforzada. Cuidado: módulos de 1 KLOC tienen alta varianza; complementar con CC (complejidad ciclomática, S3) y churn de código.</li></ul>
+<h4>5. Costo con la curva p13</h4>
+<ul><li>18 defectos de campo × US$ 14 102 = <b>US$ 253 836</b>.</li>
+<li>Los 4 defectos de requisitos hallados en campo, contenidos en requisitos: 4 × (14 102 − 139) = <b>US$ 55 852</b> de ahorro (22 % del costo de campo con solo 4 defectos).</li></ul>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo / dimensión</th></tr></thead>
+<tbody>
+<tr><td>Inspección de requisitos débil</td><td>Sin checklist ni participación de usuarios (tributación municipal)</td><td>PCE_Req 33,3 %; 4 llegan a campo</td><td>Funcionalidad → exactitud, adecuación</td></tr>
+<tr><td>Inspección de código por debajo de lo esperado</td><td>Tasa de inspección excesiva (LOC/h) o revisores sin preparación</td><td>DRE_Cod 46,9 % (Fagan reporta 60–90 %)</td><td>Mantenibilidad → analizable</td></tr>
+<tr><td>IT ineficaz</td><td>Casos de integración no derivados de interfaces</td><td>DRE_IT 26 %</td><td>Funcionalidad → interoperabilidad</td></tr>
+<tr><td>Módulos atípicos (M1, M4)</td><td>Complejidad alta o autor sin experiencia</td><td>23 y 32 defectos/KLOC</td><td>Mantenibilidad → estable, cambiable</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · SQA: reforzar la contención temprana</h4><ul><li>Checklist de inspección de requisitos (ambigüedad, completitud, reglas tributarias) y participación de un usuario de rentas.</li><li>Tasa de inspección controlada (≤ 200 LOC/h) y preparación individual registrada (método Fagan).</li><li>Criterio de salida de fase: PCE ≥ 60 %.</li></ul></div>
+<div class="alt"><h4>Alternativa B · QC: rediseño dirigido y pruebas de interfaz</h4><ul><li>Refactorizar o reescribir M4 y M1; pruebas de contrato en las interfaces (IT).</li><li>Pruebas basadas en riesgo: más casos en módulos con mayor densidad.</li></ul></div>
+<div class="alt"><h4>Alternativa C · Análisis causal (CAR)</h4><p>RCA (Root Cause Analysis) de los 18 defectos de campo con Pareto por tipo, y acciones sobre el proceso (CMMI CAR, Causal Analysis and Resolution). Es la más sostenible porque reduce la <b>inyección</b> y no solo la fuga.</p></div>
+<h4>Justificación normativa</h4>
+<p>IEEE 1028-2008 (inspecciones: roles, preparación, tasa, criterios de salida); ISO/IEC/IEEE 12207:2017 proceso de Gestión de la medición (6.3.7) y Aseguramiento de la calidad (6.3.8); ISO/IEC/IEEE 15939 (proceso de medición); CMMI-DEV áreas MA (Measurement and Analysis) y CAR; ISO/IEC 25010 para clasificar el atributo afectado.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Línea base</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>DRE global</td><td>defectos antes del release / defectos totales</td><td>89,2 %</td><td>≥ 95 %</td></tr>
+<tr><td>PCE de requisitos</td><td>defectos Req detectados en Req / defectos originados en Req</td><td>33,3 %</td><td>≥ 60 %</td></tr>
+<tr><td>DRE de inspección de código</td><td>removidos en Cod / presentes al entrar</td><td>46,9 %</td><td>≥ 65 %</td></tr>
+<tr><td>Densidad liberada</td><td>defectos de campo / KLOC</td><td>0,60</td><td>≤ 0,25</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) calcular la DRE de la inspección como 49/98: eso es la <b>PCE</b> de codificación, no la DRE de la actividad; (2) olvidar los defectos "arrastrados" de fases previas en el denominador; (3) incluir en "presentes" los defectos originados en fases posteriores; (4) decidir el rediseño solo por cantidad absoluta (M2 tiene 36 defectos pero 2,4/KLOC: es sano). No hay una única mejora: A ataca la contención, C la inyección, B el síntoma.</div>
+</details>
+</section>
+<section id="caso-11" class="caso">
+<h2>Caso 11 · Escalamiento del costo de corrección (Boehm/NASA) y ROI de inspeccionar el SRS</h2>
+<p class="origen">Origen: Web: adaptado de Stecklein et al., <a href="https://ntrs.nasa.gov/citations/20100036670">"Error Cost Escalation Through the Project Life Cycle", NASA JSC</a> y Boehm, Software Engineering Economics (1981) | Caso nuevo</p> <span class="tag">Dificultad: Muy alta (numérico)</span>
+<div class="enunciado">
+<p>En el proyecto "Mi Trámite RENIEC" (Registro Nacional de Identificación y Estado Civil) se estiman <b>120 defectos de requisitos</b>. Corregir uno en la fase de requisitos cuesta <b>S/ 200</b>. Multiplicadores conservadores (dentro de los rangos NASA: diseño 3–8×, construcción 7–16×, integración y prueba 21–78×, operación 29 a &gt; 1 500×): Req 1×, Diseño 5×, Construcción 10×, I&amp;T (Integración y Prueba) 50×, Operación 100×.</p>
+<div class="tabla"><table>
+<thead><tr><th>Escenario</th><th>Req</th><th>Diseño</th><th>Construcción</th><th>I&amp;T</th><th>Operación</th></tr></thead>
+<tbody>
+<tr><td>A · Sin inspección formal del SRS</td><td>20 %</td><td>25 %</td><td>15 %</td><td>30 %</td><td>10 %</td></tr>
+<tr><td>B · Inspección Fagan del SRS (costo S/ 18 000)</td><td>65 %</td><td>15 %</td><td>5 %</td><td>12,5 %</td><td>2,5 %</td></tr>
+</tbody></table></div>
+</div>
+<h3>Se pide</h3><ol>
+<li>Calcular el costo total de corrección de cada escenario.</li>
+<li>Calcular ahorro neto, ROI y el punto de equilibrio de la inspección.</li>
+<li>Hacer un análisis de sensibilidad con el multiplicador superior de operación (1 500×).</li>
+<li>Relacionar el resultado con la "Ley de Boehm" de la p03 y la curva de la p13.</li>
+<li>Indicar si la inspección es QC o SQA y en qué categoría de CoQ cae.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. Costos por escenario</h4>
+<div class="tabla"><table>
+<thead><tr><th>Fase (costo unit.)</th><th>A: defectos</th><th>A: S/</th><th>B: defectos</th><th>B: S/</th></tr></thead>
+<tbody>
+<tr><td>Req (200)</td><td>24</td><td>4 800</td><td>78</td><td>15 600</td></tr>
+<tr><td>Diseño (1 000)</td><td>30</td><td>30 000</td><td>18</td><td>18 000</td></tr>
+<tr><td>Construcción (2 000)</td><td>18</td><td>36 000</td><td>6</td><td>12 000</td></tr>
+<tr><td>I&amp;T (10 000)</td><td>36</td><td>360 000</td><td>15</td><td>150 000</td></tr>
+<tr><td>Operación (20 000)</td><td>12</td><td>240 000</td><td>3</td><td>60 000</td></tr>
+<tr><td><b>Total</b></td><td>120</td><td><b>670 800</b></td><td>120</td><td>255 600 + 18 000 = <b>273 600</b></td></tr>
+</tbody></table></div>
+<h4>2. Ahorro, ROI y equilibrio</h4>
+<ul><li>Ahorro neto = 670 800 − 273 600 = <b>S/ 397 200</b>.</li>
+<li>ROI = 397 200 / 18 000 = <b>22,1×</b> (2 207 %).</li>
+<li>Equilibrio: basta evitar que <b>2</b> defectos lleguen a I&amp;T (2 × 10 000 = 20 000 &gt; 18 000), o 1 que llegue a operación más uno a construcción.</li>
+<li>Lectura: en A el 89,4 % del costo está en I&amp;T y operación (600 000 / 670 800): el valor del SQA es <b>desplazar la detección a la izquierda</b>.</li></ul>
+<h4>3. Sensibilidad</h4>
+<p>Con 1 500× en operación (S/ 300 000 por defecto): A = 430 800 + 12 × 300 000 = <b>S/ 4 030 800</b>; B = 213 600 + 3 × 300 000 + 18 000 = <b>S/ 1 131 600</b>; ahorro neto ≈ <b>S/ 2,9 M</b>. El CoPQ externo es la variable más sensible: en sistemas críticos de identidad (DNI electrónico) domina todo el análisis.</p>
+<h4>4. Relación con la clase</h4>
+<p>La p03 enuncia que corregir en producción cuesta hasta 100× más que en diseño/desarrollo; la p13 da 14 102 / 139 ≈ <b>101×</b> entre mantenimiento y requisitos. Aquí, 20 000 / 200 = 100×: el caso usa la misma proporción de la profesora.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión</th></tr></thead>
+<tbody>
+<tr><td>Detección tardía de defectos de requisitos</td><td>SRS no inspeccionado; validación solo al final</td><td>40 % llega a I&amp;T u operación en A</td><td>Costo (p03), time-to-market (p06)</td></tr>
+<tr><td>Concentración del costo en I&amp;T</td><td>Estrategia de calidad basada solo en pruebas (QC tardío)</td><td>360 000 de 670 800</td><td>CoPQ interno</td></tr>
+<tr><td>Riesgo reputacional en operación</td><td>Defectos de requisitos visibles al ciudadano</td><td>12 defectos en operación</td><td>Satisfacción (p05)</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Inspección Fagan del SRS (escenario B)</h4><p>Roles formales (moderador, autor, lector, registrador), preparación individual, checklist y criterio de salida. ROI 22×.</p></div>
+<div class="alt"><h4>Alternativa B · Validación temprana con prototipos y usuarios</h4><p>Prototipos navegables y sesiones con ciudadanos y registradores civiles (UCD); atrapa los defectos de <b>validación</b> que la inspección (verificación) no ve. Se complementa con A.</p></div>
+<div class="alt"><h4>Alternativa C · BDD (Behavior-Driven Development) con criterios de aceptación ejecutables</h4><p>Cada requisito se escribe como escenarios Gherkin revisados por negocio; los escenarios se automatizan y sirven de prueba de aceptación desde el día 1.</p></div>
+<h4>5. Clasificación</h4>
+<p>Ejecutar la inspección sobre el SRS es <b>QC</b> (evaluación estática de un entregable intermedio, p15: "técnicas de revisión de modelos"); que el SQAP la <b>exija</b> para todo proyecto es <b>SQA</b>. En CoQ, la inspección es <b>Evaluación</b> (detecta defectos ya escritos); la capacitación en redacción de requisitos sería Prevención.</p>
+<h4>Justificación normativa</h4>
+<p>IEEE 1028-2008 (inspección como revisión formal), ISO/IEC/IEEE 29148:2018 (características de un buen requisito: no ambiguo, verificable, completo, consistente, trazable), ISO/IEC/IEEE 12207:2017 proceso de Definición de requisitos de los interesados (6.4.2) y Verificación (6.4.9), IEEE 730-2014 (el SQAP define qué revisiones son obligatorias).</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>PCE de requisitos</td><td>defectos de req. detectados en req. / defectos de req. totales</td><td>≥ 65 %</td></tr>
+<tr><td>Costo promedio por defecto de requisitos</td><td>Σ costo de corrección / n.º defectos de req.</td><td>≤ S/ 2 500 (B: 2 130)</td></tr>
+<tr><td>ROI de inspección</td><td>(costo evitado − costo de inspección) / costo de inspección</td><td>≥ 5×</td></tr>
+<tr><td>Defectos de requisitos en operación</td><td>n.º por release</td><td>≤ 3</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) olvidar sumar los S/ 18 000 de la inspección al escenario B; (2) calcular el ROI con el costo total y no con la inversión; (3) multiplicar porcentajes por el costo sin convertir primero a número de defectos; (4) creer que la inspección elimina defectos: los <b>detecta</b>; la corrección es otro costo; (5) leer la curva p13 como "ley exacta": es un promedio; NASA muestra rangos amplios. A, B y C son caminos válidos; la mejor respuesta combina verificación (A) y validación (B).</div>
+</details>
+</section>
+<section id="caso-12" class="caso">
+<h2>Caso 12 · DRE acumulada en serie (modelo de Capers Jones) y defectos liberados por FP</h2>
+<p class="origen">Origen: Web: adaptado de Capers Jones, <a href="https://www.ppi-int.com/wp-content/uploads/2021/01/Software-Defect-Removal-Efficiency.pdf">"Software Defect Removal Efficiency"</a> | Caso nuevo</p> <span class="tag">Dificultad: Muy alta (numérico)</span>
+<div class="enunciado">
+<p>El nuevo core de pagos de una CMAC (Caja Municipal de Ahorro y Crédito) mide <b>1 500 FP</b> (Function Points – puntos de función) con un potencial de defectos de <b>5 defectos/FP</b>. Eficiencias típicas de remoción por actividad:</p>
+<div class="tabla"><table>
+<thead><tr><th>Actividad</th><th>Tipo</th><th>Eficiencia</th></tr></thead>
+<tbody>
+<tr><td>Inspección formal</td><td>Estática</td><td>65 %</td></tr>
+<tr><td>Análisis estático SAST (Static Application Security Testing)</td><td>Estática</td><td>55 %</td></tr>
+<tr><td>UT (prueba unitaria)</td><td>Dinámica</td><td>30 %</td></tr>
+<tr><td>Prueba de función</td><td>Dinámica</td><td>35 %</td></tr>
+<tr><td>Regresión</td><td>Dinámica</td><td>25 %</td></tr>
+<tr><td>ST (prueba de sistema)</td><td>Dinámica</td><td>40 %</td></tr>
+</tbody></table></div>
+<p>Escenario A: solo pruebas (UT, función, regresión, ST). Escenario B: inspección + SAST + las mismas pruebas. La SBS exige para sistemas core una tasa de defectos liberados "razonablemente baja"; la caja fija como meta ≤ 0,2 defectos/FP.</p>
+</div>
+<h3>Se pide</h3><ol>
+<li>Calcular la DRE acumulada, los defectos liberados y los defectos liberados/FP de cada escenario.</li>
+<li>¿Cuántas pruebas adicionales de 30 % necesitaría A para llegar a 95 %?</li>
+<li>Explicar el supuesto del modelo multiplicativo y su sesgo.</li>
+<li>Recomendar la estrategia con al menos dos alternativas, normas y KPI.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. Cálculo</h4>
+<p>Potencial = 1 500 × 5 = <b>7 500</b> defectos. Fracción remanente = Π(1 − e<sub>i</sub>).</p>
+<div class="tabla"><table>
+<thead><tr><th>Escenario</th><th>Remanente</th><th>DRE</th><th>Liberados</th><th>Defectos/FP</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>0,70 × 0,65 × 0,75 × 0,60 = 0,20475</td><td><b>79,5 %</b></td><td>≈ <b>1 536</b></td><td><b>1,02</b></td></tr>
+<tr><td>B</td><td>0,35 × 0,45 × 0,20475 = 0,03225</td><td><b>96,8 %</b></td><td>≈ <b>242</b></td><td><b>0,16</b> (−84 %)</td></tr>
+</tbody></table></div>
+<h4>2. Pruebas adicionales</h4>
+<p>Se necesita 0,20475 × 0,70<sup>n</sup> ≤ 0,05 → 0,70<sup>n</sup> ≤ 0,2442 → n ≥ ln 0,2442 / ln 0,70 = 3,95 → <b>4 pruebas más</b> (8 en total), y aun así con solapamiento real no se alcanzaría. Con una sola prueba más: 0,1433 → DRE 85,7 %.</p>
+<h4>3. Supuesto</h4>
+<p>Independencia entre filtros: cada actividad elimina un % fijo de lo que le llega. En la realidad las pruebas dinámicas se solapan (encuentran clases de defectos parecidas), por lo que B es una <b>cota optimista</b>. Aun así, la conclusión de Jones se mantiene: series solo de pruebas rara vez superan 85–90 % de DRE; para pasar de 95 % hacen falta técnicas estáticas (S3).</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo / dimensión</th></tr></thead>
+<tbody>
+<tr><td>Escenario A libera ~1 536 defectos</td><td>Estrategia de calidad basada solo en QC dinámico tardío</td><td>DRE 79,5 %</td><td>Confiabilidad → madurez</td></tr>
+<tr><td>Meta 0,2 defectos/FP inalcanzable en A</td><td>Ausencia de técnicas estáticas</td><td>1,02 vs 0,2</td><td>Funcionalidad → exactitud</td></tr>
+<tr><td>Riesgo regulatorio</td><td>Defectos en core financiero visibles a clientes y SBS</td><td>—</td><td>Funcionalidad → cumplimiento</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Escenario B completo</h4><p>Inspección formal de diseño y código crítico + SAST en CI + pruebas. DRE 96,8 %, cumple la meta (0,16 ≤ 0,2).</p></div>
+<div class="alt"><h4>Alternativa B · Estática selectiva por riesgo</h4><p>SAST en el 100 % del código (barato, automatizado) e inspección formal solo en el 30 % más crítico (liquidación, intereses, cuadre contable). Remanente aproximado: 0,45 × (0,3 × 0,35 + 0,7 × 1) × 0,20475 = 0,0742 → DRE ≈ 92,6 %; no llega a la meta, pero con menor costo; se completa con pruebas basadas en riesgo.</p></div>
+<div class="alt"><h4>Alternativa C · Prevención para bajar el potencial</h4><p>Reducir la inyección de 5 a 3,5 defectos/FP (RTF de requisitos, estándares, TDD): con el escenario A, liberados = 1 500 × 3,5 × 0,20475 ≈ 1 075 → 0,72/FP; no basta solo, pero combinada con B baja a ≈ 0,11/FP.</p></div>
+<h4>Justificación normativa</h4>
+<p>IEEE 1028-2008 (inspecciones), ISO/IEC/IEEE 29119-4 (técnicas de prueba), ISO/IEC/IEEE 12207:2017 Verificación (6.4.9) y Gestión de la medición (6.3.7); para la meta del producto, ISO/IEC 25010 (Fiabilidad → madurez) e ISO/IEC 25023 (métricas de calidad del producto); IFPUG / ISO/IEC 20926 para la medición en FP.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>DRE acumulada</td><td>1 − Π(1 − e<sub>i</sub>) (planificada) / defectos pre-release ÷ totales (real)</td><td>≥ 95 %</td></tr>
+<tr><td>Defectos liberados por FP</td><td>defectos en 90 días de operación / FP</td><td>≤ 0,2</td></tr>
+<tr><td>Eficiencia real de cada filtro</td><td>defectos removidos / presentes al entrar</td><td>inspección ≥ 60 %, SAST ≥ 50 %</td></tr>
+<tr><td>Potencial de defectos</td><td>defectos totales / FP</td><td>≤ 4</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) <b>sumar</b> eficiencias (30 + 35 + 25 + 40 = 130 %): se multiplican los remanentes; (2) multiplicar las eficiencias en vez de los complementos; (3) creer que más pruebas iguales llevan al 99 %: el solapamiento lo impide; (4) olvidar que la DRE planificada es un modelo y la real se mide con defectos de campo a 90 días. La solución no es única: B y C son válidas según presupuesto y criticidad.</div>
+</details>
+</section>
+<section id="caso-13" class="caso">
+<h2>Caso 13 · Clasificación cruzada QA / QC / V&amp;V / CoQ de 12 actividades del SUM-UNMSM</h2>
+<p class="origen">Origen: Creado para el repaso a partir de SWEBOK v4 (cap. Software Quality), IEEE 730-2014 e ISO 9000:2015, con la regla de las diapositivas 17, 19, 20 y 21 (clase) | Caso nuevo</p> <span class="tag">Dificultad: Muy alta (clasificación con ítems frontera)</span>
+<div class="enunciado">
+<p>La OGTI (Oficina General de Tecnologías de la Información) de la UNMSM moderniza el <b>SUM</b> (Sistema Único de Matrícula). El nuevo jefe de SQA (Software Quality Assurance – Aseguramiento de la Calidad del SW) debe presentar al Vicerrectorado un presupuesto de calidad y para ello necesita clasificar las 12 actividades del plan del semestre 2026-II, cada una con su costo estimado:</p>
+<div class="tabla"><table>
+<thead><tr><th>#</th><th>Actividad</th><th>Miles S/</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Redactar el SQAP (Software Quality Assurance Plan) del proyecto según IEEE 730</td><td>18</td></tr>
+<tr><td>2</td><td>Ejecutar la suite de regresión automatizada en el pipeline CI/CD (Continuous Integration / Continuous Delivery) en cada commit</td><td>42</td></tr>
+<tr><td>3</td><td>Auditar el cumplimiento del proceso SCM (Software Configuration Management) según IEEE 828</td><td>12</td></tr>
+<tr><td>4</td><td>Inspección Fagan del SRS (Software Requirements Specification) con moderador y lector</td><td>16</td></tr>
+<tr><td>5</td><td>Capacitar a los 14 desarrolladores en OWASP (Open Worldwide Application Security Project) Top 10</td><td>20</td></tr>
+<tr><td>6</td><td>Medir la DRE (Defect Removal Efficiency) por fase y analizar su tendencia trimestral</td><td>8</td></tr>
+<tr><td>7</td><td>UAT (User Acceptance Testing) con las secretarías académicas de 5 facultades</td><td>25</td></tr>
+<tr><td>8</td><td>Definir la DoD (Definition of Done) incluyendo el QG (Quality Gate) de SonarQube</td><td>6</td></tr>
+<tr><td>9</td><td>Revisar en cada PR (Pull Request) el cumplimiento de las reglas de SonarQube</td><td>30</td></tr>
+<tr><td>10</td><td>RCA (Root Cause Analysis) de los defectos escapados a producción y acción correctiva sobre el proceso</td><td>10</td></tr>
+<tr><td>11</td><td>Pruebas de carga con JMeter simulando 25 000 alumnos concurrentes el primer día de matrícula</td><td>22</td></tr>
+<tr><td>12</td><td>Seleccionar CMMI (Capability Maturity Model Integration) o ISO/IEC/IEEE 12207 como marco de mejora del proceso</td><td>9</td></tr>
+</tbody></table></div>
+<p>El Vicerrectorado exige que el informe distinga <b>tres ejes</b>: (i) QA (orientada al proceso, preventiva) vs QC (Quality Control, orientada al producto, detectiva); (ii) Verificación ("¿construimos el producto correctamente?") vs Validación ("¿construimos el producto correcto?"), cuando aplique; (iii) categoría del CoQ (Cost of Quality): Prevención (P), Evaluación (A, appraisal), Falla interna (FI) o Falla externa (FE).</p>
+</div>
+<h3>Se pide</h3><ol>
+<li>Clasificar las 12 actividades en los tres ejes, justificando los ítems frontera (3, 4, 6, 10, 11).</li>
+<li>Calcular el monto de QA vs QC y de P vs A, y demostrar que ambos repartos <b>no coinciden</b>.</li>
+<li>Explicar la relación de inclusión entre SQA y QC según la profesora (p20–p21) y según IEEE 730-2014.</li>
+<li>Proponer al menos dos formas de presentar el presupuesto y los KPI con los que la OGTI rendirá cuentas.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. Clasificación en tres ejes</h4>
+<div class="tabla"><table>
+<thead><tr><th>#</th><th>QA / QC</th><th>V&amp;V</th><th>CoQ</th><th>Justificación corta</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>QA</td><td>—</td><td>P</td><td>Planifica el proceso de calidad antes de producir (p17: "establecer procesos").</td></tr>
+<tr><td>2</td><td>QC</td><td>Verificación</td><td>A</td><td>Se ejecuta sobre el producto contra lo especificado (p19: "ejecutar pruebas").</td></tr>
+<tr><td>3</td><td>QA (auditoría de proceso)</td><td>—</td><td><b>A</b></td><td>Frontera: es QA por naturaleza (examina el proceso), pero en CoQ es costo de <b>evaluar</b> conformidad, no de prevenir.</td></tr>
+<tr><td>4</td><td>QC (evaluación estática del SRS)</td><td>Verificación (+ validación parcial si participan usuarios)</td><td>A</td><td>Frontera: muchos la llaman "QA" por ser temprana, pero inspecciona un <b>producto de trabajo</b> y detecta defectos ya inyectados.</td></tr>
+<tr><td>5</td><td>QA</td><td>—</td><td>P</td><td>Evita que el defecto se inyecte.</td></tr>
+<tr><td>6</td><td>QA (mejora del proceso con datos)</td><td>—</td><td>P</td><td>Frontera: medir la DRE no detecta defectos; sirve para <b>ajustar el proceso</b> (p17: "auditar y mejorar procesos").</td></tr>
+<tr><td>7</td><td>QC</td><td><b>Validación</b></td><td>A</td><td>Usuarios reales confirman que el SUM resuelve su necesidad.</td></tr>
+<tr><td>8</td><td>QA</td><td>—</td><td>P</td><td>Define el estándar que el producto debe cumplir.</td></tr>
+<tr><td>9</td><td>QC</td><td>Verificación</td><td>A</td><td>Aplica el estándar a un cambio concreto del producto.</td></tr>
+<tr><td>10</td><td>QA (CAR – Causal Analysis and Resolution de CMMI)</td><td>—</td><td>P (la corrección del defecto en sí es FE)</td><td>Frontera: el defecto ya escapó (FE), pero el RCA + acción correctiva busca que no se repita → prevención.</td></tr>
+<tr><td>11</td><td>QC</td><td>Verificación del NFR (Non-Functional Requirement) de rendimiento; validación si se usa el perfil real de matrícula</td><td>A</td><td>Frontera: depende de contra qué se compare (el SRS o el uso real).</td></tr>
+<tr><td>12</td><td>QA</td><td>—</td><td>P</td><td>Decisión de gobierno del proceso.</td></tr>
+</tbody></table></div>
+<h4>2. Repartos que no coinciden</h4>
+<ul>
+<li><b>QA</b> = ítems 1, 3, 5, 6, 8, 10, 12 = 18 + 12 + 20 + 8 + 6 + 10 + 9 = <b>83</b> mil; <b>QC</b> = ítems 2, 4, 7, 9, 11 = 42 + 16 + 25 + 30 + 22 = <b>135</b> mil. Total = <b>218</b> mil.</li>
+<li><b>P</b> = ítems 1, 5, 6, 8, 10, 12 = 18 + 20 + 8 + 6 + 10 + 9 = <b>71</b> mil; <b>A</b> = ítems 2, 3, 4, 7, 9, 11 = 42 + 12 + 16 + 25 + 30 + 22 = <b>147</b> mil.</li>
+<li>La diferencia (83 − 71 = 12) es exactamente la auditoría SCM: QA pero Evaluación. Conclusión: QA ≠ Prevención y QC ≠ Evaluación; son ejes distintos (<i>sobre qué</i> actúa vs <i>para qué</i> se gasta).</li>
+<li>Razón P / (P + A) = 71 / 218 = <b>32,6 %</b>: el plan sigue sesgado a detectar.</li>
+</ul>
+<h4>3. Relación de inclusión</h4>
+<p>La profesora (p20–p21) presenta SQA como <b>proceso</b> (preventivo, todo el ciclo), QC como <b>producto</b> (detectivo, fases de prueba) y la Calidad de SW como la <b>meta</b>. En IEEE 730-2014 el SQA abarca el aseguramiento del proceso y del producto: las revisiones y pruebas (QC) <b>alimentan</b> al SQA con evidencia objetiva. Por eso QC funciona como subconjunto operativo de un SQA amplio. Ej.: el QG de SonarQube lo <i>define</i> SQA (ítem 8) y lo <i>aplica</i> QC (ítem 9).</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Presupuesto sesgado a evaluación</td><td>Cultura de "probar al final"</td><td>A = 67,4 % del plan</td><td>Costo (Ley de Boehm, p03)</td></tr>
+<tr><td>Confusión QA = prevención</td><td>Falta de vocabulario común (ISO 9000)</td><td>Auditoría registrada como prevención en planes previos</td><td>Gestión de la información del proceso</td></tr>
+<tr><td>Validación con solo 5 de 20 facultades</td><td>UAT no representativo</td><td>Ítem 7</td><td>Adecuación funcional / satisfacción (p05)</td></tr>
+<tr><td>Carga de 25 000 sin perfil real</td><td>No se usaron logs históricos de matrícula</td><td>Ítem 11</td><td>Eficiencia de desempeño, continuidad (p04)</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Presupuesto por eje QA/QC (visión de proceso)</h4><p>Presentar 83 mil QA y 135 mil QC, con el SQAP (IEEE 730) como documento rector. Ventaja: muestra la responsabilidad de cada equipo (SQA independiente vs testers). Desventaja: no permite estimar retorno económico.</p></div>
+<div class="alt"><h4>Alternativa B · Presupuesto por CoQ (visión económica PAF)</h4><p>Presentar P = 71 mil y A = 147 mil, añadiendo la FI y FE históricas del SUM (reclamos, hotfixes en matrícula). Habla el idioma de la alta dirección (ROI – Return On Investment). Propuesta: mover 20 mil de A a P (RTF – Revisión Técnica Formal de requisitos, modelado de carga) hasta P / (P + A) ≥ 40 %.</p></div>
+<div class="alt"><h4>Alternativa C · Matriz de doble entrada</h4><p>Cruzar QA/QC (filas) con P/A (columnas) en un solo cuadro; deja visibles los ítems frontera (3 y 4) y evita discusiones de clasificación en el Consejo Universitario.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO 9000:2015 (3.3.6 aseguramiento de la calidad: "proporcionar confianza"; 3.3.7 control de la calidad: "cumplir los requisitos"); IEEE 730-2014 (aseguramiento del producto y del proceso); IEEE 1012-2016 (definición de verificación y validación); ISO/IEC/IEEE 12207:2017, procesos 6.3.8 Aseguramiento de la calidad, 6.4.9 Verificación y 6.4.11 Validación; CMMI v2.0, áreas PQA (Process Quality Assurance) y CAR.</p>
+<div class="norma"><h4>IEEE 730-2014 · Software Quality Assurance Processes</h4>
+<p><b>Organismo:</b> IEEE (Institute of Electrical and Electronics Engineers). <b>Versiones:</b> 1979, 1981, 1984, 1989, 1998, 2002, 2014. <b>Propósito:</b> requisitos para iniciar, planificar, controlar y ejecutar el SQA de un proyecto. <b>Estructura:</b> 3 actividades (implementación del proceso de SQA, aseguramiento del producto, aseguramiento del proceso) con 16 tareas; el SQAP es su producto principal. <b>Trampa típica:</b> desde 2014 ya no es una "plantilla de documento" sino un <b>estándar de procesos</b> alineado a la ISO/IEC/IEEE 12207.</p></div>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Línea base</th><th>Meta 2027-I</th></tr></thead>
+<tbody>
+<tr><td>Proporción de prevención</td><td>P / (P + A) × 100</td><td>32,6 %</td><td>≥ 40 %</td></tr>
+<tr><td>DRE del release</td><td>defectos pre-release / (pre-release + defectos en 90 días de producción)</td><td>a medir</td><td>≥ 90 %</td></tr>
+<tr><td>Cobertura de validación</td><td>facultades en UAT / 20 facultades</td><td>25 %</td><td>≥ 50 %</td></tr>
+<tr><td>No conformidades cerradas a tiempo</td><td>NC cerradas en plazo / NC abiertas</td><td>—</td><td>≥ 90 %</td></tr>
+<tr><td>Tiempo de respuesta p95 en matrícula</td><td>percentil 95 con 25 000 sesiones</td><td>—</td><td>≤ 3 s</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) poner la auditoría (3) en Prevención "porque es QA": en CoQ es Evaluación; (2) llamar "QA" a la inspección del SRS por ser temprana: evalúa un producto, es QC estático; (3) clasificar la UAT como verificación: con usuarios y contra la necesidad real es validación; (4) poner el RCA (10) en FE: el defecto escapado es FE, pero el análisis que cambia el proceso es Prevención; (5) creer que hay una única respuesta para 4 y 11: el examen premia la <b>justificación</b>, no la etiqueta. La solución no es única porque la clasificación depende del propósito declarado de cada actividad.</div>
+</details>
+</section>
+<section id="caso-14" class="caso">
+<h2>Caso 14 · CrowdStrike (2024) vs Ariane 5 (1996): fallas por supuestos no verificados</h2>
+<p class="origen">Origen: Web: adaptado de CrowdStrike, <a href="https://crowdstrike.com/wp-content/uploads/2024/08/Channel-File-291-Incident-Root-Cause-Analysis-08.06.2024.pdf">"Channel File 291 Incident – Root Cause Analysis" (06-ago-2024)</a> y del informe de la Junta de Investigación (Lions) ESA/CNES del vuelo 501 (1996); conecta con la diapositiva 24 (clase) | Caso nuevo</p> <span class="tag">Dificultad: Muy alta (comparativo + numérico)</span>
+<div class="enunciado">
+<p>Un banco peruano (llámese "Banco Andino") sufrió el 19-jul-2024 la caída de 2 300 de sus 2 600 estaciones Windows (agencias, cajeros asistidos y call center) por la actualización del sensor <b>Falcon</b> de CrowdStrike. El comité de riesgo TI pide comparar el incidente con el Ariane 5 visto en clase. Datos:</p>
+<div class="tabla"><table>
+<thead><tr><th>Aspecto</th><th>CrowdStrike, Channel File 291 (2024)</th><th>Ariane 5, vuelo 501 (1996)</th></tr></thead>
+<tbody>
+<tr><td>Supuesto implícito</td><td>Un nuevo <i>template type</i> definía <b>21</b> campos de entrada, pero el código de integración del sensor entregaba solo <b>20</b>.</td><td>El SRI (Sistema de Referencia Inercial) de Ariane 4 asumía que la variable de <b>sesgo horizontal (BH)</b> cabía en un entero de <b>16 bits con signo</b> (máx. 32 767).</td></tr>
+<tr><td>Prueba que enmascaró el defecto</td><td>Las pruebas usaron un <b>comodín (wildcard)</b> en el campo 21; el <i>Content Validator</i> tenía un error lógico y aprobó el archivo.</td><td>No se re-simuló el SRI con la trayectoria de Ariane 5 (aceleración horizontal ~5 veces mayor).</td></tr>
+<tr><td>Ausencia de defensa</td><td>El intérprete de contenido no tenía <b>verificación de límites</b> (bounds check) en tiempo de ejecución → lectura fuera de límites en modo kernel → BSOD (Blue Screen of Death).</td><td>La conversión de 64 bits flotante → 16 bits no estaba protegida (se excluyó para ahorrar carga de CPU, objetivo ≤ 80 %).</td></tr>
+<tr><td>Redundancia / despliegue</td><td>El contenido se distribuyó <b>a todos los clientes a la vez</b>, sin despliegue escalonado; ~<b>8,5 millones</b> de equipos afectados (cifra de Microsoft).</td><td>El SRI de respaldo era <b>idéntico</b> y falló ~72 ms antes que el principal; la función que falló (alineación) no era necesaria tras el despegue.</td></tr>
+<tr><td>Resultado</td><td>Paralización mundial de aerolíneas, bancos y hospitales; recuperación manual equipo por equipo.</td><td>Autodestrucción a los <b>~37 s</b>; pérdida de ~US$ 370 M (p24).</td></tr>
+</tbody></table></div>
+<p>El Banco Andino estima que cada estación caída le costó S/ 180 por hora y que la recuperación manual tomó en promedio <b>9 horas</b> por estación. La propuesta de su proveedor es exigir por contrato un despliegue por <b>anillos</b>: 0,1 % → 1 % → 10 % → 100 %, con 4 h de observación entre anillos.</p>
+</div>
+<h3>Se pide</h3><ol>
+<li>Elaborar la tabla de causas raíz comparadas (técnica y de proceso) y la técnica de V&amp;V (Verificación y Validación) que habría detectado cada una.</li>
+<li>Calcular el costo del incidente para el banco y el "radio de impacto" (equipos afectados a escala mundial) si el defecto se detectaba en el anillo 1 o, en el peor caso, en el anillo 2.</li>
+<li>Explicar por qué la redundancia no protegió a Ariane 5 y qué principio de diseño faltó en ambos casos.</li>
+<li>Clasificar ambos casos con la plantilla de la p21 (Calidad de SW / SQA / QC) y con ISO/IEC 25010.</li>
+<li>Proponer al menos dos alternativas de mitigación para el banco (cliente, no fabricante) con su justificación normativa.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. Problemas identificados y causa raíz</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo afectado / técnica V&amp;V que lo detecta</th></tr></thead>
+<tbody>
+<tr><td>Desajuste de interfaz (21 vs 20; rango de BH)</td><td>Supuesto de entrada no documentado ni revisado en un ICD (Interface Control Document)</td><td>RCA de CrowdStrike; informe Lions</td><td>Compatibilidad (interoperabilidad) · revisión de contratos de interfaz, análisis de valores límite</td></tr>
+<tr><td>Prueba que enmascara (wildcard; trayectoria vieja)</td><td>Datos de prueba no representativos; criterio de cobertura no exigía valores reales</td><td>Campo 21 nunca ejercitado con valor concreto</td><td>Adecuación funcional · pruebas con datos reales, HIL (Hardware-in-the-Loop) con perfil nuevo</td></tr>
+<tr><td>Sin programación defensiva</td><td>Estándar de codificación no exigía bounds check / manejo de excepción de overflow</td><td>Lectura fuera de límites; Operand Error</td><td>Fiabilidad (tolerancia a fallos) · SAST (Static Application Security Testing), inspección de código crítico</td></tr>
+<tr><td>Reutilización sin revalidación</td><td>Se asumió que lo que funcionó antes funciona en el nuevo contexto</td><td>Intérprete reutilizado; SRI de Ariane 4</td><td>Mantenibilidad (reusabilidad) · re-verificación según nivel de integridad (IEEE 1012)</td></tr>
+<tr><td>Despliegue 100 % / redundancia idéntica</td><td>Arquitectura y proceso de liberación sin contención de fallas</td><td>8,5 M equipos; dos SRI caídos</td><td>Fiabilidad (disponibilidad, recuperabilidad) · canary/anillos, diversidad de diseño</td></tr>
+</tbody></table></div>
+<h4>2. Cálculos</h4>
+<ul>
+<li>Costo para el banco = 2 300 estaciones × 9 h × S/ 180 = <b>S/ 3 726 000</b> (solo costo operativo directo: FE en CoQ; sin contar reputación ni penalidades SBS – Superintendencia de Banca, Seguros y AFP).</li>
+<li>Anillo 1 (0,1 %): 8 500 000 × 0,001 = <b>8 500</b> equipos → reducción del impacto de <b>99,9 %</b>.</li>
+<li>Anillo 2 (1 %), si el anillo 1 no lo detecta: 8 500 + 85 000 = <b>93 500</b> equipos acumulados → aún 98,9 % menos.</li>
+<li>Como el BSOD era inmediato y determinista, el anillo 1 lo habría detectado en minutos: el escalonamiento casi garantizaba la contención. Costo del retraso: 3 × 4 h = 12 h hasta el 100 %, despreciable frente al daño.</li>
+<li>Ariane 5: BH superó 32 767 (2<sup>15</sup> − 1) → excepción no manejada → el SRI se apagó y envió datos de diagnóstico interpretados como datos de vuelo.</li>
+</ul>
+<h4>3. Redundancia que no protege</h4>
+<p>La redundancia de HW protege contra fallas <b>aleatorias</b> (desgaste, componentes); un defecto de SW es <b>sistemático</b>: el mismo código con la misma entrada falla igual en ambas unidades (<b>falla de modo común</b>). Faltó <b>diversidad de diseño</b> (N-version programming, equipos o algoritmos distintos) y el principio de <b>fail-safe / degradación controlada</b>: ante el error, Ariane debió seguir con el último valor válido y CrowdStrike debió descartar el archivo de contenido inválido en vez de tumbar el kernel.</p>
+<h4>4. Plantilla p21 e ISO/IEC 25010</h4>
+<div class="tabla"><table>
+<thead><tr><th>Lente</th><th>CrowdStrike</th><th>Ariane 5</th></tr></thead>
+<tbody>
+<tr><td>Calidad de SW (meta)</td><td>Sensor fiable y disponible en millones de equipos críticos</td><td>SRI fiable bajo el perfil de vuelo real</td></tr>
+<tr><td>SQA (proceso)</td><td>Proceso de liberación de contenido sin escalonamiento ni revisión de interfaz</td><td>Proceso de reutilización sin requalificación; decisión de no proteger conversiones</td></tr>
+<tr><td>QC (producto)</td><td>Validador con defecto; pruebas con wildcard</td><td>Pruebas sin trayectoria de Ariane 5</td></tr>
+<tr><td>ISO/IEC 25010</td><td>Fiabilidad (madurez, disponibilidad, tolerancia a fallos, recuperabilidad); Compatibilidad</td><td>Fiabilidad (tolerancia a fallos); Adecuación funcional (corrección); Safety (2023)</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Gestión contractual de proveedores (cliente)</h4><p>Incluir en el contrato y en el SLA (Service Level Agreement) cláusulas de despliegue escalonado controlado por el cliente (política N-1 / N-2 para contenido), notificación previa, RCA obligatorio en ≤ 15 días y penalidades. Se apoya en el proceso de <b>Adquisición</b> (6.1.1) de la ISO/IEC/IEEE 12207:2017 y en la gestión de terceros exigida por la SBS.</p></div>
+<div class="alt"><h4>Alternativa B · Arquitectura resiliente propia</h4><p>Anillos internos (TI → 1 agencia piloto → 10 % → 100 %), diversidad (no todas las estaciones críticas con el mismo agente/OS), imágenes doradas y procedimiento automatizado de arranque en modo seguro + BitLocker con claves recuperables por script. Reduce el MTTR (Mean Time To Repair/Recovery) de 9 h a una meta de 1 h.</p></div>
+<div class="alt"><h4>Alternativa C · Continuidad de negocio</h4><p>BCP/DRP (Business Continuity Plan / Disaster Recovery Plan) según ISO 22301 con escenario "falla masiva de endpoint", canales alternos (app móvil, banca por internet en otra plataforma) y simulacros semestrales. No evita la falla, pero limita el daño al cliente (p04: continuidad del negocio).</p></div>
+<h4>Justificación normativa</h4>
+<p>IEEE 1012-2016 (nivel de integridad que obliga a re-verificar componentes reutilizados y a analizar interfaces); ISO/IEC/IEEE 29119-4 (técnicas de diseño de pruebas: valores límite, partición de equivalencia); ISO/IEC/IEEE 12207:2017 procesos 6.4.9 Verificación, 6.4.10 Transición (liberación controlada) y 6.3.5 Gestión de la configuración; ISO/IEC 25010:2023 (Fiabilidad, Safety); ISO 22301 (continuidad del negocio); IEC 61508 (diversidad y fallas sistemáticas).</p>
+<div class="norma"><h4>ISO/IEC 25010:2023 · Product quality model</h4>
+<p><b>Organismo:</b> ISO/IEC JTC 1/SC 7. <b>Versiones:</b> 2011 (sustituyó a ISO/IEC 9126-1:2001) y 2023. <b>Propósito:</b> modelo de calidad del producto de SW, parte de la familia SQuaRE (Systems and software Quality Requirements and Evaluation, ISO/IEC 25000). <b>Estructura (2023):</b> 9 características: adecuación funcional, eficiencia de desempeño, compatibilidad, capacidad de interacción (antes usabilidad), fiabilidad, seguridad (security), mantenibilidad, flexibilidad (antes portabilidad) y <b>protección/safety</b> (nueva). <b>Trampa típica:</b> la profesora usa ISO 9126 (6 características, p11); en 2011 pasaron a 8 y en 2023 a 9: indica siempre la versión.</p></div>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Línea base</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Radio de impacto de un cambio defectuoso</td><td>equipos afectados antes de detener el despliegue / equipos totales</td><td>88,5 % (2 300 / 2 600)</td><td>≤ 1 %</td></tr>
+<tr><td>MTTR de estaciones</td><td>Σ horas de recuperación / estaciones caídas</td><td>9 h</td><td>≤ 1 h</td></tr>
+<tr><td>Cumplimiento de anillos del proveedor</td><td>actualizaciones con despliegue escalonado / actualizaciones totales</td><td>0 %</td><td>100 %</td></tr>
+<tr><td>Costo de falla externa por incidente</td><td>estaciones × horas × costo/h</td><td>S/ 3,73 M</td><td>≤ S/ 0,2 M</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) decir que el Ariane 5 "falló por un bug de programación": el código era correcto <b>para Ariane 4</b>; el defecto fue de <b>proceso</b> (reutilización y requisitos); (2) creer que la redundancia de HW protege contra defectos de SW; (3) culpar solo al validador de CrowdStrike: hubo cuatro barreras ausentes (interfaz, prueba, defensa en ejecución, despliegue); (4) proponer para el banco soluciones que solo puede aplicar el fabricante: el cliente actúa vía contrato, arquitectura y continuidad; (5) confundir la cifra de 37 s del Ariane con el tiempo hasta la falla del SRI (≈ 36,7 s). La solución no es única: A, B y C se complementan y su prioridad depende del apetito de riesgo del banco.</div>
+</details>
+</section>
+<section id="caso-15" class="caso">
+<h2>Caso 15 · Matriz forense de cinco desastres de SW y patrón de origen del defecto</h2>
+<p class="origen">Origen: Creado para el repaso a partir de Leveson &amp; Turner, <a href="https://web.stanford.edu/class/cs240/old/sp2014/readings/therac-25.pdf">"An Investigation of the Therac-25 Accidents", IEEE Computer 1993</a>; NASA MCO Mishap Investigation Board, Phase I (1999); U.S.–Canada Power System Outage Task Force (2004); informes JATR/NTSB sobre el Boeing 737 MAX (2019); orden de la SEC sobre Knight Capital (2013); diapositivas 22–26 (clase) | Caso nuevo</p> <span class="tag">Dificultad: Muy alta (síntesis multi-caso)</span>
+<div class="enunciado">
+<p>La SBS (Superintendencia de Banca, Seguros y AFP) prepara una guía de "lecciones aprendidas de SW crítico" para las entidades supervisadas y encarga a su equipo de riesgo tecnológico una <b>matriz forense</b> de cinco casos:</p>
+<ul>
+<li><b>Therac-25</b> (1985–1987): acelerador de radioterapia; condición de carrera al editar rápido y contador de 1 byte; interlocks de HW eliminados; al menos 6 pacientes con sobredosis (p25).</li>
+<li><b>Mars Climate Orbiter – MCO</b> (1999): el SW de tierra <i>SM_FORCES</i> entregó impulsos en libra-fuerza·segundo (lbf·s) y la navegación esperaba newton·segundo (N·s), factor <b>4,45</b>; la sonda entró demasiado baja en la atmósfera de Marte (~US$ 125 M de la nave).</li>
+<li><b>Apagón del noreste de EE.UU. y Canadá</b> (14-ago-2003): condición de carrera en el sistema de alarmas del EMS (Energy Management System) GE XA/21 de FirstEnergy, que dejó de alarmar sin avisar; ~50 millones de personas sin luz hasta 2 días, ~US$ 6 000 M (p23).</li>
+<li><b>Boeing 737 MAX</b> (Lion Air 610, oct-2018; Ethiopian 302, mar-2019): el MCAS (Maneuvering Characteristics Augmentation System) dependía de un único sensor AOA (Angle of Attack) y podía activarse repetidamente; no figuraba en los manuales de los pilotos; 346 muertes y ~20 meses en tierra.</li>
+<li><b>Knight Capital</b> (01-ago-2012): un flag reutilizado reactivó el código muerto "Power Peg" en 1 de 8 servidores no actualizado; US$ 440 M en 45 min (p22).</li>
+</ul>
+<p>Para la fase de origen use: Requisitos/interfaces, Diseño, Codificación, Configuración/despliegue. El equipo afirma que "4 de 5 casos se habrían evitado con más pruebas al final del ciclo".</p>
+</div>
+<h3>Se pide</h3><ol>
+<li>Completar la matriz: causa técnica, causa organizacional, fase de origen, característica ISO/IEC 25010 afectada, técnica SQA/QC que lo habría detectado y tipo de CoPQ (Cost of Poor Quality).</li>
+<li>Calcular la distribución porcentual de fases de origen y refutar o confirmar la afirmación del equipo.</li>
+<li>Usando la curva de Boehm de la p13 (US$ 139 en requisitos vs US$ 14 102 en mantenimiento), estimar cuántas veces más cuesta un defecto de requisitos hallado en operación y relacionarlo con el MCO.</li>
+<li>Redactar tres lecciones transversales para la guía de la SBS, cada una con la norma que la respalda.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. Matriz forense (problemas identificados)</h4>
+<div class="tabla"><table>
+<thead><tr><th>Caso</th><th>Causa técnica</th><th>Causa organizacional (raíz)</th><th>Fase de origen</th><th>ISO/IEC 25010</th><th>Técnica SQA/QC</th><th>CoPQ</th></tr></thead>
+<tbody>
+<tr><td>Therac-25</td><td>Race condition; contador de 1 byte que saltaba un chequeo</td><td>Confianza excesiva en SW reutilizado; sin IV&amp;V; FTA sin SW; mensajes crípticos ("Malfunction 54")</td><td>Diseño (concurrencia, eliminación de interlocks)</td><td>Fiabilidad; Safety; Capacidad de interacción (protección contra errores)</td><td>FTA/FMEA con SW, IV&amp;V, pruebas de concurrencia, inspección</td><td>FE: lesiones y muertes, litigios, retiro del equipo</td></tr>
+<tr><td>MCO</td><td>Unidades inglesas vs SI en una interfaz</td><td>ICD (Interface Control Document) no verificado; anomalías de navegación no escaladas</td><td>Requisitos / interfaces</td><td>Adecuación funcional (corrección); Compatibilidad (interoperabilidad)</td><td>Revisión de interfaces, verificación del ICD, pruebas extremo a extremo</td><td>FE: pérdida de la nave</td></tr>
+<tr><td>Apagón 2003</td><td>Race condition en el subsistema de alarmas; el servidor de respaldo también cayó</td><td>Operadores sin conciencia situacional; sin "monitor del monitor"; poda de árboles deficiente</td><td>Codificación (y diseño de la redundancia)</td><td>Fiabilidad (tolerancia a fallos); Capacidad de interacción (señalización)</td><td>Pruebas de estrés y concurrencia, watchdog, análisis estático de data races</td><td>FE: ~US$ 6 000 M, 50 M personas</td></tr>
+<tr><td>737 MAX</td><td>MCAS con un solo sensor AOA y activación repetida</td><td>Presión de cronograma y competencia; delegación de la certificación; MCAS omitido en manuales</td><td>Requisitos / diseño de sistema</td><td>Safety (fail safe, alerta de peligro); Fiabilidad</td><td>FHA/FMEA, revisión de supuestos de respuesta del piloto, IV&amp;V</td><td>FE: 346 muertes, flota en tierra, &gt; US$ 20 000 M</td></tr>
+<tr><td>Knight</td><td>Flag reutilizado que activó código muerto</td><td>Despliegue manual sin segundo revisor; sin política de eliminación de código muerto</td><td>Configuración / despliegue</td><td>Fiabilidad; Mantenibilidad (modificabilidad, analizabilidad)</td><td>SCM con auditoría de configuración, regresión, CI/CD automatizado</td><td>FE: US$ 440 M, multa SEC, pérdida de independencia de la empresa</td></tr>
+</tbody></table></div>
+<h4>2. Distribución por fase de origen</h4>
+<ul>
+<li>Requisitos/interfaces/diseño: Therac-25, MCO, 737 MAX = <b>3 de 5 (60 %)</b>; Codificación: apagón 2003 = 1 (20 %); Configuración/despliegue: Knight = 1 (20 %).</li>
+<li>En <b>5 de 5</b> la causa raíz es organizacional o de proceso (revisión independiente, interfaces, SCM, presión de plazos) aunque el síntoma sea técnico.</li>
+<li><b>Se refuta</b> la afirmación: "más pruebas al final" no habría detectado de forma fiable defectos de requisitos/diseño (MCO, 737 MAX) ni de configuración (Knight: la prueba en preproducción no replicaba el 8.º servidor); se necesitan técnicas <b>estáticas tempranas</b> (revisiones, inspecciones, análisis de riesgos) y control de procesos (SQA, p17).</li>
+</ul>
+<h4>3. Factor de escalamiento</h4>
+<p>14 102 / 139 ≈ <b>101×</b>. Un defecto de interfaz como el del MCO, corregible con una revisión de ICD de horas en requisitos, se manifestó en la fase de operación, donde el "costo de corregir" fue la misión completa: el escalamiento real superó con creces el factor de la curva, porque en sistemas críticos la falla externa es irreversible.</p>
+<div class="alt"><h4>Alternativa A · Guía basada en el ciclo de vida (procesos)</h4><p>Organizar las lecciones por proceso de la ISO/IEC/IEEE 12207:2017: Definición de requisitos (6.4.2, MCO y 737 MAX), Diseño de arquitectura (6.4.4, Therac-25 y redundancia del apagón), Gestión de la configuración (6.3.5, Knight), Verificación (6.4.9) y Gestión de riesgos (6.3.4). Ventaja: cada entidad sabe qué proceso auditar.</p></div>
+<div class="alt"><h4>Alternativa B · Guía basada en barreras (modelo del queso suizo)</h4><p>Por cada caso, listar las barreras que fallaron (prevención SQA → detección QC → contención operativa) y exigir a cada entidad al menos una barrera eficaz por nivel. Ventaja: obliga a la defensa en profundidad; desventaja: menos trazable a normas.</p></div>
+<div class="alt"><h4>Alternativa C · Guía basada en el producto (atributos)</h4><p>Organizar por características de ISO/IEC 25010 (fiabilidad, safety, compatibilidad) con métricas de ISO/IEC 25023. Útil para contratar SW a terceros con requisitos medibles.</p></div>
+<h4>4. Tres lecciones transversales con norma</h4>
+<ol>
+<li><b>Las interfaces y los supuestos son requisitos:</b> todo intercambio de datos debe tener ICD verificado (unidades, rangos, número de campos). Norma: ISO/IEC/IEEE 29148 (ingeniería de requisitos) y proceso 6.4.2 de la 12207:2017.</li>
+<li><b>La redundancia y la reutilización exigen re-verificación independiente:</b> IV&amp;V proporcional al nivel de integridad. Norma: IEEE 1012-2016; IEC 61508 para fallas sistemáticas.</li>
+<li><b>Lo que se despliega debe ser exactamente lo que se aprobó:</b> línea base, auditoría de configuración y despliegue automatizado. Norma: IEEE 828-2012 y proceso 6.3.5 de la 12207:2017.</li>
+</ol>
+<h4>Justificación normativa</h4>
+<p>Además de las anteriores: ISO 9001:2015 cláusula 10.2 (no conformidad y acción correctiva: RCA obligatorio); CMMI v2.0 CAR; ISO/IEC 25010:2023 para expresar el atributo afectado; DO-178C (aviónica, aplicable al 737 MAX) e IEC 62304 (dispositivos médicos, aplicable al Therac-25) como regulaciones sectoriales que nacieron de lecciones como estas (p26).</p>
+<div class="norma"><h4>IEEE 828-2012 · Configuration Management in Systems and Software Engineering</h4>
+<p><b>Organismo:</b> IEEE. <b>Versiones:</b> 1983, 1990, 1998, 2005, 2012. <b>Propósito:</b> requisitos mínimos del proceso de CM (Configuration Management) para sistemas y SW. <b>Estructura:</b> planificación de la CM (SCMP – Software Configuration Management Plan), identificación de ítems de configuración y líneas base, control de cambios, registro del estado (status accounting), auditorías de configuración (FCA – Functional Configuration Audit y PCA – Physical Configuration Audit) y gestión de liberaciones. <b>Trampa típica:</b> la CM no es "usar Git": Git es una herramienta de control de versiones; la CM incluye el control formal de cambios y las auditorías que en Knight faltaron.</p></div>
+<h4>KPI para medir la mejora (para las entidades supervisadas)</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Interfaces con ICD verificado</td><td>interfaces con ICD revisado y probado / interfaces totales</td><td>100 % en sistemas críticos</td></tr>
+<tr><td>Defectos de requisitos detectados tempranamente</td><td>defectos de requisitos hallados en revisión / defectos de requisitos totales</td><td>≥ 70 %</td></tr>
+<tr><td>Paridad de configuración en producción</td><td>nodos con versión igual a la línea base / nodos totales</td><td>100 % antes de activar</td></tr>
+<tr><td>Incidentes con RCA cerrado</td><td>incidentes críticos con RCA y acción correctiva / incidentes críticos</td><td>100 % en ≤ 15 días</td></tr>
+<tr><td>Cobertura de IV&amp;V</td><td>componentes de nivel de integridad 3–4 con IV&amp;V / componentes de nivel 3–4</td><td>100 %</td></tr>
+</tbody></table></div>
+<h4>Cómo se relaciona con los grupos</h4>
+<p>Los siete grupos trabajaron casos aislados (G3, G1 y G2 el apagón; G4 y G7 Ariane; G5 y G6 Knight) y ninguno hizo la <b>comparación transversal</b> ni identificó la fase de origen; este caso integra esa síntesis, que es el tipo de pregunta de desarrollo más probable en el parcial.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) confundir la <b>fase de origen</b> (donde se inyectó el defecto) con la <b>fase de detección</b> (donde se manifestó: casi siempre operación); (2) poner como causa raíz el síntoma técnico ("race condition") en vez de la causa de proceso que permitió que llegara a producción; (3) usar la cifra de US$ 460 M de Knight (SEC/prensa) sin advertir que la profesora usa <b>US$ 440 M</b>: en el examen usa la de la diapositiva y menciona la otra como variante; (4) clasificar el 737 MAX como "falla del piloto": el diseño del MCAS y su omisión en manuales son defectos de requisitos y de proceso; (5) creer que hay una sola forma correcta de organizar la guía: A, B y C son válidas según el destinatario (auditor, arquitecto o comprador de SW).</div>
+</details>
+</section>
+<!--FIN-->

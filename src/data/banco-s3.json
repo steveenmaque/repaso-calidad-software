@@ -1,0 +1,748 @@
+{
+ "mcq": [
+  {
+   "id": "s3-m01",
+   "s": 3,
+   "q": "En el pipeline de la app de Interbank conviven cuatro actividades: I) TruffleHog revisa el repositorio en busca de secretos embebidos; II) OWASP ZAP ataca el entorno de staging; III) el autor del SDD lo recorre con sus pares para recoger observaciones; IV) un tester hace una sesión de 60 minutos con un charter y sin guion. Según la taxonomía de la Semana 03, ¿qué clasificación es correcta?",
+   "o": [
+    "I y II son técnicas estáticas por ser de seguridad, III es una auditoría y IV es una técnica dinámica",
+    "II y IV son técnicas estáticas, I es una técnica basada en la experiencia y III es una prueba dinámica",
+    "I y III son técnicas estáticas, II es una técnica dinámica y IV es una técnica basada en la experiencia",
+    "I es dinámica porque escanea secretos, II y III son técnicas estáticas y IV es una técnica dinámica"
+   ],
+   "a": 2,
+   "exp": "Estática = evalúa artefactos SIN ejecutar el SW: TruffleHog escanea código fuente/historial (análisis estático, familia SAST/secret scanning) y el walkthrough del SDD revisa un documento de diseño. DAST con OWASP ZAP ataca la aplicación EN EJECUCIÓN, luego es dinámica aunque sea de seguridad. La sesión con charter y sin guion es una prueba exploratoria, que la profesora clasifica como técnica basada en la experiencia (diap. 16). Distractores: confundir 'de seguridad' con 'estática' (DAST es dinámica); creer que escanear secretos implica ejecutar el SW; llamar estática a una prueba exploratoria, que sí ejecuta el producto."
+  },
+  {
+   "id": "s3-m02",
+   "s": 3,
+   "q": "El equipo del SUM-UNMSM detecta 20 defectos de reglas de matrícula mediante un walkthrough del SRS, cuando históricamente esos defectos se descubrían en la fase de pruebas. Usando la curva de costo de corrección vista en la Semana 01, ¿cuánto se ahorra aproximadamente y qué principio de la Semana 03 lo respalda?",
+   "o": [
+    "Unos 139 940 dólares, restando el costo en requisitos al de pruebas; lo respalda la Ley de Boehm",
+    "Unos 133 620 dólares, restando el costo en diseño al de pruebas; lo respalda el costo de la calidad",
+    "Unos 142 720 dólares, sumando el costo en pruebas de cada defecto; lo respalda el ciclo PDCA de Deming",
+    "Unos 279 260 dólares, restando el costo en requisitos al de mantenimiento; lo respalda la Ley de Boehm"
+   ],
+   "a": 0,
+   "exp": "Curva S1: requisitos $139, diseño $455, codificación $977, pruebas $7 136, mantenimiento $14 102. Ahorro = 20 × (7 136 − 139) = $139 940. La Ley de Boehm (diap. 6 S3) dice que corregir en requisitos/código cuesta hasta 100 veces menos que en producción. Distractores: usar mantenimiento ($279 260) cuando los defectos se hallaban en pruebas; restar el costo de diseño ($133 620) cuando el walkthrough fue del SRS, es decir, en requisitos; no restar el costo de corregir temprano ($142 720) y atribuirlo a PDCA, que es un ciclo de mejora y no un modelo de costo."
+  },
+  {
+   "id": "s3-m03",
+   "s": 3,
+   "q": "Un analista afirma que el desastre del Ariane 5 se habría evitado con una batería más amplia de pruebas unitarias del SRI ejecutadas con las trayectorias del Ariane 4. Considerando lo visto en las Semanas 01 y 03, ¿cuál es la objeción más sólida a esa afirmación?",
+   "o": [
+    "El desborde fue un defecto del HW redundante del SRI y por eso ninguna prueba de SW lo habría podido revelar",
+    "La causa fue de gestión de configuración como en Knight Capital, de modo que el problema no era de pruebas",
+    "Las pruebas unitarias son estáticas y no detectan desbordes; faltó una inspección Fagan del código Ada del SRI",
+    "Con datos del Ariane 4 el módulo pasaba; faltó integración real, análisis estático y revisión de requisitos"
+   ],
+   "a": 3,
+   "exp": "Las diap. 11–12 señalan tres técnicas faltantes: pruebas de integración con datos reales del Ariane 5 (dinámica), análisis estático que detectara la conversión 64→16 bits sin protección (estática) y gestión de requisitos y diseño, pues se asumió que reutilizar garantizaba calidad. Con trayectorias del Ariane 4 el valor nunca desbordaba, así que más pruebas unitarias con esos datos seguían pasando. Distractores: las pruebas unitarias son DINÁMICAS; el SRI de respaldo tenía el mismo SW, la falla fue de modo común del SW y no del HW; Knight Capital fue SCM, Ariane 5 fue reutilización sin re-V&V."
+  },
+  {
+   "id": "s3-m04",
+   "s": 3,
+   "q": "En su Tabla de Diagnóstico de Interbank, el G3 colocó en la columna Estrategia de mejora el texto DevSecOps con SAST mediante TruffleHog o SonarQube. Si se ajusta la tabla al modelo de las diapositivas 17 y 18, ¿qué corrección es la más fiel a la profesora?",
+   "o": [
+    "Pasar SAST a Solución propuesta y poner pentesting con JMeter como estrategia continua de mejora",
+    "Pasar DevSecOps y SAST a Solución propuesta y poner el marco OWASP SAMM como estrategia de madurez",
+    "Mantener SAST y poner UCD como estrategia, pues la filtración destruyó la confianza del usuario final",
+    "Mantener DevSecOps y poner ISO/IEC 25010 como estrategia, pues la característica rota es la Seguridad"
+   ],
+   "a": 1,
+   "exp": "En la tabla de la profesora la columna Solución propuesta contiene la TÉCNICA/HERRAMIENTA (DevSecOps con SAST/DAST y pentesting) y la columna Estrategia de mejora contiene el MODELO o MARCO de proceso que institucionaliza la solución: para vulnerabilidades es OWASP SAMM. Distractores: ISO/IEC 25010 es un modelo de calidad del PRODUCTO, sirve para diagnosticar qué atributo se rompió, no para madurar el proceso; JMeter es herramienta de carga, no de pentesting, y sigue siendo herramienta; UCD es la estrategia del arquetipo de mala usabilidad."
+  },
+  {
+   "id": "s3-m05",
+   "s": 3,
+   "q": "Tras la caída nacional de la app y la Banca por Internet de Interbank del 24 de julio de 2025, el G3 diagnosticó una infracción a la Fiabilidad y Disponibilidad. Bajo ISO/IEC 25010:2011, ¿qué precisión técnica corrige mejor ese diagnóstico?",
+   "o": [
+    "Disponibilidad es subcaracterística de Seguridad junto a la integridad, por la tríada clásica de la información",
+    "Disponibilidad es subcaracterística de Fiabilidad y no soportar picos es falta de Capacidad",
+    "Disponibilidad es subcaracterística de Eficiencia de desempeño, junto al comportamiento temporal y los recursos",
+    "Disponibilidad es una característica propia de 25010 que reemplazó a la Confiabilidad de la antigua ISO 9126"
+   ],
+   "a": 1,
+   "exp": "En 25010:2011 Fiabilidad tiene cuatro subcaracterísticas: madurez, disponibilidad, tolerancia a fallos y capacidad de recuperación. No soportar la concurrencia de un pico es Eficiencia de desempeño → Capacidad. Distractores: disponibilidad no es característica; ubicarla en Eficiencia de desempeño confunde escalabilidad con disponibilidad; ubicarla en Seguridad trae la tríada CIA de ISO/IEC 27001, pero en 25010 Seguridad tiene confidencialidad, integridad, no repudio, responsabilidad y autenticidad."
+  },
+  {
+   "id": "s3-m06",
+   "s": 3,
+   "q": "El G5 describió los débitos de Yape no reflejados tras timeouts como una ruptura de la Exactitud funcional. Integrando el modelo ISO 9126 de la Semana 01 con ISO/IEC 25010 de la Semana 03, ¿qué observación es correcta?",
+   "o": [
+    "Exactitud se conserva con el mismo nombre en 25010, ahora agrupada dentro de la nueva Adecuación funcional",
+    "Exactitud pasó en 25010 a llamarse Integridad dentro de Seguridad, porque los saldos son datos de la información",
+    "Exactitud pasó en 25010 a ser subcaracterística de Fiabilidad, junto a la madurez y a la tolerancia a fallos",
+    "Exactitud venía de Funcionalidad en 9126; en 25010 se llama Corrección funcional y va en Adecuación funcional"
+   ],
+   "a": 3,
+   "exp": "ISO 9126 agrupaba en Funcionalidad: idoneidad, exactitud, interoperabilidad, seguridad de acceso y cumplimiento. ISO/IEC 25010:2011 renombra la característica como Adecuación funcional con completitud, corrección y pertinencia funcional: la exactitud pasa a ser corrección funcional. Que el problema afecte además la Integridad es un matiz válido, pero no es un renombre de exactitud. Distractores: conservar el nombre antiguo, que es justo el error del G5; convertirla en integridad; moverla a Fiabilidad."
+  },
+  {
+   "id": "s3-m07",
+   "s": 3,
+   "q": "Una consultora migra a ISO/IEC 25010:2011 un checklist hecho con ISO 9126. En el checklist antiguo, Seguridad de acceso colgaba de Funcionalidad, Interoperabilidad también, y Coexistencia colgaba de Portabilidad. ¿Cómo deben reubicarse esos tres ítems?",
+   "o": [
+    "Seguridad pasa a ser característica propia; Interoperabilidad y Coexistencia se agrupan en Compatibilidad",
+    "Seguridad pasa a ser característica propia; Interoperabilidad va a Usabilidad y Coexistencia a Mantenibilidad",
+    "Seguridad pasa a Fiabilidad; Interoperabilidad queda en Funcionalidad y Coexistencia queda en Portabilidad",
+    "Seguridad pasa a Compatibilidad; Interoperabilidad va a Adecuación funcional y Coexistencia a Flexibilidad"
+   ],
+   "a": 0,
+   "exp": "Las dos características nuevas de 25010 frente a las seis de 9126 son Seguridad y Compatibilidad. Compatibilidad agrupa coexistencia, que antes estaba en Portabilidad, e interoperabilidad, que antes estaba en Funcionalidad. Distractores: dejar los ítems en su lugar antiguo; enviar interoperabilidad a Usabilidad; usar Flexibilidad, que es el nombre de Portabilidad recién en la revisión 2023, no en la 2011 que enseña la profesora."
+  },
+  {
+   "id": "s3-m08",
+   "s": 3,
+   "q": "Una startup limeña dispone de presupuesto para una herramienta por categoría y elige Jira, Appium, Checkstyle y Mercurial. De acuerdo con las cinco categorías de herramientas de la Semana 03, ¿qué asignación es correcta?",
+   "o": [
+    "Jira versiona tickets del código, Appium prueba APIs, Checkstyle analiza JavaScript y Mercurial gestiona bugs",
+    "Jira automatiza pruebas web, Appium gestiona defectos móviles, Checkstyle versiona código y Mercurial analiza",
+    "Jira gestiona defectos, Appium automatiza pruebas móviles, Checkstyle analiza código Java y Mercurial versiona",
+    "Jira ejecuta pruebas de carga, Appium analiza código móvil, Checkstyle gestiona defectos y Mercurial versiona"
+   ],
+   "a": 2,
+   "exp": "Diap. 19–20: pruebas de SW = Selenium, JUnit, TestComplete; control de versiones = Git, SVN, Mercurial; análisis de código = SonarQube, ESLint, Checkstyle; gestión de defectos = Jira, Bugzilla, Mantis; automatización de pruebas = Selenium, Appium, Katalon Studio. Checkstyle es de Java; ESLint es de JavaScript. Jira NO prueba, gestiona defectos. Los distractores intercambian categorías o atribuyen a Checkstyle el lenguaje de ESLint."
+  },
+  {
+   "id": "s3-m09",
+   "s": 3,
+   "q": "Scotiabank quiere integrar SAST y DAST sobre su flujo de autenticación con clave digital. Siguiendo el criterio de selección que justificó el G7, ¿dónde conviene ubicar cada técnica dentro del pipeline CI/CD?",
+   "o": [
+    "DAST dentro del IDE con SonarLint sobre el código; SAST en producción sobre el tráfico real del cliente",
+    "SAST y DAST en cada commit sobre el código fuente, pues son técnicas estáticas que no ejecutan la app",
+    "DAST en cada commit sobre el código fuente; SAST antes de cada liberación contra un staging desplegado",
+    "SAST en cada commit sobre el código fuente; DAST antes de cada liberación contra un staging desplegado"
+   ],
+   "a": 3,
+   "exp": "SAST analiza el código sin ejecutarlo, es rápido y se integra de forma nativa en el pipeline bloqueándolo si no supera el Quality Gate de seguridad, por eso va en cada commit. DAST ataca la aplicación en ejecución, necesita un staging desplegado y escenarios de ataque, por eso va antes de cada liberación. Distractores: invertir los roles; llamar estático a DAST; poner DAST en el IDE, donde SonarLint hace análisis estático, y SAST en producción, donde no hay código fuente que analizar."
+  },
+  {
+   "id": "s3-m10",
+   "s": 3,
+   "q": "Indecopi multó a Scotiabank con S/ 63 800 porque el banco no pudo acreditar el uso de MFA en un préstamo de S/ 34 946,90 tramitado por la app. Bajo ISO/IEC 25010, ¿qué diagnóstico y control atacan el fondo probatorio del caso?",
+   "o": [
+    "Confidencialidad y cifrado; cifrado TLS extremo a extremo de la clave digital enviada al cliente",
+    "No repudio y responsabilidad; registros de auditoría inmutables del OTP, el dispositivo y la sesión",
+    "Integridad y pruebas dinámicas; DAST periódico sobre las APIs móviles como evidencia ante Indecopi",
+    "Autenticidad y análisis estático; SAST en cada commit del flujo de login como evidencia ante Indecopi"
+   ],
+   "a": 1,
+   "exp": "El problema no fue solo técnico sino de EVIDENCIA: el banco no pudo demostrar quién autorizó la operación. En 25010, no repudio es la capacidad de demostrar que una acción ocurrió y responsabilidad es poder rastrear las acciones hasta su autor; se cubren con logs firmados e inmutables del OTP, dispositivo, IP y sesión. Distractores: el cifrado protege la confidencialidad pero no prueba nada; SAST y DAST mejoran el código pero no generan prueba de cada transacción; es justamente la omisión que se señaló al G7."
+  },
+  {
+   "id": "s3-m11",
+   "s": 3,
+   "q": "SonarQube reporta para el core de una cooperativa un costo de desarrollo estimado de 400 días y un costo de remediación de 30 días. Con la escala del Technical Debt Ratio, ¿qué calificación de mantenibilidad obtiene y qué implica para el Quality Gate?",
+   "o": [
+    "TDR de 7,5 % y calificación A; la calificación A admite cualquier ratio inferior al diez por ciento",
+    "TDR de 13,3 % y calificación C; el ratio se calcula como desarrollo dividido entre remediación",
+    "TDR de 7,5 % y calificación B; no alcanza la meta A, que exige una deuda menor o igual al 5 %",
+    "TDR de 30 % y calificación D; el ratio se obtiene de los días de remediación sobre cien días base"
+   ],
+   "a": 2,
+   "exp": "TDR = costo de remediación ÷ costo de desarrollo = 30 ÷ 400 = 7,5 %. Escala: A ≤ 5 %, B ≤ 10 %, C ≤ 20 %, D ≤ 50 %, E > 50 %. Por tanto la calificación es B y un Quality Gate tipo Sonar way que exige mantenibilidad A sobre el código evaluado no se aprueba. Distractores: invertir el cociente; confundir el límite de A con el de B; usar una base inventada de 100 días."
+  },
+  {
+   "id": "s3-m12",
+   "s": 3,
+   "q": "Una release de 45 000 LOC del módulo de siniestros de Rímac registró 90 defectos en pruebas internas y 18 incidencias en producción durante el primer mes. ¿Qué par de valores es correcto para la densidad total de defectos y la DRE?",
+   "o": [
+    "Densidad de 2,4 defectos por KLOC y DRE cercana al 83 %",
+    "Densidad de 2,0 defectos por KLOC y DRE cercana al 80 %",
+    "Densidad de 2,4 defectos por KLOC y DRE cercana al 20 %",
+    "Densidad de 0,4 defectos por KLOC y DRE cercana al 17 %"
+   ],
+   "a": 0,
+   "exp": "Densidad = defectos totales ÷ KLOC = (90 + 18) ÷ 45 = 2,4 def/KLOC. DRE = defectos hallados antes de entregar ÷ total = 90 ÷ 108 ≈ 83,3 %. Distractores: contar solo los 90 internos para la densidad y calcular 1 − 18/90 = 80 %; usar solo los de producción para la densidad, 18/45 = 0,4, e invertir la DRE; calcular bien la densidad pero tomar 18/90 = 20 % como DRE, que es en realidad una tasa de escape relativa."
+  },
+  {
+   "id": "s3-m13",
+   "s": 3,
+   "q": "En el proyecto de la app móvil de SINEACE, la autora del SDD presenta el diseño a sus compañeros paso a paso, con fines formativos y para recoger observaciones, sin moderador, sin registrador y sin métricas de inspección. Según IEEE 1028, ¿qué tipo de revisión estática es?",
+   "o": [
+    "Es un walkthrough, porque lo conduce la autora y su propósito es formativo y de búsqueda de defectos",
+    "Es una inspección, porque lo conduce la autora y su propósito es formativo y de búsqueda de defectos",
+    "Es una revisión de gestión, porque evalúa el avance del diseño y decide si el proyecto sigue o se detiene",
+    "Es una auditoría, porque evalúa un documento de diseño y lo hace con un enfoque formal de conformidad"
+   ],
+   "a": 0,
+   "exp": "IEEE 1028-2008 distingue revisión de gestión, revisión técnica, inspección, walkthrough y auditoría. El walkthrough lo dirige el autor, tiene formalidad baja o media y fines educativos y de detección. La inspección Fagan la conduce un moderador con roles fijos y métricas. La auditoría es una evaluación independiente de conformidad con normas o contratos. La revisión de gestión evalúa avance y decisiones del proyecto. Ojo: la profesora agrupa auditorías y walkthroughs como evaluación formal; en examen se respeta su agrupación pero se sabe diferenciarlos."
+  },
+  {
+   "id": "s3-m14",
+   "s": 3,
+   "q": "Para el problema de regresiones manuales lentas en Tottus, la profesora propone PDCA, pero un consultor formado en la Semana 02 sugiere DMAIC. ¿Qué afirmación distingue correctamente ambos enfoques?",
+   "o": [
+    "PDCA y DMAIC son el mismo ciclo; DMAIC se limita a añadir una fase de Definir antes de la fase de Planear de PDCA",
+    "PDCA exige medir en DPMO durante la fase Verificar; DMAIC omite la medición estadística y se centra en el piloto",
+    "PDCA es un ciclo iterativo continuo de mejora; DMAIC es un proyecto que cierra en Controlar y ataca la variabilidad",
+    "DMAIC nació con Shewhart y Deming en el Japón de 1950; PDCA nació en Motorola como metodología de los cinturones"
+   ],
+   "a": 2,
+   "exp": "PDCA/PHVA, de Shewhart difundido por Deming, es un ciclo que se repite sin fin: planear, piloto, verificar con datos, estandarizar o reiniciar; encaja con una automatización progresiva de QA. DMAIC es la estructura de proyectos Six Sigma, con fases Definir, Medir, Analizar, Mejorar y Controlar, liderada por cinturones y orientada a reducir la variabilidad hasta 3,4 DPMO. Distractores: equipararlos; intercambiar sus orígenes; atribuir a PDCA la métrica DPMO y quitar a DMAIC su base estadística."
+  },
+  {
+   "id": "s3-m15",
+   "s": 3,
+   "q": "Al reconstruir con Ishikawa 6M la exfiltración de 3,7 TB de Interbank se listan cuatro causas: APM sin umbrales de egreso, IAM permisivo con tokens estáticos, ausencia de rotación de secretos y dependencia de un proveedor externo de observabilidad. ¿Qué clasificación es correcta?",
+   "o": [
+    "Medición, Material, Mano de obra y Método, en ese mismo orden respectivo",
+    "Medición, Máquina, Método y Medio ambiente, en ese mismo orden respectivo",
+    "Método, Máquina, Material y Medio ambiente, en ese mismo orden respectivo",
+    "Máquina, Método, Medición y Mano de obra, en ese mismo orden respectivo"
+   ],
+   "a": 1,
+   "exp": "Medición agrupa la falta de indicadores y alertas, por eso el APM sin umbrales va ahí. Máquina agrupa la tecnología: un IAM permisivo con tokens estáticos. Método agrupa los procedimientos: no rotar secretos es un proceso ausente. Medio ambiente agrupa el entorno externo: el ecosistema de terceros como New Relic. El error clásico de la Semana 02 es confundir Medición con Máquina o Medio ambiente con Método; también es frecuente llamar Material a la falta de un procedimiento."
+  },
+  {
+   "id": "s3-m16",
+   "s": 3,
+   "q": "Un equipo de la SUNAT certificado internamente con un proceso definido de nivel 3 recibe dos meses para un sistema que requiere ocho, con herramientas modernas y personal experimentado. El producto sale con muchos defectos. Según el diagrama de factores de la diapositiva 3, ¿qué explicación es la más precisa?",
+   "o": [
+    "El factor herramientas de desarrollo falló, porque la tecnología moderna eleva la tasa de defectos",
+    "El factor calidad del grupo de trabajo falló, porque en sistemas grandes el equipo es lo que domina",
+    "El factor calidad del proceso falló, porque un nivel 3 garantiza el producto en cualquier cronograma",
+    "El factor recursos invertidos, es decir costo, tiempo y cronograma, anuló el aporte de un buen proceso"
+   ],
+   "a": 3,
+   "exp": "La diapositiva 3 muestra cuatro factores convergentes sobre la calidad del producto: calidad del proceso, herramientas de desarrollo, recursos invertidos y calidad del grupo de trabajo. Sommerville añade que si presupuesto o cronograma son irreales la calidad cae aunque el proceso sea bueno. Distractores: suponer que un buen proceso garantiza calidad sin importar el plazo; culpar a la tecnología; afirmar que en sistemas grandes domina el equipo, cuando según Sommerville domina el proceso y el equipo pesa más en proyectos pequeños."
+  },
+  {
+   "id": "s3-m17",
+   "s": 3,
+   "q": "En el SUM-UNMSM se definen el perfil de reglas de Checkstyle y el Quality Gate que todo pull request debe superar, y luego el pipeline ejecuta ese análisis sobre cada pull request. Integrando la distinción SQA y QC de la Semana 01, ¿cómo se clasifican esas dos acciones?",
+   "o": [
+    "Definir y ejecutar el perfil son QC, porque Checkstyle examina directamente el producto",
+    "Definir y ejecutar el perfil son SQA, porque toda técnica estática es de tipo preventivo",
+    "Definir el perfil es SQA preventivo y ejecutarlo sobre cada pull request es QC detectivo",
+    "Definir el perfil es QC detectivo y ejecutarlo sobre cada pull request es SQA preventivo"
+   ],
+   "a": 2,
+   "exp": "SQA es proactivo y se centra en el proceso: definir estándares de codificación es una actividad típica de SQA según la diap. 17 de la Semana 01. QC es reactivo y se centra en el producto: inspeccionar el código de un PR concreto y registrar defectos es QC. La definición de técnicas de calidad de la Semana 03 lo resume: prevenir, detectar y corregir. Distractores: tratar todo como QC por usar una herramienta; invertir los roles; creer que estático equivale a preventivo, cuando el análisis estático de un PR detecta defectos ya introducidos."
+  },
+  {
+   "id": "s3-m18",
+   "s": 3,
+   "q": "El CISO de Yape quiere medir cuán madura es la práctica de construcción segura de su área de desarrollo usando el marco que la profesora asocia al arquetipo de vulnerabilidades. ¿Qué descripción de ese marco es correcta?",
+   "o": [
+    "OWASP SAMM v2 organiza 5 niveles de madurez organizacional iguales a los niveles escalonados de CMMI",
+    "OWASP SAMM v2 es una norma certificable de ISO que reemplazó a la ISO/IEC 27001 en el desarrollo",
+    "OWASP SAMM v2 organiza 12 prácticas en 4 dominios, evaluadas con el método de tasación SCAMPI",
+    "OWASP SAMM v2 organiza 15 prácticas en 5 funciones de negocio, con madurez de 1 a 3 por práctica"
+   ],
+   "a": 3,
+   "exp": "OWASP SAMM v2, de 2020, tiene 5 funciones de negocio: Gobernanza, Diseño, Implementación, Verificación y Operaciones; 3 prácticas por función, 15 en total; y madurez de 1 a 3 por práctica, por ejemplo Secure Build en Implementación. Distractores: copiar los 5 niveles escalonados de CMMI; tratarlo como norma ISO certificable, cuando es un marco abierto de OWASP y la 27001 sigue vigente; atribuirle la estructura del SAMM v1 mezclada con SCAMPI, que es el método de tasación de CMMI."
+  },
+  {
+   "id": "s3-m19",
+   "s": 3,
+   "q": "Una software factory de Lima anuncia en su web que obtendrá en seis meses la certificación ISO/IEC 90003 para sus procesos de desarrollo. ¿Qué observación debería hacerle un auditor de calidad?",
+   "o": [
+    "La 90003 certifica productos que cumplen las ocho características del modelo 25010",
+    "La certificación se otorga en ISO 9001; la 90003 es una guía para aplicarla al SW",
+    "La 90003 certifica procesos del ciclo de vida y es la adopción peruana de la 12207",
+    "La 90003 es certificable por INACAL y sustituye a la ISO 9001 en empresas de SW"
+   ],
+   "a": 1,
+   "exp": "ISO/IEC/IEEE 90003:2018 es una GUÍA para interpretar la ISO 9001:2015 en organizaciones que desarrollan, suministran o mantienen SW; no es certificable por sí misma, lo que se certifica es el SGC bajo ISO 9001. Distractores: decir que reemplaza a la 9001; confundirla con ISO/IEC 25010, que es el modelo de calidad del producto; confundirla con 12207 y su adopción peruana NTP-ISO/IEC 12207:2016."
+  },
+  {
+   "id": "s3-m20",
+   "s": 3,
+   "q": "El G3 colocó las pruebas de estrés y de carga en preproducción como estrategia de mejora para las caídas de Interbank, mientras la profesora asigna a ese arquetipo la SPE. ¿Qué distingue a la SPE de ejecutar JMeter antes de cada liberación?",
+   "o": [
+    "La SPE modela el rendimiento desde el diseño con presupuestos de respuesta; JMeter verifica al final",
+    "La SPE equivale al autoescalado en la nube, que reacciona en producción cuando el tráfico crece mucho",
+    "La SPE es un complemento de JMeter que automatiza el ramp-up y reporta el punto de quiebre del sistema",
+    "La SPE es la característica Eficiencia de desempeño de ISO 25010 aplicada a sistemas transaccionales"
+   ],
+   "a": 0,
+   "exp": "SPE, de Connie U. Smith, es un enfoque sistemático y cuantitativo que integra el rendimiento como requisito no funcional verificable desde el diseño: modelos de capacidad tempranos, presupuestos de tiempo de respuesta y performance gates en el pipeline. Las pruebas de carga con JMeter son una técnica dinámica de verificación tardía: en la tabla de la profesora van en Solución propuesta, no en Estrategia. Distractores: confundir el marco con la herramienta; con la infraestructura de autoescalado; con la característica de producto de ISO/IEC 25010."
+  },
+  {
+   "id": "s3-m21",
+   "s": 3,
+   "q": "En la app Fazil de Tottus los usuarios abandonan el carrito porque el seguimiento del delivery es confuso; el G6 lo mapeó a Adecuación funcional y propuso UCD. ¿Qué valoración técnica es la más acertada?",
+   "o": [
+    "El atributo es Usabilidad, pero UCD es una heurística de Nielsen aplicada por expertos sin usuarios",
+    "El atributo es Adecuación funcional, porque la función de seguimiento existe; UCD es la UAT del final",
+    "El atributo es Compatibilidad, porque falla la interfaz entre módulos; UCD exige pruebas de carga",
+    "El atributo es Usabilidad, con operabilidad y protección contra errores; UCD itera con usuarios reales"
+   ],
+   "a": 3,
+   "exp": "Una interfaz confusa que frustra al usuario afecta a la Usabilidad de 25010:2011, en concreto a la operabilidad, la protección contra errores de usuario y la estética de la interfaz. UCD, con norma de referencia ISO 9241-210, involucra a usuarios reales de forma iterativa en todas las fases; las heurísticas de Nielsen y las pruebas de usabilidad son técnicas dentro de ese enfoque. Distractores: el mapeo erróneo del G6; reducir UCD a una UAT final; confundir UCD con una evaluación heurística; llamar Compatibilidad a un problema de interfaz de usuario."
+  },
+  {
+   "id": "s3-m22",
+   "s": 3,
+   "q": "La UNMSM desea, a nivel de toda la institución, un modelo de excelencia con enfoque en grupos de interés y valor social, y para su oficina de desarrollo de SW un modelo que estandarice y madure los procesos de ingeniería. Integrando las Semanas 02 y 03, ¿qué combinación es más coherente?",
+   "o": [
+    "EFQM para la gestión institucional y CMMI para estandarizar los procesos de desarrollo de SW",
+    "OWASP SAMM para la gestión institucional y el PNC Perú para los procesos de desarrollo de SW",
+    "CMMI para la gestión institucional y EFQM para estandarizar los procesos de desarrollo de SW",
+    "Six Sigma para la gestión institucional y Malcolm Baldrige para los procesos de desarrollo de SW"
+   ],
+   "a": 0,
+   "exp": "EFQM, con sus bloques Dirección, Ejecución y Resultados, enfoca sostenibilidad y grupos de interés; es la opción que la Semana 02 propone para una universidad pública. CMMI es la estrategia que la diap. 17 asigna al código desorganizado para estandarizar y madurar procesos de desarrollo. Distractores: Six Sigma es operativo y micro, no un modelo institucional; Baldrige y el PNC son modelos de excelencia organizacional, no de procesos de SW; invertir los niveles de CMMI y EFQM; OWASP SAMM mide madurez de seguridad del SW, no gestión institucional."
+  },
+  {
+   "id": "s3-m23",
+   "s": 3,
+   "q": "Inkafarma propone, para la filtración de datos de cerca de 4 millones de clientes, alinearse a ISO/IEC 27001 y a la característica Seguridad de ISO/IEC 25010. Un revisor objeta que ambas normas dicen lo mismo. ¿Qué respuesta es la correcta?",
+   "o": [
+    "La 27001 y la 25010 son guías no certificables que describen el mismo conjunto de controles del Anexo A",
+    "La 27001 fija requisitos de un SGSI en la organización; la 25010 define la seguridad como atributo del producto",
+    "La 27001 es una herramienta de pruebas de penetración; la 25010 es el marco de madurez de seguridad del SW",
+    "La 27001 define la seguridad como atributo del producto; la 25010 fija requisitos de un SGSI en la organización"
+   ],
+   "a": 1,
+   "exp": "ISO/IEC 27001 establece requisitos para un Sistema de Gestión de Seguridad de la Información, SGSI, certificable, con 93 controles en el Anexo A de la versión 2022. ISO/IEC 25010 es un modelo de calidad del PRODUCTO donde Seguridad es una característica con cinco subcaracterísticas. Son complementarias: una gobierna la organización y la otra evalúa el SW. Distractores: invertirlas; decir que ambas son guías con el mismo Anexo A; confundir la 27001 con una herramienta y la 25010 con OWASP SAMM."
+  },
+  {
+   "id": "s3-m24",
+   "s": 3,
+   "q": "Un tester de RENIEC empieza probando nombres con eñe, tildes y apellidos compuestos porque en proyectos anteriores esos casos rompían los formularios; otro tester explora durante 90 minutos el flujo de duplicado de DNI aprendiendo y diseñando sobre la marcha. ¿Cómo se denominan ambas técnicas?",
+   "o": [
+    "La primera es una prueba de caja blanca y la segunda es un walkthrough dinámico del flujo de duplicado",
+    "La primera es una prueba exploratoria y la segunda es adivinación de errores basada en la experiencia",
+    "La primera es adivinación de errores y la segunda es una prueba exploratoria basada en la experiencia",
+    "La primera es una prueba de regresión y la segunda es una prueba de aceptación hecha por el usuario"
+   ],
+   "a": 2,
+   "exp": "Diap. 16: la adivinación de errores, error guessing, aplica la intuición y experiencia previa para anticipar dónde fallará el sistema, como con la eñe o los apellidos compuestos. La prueba exploratoria ejecuta simultáneamente aprendizaje, diseño y ejecución sin guion previo. Ambas son técnicas basadas en la experiencia. Distractores: invertir los nombres; confundirlas con regresión o UAT; llamar caja blanca a algo que no mira el código; un walkthrough es estático, no dinámico."
+  },
+  {
+   "id": "s3-m25",
+   "s": 3,
+   "q": "En Knight Capital, en 2012, un técnico no copió el nuevo código en uno de los ocho servidores y un flag reutilizado reactivó la función obsoleta Power Peg. ¿Qué categoría de herramientas de la Semana 03, junto con su práctica asociada, ataca la causa raíz que la profesora calificó como falla de SQA?",
+   "o": [
+    "Análisis de código con ESLint para marcar la variable del flag como no usada en cada commit",
+    "Gestión de defectos con Bugzilla para priorizar el bucle de órdenes una vez que se reportó",
+    "Control de versiones con despliegue automatizado idéntico en los ocho servidores vía CI/CD",
+    "Pruebas de usabilidad con heurísticas de Nielsen para que el operador detecte el mensaje"
+   ],
+   "a": 2,
+   "exp": "La profesora califica el caso como falla grave de SQA y control de configuraciones: despliegue manual, código muerto y flag reutilizado. El control de versiones, base de la SCM, combinado con un pipeline CI/CD que despliegue la misma versión en todos los nodos, ataca la causa raíz. Distractores: ESLint es de JavaScript y no detecta un servidor desactualizado; la gestión de defectos es reactiva y en 45 minutos se perdieron 440 millones de dólares; la usabilidad no tiene relación con la causa."
+  }
+ ],
+ "fill": [
+  {
+   "id": "s3-f01",
+   "s": 3,
+   "t": "Según la diapositiva 4, las técnicas de calidad del SW son métodos y prácticas aplicadas durante todo el ciclo de vida para {{1}}, {{2}} y {{3}} errores, asegurando un producto funcional, seguro y confiable.",
+   "r": [
+    [
+     "prevenir"
+    ],
+    [
+     "detectar"
+    ],
+    [
+     "corregir"
+    ]
+   ],
+   "exp": "Los tres verbos de la definición: prevenir se asocia a SQA, proactivo; detectar y corregir se asocian a QC, reactivo. El orden es el de la diapositiva."
+  },
+  {
+   "id": "s3-f02",
+   "s": 3,
+   "t": "El cohete Ariane 5 de la {{1}} fue destruido el 4 de junio de {{2}}, tras apenas {{3}} segundos de vuelo, con pérdidas de más de 370 millones de dólares.",
+   "r": [
+    [
+     "ESA",
+     "Agencia Espacial Europea",
+     "European Space Agency"
+    ],
+    [
+     "1996"
+    ],
+    [
+     "37",
+     "treinta y siete"
+    ]
+   ],
+   "exp": "Cifras del caso (diap. 9): ESA, 4/jun/1996, 37 s de vuelo, más de USD 370 M y 10 años de desarrollo perdidos. El overflow ocurrió en el segundo 36."
+  },
+  {
+   "id": "s3-f03",
+   "s": 3,
+   "t": "En el segundo 36 del vuelo, el SW de navegación heredado del Ariane 4 convirtió la velocidad horizontal, un decimal de {{1}} bits, a un entero de {{2}} bits, provocando un {{3}}.",
+   "r": [
+    [
+     "64",
+     "sesenta y cuatro"
+    ],
+    [
+     "16",
+     "dieciséis",
+     "dieciseis"
+    ],
+    [
+     "Integer Overflow",
+     "desbordamiento de entero",
+     "desbordamiento de enteros",
+     "overflow"
+    ]
+   ],
+   "exp": "Mecanismo de la diap. 10: conversión de 64 a 16 bits sin protección contra excepciones → desbordamiento de entero. Un análisis estático lo habría marcado."
+  },
+  {
+   "id": "s3-f04",
+   "s": 3,
+   "t": "ISO/IEC 25010 pertenece a la familia {{1}}; en su versión 2011, la que enseña la profesora, define {{2}} características de calidad del producto y reemplazó a ISO/IEC {{3}}.",
+   "r": [
+    [
+     "SQuaRE",
+     "Square"
+    ],
+    [
+     "ocho",
+     "8"
+    ],
+    [
+     "9126"
+    ]
+   ],
+   "exp": "SQuaRE = Systems and software Quality Requirements and Evaluation, serie 25000. La 2011 tiene 8 características y 31 subcaracterísticas; la revisión 2023 tiene 9. Reemplazó a ISO/IEC 9126, que tenía 6."
+  },
+  {
+   "id": "s3-f05",
+   "s": 3,
+   "t": "La Ley de Boehm afirma que encontrar un error en requisitos o código cuesta hasta {{1}} veces menos que corregirlo en producción; Barry Boehm la formuló en Software Engineering Economics, publicado en {{2}}.",
+   "r": [
+    [
+     "100",
+     "cien"
+    ],
+    [
+     "1981"
+    ]
+   ],
+   "exp": "La cifra 100 aparece en negrita en la diap. 6. Boehm y Basili matizaron en 2001: cerca de 100 veces en sistemas grandes y unas 5 veces en sistemas pequeños."
+  },
+  {
+   "id": "s3-f06",
+   "s": 3,
+   "t": "Herramientas de la diapositiva 19 y 20: control de versiones con Git, {{1}} y Mercurial; automatización de pruebas con Selenium, {{2}} y Katalon Studio; gestión de defectos con Jira, Bugzilla y {{3}}.",
+   "r": [
+    [
+     "SVN",
+     "Subversion",
+     "Apache Subversion"
+    ],
+    [
+     "Appium"
+    ],
+    [
+     "Mantis",
+     "MantisBT"
+    ]
+   ],
+   "exp": "SVN es centralizado; Git y Mercurial son distribuidos. Appium automatiza pruebas móviles. Jira, Bugzilla y Mantis gestionan defectos, no los prueban."
+  },
+  {
+   "id": "s3-f07",
+   "s": 3,
+   "t": "Herramientas de análisis de código de la diapositiva 20: SonarQube, ESLint y {{1}}. De ellas, ESLint analiza código {{2}} y la primera citada es multilenguaje.",
+   "r": [
+    [
+     "Checkstyle"
+    ],
+    [
+     "JavaScript",
+     "JS",
+     "JavaScript y TypeScript"
+    ]
+   ],
+   "exp": "Checkstyle aplica estándares de codificación en Java; ESLint es el linter de JavaScript y TypeScript; SonarQube es una plataforma de inspección continua multilenguaje. El sílabo añade PMD."
+  },
+  {
+   "id": "s3-f08",
+   "s": 3,
+   "t": "Entre las métricas de la diapositiva 13, la sigla MTTR significa {{1}}, y el NPS se calcula como el porcentaje de promotores menos el porcentaje de {{2}}.",
+   "r": [
+    [
+     "Mean Time To Repair",
+     "tiempo medio de reparación",
+     "Mean Time to Repair"
+    ],
+    [
+     "detractores"
+    ]
+   ],
+   "exp": "MTTR = suma de tiempos de reparación ÷ número de reparaciones. NPS = % promotores, notas 9–10, menos % detractores, notas 0–6; va de −100 a +100."
+  },
+  {
+   "id": "s3-f09",
+   "s": 3,
+   "t": "En la tabla de casos de la profesora, el código desorganizado se resuelve con análisis estático en SonarQube y definición de {{1}}, y su estrategia de mejora es el modelo {{2}}.",
+   "r": [
+    [
+     "Quality Gates",
+     "Quality Gate",
+     "umbrales de calidad"
+    ],
+    [
+     "CMMI"
+    ]
+   ],
+   "exp": "Fila 2 de la diap. 17: alta deuda técnica y código duplicado → SonarQube + Quality Gates → CMMI para estandarizar y madurar los procesos de desarrollo."
+  },
+  {
+   "id": "s3-f10",
+   "s": 3,
+   "t": "Para la falta de escalabilidad, la profesora propone pruebas de carga con JMeter y como estrategia la {{1}}; para vulnerabilidades, el marco {{2}}; para mala usabilidad, las heurísticas de {{3}}.",
+   "r": [
+    [
+     "SPE",
+     "Ingeniería del Rendimiento",
+     "Software Performance Engineering",
+     "Ingenieria del Rendimiento"
+    ],
+    [
+     "OWASP SAMM",
+     "SAMM"
+    ],
+    [
+     "Nielsen",
+     "Jakob Nielsen"
+    ]
+   ],
+   "exp": "Diap. 17–18: escalabilidad → SPE; vulnerabilidades → DevSecOps con SAST/DAST y pentesting → OWASP SAMM; usabilidad → pruebas con usuarios reales y heurísticas de Nielsen → UCD."
+  },
+  {
+   "id": "s3-f11",
+   "s": 3,
+   "t": "SAST significa Static Application Security Testing y es una técnica {{1}}; DAST ataca la aplicación en ejecución y es una técnica {{2}}.",
+   "r": [
+    [
+     "estática",
+     "estatica"
+    ],
+    [
+     "dinámica",
+     "dinamica"
+    ]
+   ],
+   "exp": "SAST analiza el código fuente sin ejecutar, caja blanca. DAST ataca la app desplegada desde fuera, caja negra. Ser de seguridad no las hace estáticas a ambas."
+  },
+  {
+   "id": "s3-f12",
+   "s": 3,
+   "t": "ISO/IEC 90003 es una guía para aplicar la ISO {{1}} al desarrollo de SW, mientras que ISO/IEC 27001 establece los requisitos de un {{2}}.",
+   "r": [
+    [
+     "9001"
+    ],
+    [
+     "SGSI",
+     "Sistema de Gestión de Seguridad de la Información",
+     "ISMS",
+     "Sistema de Gestion de Seguridad de la Informacion"
+    ]
+   ],
+   "exp": "La certificación se obtiene en ISO 9001, no en la 90003. La 27001:2022 es certificable y tiene 93 controles en su Anexo A."
+  },
+  {
+   "id": "s3-f13",
+   "s": 3,
+   "t": "Las pruebas de aceptación del usuario se abrevian {{1}}; las pruebas exploratorias ejecutan simultáneamente el aprendizaje, el diseño y la ejecución de pruebas sin un {{2}} previo.",
+   "r": [
+    [
+     "UAT",
+     "User Acceptance Testing"
+    ],
+    [
+     "guion",
+     "guión",
+     "guion estructurado",
+     "guión estructurado"
+    ]
+   ],
+   "exp": "UAT es la evaluación final desde la perspectiva del usuario de negocio, ejemplo típico de validación. Las exploratorias y la adivinación de errores son técnicas basadas en la experiencia."
+  },
+  {
+   "id": "s3-f14",
+   "s": 3,
+   "t": "El estándar IEEE {{1}}-2008 regula revisiones y auditorías de SW; la inspección, su tipo más formal, fue propuesta por Michael {{2}} en IBM en 1976.",
+   "r": [
+    [
+     "1028"
+    ],
+    [
+     "Fagan"
+    ]
+   ],
+   "exp": "IEEE 1028 distingue revisión de gestión, revisión técnica, inspección, walkthrough y auditoría. La inspección de Fagan tiene moderador, autor, lector, inspector y registrador."
+  },
+  {
+   "id": "s3-f15",
+   "s": 3,
+   "t": "OWASP SAMM v2 organiza la seguridad del SW en {{1}} funciones de negocio y {{2}} prácticas de seguridad, con niveles de madurez de 1 a 3 por práctica.",
+   "r": [
+    [
+     "5",
+     "cinco"
+    ],
+    [
+     "15",
+     "quince"
+    ]
+   ],
+   "exp": "Funciones: Gobernanza, Diseño, Implementación, Verificación y Operaciones; tres prácticas por función."
+  },
+  {
+   "id": "s3-f16",
+   "s": 3,
+   "t": "La metáfora de la deuda técnica se atribuye a Ward {{1}}, en 1992; en SonarQube, la calificación A de mantenibilidad exige un Technical Debt Ratio menor o igual al {{2}} por ciento.",
+   "r": [
+    [
+     "Cunningham"
+    ],
+    [
+     "5",
+     "cinco"
+    ]
+   ],
+   "exp": "TDR = costo de remediación ÷ costo de desarrollo. Escala: A ≤ 5 %, B ≤ 10 %, C ≤ 20 %, D ≤ 50 %, E > 50 %."
+  }
+ ],
+ "casos": [
+  {
+   "id": "s3-c01",
+   "s": [
+    1,
+    3
+   ],
+   "titulo": "Ariane 5: reconstrucción técnica, costo y técnicas que faltaron",
+   "enunciado": "<p>Usted integra el equipo de SQA que la ESA (European Space Agency – Agencia Espacial Europea) convoca para un análisis post mortem del vuelo 501 del Ariane 5 (4 de junio de 1996, Kourou). Datos disponibles:</p>\n<ul>\n<li>El SRI (Sistema de Referencia Inercial) fue <b>reutilizado del Ariane 4</b>, escrito en Ada. La función de alineación seguía activa unos 40 s tras el despegue, aunque en el Ariane 5 no tenía utilidad después del lanzamiento.</li>\n<li>En el segundo 36 se convirtió la velocidad horizontal, variable BH en coma flotante de 64 bits, a un entero con signo de 16 bits, con un máximo de 32 767. De 7 conversiones riesgosas, 4 estaban protegidas y 3 no, para no superar el 80 % de carga de CPU.</li>\n<li>El SRI de respaldo, con el <b>mismo SW</b>, falló 72 ms antes que el principal. El OBC interpretó el volcado de diagnóstico como datos de vuelo y ordenó la deflexión total de las toberas. Autodestrucción a los 37 s.</li>\n<li>Las pruebas se hicieron en simuladores con trayectorias del Ariane 4; nunca se probó el sistema completo con el perfil de velocidad real del Ariane 5.</li>\n<li>Pérdida: más de USD 370 M y 10 años de desarrollo. Curva de costo de corrección de la Semana 01: requisitos $139, diseño $455, codificación $977, pruebas $7 136, mantenimiento $14 102 por defecto.</li>\n</ul>",
+   "preguntas": [
+    "Reconstruya la cadena causal completa desde la decisión de reutilizar hasta la autodestrucción y explique por qué la redundancia de HW no protegió el vuelo.",
+    "Identifique las tres técnicas de calidad que, según la profesora, faltaron; clasifique cada una como estática o dinámica y diga qué evidencia del caso habría detectado.",
+    "Clasifique la causa raíz como falla de SQA o de QC según la Semana 01 y mapee el impacto a características y subcaracterísticas de ISO/IEC 25010:2011.",
+    "Usando la curva de costo, compare el múltiplo de costo de detectar el defecto en requisitos frente a mantenimiento y argumente qué técnica estática temprana lo habría hallado.",
+    "Proponga tres KPI preventivos para un programa de reutilización de SW crítico, con fórmula y meta."
+   ],
+   "solucion": "<h4>1. Cadena causal</h4>\n<p>Decisión de reutilizar el SRI sin re-especificar requisitos → perfil de vuelo del Ariane 5 con mayor velocidad horizontal → conversión 64→16 bits sin manejador de excepción → <i>Operand Error</i> no capturado en el SRI de respaldo y luego en el principal → el OBC recibe un volcado de diagnóstico como si fueran datos de vuelo → deflexión total de toberas → ruptura aerodinámica → autodestrucción a los 37 s. La redundancia de HW no sirvió porque ambos SRI ejecutaban <b>el mismo SW</b>: es una falla de modo común; la redundancia solo protege ante fallos aleatorios de HW, no ante defectos de diseño del SW.</p>\n<h4>2. Técnicas que faltaron</h4>\n<div class='tabla'><table><thead><tr><th>Técnica</th><th>Tipo</th><th>Qué habría detectado</th></tr></thead><tbody>\n<tr><td>Pruebas de integración con datos reales del Ariane 5</td><td>Dinámica</td><td>El desborde al inyectar la velocidad horizontal real</td></tr>\n<tr><td>Análisis estático de código</td><td>Estática</td><td>Las 3 conversiones sin protección contra excepciones</td></tr>\n<tr><td>Gestión de requisitos y diseño</td><td>Estática, revisión de especificaciones</td><td>Que el entorno había cambiado y que la alineación no hacía falta tras el despegue</td></tr>\n</tbody></table></div>\n<h4>3. SQA o QC y mapeo ISO/IEC 25010</h4>\n<p>La causa raíz es de <b>SQA</b>: falló el proceso, es decir, no existió una política de re-V&amp;V para el SW reutilizado ni una revisión de requisitos del nuevo contexto; QC también falló como barrera, pues las pruebas usaron datos equivocados. ISO/IEC 25010: <b>Fiabilidad</b> → tolerancia a fallos y madurez; <b>Adecuación funcional</b> → corrección funcional, porque la salida del SRI fue incorrecta. También aplica la cobertura de contexto del modelo de calidad en uso.</p>\n<h4>4. Costo</h4>\n<p>14 102 ÷ 139 ≈ 101 veces, coherente con la Ley de Boehm, que habla de hasta 100 veces. Con 3 conversiones sin protección: 3 × (14 102 − 139) = $41 889 de diferencia en la escala de la curva, mientras que la pérdida real superó los USD 370 M: la curva subestima el impacto en sistemas críticos. La técnica estática temprana idónea es una <b>inspección o walkthrough de requisitos</b> del SRI contrastando el perfil de vuelo del Ariane 5, más el <b>análisis estático</b> por interpretación abstracta, el origen histórico de PolySpace.</p>\n<h4>5. KPI</h4>\n<ul><li>% de componentes reutilizados re-verificados con el perfil del nuevo entorno = reutilizados re-V&amp;V ÷ reutilizados × 100; meta 100 %.</li>\n<li>Conversiones de tipo sin manejo de excepción detectadas por análisis estático; meta 0 en código crítico.</li>\n<li>DRE = defectos hallados antes de la entrega ÷ total × 100; meta ≥ 95 % en SW de vuelo.</li></ul>",
+   "criterios": [
+    "Cadena causal completa y explicación de la falla de modo común",
+    "Tres técnicas de la profesora bien clasificadas como estáticas o dinámicas",
+    "Clasificación SQA o QC justificada y subcaracterísticas de 25010 correctas",
+    "Cálculo del múltiplo cercano a 101 y discusión de sus límites",
+    "KPI con fórmula y meta numérica"
+   ]
+  },
+  {
+   "id": "s3-c02",
+   "s": [
+    2,
+    3
+   ],
+   "titulo": "Interbank: exfiltración de 3,7 TB y madurez de seguridad",
+   "enunciado": "<p>El 30 de octubre de 2024 un atacante divulgó una base de datos de <b>3,7 TB</b> exfiltrada de Interbank, con datos de tarjetas incluido el CVV, contraseñas y credenciales de API internas. El vector reportado fue el uso de <b>credenciales expuestas de New Relic</b>, proveedor de observabilidad, con escalamiento de privilegios hacia bases de datos en la nube. La SBS y la ANPD abrieron investigaciones.</p>\n<p>Datos internos simulados del último trimestre:</p>\n<div class='tabla'><table><thead><tr><th>Indicador</th><th>Valor</th></tr></thead><tbody>\n<tr><td>Secretos embebidos hallados en 1 200 repositorios</td><td>318</td></tr>\n<tr><td>Credenciales con rotación automática</td><td>22 %</td></tr>\n<tr><td>Vida media de un token de API</td><td>14 meses</td></tr>\n<tr><td>MTTD de incidentes de seguridad</td><td>9 días</td></tr>\n<tr><td>Cuentas privilegiadas revisadas en el trimestre</td><td>35 %</td></tr>\n</tbody></table></div>\n<p>El G3 propuso como solución Zero Trust, Key Vault con secretos efímeros y DLP con IA, y como estrategia DevSecOps con SAST mediante TruffleHog o SonarQube.</p>",
+   "preguntas": [
+    "Construya un diagrama de Ishikawa 6M de la Semana 02 con al menos dos causas por M a partir de los datos.",
+    "Identifique las subcaracterísticas de Seguridad de ISO/IEC 25010:2011 vulneradas, justificando cada una con un hecho del caso.",
+    "Rediseñe la tabla del G3 según el formato de las diapositivas 17 y 18, separando Solución propuesta de Estrategia de mejora, y justifique OWASP SAMM frente a ISO/IEC 27001.",
+    "Defina cinco KPI con línea base, tomada de la tabla, y meta a 12 meses.",
+    "Indique qué norma de la industria de tarjetas se incumple si se almacenó el CVV tras la autorización."
+   ],
+   "solucion": "<h4>1. Ishikawa 6M · efecto: exfiltración de 3,7 TB</h4>\n<ul><li><b>Mano de obra:</b> desarrolladores que embeben credenciales, 318 hallazgos; baja cultura de seguridad del proveedor.</li>\n<li><b>Método:</b> sin rotación de secretos, solo 22 %; sin TPRM (Third-Party Risk Management – gestión de riesgo de terceros); revisión de accesos de apenas 35 %.</li>\n<li><b>Máquina:</b> IAM permisivo; tokens estáticos con vida media de 14 meses; red sin segmentar entre observabilidad y BD transaccional.</li>\n<li><b>Material:</b> CVV almacenado; credenciales de API en texto plano.</li>\n<li><b>Medición:</b> MTTD de 9 días; sin alertas de volumen de egreso.</li>\n<li><b>Medio ambiente:</b> ecosistema de terceros, nube multiproveedor, presión de time-to-market, ciberdelincuencia organizada.</li></ul>\n<h4>2. Subcaracterísticas de Seguridad vulneradas</h4>\n<p><b>Confidencialidad</b>, porque se expusieron datos de millones de clientes; <b>Autenticidad</b>, porque se suplantó una identidad con credenciales robadas; <b>Integridad</b>, por el acceso no autorizado a BD; <b>Responsabilidad</b>, porque no se pudo trazar a tiempo el uso de la credencial. Ojo: Disponibilidad no es parte de Seguridad en 25010.</p>\n<h4>3. Tabla corregida</h4>\n<div class='tabla'><table><thead><tr><th>Situación actual</th><th>Solución propuesta</th><th>Estrategia de mejora</th></tr></thead><tbody>\n<tr><td>Credenciales de tercero expuestas, escalamiento de privilegios, 3,7 TB exfiltrados</td><td>DevSecOps: SAST y secret scanning que bloquean el build, DAST, pentesting, Zero Trust, Key Vault con secretos efímeros, DLP, PAM</td><td>OWASP SAMM v2 con evaluación inicial y roadmap por práctica, complementado con un SGSI ISO/IEC 27001:2022</td></tr>\n</tbody></table></div>\n<p>OWASP SAMM mide y madura la seguridad <b>del ciclo de desarrollo</b> en 5 funciones y 15 prácticas, como Secure Build o Incident Management; ISO/IEC 27001 gobierna la seguridad de <b>toda la organización</b> con controles como 5.19–5.22 de proveedores, 8.2 de accesos privilegiados y 8.12 de prevención de fuga. No compiten: SAMM es la estrategia que pide la profesora y 27001 da el marco de gestión certificable exigido por el regulador.</p>\n<h4>4. KPI</h4>\n<div class='tabla'><table><thead><tr><th>KPI</th><th>Línea base</th><th>Meta 12 meses</th></tr></thead><tbody>\n<tr><td>Secretos embebidos por cada 100 repositorios</td><td>26,5</td><td>&lt; 1, con bloqueo automático</td></tr>\n<tr><td>% credenciales con rotación automática</td><td>22 %</td><td>100 %</td></tr>\n<tr><td>Vida media de un token</td><td>14 meses</td><td>&lt; 24 horas</td></tr>\n<tr><td>MTTD</td><td>9 días</td><td>&lt; 1 hora, con SIEM y UEBA</td></tr>\n<tr><td>% cuentas privilegiadas revisadas por trimestre</td><td>35 %</td><td>100 %</td></tr>\n</tbody></table></div>\n<h4>5. Norma de tarjetas</h4>\n<p><b>PCI DSS v4.0</b>, requisito 3.3: prohíbe almacenar datos sensibles de autenticación como el CVV2 después de la autorización.</p>",
+   "criterios": [
+    "Ishikawa con las 6M correctamente asignadas y respaldadas por datos",
+    "Cuatro subcaracterísticas de Seguridad justificadas sin incluir Disponibilidad",
+    "Separación correcta entre solución técnica y estrategia de proceso",
+    "Diferencia argumentada entre OWASP SAMM e ISO/IEC 27001",
+    "KPI con línea base y meta numérica; mención de PCI DSS"
+   ]
+  },
+  {
+   "id": "s3-c03",
+   "s": [
+    3
+   ],
+   "titulo": "BCP/Yape: caídas predecibles en quincena y fin de mes",
+   "enunciado": "<p>Yape, con más de 18 millones de usuarios, registró en un trimestre de 90 días cinco caídas abruptas: 38, 52, 95, 27 y 63 minutos. Todas coincidieron con quincenas, fines de mes o justo después de un mantenimiento. El banco se enteró por Downdetector y X. La Res. SBS 01741-2026 exige informar oportunamente las interrupciones.</p>\n<ul><li>SLO de disponibilidad comprometido: 99,95 % trimestral.</li>\n<li>Pico histórico: 9 800 TPS el 30 de junio. La última prueba de estrés halló el punto de quiebre en 8 200 TPS.</li>\n<li>Capacidad fija en servidores; sin autoescalado; sin feature flags; sin congelamiento de despliegues.</li></ul>\n<p>El G4 propuso contenedores con autoescalado por RPS, health checks, circuit breaker, rate limiting, colas SQS o Kafka y pruebas de estrés antes de cada quincena, con DevOps como estrategia. El G2, para un caso similar de BBVA, propuso PDCA reactivo a partir del incidente.</p>",
+   "preguntas": [
+    "Calcule la disponibilidad real del trimestre, el MTTR, el MTBF aproximado y los minutos de caída que permitía el SLO; concluya si se cumplió.",
+    "Explique por qué un colapso abrupto en fechas predecibles indica un cuello de botella de concurrencia y una falla de planificación de capacidad, y qué subcaracterísticas de ISO/IEC 25010 se ven afectadas.",
+    "Compare SPE, PDCA y DevOps o SRE como estrategia de mejora para este caso y elija una justificando con la tabla de la profesora.",
+    "Diseñe la prueba de estrés previa a la próxima quincena: carga objetivo, ramp-up y criterios de aceptación."
+   ],
+   "solucion": "<h4>1. Cálculos</h4>\n<p>Minutos del trimestre: 90 × 1 440 = 129 600. Caída total: 38 + 52 + 95 + 27 + 63 = 275 min. Disponibilidad = 1 − 275 ÷ 129 600 ≈ <b>99,79 %</b>. MTTR = 275 ÷ 5 = <b>55 min</b>. MTBF ≈ (129 600 − 275) ÷ 5 = 25 865 min ≈ <b>431 h</b>; verificación: MTBF ÷ (MTBF + MTTR) = 25 865 ÷ 25 920 ≈ 99,79 %. El SLO de 99,95 % permitía 129 600 × 0,0005 = <b>64,8 min</b>; se consumió más de cuatro veces ese presupuesto de error, así que <b>no se cumplió</b>.</p>\n<h4>2. Diagnóstico</h4>\n<p>Una degradación progresiva sugiere fugas o crecimiento orgánico; un colapso <b>abrupto</b> en fechas <b>conocidas</b> indica que la demanda concurrente supera una capacidad rígida, sin degradación elegante. El punto de quiebre de 8 200 TPS está por debajo del pico de 9 800 TPS: el riesgo era conocido y no se planificó. Afectado: Eficiencia de desempeño → <b>Capacidad</b> y comportamiento temporal; Fiabilidad → <b>Disponibilidad</b>, tolerancia a fallos y capacidad de recuperación.</p>\n<h4>3. Estrategia</h4>\n<div class='alt'><h4>Alternativa A · SPE, recomendada</h4><p>Es la estrategia que la profesora asigna a la falta de escalabilidad: el rendimiento se trata como requisito no funcional desde el diseño, con presupuestos de respuesta, modelos de capacidad alineados al calendario de negocio y performance gates en CI/CD. Es preventiva.</p></div>\n<div class='alt'><h4>Alternativa B · PDCA</h4><p>Válida como ciclo de mejora, pero si arranca del incidente, como en el G2, es reactiva: corrige después de caer.</p></div>\n<div class='alt'><h4>Alternativa C · DevOps o SRE</h4><p>Aporta SLO, presupuesto de error, canary o blue-green, freeze de 48–72 h y postmortem sin culpables; complementa a SPE en la operación.</p></div>\n<h4>4. Prueba de estrés</h4>\n<p>Objetivo: 1,5 × 9 800 ≈ <b>14 700 TPS</b>. Ramp-up escalonado de 2 000 TPS cada 10 min hasta el objetivo y meseta de 30 min, más una prueba de pico súbito. Criterios: latencia p95 menor a 800 ms en transferir y ver saldo; tasa de errores 5xx menor a 0,1 %; autoescalado en menos de 2 min; ninguna pérdida de transacciones encoladas.</p>",
+   "criterios": [
+    "Cálculos correctos de disponibilidad, MTTR, MTBF y presupuesto del SLO",
+    "Distingue Capacidad, de Eficiencia de desempeño, de Disponibilidad, de Fiabilidad",
+    "Elige estrategia argumentando prevención frente a reacción",
+    "Prueba de estrés con carga superior al pico histórico y criterios medibles"
+   ]
+  },
+  {
+   "id": "s3-c04",
+   "s": [
+    3
+   ],
+   "titulo": "Scotiabank: deuda técnica del core y Quality Gates",
+   "enunciado": "<p>La banca digital de Scotiabank Perú convive con un Core Banking monolítico. SonarQube reporta para el módulo de préstamos, de 120 KLOC:</p>\n<div class='tabla'><table><thead><tr><th>Métrica</th><th>Valor</th></tr></thead><tbody>\n<tr><td>Costo de desarrollo estimado</td><td>2 400 días-persona</td></tr>\n<tr><td>Costo de remediación de la deuda</td><td>288 días-persona</td></tr>\n<tr><td>Bugs abiertos</td><td>312</td></tr>\n<tr><td>Densidad de líneas duplicadas</td><td>7,8 %</td></tr>\n<tr><td>Cobertura de pruebas</td><td>41 %</td></tr>\n<tr><td>Métodos con complejidad cognitiva mayor a 15</td><td>214</td></tr>\n</tbody></table></div>\n<p>Cada cambio regulatorio tarda tres sprints y genera regresiones. El G7 propuso SonarQube con Quality Gates y Clean as You Code como solución, y CMMI-DEV v2.0 nivel 3 con ISO/IEC 25010 como estrategia.</p>",
+   "preguntas": [
+    "Calcule el TDR, la calificación de mantenibilidad y la densidad de bugs por KLOC; indique cuántos días de remediación deben eliminarse para llegar a la calificación A.",
+    "Diseñe un Quality Gate para código nuevo con al menos cinco condiciones y explique por qué conviene aplicarlo al código nuevo y no al legado completo.",
+    "Mapee los síntomas a subcaracterísticas de Mantenibilidad de ISO/IEC 25010:2011 y corrija el término Transferibilidad usado por el G7.",
+    "Justifique por qué la estrategia es CMMI nivel 3 y no SonarQube, y proponga cómo un ciclo PDCA podría pilotar el cambio."
+   ],
+   "solucion": "<h4>1. Cálculos</h4>\n<p>TDR = 288 ÷ 2 400 = <b>12 %</b> → calificación <b>C</b>, pues C abarca de 10 % a 20 %. Densidad de bugs = 312 ÷ 120 = <b>2,6 por KLOC</b>. Para A se requiere TDR ≤ 5 %, es decir remediación ≤ 120 días: hay que eliminar <b>168 días</b> de deuda.</p>\n<h4>2. Quality Gate de código nuevo</h4>\n<ul><li>Cobertura ≥ 80 %.</li><li>Líneas duplicadas ≤ 3 %.</li><li>Calificación A en fiabilidad, seguridad y mantenibilidad.</li><li>100 % de security hotspots revisados.</li><li>Ningún método nuevo con complejidad cognitiva mayor a 15.</li></ul>\n<p>Clean as You Code: exigir el gate sobre todo el legado bloquearía cada entrega; aplicarlo al código nuevo o modificado impide que la deuda crezca y la reduce de forma gradual en cada cambio.</p>\n<h4>3. Mapeo ISO/IEC 25010</h4>\n<p>Duplicación → <b>reusabilidad</b> y <b>modularidad</b>; complejidad cognitiva → <b>analizabilidad</b>; tres sprints por cambio → <b>capacidad de ser modificado</b>; cobertura de 41 % → <b>capacidad de ser probado</b>. Transferibilidad es una traducción antigua de <b>Portabilidad</b>; en la revisión 2023 esa característica se llama Flexibilidad.</p>\n<h4>4. Estrategia</h4>\n<p>SonarQube es la <b>herramienta</b>; la estrategia debe institucionalizar el cambio. CMMI nivel 3, Definido, estandariza procesos a nivel organizacional: estándares de codificación, revisiones entre pares, Verificación y Validación definidas. PDCA de piloto: <b>Planear</b> la meta de TDR de 12 % a 8 % en el módulo de préstamos; <b>Hacer</b> activando el gate en un equipo; <b>Verificar</b> midiendo TDR, regresiones y lead time a los 3 meses; <b>Actuar</b> estandarizando el gate en todos los repositorios o ajustando las condiciones.</p>",
+   "criterios": [
+    "TDR, calificación, densidad y brecha de días calculados sin errores",
+    "Quality Gate con condiciones medibles y justificación de Clean as You Code",
+    "Subcaracterísticas de Mantenibilidad bien asignadas y corrección de Transferibilidad",
+    "Distinción entre herramienta y modelo de proceso; PDCA coherente"
+   ]
+  },
+  {
+   "id": "s3-c05",
+   "s": [
+    1,
+    3
+   ],
+   "titulo": "Saga Falabella: Seller Center y devoluciones bloqueadas",
+   "enunciado": "<p>En el Seller Center de Saga Falabella los vendedores cargan inventario con plantillas Excel. En un mes se registraron:</p>\n<div class='tabla'><table><thead><tr><th>Indicador</th><th>Valor</th></tr></thead><tbody>\n<tr><td>Cargas masivas intentadas</td><td>4 000</td></tr>\n<tr><td>Cargas rechazadas</td><td>1 120</td></tr>\n<tr><td>Rechazos por falso Product ID duplicado</td><td>672</td></tr>\n<tr><td>Imágenes eliminadas sin motivo</td><td>2 300</td></tr>\n<tr><td>Solicitudes de devolución perdidas entre OMS y WMS</td><td>3,2 %</td></tr>\n</tbody></table></div>\n<p>En 2024 la empresa prometió envíos en 24 horas y en noviembre de 2025 Indecopi la sancionó por publicidad engañosa y restricciones ilegales de cambios y devoluciones, en el marco de la Ley 29571. El G3 propuso middleware con APIs y validación JSON o XML en tiempo real, Selenium y Jira, y para postventa la integración API entre el front, el CRM y el WMS con pruebas E2E en CI/CD.</p>",
+   "preguntas": [
+    "Calcule la tasa de rechazo y el porcentaje de rechazos que son falsos positivos; explique qué subcaracterísticas de ISO/IEC 25010 evidencian.",
+    "Diferencie si el bloqueo de devoluciones es un problema de usabilidad, de adecuación funcional o de interoperabilidad, y qué estrategia corresponde a cada diagnóstico.",
+    "Clasifique las propuestas del G3 en las cinco categorías de herramientas de clase y señale qué le faltó a su columna de estrategia.",
+    "Proponga cuatro KPI con meta y relacione el caso con el principio de la Semana 01 de cumplir requisitos explícitos e implícitos."
+   ],
+   "solucion": "<h4>1. Tasas</h4>\n<p>Tasa de rechazo = 1 120 ÷ 4 000 = <b>28 %</b>. Falsos positivos = 672 ÷ 1 120 = <b>60 %</b> de los rechazos. El sistema rechaza datos válidos → Adecuación funcional, <b>corrección funcional</b>; la carga no orienta al vendedor → Usabilidad, <b>protección contra errores de usuario</b> y operabilidad; la integración con sistemas de los vendedores falla → Compatibilidad, <b>interoperabilidad</b>. Como complemento, ISO/IEC 25012 para la calidad de datos.</p>\n<h4>2. Diagnóstico diferencial</h4>\n<ul><li>Si la UI confunde al usuario → <b>Usabilidad</b> → UCD con heurísticas de Nielsen.</li>\n<li>Si la función no existe o tiene reglas restrictivas → <b>Adecuación funcional</b> → gestión de requisitos y conformidad legal con la Ley 29571.</li>\n<li>Si el evento no llega del OMS al WMS, el 3,2 % perdido → <b>Interoperabilidad</b> → integración por eventos con patrón outbox, contract testing y E2E en CI/CD, sostenido con PDCA.</li></ul>\n<h4>3. Clasificación de herramientas</h4>\n<p>Selenium → pruebas y automatización de pruebas; Jira → gestión de defectos. El middleware y las APIs son solución de arquitectura, no herramientas de calidad. El G3 no nombró un <b>modelo de proceso</b> en la estrategia: PDCA sobre la tasa de rechazo, CMMI para Verificación y Validación, o UCD para postventa.</p>\n<h4>4. KPI y Semana 01</h4>\n<ul><li>Tasa de rechazo: de 28 % a menos de 5 %.</li><li>Falsos positivos de duplicado: de 672 a 0 por mes.</li><li>Eventos de devolución perdidos: de 3,2 % a 0 %.</li><li>OTIF dentro de la promesa de 24 h mayor o igual a 95 %; SUS del flujo de devolución mayor o igual a 75.</li></ul>\n<p>La calidad del SW exige requisitos explícitos, como la promesa de 24 h y el derecho de devolución, y expectativas implícitas, como que una carga válida no se rechace. Incumplirlos aquí además es una infracción sancionable.</p>",
+   "criterios": [
+    "Tasas correctas de 28 % y 60 % con subcaracterísticas bien elegidas",
+    "Diagnóstico diferencial entre tres atributos con su estrategia",
+    "Clasificación de herramientas según las diapositivas 19 y 20",
+    "KPI con meta y vínculo con requisitos explícitos e implícitos"
+   ]
+  },
+  {
+   "id": "s3-c06",
+   "s": [
+    1,
+    2,
+    3
+   ],
+   "titulo": "SUM-UNMSM: plan de técnicas estáticas con retorno medible",
+   "enunciado": "<p>La oficina de desarrollo del SUM-UNMSM registró en el último ciclo de matrícula 80 defectos, distribuidos por fase de detección:</p>\n<div class='tabla'><table><thead><tr><th>Fase</th><th>Defectos</th><th>Costo unitario de corrección</th></tr></thead><tbody>\n<tr><td>Requisitos</td><td>5</td><td>$139</td></tr>\n<tr><td>Diseño</td><td>8</td><td>$455</td></tr>\n<tr><td>Codificación</td><td>12</td><td>$977</td></tr>\n<tr><td>Pruebas</td><td>40</td><td>$7 136</td></tr>\n<tr><td>Mantenimiento o producción</td><td>15</td><td>$14 102</td></tr>\n</tbody></table></div>\n<p>Se propone un plan: inspecciones del SRS y del SDD que capturen 20 de los 40 defectos hoy hallados en pruebas, 10 en requisitos y 10 en diseño, y análisis estático con SonarQube y Checkstyle que capture en codificación 6 de los 15 defectos de producción. Un Ishikawa de la Semana 02 ya identificó como causas la falta de estándares de codificación y la ausencia de revisiones.</p>",
+   "preguntas": [
+    "Calcule el costo total actual, el costo con el plan, el ahorro y la DRE antes y después.",
+    "Clasifique cada técnica del plan como estática o dinámica y como actividad de SQA o de QC.",
+    "Ubique en el Ishikawa 6M las dos causas citadas y proponga una tercera causa de Medición.",
+    "Formule un ciclo PHVA según el Modelo Deming de la Semana 02 para institucionalizar el plan, con un KPI por fase."
+   ],
+   "solucion": "<h4>1. Costos y DRE</h4>\n<p>Actual: 5 × 139 + 8 × 455 + 12 × 977 + 40 × 7 136 + 15 × 14 102 = 695 + 3 640 + 11 724 + 285 440 + 211 530 = <b>$513 029</b>.</p>\n<p>Con el plan: requisitos 15, diseño 18, codificación 18, pruebas 20, producción 9 → 2 085 + 8 190 + 17 586 + 142 720 + 126 918 = <b>$297 499</b>. Ahorro = <b>$215 530</b>, cerca del 42 %.</p>\n<p>DRE actual = 65 ÷ 80 = <b>81,25 %</b>; con el plan = 71 ÷ 80 = <b>88,75 %</b>.</p>\n<h4>2. Clasificación</h4>\n<div class='tabla'><table><thead><tr><th>Técnica</th><th>Estática o dinámica</th><th>SQA o QC</th></tr></thead><tbody>\n<tr><td>Inspección del SRS y del SDD</td><td>Estática</td><td>QC sobre el producto de trabajo; definir el procedimiento de inspección es SQA</td></tr>\n<tr><td>Análisis con SonarQube y Checkstyle</td><td>Estática</td><td>Definir reglas y Quality Gate es SQA; ejecutarlo en cada PR es QC</td></tr>\n<tr><td>Pruebas restantes</td><td>Dinámica</td><td>QC</td></tr>\n</tbody></table></div>\n<h4>3. Ishikawa</h4>\n<p>Falta de estándares de codificación → <b>Método</b>; ausencia de revisiones → <b>Método</b>, aunque también puede ubicarse en Mano de obra si se debe a falta de capacitación. Causa de <b>Medición</b>: no se registra la fase de inyección de cada defecto, por lo que no se calcula la DRE ni la densidad por KLOC.</p>\n<h4>4. PHVA</h4>\n<ul><li><b>Planear:</b> meta de DRE de 81 % a 88 % → KPI DRE.</li>\n<li><b>Hacer:</b> piloto de inspecciones en el módulo de matrícula → KPI defectos por hora de inspección.</li>\n<li><b>Verificar:</b> comparar con datos estadísticos el costo por defecto y la densidad por KLOC → KPI costo total de corrección.</li>\n<li><b>Actuar:</b> estandarizar en todos los módulos o reiniciar el ciclo → KPI % de módulos con inspección obligatoria.</li></ul>",
+   "criterios": [
+    "Costos, ahorro y DRE calculados correctamente",
+    "Clasificación estática o dinámica y SQA o QC con matiz entre definir y ejecutar",
+    "Asignación correcta a las M del Ishikawa",
+    "PHVA con las cuatro fases del Modelo Deming y KPI por fase"
+   ]
+  }
+ ]
+}

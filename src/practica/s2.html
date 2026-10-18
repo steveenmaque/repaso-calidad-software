@@ -1,0 +1,1346 @@
+<h1>Sesión 2 · Práctica</h1>
+<p class="lead">Casos de examen sobre la <b>evolución de la calidad</b> y los <b>modelos de TQM (Total Quality Management – Gestión de la Calidad Total)</b>: Premio/Modelo Deming (JUSE), MBNQA (Malcolm Baldrige National Quality Award), EFQM (European Foundation for Quality Management), Modelo Iberoamericano (FUNDIBEQ) / PNC (Premio Nacional a la Calidad del Perú) y Six Sigma (6σ, DMAIC). Primero van los casos de las diapositivas de clase (SUM-UNMSM con Ishikawa 6M, ejemplos de aplicación, UNMSM vs Indra, BCP con PNC + 6σ, lectura de SERVQUAL); luego los casos de los entregables de la Semana 02 (G3 primero y luego G2, G4, G5, G6 y G7), y al final casos NUEVOS de complejidad muy alta (DPMO, RTY, gráfico p, Pareto ponderado, puntuación RADAR/ADLI, Cp/Cpk). Cada solución trae tabla de causa raíz, al menos dos alternativas, justificación normativa, KPI (Key Performance Indicator – Indicador Clave de Desempeño) con fórmula y meta, y errores frecuentes. <b>Regla de oro:</b> en calidad no se califica el nombre del modelo elegido, sino la coherencia <i>causa raíz → criterio del modelo → KPI</i>.</p>
+
+<section id="caso-1" class="caso">
+<h2>Caso 1 · SUM-UNMSM: lentitud y saturación en la matrícula (Ishikawa 6M)</h2>
+<p class="origen">Origen: Diapositivas 25–31 (clase, Semana 02) | Actividad 1 de los entregables: Entregable G3, Grupo 02, Grupo 04, Grupo 05, Grupo 06, Grupo 07</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>La UNMSM (Universidad Nacional Mayor de San Marcos; 20 facultades, más de 60 EP – Escuelas Profesionales) matricula a unos <b>30 000</b> estudiantes con el SUM (Sistema Unificado de Matrícula). El cronograma usa <b>bloques de 2 h</b> por rango de promedio ponderado; el tramo <b>14,00–16,00</b> concentra la mayor cantidad de alumnos y abarca dos turnos. Por la "cultura de última hora" casi todos ingresan en el <b>primer minuto</b> del turno.</p>
+<p>Datos técnicos: la capa de aplicación del SUM corre en <b>Huawei Cloud</b> y la BD (Base de Datos) en <b>Oracle Cloud</b>; ambas se comunican por Internet público (dato del G3). Una simulación del G2 estimó <b>≈15 000</b> usuarios concurrentes a las 12:00 (latencia 5,5 s) y <b>≈18 000</b> a las 16:00 (6,8 s); el balanceador devuelve <b>HTTP 504</b> (Gateway Timeout) cuando la latencia supera <b>5 s</b>. Cada alumno abre en promedio <b>3 a 5</b> sesiones (pestañas o dispositivos). Los recibos del BN (Banco de la Nación) tardan hasta <b>48 h</b> en activarse; las constancias médicas se validan en tiempo real durante la matrícula. No hay alerta antes de que el servidor llegue al <b>80 %</b> de capacidad. La mesa de ayuda de la OCI (Oficina Central de Informática) atiende por teléfono y correo; en la EP de Ingeniería de Software hay <b>2 personas</b> que tardan <b>≈10 min</b> por alumno.</p>
+<figure><img src="@img/semana-02-modelos-de-calidad-total/p25.png" alt="Plantilla del diagrama de Ishikawa 6M de la profesora con las cajas Hombre, Máquina, Entorno, Material, Método y Medida apuntando al problema de lentitud y saturación del sistema de matrícula"><figcaption>Plantilla 6M del caso SUM (diap. 25). Hombre = Mano de obra; Máquina = Maquinaria; Entorno = Medio ambiente; Material = Materiales; Método = Métodos; Medida = Medición.</figcaption></figure>
+<p class="fuente">Fuente: diapositivas 25–31, Semana 02; datos de campo y simulación tomados de los entregables del G3 y del G2.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Construya el Ishikawa 6M con las 17 causas de la profesora y ubique cada una en su M; explique por qué "Cronograma masivo" es <b>Métodos</b> y "BD desactualizadas" es <b>Materiales</b>.</li>
+<li>Clasifique cada causa como <b>raíz</b> o <b>síntoma</b> y proponga al menos una mejora por causa (trazabilidad 1:1).</li>
+<li>Calcule: (a) la capacidad horaria de la mesa de ayuda y cuántas personas se necesitan para atender 300 casos en 4 h; (b) con una cola virtual que admite 1 000 usuarios concurrentes y una matrícula de 5 min promedio, cuánto se tarda en atender a 30 000 alumnos (Ley de Little).</li>
+<li>Proponga dos alternativas de solución, compárelas y defina 5 KPI con fórmula y meta.</li>
+<li>Elija un modelo de TQM y despliegue su ciclo (PHVA o DMAIC).</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados (Ishikawa oficial de la profesora)</h4>
+<div class="tabla"><table>
+<thead><tr><th>M</th><th>Causa (diap. 26–31)</th><th>¿Raíz o síntoma?</th><th>Evidencia</th><th>Atributo ISO/IEC 25010 afectado</th></tr></thead>
+<tbody>
+<tr><td>Mano de obra</td><td>MO1 Falta de capacitación técnica del personal de facultades</td><td>Raíz (proceso de formación)</td><td>No dominan las actualizaciones del SUM</td><td>Capacidad de interacción (antes usabilidad)</td></tr>
+<tr><td>Mano de obra</td><td>MO2 Error del usuario (múltiples pestañas/dispositivos)</td><td>Síntoma de la falta de control de sesiones (Maquinaria/Métodos)</td><td>3–5 sesiones por alumno</td><td>Eficiencia de desempeño – utilización de recursos</td></tr>
+<tr><td>Mano de obra</td><td>MO3 Soporte reactivo de la OCI</td><td>Raíz (diseño del servicio)</td><td>2 personas × 10 min = 12 alumnos/h</td><td>Capacidad de respuesta (SERVQUAL)</td></tr>
+<tr><td>Maquinaria</td><td>MQ1 Servidores insuficientes</td><td>Síntoma de la falta de planificación de capacidad</td><td>504 sobre 5 s</td><td>Eficiencia de desempeño – capacidad</td></tr>
+<tr><td>Maquinaria</td><td>MQ2 Falta de escalabilidad en la nube</td><td>Raíz (arquitectura)</td><td>Sin autoescalado en AWS/Azure</td><td>Capacidad; fiabilidad – disponibilidad</td></tr>
+<tr><td>Maquinaria</td><td>MQ3 Ancho de banda limitado</td><td>Síntoma (tráfico no filtrado, consultas repetidas)</td><td>Miles de consultas a BD por segundo; latencia cross-cloud</td><td>Comportamiento temporal</td></tr>
+<tr><td>Métodos</td><td>ME1 Cronograma masivo</td><td>Raíz (regla de negocio)</td><td>Bloques de 2 h; tramo 14–16</td><td>Capacidad</td></tr>
+<tr><td>Métodos</td><td>ME2 Burocracia en requisitos (validar BN y constancias en tiempo real)</td><td>Raíz (validaciones en la ruta crítica)</td><td>Validación síncrona en el pico</td><td>Comportamiento temporal</td></tr>
+<tr><td>Métodos</td><td>ME3 Falta de un manual simplificado</td><td>Raíz</td><td>Pasos extensos y confusos</td><td>Capacidad de interacción – aprendizaje</td></tr>
+<tr><td>Materiales</td><td>MT1 BD desactualizadas (notas, prerrequisitos)</td><td>Raíz (calidad del dato)</td><td>Validación congelada</td><td>Calidad de datos (ISO/IEC 25012: exactitud, actualidad)</td></tr>
+<tr><td>Materiales</td><td>MT2 Falta de vacantes virtuales (slots mal calculados)</td><td>Raíz (planificación)</td><td>"Sección llena" → reinicio del trámite</td><td>Adecuación funcional</td></tr>
+<tr><td>Materiales</td><td>MT3 Recibos de pago no integrados</td><td>Raíz (integración)</td><td>Hasta 48 h</td><td>Compatibilidad – interoperabilidad</td></tr>
+<tr><td>Medición</td><td>MD1 Ausencia de alertas tempranas (80 %)</td><td>Raíz (monitoreo)</td><td>Se entera cuando ya cayó</td><td>Fiabilidad – disponibilidad</td></tr>
+<tr><td>Medición</td><td>MD2 Falta de métricas de experiencia</td><td>Raíz</td><td>No se mide espera por alumno</td><td>Calidad en uso – satisfacción</td></tr>
+<tr><td>Medio ambiente</td><td>MA1 Brecha digital externa</td><td>Factor externo (no controlable, sí mitigable)</td><td>Internet inestable en regiones</td><td>Fiabilidad – tolerancia a fallos</td></tr>
+<tr><td>Medio ambiente</td><td>MA2 Presupuesto público limitado</td><td>Factor externo (normas de contratación del Estado)</td><td>Compras lentas</td><td>—</td></tr>
+<tr><td>Medio ambiente</td><td>MA3 Cultura de "última hora"</td><td>Factor cultural (gestión del cambio)</td><td>Pico del primer minuto</td><td>Capacidad</td></tr>
+</tbody></table></div>
+<p><b>Por qué Métodos y no Materiales:</b> Métodos = <i>procedimientos y reglas</i> (cómo se hace: cronograma, validaciones, manual). Materiales = <i>insumos e información</i> que entran al proceso (datos de notas, slots de vacantes, recibos). Ej.: el "cronograma masivo" es una <b>regla</b> decidida por la universidad; la "BD desactualizada" es un <b>insumo</b> defectuoso.</p>
+<p><b>Cálculos.</b> (a) Capacidad de la mesa de ayuda = 2 personas × (60/10) = <b>12 alumnos/h</b>. Para 300 casos en 4 h se requieren 75 casos/h ÷ 6 casos por persona-hora = 12,5 → <b>13 personas</b>; o bien bajar el tiempo de atención: con chatbot/FAQ que resuelva el 60 % (deflexión), quedan 120 casos → 30/h → 5 personas. (b) Ley de Little: L = λ·W → λ = L/W = 1 000/5 min = <b>200 alumnos/min</b>; 30 000/200 = <b>150 min</b> (2,5 h). La cola virtual no reduce la demanda total: la <b>reparte en el tiempo</b> para que la latencia quede bajo los 5 s.</p>
+<div class="alt"><h4>Alternativa A · Aumentar y elastizar la capacidad (arquitectura)</h4>
+<ul>
+<li>MQ1/MQ2: migrar a nube con <b>autoescalado horizontal</b> (pago por uso solo en semanas críticas) + LB (Load Balancer – balanceador de carga) multinodo; escalado <b>anticipado</b> 30 min antes de la apertura.</li>
+<li>MQ3: CDN (Content Delivery Network – red de distribución de contenidos) para estáticos, caché en memoria (Redis) de mallas y horarios, índices SQL y precálculo de prerrequisitos.</li>
+<li>Latencia cross-cloud (aporte del G3): enlace dedicado (Direct Connect / FastConnect) o, mejor, colocar aplicación y BD en la <b>misma región/nube</b>.</li>
+<li>MD1: observabilidad con Prometheus + Grafana; alertas a CPU &gt; 70 %, RAM &gt; 75 %, latencia p95 &gt; 3 s, tasa 5xx &gt; 1 %.</li>
+<li>Pros: ataca capacidad; Contras: costo variable, no corrige reglas (ME1/ME2) ni datos (MT1).</li>
+</ul></div>
+<div class="alt"><h4>Alternativa B · Nivelar la demanda y sacar trabajo de la ruta crítica (proceso)</h4>
+<ul>
+<li>ME1/MA3: franjas más estrechas por ponderado y escuela + <b>sala de espera virtual</b> (1 000 concurrentes) con turno y tiempo estimado.</li>
+<li>MO2: <b>sesión única</b> por código (token): el segundo inicio de sesión cierra el anterior.</li>
+<li>ME2/MT3: <b>pre-matrícula</b> 48–72 h antes con semáforo "Apto"; integración por API con el BN (Págalo.pe) o, como transición, conciliación batch nocturna; matrícula condicional asíncrona con expiración a 48 h (G6).</li>
+<li>MT1/MT2: fecha límite de actas 1 semana antes, auditoría automática de datos y modelo de demanda de secciones (aptos + repitencia + desaprobación de los últimos 4 ciclos) con lista de espera (umbral 15 alumnos → nueva sección, G4).</li>
+<li>MA1: versión ligera con autoguardado; sitio estático 24/7 de oferta académica para el tráfico de "solo consulta" (G3).</li>
+<li>Pros: ataca causas raíz con bajo costo (apto para un presupuesto público, MA2); Contras: exige gestión del cambio y coordinación entre 20 facultades.</li>
+</ul></div>
+<p><b>Recomendación:</b> combinar B como base (causas raíz baratas) y A de forma acotada (elasticidad solo en picos). Es la lógica "reducir demanda + aumentar capacidad + sacar validaciones del pico".</p>
+<h4>Justificación normativa</h4>
+<ul>
+<li><b>ISO 9001:2015</b>: 4.4 (enfoque a procesos: la matrícula como proceso con entradas, salidas e indicadores), 6.1 (riesgos: el pico es un riesgo previsible), 7.1.3 (infraestructura), 8.5.1 (control de la provisión del servicio), 9.1 (seguimiento y medición), 10.2/10.3 (acción correctiva y mejora continua).</li>
+<li><b>ISO/IEC 25010:2023</b>: eficiencia de desempeño (comportamiento temporal, utilización de recursos, <b>capacidad</b>) y fiabilidad (disponibilidad, tolerancia a fallos) como NFR (Non-Functional Requirements – requisitos no funcionales) medibles; enlaza con S3.</li>
+<li><b>Modelo Deming</b>: criterio 7 "Gestión y Control" (SPC – Statistical Process Control) y criterio 4 "Flujo de información"; PHVA de la diap. 22.</li>
+</ul>
+<div class="norma"><h4>ISO 9001:2015 — Sistemas de gestión de la calidad. Requisitos</h4>
+<p><b>Organismo:</b> ISO (International Organization for Standardization), comité ISO/TC 176; en Perú se adopta como NTP-ISO 9001 (INACAL). <b>Versión:</b> 2015 (antes 1987, 1994, 2000, 2008). <b>Propósito:</b> requisitos de un SGC (Sistema de Gestión de la Calidad) para dar productos/servicios conformes y aumentar la satisfacción del cliente. <b>Estructura:</b> HLS (High Level Structure) de 10 cláusulas; requisitos en 4 Contexto, 5 Liderazgo, 6 Planificación, 7 Apoyo, 8 Operación, 9 Evaluación del desempeño, 10 Mejora; ciclo PHVA + pensamiento basado en riesgos. <b>Trampa:</b> ISO 9001 es <b>certificable</b>; los modelos TQM (Deming, MBNQA, EFQM, PNC) son modelos de <b>excelencia/premio</b>, no se "certifican".</p></div>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Línea base</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Latencia p95</td><td>Percentil 95 del tiempo de respuesta por transacción</td><td>6,8 s (16:00)</td><td>≤ 2 s</td></tr>
+<tr><td>Tasa de errores 5xx</td><td>Respuestas 5xx ÷ respuestas totales × 100</td><td>No medida</td><td>&lt; 0,5 %</td></tr>
+<tr><td>Disponibilidad en ventana</td><td>Tiempo operativo ÷ tiempo programado × 100</td><td>No medida</td><td>≥ 99,9 % en la semana de matrícula</td></tr>
+<tr><td>% pagos validados a tiempo</td><td>Pagos activados ≤ 30 min ÷ pagos totales × 100</td><td>Hasta 48 h</td><td>≥ 95 %</td></tr>
+<tr><td>% reinicios por "sección llena"</td><td>Trámites reiniciados ÷ trámites iniciados × 100</td><td>No medida</td><td>&lt; 3 %</td></tr>
+<tr><td>FCR (First Contact Resolution) de la mesa de ayuda</td><td>Casos resueltos al primer contacto ÷ casos totales × 100</td><td>Baja ("sin solución real")</td><td>≥ 80 %</td></tr>
+</tbody></table></div>
+<p><b>PHVA (Deming):</b> P = Ishikawa + Pareto de incidentes de la campaña anterior, metas de los KPI; H = piloto en una facultad (sala de espera + sesión única + pre-matrícula); V = comparar p95 y 5xx del piloto con la línea base (gráfico de control); A = estandarizar para las 20 facultades y reiniciar el ciclo en la siguiente campaña.</p>
+<h4>Cómo lo resolvieron los grupos</h4>
+<figure><img src="@img/s2-entregables/g3-p05.png" alt="Diagrama de Ishikawa del G3 para el SUM con las espinas Hombre, Maquinaria, Materiales, Métodos, Medición y Medio Ambiente, donde Métodos y Materiales aparecen intercambiados"><figcaption>Ishikawa del G3: las causas de Métodos y Materiales están intercambiadas respecto de la diapositiva oficial.</figcaption></figure>
+<div class="tabla"><table>
+<thead><tr><th>Aspecto</th><th>G3 (grupo del alumno)</th><th>G2</th><th>G4</th><th>G5</th><th>G6</th><th>G7</th></tr></thead>
+<tbody>
+<tr><td>Clasificación 6M</td><td><b>Métodos ↔ Materiales intercambiados</b></td><td>Correcta</td><td>Correcta</td><td>Correcta (17/17)</td><td>Mapeo MQ1/MQ2 cruzado</td><td>Correcta</td></tr>
+<tr><td>Cobertura de causas</td><td>≈9/17, sin matriz causa→mejora</td><td>17/17</td><td>17/17</td><td>17/17</td><td>13/17</td><td>15/17 (no MA1 ni MA2)</td></tr>
+<tr><td>Aporte distintivo</td><td>Latencia cross-cloud Huawei↔Oracle; sala de espera 1 000 de 30 000; sitio estático; docentes asignados antes; pruebas de estrés</td><td>Efecto deseado "sin 504"; API Págalo.pe; LB + autoescalado + CDN; anexo con simulación</td><td>Umbrales 70/75 %, 3 s, 1 %; lista de espera con umbral 15; Pareto post-campaña; créditos cloud educativos</td><td>Pre-validación 2–3 días antes; software libre; lista de espera</td><td>Matrícula condicional asíncrona (48 h); Redis; Grafana/Datadog al 75 %; IaaS anual</td><td>Único que cierra con <b>Deming + PHVA</b> mapeado</td></tr>
+<tr><td>KPI</td><td>No</td><td>Umbrales técnicos</td><td>Umbrales + dashboard E2E</td><td>Solo 80 %</td><td>Tiempos de carga y cola</td><td>Tiempo por etapa</td></tr>
+</tbody></table></div>
+<p>Misma causa, soluciones distintas: para MO2 el G3 y el G2 imponen <b>sesión única</b> (control técnico), el G4 solo una campaña informativa (control débil); para MQ1 el G5 propone escalamiento <b>vertical</b> (tiene techo y crea SPOF – Single Point of Failure), el G6 escalamiento <b>horizontal</b> elástico.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) intercambiar Métodos y Materiales (G3). (2) Poner la cola virtual en <i>Medición</i> (G3): es control de admisión (Métodos/Maquinaria). (3) "Más servidores / más ancho de banda" ataca el <b>síntoma</b>; sin control de demanda el pico vuelve. (4) Repetir la misma mejora en dos M (G5: ME1 = MA3). (5) Proponer "más presupuesto" cuando la causa es justamente "presupuesto limitado" (no es accionable; sí lo es la nube por demanda o un convenio marco). (6) No cerrar con KPI ni ciclo de mejora: el Ishikawa es herramienta de <b>análisis</b>, no la solución. <b>Por qué no hay solución única:</b> la Alternativa A y la B son válidas si cada mejora se traza a una causa y se mide con un KPI.</div>
+</details>
+</section>
+
+<section id="caso-2" class="caso">
+<h2>Caso 2 · Evolución de la calidad: ubicar a una fábrica de software en las etapas</h2>
+<p class="origen">Origen: Diapositivas 12, 13 y 17 (clase, Semana 02) + Lectura de la Semana 02 (Figura 1, Murrieta Saavedra et al., 2020) | Enunciado creado para el repaso</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>"Andes Soft", fábrica de SW (software) limeña de 120 personas, describió su historia así:</p>
+<ul>
+<li><b>2014:</b> un equipo QC (Quality Control – Control de Calidad) prueba cada build al final y rechaza los defectuosos; el 22 % de builds vuelve a desarrollo.</li>
+<li><b>2016:</b> introduce gráficos de control del número de defectos por sprint y fija límites; detiene el pipeline si un sprint sale de control.</li>
+<li><b>2018:</b> crea un área SQA (Software Quality Assurance – Aseguramiento de la Calidad del SW) que audita procesos, define estándares de codificación y revisa contratos con proveedores para "dar confianza al cliente de que los requisitos se cumplirán".</li>
+<li><b>2021:</b> adopta PDCA y proyectos 6σ para elevar la capacidad de cumplir los requisitos (DRE, Defect Removal Efficiency, sube de 82 % a 93 %).</li>
+<li><b>2024:</b> la gerencia general alinea a todas las áreas (ventas, RR. HH., finanzas) a objetivos de calidad, mide la satisfacción de clientes, empleados y comunidad, y postula a un premio de excelencia.</li>
+</ul>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Ubique cada hito en las etapas de la diap. 13 (Inspección → Control estadístico → Aseguramiento → TQM → Mejora continua) y en las 4 fases de la Figura 1 (Control → Aseguramiento → Mejora → Gestión de la Calidad Total).</li>
+<li>Indique qué etapa de la escalera de la diap. 12 (con "Confiabilidad" y "Liderazgo de la Alta Gerencia") corresponde a 2024.</li>
+<li>Señale qué norma o modelo de la Figura 1 respaldaría cada paso siguiente.</li>
+<li>Explique qué cambio de alcance describe la lectura (de clientes a todas las partes interesadas).</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Hito</th><th>Etapa (diap. 13)</th><th>Fase (Figura 1)</th><th>Evidencia / causa raíz del problema de esa etapa</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>2014</td><td>Inspección (correctiva, al final)</td><td>Control de la calidad: cumplir requisitos</td><td>22 % de reproceso: se detecta tarde, no se previene (CoPQ – Cost of Poor Quality alto)</td><td>Conformidad</td></tr>
+<tr><td>2016</td><td>Control estadístico (Shewhart, preventivo en el proceso)</td><td>Control de la calidad (con SQC – Statistical Quality Control)</td><td>Se controla la variación del proceso, no solo el producto</td><td>Estabilidad del proceso</td></tr>
+<tr><td>2018</td><td>Aseguramiento (preventivo: organización, proveedores)</td><td>Aseguramiento: generar confianza</td><td>Auditorías y estándares, aún centrado en cumplir</td><td>Confianza del cliente</td></tr>
+<tr><td>2021</td><td>Mejora continua</td><td>Mejora: incrementar capacidad</td><td>DRE 82 → 93 % con PDCA/6σ</td><td>Capacidad del proceso</td></tr>
+<tr><td>2024</td><td>TQM (todos los departamentos, liderazgo, satisfacción total)</td><td>Gestión de la Calidad Total: dirigir y controlar la organización</td><td>Toda la empresa y todas las partes interesadas</td><td>Excelencia organizacional</td></tr>
+</tbody></table></div>
+<p>En la escalera de la diap. 12, 2024 corresponde a <b>Liderazgo de la Alta Gerencia → Gestión total de la calidad</b>; la "Confiabilidad" (≈1960) se asocia a la etapa en la que se empezaron a medir fallas en uso (en SW: MTBF – Mean Time Between Failures).</p>
+<div class="alt"><h4>Alternativa A · Siguiente paso con ISO 9001:2015 + ISO 9004:2018</h4>
+<p>Consolidar el aseguramiento con un SGC certificable (ISO 9001) y usar ISO 9004:2018 (éxito sostenido, autoevaluación por niveles de madurez) como puente hacia TQM. Ventaja: evidencia objetiva y reconocida por clientes corporativos.</p></div>
+<div class="alt"><h4>Alternativa B · Siguiente paso con un modelo de excelencia (EFQM 2020 o PNC/Baldrige)</h4>
+<p>Si el objetivo es "trascender" y medir a todas las partes interesadas, EFQM 2020 (Dirección–Ejecución–Resultados); si es competitividad, el PNC (alineado a Baldrige, 7 dimensiones). Ventaja: cubre liderazgo, estrategia y resultados, no solo procesos.</p></div>
+<h4>Justificación normativa</h4>
+<p>Las 4 fases de la Figura 1 coinciden con las definiciones de <b>ISO 9000:2015</b> (vocabulario): control = cumplir requisitos; aseguramiento = proporcionar confianza; mejora = aumentar la capacidad; gestión = dirigir y controlar. Hitos de la figura: Deming 1951, Baldrige 1987, ISO 9000/9004 1987, EFQM 1991, ISO 9001:2000/2008/2015, ISO 9004:2018 → "convergencia de normas y modelos".</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>% de reproceso de builds = builds rechazados ÷ builds totales × 100 (22 % → meta ≤ 5 %).</li>
+<li>DRE = defectos eliminados antes de la entrega ÷ (esos + defectos hallados por el cliente) × 100 (93 % → meta ≥ 95 %).</li>
+<li>Índice de satisfacción de partes interesadas (clientes, empleados, comunidad) en escala 1–5 (meta ≥ 4,2).</li>
+</ul>
+<div class="ojo"><b>Trampas:</b> (1) Las décadas no coinciden entre diapositivas: en la diap. 13 el control estadístico es 1920–1930 y TQM 1960–1970; en la diap. 5 el control estadístico va 1930–1950 y en la escalera TQM aparece hacia 2000. Si la pregunta cita una diapositiva, responde con <b>esa</b>. (2) Inspección ≠ control estadístico: la primera separa productos buenos y malos al final; el segundo previene durante el proceso. (3) Los hitos "Premio Nacional de Calidad 1989" y "Modelo Nacional para PYMES 2011" de la Figura 1 son <b>mexicanos</b>, no del PNC peruano. (4) Una organización puede tener prácticas de varias etapas a la vez; se clasifica por el <b>enfoque dominante</b>.</div>
+</details>
+</section>
+<section id="caso-3" class="caso">
+<h2>Caso 3 · Cuatro empresas, cuatro modelos: identificar el modelo TQM por sus prácticas</h2>
+<p class="origen">Origen: Diapositivas 39–44 (clase, Semana 02: ejemplos de Deming, Baldrige, EFQM e Iberoamericano/PNC) + diapositivas 37–38 (gurús) | Enunciado adaptado para el repaso</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>Un auditor de la SNI (Sociedad Nacional de Industrias) visita cuatro organizaciones y anota lo que observa, <b>sin decir qué modelo usa cada una</b>:</p>
+<ul>
+<li><b>Org. W</b> (planta de ensamblaje de maquinaria pesada, 900 operarios): sensores IoT (Internet of Things – Internet de las cosas) miden temperatura y presión <b>cada segundo</b>; si el gráfico de control marca un punto fuera de límites, la línea <b>se detiene sola</b>; los operarios llenan hojas de verificación y arman un Ishikawa en el puesto. Meta declarada: <b>cero defectos</b>.</li>
+<li><b>Org. X</b> (operador logístico multinacional): el CEO (Chief Executive Officer) alinea las metas de venta con el plan de desarrollo de la fuerza laboral; un sistema de "escucha al cliente" en tiempo real consolida quejas que <b>suben cada mes al directorio</b>, el cual redefine presupuestos e incentiva económicamente a los equipos con mejor <b>retención de clientes</b>.</li>
+<li><b>Org. Y</b> (empresa de servicios públicos de energía): define como propósito "reducir la huella de carbono en la comunidad"; <b>co-diseña</b> servicios con ciudadanos; mide su éxito con <b>encuestas comunitarias</b> y <b>auditorías ambientales externas</b>, además de las finanzas.</li>
+<li><b>Org. Z</b> (pesquera mediana en crecimiento): cada año un comité de RR. HH. (Recursos Humanos), Operaciones y Finanzas califica "con honestidad" su <b>nivel de madurez</b> frente a la guía de un premio regional; descubre que su punto más débil es la <b>Gestión del Conocimiento</b> y lanza un proyecto para digitalizar manuales antes de que se jubilen los técnicos antiguos.</li>
+</ul>
+<p>El auditor además encuentra en la Org. W un afiche que dice "La culpa de la mala calidad es de la <i>variación</i>" y en la Org. X un afiche "Hazlo bien a la primera: cero defectos".</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Asigne a cada organización su modelo (Deming, MBNQA, EFQM, Iberoamericano/PNC), el bloque o criterio que evidencia cada práctica y el "resultado buscado" según la diap. 44.</li>
+<li>Indique qué gurú inspira cada afiche (diap. 38) y si es coherente con el modelo de la organización.</li>
+<li>Para la Org. Z, explique por qué una autoevaluación de madurez <b>no</b> es lo mismo que una certificación ISO 9001.</li>
+<li>Proponga un KPI de seguimiento para cada organización.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados (evidencia → modelo)</h4>
+<div class="tabla"><table>
+<thead><tr><th>Org.</th><th>Evidencia clave</th><th>Modelo</th><th>Criterio / bloque</th><th>Resultado buscado (diap. 44)</th></tr></thead>
+<tbody>
+<tr><td>W</td><td>SPC (Statistical Process Control) cada segundo, paro automático (<i>jidoka</i>), 7QC, cero defectos</td><td><b>Deming</b> (JUSE, 1951)</td><td>Criterio 7 "Gestión y Control" + Educación y Diseminación (todos usan 7QC) + PHVA</td><td>Que la máquina y el proceso no fallen</td></tr>
+<tr><td>X</td><td>CEO + fuerza laboral + escucha al cliente + incentivos por retención</td><td><b>MBNQA</b> (NIST, 1987)</td><td>Liderazgo, Estrategia, Clientes, Fuerza laboral, Resultados</td><td>Que el negocio gane</td></tr>
+<tr><td>Y</td><td>Propósito social/ambiental, co-creación, percepción de la sociedad</td><td><b>EFQM 2020</b></td><td>Dirección (propósito) – Ejecución (grupos de interés, valor sostenible) – Resultados (percepción)</td><td>Que la organización trascienda en la sociedad</td></tr>
+<tr><td>Z</td><td>Autoevaluación anual de madurez, brecha en Gestión del Conocimiento</td><td><b>Iberoamericano (FUNDIBEQ) / PNC</b></td><td>Autoevaluación; dimensión "Medición y Gestión del Conocimiento"</td><td>Que las empresas locales aprendan a medirse y mejorar paso a paso</td></tr>
+</tbody></table></div>
+<p><b>Afiches:</b> "la culpa es de la variación" = Deming (también Ishikawa y Taguchi) → coherente con W. "Cero defectos, bien a la primera" = <b>Crosby</b> (culpa a la no conformidad con requisitos, <i>Quality is Free</i>) → en X no contradice a Baldrige, pero <b>no</b> es la idea central de MBNQA (competitividad); es un principio operativo que convive con cualquier modelo.</p>
+<div class="alt"><h4>Alternativa A · Lectura "pura" (un modelo por organización)</h4>
+<p>Es la respuesta esperada en examen: cada práctica se ancla al bloque/criterio que la describe en las diap. 40–43. Útil para preguntas de opción múltiple.</p></div>
+<div class="alt"><h4>Alternativa B · Lectura "híbrida" (modelo macro + motor operativo)</h4>
+<p>La Org. X podría usar MBNQA como marco y Six Sigma/DMAIC para reducir variabilidad en entregas (como el BCP de la diap. 50); la Org. Z, PNC como "mapa de ruta" y Deming/PHVA para cerrar la brecha de conocimiento. Es válida si se justifica con la diap. 36 (macro vs micro).</p></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li>Autoevaluación ≠ certificación: el PNC/FUNDIBEQ entregan un <b>puntaje de madurez</b> (benchmarking, 1 000 puntos) y un premio; la <b>ISO 9001:2015</b> es una norma de <b>requisitos</b> auditada por un OC (Organismo de Certificación) acreditado (en Perú, por INACAL-DA), con resultado conforme/no conforme. Una empresa puede tener ISO 9001 y obtener puntaje bajo en el PNC.</li>
+<li>La diap. 39 usa la definición de PHVA de ISO 9001 (Planificar, Hacer, Chequear, Actuar), mientras la diap. 22 usa la versión de auditores Deming (P: solución matemática; H: piloto; V: medir estadísticamente; A: estandarizar o reiniciar).</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>Org.</th><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>W</td><td>PPM (partes por millón) defectuosas</td><td>Defectuosas ÷ producidas × 10⁶</td><td>&lt; 50 PPM</td></tr>
+<tr><td>X</td><td>Tasa de retención de clientes</td><td>(Clientes fin − nuevos) ÷ clientes inicio × 100</td><td>≥ 92 %</td></tr>
+<tr><td>Y</td><td>Reducción de emisiones</td><td>(tCO₂e año base − tCO₂e año) ÷ año base × 100</td><td>≥ 5 % anual</td></tr>
+<tr><td>Z</td><td>Puntaje de autoevaluación</td><td>Σ (peso del criterio × % logrado)</td><td>+50 puntos/año</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Trampas:</b> (1) Confundir EFQM con Baldrige: si la evidencia es <b>sociedad/propósito/co-creación</b> → EFQM; si es <b>CEO/mercado/retención</b> → Baldrige. (2) Decir que el PNC peruano "adapta el EFQM": según la profesora el PNC se alinea a <b>Baldrige</b>; es el Modelo Iberoamericano (FUNDIBEQ) el que deriva del EFQM. (3) Atribuir el <i>poka-yoke</i> a Taguchi (la tabla de la diap. 38 lo hace): es de <b>Shingo</b>. (4) Pensar que "cero defectos" es exclusivo de Deming: es el lema de <b>Crosby</b>; Deming lo critica como eslogan si no se cambia el sistema (punto 10 de sus 14).</div>
+</details>
+</section>
+
+<section id="caso-4" class="caso">
+<h2>Caso 4 · UNMSM (EFQM) vs Indra (Baldrige): por qué cada organización tiene "su" modelo</h2>
+<p class="origen">Origen: Diapositivas 45–49 (clase, Semana 02: "Cuadro comparativo de 2 organizaciones") | Preguntas creadas para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<figure><img src="@img/semana-02-modelos-de-calidad-total/p45.png" alt="Tabla de la profesora que compara la UNMSM con el modelo EFQM y a Indra con el modelo Malcolm Baldrige, con columnas de lo que transforma internamente y el impacto final"><figcaption>Cuadro comparativo de la diap. 45: UNMSM → EFQM; Indra → Malcolm Baldrige.</figcaption></figure>
+<p>El Rectorado de la UNMSM quiere "copiar" lo que hizo Indra (consultora TI multinacional) y propone usar MBNQA para toda la universidad. Datos de la UNMSM: 20 facultades con <b>silos</b> (cada una con su propio flujo de trámites), empleabilidad de egresados a 12 meses no medida, 14 patentes registradas ante INDECOPI en 5 años, tiempo promedio de titulación de <b>9 meses</b>. Datos de Indra: objetivos trimestrales en IA (Inteligencia Artificial) y ciberseguridad, certificaciones AWS/Azure/SAP, servicios medidos con SLA (Service Level Agreement – Acuerdo de Nivel de Servicio), rotación de personal del <b>18 %</b> anual.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Argumente, con la diap. 46, por qué EFQM es más pertinente que MBNQA para la UNMSM; y por qué MBNQA lo es para Indra (diap. 48–49).</li>
+<li>Despliegue los 3 bloques EFQM para la UNMSM con al menos 2 indicadores por bloque.</li>
+<li>Despliegue los criterios Baldrige para Indra y proponga cómo bajar la rotación del 18 %.</li>
+<li>¿Qué tienen en común ambos casos con el SUM del Caso 1?</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Organización</th><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>UNMSM</td><td>Silos entre facultades, trámites lentos</td><td>Estructura federada sin propósito común desplegado</td><td>Titulación 9 meses; 20 flujos distintos</td><td>Ejecución – gestión del funcionamiento</td></tr>
+<tr><td>UNMSM</td><td>Éxito medido solo por matriculados</td><td>Falta de indicadores de impacto social</td><td>Empleabilidad no medida</td><td>Resultados – percepción de la sociedad</td></tr>
+<tr><td>Indra</td><td>Fuga de talento</td><td>Plan de carrera no ligado a metas de entrega</td><td>Rotación 18 %</td><td>Fuerza laboral</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · UNMSM con EFQM 2020 (recomendada por la profesora)</h4>
+<ul>
+<li><b>Dirección</b> (¿por qué existe?): propósito "Liderar la transformación científica y social del Perú al 2030"; cultura de ética, transparencia y descentralización. KPI: % de facultades con plan alineado al propósito; índice de transparencia (portal).</li>
+<li><b>Ejecución</b> (¿cómo cumple?): mesas de co-creación con empresas, ministerios y egresados para rediseñar mallas; automatizar matrícula y titulación en las 20 facultades. KPI: tiempo de titulación (9 → 3 meses); % de mallas co-diseñadas.</li>
+<li><b>Resultados</b> (¿qué logra?): empleabilidad a 12 meses (meta ≥ 75 %), patentes ante INDECOPI (14 → 10/año), impacto de proyectos en regiones vulnerables.</li>
+<li>Por qué: una universidad pública <b>no maximiza ganancias</b>; su valor es sostenible y para la sociedad.</li>
+</ul></div>
+<div class="alt"><h4>Alternativa B · UNMSM con Modelo Iberoamericano (AAPP) o PNC</h4>
+<p>Defendible si el objetivo inmediato es <b>autodiagnóstico</b> de una entidad pública en modernización (diap. 43): el Modelo Iberoamericano para Administraciones Públicas da mayor peso a resultados en ciudadanos. Debilidad: el PNC (alineado a Baldrige) pone foco en competitividad, menos en propósito social.</p></div>
+<div class="alt"><h4>Alternativa C · Indra con MBNQA (recomendada)</h4>
+<ul>
+<li>Liderazgo y Estrategia: objetivos trimestrales en IA y ciberseguridad desplegados <b>verticalmente</b> a PM (Project Managers) y arquitectos de SW.</li>
+<li>Fuerza laboral: planes de carrera ultra-especializados, certificaciones; medir clima e índice de rotación (18 % → ≤ 10 %) con bonos ligados a retención y a cumplimiento de SLA.</li>
+<li>Operaciones y Clientes: canales digitales de escucha; ruta automatizada de resolución de incidentes (ITSM – IT Service Management).</li>
+<li>Resultados: margen por proyecto, fidelización de <i>Key Accounts</i>, posicionamiento en reportes de la industria.</li>
+</ul></div>
+<h4>Justificación normativa</h4>
+<p>EFQM 2020: 7 criterios (1 Propósito, visión y estrategia; 2 Cultura y liderazgo → Dirección; 3 Implicar a los grupos de interés; 4 Crear valor sostenible; 5 Gestionar el funcionamiento y la transformación → Ejecución; 6 Percepción de los grupos de interés; 7 Rendimiento estratégico y operativo → Resultados), evaluados con RADAR. MBNQA: 7 categorías (1–6 proceso, 7 resultados) evaluadas con ADLI y LeTCI. Para Indra, además, los SLA se gestionan con <b>ISO/IEC 20000-1</b> (gestión de servicios TI) y su producto con <b>ISO/IEC 25010</b>.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>UNMSM: tiempo medio de titulación = Σ(fecha de título − fecha de expedito) ÷ n (meta ≤ 90 días); empleabilidad = egresados empleados a 12 meses ÷ egresados encuestados × 100 (meta ≥ 75 %).</li>
+<li>Indra: rotación = bajas voluntarias ÷ plantilla media × 100 (meta ≤ 10 %); % de SLA cumplidos = incidentes resueltos dentro del SLA ÷ incidentes × 100 (meta ≥ 98 %).</li>
+</ul>
+<p><b>Relación con el Caso 1:</b> la automatización de la matrícula en las 20 facultades es parte del bloque <b>Ejecución</b> de EFQM; el SUM es el "proceso" que Deming/6σ afinan dentro del marco EFQM.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) "Copiar" el modelo de otra organización sin analizar su naturaleza (lucro vs valor social). (2) Decir que EFQM "no mide resultados financieros": sí los mide (criterio 7), pero no son su fin último. (3) Confundir el bloque <b>Ejecución</b> (cómo cumple el propósito) con "ejecutar el PHVA". (4) Afirmar que Baldrige solo sirve a empresas privadas: tiene categorías de educación, salud y sin fines de lucro (aquí se elige por <b>enfoque</b>, no por elegibilidad).</div>
+</details>
+</section>
+
+<section id="caso-5" class="caso">
+<h2>Caso 5 · BCP: Modelo de Excelencia (PNC/Baldrige) + Six Sigma DMAIC en créditos hipotecarios</h2>
+<p class="origen">Origen: Diapositivas 50–54 (clase, Semana 02) | Cálculos añadidos para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<figure><img src="@img/semana-02-modelos-de-calidad-total/p54.png" alt="Esquema del impacto combinado del BCP: Modelo de Excelencia que define la visión, luego proyectos Six Sigma que resuelven los problemas duros, y finalmente el resultado de éxito sostenido"><figcaption>Impacto combinado (diap. 54): Modelo de Excelencia → Proyectos Six Sigma → Éxito sostenido.</figcaption></figure>
+<p>El BCP (Banco de Crédito del Perú) aplica la estrategia <i>Customer Centric</i> medida con NPS (Net Promoter Score). En Créditos Hipotecarios, el tiempo medio de aprobación-desembolso es <b>45 días</b>; el equipo Black Belt mide que el <b>95 %</b> del tiempo el expediente está "esperando" en una bandeja o rebotando por firmas. En una muestra de <b>800 expedientes</b> con <b>6 oportunidades</b> de error cada uno (DNI, ingresos, tasación, partida SUNARP, seguro de desgravamen, firma) se hallaron <b>312 errores</b>. Causas encontradas: errores de digitación de asesores (reprocesos) y áreas Legal y Riesgos en sistemas distintos (evaluación duplicada). Tras la mejora (validación con RENIEC, IA para ingresos, sin firmas físicas, dashboard con alerta a las 24 h) el tiempo baja a <b>12 días</b> y los errores a <b>9</b> en 800 expedientes.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule la PCE (Process Cycle Efficiency) antes, la reducción del ciclo y si se cumple la meta (&lt; 15 días).</li>
+<li>Calcule DPMO y nivel sigma antes y después (desplazamiento 1,5σ). ¿Es correcto decir que "se logró Six Sigma"?</li>
+<li>Escriba el proyecto completo en DMAIC con CTQ (Critical to Quality), VOC (Voice of the Customer) y plan de control.</li>
+<li>Explique la "sinergia" PNC–6σ con la tabla de la diap. 36 y qué criterio Baldrige recibe los resultados.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Ciclo de 45 días</td><td>Esperas entre áreas y firmas físicas secuenciales</td><td>95 % del tiempo en espera (PCE 5 %)</td><td>Capacidad de respuesta (SERVQUAL); eficiencia</td></tr>
+<tr><td>Expedientes con errores</td><td>Digitación manual de asesores</td><td>312 errores / 4 800 oportunidades</td><td>Fiabilidad; exactitud de datos (ISO/IEC 25012)</td></tr>
+<tr><td>Evaluación duplicada</td><td>Legal y Riesgos sin sistema común (falta de integración)</td><td>Dos evaluaciones del mismo cliente</td><td>Compatibilidad – interoperabilidad (ISO/IEC 25010)</td></tr>
+<tr><td>Fuga de clientes</td><td>Efecto de las anteriores</td><td>Quejas, clientes que se van a la competencia</td><td>NPS; resultados de clientes (Baldrige 7.2)</td></tr>
+</tbody></table></div>
+<p><b>Cálculos.</b> (1) Tiempo de valor agregado = 5 % × 45 = <b>2,25 días</b> → PCE = 2,25/45 = <b>5 %</b>. Reducción = (45 − 12)/45 = <b>73,3 %</b>; meta &lt; 15 cumplida con 3 días de holgura. Si los 2,25 días de trabajo efectivo no cambiaran, la PCE nueva sería 2,25/12 = 18,75 %. (2) Oportunidades = 800 × 6 = 4 800. Antes: DPO = 312/4 800 = 0,065 → <b>DPMO = 65 000</b> → Φ⁻¹(0,935) ≈ 1,51 → <b>≈ 3,0σ</b>. Después: 9/4 800 = 0,001875 → <b>DPMO = 1 875</b> → Φ⁻¹(0,998125) ≈ 2,90 → <b>≈ 4,4σ</b>. Para 6σ se necesitarían ≤ 3,4 DPMO, es decir ≈ 0,016 errores en 4 800 oportunidades (≈ 1 error cada 294 000 oportunidades). Conclusión: la diapositiva dice "<b>cercano</b> a Six Sigma" en contratos; con estos datos el proceso está en ≈ 4,4σ: mejora enorme pero no 6σ.</p>
+<div class="alt"><h4>Alternativa A · DMAIC clásico (el de la profesora)</h4>
+<ul>
+<li><b>D</b>: VOC "quiero mi crédito rápido y sin que me pidan dos veces lo mismo"; CTQ 1 = tiempo de desembolso ≤ 15 días; CTQ 2 = 0 errores en expediente; alcance: desde entrega de boletas en agencia hasta desembolso; Project Charter con Champion (gerente de Hipotecario) y Black Belt.</li>
+<li><b>M</b>: VSM (Value Stream Mapping – mapa de flujo de valor) con tiempos por paso; línea base 45 días, 65 000 DPMO; MSA (Measurement System Analysis) para asegurar que los tiempos registrados son fiables.</li>
+<li><b>A</b>: Pareto de motivos de rebote, Ishikawa 6M, prueba de hipótesis (¿el tiempo difiere por agencia?), regresión de tiempo vs número de firmas.</li>
+<li><b>I (Mejorar)</b>: plataforma digital, validación de identidad con RENIEC, captura de ingresos con IA (OCR + reglas), eliminación de firmas intermedias, sistema único Legal–Riesgos.</li>
+<li><b>C</b>: dashboard en tiempo real; alerta al gerente si un expediente supera 24 h en un analista; gráfico de control X̄-R del tiempo de ciclo semanal; plan de reacción y auditoría trimestral.</li>
+</ul></div>
+<div class="alt"><h4>Alternativa B · Lean Six Sigma (Lean + DMAIC)</h4>
+<p>Como el 95 % es espera, primero aplicar <b>Lean</b> (eliminar <i>muda</i> de espera, flujo continuo, trabajo en paralelo Legal ∥ Riesgos, Kanban de expedientes con límite WIP – Work In Progress) y luego 6σ para la variabilidad residual. Ventaja: ataca el tiempo más rápido que la estadística sola. Riesgo: sin control estadístico la mejora no se sostiene.</p></div>
+<div class="alt"><h4>Alternativa C · DMADV (si se rediseña el producto desde cero)</h4>
+<p>Si el BCP decide lanzar un "hipotecario 100 % digital" nuevo, corresponde DMADV (Define, Measure, Analyze, Design, Verify) en lugar de DMAIC, porque no se mejora un proceso existente sino que se diseña uno nuevo.</p></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li>Diap. 36: PNC = nivel <b>estratégico/macro</b>, mide con puntajes de madurez y benchmarking, es el "mapa de ruta"; 6σ = nivel <b>operativo/micro</b>, mide con nivel sigma, Cp/Cpk y mermas, es el "motor técnico".</li>
+<li>Los resultados (12 días, NPS) alimentan Baldrige/PNC <b>7.1 Productos y procesos</b> y <b>7.2 Clientes</b>; el proyecto evidencia la categoría 6 <b>Operaciones</b> (mejora de procesos clave) y la 4 <b>Medición, análisis y gestión del conocimiento</b> (dashboards).</li>
+<li>ISO 13053-1:2011 (métodos cuantitativos en la mejora de procesos — Six Sigma — Parte 1: metodología DMAIC) formaliza las fases y roles.</li>
+</ul>
+<div class="norma"><h4>ISO 13053-1:2011 / ISO 13053-2:2011 — Six Sigma</h4>
+<p><b>Organismo:</b> ISO, comité ISO/TC 69 (aplicación de métodos estadísticos). <b>Versión:</b> 2011 (1.ª edición; la Parte 1 fue revisada en 2024). <b>Propósito:</b> describir la metodología DMAIC y las herramientas/técnicas de Six Sigma. <b>Estructura:</b> Parte 1 = metodología DMAIC, roles (Champion, Master Black Belt, Black Belt, Green Belt), métricas (DPMO, nivel σ); Parte 2 = herramientas y técnicas por fase. <b>Trampa:</b> Six Sigma no es un "premio" ni un modelo de excelencia: es una <b>metodología de proyectos</b>; no se "gana" ni se "certifica la empresa" en Six Sigma (se certifican personas por cinturón).</p></div>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Antes</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Tiempo de ciclo de desembolso</td><td>Fecha de desembolso − fecha de solicitud completa</td><td>45 días</td><td>≤ 15 (logrado 12)</td></tr>
+<tr><td>DPMO de expedientes</td><td>Errores ÷ (expedientes × 6) × 10⁶</td><td>65 000</td><td>≤ 6 210 (4σ) el 1.er año</td></tr>
+<tr><td>PCE</td><td>Tiempo de valor agregado ÷ tiempo total × 100</td><td>5 %</td><td>≥ 25 %</td></tr>
+<tr><td>% expedientes con alerta 24 h</td><td>Expedientes que superan 24 h en un analista ÷ total × 100</td><td>—</td><td>&lt; 5 %</td></tr>
+<tr><td>NPS hipotecario</td><td>% promotores (9–10) − % detractores (0–6)</td><td>—</td><td>≥ +40</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Escribir que la "I" de DMAIC es "Implementar": la profesora pone "Implementar (Mejorar)"; en la literatura es <b>Improve</b>. Responde "Mejorar" y menciona la equivalencia. (2) Decir que 6σ = 99,9 %: es <b>99,99966 %</b> (3,4 DPMO) con desplazamiento de 1,5σ. (3) Confundir el rol del PNC (marco macro) con el de 6σ (motor micro): no compiten, se <b>combinan</b>. (4) Declarar "Six Sigma logrado" sin calcular el DPMO. (5) Usar DMAIC para un proceso que aún no existe (corresponde DMADV).</div>
+</details>
+</section>
+<section id="caso-6" class="caso">
+<h2>Caso 6 · Lectura: SERVQUAL, Seguridad y Capacidad de respuesta en el SUM y en Yape</h2>
+<p class="origen">Origen: Lectura de la Semana 02 ("La evolución de la gestión de la calidad y sus dimensiones: Seguridad y Capacidad de respuesta", pp. 4–5: 5 dimensiones, dos enfoques de evaluación, brechas) | Datos creados para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>La OCI aplica una encuesta tipo SERVQUAL (escala Likert 1–7) a <b>420</b> alumnos después de la matrícula en el SUM. Resultados promedio (E = expectativa, P = percepción) y peso que los alumnos dan a cada dimensión (suma 100):</p>
+<div class="tabla"><table>
+<thead><tr><th>Dimensión</th><th>E</th><th>P</th><th>Peso</th></tr></thead>
+<tbody>
+<tr><td>Elementos tangibles (interfaz, manual, pantallas)</td><td>5,8</td><td>4,9</td><td>10</td></tr>
+<tr><td>Fiabilidad (la matrícula queda registrada como se pidió)</td><td>6,7</td><td>5,1</td><td>30</td></tr>
+<tr><td>Capacidad de respuesta (rapidez, ayuda oportuna)</td><td>6,5</td><td>3,2</td><td>25</td></tr>
+<tr><td>Seguridad (competencia y confianza que inspira el soporte)</td><td>6,2</td><td>4,4</td><td>20</td></tr>
+<tr><td>Empatía (atención individualizada)</td><td>5,5</td><td>4,6</td><td>15</td></tr>
+</tbody></table></div>
+<p>Por otro lado, el área de QA de la OCI declara que "el SUM tiene calidad" porque cumplió su estándar interno: 99,0 % de disponibilidad en la semana. En paralelo, la publicidad de una billetera (tipo Yape) promete "transferencias al instante", pero la SRS (Software Requirements Specification) no fija un tiempo máximo y en horas punta tardan <b>3 min</b>.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule la brecha P − E por dimensión, el índice SERVQUAL no ponderado y el ponderado; priorice.</li>
+<li>Explique por qué, según la lectura, la afirmación de QA corresponde al enfoque <b>subjetivo/interno</b> y la encuesta al enfoque <b>objetivo</b>.</li>
+<li>Distinga los tres significados de "seguridad" (Assurance, Security, Safety) y ubique la definición de Nizamidou que usa la lectura.</li>
+<li>Para la billetera, identifique las brechas del modelo de Parasuraman (Gaps 1–5) involucradas y proponga cómo cerrarlas.</li>
+<li>Proponga mejoras y KPI para Seguridad y Capacidad de respuesta.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Dimensión</th><th>P − E</th><th>Peso × brecha</th><th>Causa raíz probable (Caso 1)</th><th>Atributo ISO/IEC 25010 relacionado</th></tr></thead>
+<tbody>
+<tr><td>Tangibles</td><td>−0,9</td><td>−0,090</td><td>ME3 falta de manual simplificado</td><td>Capacidad de interacción</td></tr>
+<tr><td>Fiabilidad</td><td>−1,6</td><td>−0,480</td><td>MT1 BD desactualizadas; MT2 slots mal calculados</td><td>Fiabilidad; adecuación funcional</td></tr>
+<tr><td><b>Capacidad de respuesta</b></td><td><b>−3,3</b></td><td><b>−0,825</b></td><td>MQ1/MQ2 capacidad; MO3 soporte reactivo</td><td>Eficiencia de desempeño – comportamiento temporal</td></tr>
+<tr><td>Seguridad (Assurance)</td><td>−1,8</td><td>−0,360</td><td>MO1 personal sin capacitación</td><td>(Calidad en uso – confianza)</td></tr>
+<tr><td>Empatía</td><td>−0,9</td><td>−0,135</td><td>Atención masiva sin seguimiento por caso</td><td>Calidad en uso – satisfacción</td></tr>
+</tbody></table></div>
+<p><b>Cálculos.</b> Índice no ponderado = (−0,9 − 1,6 − 3,3 − 1,8 − 0,9)/5 = <b>−1,70</b>. Índice ponderado = Σ(peso/100 × brecha) = −0,090 − 0,480 − 0,825 − 0,360 − 0,135 = <b>−1,89</b>. Prioridad: Capacidad de respuesta (−0,825) &gt; Fiabilidad (−0,480) &gt; Seguridad (−0,360). Coincide con el foco de la lectura (Seguridad y Capacidad de respuesta).</p>
+<p><b>Enfoques (trampa de la lectura):</b> el enfoque <b>subjetivo o interno</b> = la empresa fija sus propios criterios (el 99,0 % de QA); el enfoque <b>objetivo</b> = compara percepciones del cliente durante y después del servicio con sus expectativas (SERVQUAL). Que el SUM cumpla su estándar interno no impide una brecha de −3,3 en capacidad de respuesta: la disponibilidad no es lo mismo que la rapidez percibida.</p>
+<p><b>Tres "seguridades":</b> (a) <i>Assurance</i> (SERVQUAL): competencia y cortesía que inspiran confianza; (b) <i>Security</i>: tríada CID/CIA (Confidencialidad, Integridad, Disponibilidad) — es la definición de Nizamidou que cita la lectura; en ISO/IEC 25010 la disponibilidad está bajo <b>Fiabilidad</b>, no bajo Seguridad; (c) <i>Safety</i>: ausencia de daño (característica nueva de ISO/IEC 25010:2023).</p>
+<p><b>Billetera (Gaps):</b> Brecha 2 (percepción de la dirección → especificaciones): el PO (Product Owner) entiende "al instante" pero la SRS no tiene NFR medible; Brecha 3 (especificación → entrega): sin NFR no hay prueba de rendimiento que lo verifique; Brecha 4 (entrega → comunicación externa): marketing promete más de lo que se entrega; Brecha 5 (esperado − percibido) = resultado de las anteriores.</p>
+<div class="alt"><h4>Alternativa A · Cerrar brechas desde la ingeniería (duro)</h4>
+<ul>
+<li>Capacidad de respuesta: NFR "p95 ≤ 2 s con 18 000 concurrentes", pruebas de carga en el pipeline CI/CD (Continuous Integration/Continuous Delivery), autoescalado, cola virtual.</li>
+<li>Seguridad (Security): MFA (Multi-Factor Authentication), cifrado TLS 1.3, registro de auditoría; para la billetera, NFR "transferencia confirmada ≤ 10 s en p99" y prueba en horas punta.</li>
+</ul></div>
+<div class="alt"><h4>Alternativa B · Cerrar brechas desde las personas y la comunicación (blando)</h4>
+<ul>
+<li>Seguridad (Assurance): capacitación certificada del personal de soporte, guiones con base de conocimiento, FCR como meta.</li>
+<li>Brecha 4: alinear la publicidad con el SLA real ("transferencias en segundos") y comunicar estados ("en proceso") en la UI.</li>
+<li>Según Sciarelli et al. (2020) en la lectura, la GC necesita equilibrio entre componentes <b>blandos</b> y <b>duros</b>: lo ideal es A + B.</li>
+</ul></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li>ISO 9001:2015, 9.1.2 (satisfacción del cliente: seguimiento de la percepción) — exactamente lo que mide SERVQUAL.</li>
+<li>ISO/IEC 25010:2023 (eficiencia de desempeño, fiabilidad, seguridad) para traducir dimensiones percibidas en NFR verificables; ISO/IEC 27001:2022 para la tríada CID.</li>
+<li>Lectura: Arroyo Valer (2020) — normativas, capacitación y SGC sólidos fortalecen la seguridad; Kumar et al. (2020) — IA y analítica de datos potencian la capacidad de respuesta.</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Línea base</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Brecha ponderada SERVQUAL</td><td>Σ wᵢ(Pᵢ − Eᵢ)</td><td>−1,89</td><td>≥ −0,80 en 2 campañas</td></tr>
+<tr><td>Tiempo de primera respuesta del soporte</td><td>Media (t primera respuesta − t ticket)</td><td>Horas</td><td>≤ 15 min en semana de matrícula</td></tr>
+<tr><td>Latencia p95</td><td>Percentil 95</td><td>6,8 s</td><td>≤ 2 s</td></tr>
+<tr><td>FCR</td><td>Resueltos al 1.er contacto ÷ total × 100</td><td>Bajo</td><td>≥ 80 %</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Trampas:</b> (1) En la lectura el enfoque "objetivo" es el de la <b>percepción del cliente</b> y el "subjetivo" el <b>interno</b> (al revés de lo intuitivo). (2) "Capacidad de respuesta" (Responsiveness) ≠ "tiempo de respuesta" técnico (comportamiento temporal), aunque se relacionan. (3) Mnemotecnia RATER: Reliability, Assurance, Tangibles, Empathy, Responsiveness. (4) SERVPERF mide solo percepciones; SERVQUAL mide P − E. (5) Promediar sin pesos puede cambiar la prioridad si la dimensión con mayor brecha tiene poco peso: indique siempre qué índice usa.</div>
+</details>
+</section>
+
+<section id="caso-7" class="caso">
+<h2>Caso 7 · EPS Pacífico vs Rímac: demora y rechazo en cartas de garantía</h2>
+<p class="origen">Origen: Entregable G3 (Actividad 2, "Retraso en activación de pólizas") | Grupo 02 | Grupo 04 | Grupo 06 | Grupo 07 (con casos reales INDECOPI/SUSALUD)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Una EPS (Entidad Prestadora de Salud; plan complementario a EsSalud, supervisada por SUSALUD) de Credicorp y su competidora de Breca reciben reclamos por <b>demoras y rechazos en la emisión de cartas de garantía</b> en clínicas afiliadas (IPRESS – Instituciones Prestadoras de Servicios de Salud). Datos reunidos por los grupos:</p>
+<ul>
+<li>Flujo secuencial de <b>hasta 3 firmas</b>; auditores médicos sobrecargados en madrugadas, fines de semana y feriados (picos de dengue y enfermedades respiratorias).</li>
+<li>La Extranet de Prestadores se cae en picos; la validación del asegurado con RENIEC/SUSALUD da <i>timeouts</i>; el <i>middleware</i> HL7/FHIR (Health Level 7 / Fast Healthcare Interoperability Resources) hacia las clínicas tiene alta latencia; desfase de sincronización con SITEDS (Sistema de Intercambio de Transacciones Electrónicas de Datos en Salud).</li>
+<li>Las altas de planilla llegan con <b>48–72 h</b> de desfase; códigos CIE-10 no homologados; informes médicos con diagnósticos ambiguos.</li>
+<li>Plazo de 24 h computado rígidamente, sin monitoreo por etapa ni alertas ante HTTP 500; solo reportes mensuales.</li>
+<li>Casos documentados (G7): carta oncológica emitida <b>un día después</b> del fallecimiento del paciente (sanción INDECOPI <b>6,89 UIT</b>); se informó cobertura <b>100 %</b> y la carta autorizó <b>80 %</b>; rechazo por "congénito" sin sustento; negativa por "periodo de espera de 18 meses" declarada injustificada.</li>
+<li>Registro de un mes: <b>12 400</b> solicitudes; 9 052 emitidas en ≤ 24 h; 1 488 observadas (devueltas a la clínica); 186 rechazos, de los cuales 41 fueron revocados en reconsideración o por INDECOPI.</li>
+</ul>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Construya el Ishikawa 6M con al menos 2 causas por M redactadas como <b>fallas</b> (no como reglas), separando causas internas de externas.</li>
+<li>Calcule % dentro de SLA, tasa de observación, tasa de rechazo y tasa de rechazo revocado.</li>
+<li>Explique por qué "retraso en activación de pólizas" (G3) está mal formulado.</li>
+<li>Proponga dos alternativas y elija modelo TQM rebatiendo los descartes de otros grupos.</li>
+<li>Defina KPI con meta.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<figure><img src="@img/s2-entregables/g3-p09.png" alt="Diagrama de Ishikawa del G3 para Pacífico con el efecto Retraso en activación de pólizas y causas en Mano de obra, Maquinaria, Métodos, Materiales, Medición y Medio ambiente"><figcaption>Ishikawa del G3 para Pacífico (efecto "Retraso en activación de pólizas").</figcaption></figure>
+<div class="tabla"><table>
+<thead><tr><th>M</th><th>Causa (como falla)</th><th>¿Interna/externa?</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Mano de obra</td><td>Auditores insuficientes en turnos pico; criterios dispares entre auditores</td><td>Interna</td><td>Madrugadas/feriados; rechazos revocados</td><td>Capacidad de respuesta; fiabilidad</td></tr>
+<tr><td>Mano de obra</td><td>Personal de admisión de clínicas mal capacitado en el portal</td><td>Externa (aliado)</td><td>Solicitudes incompletas</td><td>Capacidad de interacción</td></tr>
+<tr><td>Maquinaria</td><td>Caídas de Extranet; <i>timeouts</i> RENIEC/SUSALUD; latencia HL7/FHIR</td><td>Interna (TI) + externa (servicios del Estado)</td><td>Picos estacionales</td><td>Fiabilidad – disponibilidad; comportamiento temporal</td></tr>
+<tr><td>Métodos</td><td>Flujo secuencial de 3 firmas; sin vía rápida para emergencias</td><td>Interna</td><td>Caso oncológico (6,89 UIT)</td><td>Eficiencia del proceso</td></tr>
+<tr><td>Materiales</td><td>Padrón con desfase 48–72 h; CIE-10 no homologado; informes ambiguos</td><td>Mixta (empresas clientes, clínicas)</td><td>Validación de vigencia falla</td><td>Calidad de datos (ISO/IEC 25012: actualidad, exactitud)</td></tr>
+<tr><td>Medición</td><td>Sin monitoreo por etapa ni alertas HTTP 500; solo reportes mensuales</td><td>Interna</td><td>"No se sabe dónde está la solicitud"</td><td>Capacidad de ser analizado</td></tr>
+<tr><td>Medio ambiente</td><td>Presión en emergencias; "temor a glosas"; cortes de red en IPRESS de regiones</td><td>Externa</td><td>Verificaciones extra</td><td>—</td></tr>
+</tbody></table></div>
+<p><b>Cálculos.</b> % dentro de SLA = 9 052/12 400 = <b>73,0 %</b>. Tasa de observación = 1 488/12 400 = <b>12,0 %</b>. Tasa de rechazo = 186/12 400 = <b>1,50 %</b>. Rechazo revocado = 41/186 = <b>22,0 %</b>: uno de cada cinco rechazos era injustificado → problema de <b>criterio</b> (variabilidad), no solo de tiempo.</p>
+<p><b>Por qué "activación de pólizas" está mal formulado:</b> la activación es el inicio de vigencia del contrato; las causas del G3 describen la <b>autorización de cobertura / emisión de carta de garantía</b> en una atención concreta. Un efecto mal nombrado lleva a mejorar el proceso equivocado (suscripción en vez de autorización). Además el Ishikawa del G3 para Rímac redacta causas como reglas ("Respuesta objetivo menor a cuatro horas", "Orden médica contiene diagnóstico"): un Ishikawa lista <b>desviaciones</b>.</p>
+<div class="alt"><h4>Alternativa A · Automatización por reglas + vía rápida (proceso)</h4>
+<ul>
+<li>Pre-autorización automática por reglas para diagnósticos frecuentes (CIE-10 homologado) y montos menores (G4: "aprobación automática de montos menores").</li>
+<li>Protocolo de aprobación prioritaria inmediata para alta gravedad (oncológicos, quirúrgicos), con auditoría a posteriori (G7).</li>
+<li>Guía única de criterios + mesa de escalamiento para expedientes complejos (G2); calibración mensual entre auditores (concordancia κ de Cohen ≥ 0,8).</li>
+<li>Turnos de auditores dimensionados con la demanda histórica (picos de dengue).</li>
+</ul></div>
+<div class="alt"><h4>Alternativa B · Interoperabilidad y trazabilidad (tecnología)</h4>
+<ul>
+<li>API en tiempo real clínica–EPS sobre HL7/FHIR con reintentos y circuito de corte (<i>circuit breaker</i>) ante <i>timeouts</i> de RENIEC; caché de la última validación.</li>
+<li>Formularios digitales con campos obligatorios y validación previa al envío; padrón sincronizado diariamente con planillas (PLAME/T-Registro de SUNAT).</li>
+<li>Tablero por etapa con SLA y alertas (p. ej., a las 4 h y 12 h), y comunicación proactiva al asegurado del estado de la carta.</li>
+</ul></div>
+<h4>Elección del modelo (debate entre grupos)</h4>
+<ul>
+<li><b>Baldrige</b> (G3, G4, G6-Pacífico): servicio crítico donde se juega la confianza y fidelidad; Baldrige tiene criterios para el sector salud; atiende Liderazgo, Clientes, Operaciones y Medición.</li>
+<li><b>Deming</b> (G7): las controversias nacen de variabilidad de criterios y falta de control de tiempos → PHVA + Pareto + control estadístico. El 22 % de rechazos revocados respalda esta lectura.</li>
+<li><b>Six Sigma DMAIC + Baldrige</b> (G2): proceso repetitivo y medible (tiempo de ciclo, % observados) con marco macro orientado al cliente.</li>
+<li><b>Rebatir a G3</b> ("Deming no aplica porque la falla depende de un tercero"): el punto 4 de los 14 de Deming pide relación de largo plazo con proveedores, y el PHVA puede extenderse a la cadena (clínicas). <b>Rebatir</b> "EFQM no aplica porque no hay causa social": el bloque <b>Ejecución</b> incluye implicar a grupos de interés (red de IPRESS, SUSALUD, pacientes).</li>
+<li><b>Recomendación integrada:</b> Baldrige como marco (Clientes + Operaciones) y DMAIC como motor sobre el CTQ "carta emitida ≤ 24 h con criterio correcto".</li>
+</ul>
+<h4>Justificación normativa</h4>
+<p>ISO 9001:2015, 8.4 (control de procesos, productos y servicios suministrados externamente: las clínicas son proveedores externos del proceso), 8.5.1 (provisión controlada del servicio), 9.1.1 (seguimiento y medición), 10.2 (no conformidad y acción correctiva ante rechazos revocados). Marco legal: Ley 29571 (Código de Protección y Defensa del Consumidor – deber de idoneidad e información) aplicado por INDECOPI; normativa de SUSALUD sobre IAFAS (Instituciones Administradoras de Fondos de Aseguramiento en Salud). Para el SW: ISO/IEC 25010 (fiabilidad, interoperabilidad) e HL7 FHIR como estándar de intercambio.</p>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Línea base</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>% cartas dentro de SLA</td><td>Emitidas ≤ 24 h ÷ solicitadas × 100</td><td>73,0 %</td><td>≥ 95 %</td></tr>
+<tr><td>Tiempo p90 de emisión</td><td>Percentil 90 de (t emisión − t solicitud completa)</td><td>—</td><td>≤ 12 h; emergencias ≤ 1 h</td></tr>
+<tr><td>Tasa de observación</td><td>Observadas ÷ solicitadas × 100</td><td>12,0 %</td><td>≤ 4 %</td></tr>
+<tr><td>Tasa de rechazo revocado</td><td>Rechazos revocados ÷ rechazos × 100</td><td>22,0 %</td><td>≤ 5 %</td></tr>
+<tr><td>Discrepancia informado vs autorizado</td><td>Cartas con % distinto al informado ÷ cartas × 100</td><td>—</td><td>0 %</td></tr>
+<tr><td>Reclamos ante SUSALUD/INDECOPI</td><td>Reclamos ÷ 10 000 afiliados por mes</td><td>—</td><td>−50 % en 1 año</td></tr>
+</tbody></table></div>
+<h4>Cómo lo resolvieron los grupos</h4>
+<div class="tabla"><table>
+<thead><tr><th>Grupo</th><th>Efecto elegido</th><th>Fortaleza</th><th>Debilidad</th><th>Modelo</th></tr></thead>
+<tbody>
+<tr><td><b>G3</b></td><td>"Retraso en activación de pólizas" (mismo efecto para ambas EPS)</td><td>Comparación simétrica; Ishikawa rico (SITEDS, Extranet, Plan Resguardo, glosas, carencia)</td><td>Efecto impreciso; causas de Rímac redactadas como reglas; mezcla EPS con seguros generales (SBS); sin KPI ni mejoras; sin 6σ ni PNC</td><td>Baldrige (ambas)</td></tr>
+<tr><td>G2</td><td>Pacífico: demoras y baja trazabilidad en reembolsos/autorizaciones</td><td>Mejoras 6M + KPI; matriz 1–5; advierte que las causas son hipótesis</td><td>Puntajes sin ponderación explícita</td><td>6σ DMAIC + Baldrige</td></tr>
+<tr><td>G4</td><td>Demora en cartas y reembolsos (ambas)</td><td>Evidencia SUSALUD/INDECOPI; descarte razonado de los otros modelos</td><td>Mezcla EFQM 2013 (agentes/resultados) con EFQM 2020</td><td>Baldrige (ambas)</td></tr>
+<tr><td>G6</td><td>Pacífico: cartas; Rímac: reembolsos</td><td>Ishikawa técnico (HL7/FHIR, RENIEC, AS400, OCR)</td><td>Sin mejoras; justificación genérica</td><td>Pacífico Baldrige; Rímac EFQM</td></tr>
+<tr><td>G7</td><td>Rechazos y controversias en cartas (ambas)</td><td>8 casos reales con UIT y fechas; matriz problema × modelo; principal + complemento</td><td>Deming en todo (poca discriminación)</td><td>Deming + EFQM</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Nombrar mal el efecto (activación ≠ autorización). (2) Redactar causas como requisitos. (3) Descartar un modelo con un argumento absoluto ("no hay causa social"). (4) Confundir EPS (salud, SUSALUD) con aseguradora de ramos generales (SBS – Superintendencia de Banca, Seguros y AFP). (5) Medir solo el promedio de tiempo: el caso oncológico es un problema de <b>cola</b> (p90/p99), no de media. <b>No hay solución única:</b> Baldrige, Deming y DMAIC son correctos si cada uno se ancla a la causa raíz que el grupo demostró (confianza del cliente vs variabilidad de criterio vs tiempo medible).</div>
+</details>
+</section>
+<section id="caso-8" class="caso">
+<h2>Caso 8 · Metro: inventario fantasma, quiebres y canal omnicanal (DMAIC con CTQ = exactitud de inventario)</h2>
+<p class="origen">Origen: Entregable G3 (Metro: "Incumplimiento en la disponibilidad y entrega de productos al cliente") | Grupo 02 (Metro: quiebres de stock y diferencias de precio) | Grupo 06 (Metro: inventario omnicanal SAP ERP–VTEX)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Metro (Cencosud Retail Perú, &gt; 70 locales) vende en tienda y online. El inventario vive en <b>SAP ERP</b> y la tienda virtual en <b>VTEX</b>; la sincronización es <b>batch cada 6 h</b>. Hallazgos:</p>
+<ul>
+<li><b>Inventario fantasma</b>: el sistema muestra stock que no existe → sobreventa digital; <b>quiebres visuales</b>: hay producto en almacén pero no en góndola.</li>
+<li>Alta rotación de reponedores; errores manuales de conteo; <i>pickers</i> de pedidos digitales recolectan en los mismos pasillos que los clientes, sin ruteo; no se usa FIFO ni doble pesaje.</li>
+<li>Lectores de código descalibrados; PDA (Personal Digital Assistant) lentas; SKU (Stock Keeping Unit) duplicados en la tienda virtual; etiquetas caídas o ilegibles.</li>
+<li>No hay conteos cíclicos por pasillo; no se mide <i>Fulfillment Cycle Time</i> ni <i>Order Accuracy Rate</i>.</li>
+<li>Auditoría de una tienda piloto: de <b>1 500 SKU</b> contados, <b>1 215</b> coinciden con el sistema (±0 unidades). En un Cyber, de <b>4 000</b> pedidos online, <b>480</b> llegaron con faltantes o sustituciones no pedidas, y <b>520</b> fuera de la franja prometida (de ellos, 210 también incompletos).</li>
+</ul>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Ishikawa 6M separando causas de <b>sistema (SW)</b> y de <b>operación</b>.</li>
+<li>Calcule exactitud de inventario, <i>Order Accuracy Rate</i> y OTIF (On Time In Full) del Cyber.</li>
+<li>Desarrolle las 5 fases DMAIC con CTQ = exactitud de inventario.</li>
+<li>Compare dos alternativas y explique por qué, según la heurística de la diap. 44, Baldrige es menos pertinente aquí que Deming/6σ.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<figure><img src="@img/s2-entregables/g3-p15.png" alt="Diagrama de Ishikawa del G3 para Metro con el efecto Incumplimiento en la disponibilidad y entrega de productos al cliente y sus causas por Mano de obra, Máquina, Medio ambiente, Material, Método y Medición"><figcaption>Ishikawa del G3 para Metro: el efecto se formula como incumplimiento de disponibilidad y entrega.</figcaption></figure>
+<div class="tabla"><table>
+<thead><tr><th>M</th><th>Causa</th><th>Tipo</th><th>Causa raíz / evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Máquina</td><td>Sincronización batch 6 h SAP ↔ VTEX</td><td>SW</td><td>Latencia de datos → sobreventa</td><td>Compatibilidad – interoperabilidad; actualidad del dato (ISO/IEC 25012)</td></tr>
+<tr><td>Máquina</td><td>Lectores descalibrados, PDA lentas</td><td>HW</td><td>Errores de registro</td><td>Exactitud</td></tr>
+<tr><td>Material</td><td>SKU duplicados; etiquetas ilegibles; quiebres desde el CD (Centro de Distribución)</td><td>Datos / insumos</td><td>Catálogo maestro sin gobierno de datos</td><td>Consistencia del dato</td></tr>
+<tr><td>Método</td><td>Sin conteo cíclico, sin FIFO, sin doble pesaje, sin política de sustitución</td><td>Operación</td><td>Procedimiento no estandarizado</td><td>Conformidad</td></tr>
+<tr><td>Mano de obra</td><td>Rotación alta; <i>pickers</i> sin ruteo</td><td>Operación</td><td>Personal nuevo sin inducción</td><td>Fiabilidad del servicio</td></tr>
+<tr><td>Medición</td><td>Inventario fantasma no detectado; sin OAR ni Fulfillment Cycle Time</td><td>Operación</td><td>"No se mide lo que se promete"</td><td>—</td></tr>
+<tr><td>Medio ambiente</td><td>Almacenes saturados; tráfico de Lima para reparto</td><td>Externa</td><td>Picos de Cyber</td><td>—</td></tr>
+</tbody></table></div>
+<p><b>Cálculos.</b> Exactitud de inventario = 1 215/1 500 = <b>81,0 %</b> (referencia de retail moderno ≥ 97 %). OAR = (4 000 − 480)/4 000 = <b>88,0 %</b>. Pedidos con algún fallo = 480 + 520 − 210 = 790 (principio de inclusión-exclusión) → OTIF = (4 000 − 790)/4 000 = <b>80,25 %</b>. Error típico: restar 480 + 520 = 1 000 y obtener 75 % (doble conteo de los 210).</p>
+<div class="alt"><h4>Alternativa A · Integración en tiempo real (SW) + DMAIC</h4>
+<ul>
+<li><b>D</b>: VOC "lo que compro online debe existir"; CTQ = exactitud de inventario por SKU-tienda ≥ 97 %; alcance: 10 tiendas Lima, familias de alta rotación.</li>
+<li><b>M</b>: conteo cíclico ABC (A diario, B semanal, C mensual); línea base 81 %; MSA de los lectores (repetibilidad del escaneo).</li>
+<li><b>A</b>: Pareto de discrepancias por causa (recepción, merma no registrada, error de picking, latencia de sincronización); regresión discrepancia vs horas desde el último batch.</li>
+<li><b>I</b>: sincronización por eventos (API/webhooks o CDC – Change Data Capture) SAP → VTEX en &lt; 1 min; <b>stock de seguridad digital</b> (no publicar las últimas N unidades); depuración de SKU duplicados (MDM – Master Data Management).</li>
+<li><b>C</b>: gráfico p de "% SKU con discrepancia" por tienda; auditoría semanal; alerta si OAR &lt; 95 %.</li>
+</ul></div>
+<div class="alt"><h4>Alternativa B · Operación dedicada + Deming (PHVA)</h4>
+<ul>
+<li>P: separar el <i>picking</i> digital en una <i>dark store</i> o en horario sin clientes; estándar de recepción en andenes; política formal de sustitución acordada con el cliente.</li>
+<li>H: piloto en 2 tiendas con ruteo algorítmico de <i>pickers</i>, FIFO y doble pesaje antes del despacho.</li>
+<li>V: comparar OTIF y exactitud con tiendas control (gráfico de control).</li>
+<li>A: estandarizar y capacitar (reducir dependencia de la rotación con instructivos visuales).</li>
+<li>Ventaja: bajo costo TI; contra: no elimina la latencia del batch (la causa del fantasma digital).</li>
+</ul></div>
+<p><b>Por qué Deming/6σ y no Baldrige:</b> la causa raíz es <b>interna y de proceso</b> (conteo, sincronización, picking) → "que la máquina y el proceso no fallen". Baldrige se justificaría si el problema fuera de posicionamiento competitivo o alineamiento estratégico. G2 combina 6σ DMAIC + Deming; G3 elige Deming. Ambos coherentes.</p>
+<h4>Justificación normativa</h4>
+<ul>
+<li>ISO 9001:2015, 8.5.2 (identificación y trazabilidad), 8.5.4 (preservación), 7.1.5 (recursos de seguimiento y medición: calibración de lectores), 8.7 (salidas no conformes).</li>
+<li>ISO/IEC 25012:2008 (calidad de datos: exactitud, actualidad, consistencia) — el inventario fantasma es un defecto de <b>datos</b>, no solo de operación.</li>
+<li>Ley 29571 (idoneidad): vender lo que no existe genera sanción; INDECOPI recibe reclamos por entregas fuera de plazo.</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Base</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Exactitud de inventario</td><td>SKU con conteo = sistema ÷ SKU contados × 100</td><td>81,0 %</td><td>≥ 97 %</td></tr>
+<tr><td>OAR</td><td>Pedidos sin error de contenido ÷ pedidos × 100</td><td>88,0 %</td><td>≥ 98 %</td></tr>
+<tr><td>OTIF</td><td>Pedidos a tiempo y completos ÷ pedidos × 100</td><td>80,25 %</td><td>≥ 95 %</td></tr>
+<tr><td>Quiebre por SKU</td><td>SKU-tienda con stock 0 en góndola ÷ SKU-tienda × 100</td><td>—</td><td>≤ 3 %</td></tr>
+<tr><td>Fulfillment Cycle Time</td><td>t entrega − t confirmación</td><td>—</td><td>≤ franja prometida en p95</td></tr>
+</tbody></table></div>
+<h4>Cómo lo resolvieron los grupos</h4>
+<ul>
+<li><b>G3</b>: efecto común para Metro y Plaza Vea (máxima comparabilidad); Ishikawa con inventario fantasma, quiebre visual, conflicto de <i>pickers</i>, cadena de frío; modelo <b>Deming</b> "porque el problema nace dentro de su propio proceso". No propone mejoras ni KPI en esta actividad.</li>
+<li><b>G2</b>: quiebres + diferencias de precio; mejoras 6M (pronóstico por promoción, reposición priorizada, etiquetas digitales) y KPI (quiebre por SKU, exactitud, discrepancias de precio); modelo <b>6σ DMAIC + Deming</b>.</li>
+<li><b>G6</b>: diagnóstico técnico más fino (SAP ERP–VTEX batch, SKU duplicados, dark stores, Fulfillment Cycle Time, OAR) pero <b>no asigna modelo</b> a los supermercados (lo hace para heladerías).</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Sumar fallos solapados al calcular OTIF. (2) Ubicar "inventario desincronizado" en Medición: es una falla de <b>Máquina/SW</b> (integración); Medición es no detectarlo. (3) Proponer "más personal" contra el inventario fantasma digital (la causa es la latencia del dato). (4) Elegir Baldrige "porque Metro es una gran empresa": el modelo sigue a la <b>causa</b>, no al tamaño.</div>
+</details>
+</section>
+
+<section id="caso-9" class="caso">
+<h2>Caso 9 · Plaza Vea: colapso del canal digital en Cyber Wow y caída del OTIF de fin de semana</h2>
+<p class="origen">Origen: Entregable G3 (Plaza Vea: Cyber Wow, Marketplace, Makro, Agora) | Grupo 02 (variabilidad del pedido digital, Anexo B OTIF simulado)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Plaza Vea (Supermercados Peruanos S.A., InRetail – Intercorp) opera web + app + Marketplace con <i>sellers</i> externos y comparte stock con Makro; recibe pedidos cruzados de la app Agora. En Cyber Wow y "Días Tarjeta Oh!" la web cae, aparecen precios erróneos (descuentos de hasta 90 %, luego cancelados), hay sobreventa por catálogos cruzados y el <i>lead time</i> prometido no suma el tiempo de los almacenes de <i>sellers</i>; el "carrito mixto" llega en dos entregas. No se hacen pruebas de estrés antes de campañas.</p>
+<figure><img src="@img/s2-entregables/g2-p23b.png" alt="Gráfico de barras del G2 con el OTIF diario simulado de Plaza Vea de lunes a domingo frente a la meta de 90 por ciento, con caída fuerte el sábado y el domingo"><figcaption>Anexo B del G2 (datos simulados): OTIF diario vs meta 90 %.</figcaption></figure>
+<p>OTIF diario (G2): L 95 %, M 96 %, X 94 %, J 90 %, V 82 %, S 65 %, D 58 %; volumen de pedidos: L–J 1 200/día, V 1 800, S 3 000, D 2 800.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule el OTIF promedio simple y el ponderado por volumen. ¿Cuál debe reportarse y por qué?</li>
+<li>Ishikawa 6M y estratificación (qué dice el patrón por día).</li>
+<li>Plan DMAIC y plan de pruebas de rendimiento para la próxima campaña.</li>
+<li>¿Baldrige (G3) o 6σ + Baldrige (G2)? Discuta además si cancelar pedidos por "error reconocible" es aceptable desde la calidad.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>Cálculos.</b> OTIF simple = (95 + 96 + 94 + 90 + 82 + 65 + 58)/7 = 580/7 = <b>82,9 %</b> (déficit 7,1 pp vs 90 %). Ponderado: pedidos totales = 4 × 1 200 + 1 800 + 3 000 + 2 800 = 12 400; pedidos OK = 1 200 × (0,95 + 0,96 + 0,94 + 0,90) + 1 800 × 0,82 + 3 000 × 0,65 + 2 800 × 0,58 = 4 500 + 1 476 + 1 950 + 1 624 = 9 550 → OTIF ponderado = 9 550/12 400 = <b>77,0 %</b>. Debe reportarse el <b>ponderado</b>: el cliente vive pedidos, no días; el promedio simple oculta que el 47 % de los pedidos ocurre en S–D, justo cuando el OTIF colapsa.</p>
+<h4>Problemas identificados</h4>
+<figure><img src="@img/s2-entregables/g3-p17.png" alt="Diagrama de Ishikawa del G3 para Plaza Vea con el efecto Incumplimiento en la disponibilidad y entrega de productos al cliente y causas como servidores colapsados, inventarios desincronizados vía API, picos de Cyber Wow y lead time irreal"><figcaption>Ishikawa del G3 para Plaza Vea.</figcaption></figure>
+<div class="tabla"><table>
+<thead><tr><th>M</th><th>Causa</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Máquina</td><td>Servidores web colapsados en campañas cruzadas</td><td>Sin pruebas de carga ni autoescalado</td><td>Caídas en Cyber Wow</td><td>Eficiencia de desempeño – capacidad; disponibilidad</td></tr>
+<tr><td>Máquina</td><td>Inventario desincronizado vía API (Plaza Vea ↔ Makro ↔ sellers)</td><td>Integración sin reserva de stock</td><td>Sobreventa</td><td>Interoperabilidad</td></tr>
+<tr><td>Material</td><td>Catálogos con falsa disponibilidad; precios erróneos</td><td>Sin validación de reglas de precio antes de publicar</td><td>Descuentos de 90 %</td><td>Exactitud del dato</td></tr>
+<tr><td>Método</td><td>Fulfillment del "carrito mixto"; filtros antifraude lentos</td><td>Proceso no diseñado para multi-origen</td><td>Dos entregas</td><td>Adecuación funcional</td></tr>
+<tr><td>Medición</td><td>Lead time irreal; sin trazabilidad externa</td><td>No suma tiempos de sellers</td><td>Entregas fuera de franja</td><td>—</td></tr>
+<tr><td>Mano de obra</td><td>Picking colapsado; call center rebasado</td><td>Capacidad fija ante demanda variable</td><td>S–D</td><td>Capacidad de respuesta</td></tr>
+<tr><td>Medio ambiente</td><td>Demanda concentrada S–D; couriers tercerizados saturados</td><td>Externa (mitigable)</td><td>OTIF 58–65 %</td><td>—</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · 6σ DMAIC (motor) + Baldrige (marco) — enfoque G2</h4>
+<ul>
+<li><b>D</b>: CTQ = pedido completo y en franja; meta OTIF ponderado ≥ 90 %.</li>
+<li><b>M</b>: OTIF por tienda/zona/franja/día; tasa de sustitución; motivos de falla.</li>
+<li><b>A</b>: Pareto de motivos (sustitución, faltante, tardanza); prueba χ² de independencia OTIF × día.</li>
+<li><b>I</b>: capacidad flexible S–D (turnos, <i>pickers</i> temporales), reglas de sustitución configurables por cliente, reserva de inventario al confirmar, cálculo de <i>lead time</i> por origen, división explícita del carrito mixto.</li>
+<li><b>C</b>: tablero OTIF diario; gráfico p por día; plan de reacción.</li>
+</ul></div>
+<div class="alt"><h4>Alternativa B · Baldrige centrado en el cliente + ingeniería de rendimiento — enfoque G3</h4>
+<ul>
+<li>Clientes y Operaciones: la campaña es el "momento de la verdad" de la fidelidad; plan de campaña aprobado por la gerencia con criterios de salida.</li>
+<li>Plan de pruebas: carga (pico esperado × 1), estrés (× 2–3 hasta el quiebre), <i>soak</i> (8 h sostenidas), <i>spike</i> (de 0 a pico en 1 min); NFR p95 ≤ 2 s, error 5xx &lt; 0,5 %; congelamiento de despliegues 48 h antes; validación automática de precios (alerta si descuento &gt; 60 %).</li>
+</ul></div>
+<p><b>"Error reconocible":</b> INDECOPI archivó porque el error de precio era evidente para un consumidor razonable; desde la calidad, sin embargo, la cancelación es un <b>costo de falla externa</b> (CoPQ) y daña la confianza. La acción correcta es <b>prevenir</b> (control de precios antes de publicar), no ampararse en la excepción legal.</p>
+<h4>Justificación normativa</h4>
+<p>ISO 9001:2015, 8.2.3 (revisión de requisitos antes de comprometerse a suministrar: no prometer lead time imposible), 8.4 (proveedores externos: sellers y couriers), 9.1.3 (análisis de datos). ISO/IEC 25010 (capacidad, disponibilidad); ISO/IEC/IEEE 29119 para el plan de pruebas de rendimiento.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>OTIF ponderado = pedidos a tiempo y completos ÷ pedidos × 100 (77,0 % → ≥ 90 %; ningún día &lt; 85 %).</li>
+<li>Disponibilidad en campaña = minutos operativos ÷ minutos de campaña × 100 (meta ≥ 99,95 %).</li>
+<li>Tasa de cancelación por precio erróneo = pedidos cancelados por precio ÷ pedidos × 100 (meta 0 %).</li>
+<li>Exactitud de lead time = pedidos entregados en la franja prometida ÷ pedidos × 100 (meta ≥ 95 %).</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p><b>G3</b>: Ishikawa muy específico del ecosistema (Makro, Agora, Marketplace, Olva/Urbano, antifraude, carrito mixto) y modelo <b>Baldrige</b> (golpe a la experiencia del cliente en el evento clave); sin KPI. <b>G2</b>: problema "variabilidad del pedido digital", anexo OTIF, modelo <b>6σ DMAIC + Baldrige</b> con KPI (OTIF, sustitución, devoluciones, puntualidad); debilidad: datos simulados. <b>G4</b> eligió para Plaza Vea un problema distinto (sanitario, Caso 11) → <b>EFQM</b>. Lección: el modelo sigue al <b>encuadre del efecto</b>.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Reportar el OTIF promedio de días en vez del ponderado por pedidos (Paradoja de Simpson en miniatura). (2) Presentar datos simulados como evidencia sin advertirlo. (3) "Más servidores" sin prueba de carga ni NFR. (4) Creer que si la ley no sanciona (error reconocible) no hay problema de calidad.</div>
+</details>
+</section>
+<section id="caso-10" class="caso">
+<h2>Caso 10 · Precio de góndola vs precio cobrado en caja/POS/autocaja (Metro y Plaza Vea)</h2>
+<p class="origen">Origen: Grupo 05 (Metro y Plaza Vea: "precio góndola vs caja") | Grupo 06 (Plaza Vea: "discrepancias góndola vs POS") | Grupo 02 (Metro: diferencias de precio comunicado) | Cifras de auditoría creadas para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>INDECOPI (Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual) sancionó en primera instancia a varias cadenas, entre ellas Metro (Cencosud Retail Perú), por <b>no respetar en caja el precio exhibido en góndola</b>. Plaza Vea (Supermercados Peruanos S.A., InRetail) presenta el mismo patrón en <b>cajas tradicionales y autocajas (<i>self-checkout</i>)</b>, sobre todo con promociones de Tarjeta Oh!/Agora y "Preciazos" de fin de semana.</p>
+<p>Una auditoría interna sorpresa en un hipermercado de Lima revisa <b>2 000 SKU (Stock Keeping Unit – unidad de mantenimiento de inventario)</b> y halla <b>46</b> con precio de góndola ≠ precio cobrado: 28 son promociones con tarjeta no activadas en el POS (Point of Sale – punto de venta), 9 son flejes vencidos no retirados, 5 son etiquetas bajo el producto equivocado y 4 son errores de lectura del código de barras. Datos de contexto (G5/G6): los precios se replican del sistema central al POS por <b>batch nocturno</b> (las ofertas del día llegan horas tarde); las PDA (Personal Digital Assistant – terminal portátil) de etiquetado no imprimen cuando falla el Wi-Fi; el reponedor también etiqueta (no hay personal dedicado); anular un cobro mayor exige formulario manual y llamada al supervisor; los reclamos por WhatsApp/App se resuelven verbalmente sin registro; <b>nadie mide la coincidencia góndola-caja</b> (sí se miden ventas y mermas).</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule el <i>Price Accuracy Rate</i> (PAR), el DPMO (Defects Per Million Opportunities) y el nivel σ (con desplazamiento de 1,5σ).</li>
+<li>Construya un Pareto de las 46 discrepancias y el Ishikawa 6M con causa raíz.</li>
+<li>Proponga una solución <b>tecnológica</b> y otra <b>de proceso</b>, y compárelas.</li>
+<li>¿Qué modelo TQM corresponde? Evalúe la elección del G5 (Metro → EFQM; Plaza Vea → Baldrige).</li>
+<li>¿Qué deberes del Código de Protección y Defensa del Consumidor (Ley 29571) se vulneran?</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>Cálculos.</b> PAR = (2 000 − 46)/2 000 × 100 = <b>97,7 %</b>. Con 1 oportunidad por SKU auditado: DPO = 46/2 000 = 0,023 → <b>DPMO = 23 000</b> → σ = Φ⁻¹(0,977) + 1,5 = 1,995 + 1,5 ≈ <b>3,5σ</b>. Una meta habitual del sector (PAR ≥ 99,5 %) equivale a 5 000 DPMO ≈ 4,1σ: hay que reducir los defectos en ≈ 78 %.</p>
+<p><b>Pareto.</b> Promoción no activada en POS 28 (60,9 %; acumulado 60,9 %) → fleje vencido 9 (19,6 %; 80,4 %) → etiqueta mal ubicada 5 (10,9 %; 91,3 %) → lectura de código 4 (8,7 %; 100 %). Dos causas (50 % de las categorías) explican el 80,4 %: ambas son de <b>sincronización de datos de precio</b>, no de "descuido del cajero".</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema (M)</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Promoción no aplicada en POS/autocaja (Máquina)</td><td>Réplica de precios por <i>batch</i> nocturno; autocaja descarga tarde la BD de precios</td><td>28/46 discrepancias</td><td>Exactitud funcional (ISO/IEC 25010); conformidad (Garvin)</td></tr>
+<tr><td>Flejes vencidos en góndola (Método)</td><td>Cambio manual de miles de etiquetas sin revisión diaria antes de abrir</td><td>9/46</td><td>Confiabilidad de la información</td></tr>
+<tr><td>Etiqueta bajo producto equivocado (Mano de obra/Material)</td><td>Reponedor que también etiqueta, con prisa; flejes casi idénticos (500 g vs 1 kg)</td><td>5/46</td><td>Conformidad</td></tr>
+<tr><td>Lectura errónea del código (Máquina/Material)</td><td>Lectores gastados; códigos ilegibles del proveedor</td><td>4/46</td><td>Fiabilidad</td></tr>
+<tr><td>No se detecta el problema (Medición)</td><td>No existe KPI de coincidencia góndola-caja ni registro de correcciones manuales</td><td>"Nadie lo mide"</td><td>Capacidad de control (SQC)</td></tr>
+<tr><td>Corrección desincentivada (Método)</td><td>Anulación con formulario manual + supervisor</td><td>Reclamos verbales sin registro</td><td>Capacidad de respuesta (SERVQUAL)</td></tr>
+<tr><td>Afiches "Preciazo" tapan el precio base (Medio ambiente)</td><td>Armado rápido de zonas temáticas sin estándar</td><td>Campañas Navidad/Escolar</td><td>Información al consumidor</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Tecnológica: precio único en tiempo real + ESL</h4>
+<ul>
+<li>Fuente única de precio (<i>single source of truth</i>) publicada por eventos/API al POS, autocajas, app y ESL (Electronic Shelf Labels – etiquetas electrónicas de góndola) en minutos, no en horas.</li>
+<li>Regla en POS: si la promoción con Tarjeta Oh! está vigente para el SKU, se aplica automáticamente (no depende del cajero).</li>
+<li>Pros: elimina de raíz el 80 % del Pareto. Contras: CAPEX alto (ESL en &gt; 100 tiendas), dependencia de la red (requiere modo <i>offline</i> con última versión firmada).</li>
+</ul></div>
+<div class="alt"><h4>Alternativa B · De proceso (Deming/PHVA): doble control y auditoría sorpresa</h4>
+<ul>
+<li><b>P</b>: estándar "ningún cambio de precio sin fleje impreso y verificado antes de abrir"; meta PAR ≥ 99,5 %.</li>
+<li><b>H</b>: ronda de verificación con escáner (muestra de 200 SKU/día por tienda, priorizando promociones); personal dedicado a precios en campañas; anulación de diferencia con un clic y registro automático.</li>
+<li><b>V</b>: gráfico p del % de discrepancias por tienda y por sección (abarrotes, lácteos…); registro de reclamos de App/WhatsApp.</li>
+<li><b>A</b>: estandarizar en todas las tiendas; política "si el precio de góndola es menor, se cobra el de góndola" (reduce el CoPQ legal).</li>
+<li>Pros: barato y rápido. Contras: depende de disciplina humana; no elimina la latencia del <i>batch</i>.</li>
+</ul></div>
+<p><b>Comparación:</b> A ataca la causa raíz técnica (latencia de datos) y B controla la variabilidad operativa; la solución madura combina B de inmediato (semanas) y A como proyecto (meses).</p>
+<h4>Justificación normativa</h4>
+<p>Six Sigma (DMAIC) o Deming (PHVA + 7QC: Pareto, hoja de verificación, gráfico p) son los modelos coherentes: el problema es <b>repetitivo, medible e interno</b> (matriz de decisión: variabilidad de proceso → Deming/6σ). ISO 9001:2015 cláusulas 7.1.5 (recursos de seguimiento y medición: lectores calibrados), 8.5.1 (producción y provisión del servicio controladas), 8.7 (salidas no conformes: precio erróneo detectado), 9.1.1 (seguimiento y medición). Ley 29571: deber de <b>información</b> veraz y oportuna (art. 2) e <b>idoneidad</b> (arts. 18–19): el consumidor recibe lo que se le ofreció al precio anunciado.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>PAR = SKU con precio correcto ÷ SKU auditados × 100 (97,7 % → ≥ 99,5 %).</li>
+<li>Latencia de precio = t(precio vigente en POS) − t(aprobación del cambio) (horas → ≤ 15 min, p95).</li>
+<li>Correcciones manuales en caja por 1 000 tickets (línea base a medir; meta −70 % en 3 meses).</li>
+<li>Vida media de fleje vencido (h) = Σ(t retiro − t vencimiento) ÷ n.º flejes vencidos (meta ≤ 2 h).</li>
+<li>Reclamos por precio ante INDECOPI/Libro de Reclamaciones por 10 000 tickets (meta −80 %).</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p><b>G5</b> hizo el Ishikawa 6M más fino de ambas cadenas (cajeros no informados de ofertas, verificadores de precio apagados, flejes con tinta tenue, afiches que tapan el precio) pero <b>sin propuestas ni KPI</b>, y justificó <b>EFQM para Metro con la multa por discriminación</b> (S/ 555 000, 2013), que es otro problema; para Plaza Vea eligió <b>Baldrige</b>. <b>G6</b> modeló Plaza Vea con causas técnicas precisas (réplica <i>batch</i> nocturna al POS, lentitud de <i>Self-Checkout</i>, microcortes de LAN, flejes caducos) y nombró el KPI <i>Price Accuracy Rate</i> por sucursal, pero <b>no asignó modelo</b> a los supermercados (su sección de modelos trató D'Onofrio/Artika). <b>G2</b> incluyó la discrepancia de precio dentro de los quiebres de Metro y eligió <b>6σ DMAIC + Deming</b>, la opción más coherente con la naturaleza del problema.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Justificar el modelo con un problema distinto del efecto del Ishikawa (G5). (2) Culpar al cajero: el Pareto muestra que el 80 % es de datos/sistemas (Deming: el 94 % de los problemas es del sistema, no del trabajador). (3) Contar como oportunidades todos los campos del fleje para "subir" el σ. (4) La solución no es única: A (tecnológica) y B (proceso) son ambas correctas si se justifican con la causa raíz y se miden con el mismo KPI.</div>
+</details>
+</section>
+
+<section id="caso-11" class="caso">
+<h2>Caso 11 · Plagas e insalubridad en supermercados: ¿Deming o EFQM para el mismo efecto?</h2>
+<p class="origen">Origen: Grupo 04 (Metro → Deming; Plaza Vea → EFQM) | Grupo 07 (Metro y Plaza Vea → Deming + EFQM complementario) | Pregunta de CoPQ integrada con la Sesión 1</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p><b>Cadena A (Metro).</b> Marzo 2023, Metro Plaza Lima Sur (Chorrillos): un video viral de TikTok muestra dos ratas sobre embutidos; la fiscalización municipal halla observaciones de limpieza y almacenamiento → clausura temporal y tres multas. En otros locales (Comas, Barranco) se encontraron verduras descompuestas y productos embolsados sin fecha de vencimiento. Causas reportadas: falla de rotación PEPS/FIFO (Primero en Entrar, Primero en Salir – First In, First Out), protocolos de desinfección deficientes, personal sin capacitación en BPM (Buenas Prácticas de Manufactura), trampas obsoletas, bitácoras de temperatura inexactas, sin auditorías internas inopinadas.</p>
+<p><b>Cadena B (Plaza Vea).</b> Pueblo Libre (mayo 2020): multa de 5 UIT (S/ 21 500) por pollos recocidos del día anterior y salsas vencidas; Ica (ene. 2023): productos vencidos y mal almacenados (Ordenanza 050-2022-MPI, código 9.18); SJL, Canto Grande (abr. 2024): excretas de roedor, aceite de freidora tóxico, multa ≈ S/ 2 575; San Isidro (feb. 2025): moho, filtraciones, cucarachas en la cisterna; en las mismas fechas clausuras en La Molina, La Perla, Huancayo y Talara. El control de plagas está <b>tercerizado</b> y la fumigadora no rinde cuentas por resultados; locales con fallas eléctricas y sanitarias; cadena de frío sin plan de mantenimiento.</p>
+<p>Dato común (G7): <b>en casi todos los incidentes la falla la detectó la autoridad o un cliente</b>, no la empresa.</p>
+<figure><img src="@img/s2-entregables/g4-p18.png" alt="Diagrama de Ishikawa del Grupo 04 para Plaza Vea con el efecto deficiencias de higiene, salubridad y control de plagas, y causas como locales deteriorados, cadena de frío sin mantenimiento, mala rotación PEPS, limpieza no estandarizada, cebaderos en mal estado y ausencia de auditorías internas"><figcaption>Ishikawa del G4 para Plaza Vea (efecto sanitario multi-sede).</figcaption></figure>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Explique por qué el mismo patrón en distintos distritos indica una <b>falla sistémica</b> y no un error humano aislado.</li>
+<li>Tabla de causas raíz para A y B.</li>
+<li>Diseñe un PHVA (enfoque G7) y una evaluación con agentes facilitadores EFQM (enfoque G4); explique por qué ambos pueden ser correctos.</li>
+<li>Relacione la "detección por el cliente o la autoridad" con el CoPQ (Cost of Poor Quality – costo de la mala calidad).</li>
+<li>Defina KPI con fórmula y meta.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1. Falla sistémica.</b> Si el mismo efecto aparece en ≥ 6 sedes, en años distintos y con personal distinto, la variación es de <b>causa común</b> (del sistema: estándares, inversión, proveedores, supervisión) y no de <b>causa especial</b> (un trabajador descuidado). Es la tesis de Deming (≈ 94 % de los problemas pertenecen al sistema y son responsabilidad de la dirección) y de Shewhart (causas comunes vs especiales).</p>
+<h4>Problemas identificados</h4>
+<figure><img src="@img/s2-entregables/g4-p15.png" alt="Diagrama de Ishikawa del Grupo 04 para Metro con el efecto presencia de plagas e insalubridad, y causas como equipos de frío defectuosos, falta de trampas modernas, mala rotación FIFO, falta de capacitación en BPM, infraestructura vulnerable y registros inexactos"><figcaption>Ishikawa del G4 para Metro.</figcaption></figure>
+<div class="tabla"><table>
+<thead><tr><th>Cadena · M</th><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>A · Método</td><td>Vencidos y descompuestos en góndola</td><td>PEPS/FIFO no estandarizado ni verificado</td><td>Productos sin fecha (Comas)</td><td>Inocuidad; conformidad</td></tr>
+<tr><td>A · Medio ambiente/Máquina</td><td>Roedores en embutidos</td><td>Vitrinas sin cierre anti-plagas; desagües sin rejillas</td><td>Video TikTok, clausura</td><td>Seguridad del cliente</td></tr>
+<tr><td>A · Medición</td><td>Detección tardía</td><td>Sin auditoría inopinada ni bitácoras fiables</td><td>La detectó un cliente</td><td>Capacidad de control</td></tr>
+<tr><td>B · Medio ambiente</td><td>Moho, filtraciones, cisternas contaminadas</td><td>Infraestructura sin mantenimiento preventivo (decisión de inversión)</td><td>San Isidro 2025</td><td>Inocuidad</td></tr>
+<tr><td>B · Alianzas (EFQM)</td><td>Plagas persistentes</td><td>Fumigadora tercerizada contratada por actividad, no por resultado</td><td>Excretas en SJL</td><td>Fiabilidad del proveedor</td></tr>
+<tr><td>B · Método</td><td>Limpieza distinta por tienda</td><td>Sin estándar corporativo ni comparación entre unidades</td><td>6 sedes en 10 meses</td><td>Consistencia</td></tr>
+<tr><td>B · Material</td><td>Aceite tóxico; reuso de pollo</td><td>Sin control de vida útil del aceite ni de reprocesos</td><td>SJL 2024, Pueblo Libre 2020</td><td>Inocuidad</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Deming/PHVA (principal) — enfoque G7 y G4-Metro</h4>
+<ul>
+<li><b>P</b>: protocolo de MIP (Manejo Integrado de Plagas) con fumigación <b>preventiva</b> programada, sellado de vitrinas y desagües, considerando lluvias e infraestructura; meta: 0 hallazgos críticos de la autoridad.</li>
+<li><b>H</b>: capacitación BPM por sección (embutidos, congelados, almacén); <i>checklists</i> firmados por turno, incluido el cierre; control digital de vencimientos con alertas.</li>
+<li><b>V</b>: auditorías internas inopinadas con registro digital; hoja de verificación + Pareto de hallazgos; "que lo detecte la empresa y no un cliente en TikTok".</li>
+<li><b>A</b>: estandarizar en todas las tiendas, homologar entre distritos y actualizar el protocolo.</li>
+</ul></div>
+<div class="alt"><h4>Alternativa B · EFQM (principal) — enfoque G4-Plaza Vea</h4>
+<ul>
+<li>Agentes facilitadores → resultados: la insalubridad es <b>consecuencia</b> de decisiones de Liderazgo (inversión en infraestructura), Alianzas y recursos (fumigadora sin rendición de cuentas), Personas (rotación, sin BPM) y Procesos (limpieza no estandarizada).</li>
+<li>Lógica RADAR/REDER: definir resultados (0 clausuras), enfoque (MIP corporativo), despliegue en 100 % de locales, evaluación y refinamiento con <b>comparación entre unidades</b> (ranking de tiendas).</li>
+<li>Contrato con la fumigadora por resultados (incidencias por local) y coordinación con cada municipalidad (matriz de requisitos por distrito).</li>
+</ul></div>
+<p><b>Por qué ambos son correctos:</b> en A el origen dominante es la <b>rutina diaria</b> (variabilidad operativa → Deming); en B el patrón multi-sede revela <b>decisiones de inversión y gestión de proveedores</b> (facilitadores → EFQM). G7 los combina: Deming como motor y EFQM como complemento, igual que la sinergia "macro + micro" de la diapositiva 36.</p>
+<p><b>4. CoPQ.</b> La detección por el cliente o la autoridad convierte el defecto en <b>costo de falla externa</b> (multas de 5 UIT, clausuras con días sin venta, daño reputacional viral), el más caro de la curva de la Sesión 1. Invertir en <b>prevención</b> (MIP, capacitación) y <b>evaluación</b> (auditoría inopinada) desplaza el costo hacia la izquierda: CoQ = CoGQ (prevención + evaluación) + CoPQ (fallas internas + externas).</p>
+<h4>Justificación normativa</h4>
+<p>[Complemento] Sector alimentos: sistema HACCP (Hazard Analysis and Critical Control Points – Análisis de Peligros y Puntos Críticos de Control) e ISO 22000 (gestión de inocuidad alimentaria); vigilancia sanitaria de DIGESA (Dirección General de Salud Ambiental). Plaza Vea obtuvo certificación HACCP para frescos en 2009 (G2): los incidentes muestran que la certificación no se <b>desplegó</b> a todas las sedes (falla de "Despliegue" en RADAR). ISO 9001:2015: 7.1.4 (ambiente para la operación), 8.4 (control de proveedores externos: fumigadora), 9.2 (auditoría interna), 10.2 (no conformidad y acción correctiva).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Incidencias de plagas por local/mes (meta: 0 críticas; tendencia decreciente 3 meses).</li>
+<li>Cumplimiento de checklist = checklists completos y firmados ÷ programados × 100 (meta ≥ 98 %).</li>
+<li>Vencidos detectados en góndola por 1 000 SKU revisados (meta ≤ 1).</li>
+<li>Índice de detección interna = hallazgos internos ÷ (hallazgos internos + hallazgos de la autoridad/clientes) × 100 (meta ≥ 95 %).</li>
+<li>Costo de falla externa = multas + ventas perdidas por clausura (S/ por trimestre; meta −90 % en un año).</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p><b>G4</b>: el mismo efecto con <b>dos modelos</b> — Metro → <b>Deming</b> (descuidos diarios) y Plaza Vea → <b>EFQM</b> (patrón multi-sede y tercerización), con descarte razonado de los otros modelos; debilidades: mezcla EFQM 2013 (agentes/resultados) y 2020 (Dirección-Ejecución-Resultados), sin KPI ni mejoras 6M, "locales deteriorados" ubicado en Máquinas. <b>G7</b>: el entregable mejor documentado (fechas, UIT, ordenanzas), matriz problema × 4 modelos, mejoras 6M completas y <b>Deming + EFQM complemento</b>; debilidad: eligió Deming en los cinco casos del trabajo. <b>G3, G5 y G6</b> no trataron este problema (G3 eligió disponibilidad y entrega).</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Llamar "error humano" a un patrón multi-sede. (2) Proponer fumigación <i>reactiva</i> (después del video). (3) Creer que una certificación HACCP garantiza inocuidad en todas las tiendas sin auditoría de despliegue. (4) Olvidar que es un caso de calidad de <b>servicio/producto</b> y no de SW: el vínculo con SW es el control digital de vencimientos y el tablero de hallazgos. (5) No hay respuesta única: Deming y EFQM son defendibles si la causa raíz elegida sostiene el modelo.</div>
+</details>
+</section>
+<section id="caso-12" class="caso">
+<h2>Caso 12 · EPS: liquidación de reembolsos, copagos no informados y opacidad tarifaria</h2>
+<p class="origen">Origen: Grupo 06 (Rímac EPS: liquidación de reembolsos y copagos) | Grupo 07 (Pacífico EPS: casos Dávila Cabrejos y Attilano Freyre) | Grupo 02 (Pacífico: reembolsos) | Grupo 04 (Rímac: cartas y reembolsos) | Rendimientos por área creados para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Las EPS (Entidades Prestadoras de Salud) administran planes complementarios a EsSalud, supervisadas por SUSALUD (Superintendencia Nacional de Salud). En una EPS líder, cada expediente de reembolso pasa <b>manualmente por 4 áreas</b> (Recepción → Auditoría médica → Liquidación → Tesorería). Los liquidadores aplican <b>criterios dispares</b>; el OCR (Optical Character Recognition – reconocimiento óptico de caracteres) de la app falla al leer boletas fotografiadas; el <i>core</i> asegurador corre en AS400 (deuda técnica); los tarifarios de reembolso están desactualizados; las facturas electrónicas XML SUNAT llegan con esquemas heterogéneos y sin desglose de ítems; y los expedientes con errores menores se <b>anulan</b> sin permitir subsanar. El <i>call center</i> no tiene facultades para resolver (G6).</p>
+<p>Casos documentados (G7, INDECOPI): (i) a un asegurado se le informó cobertura <b>100 %</b> en una clínica y la carta autorizó <b>80 %</b> (copago de 20 % no informado); (ii) con coaseguro de 15 %, la liquidación cobró <b>omeprazol a más de S/ 255</b> cuando el precio de mercado era &lt; S/ 10; la clínica se amparó en el convenio con la EPS; INDECOPI declaró fundada la denuncia y ordenó transparentar la lista de precios.</p>
+<p>Rendimiento a la primera (FTY, First Time Yield) medido por área en un mes: Recepción 90 %, Auditoría 85 %, Liquidación 92 %, Tesorería 88 %. Tiempo de ciclo medio: 19 días hábiles; SLA contractual: 10 días.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule el RTY (Rolled Throughput Yield) del proceso y explique qué revela.</li>
+<li>Identifique la deuda técnica y la asimetría de información como causas raíz (tabla 6M).</li>
+<li>Proponga dos alternativas de mejora con su modelo TQM.</li>
+<li>Evalúe la coherencia de G6 (Rímac → EFQM "por propósito de bienestar") frente a G2 (6σ DMAIC + Baldrige) y G7 (Deming + EFQM).</li>
+<li>KPI con fórmula y meta.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1. RTY</b> = 0,90 × 0,85 × 0,92 × 0,88 = <b>0,619</b>: solo el 61,9 % de los expedientes atraviesa las 4 áreas sin reproceso, aunque ninguna área baja de 85 %. La "fábrica oculta" de devoluciones explica el ciclo de 19 días. La mayor pérdida está en Auditoría (−ln 0,85 = 0,163 de DPU equivalente, 34 % del total −ln 0,619 = 0,479).</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>M</th><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión</th></tr></thead>
+<tbody>
+<tr><td>Mano de obra</td><td>Criterios dispares de liquidación</td><td>Sin reglas de pertinencia médica estandarizadas ni calibración entre auditores</td><td>FTY Auditoría 85 %</td><td>Fiabilidad (SERVQUAL)</td></tr>
+<tr><td>Máquina</td><td>OCR falla; <i>core</i> AS400</td><td>Deuda técnica: sin servicio de validación de comprobantes ni API moderna</td><td>FTY Recepción 90 %</td><td>Mantenibilidad, interoperabilidad (ISO/IEC 25010)</td></tr>
+<tr><td>Método</td><td>Anulación por errores menores; 4 áreas secuenciales</td><td>Proceso diseñado para "rechazar", no para "subsanar"</td><td>Ciclo 19 días vs SLA 10</td><td>Capacidad de respuesta</td></tr>
+<tr><td>Material</td><td>Tarifarios desactualizados; XML sin desglose</td><td>Sin catálogo homologado ni precios de referencia con IPRESS</td><td>Omeprazol S/ 255</td><td>Transparencia, deber de información</td></tr>
+<tr><td>Medición</td><td>Sin FCR ni embudo de abandono en la app</td><td>No hay KPI por etapa</td><td>Reclamos en SUSALUD/INDECOPI</td><td>Capacidad de control</td></tr>
+<tr><td>Medio ambiente</td><td>Copago no informado por la red</td><td>Asimetría de información clínica–EPS–asegurado</td><td>100 % → 80 %</td><td>Seguridad/confianza (SERVQUAL)</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · 6σ DMAIC (motor) + Baldrige (marco) — enfoque G2</h4>
+<ul>
+<li><b>D</b>: CTQ = reembolso correcto en ≤ 10 días; VOC: "quiero saber cuánto pagaré antes de atenderme".</li>
+<li><b>M</b>: FTY por área, tiempo por etapa, motivos de observación.</li>
+<li><b>A</b>: Pareto de motivos de observación; ANOVA del tiempo por liquidador (criterios dispares).</li>
+<li><b>I</b>: subsanación en línea (no anular); validación automática de XML SUNAT al recibir; reglas de pertinencia; paralelizar Auditoría y Liquidación para montos menores (aprobación automática ≤ S/ 300, idea de G4).</li>
+<li><b>C</b>: gráfico X̄-R del tiempo de ciclo; auditoría de calibración mensual.</li>
+<li>Baldrige categorías Clientes (3) y Operaciones (6) sostienen el foco en el afiliado.</li>
+</ul></div>
+<div class="alt"><h4>Alternativa B · EFQM (Alianzas/ecosistema) + Deming — enfoque G7</h4>
+<ul>
+<li>El caso Attilano Freyre es de <b>ecosistema</b>: el precio lo fija el convenio EPS–IPRESS (Instituciones Prestadoras de Servicios de Salud). EFQM 2020, criterio 3 (Implicar a los grupos de interés) y 4 (Crear valor sostenible): comités mixtos clínica–EPS, catálogo homologado con precios de referencia públicos, cláusulas de transparencia.</li>
+<li>Deming/PHVA como motor operativo para estandarizar criterios de auditoría (P homologación; H pre-aprobaciones; V tiempos y observaciones; A manual único).</li>
+<li>Simulador de copago en la app antes de la atención (elimina el "100 % → 80 %").</li>
+</ul></div>
+<h4>Justificación normativa</h4>
+<p>Ley 29571 (deber de información sobre condiciones y costos, idoneidad): las dos sanciones de INDECOPI provienen de <b>información</b>, no de medicina. ISO 9001:2015: 8.2.1 (comunicación con el cliente sobre condiciones), 8.4 (control de proveedores externos: IPRESS), 8.7 (salidas no conformes: subsanar en lugar de anular), 7.1.6 (conocimiento de la organización: criterios documentados). En SW: ISO/IEC 25010 (interoperabilidad, mantenibilidad del <i>core</i>); la deuda técnica del AS400 se gestiona como riesgo, no como "causa externa".</p>
+<p><b>Coherencia de G6:</b> elegir EFQM "por el propósito de prevención y bienestar" no se deriva de su propio Ishikawa (liquidación manual, OCR, AS400, tarifarios = causas <b>operativas</b>) → Deming/6σ son más coherentes; EFQM solo se sostiene si la causa raíz dominante es la relación con la red (caso omeprazol).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>RTY = Π FTY<sub>i</sub> (61,9 % → ≥ 85 %).</li>
+<li>% reembolsos dentro de SLA = reembolsos pagados ≤ 10 días ÷ total × 100 (meta ≥ 95 %).</li>
+<li>% expedientes anulados = anulados ÷ recibidos × 100 (meta ≤ 1 %; el resto se subsana).</li>
+<li>Discrepancia informado vs liquidado = |monto informado − monto liquidado| ÷ monto informado (meta ≤ 2 % en el 99 % de casos).</li>
+<li>FCR = casos resueltos en el primer contacto ÷ casos × 100 (meta ≥ 75 %).</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p><b>G6</b>: el Ishikawa más técnico (OCR, AS400, XML SUNAT, CIE-10, FCR, embudo de abandono), sin mejoras propuestas, modelo EFQM poco derivado de las causas. <b>G7</b>: 4 casos reales con fallos de INDECOPI, mejoras 6M (API en tiempo real, catálogos homologados, comités mixtos) y <b>Deming principal + EFQM soporte</b> (Alianzas y Ecosistemas). <b>G2</b>: Pacífico "demoras y baja trazabilidad", <b>6σ + Baldrige</b> con KPI (tiempo de ciclo, % observados, % dentro de SLA). <b>G4</b>: aprobación automática de montos menores y <b>Baldrige</b>. <b>G3</b> se centró en cartas de garantía (Caso 7), no en reembolsos.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Promediar los FTY (88,75 %) en lugar de multiplicarlos (61,9 %). (2) Tratar la deuda técnica como "Medio ambiente" (es interna: Máquina/Método). (3) Proponer "más liquidadores" sin estandarizar criterios. (4) Ignorar que el defecto que sanciona INDECOPI es de <b>información</b>; mejorar solo la velocidad no resuelve el copago no informado.</div>
+</details>
+</section>
+
+<section id="caso-13" class="caso">
+<h2>Caso 13 · Rímac: inconsistencia omnicanal y variabilidad del tiempo de resolución (boxplot)</h2>
+<p class="origen">Origen: Grupo 02 (Rímac: "inconsistencia de la experiencia de atención entre canales", Anexo C con datos simulados) | Preguntas estadísticas creadas para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Rímac Seguros (Grupo Breca; Memoria 2025: 3,43 M clientes, NPS (Net Promoter Score) 67, cuota 28,5 %; 68 % de interacciones por canales digitales y 550 mil usuarios de app en 2024) recibe quejas de que la respuesta "cambia según el canal o el asesor". El G2 presenta un boxplot (datos simulados) del tiempo de resolución en horas:</p>
+<div class="tabla"><table>
+<thead><tr><th>Canal</th><th>Q1</th><th>Mediana</th><th>Q3</th><th>Valores extremos</th></tr></thead>
+<tbody>
+<tr><td>App/web</td><td>≈ 2,5</td><td>3,8</td><td>≈ 5,0</td><td>rango 1–7,8</td></tr>
+<tr><td>Agencia presencial</td><td>6,0</td><td>8,3</td><td>10,1</td><td>punto aislado 19,6</td></tr>
+<tr><td>Call center</td><td>8,0</td><td>12,4</td><td>14,6</td><td>máx. 24,3; punto aislado 25,6</td></tr>
+<tr><td>WhatsApp (bot + asesor)</td><td>17,2</td><td>24,7</td><td>32,2</td><td>rango 1–50</td></tr>
+</tbody></table></div>
+<figure><img src="@img/s2-entregables/g2-p24.png" alt="Diagrama de cajas del Grupo 02 con el tiempo de resolución en horas por canal de atención de la EPS: app y web, call center, agencia presencial y WhatsApp, donde WhatsApp tiene la mediana y la dispersión más altas"><figcaption>Anexo C del G2 (datos simulados): tiempo de resolución por canal.</figcaption></figure>
+<p>Causas 6M del G2: respuestas distintas según asesor o canal; escalamiento lento; información no sincronizada entre CRM (Customer Relationship Management), app y web; autoservicio limitado para casos no estándar; guiones no homogéneos; transferencias repetidas; base de conocimiento dispersa; coberturas en lenguaje técnico.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule el IQR (rango intercuartílico) y las vallas de Tukey (Q3 + 1,5·IQR) de cada canal; confirme qué puntos son atípicos.</li>
+<li>Interprete: ¿el problema es de <b>nivel</b> (mediana) o de <b>variabilidad</b>? ¿Qué canal priorizar?</li>
+<li>Proponga dos alternativas y su modelo TQM.</li>
+<li>KPI y metas por canal.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> Agencia: IQR = 10,1 − 6,0 = 4,1 → valla = 10,1 + 6,15 = 16,25 h → 19,6 h <b>es atípico</b>. Call center: IQR = 6,6 → valla = 14,6 + 9,9 = 24,5 h → 24,3 h está dentro (bigote) y 25,6 h <b>es atípico</b>. WhatsApp: IQR = 15,0 → valla = 32,2 + 22,5 = 54,7 h → 50 h <b>no</b> es atípico: la dispersión es <b>estructural</b>, no un caso raro. App/web: IQR ≈ 2,5, sin atípicos.</p>
+<p><b>2.</b> Hay ambos problemas: WhatsApp tiene la mediana más alta (6,5 veces la de la app) <b>y</b> la mayor dispersión (IQR 3,6 veces el de la agencia). Para el cliente, la experiencia "inconsistente" es justamente la <b>variabilidad entre canales</b> (3,8 h vs 24,7 h por el mismo trámite). Prioridad: WhatsApp (canal en crecimiento, peor desempeño, transferencias bot→asesor sin SLA).</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Respuesta distinta según canal</td><td>Sin "vista única del cliente": CRM, app, web y red médica desincronizados (Máquina)</td><td>Quejas de inconsistencia</td><td>Fiabilidad (SERVQUAL); interoperabilidad (ISO/IEC 25010)</td></tr>
+<tr><td>Transferencias repetidas</td><td>Nadie es "dueño del caso" hasta el cierre (Método)</td><td>WhatsApp IQR 15 h</td><td>Capacidad de respuesta</td></tr>
+<tr><td>Guiones heterogéneos</td><td>Base de conocimiento dispersa y sin versionar (Material)</td><td>Respuestas distintas por asesor</td><td>Conformidad</td></tr>
+<tr><td>Escalamiento lento</td><td>Asesores de primera línea sin facultades ni árbol de derivación (Mano de obra)</td><td>Atípicos de 19,6 y 25,6 h</td><td>Empatía/seguridad</td></tr>
+<tr><td>Sin control por canal</td><td>No se mide FCR ni transferencias por motivo (Medición)</td><td>Solo NPS global</td><td>Capacidad de control</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Baldrige (marco) + Deming/PHVA (motor) — enfoque G2</h4>
+<ul>
+<li>Baldrige categoría 3 (Clientes: escuchar la voz del cliente por canal) y 6 (Operaciones: diseño del proceso de atención); 4 (Medición, análisis y gestión del conocimiento: base de conocimiento única).</li>
+<li>PHVA: P guiones únicos y SLA homogéneo por tipo de caso; H vista única del cliente y propiedad del caso; V FCR y transferencias por canal; A estandarizar y versionar la base de conocimiento.</li>
+</ul></div>
+<div class="alt"><h4>Alternativa B · 6σ DMAIC sobre la variabilidad de WhatsApp</h4>
+<ul>
+<li>CTQ = tiempo de resolución ≤ 8 h en el 90 % de los casos; métrica principal = <b>σ</b> y p90 del tiempo, no solo la media.</li>
+<li>A: estratificar por motivo y por "n.º de transferencias"; prueba de Kruskal-Wallis entre canales (datos sesgados, no normales).</li>
+<li>I: <i>handoff</i> bot→asesor con contexto (sin repetir datos), enrutamiento por habilidad, autoservicio para casos estándar.</li>
+<li>C: gráfico de control I-MR del p90 diario por canal.</li>
+</ul></div>
+<h4>Justificación normativa</h4>
+<p>ISO 9001:2015, 8.2.1 (comunicación con el cliente coherente), 8.5.1 (condiciones controladas: información documentada disponible para todos los canales), 9.1.2 (satisfacción del cliente) y 7.1.6 (conocimiento de la organización). [Complemento] ISO 10002 (tratamiento de quejas) para el flujo de reclamos. Baldrige es pertinente porque el efecto es de <b>experiencia del cliente y competitividad</b> (líder con 28,5 % de cuota); 6σ porque el defecto está <b>cuantificado</b> como variabilidad.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>FCR por canal = casos resueltos en el primer contacto ÷ casos × 100 (meta ≥ 70 % en todos).</li>
+<li>Transferencias por caso = transferencias ÷ casos (meta ≤ 1,2).</li>
+<li>p90 del tiempo de resolución por canal (WhatsApp: ≈ 40 h → ≤ 12 h).</li>
+<li>Brecha omnicanal = mediana máx. ÷ mediana mín. entre canales (24,7/3,8 = 6,5 → ≤ 2,0).</li>
+<li>NPS por canal (no solo global; meta: ningún canal &lt; 50).</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p>Solo el <b>G2</b> eligió este efecto para Rímac (los demás trataron cartas o reembolsos). Usó una <b>matriz de pertinencia 1–5</b> (Baldrige 5, 6σ 4, Deming 4) y recomendó <b>Baldrige + Deming</b> con KPI (FCR, transferencias, tiempo de cierre, NPS por canal). Fortaleza: único con evidencia gráfica de variabilidad. Debilidad: datos simulados y puntajes sin criterios de ponderación explícitos (ver Caso 15).</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Comparar canales solo por la media: con datos sesgados se usa mediana, IQR y percentiles. (2) Llamar "atípico" a todo valor alto sin calcular la valla (50 h en WhatsApp no lo es). (3) Presentar datos simulados como reales. (4) Resolver con "más asesores" sin vista única del cliente: aumenta la variabilidad entre asesores.</div>
+</details>
+</section>
+
+<section id="caso-14" class="caso">
+<h2>Caso 14 · D'Onofrio vs Artika: efecto estratégico, ¿Deming o Baldrige? ¿PNC o Iberoamericano?</h2>
+<p class="origen">Origen: Grupo 05 (antecedentes + Ishikawa + modelos) | Grupo 06 (solo cuadro de modelos) | Preguntas de coherencia creadas para el repaso</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p><b>D'Onofrio</b> (fundada en 1897 por Pietro D'Onofrio; hoy marca de Nestlé Perú) fue sancionada en 2011 con <b>400 UIT</b> por la promoción "Gracias Perú" (helados a S/ 1 sin la disponibilidad anunciada). Con Artika y Yámboly concentra ≈ 90 % del mercado (2023, dato que G5 advierte verificar). Ishikawa del G5 para el efecto <b>"pérdida de dominancia de mercado"</b>: dependencia de lineamientos transnacionales; rotación de heladeros; flota de frío envejecida; marcas regionales más baratas; costos premium estandarizados; <b>tiempos largos para lanzar sabores</b>; <b>métricas globales que enmascaran pérdidas por segmento</b>.</p>
+<p><b>Artika</b> (emprendimiento familiar de los hermanos Mejía, Quillabamba → Arequipa) tuvo que cambiar su nombre "Alaska" por registro previo de D'Onofrio; en 2016 una planta vinculada en Piura (con otra razón social) fue clausurada (sin licencia ni registro sanitario); en 2017 negó rumores de cierre (cumple DIGESA). Efecto (G5): <b>"dificultad de posicionamiento nacional"</b>: marketing reducido, gestión familiar, poca I+D (Investigación y Desarrollo), sin investigación de mercado, ROI (Return on Investment) comunicacional no medido.</p>
+<p>Elecciones: G5 y G6 → <b>D'Onofrio: Deming</b> ("manufactura masiva, cadena de frío") y <b>Artika: PNC/Iberoamericano</b> ("autoevaluación de una empresa regional").</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Clasifique cada efecto como operativo o estratégico.</li>
+<li>Evalúe la coherencia efecto ↔ modelo de G5/G6 y proponga la alternativa más defendible.</li>
+<li>Distinga PNC y Modelo Iberoamericano y diga qué criterio atiende la gobernanza de plantas con otra razón social.</li>
+<li>KPI de cuota y posicionamiento.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> Ambos efectos son <b>estratégicos/de mercado</b> (dominancia, posicionamiento), no de conformidad del producto. Las causas operativas (frío, maquinaria) son <b>subcausas</b>, no el efecto.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Empresa</th><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>D'Onofrio</td><td>Lanzamientos lentos</td><td>Decisión centralizada en lineamientos globales (Liderazgo/Estrategia)</td><td>Competidores más ágiles</td><td>Características (Garvin)</td></tr>
+<tr><td>D'Onofrio</td><td>Pérdidas ocultas por segmento</td><td>Métricas agregadas, sin segmentación (Medición)</td><td>"Exceso de confianza histórica"</td><td>Calidad percibida</td></tr>
+<tr><td>D'Onofrio</td><td>Promoción incumplida</td><td>Promesa comercial sin capacidad de suministro verificada</td><td>400 UIT (2011)</td><td>Conformidad con lo ofrecido</td></tr>
+<tr><td>Artika</td><td>Planta con otra razón social clausurada</td><td>Gobernanza débil sobre plantas/distribuidores</td><td>Piura 2016</td><td>Inocuidad; reputación</td></tr>
+<tr><td>Artika</td><td>Posicionamiento limitado</td><td>Sin investigación de mercado ni estrategia de comunicación medible</td><td>"Boca a boca"</td><td>Calidad percibida</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · D'Onofrio con Baldrige (Estrategia, Clientes, Medición)</h4>
+<p>Categoría 2 (Estrategia: tiempo de lanzamiento como objetivo estratégico), 3 (Clientes: segmentación por región y canal), 4 (Medición: tablero por segmento que evite el sesgo del promedio), 7.5 (Resultados financieros y de mercado: cuota por región). Deming queda como <b>motor complementario</b> para la cadena de frío (variabilidad de temperatura, gráfico X̄-R).</p></div>
+<div class="alt"><h4>Alternativa B · D'Onofrio con EFQM 2020 (Dirección + Transformación)</h4>
+<p>Criterio 1 (Propósito, visión y estrategia) y 5 (Gestionar el funcionamiento y la transformación: agilidad e innovación); grupos de interés = heladeros ambulantes, bodegueros (criterio 3). Útil si la causa raíz elegida es la cultura de "líder confiado".</p></div>
+<div class="alt"><h4>Para Artika · PNC (Modelo de Excelencia en la Gestión, alineado a Baldrige) con foco en Liderazgo/gobierno</h4>
+<p>Autoevaluación de madurez de una empresa peruana en crecimiento: Liderazgo y gobierno corporativo (control de plantas y licencias de terceros, ítem 1.2 de Baldrige: gobernanza y responsabilidad social), Clientes (investigación de mercado) y Resultados (7.4 liderazgo y gobierno: cumplimiento legal/sanitario). Si se prefiere el Modelo Iberoamericano, el criterio es "Recursos y asociados/alianzas" (control de terceros) y "Resultados de sociedad".</p></div>
+<h4>Justificación normativa</h4>
+<p>Diferencia clave (profesora, diap. del PNC): el <b>PNC peruano</b> (promovido por el CGC – Comité de Gestión de la Calidad, con el CDI – Centro de Desarrollo Industrial de la SNI – Sociedad Nacional de Industrias) usa el Modelo de Excelencia en la Gestión <b>alineado a Baldrige</b> (7 criterios); el <b>Modelo Iberoamericano</b> lo administra FUNDIBEQ (Fundación Iberoamericana para la Gestión de la Calidad) y toma su estructura de procesos facilitadores + resultados del EFQM. G5 y G6 los fusionaron. La gobernanza de plantas también se ancla en ISO 9001:2015, 8.4 (procesos contratados externamente).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Cuota de mercado por región = ventas de la marca en la región ÷ ventas totales de la categoría × 100 (meta D'Onofrio: no caer &gt; 1 pp/año en ninguna región).</li>
+<li><i>Time-to-market</i> de nuevos sabores = t(lanzamiento) − t(aprobación del concepto) (meta ≤ 4 meses).</li>
+<li>Recordación de marca no asistida (<i>top of mind</i>) en provincias (Artika: +10 pp en 2 años).</li>
+<li>% plantas/distribuidores auditados con licencia y registro sanitario vigente (meta 100 %).</li>
+<li>ROI comunicacional = (margen incremental atribuido − inversión) ÷ inversión.</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p><b>G5</b>: antecedentes completos, Ishikawa con formato causa principal + 2 subcausas, buena higiene de fuentes (advierte verificar el 90 % con Euromonitor); eligió <b>Deming</b> para un efecto estratégico (incoherencia) y justificó <b>PNC</b> para Artika con la clausura sanitaria cuando el efecto era el posicionamiento. <b>G6</b>: solo el cuadro de 4 modelos (sin antecedentes ni Ishikawa de heladerías) con las <b>mismas elecciones</b> → posible fuente común. <b>G3</b> no trató esta pareja.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Elegir Deming "porque es manufactura" cuando el efecto es de mercado: el modelo se elige por la causa raíz del <b>efecto</b>, no por el sector. (2) Confundir PNC (Baldrige) con Iberoamericano (EFQM/FUNDIBEQ). (3) Justificar con un hecho (clausura) que no está en el Ishikawa del efecto elegido. (4) Sí puede defenderse Deming si el efecto se reformula como "variabilidad de la cadena de frío que deteriora el producto": cambiar el encuadre cambia el modelo.</div>
+</details>
+</section>
+
+<section id="caso-15" class="caso">
+<h2>Caso 15 · Meta-caso: selección ponderada del modelo TQM (incluye Metro y la multa por discriminación)</h2>
+<p class="origen">Origen: Grupo 02 (matriz de pertinencia 1–5) | Grupo 05 (Metro: multa de S/ 555 000 por discriminación, 2013) | Todos los grupos (sección "Modelos") | Diapositiva 36 (sinergia PNC macro + Six Sigma micro) | Ponderaciones creadas para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Un comité de calidad debe recomendar un modelo para el problema <b>"variabilidad en el tiempo de emisión de cartas de garantía"</b> de una EPS. Usa cinco criterios con pesos: C1 origen interno de la causa (0,30), C2 impacto en el cliente (0,25), C3 disponibilidad de datos (0,20), C4 alcance a grupos de interés/aliados (0,15), C5 horizonte estratégico (0,10). Puntajes (1–5):</p>
+<div class="tabla"><table>
+<thead><tr><th>Modelo</th><th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>C5</th></tr></thead>
+<tbody>
+<tr><td>Deming (PHVA)</td><td>5</td><td>3</td><td>4</td><td>2</td><td>2</td></tr>
+<tr><td>Six Sigma (DMAIC)</td><td>5</td><td>3</td><td>5</td><td>2</td><td>2</td></tr>
+<tr><td>Baldrige (MBNQA)</td><td>3</td><td>5</td><td>4</td><td>3</td><td>5</td></tr>
+<tr><td>EFQM 2020</td><td>2</td><td>4</td><td>3</td><td>5</td><td>4</td></tr>
+<tr><td>PNC</td><td>3</td><td>4</td><td>3</td><td>3</td><td>4</td></tr>
+</tbody></table></div>
+<p>Además, se analizan otras situaciones: (b) Metro es multada con S/ 555 000 por impedir el ingreso de menores con habilidades diferentes; (c) una red de supermercados con fumigadoras y municipalidades distintas por distrito; (d) una empresa regional peruana que necesita un autodiagnóstico de madurez.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule el puntaje ponderado de cada modelo y el ganador.</li>
+<li>Análisis de sensibilidad: si C3 sube a 0,30 y C2 baja a 0,15, ¿cambia el ganador? ¿Qué enseña esto?</li>
+<li>Asigne modelo principal, criterio/bloque y complemento a (b), (c) y (d).</li>
+<li>Identifique el error en: "EFQM no aplica porque no hay causa social" (G3), "Deming no aplica porque la falla es de un tercero" (G3) y "el Iberoamericano es solo una adaptación del EFQM" (G4).</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> Deming = 0,30·5 + 0,25·3 + 0,20·4 + 0,15·2 + 0,10·2 = 1,50 + 0,75 + 0,80 + 0,30 + 0,20 = <b>3,55</b>. 6σ = 1,50 + 0,75 + 1,00 + 0,30 + 0,20 = <b>3,75</b>. Baldrige = 0,90 + 1,25 + 0,80 + 0,45 + 0,50 = <b>3,90</b> (ganador). EFQM = 0,60 + 1,00 + 0,60 + 0,75 + 0,40 = <b>3,35</b>. PNC = 0,90 + 1,00 + 0,60 + 0,45 + 0,40 = <b>3,35</b>.</p>
+<p><b>2.</b> Nuevos pesos (0,30; 0,15; 0,30; 0,15; 0,10): Deming = 1,50 + 0,45 + 1,20 + 0,30 + 0,20 = 3,65; 6σ = 1,50 + 0,45 + 1,50 + 0,30 + 0,20 = <b>3,95</b> (nuevo ganador); Baldrige = 0,90 + 0,75 + 1,20 + 0,45 + 0,50 = 3,80. El ganador <b>cambia con los pesos</b>: por eso los pesos deben justificarse explícitamente (debilidad del G2, que puntuó 1–5 sin criterios). Es la demostración numérica de que "en calidad la solución no es única".</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Situación</th><th>Causa raíz dominante</th><th>Modelo principal · criterio</th><th>Complemento</th><th>KPI ancla</th></tr></thead>
+<tbody>
+<tr><td>(a) Variabilidad de cartas</td><td>Proceso interno repetitivo con datos</td><td>Baldrige (Clientes, Operaciones) o 6σ (DMAIC) según pesos</td><td>El otro de la pareja</td><td>% cartas en SLA; p90</td></tr>
+<tr><td>(b) Discriminación en Metro</td><td>Cultura, ética y propósito (no variabilidad)</td><td>EFQM 2020 · criterio 2 (Cultura y liderazgo) y bloque Dirección; o Baldrige 1.2 (Gobernanza y responsabilidad social)</td><td>Ninguno técnico: 6σ/Deming no atacan valores</td><td>Reclamos por trato; percepción de inclusión</td></tr>
+<tr><td>(c) Red de aliados por distrito</td><td>Gestión de proveedores y grupos de interés</td><td>EFQM · criterio 3 (Implicar a los grupos de interés)</td><td>Deming (estandarizar entre locales)</td><td>Incidencias por local; % aliados con contrato por resultados</td></tr>
+<tr><td>(d) Autodiagnóstico regional</td><td>Madurez de gestión desconocida</td><td>PNC (Modelo de Excelencia en la Gestión, alineado a Baldrige)</td><td>6σ como motor técnico (diap. 36)</td><td>Puntaje de madurez /1 000</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Un modelo "macro" + un motor "micro"</h4>
+<p>Baldrige/PNC fija el mapa estratégico (liderazgo, clientes, resultados) y 6σ/Deming ejecuta la reducción de variabilidad. Es el patrón de la diapositiva 36 y del caso BCP (Caso 5); lo aplicaron G2 (6σ + Baldrige) y G7 (Deming + EFQM).</p></div>
+<div class="alt"><h4>Alternativa B · Un solo modelo con justificación por causa raíz</h4>
+<p>Elegir el modelo de mayor puntaje ponderado y documentar el descarte de los otros (lo hizo G4). Más simple de comunicar, pero arriesga dejar fuera el motor técnico o la visión estratégica.</p></div>
+<p><b>4. Errores conceptuales.</b> "No hay causa social" ignora que los reclamos masivos ante INDECOPI y SUSALUD son percepción de <b>grupos de interés</b> (EFQM criterio 6). "Deming no aplica a terceros" ignora el <b>punto 4 de los 14</b> (relación de largo plazo con un proveedor único, no comprar solo por precio): Deming sí abarca proveedores. "El Iberoamericano es solo adaptación del EFQM" es incompleto: FUNDIBEQ toma la estructura del EFQM pero incorpora elementos de Baldrige y de la realidad iberoamericana, y tiene versión para administración pública.</p>
+<h4>Justificación normativa</h4>
+<p>Diapositivas de la Semana 02: Deming = control estadístico y PHVA (JUSE, desde 1951); Baldrige = 7 criterios con 1 000 puntos y fuerte peso en resultados (NIST); EFQM 2020 = Dirección, Ejecución, Resultados con RADAR; PNC = modelo peruano alineado a Baldrige; 6σ = DMAIC y meta de 3,4 DPMO. Para la decisión ponderada, la técnica es una matriz de decisión multicriterio (base de un AHP – Analytic Hierarchy Process simplificado).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Del proceso de decisión: % de recomendaciones con pesos y descarte documentados (meta 100 %).</li>
+<li>Del caso (a): % cartas en SLA (meta ≥ 95 %), p90 del tiempo de emisión (meta ≤ 4 h en emergencias).</li>
+<li>Del caso (b): reclamos por trato discriminatorio por 100 000 visitas (meta 0) y % personal capacitado en inclusión (meta 100 %).</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p>Mismo problema EPS, cuatro respuestas: <b>Baldrige</b> (G3, G4, G6-Pacífico), <b>Deming</b> (G7), <b>6σ + Baldrige</b> (G2), <b>EFQM</b> (G6-Rímac, reembolsos). <b>G3</b> argumentó con la dependencia de 300+ clínicas y la fidelidad del cliente; <b>G7</b> con la variabilidad de criterios internos; <b>G2</b> con la medibilidad del proceso. <b>G5</b> usó la multa por discriminación para justificar EFQM en Metro, correcto para (b) pero no para su efecto (precios). Todas son defendibles si la cadena causa raíz → criterio → KPI es coherente.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Puntuar sin pesos ni criterios (subjetividad oculta). (2) Elegir el mismo modelo para todo (G7: Deming ×5) o descartar con absolutos (G3). (3) Proponer 6σ para un problema de valores éticos. (4) Creer que existe "el" modelo correcto: lo que se califica es la coherencia y la sensibilidad del razonamiento.</div>
+</details>
+</section>
+<section id="caso-16" class="caso">
+<h2>Caso 16 · SUNAT: DPMO, nivel sigma y FTY en la validación de declaraciones juradas</h2>
+<p class="origen">Origen: Web: <a href="https://elsmar.com/elsmarqualityforum/threads/how-to-calculate-the-sigma-level-of-a-process-and-relationship-of-dpmo.11661/">Elsmar Cove – cálculo de DPMO y nivel sigma</a> y <a href="https://www.qualitygurus.com/?p=3049">Quality Gurus</a> (adaptado al contexto peruano) | Caso nuevo</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>El servicio de validación de declaraciones juradas mensuales (estilo PDT/Declara Fácil de la SUNAT – Superintendencia Nacional de Aduanas y de Administración Tributaria) procesó <b>96 000</b> declaraciones en un mes. Cada declaración tiene <b>6 oportunidades de defecto</b> definidas como CTQ (Critical to Quality – crítico para la calidad): RUC (Registro Único de Contribuyentes) válido, periodo, base imponible, cálculo del IGV (Impuesto General a las Ventas), redondeo y constancia/firma. Se hallaron <b>2 150 defectos</b> distribuidos en <b>1 900 declaraciones defectuosas</b>. Un analista propone "contar los 20 campos del formulario como oportunidades" para el informe a la gerencia.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule DPU, DPO, DPMO y nivel σ (con desplazamiento de 1,5σ).</li>
+<li>Calcule el FTY real y el FTY estimado por Poisson (e<sup>−DPU</sup>); interprete la diferencia.</li>
+<li>¿Cuántos defectos como máximo se tolerarían para 4,5σ?</li>
+<li>Evalúe la propuesta del analista. Proponga dos estrategias DMAIC para llegar a 4,5σ.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> DPU (Defects Per Unit) = 2 150/96 000 = <b>0,0224</b>. Oportunidades = 96 000 × 6 = 576 000. DPO = 2 150/576 000 = <b>0,003733</b> → <b>DPMO = 3 733</b>. σ = Φ⁻¹(1 − 0,003733) + 1,5 = 2,675 + 1,5 ≈ <b>4,18σ</b>.</p>
+<p><b>2.</b> FTY real = (96 000 − 1 900)/96 000 = <b>98,02 %</b>. FTY Poisson = e<sup>−0,0224</sup> = <b>97,79 %</b>. El real es mayor porque los defectos se <b>concentran</b>: 1 900 declaraciones acumulan 2 150 defectos (al menos 250 tienen más de uno). Poisson supone defectos independientes; la concentración sugiere una causa común (p. ej., un tipo de contribuyente o un software contable que arrastra errores de cálculo y redondeo a la vez).</p>
+<p><b>3.</b> 4,5σ ↔ 1 350 DPMO → defectos máx. = 1 350 × 576 000/10⁶ ≈ <b>777</b> (reducción de 64 %). Tabla de referencia (con 1,5σ): 3σ = 66 807; 3,5σ = 22 750; 4σ = 6 210; 4,5σ = 1 350; 5σ = 233; 6σ = 3,4 DPMO.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión</th></tr></thead>
+<tbody>
+<tr><td>Defectos concentrados en pocas declaraciones</td><td>Fuente común (software contable de terceros, regla de redondeo mal implementada)</td><td>FTY real &gt; FTY Poisson</td><td>Exactitud funcional (ISO/IEC 25010)</td></tr>
+<tr><td>Validación tardía (al recibir, no al llenar)</td><td>Formulario sin validación en el cliente</td><td>2 150 defectos llegan al servidor</td><td>Prevención de errores de usuario</td></tr>
+<tr><td>Manipulación del indicador</td><td>Oportunidades infladas con campos triviales</td><td>Propuesta del analista</td><td>Integridad de la medición</td></tr>
+</tbody></table></div>
+<p><b>4. Propuesta del analista:</b> con 20 oportunidades, DPMO = 2 150/(96 000 × 20) × 10⁶ ≈ 1 120 → ≈ 4,6σ "sin mejorar nada". Es un error ético y técnico: las oportunidades deben ser CTQ <b>independientes, verificables y relevantes para el cliente</b>, y deben mantenerse constantes para comparar en el tiempo.</p>
+<div class="alt"><h4>Alternativa A · DMAIC centrado en prevención (poka-yoke)</h4>
+<p>D: CTQ = declaración sin defectos en los 6 CTQ. M: DPMO por CTQ y por canal de envío. A: Pareto por CTQ y estratificación por software de origen; prueba χ². I: validaciones en el formulario (RUC con dígito verificador, IGV recalculado, redondeo único), API de validación para software de terceros. C: gráfico u (defectos por unidad) diario.</p></div>
+<div class="alt"><h4>Alternativa B · DMAIC centrado en la fuente común</h4>
+<p>Identificar las 250 declaraciones multi-defecto, rastrear su software de origen y homologar a los proveedores (requisito de certificación del software contable). Menos cambio interno, más gestión de terceros (lógica de Deming, punto 4).</p></div>
+<h4>Justificación normativa</h4>
+<p>Six Sigma (Motorola, 1986; DMAIC; meta 3,4 DPMO con desplazamiento de 1,5σ). ISO 9001:2015, 9.1.1 (métodos de seguimiento válidos) y 7.1.5 (recursos de medición adecuados): cambiar la definición de oportunidad invalida la comparación. ISO 13053-1 [Complemento] define la metodología DMAIC y sus métricas.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>DPMO = defectos ÷ (declaraciones × 6) × 10⁶ (3 733 → ≤ 1 350).</li>
+<li>FTY = declaraciones sin defecto ÷ declaraciones × 100 (98,02 % → ≥ 99,3 %).</li>
+<li>% defectos detectados en el cliente (antes de enviar) (meta ≥ 80 %).</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Usar defectuosas (1 900) en vez de defectos (2 150) para el DPMO. (2) Olvidar sumar 1,5σ o sumarlo dos veces. (3) Inflar oportunidades. (4) Creer que 4,18σ es "malo" sin contexto: lo que importa es la tendencia y el costo de cada defecto (una declaración rechazada genera multa al contribuyente: CoPQ externo).</div>
+</details>
+</section>
+
+<section id="caso-17" class="caso">
+<h2>Caso 17 · Yape: RTY de un pipeline CI/CD y priorización con logaritmos</h2>
+<p class="origen">Origen: Web: <a href="https://www.isixsigma.com/metrics-methodology/six-sigma-software-metrics-part-4/">iSixSigma – Six Sigma Software Metrics, Part 4</a> (adaptado) | Caso nuevo</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>El <i>pipeline</i> CI/CD (Continuous Integration / Continuous Delivery) de la billetera Yape (BCP) tiene 5 etapas con FTY: <b>build 97 %</b>, <b>UT (Unit Tests) 92 %</b>, <b>SAST (Static Application Security Testing) 95 %</b>, <b>empaquetado 99 %</b>, <b>pruebas E2E (End-to-End) 90 %</b>. El jefe de QA (Quality Assurance) reporta a la gerencia "rendimiento promedio de 94,6 %, todas las etapas ≥ 90 %". Cada punto porcentual de mejora cuesta lo mismo en cualquier etapa.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule el RTY, el DPU total equivalente y el rendimiento normalizado Y<sub>norm</sub>, con su nivel σ.</li>
+<li>Critique el reporte del jefe de QA.</li>
+<li>¿Qué etapa atacar primero? Cuantifique el efecto de subir E2E a 97 %.</li>
+<li>Proponga dos alternativas (técnica y de proceso) y su KPI.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> RTY = 0,97 × 0,92 × 0,95 × 0,99 × 0,90 = <b>0,7554</b>. DPU total = −ln(0,7554) = <b>0,2805</b>. Y<sub>norm</sub> = 0,7554<sup>1/5</sup> = <b>0,9454</b> → σ ≈ Φ⁻¹(0,9454) + 1,5 ≈ <b>3,10σ</b> (el σ del RTY completo ≈ 2,19σ).</p>
+<p><b>2.</b> Promediar FTY (94,6 %) oculta la "fábrica oculta": solo el <b>75,5 %</b> de los <i>commits</i> pasa todo a la primera; 1 de cada 4 se reprocesa. Los rendimientos en serie se <b>multiplican</b>.</p>
+<p><b>3.</b> Aporte al DPU: E2E −ln 0,90 = 0,105 (<b>37,6 %</b>), UT −ln 0,92 = 0,083 (29,7 %), SAST 0,051 (18,3 %), build 0,030 (10,9 %), empaquetado 0,010 (3,6 %). Prioridad: <b>E2E</b>, luego UT (Pareto con logaritmos). Con E2E = 97 %: RTY = 0,97 × 0,92 × 0,95 × 0,99 × 0,97 = <b>0,8141</b> (+5,9 pp).</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Etapa</th><th>Problema</th><th>Causa raíz probable</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>E2E</td><td>10 % de fallos</td><td>Pruebas <i>flaky</i> (dependientes de datos/tiempos) y ambientes compartidos</td><td>Mayor DPU (37,6 %)</td><td>Fiabilidad (madurez)</td></tr>
+<tr><td>UT</td><td>8 % de fallos</td><td>Defectos introducidos tarde; sin revisión previa (técnicas estáticas)</td><td>29,7 % del DPU</td><td>Mantenibilidad (capacidad de ser probado)</td></tr>
+<tr><td>SAST</td><td>5 % de fallos</td><td>Vulnerabilidades detectadas al final, no en el IDE</td><td>18,3 %</td><td>Seguridad</td></tr>
+<tr><td>Medición</td><td>Indicador engañoso</td><td>Promedio aritmético de rendimientos en serie</td><td>94,6 % vs 75,5 %</td><td>—</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Técnica: estabilizar E2E</h4>
+<p>Cuarentena automática de pruebas <i>flaky</i> (re-ejecución y marcado), datos de prueba sintéticos aislados por ejecución, ambientes efímeros por rama (contenedores). Meta: FTY E2E ≥ 97 %.</p></div>
+<div class="alt"><h4>Alternativa B · Proceso: shift-left (Deming: "calidad en la fuente")</h4>
+<p>Linters y SAST en el IDE y en <i>pre-commit</i>; revisión de código obligatoria; TDD (Test-Driven Development) para módulos críticos. Reduce defectos que llegan a UT y SAST; coherente con el 3.er punto de Deming (no depender de la inspección masiva).</p></div>
+<h4>Justificación normativa</h4>
+<p>Six Sigma: RTY = Π FTY<sub>i</sub>, DPU = −ln RTY (aproximación Poisson). ISO/IEC 25010 (fiabilidad, seguridad, mantenibilidad). Deming punto 3 ("dejar de depender de la inspección masiva") justifica el <i>shift-left</i>. Se enlaza con S3 (técnicas estáticas: SonarQube, ESLint).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>RTY = Π FTY (75,5 % → ≥ 88 %).</li>
+<li>Tasa de pruebas <i>flaky</i> = pruebas con resultado inconsistente ÷ pruebas × 100 (meta ≤ 1 %).</li>
+<li>Lead time de cambio (DORA) = t(producción) − t(<i>commit</i>) (meta ≤ 1 día).</li>
+<li>Tasa de fallos de cambio (DORA) (meta ≤ 15 %).</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Promediar FTY. (2) Priorizar por "la etapa más importante" en vez de por aporte al DPU. (3) Subir FTY desactivando pruebas o umbrales (mejora falsa: el defecto se va a producción, CoPQ externo).</div>
+</details>
+</section>
+
+<section id="caso-18" class="caso">
+<h2>Caso 18 · Interbank: DMAIC con datos, prueba z de dos proporciones y gráfico p</h2>
+<p class="origen">Origen: Web: <a href="https://repository.li.mahidol.ac.th/handle/123456789/35965">Mahidol University – SDLC testing process using DMAIC</a> y <a href="https://www.emeraldinsight.com/insight/content/doi/10.1108/BPMJ-02-2017-0028/full/html">Karout &amp; Awasthi (2017), BPMJ</a> (adaptado) | Caso nuevo</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Interbank aplicó DMAIC a los errores de ejecución (<i>runtime</i>) detectados en pruebas de su app móvil:</p>
+<div class="tabla"><table>
+<thead><tr><th>Módulo</th><th>Ejecuciones (n)</th><th>Errores antes</th><th>Errores después</th></tr></thead>
+<tbody>
+<tr><td>Pagos</td><td>2 400</td><td>92</td><td>64</td></tr>
+<tr><td>Transferencias</td><td>1 800</td><td>51</td><td>24</td></tr>
+<tr><td>Reportes</td><td>1 200</td><td>66</td><td>46</td></tr>
+</tbody></table></div>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Redacte la fase Define (CTQ, VOC – Voice of the Customer, alcance, meta).</li>
+<li>Calcule tasa de error, DPMO y σ antes y después.</li>
+<li>¿La mejora es estadísticamente significativa? (z de dos proporciones, α = 0,05).</li>
+<li>Calcule límites 3σ de un gráfico p con p̄ "después" para cada n y detecte señales.</li>
+<li>Proponga el plan de Control con dos alternativas.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1. Define.</b> CTQ: % de ejecuciones sin error de <i>runtime</i>. VOC: "la app no debe colgarse al pagar". Alcance: pruebas de los 3 módulos en el ambiente QA. Meta: ≤ 2 %.</p>
+<p><b>2.</b> Antes: 209/5 400 = <b>3,87 %</b> (38 704 DPMO) → <b>3,27σ</b>. Después: 134/5 400 = <b>2,48 %</b> (24 815 DPMO) → <b>3,46σ</b>. Reducción relativa = 35,9 %. Por módulo después: Pagos 2,67 %, Transferencias 1,33 %, Reportes 3,83 %.</p>
+<p><b>3.</b> p̂ combinado = 343/10 800 = 0,03176; z = (0,03870 − 0,02481)/√(0,03176 × 0,96824 × 2/5 400) ≈ <b>4,12</b> &gt; 1,645 → mejora <b>significativa</b> (p ≈ 2×10⁻⁵).</p>
+<p><b>4.</b> p̄ = 0,02481; LC = p̄ ± 3√(p̄(1 − p̄)/n): n = 2 400 → [1,53 %; 3,43 %]; n = 1 800 → [1,38 %; 3,58 %]; n = 1 200 → [1,13 %; 3,83 %]. <b>Señales:</b> Reportes 3,833 % &gt; UCL 3,829 % (fuera de control por arriba, por muy poco) y Transferencias 1,33 % &lt; LCL 1,38 % (causa especial <b>favorable</b>). El proceso no es homogéneo: debe estratificarse por módulo.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz probable</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Reportes fuera de control</td><td>Consultas pesadas sin manejo de excepciones ni paginación</td><td>3,83 % &gt; UCL</td><td>Fiabilidad (tolerancia a fallos)</td></tr>
+<tr><td>Un único p̄ para módulos distintos</td><td>Mezcla de procesos con distinta capacidad</td><td>Señales en direcciones opuestas</td><td>Validez de la medición</td></tr>
+<tr><td>Meta 2 % no alcanzada</td><td>Mejora parcial (35,9 %)</td><td>2,48 % global</td><td>Madurez</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Control estadístico estratificado</h4>
+<p>Un gráfico p por módulo con su propio p̄; plan de reacción (si un punto sale de límites: congelar <i>merge</i> del módulo y abrir RCA – Root Cause Analysis); nuevo DMAIC para Reportes.</p></div>
+<div class="alt"><h4>Alternativa B · Estandarizar la práctica de Transferencias</h4>
+<p>Estudiar la causa especial favorable (programación defensiva, manejo de nulos, <i>timeouts</i> configurados) y convertirla en estándar de codificación y regla de análisis estático para los otros módulos; <i>quality gate</i> en CI con umbral de errores.</p></div>
+<h4>Justificación normativa</h4>
+<p>DMAIC (Six Sigma); gráfico p de Shewhart (fase Control; base del ciclo PHVA de Deming). ISO 9001:2015, 9.1.3 (análisis y evaluación con técnicas estadísticas) y 10.3 (mejora continua). ISO/IEC/IEEE 29119 [Complemento] para el proceso de pruebas.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Tasa de error por módulo = errores ÷ ejecuciones × 100 (meta ≤ 2 % en los tres).</li>
+<li>% de subgrupos dentro de límites de control (meta 100 % durante 8 semanas).</li>
+<li>Crash-free sessions en producción (meta ≥ 99,8 %).</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Ignorar la señal "por abajo": una causa especial favorable también se investiga. (2) Concluir mejora solo porque bajó el porcentaje, sin prueba de hipótesis. (3) Usar el mismo límite para n distintos. (4) Confundir límites de control (voz del proceso) con especificación (voz del cliente: 2 %).</div>
+</details>
+</section>
+<section id="caso-19" class="caso">
+<h2>Caso 19 · Billetera digital: Pareto por frecuencia vs Pareto ponderado por costo + PDCA</h2>
+<p class="origen">Origen: Creado para el repaso (método de Pareto ponderado de Juran; referencia: <a href="https://asq.org/quality-resources/pareto">ASQ – What is a Pareto chart</a>) | Caso nuevo</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Incidentes trimestrales de una billetera digital peruana (cantidad; costo unitario de atención y compensación en S/):</p>
+<div class="tabla"><table>
+<thead><tr><th>Categoría</th><th>Cantidad</th><th>Costo unitario (S/)</th></tr></thead>
+<tbody>
+<tr><td>Timeout de pasarela de pagos</td><td>412</td><td>35</td></tr>
+<tr><td>Error de OTP (One-Time Password)</td><td>287</td><td>12</td></tr>
+<tr><td>Saldo no actualizado por caché</td><td>198</td><td>80</td></tr>
+<tr><td>Caída de sesión</td><td>96</td><td>10</td></tr>
+<tr><td>Errores de UI (User Interface)/traducción</td><td>61</td><td>5</td></tr>
+<tr><td>Notificaciones push duplicadas</td><td>44</td><td>3</td></tr>
+<tr><td>Fallas de accesibilidad</td><td>27</td><td>40</td></tr>
+<tr><td>Otros</td><td>25</td><td>8</td></tr>
+</tbody></table></div>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Pareto por frecuencia con porcentajes acumulados.</li>
+<li>Pareto por costo.</li>
+<li>¿Cambian los "pocos vitales"? ¿Cuál debe usarse?</li>
+<li>Plan PDCA (PHVA) del primer ciclo con KPI.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1. Frecuencia</b> (total 1 150): Timeout 35,83 % (acum. 35,83 %); OTP 24,96 % (60,78 %); Saldo 17,22 % (78,00 %); Sesión 8,35 % (86,35 %); UI 5,30 % (91,65 %); Push 3,83 % (95,48 %); Accesibilidad 2,35 % (97,83 %); Otros 2,17 % (100 %). Tres de ocho categorías (37,5 %) explican el 78 %: aproximación al 80/20.</p>
+<p><b>2. Costo</b> (total S/ 36 381): Saldo 15 840 (43,54 %); Timeout 14 420 (acum. 83,18 %); OTP 3 444 (92,64 %); Accesibilidad 1 080 (95,61 %); Sesión 960 (98,25 %); UI 305; Otros 200; Push 132.</p>
+<p><b>3.</b> Sí: por costo, <b>Saldo</b> pasa al 1.er lugar y solo <b>dos</b> categorías explican el 83 %; OTP baja de prioridad; Accesibilidad sube (riesgo legal e inclusión). Debe usarse la métrica que representa el CTQ del negocio/cliente (aquí costo + riesgo), no solo la frecuencia.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz hipotética</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Saldo no actualizado</td><td>Invalidación de caché por tiempo (TTL) y no por evento (Método/Máquina)</td><td>43,54 % del costo</td><td>Exactitud funcional; integridad</td></tr>
+<tr><td>Timeout de pasarela</td><td>Sin <i>circuit breaker</i> ni reintentos idempotentes</td><td>35,83 % de la frecuencia</td><td>Disponibilidad, tolerancia a fallos</td></tr>
+<tr><td>Accesibilidad</td><td>Sin pruebas WCAG en la DoD (Definition of Done)</td><td>Costo unitario alto (S/ 40)</td><td>Usabilidad – accesibilidad</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · PDCA sobre "Saldo" (prioridad por costo)</h4>
+<ul>
+<li><b>P</b>: meta −60 % de incidentes de saldo en 8 semanas; hipótesis: invalidación tardía de caché (Ishikawa: Método/Máquina).</li>
+<li><b>D</b>: piloto con invalidación por evento para el 10 % de usuarios (<i>feature flag</i>).</li>
+<li><b>C</b>: comparar incidentes/10 000 transacciones contra grupo de control.</li>
+<li><b>A</b>: estandarizar, actualizar la DoD y pasar al siguiente ítem (Timeout).</li>
+</ul></div>
+<div class="alt"><h4>Alternativa B · Pareto ponderado por riesgo (costo × severidad)</h4>
+<p>Agregar un factor de severidad (impacto regulatorio SBS/INDECOPI, pérdida de confianza): Accesibilidad y Saldo suben aún más. Útil cuando el costo directo no captura el daño reputacional. Más completo, pero el factor de severidad debe acordarse con criterios explícitos.</p></div>
+<h4>Justificación normativa</h4>
+<p>Pareto es una de las 7QC (siete herramientas básicas de calidad de Ishikawa) vistas en la Semana 02; Juran lo formalizó como "pocos vitales, muchos triviales". PDCA/PHVA (Shewhart–Deming). ISO 9001:2015, 6.1 (acciones para abordar riesgos), 9.1.3 (análisis) y 10.3 (mejora continua).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Incidentes de saldo por 10 000 transacciones (meta −60 %).</li>
+<li>Costo de incidentes por trimestre (S/ 36 381 → ≤ S/ 18 000).</li>
+<li>MTTR (Mean Time To Repair) = Σ tiempos de resolución ÷ n.º incidentes (meta ≤ 30 min).</li>
+<li>% transacciones con saldo consistente (meta ≥ 99,99 %).</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Ordenar el Pareto sin "Otros" al final. (2) Usar solo frecuencia cuando el costo es muy heterogéneo. (3) Atacar varias causas a la vez en el mismo ciclo PDCA (no se sabe qué funcionó). (4) No hay un único Pareto correcto: depende del CTQ elegido.</div>
+</details>
+</section>
+
+<section id="caso-20" class="caso">
+<h2>Caso 20 · Plataforma tributaria: Ishikawa 6M con causas frontera + 5 porqués hasta el proceso</h2>
+<p class="origen">Origen: Creado para el repaso (adaptación SW de las 6M, coherente con el ejemplo SUM de la diapositiva de la Semana 02) | Caso nuevo</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>El <b>35 %</b> de las declaraciones enviadas el último día de vencimiento a una plataforma tributaria es rechazado o queda "en proceso" (error 504). Causas detectadas: (a) autoescalado configurado con umbral tardío (CPU 90 %); (b) no hay pruebas de carga con el pico real; (c) el formulario permite enviar sin validación previa; (d) catálogo de tasas desactualizado en la BD; (e) desarrolladores nuevos sin inducción en la regla de redondeo; (f) el monitoreo mide CPU pero no el tiempo de respuesta p95; (g) el cronograma concentra al 60 % de contribuyentes el mismo día; (h) librería PDF con fuga de memoria; (i) despliegue realizado el mismo día del pico; (j) contadores externos que suben archivos masivos por macros; (k) SLA del proveedor de nube sin penalidad; (l) definición ambigua de "declaración exitosa" en los reportes; (m) red del contribuyente inestable en provincias; (n) soporte sin <i>script</i> para el error 504.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Clasifique las 14 causas en las 6M y justifique los casos frontera.</li>
+<li>Aplique 5 porqués al efecto hasta llegar a una causa de <b>proceso</b>.</li>
+<li>Proponga dos alternativas de contramedidas y KPI.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> Método: (b), (c), (i). Máquina: (a), (h). Mano de obra: (e), (n), (j). Material (insumos, datos, componentes): (d), y (h) si la librería se considera insumo (frontera: justificar). Medición: (f), (l). Medio ambiente: (g), (k), (m).</p>
+<p><b>2. 5 porqués.</b> ¿Por qué rechazos? → timeouts 504. ¿Por qué? → pods saturados. ¿Por qué? → el autoescalado reacciona tarde. ¿Por qué? → umbral en CPU 90 % y sin métrica de latencia. ¿Por qué? → <b>no existe un NFR (Non-Functional Requirement) de capacidad ni prueba de carga en el SQAP</b> (Software Quality Assurance Plan). Causa raíz de proceso, no de máquina.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Saturación en el pico</td><td>Sin NFR de capacidad ni prueba de carga</td><td>35 % de rechazos</td><td>Eficiencia de desempeño – capacidad</td></tr>
+<tr><td>Demanda concentrada</td><td>Cronograma de vencimientos no escalonado</td><td>60 % el mismo día</td><td>— (Medio ambiente gestionable)</td></tr>
+<tr><td>Despliegue en el pico</td><td>Sin política de congelamiento</td><td>(i)</td><td>Fiabilidad</td></tr>
+<tr><td>Éxito mal medido</td><td>Definición ambigua en reportes</td><td>(l)</td><td>Validez de la medición</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Ingeniería de capacidad</h4>
+<p>NFR medible (p95 ≤ 2 s con 50 000 concurrentes), prueba de carga en el <i>pipeline</i>, autoescalado por latencia y longitud de cola, corrección de la fuga de memoria, congelamiento de despliegues 48 h antes del vencimiento.</p></div>
+<div class="alt"><h4>Alternativa B · Nivelación de la demanda</h4>
+<p>Cronograma escalonado por último dígito del RUC (ya usado por la SUNAT), validación en el cliente, envío asíncrono con constancia diferida y API para contadores masivos con cuota. Más barato; actúa sobre el Medio ambiente.</p></div>
+<h4>Justificación normativa</h4>
+<p>Ishikawa 6M (diapositivas 25–31). IEEE 730 (SQAP: debe incluir pruebas no funcionales) e ISO/IEC 25010 (eficiencia de desempeño – capacidad y comportamiento temporal). En TQM: DMAIC (fase Analizar = 5 porqués + Ishikawa).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>% declaraciones aceptadas en el día de vencimiento (65 % → ≥ 99,5 %).</li>
+<li>p95 de tiempo de respuesta en el pico (meta ≤ 2 s).</li>
+<li>Tasa de 5xx = respuestas 5xx ÷ respuestas × 100 (meta ≤ 0,1 %).</li>
+<li>% del volumen concentrado en el día de mayor carga (60 % → ≤ 25 %).</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Detener los porqués en "falta de servidores" (síntoma). (2) Poner el cronograma en "Método" sin advertir que es un factor externo para el SW (Medio ambiente) aunque sea gestionable por la entidad. (3) Clasificar ítems frontera sin justificar: en el examen se acepta la ubicación si se argumenta.</div>
+</details>
+</section>
+
+<section id="caso-21" class="caso">
+<h2>Caso 21 · Puntuación EFQM 2020 (1 000 puntos) con lógica RADAR vs EFQM 2013</h2>
+<p class="origen">Origen: Web: <a href="https://futurelearn.com/info/courses/efqm-foundation-online-certificate/0/steps/231443">FutureLearn – EFQM Foundation</a> y <a href="https://testeclass.unipi.gr/modules/document/file.php/ODE565/2024.eMBA.TQM.Lec03b.pdf">Univ. del Pireo – bandas RADAR</a> (adaptado) | Caso nuevo</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Un equipo evaluador puntuó a la <i>software factory</i> limeña "Andes Soft" con el Modelo EFQM 2020 (ponderaciones: C1 Propósito, visión y estrategia 100; C2 Cultura y liderazgo 100; C3 Implicar a los grupos de interés 100; C4 Crear valor sostenible 200; C5 Gestionar el funcionamiento y la transformación 100; C6 Percepción de los grupos de interés 200; C7 Rendimiento estratégico y operativo 200): C1 55 %, C2 60 %, C3 45 %, C4 50 %, C5 35 %, C6 40 %, C7 30 %.</p>
+<p>Con EFQM 2013 (5 agentes de 100 c/u; resultados en clientes 150, personas 100, sociedad 100, clave 150): Liderazgo 55, Estrategia 60, Personas 45, Alianzas y recursos 40, Procesos 50, Res. clientes 40, Res. personas 35, Res. sociedad 30, Res. clave 30 (%).</p>
+<p>Para C4, los evaluadores asignaron: Enfoque 70 %, Despliegue 45 %, Evaluación y refinamiento 30 %; un evaluador propone puntuar C4 con 70 %.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Puntaje total EFQM 2020 y por bloque (Dirección, Ejecución, Resultados).</li>
+<li>Puntaje EFQM 2013.</li>
+<li>¿Puede C4 puntuarse con 70 %? Explique con RADAR.</li>
+<li>Proponga acciones para subir C7 (dos alternativas).</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> 55 + 60 + 45 + 0,50·200 + 35 + 0,40·200 + 0,30·200 = 55 + 60 + 45 + 100 + 35 + 80 + 60 = <b>435/1 000</b>. Dirección (C1–C2) 115/200 = 57,5 %; Ejecución (C3–C5) 180/400 = 45 %; Resultados (C6–C7) 140/400 = 35 %. La organización "dice" más de lo que "hace" y "hace" más de lo que "logra".</p>
+<p><b>2.</b> Agentes: 55 + 60 + 45 + 40 + 50 = 250/500; Resultados: 0,40·150 + 0,35·100 + 0,30·100 + 0,30·150 = 60 + 35 + 30 + 45 = 170/500 → <b>420/1 000</b>.</p>
+<p><b>3.</b> No. En RADAR (Results, Approaches, Deploy, Assess and Refine – Resultados, Enfoque, Despliegue, Evaluación y Refinamiento) el puntaje del criterio integra los atributos con juicio del evaluador; no se toma el máximo. Con 70/45/30 el valor razonable es ≈ 45–50 % (promedio 48,3 %). Un buen enfoque sin despliegue ni medición no produce resultados: RADAR es un PDCA.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Brecha</th><th>Causa raíz</th><th>Evidencia</th><th>Bloque EFQM</th></tr></thead>
+<tbody>
+<tr><td>Resultados bajos (35 %)</td><td>KPI sin metas, sin tendencias ni comparaciones</td><td>C7 = 30 %</td><td>Resultados</td></tr>
+<tr><td>Transformación débil</td><td>Procesos no medidos; sin gestión del cambio</td><td>C5 = 35 %</td><td>Ejecución</td></tr>
+<tr><td>Despliegue incompleto</td><td>Enfoques en papel, no en todos los proyectos</td><td>C4: D = 45 %, E/R = 30 %</td><td>Ejecución</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Sistema de indicadores con atributos RADAR de resultados</h4>
+<p>Definir KPI estratégicos con metas y tendencia de ≥ 3 años, comparación con referentes (<i>benchmark</i>) y segmentación por línea de servicio; atributos: relevancia y utilidad (alcance, integridad, segmentación) y rendimiento (tendencias, objetivos, comparaciones, confianza).</p></div>
+<div class="alt"><h4>Alternativa B · Atacar primero la Ejecución (C5) con un modelo de madurez</h4>
+<p>Usar CMMI o ISO/IEC 33000 (Sesión 6) como motor para estandarizar y medir procesos; los resultados (C7) suben como consecuencia. Más lento, pero ataca la causa (facilitadores) y no solo la medición.</p></div>
+<h4>Justificación normativa</h4>
+<p>EFQM 2020 (European Foundation for Quality Management, Bruselas): 3 bloques, 7 criterios, 1 000 puntos (600 facilitadores / 400 resultados), lógica RADAR. EFQM 2013: 9 criterios (5 agentes + 4 resultados). Trampa: el puntaje de una versión no es comparable con el de la otra sin conversión.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Puntaje EFQM total (435 → ≥ 500 en 2 años, con mejora en los tres bloques).</li>
+<li>% de KPI estratégicos con meta, tendencia y benchmark (meta 100 %).</li>
+<li>% de proyectos con el enfoque desplegado y auditado (C4 Despliegue 45 % → ≥ 80 %).</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Multiplicar todos los porcentajes por 100 (C4, C6 y C7 valen 200). (2) Mezclar la estructura de 2013 (agentes/resultados) con la de 2020 (Dirección/Ejecución/Resultados), como el G4. (3) Puntuar con el atributo máximo. (4) Confundir RADAR (EFQM) con ADLI (Baldrige, Caso 22).</div>
+</details>
+</section>
+
+<section id="caso-22" class="caso">
+<h2>Caso 22 · Aseguradora que postula al PNC: puntuación Baldrige con ADLI/LeTCI y análisis de palanca</h2>
+<p class="origen">Origen: Web: <a href="https://www.nist.gov/baldrige/publications/baldrige-excellence-framework">NIST – Baldrige Excellence Framework</a> (adaptado; ponderaciones a verificar con el documento vigente) | Caso nuevo</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Una aseguradora peruana postula al PNC (alineado a Baldrige según la profesora). Puntos por categoría: Liderazgo 120, Estrategia 85, Clientes 85, Medición, análisis y gestión del conocimiento 90, Fuerza laboral 85, Operaciones 85; Resultados 450 = 7.1 Productos y procesos 120, 7.2 Clientes 80, 7.3 Fuerza laboral 80, 7.4 Liderazgo y gobierno 80, 7.5 Financieros, mercado y estrategia 90.</p>
+<p>Evaluación de procesos (ADLI: Approach, Deployment, Learning, Integration): Liderazgo 50 %, Estrategia 45 %, Clientes 55 %, Medición 40 %, Fuerza laboral 50 %, Operaciones 45 %. Resultados (LeTCI: Levels, Trends, Comparisons, Integration): 7.1 35 %, 7.2 40 %, 7.3 30 %, 7.4 50 %, 7.5 25 %.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Puntaje de procesos, de resultados y total.</li>
+<li>Calcule la "palanca" (puntos ganados por cada +10 %) y priorice.</li>
+<li>¿Por qué el Perfil Organizacional no suma puntos pero condiciona la evaluación?</li>
+<li>Diferencie ADLI/LeTCI de RADAR.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> Procesos: 60 + 38,25 + 46,75 + 36 + 42,5 + 38,25 = <b>261,75/550</b>. Resultados: 42 + 32 + 24 + 40 + 22,5 = <b>160,5/450</b>. Total = <b>422,25/1 000</b>.</p>
+<p><b>2.</b> Palanca = 10 % × puntos: Liderazgo 12; 7.1 Productos y procesos 12; 7.5 Financieros 9; Medición 9; el resto 8–8,5. Combinando palanca y brecha (7.5 está en 25 % y Medición en 40 %), priorizar <b>7.1, 7.5, Liderazgo y Medición</b>.</p>
+<p><b>3.</b> El Perfil Organizacional (entorno, relaciones, situación estratégica) da el contexto para juzgar qué resultados son relevantes; sin él no se puede valorar la Integración (la "I" de ADLI y LeTCI).</p>
+<p><b>4.</b> ADLI evalúa <b>procesos</b>; LeTCI evalúa <b>resultados</b> (Baldrige). RADAR (EFQM) usa una sola lógica para ambos. Los dos son ciclos tipo PDCA.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Brecha</th><th>Causa raíz</th><th>Evidencia</th><th>Categoría Baldrige</th></tr></thead>
+<tbody>
+<tr><td>Resultados financieros bajos</td><td>Estrategia sin despliegue a objetivos medibles</td><td>7.5 = 25 %; Estrategia 45 %</td><td>2 → 7.5</td></tr>
+<tr><td>Medición débil</td><td>Sin gestión del conocimiento ni datos integrados</td><td>Medición 40 %</td><td>4</td></tr>
+<tr><td>Resultados de fuerza laboral bajos</td><td>Procesos de personas no evaluados (L de ADLI)</td><td>7.3 = 30 %</td><td>5 → 7.3</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Priorizar por palanca × brecha</h4>
+<p>Plan anual sobre 7.1 y 7.5 (tablero de resultados con niveles, tendencias y comparaciones) + Liderazgo (despliegue de objetivos). Mayor ganancia de puntos por esfuerzo.</p></div>
+<div class="alt"><h4>Alternativa B · Priorizar la causa: Medición (categoría 4)</h4>
+<p>Sin datos confiables no se pueden demostrar tendencias ni comparaciones en ningún resultado (LeTCI). Invertir primero en la categoría 4 es la "cimentación" de Baldrige (el sistema de medición sostiene todo el marco).</p></div>
+<h4>Justificación normativa</h4>
+<p>MBNQA (Malcolm Baldrige National Quality Award, NIST, EE. UU., 1987): 7 categorías, 1 000 puntos, 450 en resultados. El PNC peruano usa el Modelo de Excelencia en la Gestión alineado a Baldrige.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Puntaje total (422 → ≥ 500 en dos ciclos de postulación).</li>
+<li>% de objetivos estratégicos con indicador, meta y responsable (meta 100 %).</li>
+<li>Puntaje 7.5 (25 % → ≥ 45 %).</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Sumar porcentajes sin ponderar. (2) Creer que el Perfil Organizacional otorga puntos. (3) Usar RADAR para Baldrige. (4) Confundir PNC con el Modelo Iberoamericano.</div>
+</details>
+</section>
+
+<section id="caso-23" class="caso">
+<h2>Caso 23 · SINEACE con el Modelo Iberoamericano: versión general vs administración pública</h2>
+<p class="origen">Origen: Web: <a href="https://dialnet.unirioja.es/descarga/articulo/2387814.pdf">Dialnet – criterios del Modelo Iberoamericano</a> y <a href="https://www.conacyt.gov.py/sites/default/files/upload_editores/u294/Modelo_Excelencia_en_la_Gesti%C3%B3n_Administraci%C3%B3n_P%C3%BAblica.pdf">CONACYT Paraguay – Modelo para AAPP</a> (adaptado) | Caso nuevo</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>El SINEACE (Sistema Nacional de Evaluación, Acreditación y Certificación de la Calidad Educativa) se autoevalúa con los mismos porcentajes en dos versiones del Modelo Iberoamericano de FUNDIBEQ: Liderazgo 60 %, Estrategia 50 %, Personas 45 %, Recursos/alianzas 55 %, Clientes/procesos 50 %, Res. clientes 40 %, Res. personas 45 %, Res. sociedad 35 %, Res. globales 50 %.</p>
+<p>Pesos versión general: Liderazgo 140, Política y estrategia 100, Desarrollo de las personas 140, Recursos y asociados 100, Clientes 120; Res. clientes 110, personas 90, sociedad 90, globales 110. Pesos AAPP (Administraciones Públicas): Liderazgo 120, Estrategia 120, Personas 110, Recursos/proveedores/alianzas 90, Procesos y clientes/ciudadanos 110; Res. ciudadanos 130, personas 90, sociedad 90, globales 140.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule ambos puntajes.</li>
+<li>¿Por qué cambian con iguales porcentajes? ¿Qué filosofía revela cada distribución?</li>
+<li>Contraste con EFQM 2020 y con el PNC; elija la versión para el SINEACE.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> General: procesos 84 + 50 + 63 + 55 + 60 = 312/600; resultados 44 + 40,5 + 31,5 + 55 = 171/400 → <b>483</b>. AAPP: procesos 72 + 60 + 49,5 + 49,5 + 55 = 286/550; resultados 52 + 40,5 + 31,5 + 70 = 194/450 → <b>480</b>.</p>
+<p><b>2.</b> La versión AAPP da más peso a resultados (45 % vs 40 %), en especial a ciudadanos (130) y globales (140): una entidad pública rinde cuentas por resultados a la ciudadanía. La general premia más a los facilitadores (Liderazgo y Personas 140).</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Brecha</th><th>Causa raíz</th><th>Evidencia</th><th>Criterio</th></tr></thead>
+<tbody>
+<tr><td>Resultados en sociedad bajos</td><td>Impacto de la acreditación no medido</td><td>35 %</td><td>Res. sociedad</td></tr>
+<tr><td>Resultados de ciudadanos bajos</td><td>Sin encuestas a instituciones evaluadas</td><td>40 %</td><td>Res. clientes/ciudadanos</td></tr>
+<tr><td>Personas</td><td>Evaluadores sin plan de desarrollo</td><td>45 %</td><td>Personas</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Versión AAPP</h4><p>Coherente con la naturaleza pública del SINEACE y con la rendición de cuentas; prioriza indicadores ciudadanos (tiempo de acreditación, satisfacción de universidades y colegios).</p></div>
+<div class="alt"><h4>Alternativa B · PNC (Baldrige) para comparabilidad nacional</h4><p>Permite compararse con otras organizaciones peruanas evaluadas con el Modelo de Excelencia en la Gestión; pierde los criterios específicos del sector público.</p></div>
+<h4>Justificación normativa</h4>
+<p>EFQM 2020 = 600 facilitadores / 400 resultados; el Iberoamericano deriva conceptualmente del EFQM (procesos facilitadores + resultados) con adaptación regional; el PNC peruano se alinea a Baldrige (450 en resultados). Trampa: fusionar Iberoamericano y PNC (G5, G6).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Tiempo medio de acreditación = Σ(t informe final − t solicitud) ÷ n.º procesos (meta −30 %).</li>
+<li>Satisfacción de instituciones evaluadas (escala 1–5; meta ≥ 4,2).</li>
+<li>Puntaje AAPP (480 → ≥ 550).</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Creer que con iguales porcentajes el total es igual. (2) Confundir FUNDIBEQ con el CGC peruano. (3) Comparar puntajes de modelos distintos como si fueran equivalentes.</div>
+</details>
+</section>
+
+<section id="caso-24" class="caso">
+<h2>Caso 24 · Plaza Vea delivery: capacidad de proceso Cp/Cpk de la entrega en franja y nivel sigma</h2>
+<p class="origen">Origen: Creado para el repaso (diapositiva 36: Six Sigma mide con nivel sigma, Cp/Cpk y mermas) | Caso nuevo</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Plaza Vea promete entregas en una <b>franja de 2 h</b>: la entrega es conforme si ocurre entre el minuto 0 (LSL, Lower Specification Limit) y el minuto 120 (USL, Upper Specification Limit) desde el inicio de la franja. Un muestreo de 400 pedidos (proceso estable, distribución aproximadamente normal) da <b>μ = 85 min</b> y <b>σ = 20 min</b>. La gerencia afirma: "el proceso es capaz porque la franja (120 min) es igual a 6σ".</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcule Cp y Cpk e interprete.</li>
+<li>Estime el % de entregas fuera de franja, el DPMO y el nivel σ.</li>
+<li>Evalúe la afirmación de la gerencia.</li>
+<li>Proponga dos alternativas para llegar a Cpk ≥ 1,33 y verifique numéricamente una de ellas.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<p><b>1.</b> Cp = (USL − LSL)/6σ = 120/120 = <b>1,00</b> (capacidad potencial justa). Cpk = mín[(USL − μ)/3σ; (μ − LSL)/3σ] = mín[35/60; 85/60] = <b>0,58</b>: el proceso está <b>descentrado</b> hacia el límite superior.</p>
+<p><b>2.</b> P(X &gt; 120) = P(Z &gt; 1,75) ≈ <b>4,01 %</b>; P(X &lt; 0) ≈ 0,001 %. DPMO ≈ <b>40 070</b> → nivel σ ≈ 1,75 + 1,5 = <b>3,25σ</b>.</p>
+<p><b>3.</b> La gerencia confunde <b>Cp</b> (dispersión vs ancho de especificación) con <b>Cpk</b> (considera el centrado). Si el proceso estuviera centrado (μ = 60), con σ = 20 el % fuera sería ≈ 0,27 % (2 700 DPMO); hoy es 15 veces peor por el descentrado.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Dimensión afectada</th></tr></thead>
+<tbody>
+<tr><td>Entregas tardías</td><td>Despacho programado tarde dentro de la franja (descentrado)</td><td>μ = 85 vs centro 60</td><td>Capacidad de respuesta; puntualidad</td></tr>
+<tr><td>Variabilidad alta</td><td>Rutas sin optimizar; <i>picking</i> en pasillos compartidos</td><td>σ = 20 min</td><td>Fiabilidad</td></tr>
+<tr><td>Indicador mal interpretado</td><td>Uso de Cp en lugar de Cpk</td><td>Afirmación gerencial</td><td>Validez de la medición</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Centrar el proceso (despacho anticipado)</h4>
+<p>Adelantar la salida 25 min (μ = 60) y reducir σ a 15 min con ruteo algorítmico: Cp = 120/90 = 1,33; Cpk = 60/45 = <b>1,33</b> ✔; fuera de franja ≈ 63 DPMO (Z = 4 a cada lado; ≈ 5,3σ con desplazamiento de 1,5σ).</p></div>
+<div class="alt"><h4>Alternativa B · Ampliar la especificación (franja de 3 h)</h4>
+<p>Con USL = 180 y μ = 85, σ = 20: Cpk = mín[95/60; 85/60] = 1,42. Cumple numéricamente, pero <b>empeora la propuesta de valor</b> al cliente: cambia la VOC en lugar de mejorar el proceso. Defendible solo si el cliente lo acepta (franjas económicas).</p></div>
+<h4>Justificación normativa</h4>
+<p>Six Sigma (DMAIC, fase Medir/Analizar: estudio de capacidad); umbrales convencionales Cpk ≥ 1,33 (capaz) y ≥ 1,67 (crítico). ISO 22514 [Complemento] (métodos estadísticos de capacidad). ISO 9001:2015, 8.2.3 (no comprometer franjas que el proceso no puede cumplir).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Cpk de entrega = mín[(USL − μ)/3σ; (μ − LSL)/3σ] (0,58 → ≥ 1,33).</li>
+<li>% entregas en franja (95,99 % → ≥ 99,9 %).</li>
+<li>OTIF ponderado (ver Caso 9) (meta ≥ 90 %).</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) Reportar Cp cuando el proceso está descentrado. (2) Calcular capacidad con un proceso fuera de control estadístico (primero estabilizar con gráfico X̄-R). (3) "Mejorar" ampliando la especificación sin consultar al cliente. (4) Hay varias rutas válidas (centrar, reducir σ, rediseñar la promesa): la elección depende del costo y de la VOC.</div>
+</details>
+</section>
+<!--FIN-->

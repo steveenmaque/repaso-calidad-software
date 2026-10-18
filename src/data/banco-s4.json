@@ -1,0 +1,815 @@
+{
+ "mcq": [
+  {
+   "id": "s4-m01",
+   "s": 4,
+   "q": "En una fintech limeña el Líder de SQA reporta al Líder de Desarrollo. A tres días del release de una billetera tipo Yape, el Líder de SQA detecta 3 defectos críticos abiertos, pero el Líder de Desarrollo ordena desplegar porque el KPI de time-to-market del trimestre está en riesgo. Según el SQAP visto en clase, ¿cuál es la falla de raíz y su corrección estructural?",
+   "o": [
+    "Falla de V&V: debe programarse una UAT con usuarios reales para que el PO decida si los defectos son aceptables.",
+    "Falla de SCM: el Administrador de Configuración debe congelar la línea base y decidir el pase a producción.",
+    "Falla de independencia: el Líder de SQA debe ser par del Líder de Desarrollo y escalar la NC a la Dirección.",
+    "Falla de QC: deben sumarse testers a la línea del Líder de Desarrollo para cerrar los defectos antes del release."
+   ],
+   "a": 2,
+   "exp": "Correcta: el organigrama de la diap. 5 pone al Líder de SQA/Calidad como PAR del Líder de Desarrollo, ambos bajo la Gerencia/Dirección, y la diap. 8 da al responsable de SQA la libertad de reportar anomalías y NC al siguiente o al nivel más alto. El problema es estructural: quien produce no puede subordinar a quien asegura. Distractores: sumar testers bajo Desarrollo refuerza QC pero mantiene la dependencia y el conflicto de intereses; el Adm. de Configuración controla versiones y cambios, no decide sobre calidad del release; la UAT es validación, no resuelve que haya 3 críticos abiertos ni la falta de independencia, y los criterios de salida tipo cero defectos críticos abiertos no son negociables por el PO."
+  },
+  {
+   "id": "s4-m02",
+   "s": 4,
+   "q": "Tras evaluar el proceso de análisis de requerimientos del sistema SUM-UNMSM, el Administrador SQA emite 5 recomendaciones de auditoría. Según la matriz de responsabilidades del SQAP de clase, ¿quién debe RESOLVER esas recomendaciones y por qué?",
+   "o": [
+    "El Administrador del Proyecto, porque SQA evalúa y reporta, mientras la gestión del proyecto corrige.",
+    "El Administrador SQA, porque quien detecta la no conformidad conoce mejor su causa raíz y su corrección.",
+    "El Administrador de Requerimientos, porque el proceso auditado le pertenece y él documenta el ERS.",
+    "El Administrador de Configuración, porque toda corrección requiere un cambio controlado en la línea base."
+   ],
+   "a": 0,
+   "exp": "Correcta: en la matriz de las diap. 15 y 16, la fila Resolver las recomendaciones de la auditoría lleva X solo en Admin Proyecto, y Evaluar/reportar el proceso de análisis de req. lleva X solo en Admin SQA: separación auditor/auditado. Distractores: si SQA resolviera lo que audita perdería objetividad; el Adm. de Requerimientos desarrolla y aprueba requerimientos junto con Admin Proyecto, pero no resuelve recomendaciones; el Adm. de Configuración tiene a su cargo los requerimientos de SCM, no la resolución de hallazgos."
+  },
+  {
+   "id": "s4-m03",
+   "s": 4,
+   "q": "Un analista del SQAP de una app de SUNAT clasifica, para la fase de Diseño, el análisis de trazabilidad de requisitos. Si debe responder según la matriz de V&V de la profesora y no según IEEE 1012, ¿cómo lo clasifica y qué actividad lo acompaña en la otra columna?",
+   "o": [
+    "Como validación del diseño, acompañada por la revisión de la especificación de requisitos como verificación.",
+    "Como verificación del diseño, acompañada por la auditoría de configuración del software como validación.",
+    "Como verificación del diseño, acompañada por el prototipado con el usuario final como actividad de validación.",
+    "Como validación del diseño, acompañada por la inspección de la arquitectura del software como verificación."
+   ],
+   "a": 3,
+   "exp": "Correcta: la matriz de la diap. 6 asigna a Diseño la inspección de la arquitectura como verificación y el análisis de trazabilidad de requisitos como validación. Distractores: IEEE 1012 trataría la trazabilidad como verificación, pero la pregunta pide la matriz de clase; el prototipado con el usuario es la validación de Requisitos; la revisión de la especificación es la verificación de Requisitos; la auditoría de configuración es la verificación de Producto, cuya validación es la UAT."
+  },
+  {
+   "id": "s4-m04",
+   "s": 4,
+   "q": "El SQAP de una app de delivery peruana reporta 420 pruebas E2E con Cypress, 90 de API y 60 unitarias; el pipeline tarda 95 minutos y falla de forma intermitente. ¿Qué decisión es coherente con la pirámide incluida en la sección de control del SQAP?",
+   "o": [
+    "Mantener la proporción, pues las E2E validan lo que ve el usuario y esa es la meta final de la calidad.",
+    "Elevar la cobertura exigida al 100 %, pues el problema de tiempos se origina en código no cubierto por pruebas.",
+    "Invertir la proporción: ampliar unitarias en la base y dejar E2E para los flujos críticos del negocio.",
+    "Reemplazar las E2E por análisis estático con SonarQube, ya que verifica el mismo comportamiento sin ejecutar."
+   ],
+   "a": 2,
+   "exp": "Correcta: la pirámide de la diap. 7 define la proporción ideal de pruebas automatizadas: muchas unitarias rápidas y económicas en la base, integración/API intermedias y pocas de UI costosas; AlfaShop limita Cypress a Login, Carrito y Pago. 420 E2E sobre 60 unitarias es el antipatrón del cono de helado. Distractores: mantener la proporción ignora el costo y la fragilidad de la UI; SonarQube es técnica estática y no sustituye pruebas dinámicas; subir la cobertura al 100 % no resuelve una proporción invertida ni los 95 minutos."
+  },
+  {
+   "id": "s4-m05",
+   "s": 4,
+   "q": "Último sprint de AlfaShop: 0 defectos críticos o bloqueantes abiertos, 100 % de E2E críticas en verde, regresión al 97,5 %, cobertura del back-end crítico 83 % y 6 defectos en 15 KLOC modificadas. Con los criterios del SQAP de AlfaShop, ¿se autoriza el pase a producción?",
+   "o": [
+    "No, porque la cobertura de 83 % está por debajo del 85 % que exige la DoD derivada del SQAP de AlfaShop.",
+    "No, porque la regresión de 97,5 % no alcanza la tasa de éxito mínima de 98 % fijada para el despliegue.",
+    "Sí, porque los defectos críticos están en cero y las E2E críticas pasan, que son los criterios bloqueantes.",
+    "No, porque la densidad de 0,4 defectos por KLOC supera el umbral de 0,3 que fija la sección de métricas."
+   ],
+   "a": 1,
+   "exp": "Correcta: la sección 5.2 de AlfaShop exige tres condiciones concurrentes: 0 críticos o bloqueantes, 100 % de E2E críticas y regresión no menor al 98 %; 97,5 % incumple. Distractores: no basta con dos de tres criterios; el 85 % de cobertura es de la DoD del ejemplo ágil, no de AlfaShop, que pide 80 % en componentes críticos del back-end, y 83 % cumple; la DD es 6/15 = 0,4 por KLOC, por debajo del umbral real de 0,5."
+  },
+  {
+   "id": "s4-m06",
+   "s": 4,
+   "q": "En AlfaShop se registraron 3 bugs bloqueantes resueltos en 2 h, 3,5 h y 7 h, y 9 defectos en 20 000 líneas modificadas. Con las métricas 7.1 del SQAP de AlfaShop, ¿qué diagnóstico es correcto?",
+   "o": [
+    "Cumple la densidad con 0,45 por KLOC y cumple el MTTR, porque dos de los tres bloqueantes bajan de 4 h.",
+    "Incumple la densidad con 0,45 por KLOC y cumple el MTTR, porque la mediana de 3,5 h está bajo 4 horas.",
+    "Incumple la densidad con 4,5 por KLOC e incumple el MTTR, porque un bloqueante superó las 4 horas fijadas.",
+    "Cumple la densidad con 0,45 por KLOC e incumple el MTTR, cuyo promedio de 4,17 h supera las 4 horas."
+   ],
+   "a": 3,
+   "exp": "Correcta: DD = 9 / 20 KLOC = 0,45 < 0,5 cumple; MTTR = (2 + 3,5 + 7) / 3 = 4,17 h > 4 h incumple. Distractores: el MTTR es una media, no una mediana ni un conteo de casos bajo el umbral; 4,5 por KLOC confunde la división por miles; un caso aislado sobre 4 h no define el MTTR, aunque sí merece análisis de causa."
+  },
+  {
+   "id": "s4-m07",
+   "s": 4,
+   "q": "Un grupo construye una matriz Pipeline DevOps contra la ISO/IEC/IEEE 12207:2017 y coloca el bloqueo de push directo a main y las feature branches en la columna Proceso técnico, bajo Gestión de la Configuración. ¿Cuál es la observación correcta?",
+   "o": [
+    "Es correcto, pues la norma de 2017 fusionó la Gestión de la Configuración con la Integración del software.",
+    "Es un error: la Gestión de la Configuración es un proceso habilitador organizacional ligado a infraestructura.",
+    "Es correcto, pues la Gestión de la Configuración se ejecuta en el pipeline y por eso integra los técnicos.",
+    "Es un error: la Gestión de la Configuración pertenece a los procesos de gestión técnica, no a los técnicos."
+   ],
+   "a": 3,
+   "exp": "Correcta: la Gestión de la Configuración es uno de los 8 procesos de gestión técnica, que la profesora llama Procesos de Gestión de Proyectos; es el error que cometió el G6. Distractores: ejecutarse en el pipeline no cambia la categoría; los habilitadores son modelo de ciclo de vida, infraestructura, cartera, RR.HH., calidad y conocimiento; la Integración es un proceso técnico distinto que ensambla componentes y configura CI."
+  },
+  {
+   "id": "s4-m08",
+   "s": 4,
+   "q": "En un banco peruano, un área corporativa define metas de calidad para todos los proyectos y audita el apego a estándares de la organización; a la vez, en el proyecto de la nueva banca móvil, un QA Lead define el enfoque de aseguramiento y verifica que el equipo siga procesos y estándares. ¿Cómo se clasifican en la ISO/IEC/IEEE 12207:2017?",
+   "o": [
+    "El área corporativa ejecuta Gestión del Modelo de Ciclo de Vida y el QA Lead ejecuta Evaluación y Control.",
+    "El área corporativa ejecuta Medición organizacional y el QA Lead ejecuta Verificación como proceso técnico.",
+    "El área corporativa ejecuta Gestión de la Calidad habilitadora y el QA Lead ejecuta Aseguramiento de la Calidad.",
+    "El área corporativa ejecuta Aseguramiento de la Calidad y el QA Lead ejecuta Gestión de la Calidad del proyecto."
+   ],
+   "a": 2,
+   "exp": "Correcta: Gestión de la Calidad es habilitadora organizacional, con actividades Establecimiento de metas corporativas y Auditoría de apego a estándares; Aseguramiento de la Calidad es de gestión de proyectos, con Estrategia de QA y Evaluación del seguimiento de procesos y estándares. Distractores: invertir los nombres es la confusión típica QM/QA; Medición y Verificación existen pero no describen esas tareas; Modelo de Ciclo de Vida define políticas de ciclos de vida y Evaluación y Control mide avance contra líneas base."
+  },
+  {
+   "id": "s4-m09",
+   "s": 4,
+   "q": "Un estudiante cuenta las viñetas de las diapositivas de categorías de la ISO/IEC/IEEE 12207:2017 y obtiene 28 procesos, pero la misma diapositiva afirma que son 30. ¿Qué explica la diferencia?",
+   "o": [
+    "Las viñetas omiten Adquisición y Suministro, que la norma cuenta aparte como procesos de contexto del sistema.",
+    "Dos viñetas agrupan dos procesos cada una: Infraestructura con Cartera y Análisis de Negocio con Necesidades.",
+    "Verificación y Validación se cuentan como cuatro procesos, ya que cada uno tiene versión estática y dinámica.",
+    "Medición e Información figuran en dos categorías a la vez, por lo que la norma los cuenta en cada grupo."
+   ],
+   "a": 1,
+   "exp": "Correcta: la viñeta Gestión de la Cartera de Proyectos lleva en inglés Infrastructure Management / Project Portfolio Management, y la de Necesidades de partes interesadas lleva Business or Mission Analysis / Stakeholder Needs: dos procesos por viñeta, así que 2 + 6 + 8 + 14 = 30. Distractores: V y V son un proceso cada uno; ningún proceso se cuenta en dos grupos; Adquisición y Suministro sí aparecen y los procesos de contexto del sistema eran de la versión 2008."
+  },
+  {
+   "id": "s4-m10",
+   "s": 4,
+   "q": "Las bases de un concurso público de 2026 exigen al postor cumplir la ISO/IEC 12207:2008 por ser la edición más reciente elaborada en conjunto por ISO, IEC e IEEE. ¿Qué corrección corresponde según la historia de la norma vista en clase?",
+   "o": [
+    "La edición conjunta es la tercera, de noviembre de 2017; la de febrero de 2008 fue la segunda edición.",
+    "La edición conjunta es la segunda, de febrero de 2008; la de 2017 fue una enmienda sin cambios de procesos.",
+    "La edición conjunta es la cuarta, de 2016; la versión NTP de INACAL es la que sustituyó a la de 2017.",
+    "La edición conjunta es la primera, de 1995; las ediciones de 2002 y 2004 la volvieron de ISO e IEC."
+   ],
+   "a": 0,
+   "exp": "Correcta: 1995 primera edición; 2002 y 2004 modificaciones; febrero de 2008 segunda edición; noviembre de 2017 tercera edición, trabajo conjunto de ISO, IEC e IEEE. Distractores: 2008 no era la edición conjunta referida por la profesora y 2017 no es enmienda; 2002 y 2004 son enmiendas a la de 1995; la NTP-ISO/IEC 12207:2016 de INACAL es una adopción nacional de la versión 2008, no una cuarta edición."
+  },
+  {
+   "id": "s4-m11",
+   "s": 4,
+   "q": "En la metodología OGTI del MEF, la OGTI terceriza con una firma desarrolladora el sistema que pidió un órgano usuario, y luego la firma entrega el código en GitLab corporativo. Para la ISO/IEC/IEEE 12207:2017, ¿qué rol cumple la OGTI en ese escenario?",
+   "o": [
+    "Supervisor técnico, porque verifica entregables sin ser parte del acuerdo de Adquisición alguno.",
+    "Proveedor y adquiriente, porque la norma fusiona Adquisición y Suministro cuando hay tercerización.",
+    "Adquiriente, porque contrata a la firma, define RFP y criterios, y acepta el producto entregado.",
+    "Proveedor, porque responde ante el órgano usuario por el sistema y por eso ejecuta Suministro."
+   ],
+   "a": 2,
+   "exp": "Correcta: en el escenario 2 descrito por el G3, la OGTI contrata a la firma y ejecuta Adquisición: prepara la adquisición, difunde la RFP o TDR, selecciona, establece el acuerdo, lo monitorea y acepta el producto. Distractores: OGTI es proveedor en el escenario 1, desarrollo interno con la OSI; el rol de supervisor y verificador técnico corresponde al escenario 3, cuando el órgano contrata directamente; la norma no fusiona procesos: Adquisición y Suministro son roles complementarios."
+  },
+  {
+   "id": "s4-m12",
+   "s": 4,
+   "q": "En la ficha del proceso Gestión de Riesgos de un SQAP para SINEACE, un alumno escribe: los riesgos se identifican y se tratan. Según los atributos de cada proceso de la ISO/IEC/IEEE 12207:2017, ¿qué atributo es esa frase?",
+   "o": [
+    "Una actividad, porque agrupa las tareas cohesivas de identificación y tratamiento del mismo proceso.",
+    "Una tarea, porque expresa una acción concreta que el responsable de riesgos debe ejecutar en el proyecto.",
+    "Una salida, porque expresa el resultado observable esperado de la ejecución exitosa del proceso.",
+    "Un propósito, porque define la meta general de ejecutar el proceso de gestión de riesgos en el proyecto."
+   ],
+   "a": 2,
+   "exp": "Correcta: la diap. 8 define Salidas, outcomes, como el resultado observable esperado de la ejecución exitosa; un outcome puede ser un estado, no un documento. Distractores: la tarea es un requerimiento, recomendación o acción, como detectar eventos inciertos técnicos o humanos; el propósito define las metas de ejecutar el proceso en términos generales; la actividad es un conjunto de tareas cohesivas, como Identificación o Tratamiento."
+  },
+  {
+   "id": "s4-m13",
+   "s": 4,
+   "q": "En EduTech, ante el riesgo de caídas del backend del banco, el equipo diseñó una cola de reintentos automatizada de fondo. ¿Cómo se clasifica ese tratamiento y qué riesgo secundario debe preverse?",
+   "o": [
+    "Aceptación, pues no elimina la caída del banco; riesgo secundario: saturación de la cola en horas pico.",
+    "Mitigación, pues reduce el impacto de la caída; riesgo secundario: cobros duplicados sin idempotencia.",
+    "Contingencia, pues se activa cuando el banco ya cayó; riesgo secundario: pérdida de logs del pipeline.",
+    "Transferencia, pues traslada el riesgo al banco vía SLA; riesgo secundario: penalidades del contrato."
+   ],
+   "a": 1,
+   "exp": "Correcta: en la 12207, Gestión de Riesgos tiene la actividad Tratamiento con planes de mitigación o contingencia; la cola es mitigación porque está diseñada de antemano y reduce el impacto. Un reintento ingenuo puede cobrar dos veces, de ahí las idempotency keys del G6. Distractores: la contingencia es el plan B que se activa al materializarse el riesgo; transferir sería trasladarlo a otro mediante contrato o seguro; aceptación implica no actuar, y aquí sí se diseñó un control."
+  },
+  {
+   "id": "s4-m14",
+   "s": 4,
+   "q": "Meses después del lanzamiento de la pasarela EduTech, Visa cambia sus políticas de seguridad y el equipo actualiza el sistema sin apagar la plataforma. ¿Qué proceso técnico y actividad del documento de clase aplican?",
+   "o": [
+    "Mantenimiento, actividad Evolución, porque es una adaptación al entorno cambiante sin un error reportado.",
+    "Operación, actividad Monitoreo, porque la actualización se detectó analizando telemetría y logs del sistema.",
+    "Mantenimiento, actividad Gestión de incidencias, porque corrige un error de seguridad hallado en producción.",
+    "Transición, actividad Despliegue, porque se pone en producción un artefacto nuevo con bajo impacto operativo."
+   ],
+   "a": 0,
+   "exp": "Correcta: el caso clasifica el hecho como Mantenimiento; dentro de él, la actividad Evolución incorpora mejoras menores o adaptaciones al entorno cambiante, lo que la ISO/IEC 14764 llamaría mantenimiento adaptativo. Distractores: Monitoreo analiza telemetría para la disponibilidad, no explica la actualización; Gestión de incidencias corrige errores reportados y aquí no hubo error; el despliegue del parche usa mecanismos de Transición, pero el proceso que lo origina es Mantenimiento."
+  },
+  {
+   "id": "s4-m15",
+   "s": 4,
+   "q": "Al final de cada sprint de 2 semanas, el QA Lead de AlfaShop revisa el tablero de Jira para verificar que ninguna historia se haya movido a Done sin cumplir los criterios de calidad. Integrando la distinción SQA y QC de la Sesión 1, ¿qué es esa actividad?",
+   "o": [
+    "QC, porque inspecciona historias ya terminadas para encontrar y corregir defectos del producto entregado.",
+    "QC, porque se realiza al final del sprint y por tanto es una actividad reactiva propia de la fase de pruebas.",
+    "SQA, porque la ejecuta un QA Lead y toda actividad realizada por el equipo de QA pertenece al aseguramiento.",
+    "SQA, porque es una auditoría de proceso que comprueba que el equipo sigue el proceso acordado en el plan."
+   ],
+   "a": 3,
+   "exp": "Correcta: la sección 4.2 de AlfaShop la llama auditoría de proceso: no busca defectos del código sino que el proceso definido se cumpla; eso es SQA, orientado al proceso y preventivo, coherente con el elemento 4 de la diap. 18. Distractores: QC detecta defectos en el producto mediante pruebas e inspecciones; el momento al final del sprint no la vuelve reactiva; clasificar por quién la ejecuta es un error, pues un QA Lead también puede hacer QC."
+  },
+  {
+   "id": "s4-m16",
+   "s": 4,
+   "q": "El SQAP de GMD fechado en 2026 evalúa el producto con las 6 características de ISO/IEC 9126. Integrando la Sesión 3 con el elemento 3 del SQAP de clase, ¿qué observación de auditoría corresponde?",
+   "o": [
+    "Debe mantener ISO/IEC 9126, porque IEEE 730 la exige como modelo de calidad y aún está plenamente vigente.",
+    "Debe usar ISO/IEC 25010, que reemplazó a 9126 y separa Seguridad y Compatibilidad como características.",
+    "Debe usar ISO 9001:2015, porque la calidad del producto se certifica junto con el sistema de gestión.",
+    "Debe usar ISO/IEC/IEEE 12207:2017, porque su proceso de Verificación fija ya las características de producto."
+   ],
+   "a": 1,
+   "exp": "Correcta: la diap. 18 pide IEEE 730 para el SQAP e ISO/IEC 25010 para calidad de producto; 25010 reemplazó a 9126 y en la versión 2011 tiene 8 características, incluyendo Seguridad y Compatibilidad, que 9126 no tenía como características propias. Distractores: ISO 9001 certifica el SGC, no el producto; la 12207 define procesos, no un modelo de calidad de producto; 9126 está reemplazada y IEEE 730 no la impone."
+  },
+  {
+   "id": "s4-m17",
+   "s": 4,
+   "q": "Una OU peruana quiere explicar su SQAP con el ciclo PHVA de Deming visto en la Sesión 2. ¿Qué correspondencia es la más defendible?",
+   "o": [
+    "P: definir el problema; H: medir la línea base; V: analizar las causas; A: implementar y controlar mejoras.",
+    "P: redactar el SQAP; H: ejecutar revisiones y pruebas; V: auditar y medir KPI; A: acciones correctivas.",
+    "P: auditar el proceso; H: redactar el SQAP; V: corregir las NC; A: medir cobertura y densidad de defectos.",
+    "P: ejecutar pruebas; H: redactar el SQAP; V: aprobar el plan por la gerencia; A: desplegar a producción."
+   ],
+   "a": 1,
+   "exp": "Correcta: planear es documentar objetivos, roles, estándares y métricas del SQAP; hacer es ejecutar revisiones, pruebas y SCM; verificar es auditar el proceso y medir métricas como cobertura, DD o MTTR; actuar es levantar NC con acciones correctivas y mejorar el plan. Distractores: el primero invierte el orden lógico; el tercero es DMAIC de Six Sigma disfrazado de PHVA; el cuarto pone la ejecución antes de la planificación y confunde Actuar con desplegar."
+  },
+  {
+   "id": "s4-m18",
+   "s": 4,
+   "q": "Al construir un Ishikawa 6M de la reincidencia de errores en GMD-AO, un alumno debe ubicar la causa: los ratios de la Tabla 7 premian valores altos aunque cuentan LOC errados sobre total. ¿En qué M corresponde y por qué?",
+   "o": [
+    "Medición, porque el defecto está en cómo se calcula e interpreta el indicador que guía las decisiones.",
+    "Método, porque la fórmula es parte del procedimiento de trabajo que siguen los analistas de calidad.",
+    "Material, porque los datos de entrada del indicador son los entregables con defectos del Analista Líder.",
+    "Mano de obra, porque quien definió la fórmula no tenía la capacitación suficiente en métricas de SW."
+   ],
+   "a": 0,
+   "exp": "Correcta: en el 6M visto en la Sesión 2, Medición agrupa causas ligadas a indicadores, instrumentos y su interpretación; un ratio de defectos donde más alto se considera bueno es un error de medición. Distractores: Método cubre procedimientos de trabajo, no el cálculo del indicador; Material son insumos como requisitos o entregables; Mano de obra sería falta de capacitación de las personas, pero la causa directa es la métrica invertida. Confundir Medición con Método es el error típico."
+  },
+  {
+   "id": "s4-m19",
+   "s": 4,
+   "q": "El diagnóstico del SQAP de GMD indica que solo se cumple cerca del 50 % de las prácticas de planificación y de monitoreo y control de proyectos. Integrando CMMI de la Sesión 3, ¿qué consecuencia es correcta para CMMI-DEV v1.3?",
+   "o": [
+    "Compromete el nivel 4 Cuantitativamente Gestionado, porque el control exige medición estadística del avance.",
+    "Compromete el nivel 3 Definido, porque planificación y control son áreas de estandarización organizacional.",
+    "No compromete ningún nivel, porque CMMI evalúa prácticas genéricas y no prácticas específicas por área.",
+    "Compromete el nivel 2 Gestionado, porque PP y PMC son áreas de proceso que ese nivel ya exige cumplir."
+   ],
+   "a": 3,
+   "exp": "Correcta: en CMMI-DEV v1.3, PP Project Planning y PMC Project Monitoring and Control son áreas de proceso del ML2 Gestionado; cumplir la mitad impide alcanzarlo. Distractores: el ML3 Definido se relaciona con estandarizar procesos organizacionales; el ML4 con gestión cuantitativa; CMMI evalúa prácticas específicas y genéricas, y en SCAMPI las específicas sí cuentan."
+  },
+  {
+   "id": "s4-m20",
+   "s": 4,
+   "q": "En el caso del G6, una prueba Supertest que lanza ráfagas concurrentes al endpoint de cargo falla al hallar dos transacciones con el mismo ID de orden y bloquea el pase a producción. Integrando la Ley de Boehm y la 12207, ¿cuál es la lectura correcta?",
+   "o": [
+    "Es Validación, porque reproduce el doble clic del usuario; su valor es demostrar la UX antes del UAT final.",
+    "Es Gestión de la Configuración, porque genera una rama hotfix; su valor es controlar los cambios de la versión.",
+    "Es Verificación técnica automatizada; su valor es detectar el defecto antes de producción, donde cuesta más.",
+    "Es Integración, porque ocurrió en esa etapa del pipeline; su valor es asegurar que los módulos compilen juntos."
+   ],
+   "a": 2,
+   "exp": "Correcta: probar el comportamiento del endpoint contra su especificación de idempotencia es Verificación, con pruebas técnicas automatizadas; detectarlo shift-left evita el costo de corregir en producción, que según Boehm puede llegar a ser hasta 100 veces mayor. Distractores: la Validación confirma que se construyó el producto correcto con el usuario, como la UAT; la etapa del pipeline no define el proceso 12207; la rama hotfix es la respuesta posterior en SCM, no la detección."
+  },
+  {
+   "id": "s4-m21",
+   "s": 4,
+   "q": "En un equipo Scrum de RENIEC, el QA define en el Sprint Review los criterios de aceptación de cada historia de usuario y revisa la Definition of Ready recién en la retrospectiva. Según el SQAP ágil de clase, ¿qué está mal ubicado?",
+   "o": [
+    "La DoR y la DoD se definen en la retrospectiva, porque allí se mejora el proceso de calidad del equipo.",
+    "Los criterios de aceptación y la DoR van en el Sprint Planning; en el Sprint Review se valida contra la DoD.",
+    "Los criterios de aceptación van en la Daily; la DoR se valida en el Sprint Review junto con el incremento.",
+    "Los criterios de aceptación van en el Sprint Review; la DoD debe revisarse en el Sprint Planning siguiente."
+   ],
+   "a": 1,
+   "exp": "Correcta: en el Ejemplo 1, en el Sprint Planning el QA colabora para definir los criterios de aceptación de cada HU y asegura una DoR clara; en el Sprint Review se valida que el incremento cumpla la DoD dictada por el SQAP; en la Daily se monitorean bloqueos. Distractores: la Daily no define criterios; la retrospectiva no aparece en el ejemplo y no es donde se fijan DoR ni DoD; dejar criterios para el Review impide construir con ellos."
+  },
+  {
+   "id": "s4-m22",
+   "s": 4,
+   "q": "El SQAP de AlfaShop excluye las pruebas de carga de los servidores de base de datos de respaldo porque los gestiona el proveedor de la nube. ¿Cuál es la lectura más rigurosa de esa exclusión?",
+   "o": [
+    "Es válida si se delimita y el riesgo se controla con un SLA y control del proveedor en el proceso de Acuerdo.",
+    "Es inválida, porque las pruebas de carga son QC y deben ejecutarse por el equipo propio antes de cada release.",
+    "Es válida y deja el riesgo cubierto, porque el proveedor de nube es responsable de toda la calidad del servicio.",
+    "Es inválida, porque un SQAP debe cubrir todo el sistema y la norma IEEE 730 no admite exclusiones de alcance."
+   ],
+   "a": 0,
+   "exp": "Correcta: la diap. 17 exige delimitar qué entra y qué queda fuera; pero lo excluido sigue siendo un riesgo, que se gestiona en la 12207 con Adquisición, con SLA y Monitoreo del acuerdo, e IEEE 730-2002 tenía la sección Control de proveedores. Distractores: externalizar no transfiere toda la responsabilidad; IEEE 730 y la clase sí admiten exclusiones explícitas; clasificar la prueba como QC no obliga a ejecutarla con personal propio."
+  },
+  {
+   "id": "s4-m23",
+   "s": 4,
+   "q": "Un consultor afirma que IEEE 730-2014 sigue siendo, como la edición de 2002, un estándar que fija las secciones obligatorias del documento SQAP. ¿Qué corrección es precisa?",
+   "o": [
+    "La de 2014 se centra en la calidad del producto final y deja los procesos de SQA a la norma IEEE 1012.",
+    "La de 2014 fusiona el SQAP con el plan de SCM, por lo que su contenido lo regula ahora la IEEE 828.",
+    "La de 2014 elimina el SQAP y lo sustituye por la ISO/IEC 25010 como modelo para planificar la calidad.",
+    "La de 2014 se centra en los procesos de SQA y trata el SQAP como resultado de ellos, alineada con la 12207."
+   ],
+   "a": 3,
+   "exp": "Correcta: la 730-2002 se titulaba Standard for Software Quality Assurance Plans y fijaba el contenido del plan; la 730-2014 se titula Software Quality Assurance Processes, organiza actividades de SQA y se alinea con el proceso de QA de la ISO/IEC/IEEE 12207, con el plan como producto. Distractores: 25010 es modelo de calidad de producto, no plan; IEEE 1012 es V&V; IEEE 828 es gestión de configuración y no absorbió el SQAP."
+  },
+  {
+   "id": "s4-m24",
+   "s": 4,
+   "q": "Un evaluador acreditado usa la ISO/IEC/IEEE 12207:2017 como modelo de referencia para valorar los procesos de una MYPE de software de Arequipa y proponerle mejoras. Según la diapositiva de destinatarios, ¿en qué grupo encaja?",
+   "o": [
+    "Un comprador o proveedor, que la usa para acordar los procesos y actividades que se vayan a manejar.",
+    "Un proyecto, que la usa para seleccionar infraestructura y los elementos del ciclo de vida establecido.",
+    "Asesores, que la usan para realizar evaluaciones que sirven de apoyo para mejorar los procesos.",
+    "Una organización de software, que la usa para ayudar a establecer un entorno de trabajo propio."
+   ],
+   "a": 2,
+   "exp": "Correcta: la diap. 6 lista cuatro destinatarios; los asesores la usan para realizar evaluaciones que sirvan de apoyo para mejorar los procesos, puente con ISO/IEC 15504 y 33000 de la Sesión 6, donde la 12207 actúa como PRM. Distractores: los otros tres son destinatarios reales pero con otra finalidad: un proyecto selecciona infraestructura y ciclo de vida, comprador o proveedor acuerda procesos, la organización establece su entorno de trabajo."
+  },
+  {
+   "id": "s4-m25",
+   "s": 4,
+   "q": "En el SQAP de una consultora de software para Rímac, ¿qué tarea distingue al Gerente Técnico del Jefe de Proyecto según los roles de SQA vistos en clase?",
+   "o": [
+    "Establecer un programa de calidad del proyecto de acuerdo con las políticas de la organización.",
+    "Identificar un grupo independiente para auditar las actividades de SQA, cuando resulte preciso hacerlo.",
+    "Identificar los participantes de las actividades de SQA y los factores de calidad del software a implementar.",
+    "Revisar y aprobar el plan de SQA del proyecto, y mantener la documentación del proyecto actualizada."
+   ],
+   "a": 1,
+   "exp": "Correcta: la diap. 9 asigna al Gerente Técnico identificar un grupo independiente para la auditoría de las actividades de SQA de ser preciso; además opera a nivel organizacional, para cada proyecto. Distractores: identificar participantes y factores de calidad es del Jefe de Proyecto; revisar y aprobar el plan lo hacen ambos y mantener la documentación es del Jefe de Proyecto; establecer un programa de calidad según políticas organizacionales lo hacen ambos, uno para cada proyecto y otro para el proyecto."
+  },
+  {
+   "id": "s4-m26",
+   "s": 4,
+   "q": "En el pipeline del SQAP ágil de clase: análisis estático, pruebas unitarias, revisión por pares y despliegue a QA con E2E. Integrando la clasificación de técnicas de la Sesión 3, ¿qué afirmación es correcta?",
+   "o": [
+    "Las etapas 2 y 4 son estáticas y las etapas 1 y 3 son dinámicas; la etapa 2 es la única manual del flujo.",
+    "Las etapas 1 y 2 son estáticas y las etapas 3 y 4 son dinámicas; la etapa 4 es la única manual del flujo.",
+    "Las etapas 1, 2 y 3 son estáticas y la 4 es dinámica; la etapa 1 es la única manual de todo el flujo.",
+    "Las etapas 1 y 3 son estáticas y las etapas 2 y 4 son dinámicas; la etapa 3 es la única manual del flujo."
+   ],
+   "a": 3,
+   "exp": "Correcta: SonarQube y la revisión por pares examinan código sin ejecutarlo, técnicas estáticas; unitarias y E2E ejecutan el software, técnicas dinámicas; el documento dice que en la revisión por pares un compañero aprueba manualmente el diseño del código. Distractores: las unitarias se ejecutan, no son estáticas; la etapa 4 se genera en entorno automático; SonarQube es automático."
+  },
+  {
+   "id": "s4-m27",
+   "s": 4,
+   "q": "EduTech pactó un SLA de disponibilidad del 99,9 % mensual. En un mes de 30 días la pasarela estuvo caída 52 minutos. ¿Qué diagnóstico y qué actividad de la 12207 corresponden?",
+   "o": [
+    "Cumple, pues el margen es de 8,76 horas al mes; actividad: Monitoreo de Operación con telemetría.",
+    "Cumple, pues 52 min equivale a 99,88 %, que redondea a 99,9 %; actividad: Aceptación del Producto.",
+    "Incumple, pues el margen es de 4,32 min al mes; actividad: Evaluación y Control del Proyecto.",
+    "Incumple, pues el margen es de 43,2 min al mes; actividad: Monitoreo del Acuerdo en Adquisición."
+   ],
+   "a": 3,
+   "exp": "Correcta: 0,1 % de 43 200 min = 43,2 min; 52 min lo excede y la disponibilidad real es 1 − 52/43 200 = 99,88 %. El adquiriente evalúa el cumplimiento en Monitoreo del Acuerdo. Distractores: redondear para cumplir un SLA es un error; 4,32 min corresponde a 99,99 %; 8,76 h es el margen anual de 99,9 %, no el mensual; la telemetría de Operación genera el dato, pero la evaluación contractual es del Acuerdo."
+  },
+  {
+   "id": "s4-m28",
+   "s": 4,
+   "q": "Tres actividades de un proyecto para Interbank: dividir el alcance en una WBS y un Product Backlog; medir el avance real contra la línea base cada semana; y comparar alternativas monolito o microservicios con criterios técnicos. ¿Qué procesos de gestión de proyectos de la 12207 son, en ese orden?",
+   "o": [
+    "Gestión del Modelo de Ciclo de Vida, Medición, Gestión de Decisiones técnicas.",
+    "Planificación del Proyecto, Medición, Definición de la Arquitectura del sistema.",
+    "Planificación del Proyecto, Evaluación y Control del Proyecto, Gestión de Decisiones.",
+    "Gestión de la Cartera, Evaluación y Control del Proyecto, Gestión de Riesgos."
+   ],
+   "a": 2,
+   "exp": "Correcta: Planificación del Proyecto tiene la actividad Definición, desglosar alcance y WBS; Evaluación y Control tiene Monitoreo, medir avance real contra líneas base; Gestión de Decisiones tiene Estrategia y Evaluación de alternativas técnicas. Distractores: Medición recoge y analiza datos pero comparar contra línea base y corregir es Evaluación y Control; Definición de la Arquitectura es técnico y produce la arquitectura, no la decisión entre alternativas; Cartera autoriza proyectos; Modelo de Ciclo de Vida define políticas de ciclos de vida."
+  }
+ ],
+ "fill": [
+  {
+   "id": "s4-f01",
+   "s": 4,
+   "t": "Un SQAP es un documento formal que describe los {{1}}, herramientas, {{2}} y {{3}} necesarios para garantizar que el producto cumpla los requisitos de calidad a lo largo de todo su ciclo de vida.",
+   "r": [
+    [
+     "métodos",
+     "metodos"
+    ],
+    [
+     "estándares",
+     "estandares"
+    ],
+    [
+     "responsabilidades"
+    ]
+   ],
+   "exp": "Definición destacada en la diap. 4: métodos, herramientas, estándares y responsabilidades."
+  },
+  {
+   "id": "s4-f02",
+   "s": 4,
+   "t": "La profesora define el SQA como un modelo {{1}} y {{2}} de todas las acciones necesarias para proveer la confianza adecuada de que cada producto e ítem cumple los requerimientos técnicos.",
+   "r": [
+    [
+     "sistemático",
+     "sistematico"
+    ],
+    [
+     "planeado",
+     "planificado"
+    ]
+   ],
+   "exp": "Diap. 2, en negrita; proviene de la definición clásica de IEEE 610.12-1990."
+  },
+  {
+   "id": "s4-f03",
+   "s": 4,
+   "t": "Un sinónimo de aseguramiento de la calidad del software es aseguramiento del {{1}}; el SQAP contiene una {{2}} de las actividades que se deben realizar.",
+   "r": [
+    [
+     "producto de software",
+     "producto de SW",
+     "producto"
+    ],
+    [
+     "lista de comprobación",
+     "lista de comprobacion",
+     "checklist",
+     "lista de chequeo"
+    ]
+   ],
+   "exp": "Diap. 2: el SQAP contiene una lista de comprobación y, por cada actividad, un plan de monitoreo."
+  },
+  {
+   "id": "s4-f04",
+   "s": 4,
+   "t": "La ISO/IEC 12207 se publicó por primera vez en {{1}}; la segunda edición salió en febrero de {{2}} y la tercera, conjunta ISO, IEC e IEEE, en noviembre de {{3}}.",
+   "r": [
+    [
+     "1995"
+    ],
+    [
+     "2008"
+    ],
+    [
+     "2017"
+    ]
+   ],
+   "exp": "Diap. 3 del mazo de 12207; las modificaciones de 2002 y 2004 fueron enmiendas a la primera edición."
+  },
+  {
+   "id": "s4-f05",
+   "s": 4,
+   "t": "La ISO/IEC/IEEE 12207:2017 organiza sus {{1}} procesos en {{2}} categorías; los procesos técnicos son {{3}}.",
+   "r": [
+    [
+     "30",
+     "treinta"
+    ],
+    [
+     "4",
+     "cuatro"
+    ],
+    [
+     "14",
+     "catorce"
+    ]
+   ],
+   "exp": "Reparto oficial 2 + 6 + 8 + 14 = 30."
+  },
+  {
+   "id": "s4-f06",
+   "s": 4,
+   "t": "La versión 2017 de la 12207 alinea la ingeniería de software con la ingeniería de sistemas al integrarse con la norma ISO/IEC {{1}}.",
+   "r": [
+    [
+     "15288",
+     "ISO/IEC 15288",
+     "ISO/IEC/IEEE 15288"
+    ]
+   ],
+   "exp": "Diap. 4: ambas comparten el mismo modelo de procesos del ciclo de vida."
+  },
+  {
+   "id": "s4-f07",
+   "s": 4,
+   "t": "Cada proceso de la 12207 tiene como atributos: Título, {{1}}, {{2}}, Actividades y {{3}}.",
+   "r": [
+    [
+     "Propósito",
+     "Proposito"
+    ],
+    [
+     "Salidas",
+     "Resultados",
+     "Outcomes"
+    ],
+    [
+     "Tareas"
+    ]
+   ],
+   "exp": "Diap. 8: las Salidas son resultados observables; las Tareas son requerimientos, recomendaciones o acciones."
+  },
+  {
+   "id": "s4-f08",
+   "s": 4,
+   "t": "En los procesos de Acuerdo, el proceso de {{1}} agrupa las actividades de la organización que adquiere, y el de {{2}} las de la organización que provee el producto o servicio.",
+   "r": [
+    [
+     "Adquisición",
+     "Adquisicion",
+     "Acquisition"
+    ],
+    [
+     "Suministro",
+     "Supply"
+    ]
+   ],
+   "exp": "Diap. 9. Son roles, no organizaciones fijas: la OGTI del MEF puede ser cualquiera de los dos."
+  },
+  {
+   "id": "s4-f09",
+   "s": 4,
+   "t": "En la matriz V&V de la profesora, la verificación responde a ¿Hacemos el producto {{1}}? y, en la fase Producto, la actividad de validación son las pruebas {{2}}.",
+   "r": [
+    [
+     "bien"
+    ],
+    [
+     "UAT",
+     "de aceptación del usuario",
+     "de aceptacion del usuario"
+    ]
+   ],
+   "exp": "Diap. 6: verificación es hacer el producto bien y validación hacer el producto correcto; en Producto, la verificación es la auditoría de configuración y la validación la UAT."
+  },
+  {
+   "id": "s4-f10",
+   "s": 4,
+   "t": "La pirámide de pruebas está incluida en la sección de {{1}} del SQAP; su base son las pruebas {{2}} y su cúspide las pruebas de {{3}}.",
+   "r": [
+    [
+     "control"
+    ],
+    [
+     "unitarias"
+    ],
+    [
+     "interfaz",
+     "UI",
+     "interfaz de usuario"
+    ]
+   ],
+   "exp": "Diap. 7: UI pocas y costosas, integración/API medianas, unitarias muchas, rápidas y económicas."
+  },
+  {
+   "id": "s4-f11",
+   "s": 4,
+   "t": "La DoD del SQAP ágil exige cobertura unitaria igual o superior al {{1}} %, SonarQube con Quality Gate {{2}} y pruebas de regresión con {{3}} % de éxito.",
+   "r": [
+    [
+     "85"
+    ],
+    [
+     "PASSED",
+     "aprobado"
+    ],
+    [
+     "100"
+    ]
+   ],
+   "exp": "Ejemplo 1 de la profesora; no confundir con AlfaShop, que pide 80 % de cobertura y regresión no menor al 98 %."
+  },
+  {
+   "id": "s4-f12",
+   "s": 4,
+   "t": "Para desplegar AlfaShop a producción se exigen {{1}} defectos críticos o bloqueantes abiertos, 100 % de E2E críticas en verde y regresión no menor al {{2}} %; los bloqueantes deben corregirse en menos de {{3}} horas.",
+   "r": [
+    [
+     "0",
+     "cero"
+    ],
+    [
+     "98"
+    ],
+    [
+     "4",
+     "cuatro"
+    ]
+   ],
+   "exp": "Secciones 5.2 y 7.1 del SQAP AlfaShop; el MTTR de bloqueantes es menor a 4 horas."
+  },
+  {
+   "id": "s4-f13",
+   "s": 4,
+   "t": "Los dos procesos de gestión de proyectos que la diapositiva lista pero el documento de 24 procesos de clase omite son Gestión de la {{1}} y {{2}}.",
+   "r": [
+    [
+     "Información",
+     "Informacion"
+    ],
+    [
+     "Medición",
+     "Medicion"
+    ]
+   ],
+   "exp": "El documento de clase tiene 6 de los 8 procesos de gestión técnica: faltan Información y Medición."
+  },
+  {
+   "id": "s4-f14",
+   "s": 4,
+   "t": "El responsable de SQA tiene la libertad de reportar anomalías y no conformidades al siguiente o al nivel {{1}} en la cadena de liderazgo; el Gerente Técnico identifica un grupo {{2}} para auditar las actividades de SQA.",
+   "r": [
+    [
+     "más alto",
+     "mas alto"
+    ],
+    [
+     "independiente"
+    ]
+   ],
+   "exp": "Diap. 8 y 9: principio de independencia y escalamiento del SQA."
+  },
+  {
+   "id": "s4-f15",
+   "s": 4,
+   "t": "En AlfaShop el control de versiones usa la estrategia {{1}} y los criterios de aceptación de cada historia se escriben en formato {{2}}.",
+   "r": [
+    [
+     "GitHub Flow"
+    ],
+    [
+     "Gherkin",
+     "Given-When-Then"
+    ]
+   ],
+   "exp": "Secciones 6.1 y 3.2 del SQAP AlfaShop."
+  },
+  {
+   "id": "s4-f16",
+   "s": 4,
+   "t": "En la cláusula oficial de la 12207:2017, el proceso de Transición va antes que el de {{1}}, y el último proceso técnico es la Retirada, en inglés {{2}}.",
+   "r": [
+    [
+     "Validación",
+     "Validacion"
+    ],
+    [
+     "Disposal"
+    ]
+   ],
+   "exp": "6.4.10 Transición y 6.4.11 Validación; 6.4.14 Disposal. Las diapositivas usan el orden práctico Verificación, Validación, Transición."
+  },
+  {
+   "id": "s4-f17",
+   "s": 4,
+   "t": "La IEEE 730-2002 se titulaba Standard for Software Quality Assurance {{1}}, mientras que la edición de 2014 se titula Software Quality Assurance {{2}}.",
+   "r": [
+    [
+     "Plans"
+    ],
+    [
+     "Processes"
+    ]
+   ],
+   "exp": "Cambio de enfoque: del contenido del plan al proceso de SQA alineado con la 12207."
+  },
+  {
+   "id": "s4-f18",
+   "s": 4,
+   "t": "En la 12207 según el documento de clase, la Gestión de la Calidad Organizacional define {{1}} de calidad y verifica el apego a estándares mediante la actividad de {{2}}.",
+   "r": [
+    [
+     "metas corporativas",
+     "metas"
+    ],
+    [
+     "Auditoría",
+     "Auditoria"
+    ]
+   ],
+   "exp": "Actividades Establecimiento y Auditoría; no confundir con Aseguramiento de la Calidad del proyecto."
+  }
+ ],
+ "casos": [
+  {
+   "id": "s4-c01",
+   "s": [
+    4,
+    3
+   ],
+   "titulo": "Go/No-Go de un e-commerce con SQAP IEEE 730",
+   "enunciado": "<p>MercadoAndino SAC, retailer limeño, prepara el lanzamiento de su tienda en línea para el Cyber Wow. Su SQAP, basado en la plantilla IEEE 730 de AlfaShop, fija: 0 defectos críticos o bloqueantes abiertos; 100 % de E2E críticas en verde; regresión no menor al 98 %; cobertura mínima 80 % en componentes críticos del back-end; DD menor a 0,5 defectos por KLOC modificada; MTTR de bloqueantes menor a 4 h. El alcance excluye las pruebas de carga del clúster de BD gestionado por el proveedor de nube.</p><p>Datos del último sprint: 1 bloqueante abierto en el flujo de Pago con Stripe; 41 de 42 E2E críticas en verde; 1 470 de 1 500 pruebas de regresión aprobadas; cobertura del back-end crítico 78 %; 13 defectos en 21 400 LOC modificadas; tres bloqueantes previos resueltos en 1,5 h, 4,5 h y 3 h. El Gerente Comercial sostiene que el sitio debe salir porque el 97 % de la campaña ya está comprometido. El QA Lead reporta al Líder de Desarrollo y el SQAP no tiene sección de pruebas de rendimiento, aunque su propósito declara una plataforma segura y rápida.</p>",
+   "preguntas": [
+    "Calcule cada métrica y decida Go o No-Go justificando criterio por criterio.",
+    "Identifique dos huecos del SQAP respecto a su propio propósito y proponga cómo cerrarlos con secciones y herramientas.",
+    "Evalúe el riesgo de la exclusión del alcance y qué proceso de la ISO/IEC/IEEE 12207:2017 debe cubrirlo.",
+    "Analice la estructura organizacional y proponga la corrección según el organigrama de clase."
+   ],
+   "solucion": "<h4>1. Métricas</h4><ul><li>Bloqueantes abiertos: 1 frente a 0 exigido: incumple.</li><li>E2E críticas: 41/42 = 97,6 %: incumple el 100 %.</li><li>Regresión: 1 470/1 500 = 98,0 %: cumple, en el límite.</li><li>Cobertura: 78 % menor a 80 %: incumple.</li><li>DD: 13/21,4 = 0,61 por KLOC mayor a 0,5: incumple.</li><li>MTTR: (1,5 + 4,5 + 3)/3 = 3,0 h menor a 4 h: cumple, aunque un caso superó 4 h y merece análisis de causa raíz.</li></ul><p><b>Decisión: No-Go.</b> Los criterios de salida son condiciones exactas definidas en el SQAP; la presión comercial no los modifica. La alternativa defendible es posponer, o lanzar sin el flujo afectado si el negocio lo acepta formalmente, con el riesgo documentado.</p><h4>2. Huecos</h4><ul><li>Rendimiento: el propósito dice rápida, pero no hay pruebas de carga y estrés; agregar k6 o JMeter con meta de p95 menor a 2 s a 10 veces el tráfico normal, como el G6 en Platanitos.</li><li>Seguridad: pagos con tarjeta sin SAST, DAST ni PCI DSS; agregar SonarQube con reglas OWASP Top 10, OWASP ZAP en Staging y el cuestionario PCI de Stripe.</li><li>Opcional: gestión de riesgos explícita y flujo completo de control de cambios desde la detección hasta producción, según el elemento 6.</li></ul><h4>3. Exclusión</h4><p>Excluir es válido si se delimita, según el elemento 1, pero el riesgo no desaparece: se gestiona con Adquisición, mediante SLA de rendimiento y disponibilidad, y con Monitoreo del Acuerdo; en IEEE 730-2002 sería la sección Control de proveedores. Gestión de Riesgos registra el riesgo con su plan de contingencia.</p><h4>4. Organización</h4><p>El QA Lead debe ser par del Líder de Desarrollo y reportar a la Dirección, con libertad de escalar NC al nivel más alto, según las diap. 5 y 8; si no, el conflicto de intereses deja sin efecto los criterios de salida.</p>",
+   "criterios": [
+    "Calcula correctamente E2E 97,6 %, regresión 98 %, DD 0,61 y MTTR 3 h.",
+    "Concluye No-Go y lo sustenta en criterios de salida, no en opinión.",
+    "Detecta al menos dos huecos coherentes con el propósito: rendimiento y seguridad.",
+    "Vincula la exclusión con Adquisición, SLA o Control de proveedores y con Gestión de Riesgos.",
+    "Corrige la dependencia del QA Lead con base en el organigrama de clase."
+   ]
+  },
+  {
+   "id": "s4-c02",
+   "s": [
+    4,
+    2,
+    3
+   ],
+   "titulo": "Auditoría del SQAP de GMD S.A. del G3",
+   "enunciado": "<p>El G3 elaboró el SQAP del área de Outsourcing de Aplicaciones de GMD S.A. a partir de una tesis de la UPC de 2014. Datos del plan: dotación de 1 Gestor de Calidad y 12 analistas, con propuesta de 2 gestores y 8 analistas, simulada en Bizagi sobre 181 requerimientos en 30 días; el diagnóstico CMMI indica cerca de 50 % de cumplimiento en planificación y en monitoreo y control; el 40 % de los requerimientos repite los mismos errores. Indicadores: incidencias por componente no mayor al 10 % semanal, aprobación en pruebas de calidad entre 70 % y 80 % mensual y desviación del avance no mayor al 4 %.</p><p>La Tabla 7 define el ratio de eficiencia de codificación como LOC errados sobre total de LOC, con criterio: menos de 80 malo, 80 a 90 regular, 90 o más bueno. Las normas citadas incluyen ISO 9001:2008, ISO/IEC 9126, IEEE 730-2002, IEEE 829-1998 e IEEE 830-1998. El control de versiones usa Visual SourceSafe y no hay pipeline CI/CD.</p>",
+   "preguntas": [
+    "Detecte el error de la fórmula del ratio y recalcule con 1 200 LOC errados en 20 000 LOC.",
+    "Analice la propuesta de dotación con carga por gestor y por analista.",
+    "Indique el nivel CMMI comprometido y construya un Ishikawa 6M de la reincidencia del 40 %.",
+    "Actualice las normas citadas a sus versiones vigentes y justifique el cambio de 9126.",
+    "Proponga tres mejoras para pasar de un SQAP estático a uno dinámico."
+   ],
+   "solucion": "<h4>1. Ratio invertido</h4><p>LOC errados sobre total mide defectos: menor es mejor. 1 200/20 000 = 6 %, que según el criterio literal sería malo aunque el 94 % del código es correcto. Corrección: ratio = 1 − errados/total = 94 %, bueno, o redefinir el criterio como menor a 5 % bueno. Lo mismo aplica a datos inconsistentes y a documentos incompletos.</p><h4>2. Dotación</h4><p>Actual: 181 requerimientos por gestor y 15,1 por analista. Propuesta: 90,5 por gestor y 22,6 por analista. El cuello de botella es la planificación del cronograma de calidad por el gestor; la propuesta lo reduce a la mitad a costa de más carga por analista. Falta reportar el resultado de la simulación: sin ese dato la decisión no está sustentada.</p><h4>3. CMMI e Ishikawa</h4><p>PP y PMC son áreas de proceso del ML2 Gestionado de CMMI-DEV v1.3: GMD-AO no alcanzaría ML2. Ishikawa 6M: Método, PP y PMC a medias y estimación sin base histórica; Mano de obra, capacitación insuficiente en estándares y 1 gestor para 12 analistas; Máquina, ambientes de prueba tardíos y VSS obsoleto; Material, entregables incompletos; Medición, ratios invertidos e indicadores sin visibilidad; Medio ambiente, múltiples clientes y presión de plazos.</p><h4>4. Normas</h4><ul><li>ISO 9001:2008 a ISO 9001:2015, con pensamiento basado en riesgos.</li><li>ISO/IEC 9126 a ISO/IEC 25010, que la diap. 18 pide para calidad de producto e incorpora Seguridad y Compatibilidad.</li><li>IEEE 730-2002 a IEEE 730-2014.</li><li>IEEE 829 a ISO/IEC/IEEE 29119-3; IEEE 830 a ISO/IEC/IEEE 29148.</li></ul><h4>5. SQAP dinámico</h4><ul><li>Migrar de VSS a Git con un branching model y Pull Requests.</li><li>Pipeline con SonarQube y Quality Gate, unitarias con umbral de cobertura y E2E de flujos críticos.</li><li>Dashboard de KPI y repositorio de lecciones aprendidas por requerimiento contra la reincidencia.</li></ul><p>Además, aclarar si la desviación del 4 % es relativa o absoluta: plan 60 %, real 57 % da 3 puntos o 5 % relativo.</p>",
+   "criterios": [
+    "Identifica la dirección invertida del ratio y propone la fórmula complementaria.",
+    "Calcula cargas 181 y 90,5 por gestor; 15,1 y 22,6 por analista, y discute el trade-off.",
+    "Ubica PP y PMC en ML2 y clasifica bien las causas en las 6M.",
+    "Actualiza al menos cuatro normas y justifica 25010 frente a 9126.",
+    "Propone mejoras concretas de automatización coherentes con el SQAP ágil."
+   ]
+  },
+  {
+   "id": "s4-c03",
+   "s": [
+    4
+   ],
+   "titulo": "Mapeo de la metodología OGTI del MEF a la ISO/IEC/IEEE 12207:2017",
+   "enunciado": "<p>El G3 mapeó la metodología de la OGTI del MEF, procesos G1 a G4 de gestión, A1 a A3 de apoyo y T1.1 a T1.9, T2 y T3 técnicos, a la 12207:2017 siguiendo el documento de 24 procesos de clase y agregó Retirada. Su cobertura fue: Acuerdo 2 de 2, Habilitadores 5 de 6, Gestión 6 de 8 y Técnicos 12 de 14. La OIT provee servidores, ambientes y homologación; existen semáforos semanales y dashboards de cartera; el MEF tiene un proceso G1 Análisis de Negocio, usado por el G3 dentro de Adquisición; el subproceso T1.2 se llama Análisis de sistemas.</p><p>La Tabla 1 de complejidad define: Alta más de 4 000 HH o más de 6 meses; Mediana de 880 a 3 000 HH y de 2 a 6 meses; Baja hasta 880 HH y menos de 2 meses. Hay tres escenarios de acuerdo: desarrollo interno por la OSI, tercerización por la OGTI y contratación directa por un órgano usuario con la OGTI como supervisor técnico.</p>",
+   "preguntas": [
+    "Para cada escenario, indique adquiriente, proveedor y el proceso de Acuerdo que ejecuta la OGTI.",
+    "Identifique los cinco procesos faltantes y proponga dónde evidenciarlos en el MEF.",
+    "Explique por qué T1.2 Análisis de sistemas no es el proceso 6.4.6 Análisis del Sistema.",
+    "Detecte los defectos de la Tabla 1 y clasifique un proyecto de 3 500 HH en 5 meses."
+   ],
+   "solucion": "<h4>1. Escenarios</h4><ul><li>Interno: adquiriente el órgano usuario; proveedor la OGTI/OSI, que ejecuta Suministro.</li><li>Tercerizado: adquiriente la OGTI, que ejecuta Adquisición; proveedor la firma.</li><li>Directo: adquiriente el órgano; proveedor la firma; la OGTI no es parte contractual: verifica entregables, lo que se ubica en Aseguramiento de la Calidad y Verificación en apoyo del adquiriente.</li></ul><h4>2. Faltantes</h4><ul><li>Gestión de la Infraestructura 6.2.2: la OIT y sus ambientes.</li><li>Gestión de la Información 6.3.6: biblioteca de anexos y control documental.</li><li>Medición 6.3.7: semáforos, métricas de esfuerzo, dashboards.</li><li>Análisis del Negocio o Misión 6.4.1: el proceso G1 del MEF.</li><li>Análisis del Sistema 6.4.6: análisis de costo, rendimiento y riesgo para decisiones de arquitectura.</li></ul><h4>3. Trampa de nombres</h4><p>T1.2 especifica requisitos funcionales y se mapea a Definición de Requisitos del Sistema/SW 6.4.3; el 6.4.6 provee análisis matemáticos y técnicos que soportan decisiones del ciclo de vida. Igual nombre no implica igual propósito: se clasifica por propósito y salidas.</p><h4>4. Tabla 1</h4><p>Hueco: 3 000 a 4 000 HH sin categoría. Solape: 880 HH cae en Baja y Mediana. Conflicto de criterios: 3 500 HH en 5 meses no encaja por esfuerzo y sería Mediana por plazo. Propuesta: rangos continuos y excluyentes, por ejemplo Baja menor a 880, Mediana de 880 a menos de 4 000, Alta desde 4 000, con regla de desempate por la mayor categoría; así el proyecto sería Mediana.</p>",
+   "criterios": [
+    "Distingue roles por escenario y reconoce Adquisición y Suministro como roles.",
+    "Lista los cinco faltantes con su cláusula o grupo y una evidencia del MEF.",
+    "Explica la diferencia por propósito y no por nombre.",
+    "Detecta hueco, solape y conflicto, y propone rangos excluyentes."
+   ]
+  },
+  {
+   "id": "s4-c04",
+   "s": [
+    4,
+    1,
+    3
+   ],
+   "titulo": "Pasarela de pagos con 12207, DevOps y doble cobro",
+   "enunciado": "<p>PagaFácil, fintech peruana que opera con Scrum y DevOps, integra su pasarela con una cadena de zapaterías para el Cyber Wow. Se pactó un SLA de 99,99 % de disponibilidad en la campaña, latencia de API menor a 1,5 s y cero transacciones huérfanas. Pipeline: commit en feature branch, build Docker con GitHub Actions, SonarQube, 300 pruebas Jest con cobertura de 85 %, Pull Request con 2 séniores, pruebas de API con Supertest, E2E con Cypress en Staging, UAT del cliente, despliegue Blue-Green con Terraform y monitoreo con Datadog.</p><p>En pruebas, un doble clic en Pagar con QR genera dos POST simultáneos al endpoint de cargo con el mismo ID de orden y debita dos veces. Además, tras un timeout del adquirente, el reintento automático duplica el 0,3 % de los cargos. El informe del grupo clasifica la Gestión de la Configuración como proceso técnico y registra MTTR menor a 4 h en un apartado y menor a 2 h en otro.</p>",
+   "preguntas": [
+    "Mapee cada etapa del pipeline a su proceso y grupo de la 12207:2017.",
+    "Clasifique el defecto con ISO/IEC 25010, su severidad y la fase en que debe detectarse según la Ley de Boehm.",
+    "Diseñe la corrección y su recorrido por los procesos 12207.",
+    "Calcule el margen mensual de caída del SLA y opine sobre su viabilidad.",
+    "Señale los dos errores del informe y corríjalos."
+   ],
+   "solucion": "<h4>1. Mapeo</h4><ul><li>Feature branch, PR y bloqueo de main: Gestión de la Configuración, gestión técnica.</li><li>Build Docker: Implementación; unión con main y CI: Integración.</li><li>SonarQube, Jest, Supertest: Verificación.</li><li>E2E en Staging y UAT: Validación, con la salvedad de que Cypress automatizado es verificación de regresión y la UAT con el cliente es validación.</li><li>Blue-Green con Terraform: Transición; Datadog: Operación; parches: Mantenimiento.</li></ul><h4>2. Defecto</h4><p>ISO/IEC 25010: fiabilidad e integridad de la seguridad, con corrección funcional afectada; severidad Bloqueante por pérdida económica. Debe detectarse en Verificación, en el pipeline, con pruebas de API concurrentes: corregirlo en producción cuesta hasta 100 veces más según Boehm, y caer en producción con reclamos ante Indecopi.</p><h4>3. Corrección</h4><p>Rama hotfix bajo Gestión de la Configuración; idempotency keys en Redis o restricción UNIQUE por ID de orden; botón deshabilitado y token de un solo uso en UI; reintentos con la misma llave. PR con 2 séniores, unitarias y prueba Supertest de ráfagas como regresión permanente en Verificación; E2E y UAT en Staging en Validación; despliegue Blue-Green sin caída en Transición; alerta de órdenes duplicadas en Operación. Registrar el riesgo y la lección en Gestión de Riesgos y Gestión del Conocimiento.</p><h4>4. SLA</h4><p>0,01 % de 43 200 min = 4,32 min al mes. Es muy exigente: requiere multi-adquirente, Circuit Breaker, colas y probablemente multi-región; si no, conviene acotarlo a la ventana de campaña o renegociarlo a 99,95 %, que da 21,6 min.</p><h4>5. Errores</h4><p>Gestión de la Configuración es de gestión técnica, no técnica. El MTTR debe ser único y coherente; por ejemplo, menor a 2 h para bloqueantes en producción, definiendo desde cuándo y hasta cuándo se mide.</p>",
+   "criterios": [
+    "Mapea al menos ocho etapas con grupo y proceso correctos.",
+    "Clasifica el defecto con 25010 y lo vincula con shift-left y Boehm.",
+    "Propone idempotencia y la recorre por Configuración, Verificación, Validación, Transición y Operación.",
+    "Calcula 4,32 min por mes y argumenta viabilidad.",
+    "Corrige la categoría de Configuración y la incoherencia de MTTR."
+   ]
+  },
+  {
+   "id": "s4-c05",
+   "s": [
+    4,
+    2,
+    3
+   ],
+   "titulo": "SQAP ágil para una entidad pública",
+   "enunciado": "<p>Una entidad pública peruana de recaudación tiene un SQAP IEEE 730 de 100 páginas que nadie consulta. Su equipo trabaja con Scrum en sprints de 2 semanas y despliega con GitHub Actions. En los últimos 3 sprints se marcaron 50 historias como Done, de las cuales 20 fueron reabiertas; SonarQube muestra 12 vulnerabilidades altas abiertas; la cobertura media es 61 %; no hay revisión por pares obligatoria; el QA verifica el incremento el mismo día del despliegue.</p><p>La jefatura pide un SQAP dinámico y automatizado, mantener la trazabilidad con la ISO/IEC/IEEE 12207:2017 y explicar la mejora con un ciclo de mejora continua.</p>",
+   "preguntas": [
+    "Distribuya las directrices del SQAP en los eventos Scrum.",
+    "Diseñe el pipeline CI/CD con sus Quality Gates en orden y justifique el orden.",
+    "Redacte una DoD verificable de 5 ítems y 4 KPI con meta.",
+    "Explique la mejora con PHVA y vincule el plan con dos procesos de la 12207."
+   ],
+   "solucion": "<h4>1. Eventos</h4><p>Sprint Planning: QA define criterios de aceptación en Gherkin y asegura la DoR. Daily: bloqueos del entorno de pruebas y defectos críticos. Sprint Review: validar el incremento contra la DoD dictada por el SQAP. Auditoría de proceso del QA Lead al cierre del sprint, con independencia y reporte a la jefatura.</p><h4>2. Pipeline</h4><p>Análisis estático con SonarQube, unitarias con umbral, revisión por pares y despliegue a QA con E2E. El orden va de lo más barato y rápido a lo más costoso, según la pirámide y el principio de detección temprana: un fallo estático detiene el flujo antes de gastar en E2E.</p><h4>3. DoD y KPI</h4><ul><li>Peer review sin observaciones pendientes; cobertura de al menos 80 a 85 % según criticidad; Quality Gate PASSED sin vulnerabilidades altas; regresión al 100 %; documentación actualizada.</li><li>KPI: historias reabiertas, hoy 20/50 = 40 %, meta menor a 10 %; vulnerabilidades altas de 12 a 0; cobertura de 61 % a 80 %; DD menor a 0,5 por KLOC.</li></ul><h4>4. PHVA y 12207</h4><p>P: redactar el SQAP dinámico y metas; H: aplicar pipeline y DoD; V: medir KPI y auditar; A: estandarizar o ajustar umbrales. En la 12207: Aseguramiento de la Calidad, con estrategia y evaluación, y Verificación, con análisis estático y regresión; también Gestión de la Configuración para la revisión por pares.</p>",
+   "criterios": [
+    "Ubica criterios y DoR en Planning y DoD en Review.",
+    "Ordena el pipeline y justifica por costo y velocidad.",
+    "La DoD tiene 5 ítems medibles y los KPI tienen línea base calculada y meta.",
+    "Aplica PHVA sin confundirlo con DMAIC y cita procesos 12207 correctos."
+   ]
+  },
+  {
+   "id": "s4-c06",
+   "s": [
+    4,
+    1
+   ],
+   "titulo": "Matriz de responsabilidades y V&V en un proyecto regional",
+   "enunciado": "<p>Un gobierno regional desarrolla un sistema de trámite documentario. Su SQAP contiene una matriz con estas asignaciones: Desarrollar el Plan SQA solo el Administrador SQA; Revisar el Plan SQA solo Admin SQA y Admin Proyecto; Aprobar el producto solo Desarrollo/Diseño; Resolver recomendaciones de auditoría el Admin SQA; Evaluar el proceso de análisis de requerimientos el Admin Proyecto; Requerimientos de Administración de la Configuración el Admin de Requerimientos. El Líder de SQA depende del Líder de Desarrollo y los testers pertenecen al equipo de desarrollo.</p><p>Para V&V se propuso: en Requisitos, UAT como verificación; en Código, pruebas unitarias como verificación y revisión por pares como validación; en Producto, auditoría de configuración como validación.</p>",
+   "preguntas": [
+    "Detecte y corrija cada asignación errónea de la matriz según el SQAP de clase.",
+    "Corrija la estructura organizacional y explique el principio violado.",
+    "Rehaga la matriz V&V por fase según la profesora y comente una diferencia con IEEE 1012.",
+    "Clasifique cada corrección como mejora de SQA o de QC."
+   ],
+   "solucion": "<h4>1. Matriz</h4><ul><li>Desarrollar el Plan SQA: Admin SQA y Admin Proyecto.</li><li>Revisar el Plan SQA: los 7 roles, pues toda fila Revisar es participativa.</li><li>Aprobar el producto: Admin SQA y Admin Proyecto, no quien lo desarrolla.</li><li>Resolver recomendaciones: solo Admin Proyecto; SQA audita y reporta.</li><li>Evaluar o reportar el proceso de análisis de requerimientos: solo Admin SQA.</li><li>Requerimientos de SCM: Adm de Configuración.</li></ul><h4>2. Organización</h4><p>Líder de SQA par del Líder de Desarrollo bajo la Dirección; auditores y testers en la rama de calidad. Principio: independencia del SQA y libertad de escalar NC al nivel más alto.</p><h4>3. V&V</h4><p>Requisitos: revisión de la especificación y prototipado con el usuario. Diseño: inspección de arquitectura y análisis de trazabilidad. Código: revisión por pares y pruebas unitarias ejecutadas. Producto: auditoría de configuración y UAT. Diferencia: IEEE 1012 suele tratar la trazabilidad y las unitarias como verificación; en el examen se responde con la matriz de clase sabiendo explicar la diferencia.</p><h4>4. SQA o QC</h4><p>Matriz, organigrama y separación auditor y auditado son SQA, pues mejoran el proceso; la corrección de las actividades de prueba como UAT y unitarias pertenece a QC, porque evalúa el producto.</p>",
+   "criterios": [
+    "Corrige las seis asignaciones con el patrón de la matriz de clase.",
+    "Aplica el organigrama y el principio de independencia.",
+    "Reconstruye la matriz V&V de cuatro fases y comenta IEEE 1012.",
+    "Distingue SQA de QC con argumentos de proceso y producto."
+   ]
+  }
+ ]
+}

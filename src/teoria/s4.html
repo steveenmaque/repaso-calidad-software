@@ -1,0 +1,647 @@
+<h1>Sesión 4 · Planeamiento de la calidad: SQAP (IEEE 730), modelos de mejora del proceso de SW e ISO/IEC/IEEE 12207:2017</h1>
+<p class="lead">El sílabo pide para la Semana 4 tres bloques encadenados: (1) la <b>introducción al planeamiento de la calidad</b> mediante el SQAP (Software Quality Assurance Plan – Plan de Aseguramiento de la Calidad del Software) según IEEE 730; (2) los <b>modelos de mejora del proceso de SW</b> (SPI, Software Process Improvement – Mejora del Proceso de Software); y (3) la norma <b>ISO/IEC/IEEE 12207:2017</b> con sus 4 grupos y 30 procesos del ciclo de vida del SW. La idea de fondo: el SQAP asegura la calidad <i>de un proyecto</i>, mientras que la 12207 da el <i>mapa común de procesos</i> que toda organización puede adoptar, evaluar (S6) y mejorar (S5–S7). Se estudian dos ejemplos de clase de SQAP (Scrum + DevOps y el e-commerce AlfaShop) y el caso EduTech Solutions de la 12207.</p>
+<div class="clave"><h4>Ideas clave</h4><ul>
+<li>SQA = <b>modelo sistemático y planeado</b> de acciones para dar <b>confianza adecuada</b> de que cada producto/ítem cumple los requisitos técnicos; sinónimo: <b>aseguramiento del producto de SW</b>.</li>
+<li>SQAP = <b>documento formal</b> que describe <b>métodos, herramientas, estándares y responsabilidades</b> para cumplir los requisitos de calidad <b>a lo largo de todo el ciclo de vida</b>.</li>
+<li>El SQA <b>no es una fase final</b>: es un proceso transversal de <b>auditorías y revisiones</b> que toca Requisitos, Diseño, Codificación, Pruebas y Despliegue.</li>
+<li>El Líder de SQA es <b>par</b> del Líder de Desarrollo y reporta a la Dirección: <b>independencia organizacional</b> y derecho a escalar no conformidades al nivel más alto.</li>
+<li>V&amp;V en la matriz de la profesora: Verificación = «¿hacemos el producto bien?»; Validación = «¿hacemos el producto correcto?».</li>
+<li>Pirámide de pruebas (sección de control del SQAP): muchas unitarias, medianas de integración/API, pocas de UI.</li>
+<li>7 elementos claves de un SQAP: Propósito/Alcance · Roles · Estándares · Revisiones/Auditorías · Pruebas · SCM/Cambios · Métricas/Herramientas.</li>
+<li>En Scrum/DevOps el SQAP deja de ser un documento estático de 100 páginas y «cobra vida» en el pipeline CI/CD y en la DoD.</li>
+<li>ISO/IEC/IEEE 12207: 1.ª ed. 1995, enmiendas 2002 y 2004, 2.ª ed. feb-2008, 3.ª ed. nov-2017 (ISO + IEC + IEEE), alineada con ISO/IEC 15288.</li>
+<li>12207:2017 = <b>4 categorías, 30 procesos</b>: Acuerdo (2), Habilitación organizacional (6), Gestión técnica/de proyectos (8), Técnicos (14).</li>
+<li>Cada proceso tiene 5 atributos: <b>Título, Propósito, Salidas (outcomes), Actividades, Tareas</b>.</li>
+<li>QM (Gestión de la Calidad, habilitador organizacional) ≠ QA (Aseguramiento de la Calidad, proceso de gestión del proyecto).</li>
+</ul></div>
+
+<section id="planeamiento-y-mejora">
+<h2>1. Planeamiento de la calidad y mejora del proceso de SW (SPI)</h2>
+<p>Antes de hablar de SQAP y 12207 conviene ubicar ambos dentro del gran marco de la gestión de la calidad visto en S1–S3: la calidad no se «inspecciona al final», se <b>planifica</b>, se <b>controla</b> y se <b>mejora</b> de forma continua.</p>
+<figure><img src="@img/semana-04-modelos-de-mejora-del-proceso-de-sw/p02.png" alt="Viñeta de Ted Goff: pizarrón titulado SALES PROCESS con un diagrama de flujo caótico lleno de cajas y flechas cruzadas; una mujer señala una única cadena lineal al pie"><figcaption>«A veces definir el proceso es complicado…»: los procesos reales tienen variantes, excepciones y retrabajos. Por eso existen marcos de referencia de procesos (PRM) como la ISO/IEC/IEEE 12207: primero se <b>define</b> el proceso para luego poder <b>medirlo y mejorarlo</b>.</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 2, «Modelos de Mejora del Proceso de Desarrollo de SW», Semana 04.</p>
+
+<div class="concepto"><h3>Planeamiento de la calidad (QP, Quality Planning)</h3><p>Primer componente de la trilogía de Juran (1986: planificación, control y mejora de la calidad). Consiste en identificar a los clientes y sus necesidades, traducirlas en requisitos y objetivos de calidad medibles, y definir los procesos, recursos, responsables y controles necesarios para alcanzarlos. En SW se materializa en el SQAP del proyecto y en la política/manual de calidad de la organización (ISO 9001, cláusula 6 «Planificación»).</p><p class="ej"><b>Ej.:</b> antes del primer Sprint del app de citas de EsSalud, el QA Lead fija en el SQAP la meta «tasa de fallos en PROD &lt; 2 %» y el KPI de cobertura ≥ 80 %.</p></div>
+
+<div class="concepto"><h3>Proceso de SW</h3><p>Conjunto coherente de actividades, métodos, prácticas y transformaciones que las personas usan para desarrollar y mantener SW y sus productos asociados (planes, SRS, SDD, código, casos de prueba, manuales). Premisa de SPI (Humphrey, SEI): «la calidad de un producto está fuertemente determinada por la calidad del proceso usado para construirlo».</p><p class="ej"><b>Ej.:</b> el proceso de una fábrica de SW limeña: HU → diseño → código → PR + Code Review → CI/CD → UAT → despliegue.</p></div>
+
+<div class="concepto"><h3>SPI (Software Process Improvement – Mejora del Proceso de SW)</h3><p>Disciplina que evalúa el proceso actual de una OU (Organizational Unit – Unidad Organizacional), identifica brechas frente a un modelo de referencia y ejecuta acciones planificadas para aumentar su capacidad/madurez, reduciendo defectos, costos y plazos. Usa ciclos PDCA/PHVA o el modelo IDEAL, y se apoya en un PRM y un PAM.</p><p class="ej"><b>Ej.:</b> la OTI de una municipalidad detecta 40 % de retrabajo, compara su proceso con la 12207 y crea el proceso faltante de Gestión de la Configuración (SCM) con Git y PR obligatorios.</p></div>
+
+<div class="concepto"><h3>Modelo de mejora del proceso de SW</h3><p>Marco que describe «qué» buenas prácticas debe tener un proceso de SW y, a menudo, cómo evaluar su nivel. Se distinguen: (a) <b>modelos de referencia de procesos</b> (ISO/IEC/IEEE 12207, ISO/IEC 15288); (b) <b>modelos de evaluación de capacidad/madurez</b> (ISO/IEC 15504-SPICE, ISO/IEC 33000, CMMI, S6); (c) <b>modelos para pymes</b> (MoProSoft, MPS.BR, COMPETISOFT, ISO/IEC 29110, S7); (d) <b>ciclos de mejora</b> (PDCA, IDEAL, DMAIC).</p><p class="ej"><b>Ej.:</b> una pyme de Arequipa usa la 12207 como mapa (PRM), ISO/IEC 29110 como perfil ligero y PDCA para cada iteración de mejora.</p></div>
+
+<div class="concepto"><h3>PRM (Process Reference Model – Modelo de Referencia de Procesos)</h3><p>Modelo que describe un conjunto de procesos en términos de <b>propósito</b> y <b>resultados (outcomes)</b>, sin decir cómo medirlos. La 12207:2017 actúa como PRM para la evaluación según ISO/IEC 33000 (antes 15504-5 usaba la 12207 como PRM).</p><p class="ej"><b>Ej.:</b> el evaluador toma el proceso 6.3.8 «Aseguramiento de la Calidad» de la 12207 como referencia para revisar el QA de Interbank Digital.</p></div>
+
+<div class="concepto"><h3>PAM (Process Assessment Model – Modelo de Evaluación de Procesos)</h3><p>Modelo que añade al PRM los <b>indicadores</b> (prácticas base, productos de trabajo, atributos de proceso) para medir la capacidad de cada proceso en una escala (niveles 0–5 en ISO/IEC 15504/33000). Se profundiza en S6.</p><p class="ej"><b>Ej.:</b> ISO/IEC 33061 es el PAM de los procesos de SW; con él se califica la SCM de una empresa como «nivel 2: gestionado».</p></div>
+
+<div class="concepto"><h3>Modelo IDEAL (SEI)</h3><p>Ciclo de SPI del SEI (Software Engineering Institute, 1996) en 5 fases: <b>I</b>nitiating (iniciar: patrocinio), <b>D</b>iagnosing (diagnosticar brechas), <b>E</b>stablishing (establecer plan de acción), <b>A</b>cting (actuar: pilotos y despliegue), <b>L</b>earning (aprender y reiniciar). Es el «PDCA» especializado para programas de mejora de procesos.</p><p class="ej"><b>Ej.:</b> el BCP inicia un programa CMMI (I), hace un SCAMPI de diagnóstico (D), planifica (E), pilota PR obligatorios en 2 squads (A) y documenta lecciones (L).</p></div>
+
+<div class="concepto"><h3>Trilogía de Juran aplicada al SW</h3><p>Planificación (SQAP, objetivos, estándares), Control (QC: revisiones, pruebas, quality gates, auditorías) y Mejora (SPI: análisis de causa raíz, acciones correctivas, cambio de proceso). El SQAP cubre sobre todo la planificación y el control; la 12207 y los modelos de madurez sostienen la mejora.</p><p class="ej"><b>Ej.:</b> SUNAT planifica (SQAP del nuevo SIRE), controla (Quality Gate de SonarQube en CI) y mejora (RCA mensual con Ishikawa 6M de los incidentes).</p></div>
+
+<div class="tabla"><table><thead><tr><th>Nivel</th><th>Qué asegura</th><th>Instrumento de S4</th><th>Sesión relacionada</th></tr></thead><tbody>
+<tr><td>Producto</td><td>Que el SW cumpla atributos de calidad</td><td>ISO/IEC 25010 (citada en el SQAP como estándar de producto)</td><td>S3</td></tr>
+<tr><td>Proyecto</td><td>Que el proyecto ejecute las actividades de QA planificadas</td><td>SQAP (IEEE 730)</td><td>S4</td></tr>
+<tr><td>Organización / procesos</td><td>Que existan procesos definidos, comunes y mejorables</td><td>ISO/IEC/IEEE 12207:2017 (PRM)</td><td>S4–S5</td></tr>
+<tr><td>Capacidad / madurez</td><td>Que los procesos sean medibles y comparables</td><td>ISO/IEC 15504/33000, CMMI</td><td>S6</td></tr>
+</tbody></table></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>El título del mazo de la profesora es «Modelos de Mejora del Proceso de Desarrollo de SW: ISO/IEC 12207:2017». La 12207 <b>no</b> es por sí sola un modelo de madurez con niveles: es un modelo de <b>referencia</b> de procesos (qué procesos existen y qué resultados producen). Los niveles de capacidad vienen de ISO/IEC 33000/15504 o CMMI (S6).</p></div>
+</section>
+
+<section id="sqa-y-sqap">
+<h2>2. SQA y SQAP: definición, propósito y alcance</h2>
+
+<div class="concepto"><h3>SQA (Software Quality Assurance – Aseguramiento de la Calidad del SW)</h3><p>Según la diapositiva 2: «un <b>modelo sistemático y planeado</b> de todas las acciones necesarias para proveer la <b>confianza adecuada</b>, según los requerimientos técnicos establecidos, de cada producto e ítem del proyecto». Es la definición clásica de QA del IEEE Std 610.12-1990. Cuatro palabras clave: <b>sistemático + planeado + confianza adecuada + conformidad con requisitos técnicos</b>. SQA es preventivo y orientado al proceso; QC (Quality Control) es detectivo y orientado al producto (S1).</p><p class="ej"><b>Ej.:</b> el equipo SQA de RENIEC no «prueba el DNIe» (eso es QC); audita que cada Sprint cumpla el proceso de revisiones y pruebas definido en el SQAP.</p></div>
+
+<div class="concepto"><h3>Aseguramiento del producto de SW</h3><p>Sinónimo de SQA que da la profesora (diap. 2). En IEEE 730-2014, «product assurance» es además una de las 3 áreas de actividades de SQA (junto a implementación del proceso SQA y aseguramiento del proceso).</p><p class="ej"><b>Ej.:</b> en un contrato del MEF se exige «plan de aseguramiento del producto de SW», es decir, un SQAP.</p></div>
+
+<div class="concepto"><h3>SQAP (Software Quality Assurance Plan – Plan de Aseguramiento de la Calidad del SW)</h3><p>Definición destacada de la clase (diap. 4): «<b>documento formal</b> que describe los <b>métodos, herramientas, estándares y responsabilidades</b> necesarios para garantizar que un producto de SW cumpla con los requisitos de calidad establecidos <b>a lo largo de todo su ciclo de vida</b>». Además (diap. 2) el SQAP define cuán adherido a los estándares se debe monitorear y contiene una <b>lista de comprobación (checklist)</b> de las actividades que aseguran la calidad; por cada actividad bajo responsabilidad de SQA se crea un <b>plan de monitoreo</b>.</p><p class="ej"><b>Ej.:</b> el SQAP del SUM-UNMSM fija método (inspección Fagan), herramienta (SonarQube), estándar (ISO/IEC 25010) y responsable (Admin SQA) para el módulo de matrícula.</p></div>
+
+<div class="concepto"><h3>Propósito del SQAP</h3><p>(Diap. 3, en rojo) «Servir como <b>soporte para el desarrollo de un producto de alta calidad</b>, definiendo las <b>actividades mínimas</b> que deben realizar los involucrados para alcanzar dicho objetivo». Ojo con «mínimas»: el SQAP fija el piso obligatorio, no un techo.</p><p class="ej"><b>Ej.:</b> el SQAP de Yape exige como mínimo Code Review + pruebas unitarias en cada PR; el squad puede añadir pruebas de mutación si desea.</p></div>
+
+<div class="concepto"><h3>Elementos alcanzados por el plan (4 productos)</h3><p>(Diap. 3) El plan alcanza: (1) <b>Especificación Formal de los Requerimientos</b> (ERS/SRS), (2) <b>Modelos de Diseño</b> (SDD), (3) <b>Código y Tests</b> generados, (4) <b>Documentación</b> desarrollada.</p><p class="ej"><b>Ej.:</b> en el SQAP del sistema de admisión UNMSM se revisan la ERS v1.2, el diagrama de componentes, el repositorio Git con sus tests Jest y el manual de usuario.</p></div>
+
+<div class="concepto"><h3>Etapas y procesos cubiertos por el plan</h3><p>(Diap. 3) Cubre las etapas de <b>Ingeniería de Requerimientos, Diseño, Implementación y Pruebas</b>, y además define acciones para la <b>Gestión de la Configuración del SW (SCM, Software Configuration Management)</b> y la <b>Gestión de Riesgos</b>. Fórmula: 4 productos × 4 etapas técnicas + 2 procesos de soporte/gestión.</p><p class="ej"><b>Ej.:</b> el SQAP de Rímac Seguros incluye un capítulo SCM (GitFlow, línea base por release) y otro de riesgos (matriz probabilidad × impacto).</p></div>
+
+<div class="concepto"><h3>SQA como proceso transversal (paralelo) al ciclo de vida</h3><p>El diagrama de la diap. 4 muestra las fases Requisitos → Diseño → Codificación → Pruebas → Despliegue y, debajo, una línea continua «<b>PROCESO SQA: Auditorías y Revisiones</b>» conectada a <b>todas</b> las fases. Significa que el SQA es un proceso <b>sombrilla/umbrella</b> (Pressman) que acompaña todo el SDLC (Software Development Life Cycle), no una etapa al final.</p><p class="ej"><b>Ej.:</b> en Plaza Vea Online, SQA audita la ERS en Requisitos, la arquitectura en Diseño, los PR en Codificación y los informes de UAT antes del despliegue.</p></div>
+
+<figure><img src="@img/semana-04-introduccion-al-sqap/p04.png" alt="Recuadro naranja con la definición formal del SQAP y diagrama de fases Requisitos, Diseño, Codificación, Pruebas y Despliegue conectadas a una línea inferior rotulada PROCESO SQA: Auditorías y Revisiones"><figcaption>Definición oficial del SQAP (métodos, herramientas, estándares, responsabilidades) y el SQA como línea transversal de <b>auditorías y revisiones</b> bajo todas las fases del ciclo de vida.</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 4, «Introducción al SQAP», Semana 04.</p>
+
+<div class="concepto"><h3>Checklist y plan de monitoreo del SQAP</h3><p>El SQAP es operativamente una <b>lista de comprobación</b>: cada actividad de calidad (revisión de ERS, inspección de diseño, auditoría de proceso, prueba de regresión…) tiene responsable, frecuencia, criterio de aceptación y evidencia. El <b>plan de monitoreo</b> indica cómo SQA verificará que esa actividad se ejecutó.</p><p class="ej"><b>Ej.:</b> ítem del checklist «¿Cada PR tiene ≥ 1 aprobación y QG PASSED?» — monitoreo: SQA revisa semanalmente el reporte de GitHub y registra no conformidades (NC).</p></div>
+
+<div class="concepto"><h3>No conformidad (NC) y anomalía</h3><p><b>No conformidad</b>: incumplimiento de un requisito, estándar o procedimiento (ISO 9000). <b>Anomalía</b>: cualquier condición que se desvía de lo esperado según requisitos, especificaciones o experiencia (IEEE 1044). El responsable de SQA tiene libertad para <b>reportarlas</b> y escalarlas.</p><p class="ej"><b>Ej.:</b> NC: «el Sprint 5 movió 3 HU a Done sin Code Review»; anomalía: «el cálculo del IGV da 18,01 % en un caso límite».</p></div>
+
+<div class="norma"><h4>IEEE Std 730 — Software Quality Assurance Processes (antes: SQA Plans)</h4>
+<ul>
+<li><b>Organismo:</b> IEEE (Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos), Computer Society, comité S2ESC.</li>
+<li><b>Versiones:</b> 1979 (una de las primeras normas de ingeniería de SW del IEEE), 1981, 1984, 1989, 1998, <b>2002</b> «Standard for SQA <i>Plans</i>» y <b>2014</b> «Standard for SQA <i>Processes</i>».</li>
+<li><b>Propósito:</b> establecer los requisitos para iniciar, planificar, controlar y ejecutar el SQA de un proyecto. En la clase: «IEEE 730 para SQAP».</li>
+<li><b>Estructura 2002:</b> contenido mínimo del SQAP en 16 secciones (ver sección 7 de esta página).</li>
+<li><b>Estructura 2014:</b> 3 áreas de actividades — implementación del proceso de SQA, aseguramiento del producto y aseguramiento del proceso; el SQAP queda como producto de esos procesos (esquema sugerido en anexo) y se alinea con el proceso de QA de ISO/IEC/IEEE 12207.</li>
+<li><b>Trampa:</b> IEEE 730 regula el <b>plan/proceso de aseguramiento</b>; NO la calidad del producto (ISO/IEC 25010), ni la V&amp;V detallada (IEEE 1012), ni revisiones/auditorías (IEEE 1028), ni SCM (IEEE 828), ni pruebas (ISO/IEC/IEEE 29119).</li>
+</ul></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>SQAP describe <b>métodos, herramientas, estándares y responsabilidades</b> (4 palabras exactas; candidatas a pregunta de completar). Si una opción dice «métodos, costos, cronograma y riesgos», es distractor: eso se parece al plan del proyecto (SDP, Software Development Plan).</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>La definición de SQA de la clase dice «<b>confianza adecuada</b>», no «garantía total» ni «cero defectos». El SQA reduce la incertidumbre, no elimina los defectos.</p></div>
+</section>
+<section id="organizacion-roles">
+<h2>3. Organización de la calidad y roles/tareas de SQA</h2>
+
+<div class="concepto"><h3>Estructura organizacional de calidad (organigrama del SQAP)</h3><p>Árbol de 3 niveles (diap. 5): <b>Gerencia del Proyecto / Dirección</b> → dos ramas pares: <b>Líder de Desarrollo</b> (con sus Desarrolladores) y <b>Líder de SQA / Calidad</b> (con sus Auditores / Testers). La rama de calidad <b>no depende</b> del Líder de Desarrollo.</p><p class="ej"><b>Ej.:</b> en la fintech Tunki, la QA Lead reporta al CTO, no al Tech Lead del squad que audita.</p></div>
+
+<figure><img src="@img/semana-04-introduccion-al-sqap/p05.png" alt="Organigrama: Gerencia del Proyecto / Dirección arriba; abajo dos ramas paralelas Líder de Desarrollo con Desarrolladores y Líder de SQA / Calidad con Auditores / Testers"><figcaption>Independencia organizacional: Líder de Desarrollo y Líder de SQA son pares y reportan a la Dirección; testers y auditores pertenecen a la rama de calidad.</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 5, «Introducción al SQAP», Semana 04.</p>
+
+<div class="concepto"><h3>Independencia del SQA y derecho de escalamiento</h3><p>(Diap. 8) «El responsable de SQA tiene la <b>libertad de reportar anomalías y no conformidades</b> (si la calidad del producto está en peligro) <b>al siguiente o al nivel más alto</b> en la cadena de liderazgo». La independencia puede ser técnica, gerencial y financiera (IEEE 1012 la usa para definir IV&amp;V, Independent Verification and Validation).</p><p class="ej"><b>Ej.:</b> si el Jefe de Proyecto del nuevo portal del MINSA presiona para desplegar con 2 defectos críticos abiertos, el Admin SQA escala la NC directamente a la Dirección General de TI.</p></div>
+
+<div class="concepto"><h3>Administrador SQA (6 tareas)</h3><p>(1) Establecer un programa de calidad para el proyecto; (2) identificar las actividades de SQA; (3) resolver problemas relacionados con la calidad; (4) <b>auditar y reportar</b> las funciones SQA; (5) monitorear el cumplimiento de lo planificado en el plan SQA; (6) <b>garantizar la calidad de los entregables, la documentación y los procesos</b> usados para producir SW.</p><p class="ej"><b>Ej.:</b> el Admin SQA del SIAF-MEF publica cada 15 días un informe de auditoría con 4 NC y su estado.</p></div>
+
+<div class="concepto"><h3>Gerente Técnico (5 tareas)</h3><p>Nivel <b>organizacional</b>: (1) establecer un programa de calidad <b>para cada proyecto</b> de acuerdo a las <b>políticas organizacionales</b>; (2) revisar y aprobar el plan de SQA de cada proyecto; (3) monitorear las actividades de SQA; (4) <b>resolver cualquier conflicto</b> relacionado con SQA; (5) <b>identificar un grupo independiente para auditar las actividades de SQA</b> de ser preciso.</p><p class="ej"><b>Ej.:</b> el Gerente Técnico de una consultora contrata a una firma externa de IV&amp;V para auditar el SQA del proyecto de SUNARP.</p></div>
+
+<div class="concepto"><h3>Jefe de Proyecto (8 tareas)</h3><p>Nivel <b>proyecto</b>: (1) establecer un programa de calidad para <b>el proyecto</b> según políticas organizacionales; (2) identificar las actividades de SQA requeridas; (3) revisar y aprobar el plan de SQA; (4) <b>identificar los participantes</b> de SQA; (5) implementar las actividades de SQA según el plan; (6) monitorearlas; (7) <b>identificar los factores de calidad</b> para la implementación; (8) identificar, desarrollar y mantener la documentación del proyecto.</p><p class="ej"><b>Ej.:</b> el PM del app de Interbank define que los factores de calidad prioritarios son seguridad y disponibilidad 99,9 % (ISO/IEC 25010).</p></div>
+
+<div class="concepto"><h3>Pruebas (5 tareas)</h3><p>(1) Comentar el plan de SQA; (2) implementar la calidad en las pruebas según el plan; (3) resolver y dar seguimiento a asuntos de calidad de las pruebas del sistema; (4) <b>verificar que los factores de calidad se implementaron</b> en el sistema; (5) implementar las prácticas de pruebas según el <b>documento de pruebas</b> (STP, Software Test Plan).</p><p class="ej"><b>Ej.:</b> el equipo de testing verifica con JMeter que el login de SUNAT responda en &lt; 2 s, factor de eficiencia definido por el PM.</p></div>
+
+<div class="concepto"><h3>Diseño y codificación (5 tareas)</h3><p>(1) Comentar el plan; (2) implementar la calidad en diseño y codificación; (3) resolver asuntos de calidad de diseño, <b>arquitectura</b> y desarrollo; (4) <b>identificar, implementar y evaluar los factores de calidad</b>; (5) implementar diseño, arquitectura, desarrollo, procesos y procedimientos siguiendo los documentos de planeación.</p><p class="ej"><b>Ej.:</b> el arquitecto de Yape elige microservicios con circuit breaker para cumplir el factor de fiabilidad.</p></div>
+
+<div class="concepto"><h3>Administración de riesgos (4 tareas)</h3><p>(1) Dar seguimiento a los riesgos identificados; (2) buscar <b>medidas de contingencia</b>; (3) comentar el plan SQA; (4) <b>notificar al administrador del proyecto cuando un riesgo identificado se convierta en un problema</b> (issue).</p><p class="ej"><b>Ej.:</b> el riesgo «renuncia del único DBA» se materializa; el gestor de riesgos lo notifica al PM y activa el plan B (DBA de la consultora aliada).</p></div>
+
+<div class="concepto"><h3>Administrador de requerimientos (4 tareas)</h3><p>(1) Realizar la <b>ERS</b> (Especificación de Requerimientos de SW = SRS); (2) comentar el plan SQA; (3) implementar calidad en la ERS; (4) analizar los requerimientos.</p><p class="ej"><b>Ej.:</b> el analista del sistema de becas PRONABEC redacta la ERS según ISO/IEC/IEEE 29148 y elimina requisitos ambiguos como «rápido».</p></div>
+
+<div class="concepto"><h3>Métricas (4 tareas)</h3><p>(1) Realizar el <b>plan de métricas</b>; (2) evaluar las métricas recabadas a lo largo del proyecto; (3) comentar el plan SQA; (4) implementar la calidad en el plan de métricas.</p><p class="ej"><b>Ej.:</b> el analista de métricas mide densidad de defectos (defectos/KLOC) y MTTR por Sprint con un tablero en Grafana.</p></div>
+
+<div class="concepto"><h3>SCM – Administrador de Configuración (4 tareas)</h3><p>(1) Revisar y comentar el plan SQA; (2) implementar las actividades de calidad según el plan; (3) <b>resolver los problemas detectados por SQA relacionados con SCM</b>; (4) implementar lo definido en el <b>plan de SCM</b> (SCMP, Software Configuration Management Plan).</p><p class="ej"><b>Ej.:</b> SQA detecta que el release 2.3 no tiene etiqueta (tag) en Git; el SCM crea la línea base y corrige el procedimiento.</p></div>
+
+<div class="tabla"><table><thead><tr><th>#</th><th>Rol</th><th>N.º tareas</th><th>Tarea distintiva (para no confundir)</th></tr></thead><tbody>
+<tr><td>1</td><td>Administrador SQA</td><td>6</td><td>Auditar y reportar funciones SQA; garantizar calidad de entregables, documentación y procesos</td></tr>
+<tr><td>2</td><td>Gerente Técnico</td><td>5</td><td>«Para cada proyecto», políticas organizacionales; resolver conflictos; grupo independiente de auditoría</td></tr>
+<tr><td>3</td><td>Jefe de Proyecto</td><td>8</td><td>Identificar participantes de SQA; identificar factores de calidad; mantener documentación</td></tr>
+<tr><td>4</td><td>Pruebas</td><td>5</td><td>Verificar que los factores de calidad se implementaron; documento de pruebas</td></tr>
+<tr><td>5</td><td>Diseño y codificación</td><td>5</td><td>Identificar, implementar y evaluar factores de calidad; arquitectura</td></tr>
+<tr><td>6</td><td>Administración de riesgos</td><td>4</td><td>Contingencia; notificar cuando un riesgo se vuelve problema</td></tr>
+<tr><td>7</td><td>Administrador de requerimientos</td><td>4</td><td>Realizar la ERS e implementar calidad en ella</td></tr>
+<tr><td>8</td><td>Métricas</td><td>4</td><td>Plan de métricas; evaluar métricas recabadas</td></tr>
+<tr><td>9</td><td>SCM (Adm. de Configuración)</td><td>4</td><td>Resolver problemas detectados por SQA relacionados con SCM; plan de SCM</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuente: diapositivas 8–13, «Introducción al SQAP», Semana 04. Total: 9 roles, 45 tareas.</p>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p><b>Gerente Técnico vs Jefe de Proyecto:</b> ambos «establecen un programa de calidad» y «revisan y aprueban el plan SQA», pero el Gerente Técnico lo hace <b>para cada proyecto</b> (visión organizacional), <b>resuelve conflictos</b> e <b>identifica un grupo independiente de auditoría</b>; el Jefe de Proyecto lo hace para <b>el</b> proyecto, identifica <b>participantes</b> y <b>factores de calidad</b>. «Identificar factores» = Jefe de Proyecto; «identificar, implementar y <b>evaluar</b> factores» = Diseño y codificación; «<b>verificar</b> que se implementaron» = Pruebas.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>Casi todos los roles técnicos tienen «<b>Comentar</b> acerca del plan de SQA» (participan en su revisión). <b>Revisar y aprobar</b> el plan corresponde al Gerente Técnico y al Jefe de Proyecto (diap. 9); en la matriz (diap. 14) <b>aprobar</b> el Plan SQA lo hacen Admin SQA + Admin Proyecto.</p></div>
+</section>
+
+<section id="matriz-responsabilidades">
+<h2>4. Matriz de responsabilidades del SQAP</h2>
+
+<div class="concepto"><h3>Matriz de responsabilidades (tipo RACI simplificada)</h3><p>Tabla actividades × roles marcada con «X» (diap. 14–16). Columnas: <b>Admin SQA · Admin Proyecto · Adm de Conf. · Desarrollo/Diseño · Pruebas SW · Plan SQA · Req</b>. Es una RACI (Responsible, Accountable, Consulted, Informed – Responsable, Aprobador, Consultado, Informado) sin letras: solo indica participación.</p><p class="ej"><b>Ej.:</b> en la fila «Aprobar el Plan SQA» solo hay X en Admin SQA y Admin Proyecto: ellos firman el acta.</p></div>
+
+<figure><img src="@img/semana-04-introduccion-al-sqap/p14.png" alt="Matriz de responsabilidades: bloques Plan SQA (desarrollar, revisar, aprobar) y Revisión de productos de software, con X por rol"><figcaption>Bloques «Plan SQA» y «Revisión de productos de SW»: todos revisan; desarrollan/documentan y aprueban el Plan SQA Admin SQA + Admin Proyecto; aprueban el producto los mismos dos.</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 14, «Introducción al SQAP», Semana 04.</p>
+
+<figure><img src="@img/semana-04-introduccion-al-sqap/p15.png" alt="Matriz de responsabilidades: evaluar herramientas de software, resolver recomendaciones de auditoría y planificación del proyecto, seguimiento y supervisión"><figcaption>«Evaluar herramientas» (todos menos Admin Proyecto y Req), «Resolver recomendaciones de auditoría» (solo Admin Proyecto) y planificación (solo Admin Proyecto desarrolla y aprueba planes; todos revisan).</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 15, «Introducción al SQAP», Semana 04.</p>
+
+<figure><img src="@img/semana-04-introduccion-al-sqap/p16.png" alt="Matriz de responsabilidades del proceso de análisis de requerimientos del sistema"><figcaption>Análisis de requerimientos: Req desarrolla; Adm de Conf. define requisitos de SCM; todos revisan; aprueban Admin Proyecto + Req; solo Admin SQA evalúa/reporta el proceso; solo Admin Proyecto resuelve recomendaciones de auditoría.</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 16, «Introducción al SQAP», Semana 04 (captura de un SQAP académico publicado con Sphinx, ©2016).</p>
+
+<div class="tabla"><table><thead><tr><th>Bloque / actividad</th><th>Admin SQA</th><th>Admin Proy.</th><th>Adm Conf.</th><th>Des./Diseño</th><th>Pruebas SW</th><th>Plan SQA</th><th>Req</th></tr></thead><tbody>
+<tr><td>Desarrollar/Documentar Plan SQA</td><td>X</td><td>X</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Revisar Plan SQA</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+<tr><td>Aprobar Plan SQA</td><td>X</td><td>X</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Revisión de productos</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+<tr><td>Aprobar el producto</td><td>X</td><td>X</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Evaluar herramientas</td><td>X</td><td></td><td>X</td><td>X</td><td>X</td><td>X</td><td></td></tr>
+<tr><td>Resolver recomendaciones de auditoría</td><td></td><td>X</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Desarrollar/Documentar Plan de Desarrollo de SW y otros planes</td><td></td><td>X</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Revisar planes</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+<tr><td>Aprobar planes</td><td></td><td>X</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Desarrollar/Documentar requerimientos del sistema</td><td></td><td></td><td></td><td></td><td></td><td></td><td>X</td></tr>
+<tr><td>Requerimientos de Administración de la Configuración</td><td></td><td></td><td>X</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Revisar requerimientos del sistema</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+<tr><td>Aprobar requerimientos del sistema</td><td></td><td>X</td><td></td><td></td><td></td><td></td><td>X</td></tr>
+<tr><td>Evaluar/reportar proceso de análisis de req.</td><td>X</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Resolver recomendaciones de auditoría (req.)</td><td></td><td>X</td><td></td><td></td><td></td><td></td><td></td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Revisión participativa</h3><p>Patrón de la matriz: <b>toda fila «Revisar…» tiene X en las 7 columnas</b>. La calidad se construye con la mirada de todos los involucrados (enfoque TQM, S2), aunque la aprobación esté concentrada.</p><p class="ej"><b>Ej.:</b> la ERS del sistema de trámite documentario del Poder Judicial la revisan SQA, PM, SCM, devs, testers y analista antes de aprobarla.</p></div>
+
+<div class="concepto"><h3>Separación auditor / auditado</h3><p>«Resolver las recomendaciones de la auditoría» es <b>solo del Admin Proyecto</b> (aparece 2 veces). SQA audita y reporta; quien corrige es la gestión del proyecto. Si SQA resolviera sus propios hallazgos perdería objetividad.</p><p class="ej"><b>Ej.:</b> SQA reporta que faltan pruebas de regresión en el release del Banco de la Nación; el PM asigna la acción correctiva al equipo de testing.</p></div>
+
+<div class="concepto"><h3>Aseguramiento del proceso vs aseguramiento del producto</h3><p>«Evaluar/reportar el proceso de análisis de requerimientos» es <b>solo del Admin SQA</b>: SQA evalúa si el <b>proceso</b> se siguió (process assurance). En cambio, aprobar el <b>producto</b> lo hacen Admin SQA + Admin Proyecto (product assurance). Son 2 de las 3 áreas de IEEE 730-2014.</p><p class="ej"><b>Ej.:</b> SQA comprueba que la elicitación de RENIEC usó talleres y acta firmada (proceso), aunque no decide el contenido de cada requisito (producto).</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>Distractores típicos: «SQA aprueba los planes de desarrollo» (falso: solo Admin Proyecto), «SQA resuelve las recomendaciones de auditoría» (falso: Admin Proyecto), «Req aprueba solo él los requerimientos» (falso: Admin Proyecto + Req), «el Admin Proyecto evalúa herramientas» (falso: es de todos <b>menos</b> Admin Proyecto y Req).</p></div>
+</section>
+
+<section id="vv-en-el-sqap">
+<h2>5. Verificación y Validación (V&amp;V) dentro del SQAP</h2>
+
+<div class="concepto"><h3>Verificación</h3><p>«¿<b>Hacemos el producto bien</b>?» (building the product right, Boehm 1979): confirmar, mediante evidencia objetiva, que un producto de trabajo cumple su especificación y estándares. En la 12207 (diap. 13 del mazo de procesos): «comprobar que el SW <b>se construyó correctamente</b>».</p><p class="ej"><b>Ej.:</b> inspeccionar que el SDD del SIAF implemente las 12 reglas de la ERS (estático, contra especificación).</p></div>
+
+<div class="concepto"><h3>Validación</h3><p>«¿<b>Hacemos el producto correcto</b>?» (building the right product): confirmar que el producto satisface el uso previsto y la necesidad real del usuario en su entorno. En la 12207: «comprobar que <b>se construyó el SW correcto</b> para el usuario».</p><p class="ej"><b>Ej.:</b> cajeros del BCP usan el prototipo del nuevo sistema de ventanilla y confirman que reduce la atención de 6 a 3 min.</p></div>
+
+<figure><img src="@img/semana-04-introduccion-al-sqap/p06.png" alt="Tabla Matriz de Actividades de Verificación y Validación por fase: Requisitos, Diseño, Código y Producto"><figcaption>Matriz V&amp;V de la profesora: por cada fase una actividad de verificación (todas revisiones/inspecciones/auditorías) y una de validación (contraste con la necesidad o ejecución).</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 6, «Introducción al SQAP», Semana 04.</p>
+
+<div class="tabla"><table><thead><tr><th>Fase</th><th>Verificación (¿hacemos el producto bien?)</th><th>Validación (¿hacemos el producto correcto?)</th></tr></thead><tbody>
+<tr><td>Requisitos</td><td>Revisión de la especificación de requisitos</td><td>Prototipado con el usuario final</td></tr>
+<tr><td>Diseño</td><td>Inspección de la arquitectura del SW</td><td>Análisis de trazabilidad de requisitos</td></tr>
+<tr><td>Código</td><td>Revisión de código por pares (Code Review)</td><td>Pruebas unitarias ejecutadas</td></tr>
+<tr><td>Producto</td><td>Auditoría de configuración del SW</td><td>Pruebas de aceptación del usuario (UAT)</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Análisis de trazabilidad de requisitos (RTM)</h3><p>Comprobación de que cada requisito está enlazado hacia adelante (diseño, código, pruebas) y hacia atrás (necesidad del stakeholder) mediante una RTM (Requirements Traceability Matrix – Matriz de Trazabilidad de Requisitos). En la matriz de la profesora figura como <b>validación</b> en la fase de Diseño.</p><p class="ej"><b>Ej.:</b> la RTM del sistema de admisión muestra que el RF-07 «publicar resultados» no tiene ningún componente de diseño asociado.</p></div>
+
+<div class="concepto"><h3>UAT (User Acceptance Testing – Pruebas de Aceptación del Usuario)</h3><p>Pruebas ejecutadas por el usuario/cliente, en un entorno similar a PROD, para decidir si acepta el producto. Es la validación por excelencia en la fase Producto y la tarea de la actividad «Aceptación del Producto» del proceso de Adquisición de la 12207.</p><p class="ej"><b>Ej.:</b> en EduTech, los directores de colegio ingresan transacciones simuladas reales en staging y confirman que el dinero llega a la cuenta correcta.</p></div>
+
+<div class="concepto"><h3>Auditoría de configuración (FCA/PCA)</h3><p>Verificación en la fase Producto de que el ítem entregado coincide con su documentación: <b>FCA</b> (Functional Configuration Audit – auditoría funcional: el producto cumple los requisitos probados) y <b>PCA</b> (Physical Configuration Audit – auditoría física: el build entregado corresponde a la línea base y a su documentación). Complemento de IEEE 828/IEEE 1028.</p><p class="ej"><b>Ej.:</b> antes de entregar el release 3.0 a ESSALUD se comprueba que el .war desplegado corresponde al tag v3.0 y al manual v3.0 (PCA).</p></div>
+
+<div class="concepto"><h3>IV&amp;V (Independent Verification and Validation)</h3><p>V&amp;V realizada por una organización independiente técnica, gerencial y financieramente del desarrollador (IEEE 1012). Se exige en sistemas críticos (banca, salud, aviación).</p><p class="ej"><b>Ej.:</b> la SBS exige que una firma externa haga IV&amp;V del core bancario migrado de una caja municipal.</p></div>
+
+<div class="norma"><h4>IEEE Std 1012 — System, Software and Hardware Verification and Validation</h4>
+<ul>
+<li><b>Organismo:</b> IEEE. <b>Versiones:</b> 1986, 1998, 2004, 2012, <b>2016</b> (vigente, con revisiones posteriores).</li>
+<li><b>Propósito:</b> definir procesos, actividades y tareas de V&amp;V a lo largo del ciclo de vida y el contenido del SVVP (Software Verification and Validation Plan).</li>
+<li><b>Estructura:</b> niveles de integridad (1 a 4) que escalan el rigor de V&amp;V; tareas por proceso del ciclo de vida; independencia técnica, gerencial y financiera para IV&amp;V.</li>
+<li><b>Trampa:</b> en IEEE 1012 la trazabilidad y las pruebas unitarias se catalogan como tareas de <b>verificación</b>; la profesora las pone en la columna de <b>validación</b>. En el examen responde según la matriz de clase y, si piden justificar, explica la diferencia.</li>
+</ul></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>En la matriz de clase <b>todas las verificaciones son estáticas</b> (revisión, inspección, code review, auditoría) y las validaciones implican usuario o ejecución (prototipo, trazabilidad hacia la necesidad, pruebas unitarias ejecutadas, UAT). No asumas «verificación = sin usuario, validación = con usuario» en todos los casos: las pruebas unitarias no involucran usuario y aquí son validación. La regla de la clase es la tabla.</p></div>
+</section>
+
+<section id="piramide-y-metricas">
+<h2>6. Pirámide de pruebas y métricas de control del SQAP</h2>
+
+<div class="concepto"><h3>Pirámide de pruebas</h3><p>(Diap. 7) «Incluida en la <b>sección de control del SQAP</b>, define la <b>proporción ideal de los esfuerzos de prueba automatizados</b>». Cúspide: <b>Pruebas de Interfaz (UI)</b> – pocas y costosas; medio: <b>Integración / API</b> – medianas; base: <b>Unitarias</b> – muchas, rápidas y económicas. Atribuida a Mike Cohn (2009). Proporción orientativa 70/20/10 (complemento, no está en la diapositiva).</p><p class="ej"><b>Ej.:</b> el app de Rappi Perú tiene 1 800 tests Jest (unit), 300 de API con Supertest y 40 E2E con Cypress.</p></div>
+
+<figure><img src="@img/semana-04-introduccion-al-sqap/p07.png" alt="Pirámide de pruebas de tres niveles: Interfaz UI pocas y costosas arriba, Integración API medianas al centro, Unitarias muchas rápidas y económicas en la base"><figcaption>Pirámide de pruebas como parte de la sección de control del SQAP: el costo y la lentitud crecen hacia la cúspide; la cantidad crece hacia la base.</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 7, «Introducción al SQAP», Semana 04.</p>
+
+<div class="concepto"><h3>Antipatrón «cono de helado»</h3><p>Pirámide invertida: muchas pruebas manuales/UI y pocas unitarias. Produce suites lentas, frágiles (flaky) y costosas de mantener; retrasa el feedback del pipeline CI/CD.</p><p class="ej"><b>Ej.:</b> un ERP municipal con 500 casos manuales de Selenium y 20 unitarias tarda 3 días en regresión: cono de helado.</p></div>
+
+<div class="concepto"><h3>Cobertura de código (code coverage)</h3><p>Porcentaje de líneas/ramas ejecutadas por las pruebas automatizadas. Métrica de control del SQAP y criterio del quality gate (C1: ≥ 85 %; AlfaShop: ≥ 80 % en componentes críticos del back-end).</p><p class="ej"><b>Ej.:</b> si el módulo de pagos tiene 1 000 líneas y las pruebas ejecutan 820, la cobertura es 82 %.</p></div>
+
+<div class="concepto"><h3>Densidad de defectos</h3><p>Defectos encontrados ÷ tamaño (KLOC, miles de LOC – Lines of Code, o puntos de función). AlfaShop exige &lt; 0,5 fallos por cada 1 000 líneas de código <b>modificadas</b>.</p><p class="ej"><b>Ej.:</b> 6 defectos en un release que modificó 15 KLOC → 0,4 def/KLOC → cumple.</p></div>
+
+<div class="concepto"><h3>MTTR (Mean Time To Repair/Resolve – Tiempo Medio de Reparación/Resolución)</h3><p>Promedio del tiempo desde que se reporta un defecto/incidente hasta que se resuelve. En AlfaShop: bugs bloqueantes corregidos en &lt; 4 horas. Es una métrica DORA (DevOps Research and Assessment) junto con frecuencia de despliegue, lead time y tasa de fallo de cambios.</p><p class="ej"><b>Ej.:</b> 3 bloqueantes resueltos en 2 h, 5 h y 2 h → MTTR = 3 h → cumple &lt; 4 h.</p></div>
+
+<div class="concepto"><h3>Criterios de entrada y salida (entry/exit criteria)</h3><p>(Diap. 19) Condiciones exactas para iniciar y dar por aprobada una fase de pruebas. Ejemplo de clase: «<b>cero defectos críticos abiertos</b>». Convierten la calidad en decisión objetiva (go/no-go).</p><p class="ej"><b>Ej.:</b> entrada a UAT de SUNAT: build estable y regresión ≥ 95 %; salida: 0 críticos, ≤ 3 mayores con workaround.</p></div>
+
+<div class="concepto"><h3>Quality Gate (QG – puerta de calidad)</h3><p>Conjunto de umbrales que un build debe superar para avanzar en el pipeline (p. ej., en SonarQube: cobertura del código nuevo ≥ 80 %, 0 bugs/vulnerabilidades nuevas críticas, duplicación &lt; 3 %). Si falla, el pipeline se detiene.</p><p class="ej"><b>Ej.:</b> en la DoD de C1, «SonarQube califica el código con Quality Gate: PASSED (sin deuda técnica crítica)».</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>La pirámide aparece en la <b>sección de control</b> del SQAP (no en la de organización ni en la de estándares). Y define la proporción de esfuerzos de prueba <b>automatizados</b>.</p></div>
+</section>
+<section id="elementos-sqap">
+<h2>7. Los 7 elementos claves de un SQAP y la plantilla IEEE 730</h2>
+
+<div class="concepto"><h3>Elemento 1 · Propósito y Alcance</h3><p><b>Establecer objetivos</b> (qué se espera lograr; p. ej. «reducir la tasa de fallos en producción a menos del 2 %» o cumplir regulaciones) y <b>delimitar el alcance</b> (qué componentes, módulos o fases están cubiertos <b>y cuáles quedan fuera</b>).</p><p class="ej"><b>Ej.:</b> SQAP del app de Yape: cubre front móvil y API de transferencias; excluye el core del BCP (gestionado por otro SQAP).</p></div>
+
+<div class="concepto"><h3>Elemento 2 · Roles y Responsabilidades</h3><p><b>Asignar el equipo de QA</b> (ingenieros QA, líderes de prueba, auditores) y <b>fijar responsabilidades</b>: quién aprueba entregables, quién audita procesos y quién mitiga los riesgos de calidad.</p><p class="ej"><b>Ej.:</b> «QA Lead aprueba criterios de aceptación; PM aprueba el release; DevOps mitiga riesgos de disponibilidad».</p></div>
+
+<div class="concepto"><h3>Elemento 3 · Estándares y Metodologías</h3><p><b>Elegir el marco</b>: <b>IEEE 730 para SQAP</b>, <b>ISO/IEC 25010 para calidad de producto</b>, o metodologías ágiles/DevOps; y <b>definir guías internas</b>: reglas de codificación (clean code), estándares de documentación y convenciones de control de versiones de cumplimiento <b>obligatorio</b>.</p><p class="ej"><b>Ej.:</b> AlfaShop adopta Airbnb JavaScript Style Guide + ESLint/Prettier y HU en formato Gherkin.</p></div>
+
+<div class="concepto"><h3>Elemento 4 · Actividades de Revisión y Auditoría</h3><p><b>Revisiones técnicas formales</b> (code reviews, revisiones de arquitectura, validación de requerimientos) y <b>auditorías de proceso</b> con calendario para verificar que el equipo <b>realmente siga el proceso acordado</b>.</p><p class="ej"><b>Ej.:</b> el QA Lead de AlfaShop audita al final de cada Sprint que ninguna HU pasó a Done sin cumplir la DoD.</p></div>
+
+<div class="concepto"><h3>Elemento 5 · Proceso de Pruebas</h3><p><b>Tipos de prueba</b> (unitarias, integración, funcionales, rendimiento, seguridad, aceptación) y <b>criterios de éxito</b> con condiciones exactas de entrada y salida (p. ej. «cero defectos críticos abiertos»).</p><p class="ej"><b>Ej.:</b> AlfaShop: despliegue a PROD solo con 0 críticos, 100 % E2E críticas en verde y regresión ≥ 98 %.</p></div>
+
+<div class="concepto"><h3>Elemento 6 · Gestión de Configuración y Cambios</h3><p><b>Control de versiones</b> (Git branching model: GitFlow, GitHub Flow, trunk-based) y <b>control de cambios</b>: el flujo de un cambio o reporte de error <b>desde que se detecta hasta que se despliega la solución en producción</b>.</p><p class="ej"><b>Ej.:</b> bug en Jira → rama fix/123 → PR con 2 aprobaciones → CI verde → merge a main → despliegue automático.</p></div>
+
+<div class="concepto"><h3>Elemento 7 · Métricas y Herramientas</h3><p><b>Métricas de calidad</b> (cobertura de código, densidad de defectos, tiempo de resolución de bugs) y <b>herramientas</b> (stack): Jira para seguimiento, SonarQube para análisis estático, Selenium o Cypress para automatización.</p><p class="ej"><b>Ej.:</b> AlfaShop: Jira Software, SonarQube (QG estricto), GitHub Actions (CI), Jest, Cypress y Supertest.</p></div>
+
+<div class="tabla"><table><thead><tr><th>#</th><th>Elemento clave (clase)</th><th>Sub-elementos</th><th>Sección equivalente IEEE 730-2002</th></tr></thead><tbody>
+<tr><td>1</td><td>Propósito y Alcance</td><td>Establecer objetivos · Delimitar alcance</td><td>1 Propósito</td></tr>
+<tr><td>2</td><td>Roles y Responsabilidades</td><td>Asignar equipo de QA · Fijar responsabilidades</td><td>3 Gestión (organización, tareas, roles)</td></tr>
+<tr><td>3</td><td>Estándares y Metodologías</td><td>Elegir marco · Definir guías internas</td><td>5 Estándares, prácticas, convenciones y métricas</td></tr>
+<tr><td>4</td><td>Revisión y Auditoría</td><td>Revisiones técnicas formales · Auditorías de proceso</td><td>6 Revisiones de SW</td></tr>
+<tr><td>5</td><td>Proceso de Pruebas</td><td>Tipos de prueba · Criterios de éxito</td><td>7 Pruebas</td></tr>
+<tr><td>6</td><td>Configuración y Cambios</td><td>Control de versiones · Control de cambios</td><td>8 Reporte de problemas y acciones correctivas (+ SCMP)</td></tr>
+<tr><td>7</td><td>Métricas y Herramientas</td><td>Métricas de calidad · Herramientas</td><td>5 (métricas) y 9 Herramientas, técnicas y metodologías</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuente: diapositivas 17–20, «Introducción al SQAP», Semana 04; columna derecha: complemento IEEE 730-2002.</p>
+
+<div class="concepto"><h3>Contenido mínimo del SQAP según IEEE 730-2002 (16 secciones)</h3><p>1 Propósito · 2 Documentos de referencia · 3 Gestión · 4 Documentación (mínimo SRS, SDD, SVVP, SVVR, documentación de usuario, SCMP) · 5 Estándares, prácticas, convenciones y métricas · 6 Revisiones de SW (SRR, PDR, CDR, revisión del SVVP, auditoría funcional, auditoría física, auditorías en proceso, revisiones de gestión, revisión del SCMP, revisión post-implementación PIR) · 7 Pruebas · 8 Reporte de problemas y acciones correctivas · 9 Herramientas, técnicas y metodologías · 10 Control de medios · 11 Control de proveedores · 12 Registros (recolección, mantenimiento, retención) · 13 Capacitación · 14 Gestión de riesgos · 15 Glosario · 16 Procedimiento de cambios e historial del SQAP. (Complemento.)</p><p class="ej"><b>Ej.:</b> un SQAP para un contrato con el Estado peruano suele exigir «Control de proveedores» (sección 11) cuando parte del desarrollo se terceriza.</p></div>
+
+<div class="concepto"><h3>SRR / PDR / CDR (revisiones de hitos)</h3><p>SRR (Software Requirements Review – revisión de requisitos), PDR (Preliminary Design Review – revisión de diseño preliminar), CDR (Critical Design Review – revisión de diseño crítico/detallado). Revisiones formales mínimas de IEEE 730-2002 que actúan como puertas entre fases.</p><p class="ej"><b>Ej.:</b> el proyecto de un sistema de tráfico aéreo de CORPAC no pasa a codificar sin aprobar el CDR.</p></div>
+
+<div class="concepto"><h3>IEEE 730-2014: tres áreas de actividades de SQA</h3><p>(1) <b>Implementación del proceso de SQA</b> (establecer procesos SQA, coordinar con procesos relacionados, documentar la planificación — el SQAP —, ejecutarlo, gestionar registros, evaluar la independencia y objetividad organizacional); (2) <b>Aseguramiento del producto</b> (evaluar planes, producto y soporte del ciclo de vida para conformidad y aceptabilidad; medir productos); (3) <b>Aseguramiento del proceso</b> (evaluar procesos del ciclo de vida, entornos y procesos de subcontratistas; medir procesos; evaluar habilidades del personal).</p><p class="ej"><b>Ej.:</b> «evaluar procesos del subcontratista» aplica cuando el BCP terceriza el QA de su app a una consultora india.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>Los 7 «elementos claves» son la versión <b>didáctica</b> de la profesora, no la numeración oficial de IEEE 730 (que en 2002 tenía 16 secciones). Si una pregunta dice «según la clase, el elemento 6 del SQAP es…», la respuesta es <b>Gestión de Configuración y Cambios</b>. No confundas el orden 4 (Revisión/Auditoría) con 5 (Pruebas).</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>En el elemento 3 la clase pone <b>IEEE 730 para SQAP</b> e <b>ISO/IEC 25010 para calidad de producto</b>. Un distractor clásico invierte los papeles («ISO/IEC 25010 para el plan, IEEE 730 para el producto»).</p></div>
+</section>
+
+<section id="sqap-agil">
+<h2>8. El SQAP en entornos ágiles (Scrum + DevOps)</h2>
+<p>En metodologías tradicionales el SQAP era un <b>documento estático de cien páginas</b>; en Scrum/DevOps se vuelve <b>dinámico y automatizado</b> y se integra en el pipeline de <b>CI/CD (Continuous Integration / Continuous Delivery-Deployment – Integración y Entrega/Despliegue Continuos)</b>.</p>
+
+<figure><img src="@img/semana-04-ejemplo-ejemplos-con-sqap/p01.png" alt="Página del documento Ejemplos aplicados con el SQAP: eventos Scrum, diagrama del pipeline CI/CD en cuatro etapas y primeros criterios de la Definition of Done"><figcaption>El SQAP «cobra vida programáticamente» en cada Push o Pull Request: 1 análisis estático (SonarQube) → 2 pruebas unitarias (si la cobertura es menor al % del SQAP, el pipeline falla) → 3 revisión por pares → 4 despliegue a QA con E2E en Cypress.</figcaption></figure>
+<p class="fuente">Fuente: página 1, «Ejemplos aplicados con el SQAP», Semana 04.</p>
+
+<div class="concepto"><h3>DoR (Definition of Ready – Definición de Listo)</h3><p>Criterios que una HU (Historia de Usuario) debe cumplir para entrar a un Sprint: clara, estimada, con criterios de aceptación y dependencias resueltas. En C1 el equipo de QA colabora en el <b>Sprint Planning</b> definiendo los criterios de aceptación y asegurando una DoR clara.</p><p class="ej"><b>Ej.:</b> la HU «pagar con Yape» no entra al Sprint sin el criterio Gherkin «Dado un saldo ≥ monto, cuando confirmo, entonces…».</p></div>
+
+<div class="concepto"><h3>DoD (Definition of Done – Definición de Terminado)</h3><p>Lista de control que todo incremento debe cumplir para considerarse terminado; en C1 está <b>dictada por los estándares del SQAP</b> y se valida en la <b>Sprint Review</b>. DoD de clase (5 criterios): (1) peer review sin observaciones pendientes; (2) cobertura unitaria <b>≥ 85 %</b>; (3) SonarQube <b>Quality Gate: PASSED</b> sin deuda técnica crítica; (4) regresión automatizada con <b>100 % de éxito</b>; (5) documentación técnica actualizada en <b>Wiki/Confluence</b>.</p><p class="ej"><b>Ej.:</b> una HU con 84 % de cobertura no pasa a Done aunque funcione en la demo.</p></div>
+
+<div class="concepto"><h3>SQAP en los eventos de Scrum</h3><p><b>Sprint Planning</b>: QA define criterios de aceptación y DoR. <b>Daily</b>: se monitorean bloqueos del entorno de pruebas o defectos críticos que detienen el flujo. <b>Sprint Review</b>: se valida el incremento contra la DoD del SQAP. (La Retrospective no se menciona en el ejemplo; es el espacio natural de mejora PDCA del proceso.)</p><p class="ej"><b>Ej.:</b> en la Daily del squad de Interbank se reporta «staging caído desde ayer», bloqueo que SQA registra como riesgo.</p></div>
+
+<div class="concepto"><h3>Pipeline CI/CD como SQAP ejecutable</h3><p>Cada etapa automatiza un control del plan: (1) <b>Análisis estático</b> (SonarQube: guías de estilo y vulnerabilidades, técnica estática automática, SAST – Static Application Security Testing); (2) <b>Pruebas unitarias</b> (dinámica automática; si la cobertura &lt; % del SQAP, falla); (3) <b>Revisión por pares</b> (estática manual: un compañero aprueba el diseño del código); (4) <b>Despliegue a QA</b> (entorno automático, pruebas funcionales y E2E – End-to-End con Cypress).</p><p class="ej"><b>Ej.:</b> un PR en GitHub de Plaza Vea dispara GitHub Actions; el QG falla por 2 code smells críticos y el merge se bloquea.</p></div>
+
+<div class="concepto"><h3>DevOps</h3><p>Cultura y conjunto de prácticas que integra Desarrollo (Dev) y Operaciones (Ops) para entregar cambios frecuentes y confiables mediante automatización (CI/CD, IaC – Infrastructure as Code, monitoreo). En calidad, desplaza los controles «a la izquierda» (shift-left) dentro del pipeline.</p><p class="ej"><b>Ej.:</b> EduTech despliega con Terraform (IaC) y monitorea con Grafana; las pruebas corren en cada commit.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>DoR se trabaja en el <b>Sprint Planning</b>; DoD se valida en la <b>Sprint Review</b>. En el pipeline de clase el orden es <b>estático → unitarias → revisión por pares → despliegue a QA</b>: la revisión humana va después de los controles automáticos (para no gastar tiempo humano en código que ni compila ni pasa tests).</p></div>
+</section>
+
+<section id="sqap-alfashop">
+<h2>9. Ejemplo de SQAP con plantilla IEEE 730: e-commerce «AlfaShop»</h2>
+<p>Proyecto: plataforma e-commerce AlfaShop · Versión 1.0 · 27/09/2026 · Responsable: Equipo de QA &amp; DevOps. Sus 7 secciones coinciden, en el mismo orden, con los 7 elementos claves de la clase.</p>
+
+<div class="tabla"><table><thead><tr><th>Sección</th><th>Contenido de AlfaShop</th><th>Cifras / herramientas a memorizar</th></tr></thead><tbody>
+<tr><td>1 Propósito y Alcance</td><td>Plataforma segura, rápida y libre de defectos críticos antes del lanzamiento. Alcance: Front-end React, Back-end Node.js/Express, pasarela Stripe. <b>Excluye</b> pruebas de carga de servidores de BD de respaldo (proveedor de nube).</td><td>React · Node.js/Express · Stripe</td></tr>
+<tr><td>2 Organización</td><td>1 QA Lead, 2 QA Automation, 4 Desarrolladores, 1 DevOps (8 personas). QA Lead aprueba criterios de aceptación y audita el proceso <b>semanalmente</b>; QA Automation mantiene scripts E2E y de API; devs ejecutan pruebas unitarias locales y corrigen con prioridad.</td><td>1 + 2 + 4 + 1 = 8</td></tr>
+<tr><td>3 Estándares</td><td>Airbnb JavaScript Style Guide obligatoria; Prettier + ESLint; HU en Jira con 3 secciones: «Como/quiero/para», criterios en Gherkin (Given-When-Then) y Riesgos Asociados.</td><td>3 secciones por HU</td></tr>
+<tr><td>4 Revisiones y Auditorías</td><td>Peer review en GitHub con voto de <b>≥ 2 desarrolladores séniores</b> antes de fusionar; auditoría rápida del QA Lead al final de cada Sprint (<b>cada 2 semanas</b>).</td><td>2 séniores · Sprint de 2 semanas</td></tr>
+<tr><td>5 Pruebas</td><td>Unitarias con Jest; API con Postman/Newman; E2E de flujos críticos (Login, Carrito, Pago) con Cypress. Despliegue: 0 críticos/bloqueantes abiertos, 100 % E2E críticas en verde, regresión ≥ 98 %.</td><td>0 · 100 % · 98 %</td></tr>
+<tr><td>6 Configuración y Cambios</td><td>GitHub Flow (feature branches cortas → main vía PR validados). Bug en Jira con 5 campos: pasos para reproducir, resultado esperado, resultado obtenido, captura/log, severidad (Bloqueante, Alta, Media, Baja).</td><td>5 campos · 4 severidades</td></tr>
+<tr><td>7 Métricas y Herramientas</td><td>Cobertura ≥ 80 % en componentes críticos del back-end; densidad &lt; 0,5 fallos/1 000 LOC modificadas; MTTR de bloqueantes &lt; 4 h. Stack: Jira, SonarQube (QG estricto), GitHub Actions, Jest, Cypress, Supertest.</td><td>80 % · 0,5/KLOC · 4 h</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuente: páginas 2–3, «Ejemplos aplicados con el SQAP», Semana 04.</p>
+
+<div class="concepto"><h3>Gherkin (Given-When-Then)</h3><p>Lenguaje estructurado de BDD (Behavior-Driven Development) para escribir criterios de aceptación ejecutables: <b>Given</b> (dado un contexto), <b>When</b> (cuando ocurre una acción), <b>Then</b> (entonces se espera un resultado).</p><p class="ej"><b>Ej.:</b> Dado un carrito con S/ 120, cuando aplico el cupón ALFA10, entonces el total es S/ 108.</p></div>
+
+<div class="concepto"><h3>GitHub Flow</h3><p>Estrategia de ramas ligera: una rama <b>main</b> siempre desplegable y ramas de característica (feature branches) cortas que se integran por PR (Pull Request) revisado y validado por CI. Más simple que GitFlow (que usa develop, release y hotfix).</p><p class="ej"><b>Ej.:</b> feature/cupones → PR → 2 aprobaciones séniores + GitHub Actions verde → merge a main.</p></div>
+
+<div class="concepto"><h3>Severidad de un defecto</h3><p>Grado de impacto del defecto sobre el sistema (Bloqueante, Alta, Media, Baja en AlfaShop). No confundir con <b>prioridad</b> (urgencia de corrección según el negocio).</p><p class="ej"><b>Ej.:</b> el botón «Pagar» no responde → Bloqueante; logo pixelado en la home → Baja severidad, aunque marketing le dé prioridad alta.</p></div>
+
+<div class="concepto"><h3>Exclusión del alcance y riesgo de proveedor</h3><p>Declarar qué queda fuera evita expectativas falsas, pero traslada el riesgo a un tercero: debe cubrirse con un SLA (Service Level Agreement – Acuerdo de Nivel de Servicio) y con «control de proveedores» (sección 11 de IEEE 730-2002).</p><p class="ej"><b>Ej.:</b> AlfaShop excluye la carga de la BD de respaldo; si el proveedor de nube no garantiza un RTO por SLA, el riesgo queda sin dueño.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen (análisis crítico de AlfaShop)</h4><ul>
+<li><b>Inconsistencia de frecuencia:</b> 2.2 dice que el QA Lead audita «semanalmente»; 4.2 dice «al final de cada Sprint (cada 2 semanas)».</li>
+<li><b>Umbrales distintos entre ejemplos:</b> C1 exige cobertura ≥ 85 % y regresión 100 %; AlfaShop exige ≥ 80 % (solo componentes críticos del back-end) y ≥ 98 %. La calidad es contextual: cada SQAP fija su umbral.</li>
+<li><b>Peer review:</b> C1 basta 1 compañero; AlfaShop exige 2 séniores con solo 4 devs → posible cuello de botella.</li>
+<li><b>Ausencias:</b> el propósito pide «segura, rápida», pero no hay pruebas de seguridad (SAST/DAST, PCI DSS para pagos con tarjeta) ni de rendimiento; no hay sección propia de gestión de riesgos ni flujo completo de control de cambios.</li>
+<li><b>Duplicidad:</b> Postman/Newman (5.1) y Supertest (7.2) cubren ambos pruebas de API.</li>
+<li><b>Pirámide respetada:</b> muchas unitarias (Jest), intermedias de API, pocas E2E (3 flujos críticos con Cypress).</li>
+</ul></div>
+</section>
+<section id="iso-12207-introduccion">
+<h2>10. ISO/IEC/IEEE 12207:2017: historia, definición, propósito y destinatarios</h2>
+
+<div class="concepto"><h3>ISO/IEC/IEEE 12207:2017 (definición de clase)</h3><p>«Estándar internacional que define un conjunto exhaustivo de <b>procesos, actividades y tareas</b> orientadas a mejorar el <b>desarrollo, adquisición, operación y mantenimiento</b> de los sistemas de SW. La versión 2017 <b>alinea la ingeniería de SW con la ingeniería de sistemas</b> (integrándose con la <b>ISO/IEC 15288</b>) y se adapta a metodologías modernas como <b>marcos ágiles y DevOps</b>». Jerarquía: proceso → actividades → tareas. Dice QUÉ procesos deben existir, no impone un modelo de ciclo de vida (cascada, incremental, ágil).</p><p class="ej"><b>Ej.:</b> una startup limeña que usa Scrum puede declarar conformidad adaptada con la 12207 sin abandonar sus Sprints.</p></div>
+
+<div class="concepto"><h3>Historia de versiones</h3><p>(Diap. 3) 1.ª edición <b>1995</b>; modificaciones en <b>2002 y 2004</b> (Enmiendas 1 y 2); 2.ª edición <b>febrero 2008</b>; 3.ª edición <b>noviembre 2017</b>, trabajo conjunto de ISO (International Organization for Standardization), IEC (International Electrotechnical Commission) e IEEE. En Perú, INACAL adoptó la versión 2008 como NTP-ISO/IEC 12207:2016 (S5).</p><p class="ej"><b>Ej.:</b> pregunta trampa: «¿qué edición incorporó al IEEE como coautor?» → la 3.ª (2017).</p></div>
+
+<div class="tabla"><table><thead><tr><th>Versión</th><th>Año</th><th>Estructura (complemento)</th></tr></thead><tbody>
+<tr><td>ISO/IEC 12207:1995 (1.ª)</td><td>1995</td><td>17 procesos en 3 categorías: primarios (5), de apoyo (8), organizacionales (4)</td></tr>
+<tr><td>Amd 1 / Amd 2</td><td>2002 / 2004</td><td>Añaden propósito y resultados a los procesos para usarlos como PRM de ISO/IEC 15504</td></tr>
+<tr><td>ISO/IEC 12207:2008 (2.ª)</td><td>feb-2008</td><td>43 procesos en 7 grupos (4 de contexto del sistema + 3 específicos de SW: implementación, soporte y reúso)</td></tr>
+<tr><td>ISO/IEC/IEEE 12207:2017 (3.ª)</td><td>nov-2017</td><td><b>30 procesos en 4 grupos</b>, idénticos en estructura a ISO/IEC/IEEE 15288:2015</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Propósito de la 12207</h3><p>(Diap. 5) «Proporcionar una <b>estructura común</b> para que exista un <b>lenguaje común</b> entre: compradores, proveedores, desarrolladores, personal de mantenimiento, operadores, gestores y técnicos, y todos los involucrados en el desarrollo del SW». No certifica productos: unifica vocabulario de procesos.</p><p class="ej"><b>Ej.:</b> cuando el MINEDU (comprador) y una consultora (proveedor) dicen «proceso de Validación», ambos entienden lo mismo gracias a la 12207.</p></div>
+
+<figure><img src="@img/semana-04-modelos-de-mejora-del-proceso-de-sw/p05.png" alt="Diapositiva Propósito: proporcionar una estructura común para un lenguaje común entre compradores, proveedores, desarrolladores, personal de mantenimiento, operadores, gestores y técnicos"><figcaption>Propósito: estructura común → lenguaje común entre todos los actores del ciclo de vida del SW.</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 5, «Modelos de Mejora del Proceso de Desarrollo de SW», Semana 04.</p>
+
+<div class="concepto"><h3>Destinatarios de la 12207 (4)</h3><p>(Diap. 6) <b>Organización de SW</b>: ayudar a establecer un entorno de trabajo. <b>Proyecto</b>: seleccionar una infraestructura y emplear todos los elementos de un ciclo de vida establecido. <b>Comprador o proveedor</b>: desarrollar un acuerdo sobre los procesos y actividades a manejar. <b>Asesores</b>: realizar evaluaciones que apoyen la mejora de los procesos de la organización.</p><p class="ej"><b>Ej.:</b> un asesor contratado por PRODUCE usa la 12207 como PRM para evaluar a 10 mypes de SW antes de un programa de mejora (asesores).</p></div>
+
+<figure><img src="@img/semana-04-modelos-de-mejora-del-proceso-de-sw/p06.png" alt="Esquema de cuatro recuadros: Una organización de software, Un proyecto, Un comprador o proveedor y Asesores, cada uno con su finalidad"><figcaption>A quién está dirigida la 12207: organización (entorno de trabajo), proyecto (infraestructura y ciclo de vida), comprador/proveedor (acuerdo sobre procesos) y asesores (evaluaciones para mejorar).</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 6, «Modelos de Mejora del Proceso de Desarrollo de SW», Semana 04.</p>
+
+<div class="concepto"><h3>Adaptación (tailoring) y conformidad</h3><p>La 12207:2017 permite adaptar procesos (Anexo A) a las características del proyecto u organización. Se declara <b>conformidad plena</b> (todos los procesos/resultados requeridos) o <b>conformidad adaptada</b> (subconjunto justificado). (Complemento.)</p><p class="ej"><b>Ej.:</b> una pyme sin productos en retiro omite el proceso de Retirada y lo justifica: conformidad adaptada.</p></div>
+
+<div class="norma"><h4>ISO/IEC/IEEE 12207:2017 — Systems and software engineering — Software life cycle processes</h4>
+<ul>
+<li><b>Organismos:</b> ISO + IEC (comité conjunto ISO/IEC JTC 1/SC 7) + IEEE Computer Society.</li>
+<li><b>Versión:</b> 3.ª edición, noviembre 2017; reemplaza a ISO/IEC 12207:2008 e IEEE Std 12207-2008.</li>
+<li><b>Propósito:</b> marco común de procesos del ciclo de vida del SW; lenguaje común entre adquirientes, proveedores y demás partes; base para establecer, evaluar (PRM) y mejorar procesos.</li>
+<li><b>Estructura:</b> 4 grupos y 30 procesos: Acuerdo (2), Habilitación de proyectos organizacionales (6), Gestión técnica (8), Técnicos (14). Cada proceso: título, propósito, resultados (outcomes), actividades y tareas. Gemela de ISO/IEC/IEEE 15288.</li>
+<li><b>Trampa:</b> atribuirle 43 procesos en 7 grupos (eso es la 2008) o 17 procesos en primarios/apoyo/organizacionales (eso es la 1995). Tampoco tiene niveles de madurez.</li>
+</ul></div>
+
+<div class="norma"><h4>ISO/IEC/IEEE 15288 — System life cycle processes</h4>
+<ul>
+<li><b>Organismos:</b> ISO/IEC JTC 1/SC 7 + IEEE. <b>Versiones:</b> 2002, 2008, <b>2015</b>, 2023.</li>
+<li><b>Propósito:</b> procesos del ciclo de vida de <b>sistemas</b> (HW + SW + personas + procedimientos).</li>
+<li><b>Estructura:</b> los mismos 4 grupos y 30 procesos que la 12207:2017; la 12207 los aplica a sistemas de SW.</li>
+<li><b>Trampa:</b> la 15288 no es «la versión antigua» de la 12207; son normas hermanas (sistemas vs SW) alineadas en 2015/2017.</li>
+</ul></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>En portadas y en el caso EduTech la profesora escribe «ISO/IEC 12207:2017» o «ISO 12207:2017»; el nombre exacto es <b>ISO/IEC/IEEE 12207:2017</b>. Y la NTP peruana (S5) es <b>NTP-ISO/IEC 12207:2016</b>, adopción de la versión 2008, no de la 2017.</p></div>
+</section>
+
+<section id="iso-12207-estructura">
+<h2>11. Estructura de la 12207:2017: 4 categorías, 30 procesos y atributos</h2>
+
+<figure><img src="@img/semana-04-modelos-de-mejora-del-proceso-de-sw/p07.png" alt="Cuadrícula de dos por dos: Procesos de Acuerdo, Procesos de habilitación de proyectos organizacionales, Procesos de gestión técnica y Procesos técnicos"><figcaption>Las 4 grandes categorías de la ISO/IEC/IEEE 12207:2017, que contienen en total 30 procesos. Aquí con sus nombres oficiales: «gestión técnica» y «habilitación de proyectos organizacionales».</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 7, «Modelos de Mejora del Proceso de Desarrollo de SW», Semana 04.</p>
+
+<div class="concepto"><h3>Categoría (grupo) de procesos</h3><p>Agrupación de procesos con una finalidad común. La 12207:2017 tiene 4: <b>Acuerdo</b> (relaciones comprador-proveedor), <b>Habilitación organizacional</b> (capacidad y recursos de la organización), <b>Gestión técnica / de proyectos</b> (planificar, controlar y apoyar un proyecto) y <b>Técnicos</b> (transformar requisitos en producto y operarlo hasta su retiro).</p><p class="ej"><b>Ej.:</b> «firmar el contrato con SUNAT» → Acuerdo; «capacitar a los devs en OWASP» → Habilitación (RR.HH.); «medir el avance vs línea base» → Gestión; «desplegar» → Técnicos (Transición).</p></div>
+
+<div class="concepto"><h3>Atributos de cada proceso (5)</h3><p>(Diap. 8) <b>Título</b>: transmite el alcance de todo el proceso. <b>Propósito</b>: define las metas de ejecutar el proceso. <b>Salidas</b> (outcomes): resultado observable esperado de la ejecución exitosa. <b>Actividades</b>: conjunto de tareas cohesivas. <b>Tareas</b>: requerimientos, recomendaciones o acciones que conllevan al logro de los resultados.</p><p class="ej"><b>Ej.:</b> Gestión de Riesgos → Propósito: identificar, analizar, tratar y monitorear riesgos; Salida: «los riesgos se identifican y se tratan»; Actividad: Tratamiento; Tarea: «establecer planes de mitigación o contingencia».</p></div>
+
+<figure><img src="@img/semana-04-modelos-de-mejora-del-proceso-de-sw/p08.png" alt="Diapositiva con los atributos de cada proceso: Título, Propósito, Salidas, Actividades y Tareas"><figcaption>Anatomía de un proceso en la 12207: Título → Propósito → Salidas (outcomes) → Actividades → Tareas.</figcaption></figure>
+<p class="fuente">Fuente: diapositiva 8, «Modelos de Mejora del Proceso de Desarrollo de SW», Semana 04.</p>
+
+<div class="concepto"><h3>Salida / resultado (outcome)</h3><p>Resultado observable de la ejecución exitosa de un proceso. Puede ser un <b>estado</b> («los riesgos están identificados»), un cambio significativo o la producción de un artefacto. No es sinónimo de «documento» ni de «producto de trabajo» (work product).</p><p class="ej"><b>Ej.:</b> outcome de Gestión de la Configuración: «los ítems bajo control están identificados y sus cambios controlados»; evidencia: repositorio Git con tags.</p></div>
+
+<div class="tabla"><table><thead><tr><th>Grupo (cláusula)</th><th>N.º</th><th>Procesos oficiales</th></tr></thead><tbody>
+<tr><td>6.1 Acuerdo (Agreement)</td><td>2</td><td>6.1.1 Adquisición · 6.1.2 Suministro</td></tr>
+<tr><td>6.2 Habilitación de proyectos organizacionales (Organizational Project-Enabling)</td><td>6</td><td>6.2.1 Gestión del Modelo de Ciclo de Vida · 6.2.2 Gestión de la Infraestructura · 6.2.3 Gestión de la Cartera de Proyectos · 6.2.4 Gestión de RR.HH. · 6.2.5 Gestión de la Calidad · 6.2.6 Gestión del Conocimiento</td></tr>
+<tr><td>6.3 Gestión técnica (Technical Management)</td><td>8</td><td>6.3.1 Planificación del Proyecto · 6.3.2 Evaluación y Control del Proyecto · 6.3.3 Gestión de Decisiones · 6.3.4 Gestión de Riesgos · 6.3.5 Gestión de la Configuración · 6.3.6 Gestión de la Información · 6.3.7 Medición · 6.3.8 Aseguramiento de la Calidad</td></tr>
+<tr><td>6.4 Técnicos (Technical)</td><td>14</td><td>6.4.1 Análisis del Negocio o Misión · 6.4.2 Definición de Necesidades y Requisitos de las Partes Interesadas · 6.4.3 Definición de Requisitos del Sistema/SW · 6.4.4 Definición de la Arquitectura · 6.4.5 Definición del Diseño · 6.4.6 Análisis del Sistema · 6.4.7 Implementación · 6.4.8 Integración · 6.4.9 Verificación · 6.4.10 Transición · 6.4.11 Validación · 6.4.12 Operación · 6.4.13 Mantenimiento · 6.4.14 Retirada</td></tr>
+<tr><td><b>Total</b></td><td><b>30</b></td><td>2 + 6 + 8 + 14</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuente: diapositivas 7 y 9–13 del mazo de procesos; numeración de cláusulas: complemento de la norma.</p>
+
+<div class="ojo"><h4>Ojo en el examen · nombres alternativos</h4><p>La profesora usa dos nombres para la misma categoría: «<b>Procesos de gestión técnica</b>» (diap. 7, nombre oficial) = «<b>Procesos de Gestión de Proyectos</b> (Project Management Processes)» (diap. 11). Y «<b>habilitación de proyectos organizacionales</b>» = «<b>Habilitadores del Ciclo de Vida Organizacional</b>». No son categorías distintas: siguen siendo 4.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen · ¿por qué 28 viñetas suman 30?</h4><p>En las diap. 10 y 12 dos viñetas agrupan 2 procesos cada una: «Gestión de la Cartera de Proyectos (Infrastructure Management / Project Portfolio Management)» = Infraestructura + Cartera; y «Business or Mission Analysis / Stakeholder Needs and Requirements Definition» = Análisis del Negocio + Necesidades de Partes Interesadas. Por eso 2 + 5 + 8 + 13 = 28 viñetas, pero 2 + 6 + 8 + 14 = <b>30 procesos</b>.</p></div>
+</section>
+
+<section id="procesos-acuerdo">
+<h2>12. Procesos de Acuerdo: Adquisición y Suministro</h2>
+<p>(Diap. 9) «Gestionan el establecimiento de <b>convenios y contratos entre organizaciones</b>». El documento de procesos los define como ejecutados por la organización que desea comprar, arrendar o adquirir un producto o servicio de SW, para que sus necesidades se comuniquen claramente y se satisfagan.</p>
+
+<div class="concepto"><h3>Adquisición (Acquisition)</h3><p>Actividades de la organización que <b>adquiere</b> un producto o servicio (el adquiriente/comprador). 6 actividades: Preparación de la Adquisición · Difusión de la Solicitud de Propuesta · Selección del Proveedor · Establecimiento del Acuerdo · Monitoreo del Acuerdo · Aceptación del Producto.</p><p class="ej"><b>Ej.:</b> la cadena de colegios de EduTech publica una RFP para su pasarela de pagos: está ejecutando Adquisición.</p></div>
+
+<div class="concepto"><h3>Suministro (Supply)</h3><p>Actividades de la organización que <b>provee</b> el producto o servicio (el proveedor). 6 actividades: Preparación del Suministro · Negociación y Firma del Acuerdo · Planificación del Suministro · Ejecución y Control · Entrega y Soporte · Cierre del Acuerdo.</p><p class="ej"><b>Ej.:</b> EduTech evalúa la viabilidad técnica y financiera de la RFP y envía su propuesta técnica: Suministro.</p></div>
+
+<div class="tabla"><table><thead><tr><th>Adquisición: actividad</th><th>Tareas</th><th>Suministro: actividad simétrica</th><th>Tarea</th></tr></thead><tbody>
+<tr><td>Preparación de la Adquisición</td><td>Documentar concepto del negocio y justificación; definir requisitos de partes interesadas; evaluar opciones (COTS, a medida, SaaS)</td><td>Preparación del Suministro</td><td>Revisar requisitos y enviar la propuesta técnica</td></tr>
+<tr><td>Difusión de la Solicitud de Propuesta</td><td>Desarrollar documentos RFP; definir criterios de selección; publicar solicitud</td><td>—</td><td>—</td></tr>
+<tr><td>Selección del Proveedor</td><td>Evaluar propuestas conforme a criterios; seleccionar al proveedor idóneo</td><td>—</td><td>—</td></tr>
+<tr><td>Establecimiento del Acuerdo</td><td>Negociar términos y firmar contrato; definir SLA</td><td>Negociación y Firma del Acuerdo</td><td>Negociar y formalizar el contrato corporativo</td></tr>
+<tr><td>—</td><td>—</td><td>Planificación del Suministro</td><td>Determinar el modelo de ciclo de vida (Ágil, DevOps)</td></tr>
+<tr><td>Monitoreo del Acuerdo</td><td>Evaluar informes de progreso; gestionar cambios de alcance</td><td>Ejecución y Control</td><td>Desarrollar el SW y controlar desvíos</td></tr>
+<tr><td>Aceptación del Producto</td><td>Ejecutar pruebas de aceptación (UAT); formalizar la entrega final</td><td>Entrega y Soporte</td><td>Transferir el producto y asistir en la aceptación</td></tr>
+<tr><td>—</td><td>—</td><td>Cierre del Acuerdo</td><td>Completar obligaciones contractuales y cierre administrativo</td></tr>
+</tbody></table></div>
+<p class="fuente">Fuente: páginas 1–2, «ISO/IEC/IEEE 12207:2017 · Procesos del Ciclo de Vida del SW», Semana 04.</p>
+
+<div class="concepto"><h3>RFP (Request for Proposal – Solicitud de Propuesta)</h3><p>Documento con el que el adquiriente describe su necesidad, requisitos, criterios de selección y condiciones, e invita a proveedores a ofertar. Tarea de la actividad «Difusión de la Solicitud de Propuesta».</p><p class="ej"><b>Ej.:</b> el Gobierno Regional de Cusco publica una RFP (en el Estado peruano, bases del proceso de selección en el SEACE) para su sistema de trámite.</p></div>
+
+<div class="concepto"><h3>COTS, a medida y SaaS</h3><p>Opciones que se evalúan en la Preparación de la Adquisición: <b>COTS</b> (Commercial Off-The-Shelf – SW comercial de estantería), <b>a medida</b> (desarrollo específico) y <b>SaaS</b> (Software as a Service – SW como servicio en la nube por suscripción).</p><p class="ej"><b>Ej.:</b> una UGEL compara comprar un ERP COTS, desarrollar a medida o contratar un SaaS de gestión escolar.</p></div>
+
+<div class="concepto"><h3>SLA (Service Level Agreement – Acuerdo de Nivel de Servicio)</h3><p>Compromisos medibles de servicio (disponibilidad, tiempo de respuesta, MTTR, penalidades) pactados en el «Establecimiento del Acuerdo».</p><p class="ej"><b>Ej.:</b> EduTech pactó disponibilidad 99,9 % (≈ 43,2 min de caída máxima al mes de 30 días; ≈ 8,76 h/año) y procesamiento &lt; 2 s.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>La definición del documento de procesos dice que los procesos de Acuerdo los ejecuta «la organización que desea comprar»; eso describe la <b>Adquisición</b>. El <b>Suministro</b> lo ejecuta el <b>proveedor</b>. Si un enunciado dice «EduTech negocia el contrato», es Suministro (Negociación y Firma); si dice «el colegio define criterios de selección», es Adquisición.</p></div>
+</section>
+
+<section id="procesos-habilitadores">
+<h2>13. Procesos Habilitadores del Ciclo de Vida Organizacional</h2>
+<p>(Diap. 10) «Aseguran la capacidad de la organización para gestionar los proyectos y proporcionar los recursos necesarios»; el documento añade: <b>recursos, infraestructura, tecnologías y talento humano</b>. Se activan de forma <b>previa y continua</b> a los proyectos.</p>
+
+<div class="concepto"><h3>Gestión del Modelo de Ciclo de Vida</h3><p>Define y mantiene las políticas, procesos y modelos de ciclo de vida que la organización usará. Actividades: <b>Establecimiento</b> (definir políticas organizacionales) y <b>Evaluación</b> (revisar la eficacia de los ciclos de vida).</p><p class="ej"><b>Ej.:</b> la PMO del BBVA Perú decide que todo proyecto digital usa Scrum + DevOps y revisa anualmente si funciona.</p></div>
+
+<div class="concepto"><h3>Gestión de la Infraestructura</h3><p>Provee la infraestructura y servicios (entornos, nube, herramientas) que habilitan los proyectos. La profesora la junta con Cartera en una viñeta; el documento de procesos la omite, pero aparece en EduTech.</p><p class="ej"><b>Ej.:</b> en EduTech, el área de infraestructura aprovisionó cuentas seguras en AWS, GitHub Enterprise y Jira.</p></div>
+
+<div class="concepto"><h3>Gestión de la Cartera de Proyectos (PPM, Project Portfolio Management)</h3><p>Selecciona, autoriza, prioriza y evalúa los proyectos de la organización según su valor estratégico. Actividades: <b>Iniciación</b> (autorizar formalmente proyectos elegibles) y <b>Evaluación</b> (monitorear el rendimiento de la cartera).</p><p class="ej"><b>Ej.:</b> en EduTech se validó que la pasarela no interfiriera con los plazos de otros productos fintech.</p></div>
+
+<div class="concepto"><h3>Gestión de Recursos Humanos (HRM)</h3><p>Asegura personal competente. Actividades: <b>Planificación</b> (identificar habilidades y competencias necesarias) y <b>Desarrollo</b> (proveer planes de capacitación continua).</p><p class="ej"><b>Ej.:</b> EduTech asignó un Arquitecto Senior certificado en seguridad bancaria y 2 devs especializados en APIs de pago.</p></div>
+
+<div class="concepto"><h3>Gestión de la Calidad (organizacional) (QM, Quality Management)</h3><p>En las diapositivas de la profesora figura como <b>«Gestión de la Calidad Organizacional»</b>. Asegura que productos, servicios y procesos cumplan los objetivos de calidad <b>de la organización</b>. Actividades: <b>Establecimiento</b> (definir metas corporativas de calidad) y <b>Auditoría</b> (verificar el apego a estándares). Se vincula con el SGC (Sistema de Gestión de la Calidad) ISO 9001.</p><p class="ej"><b>Ej.:</b> la gerencia de calidad de una fábrica de SW certificada ISO 9001 fija «satisfacción del cliente ≥ 4,5/5 en todos los proyectos».</p></div>
+
+<div class="concepto"><h3>Gestión del Conocimiento (KM, Knowledge Management)</h3><p>Crea, comparte y reutiliza el conocimiento organizacional. Actividades: <b>Identificación</b> (mapear activos de conocimiento) y <b>Compartir</b> (implementar repositorios o wikis comunes).</p><p class="ej"><b>Ej.:</b> la OTI de la UNMSM centraliza lecciones aprendidas y plantillas de SQAP en una wiki Confluence.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>Gestión de la Calidad (<b>habilitador organizacional</b>, metas corporativas + auditoría de apego a estándares) ≠ Aseguramiento de la Calidad (<b>gestión técnica / de proyectos</b>, estrategia de QA del proyecto + evaluación del seguimiento de procesos). El SQAP de IEEE 730 materializa el proceso de <b>Aseguramiento de la Calidad</b> del proyecto.</p></div>
+</section>
+<section id="procesos-gestion-proyectos">
+<h2>14. Procesos de Gestión de Proyectos (gestión técnica)</h2>
+<p>(Diap. 11) «Se enfocan en la <b>planificación, ejecución, evaluación y control</b> de un proyecto específico»; el documento añade «y <b>cerrar</b>». Son 8 procesos; el documento de procesos solo detalla 6 (omite Información y Medición).</p>
+
+<div class="concepto"><h3>Planificación del Proyecto</h3><p>Produce y coordina planes viables. Actividades: <b>Definición</b> (desglosar alcance y WBS – Work Breakdown Structure, EDT), <b>Estimación</b> (esfuerzo, personal y costos) y <b>Programación</b> (cronograma maestro o Sprint Backlog).</p><p class="ej"><b>Ej.:</b> EduTech dividió el alcance en un Product Backlog de 6 Sprints.</p></div>
+
+<div class="concepto"><h3>Evaluación y Control del Proyecto</h3><p>Evalúa si los planes se cumplen y corrige desvíos. Actividades: <b>Monitoreo</b> (medir el avance real contra <b>líneas base</b>) y <b>Acciones de control</b> (medidas correctivas ante desvíos).</p><p class="ej"><b>Ej.:</b> el burndown muestra 30 % de atraso en el Sprint 3; el PM reduce alcance y añade un dev (acción correctiva).</p></div>
+
+<div class="concepto"><h3>Gestión de Decisiones</h3><p>Proporciona un marco estructurado para elegir entre alternativas. Actividades: <b>Estrategia</b> (definir criterios técnicos para decidir) y <b>Evaluación</b> (analizar alternativas técnicas y funcionales).</p><p class="ej"><b>Ej.:</b> matriz ponderada para elegir PostgreSQL vs Oracle (costo 40 %, rendimiento 35 %, soporte 25 %).</p></div>
+
+<div class="concepto"><h3>Gestión de Riesgos</h3><p>Identifica, analiza, trata y monitorea riesgos de forma continua. Actividades: <b>Identificación</b> (detectar eventos inciertos técnicos o humanos) y <b>Tratamiento</b> (planes de <b>mitigación</b> — reducir probabilidad/impacto antes — o <b>contingencia</b> — plan B cuando el riesgo ocurre).</p><p class="ej"><b>Ej.:</b> en EduTech, «caídas del backend del banco retrasan transacciones» → mitigación: cola de reintentos automatizada de fondo.</p></div>
+
+<div class="concepto"><h3>Gestión de la Configuración (SCM)</h3><p>Gestiona y controla los elementos del sistema y sus configuraciones. Actividades: <b>Identificación</b> (determinar elementos — código, documentos — bajo control) y <b>Control de cambios</b> (flujos de revisión y aprobación: Pull Requests). Norma de apoyo: IEEE 828.</p><p class="ej"><b>Ej.:</b> EduTech prohibió subir código directo a producción: rama secundaria en Git + Code Review + pruebas automatizadas.</p></div>
+
+<div class="concepto"><h3>Gestión de la Información</h3><p>Genera, obtiene, confirma, transforma, retiene, recupera, difunde y dispone la información del proyecto para las partes interesadas. (Solo en la lista de la diap. 11.)</p><p class="ej"><b>Ej.:</b> política de retención de actas y reportes de prueba por 5 años en SharePoint para auditorías de la Contraloría.</p></div>
+
+<div class="concepto"><h3>Medición</h3><p>Recoge, analiza y reporta datos objetivos para apoyar la gestión y demostrar la calidad de productos, servicios y procesos (enlaza con ISO/IEC/IEEE 15939). (Solo en la lista de la diap. 11.)</p><p class="ej"><b>Ej.:</b> tablero mensual con velocidad, densidad de defectos y MTTR por squad.</p></div>
+
+<div class="concepto"><h3>Aseguramiento de la Calidad (QA) en la 12207</h3><p>Ayuda a asegurar la aplicación eficaz del proceso de gestión de la calidad de la organización al proyecto. Actividades: <b>Estrategia de QA</b> (definir el enfoque de aseguramiento) y <b>Evaluación</b> (verificar el seguimiento de procesos y estándares). Su artefacto natural es el SQAP (IEEE 730).</p><p class="ej"><b>Ej.:</b> el QA Lead de AlfaShop audita cada Sprint que ninguna HU pasó a Done sin cumplir la DoD.</p></div>
+
+<div class="tabla"><table><thead><tr><th>Confusión típica</th><th>Proceso A</th><th>Proceso B</th><th>Criterio para distinguir</th></tr></thead><tbody>
+<tr><td>Planificar vs controlar</td><td>Planificación (WBS, estimación, cronograma)</td><td>Evaluación y Control (avance vs líneas base)</td><td>¿Se crea el plan o se compara la realidad contra él?</td></tr>
+<tr><td>Calidad</td><td>Gestión de la Calidad (habilitador)</td><td>Aseguramiento de la Calidad (gestión)</td><td>¿Metas corporativas o estrategia del proyecto?</td></tr>
+<tr><td>Riesgos</td><td>Mitigación</td><td>Contingencia</td><td>¿Se actúa antes de que ocurra o cuando ya ocurrió?</td></tr>
+<tr><td>Code Review</td><td>Gestión de la Configuración (control de cambios)</td><td>Verificación (técnica estática)</td><td>¿El foco es aprobar el cambio o detectar defectos?</td></tr>
+<tr><td>Medición vs Evaluación y Control</td><td>Medición (recoger y analizar datos)</td><td>Evaluación y Control (decidir acciones)</td><td>¿Se produce el dato o se usa para corregir?</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="procesos-tecnicos">
+<h2>15. Procesos Técnicos</h2>
+<p>(Diap. 12) «Definen las actividades técnicas necesarias para <b>transformar los requisitos en un producto o servicio de SW</b>»; el documento añade «asegurando su correcto funcionamiento, entrega y <b>eventual retiro</b>». Son 14 procesos.</p>
+
+<div class="concepto"><h3>Análisis del Negocio o Misión</h3><p>Define el problema u oportunidad del negocio, caracteriza el espacio de soluciones y determina la clase de solución. (Agrupado por la profesora con el siguiente.)</p><p class="ej"><b>Ej.:</b> la cadena de colegios identifica su «problema de recaudación» (morosidad del 25 %) antes de pensar en una pasarela.</p></div>
+
+<div class="concepto"><h3>Definición de Necesidades y Requisitos de las Partes Interesadas</h3><p>Captura las necesidades de los stakeholders y las transforma en requisitos (StRS). Actividades: <b>Elicitación</b> (talleres o User Stories) y <b>Validación</b> (confirmar que son viables y medibles).</p><p class="ej"><b>Ej.:</b> el PO de EduTech escribe la HU «Como padre de familia, quiero pagar con tarjeta de crédito para no ir al banco».</p></div>
+
+<div class="concepto"><h3>Definición de Requisitos del Sistema/SW</h3><p>Traduce las necesidades del usuario en especificaciones técnicas (SRS/ERS). Actividades: <b>Especificación</b> y <b>No funcionales</b> (definir seguridad, rendimiento y escalabilidad — NFR, Non-Functional Requirements).</p><p class="ej"><b>Ej.:</b> NFR: «procesar un pago en &lt; 2 s con 500 usuarios concurrentes».</p></div>
+
+<div class="concepto"><h3>Definición de la Arquitectura</h3><p>Genera alternativas de arquitectura y selecciona la que satisface los requisitos. Actividad: <b>Diseño arquitectónico</b> (patrones, tecnologías e interconexiones).</p><p class="ej"><b>Ej.:</b> EduTech eligió microservicios en contenedores para soportar picos de tráfico en las mañanas de pago.</p></div>
+
+<div class="concepto"><h3>Definición del Diseño</h3><p>Provee datos e información suficientes de cada elemento para implementarlo. Actividad: <b>Diseño detallado</b> (interfaces, APIs – Application Programming Interfaces y esquemas de BD).</p><p class="ej"><b>Ej.:</b> contrato OpenAPI del endpoint POST /pagos y tabla PAGO(id, monto, estado) en la BD.</p></div>
+
+<div class="concepto"><h3>Análisis del Sistema</h3><p>Aporta una base rigurosa de datos e información técnica (modelos, simulaciones, análisis de costo, rendimiento o seguridad) para apoyar decisiones durante todo el ciclo de vida.</p><p class="ej"><b>Ej.:</b> simular con k6 que la arquitectura soporta 3 000 pagos/min antes de construirla.</p></div>
+
+<div class="concepto"><h3>Implementación</h3><p>«Desarrollo directo del código». Actividades: <b>Construcción</b> (código limpio conforme a estándares) y <b>Pruebas unitarias</b> (verificar bloques individuales).</p><p class="ej"><b>Ej.:</b> devs de EduTech programan en Java/Node.js; build con npm run build / Docker Build en Jenkins.</p></div>
+
+<div class="concepto"><h3>Integración</h3><p>Combina los elementos en un sistema que funciona. Actividades: <b>Ensamblaje</b> (combinar componentes de forma incremental) y <b>Automatización</b> (configurar CI – Continuous Integration).</p><p class="ej"><b>Ej.:</b> Jenkins une los cambios diarios y valida que el módulo de cobro no rompa el de emisión de recibos.</p></div>
+
+<div class="concepto"><h3>Verificación (proceso 12207)</h3><p>«Comprobar que el SW se construyó correctamente». Actividades: <b>Pruebas técnicas</b> (regresión automatizada) y <b>Análisis estático</b> (escaneo de código, deuda técnica).</p><p class="ej"><b>Ej.:</b> 250 pruebas unitarias + SonarQube buscando vulnerabilidades OWASP Top 10 (Open Worldwide Application Security Project).</p></div>
+
+<div class="concepto"><h3>Validación (proceso 12207)</h3><p>«Comprobar que se construyó el SW correcto para el usuario». Actividad: <b>Pruebas de aceptación</b> (UAT: que atiende las necesidades reales del negocio).</p><p class="ej"><b>Ej.:</b> directores de colegio ingresan transacciones simuladas reales en staging y verifican el abono en las cuentas virtuales.</p></div>
+
+<div class="concepto"><h3>Transición</h3><p>Establece la capacidad de proveer servicios en el entorno operativo. Actividad: <b>Despliegue</b> (poner en producción los artefactos con <b>bajo impacto operativo</b>).</p><p class="ej"><b>Ej.:</b> lanzamiento un fin de semana con scripts de Terraform (IaC) sobre Kubernetes (K8s) en AWS (Amazon Web Services).</p></div>
+
+<div class="concepto"><h3>Operación</h3><p>Usa el sistema para entregar sus servicios. Actividades: <b>Soporte operativo</b> (uso cotidiano correcto) y <b>Monitoreo</b> (telemetría y logs para resguardar disponibilidad).</p><p class="ej"><b>Ej.:</b> más de 50 000 transacciones el primer mes vigiladas con Grafana, Datadog y ELK (Elasticsearch, Logstash, Kibana).</p></div>
+
+<div class="concepto"><h3>Mantenimiento</h3><p>Sostiene la capacidad del sistema de proveer el servicio. Actividades: <b>Gestión de incidencias</b> (corregir errores de producción) y <b>Evolución</b> (mejoras menores o adaptaciones al entorno). Tipos según ISO/IEC 14764: correctivo, preventivo, adaptativo y perfectivo.</p><p class="ej"><b>Ej.:</b> ante un cambio en las políticas de seguridad de Visa, EduTech actualizó el sistema sin apagar la plataforma (mantenimiento adaptativo).</p></div>
+
+<div class="concepto"><h3>Retirada (Disposal)</h3><p>Finaliza la existencia de un elemento del sistema para un uso específico: retiro controlado, migración y preservación/eliminación segura de datos.</p><p class="ej"><b>Ej.:</b> al reemplazar el antiguo SUM, la UNMSM migra notas históricas y borra de forma segura los servidores físicos.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen · orden V-T-V</h4><p>En la norma, <b>Transición (6.4.10) va antes de Validación (6.4.11)</b>; las diapositivas y EduTech listan Verificación → Validación → Transición (orden práctico DevOps: UAT en staging antes de producción). Ambos órdenes son defendibles: la norma no impone secuencia y la validación puede ocurrir también en operación. Además, el documento de procesos omite Análisis del Negocio, Análisis del Sistema y Retirada (describe 24 de los 30 procesos).</p></div>
+</section>
+
+<section id="caso-edutech">
+<h2>16. Caso de clase EduTech Solutions: 12207 + Scrum/DevOps</h2>
+<p>Proyecto: pasarela de pagos en línea para colegios y universidades. Cliente/Adquiriente: cadena de colegios privados (matrículas y pensiones con tarjeta de crédito, débito y transferencias locales, integrada a su sistema académico). Proveedor: EduTech Solutions (Scrum + DevOps).</p>
+
+<figure><img src="@img/semana-04-ejemplo-caso-de-estudio-practico-iso-12207/p01.png" alt="Caso de estudio EduTech Solutions: tabla que relaciona etapas del pipeline DevOps, herramientas y proceso técnico ISO 12207, más antecedentes y Fase 1 El Acuerdo"><figcaption>Mapeo pipeline DevOps → procesos técnicos 12207: build → Implementación; merge → Integración; jest/pytest/SonarQube → Verificación; Cypress/UAT en staging → Validación; despliegue automatizado → Transición; monitoreo y logs → Operación.</figcaption></figure>
+<p class="fuente">Fuente: página 1, «Caso de Estudio Práctico: EduTech Solutions», Semana 04.</p>
+
+<div class="tabla"><table><thead><tr><th>Fase</th><th>Hecho del caso</th><th>Grupo 12207</th><th>Proceso</th></tr></thead><tbody>
+<tr><td>1</td><td>El cliente publica una RFP; EduTech evalúa viabilidad</td><td>Acuerdo</td><td>Adquisición / Suministro</td></tr>
+<tr><td>1</td><td>SLA 99,9 % y &lt; 2 s; contrato ágil por Sprints</td><td>Acuerdo</td><td>Adquisición (Establecimiento) + Suministro (Negociación y Firma)</td></tr>
+<tr><td>2</td><td>Cuentas AWS, GitHub Enterprise, Jira</td><td>Habilitadores</td><td>Gestión de la Infraestructura</td></tr>
+<tr><td>2</td><td>Arquitecto Senior + 2 devs de APIs de pago</td><td>Habilitadores</td><td>Gestión de RR.HH.</td></tr>
+<tr><td>2</td><td>No interferir con otros productos fintech</td><td>Habilitadores</td><td>Gestión de la Cartera</td></tr>
+<tr><td>3</td><td>Product Backlog de 6 Sprints</td><td>Gestión</td><td>Planificación del Proyecto</td></tr>
+<tr><td>3</td><td>Riesgo de caída del banco → cola de reintentos</td><td>Gestión</td><td>Gestión de Riesgos (mitigación)</td></tr>
+<tr><td>3</td><td>Sin push directo a PROD; rama + Code Review + tests</td><td>Gestión</td><td>Gestión de la Configuración</td></tr>
+<tr><td>4</td><td>HU del padre de familia; microservicios en contenedores</td><td>Técnicos</td><td>Requisitos de partes interesadas; Arquitectura</td></tr>
+<tr><td>4</td><td>Java/Node.js; Jenkins integra cobro y recibos</td><td>Técnicos</td><td>Implementación; Integración</td></tr>
+<tr><td>4</td><td>250 unitarias + SonarQube OWASP Top 10; UAT de directores</td><td>Técnicos</td><td>Verificación; Validación</td></tr>
+<tr><td>4</td><td>Terraform un fin de semana; 50 000 transacciones; cambio de Visa sin apagar</td><td>Técnicos</td><td>Transición; Operación; Mantenimiento</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Mapeo pipeline DevOps → procesos técnicos</h3><p>Técnica de análisis que asigna cada etapa automatizada del pipeline a un proceso de la 12207 según su <b>propósito</b>, no según la herramienta. Una misma herramienta puede servir a varios procesos (Cypress para regresión = Verificación; Cypress con UAT en staging = Validación).</p><p class="ej"><b>Ej.:</b> «git merge main» de un squad de Mibanco → Integración; «kubectl apply» en PROD → Transición.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen · lo que EduTech NO evidencia</h4><p>Procesos ausentes (pregunta típica «¿qué faltó?»): Gestión del Modelo de Ciclo de Vida, Gestión de la Calidad, Gestión del Conocimiento, Evaluación y Control, Gestión de Decisiones, Gestión de la Información, Medición, <b>Aseguramiento de la Calidad</b>, Análisis del Negocio, Análisis del Sistema y Retirada. La «cola de reintentos» es <b>mitigación</b> (reduce impacto antes), no contingencia.</p></div>
+</section>
+
+<section id="integracion-sqap-12207">
+<h2>17. Integración: SQAP (IEEE 730) frente a la 12207 y otras normas</h2>
+
+<div class="tabla"><table><thead><tr><th>Aspecto</th><th>SQAP / IEEE 730</th><th>ISO/IEC/IEEE 12207:2017</th></tr></thead><tbody>
+<tr><td>Naturaleza</td><td>Plan (documento formal) / proceso de SQA</td><td>Marco de referencia de 30 procesos</td></tr>
+<tr><td>Alcance</td><td>Un proyecto concreto</td><td>Todo el ciclo de vida, organización y proyectos</td></tr>
+<tr><td>Pregunta que responde</td><td>¿Cómo aseguraremos la calidad de ESTE producto?</td><td>¿Qué procesos debe tener cualquier organización de SW?</td></tr>
+<tr><td>Relación</td><td>Implementa el proceso 6.3.8 Aseguramiento de la Calidad</td><td>Contiene QA como 1 de 8 procesos de gestión técnica</td></tr>
+<tr><td>Emisor</td><td>IEEE</td><td>ISO + IEC + IEEE</td></tr>
+</tbody></table></div>
+
+<div class="tabla"><table><thead><tr><th>Norma</th><th>Emisor / año</th><th>Tema</th><th>Dónde aparece en S4</th></tr></thead><tbody>
+<tr><td>IEEE 730</td><td>IEEE, 2002 / 2014</td><td>Plan / procesos de SQA</td><td>«IEEE 730 para SQAP» (elemento 3); plantilla de AlfaShop</td></tr>
+<tr><td>ISO/IEC 25010</td><td>ISO/IEC, 2011 (rev. 2023)</td><td>Modelo de calidad del producto</td><td>«ISO/IEC 25010 para calidad de producto» (elemento 3)</td></tr>
+<tr><td>IEEE 1012</td><td>IEEE, 2016</td><td>V&amp;V</td><td>Matriz V&amp;V (complemento)</td></tr>
+<tr><td>IEEE 1028</td><td>IEEE, 2008</td><td>Revisiones y auditorías de SW</td><td>Elemento 4 (complemento)</td></tr>
+<tr><td>IEEE 828</td><td>IEEE, 2012</td><td>Gestión de configuración</td><td>Elemento 6, rol SCM (complemento)</td></tr>
+<tr><td>ISO/IEC/IEEE 29119</td><td>ISO/IEC/IEEE, 2013– (rev. 2022)</td><td>Pruebas de SW</td><td>Elemento 5 (complemento)</td></tr>
+<tr><td>ISO/IEC/IEEE 12207</td><td>ISO/IEC/IEEE, 2017</td><td>Procesos del ciclo de vida del SW</td><td>Mazo de procesos y EduTech</td></tr>
+<tr><td>ISO/IEC/IEEE 15288</td><td>ISO/IEC/IEEE, 2015</td><td>Procesos del ciclo de vida de sistemas</td><td>Definición de la 12207:2017</td></tr>
+</tbody></table></div>
+
+<div class="norma"><h4>ISO/IEC 25010 — Systems and software Quality Requirements and Evaluation (SQuaRE): modelo de calidad</h4>
+<ul>
+<li><b>Organismo:</b> ISO/IEC JTC 1/SC 7. <b>Versiones:</b> 2011 (reemplazó a ISO/IEC 9126-1) y 2023.</li>
+<li><b>Propósito:</b> modelo de calidad del producto y de calidad en uso; en el SQAP sirve para fijar los <b>factores de calidad</b>.</li>
+<li><b>Estructura (2011):</b> 8 características de producto (adecuación funcional, eficiencia de desempeño, compatibilidad, usabilidad, fiabilidad, seguridad, mantenibilidad, portabilidad) + 5 de calidad en uso. La 2023 pasa a 9 (añade protección/safety; usabilidad → capacidad de interacción). Detalle en S3.</li>
+<li><b>Trampa:</b> no es una norma de procesos ni de planes; en el SQAP se cita como estándar de <b>producto</b>.</li>
+</ul></div>
+
+<div class="norma"><h4>IEEE Std 1028 — Software Reviews and Audits</h4>
+<ul>
+<li><b>Organismo:</b> IEEE. <b>Versiones:</b> 1988, 1997, <b>2008</b>.</li>
+<li><b>Propósito:</b> procedimientos para revisiones sistemáticas de SW.</li>
+<li><b>Estructura:</b> 5 tipos: revisiones de gestión, revisiones técnicas, inspecciones, walk-throughs y auditorías.</li>
+<li><b>Trampa:</b> la auditoría es <b>independiente</b> y evalúa conformidad con estándares/contratos; la inspección es entre pares y busca defectos.</li>
+</ul></div>
+
+<div class="norma"><h4>IEEE Std 828 — Configuration Management in Systems and Software Engineering</h4>
+<ul>
+<li><b>Organismo:</b> IEEE. <b>Versiones:</b> 1983 … 2005, <b>2012</b>.</li>
+<li><b>Propósito:</b> requisitos mínimos de los procesos de SCM y del SCMP.</li>
+<li><b>Estructura:</b> identificación de configuración, control de cambios, contabilidad de estado (status accounting), auditorías de configuración (FCA/PCA), gestión de releases.</li>
+<li><b>Trampa:</b> el control de versiones (Git) es solo una parte de SCM; SCM incluye también control de cambios y auditorías.</li>
+</ul></div>
+
+<div class="norma"><h4>ISO/IEC/IEEE 29119 — Software Testing</h4>
+<ul>
+<li><b>Organismos:</b> ISO/IEC JTC 1/SC 7 + IEEE. <b>Versiones:</b> partes 1–3 en 2013, parte 4 en 2015, revisiones 2021–2022.</li>
+<li><b>Propósito:</b> conceptos, procesos, documentación y técnicas de prueba (reemplaza a IEEE 829 en documentación de pruebas).</li>
+<li><b>Estructura:</b> Parte 1 conceptos, Parte 2 procesos de prueba, Parte 3 documentación, Parte 4 técnicas, Parte 5 pruebas basadas en palabras clave.</li>
+<li><b>Trampa:</b> el «documento de pruebas» del rol Pruebas del SQAP se norma aquí, no en IEEE 730.</li>
+</ul></div>
+
+<div class="concepto"><h3>Coherencia entre plan y proceso</h3><p>Un SQAP bien construido debe ser trazable a los procesos de la 12207 que toca: QA (6.3.8), SCM (6.3.5), Riesgos (6.3.4), Medición (6.3.7), Verificación (6.4.9) y Validación (6.4.11). Un SQAP sin gestión de riesgos ni medición deja huecos frente al marco.</p><p class="ej"><b>Ej.:</b> el SQAP de AlfaShop cubre QA, SCM, Verificación y Medición, pero no tiene sección de Gestión de Riesgos: brecha frente al proceso 6.3.4.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><p>«La 12207 reemplaza al SQAP» es falso: son complementarias. La 12207 dice <b>que</b> debe existir el proceso de Aseguramiento de la Calidad; IEEE 730 dice <b>cómo</b> planificarlo y ejecutarlo en un proyecto.</p></div>
+</section>
+
+<section id="glosario">
+<h2>Glosario de términos</h2>
+<dl class="glos">
+<dt>Actividad (12207)</dt><dd>Conjunto de tareas cohesivas de un proceso. Ej.: «Tratamiento» en Gestión de Riesgos.</dd>
+<dt>Adquisición</dt><dd>Proceso de Acuerdo ejecutado por quien compra un producto o servicio. Ej.: un colegio publica una RFP.</dd>
+<dt>Análisis estático</dt><dd>Examen del código sin ejecutarlo para hallar defectos, vulnerabilidades o deuda técnica. Ej.: SonarQube en el pipeline.</dd>
+<dt>Anomalía</dt><dd>Condición que se desvía de lo esperado según requisitos o especificaciones. Ej.: total con IGV mal redondeado.</dd>
+<dt>Aseguramiento de la Calidad (proceso 12207)</dt><dd>Proceso de gestión técnica que define la estrategia de QA y evalúa el seguimiento de procesos y estándares. Ej.: auditoría de Sprint en AlfaShop.</dd>
+<dt>Auditoría de proceso</dt><dd>Verificación independiente de que el equipo sigue el proceso acordado. Ej.: revisar que ninguna HU pasó a Done sin DoD.</dd>
+<dt>Cobertura de código</dt><dd>Porcentaje de código ejecutado por las pruebas. Ej.: 820 de 1 000 líneas = 82 %.</dd>
+<dt>Conformidad adaptada</dt><dd>Cumplimiento de la 12207 con un subconjunto justificado de procesos. Ej.: omitir Retirada.</dd>
+<dt>Contingencia</dt><dd>Plan que se activa cuando un riesgo ya ocurrió. Ej.: DBA de respaldo tras renuncia.</dd>
+<dt>Criterio de salida</dt><dd>Condición exacta para dar por aprobada una fase. Ej.: «cero defectos críticos abiertos».</dd>
+<dt>Densidad de defectos</dt><dd>Defectos por unidad de tamaño. Ej.: 0,4 defectos/KLOC.</dd>
+<dt>DevOps</dt><dd>Cultura que integra desarrollo y operaciones con automatización. Ej.: CI/CD + IaC + monitoreo.</dd>
+<dt>DoD</dt><dd>Definición de Terminado, dictada por el SQAP en el ejemplo ágil. Ej.: cobertura ≥ 85 % y QG PASSED.</dd>
+<dt>DoR</dt><dd>Definición de Listo para que una HU entre al Sprint. Ej.: HU con criterios Gherkin.</dd>
+<dt>Gestión de la Calidad (organizacional)</dt><dd>Proceso habilitador que fija metas corporativas de calidad y audita el apego a estándares. Ej.: meta «satisfacción ≥ 4,5».</dd>
+<dt>Gestión de la Configuración</dt><dd>Proceso que identifica elementos bajo control y controla sus cambios. Ej.: PR obligatorio en Git.</dd>
+<dt>Gherkin</dt><dd>Formato Given-When-Then para criterios de aceptación. Ej.: Dado/Cuando/Entonces del cupón.</dd>
+<dt>GitHub Flow</dt><dd>Estrategia de ramas cortas hacia main vía PR. Ej.: feature/cupones → main.</dd>
+<dt>Independencia del SQA</dt><dd>SQA no depende de Desarrollo y puede escalar NC al nivel más alto. Ej.: QA Lead reporta al CTO.</dd>
+<dt>Línea base</dt><dd>Versión aprobada de un plan o configuración usada como referencia para medir desvíos. Ej.: cronograma v1 aprobado.</dd>
+<dt>Matriz de responsabilidades</dt><dd>Tabla actividades × roles con X. Ej.: «Aprobar el Plan SQA» = Admin SQA + Admin Proyecto.</dd>
+<dt>Mitigación</dt><dd>Tratamiento que reduce probabilidad o impacto de un riesgo antes de que ocurra. Ej.: cola de reintentos de EduTech.</dd>
+<dt>MTTR</dt><dd>Tiempo medio de reparación/resolución. Ej.: bloqueantes &lt; 4 h en AlfaShop.</dd>
+<dt>No conformidad</dt><dd>Incumplimiento de un requisito o procedimiento. Ej.: HU sin Code Review en Done.</dd>
+<dt>Outcome (salida)</dt><dd>Resultado observable de la ejecución exitosa de un proceso. Ej.: «los riesgos se identifican y tratan».</dd>
+<dt>PAM</dt><dd>Modelo de Evaluación de Procesos con indicadores de capacidad. Ej.: ISO/IEC 33061.</dd>
+<dt>Pirámide de pruebas</dt><dd>Proporción ideal de pruebas automatizadas: muchas unitarias, medianas de API, pocas de UI. Ej.: 70/20/10.</dd>
+<dt>PRM</dt><dd>Modelo de Referencia de Procesos (propósito + resultados). Ej.: la 12207 para ISO/IEC 33000.</dd>
+<dt>Proceso de SW</dt><dd>Conjunto de actividades y prácticas para desarrollar y mantener SW. Ej.: HU → código → PR → CI/CD.</dd>
+<dt>Quality Gate</dt><dd>Umbrales que un build debe superar para avanzar. Ej.: QG estricto de SonarQube.</dd>
+<dt>Retirada (Disposal)</dt><dd>Proceso técnico que finaliza un sistema de forma controlada. Ej.: migrar y borrar el SUM antiguo.</dd>
+<dt>Revisión por pares</dt><dd>Examen del código por otro desarrollador antes del merge. Ej.: 2 séniores en AlfaShop.</dd>
+<dt>RFP</dt><dd>Solicitud de Propuesta emitida por el adquiriente. Ej.: RFP de la cadena de colegios.</dd>
+<dt>Severidad</dt><dd>Grado de impacto de un defecto. Ej.: Bloqueante, Alta, Media, Baja.</dd>
+<dt>SLA</dt><dd>Acuerdo de Nivel de Servicio medible. Ej.: 99,9 % ≈ 43,2 min/mes de caída máxima.</dd>
+<dt>SPI</dt><dd>Mejora del Proceso de SW. Ej.: crear SCM tras detectar 40 % de retrabajo.</dd>
+<dt>SQA</dt><dd>Modelo sistemático y planeado de acciones para dar confianza adecuada de conformidad. Ej.: auditorías del proceso en RENIEC.</dd>
+<dt>SQAP</dt><dd>Documento formal con métodos, herramientas, estándares y responsabilidades de calidad. Ej.: SQAP de AlfaShop.</dd>
+<dt>Suministro</dt><dd>Proceso de Acuerdo ejecutado por el proveedor. Ej.: EduTech envía la propuesta técnica.</dd>
+<dt>Tailoring (adaptación)</dt><dd>Ajuste de procesos de la norma al contexto. Ej.: pyme que simplifica Medición.</dd>
+<dt>Tarea (12207)</dt><dd>Requerimiento, recomendación o acción que conduce a los resultados. Ej.: «definir SLA».</dd>
+<dt>Transición</dt><dd>Proceso técnico de despliegue a producción con bajo impacto. Ej.: Terraform un fin de semana.</dd>
+<dt>Trazabilidad</dt><dd>Enlace de cada requisito con diseño, código y pruebas. Ej.: RTM del sistema de admisión.</dd>
+<dt>UAT</dt><dd>Pruebas de aceptación del usuario. Ej.: directores ingresan pagos simulados.</dd>
+<dt>Validación</dt><dd>¿Hacemos el producto correcto? Ej.: prototipado con el usuario final.</dd>
+<dt>Verificación</dt><dd>¿Hacemos el producto bien? Ej.: inspección de la arquitectura.</dd>
+</dl>
+</section>

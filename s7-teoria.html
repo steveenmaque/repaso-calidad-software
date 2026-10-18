@@ -1,0 +1,1038 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S7 Teoría · MoProSoft, MPS.BR y más · Repaso Calidad de SW</title>
+<meta name="description" content="Modelos para PYMEs: MoProSoft, MPS.BR, COMPETISOFT, IT Mark e ISO/IEC 29110.">
+<link rel="stylesheet" href="assets/css/style.css"></head>
+<body>
+<header class="top"><a class="brand" href="index.html">Repaso Parcial · Calidad de SW</a><nav class="menu"><a href="index.html">Inicio</a><a href="s1-teoria.html">S1</a><a href="s2-teoria.html">S2</a><a href="s3-teoria.html">S3</a><a href="s4-teoria.html">S4</a><a href="s5-teoria.html">S5</a><a href="s6-teoria.html">S6</a><a href="s7-teoria.html" class=on>S7</a><a href="normas.html">Normas</a><a href="siglas.html">Siglas</a><a href="examen.html">Examen</a></nav></header>
+<div class="wrap"><aside class="toc"><details open><summary>Índice</summary><ol><li><a href="#contexto-pyme-vse">1. Por qué existen «otros modelos»: el problema de las PYME y VSE</a></li><li><a href="#moprosoft-origen">2. MoProSoft: origen, ficha y la norma NMX-I-059-NYCE</a></li><li><a href="#moprosoft-estructura">3. MoProSoft: 3 categorías y 9 procesos</a></li><li><a href="#moprosoft-roles-patron">4. MoProSoft: roles, productos y el patrón de procesos</a></li><li><a href="#moprosoft-niveles-evalprosoft">5. MoProSoft: niveles de capacidad, EvalProSoft y relación con otras normas</a></li><li><a href="#mps-br">6. MPS.BR / MR-MPS-SW: el modelo brasileño</a></li><li><a href="#competisoft">7. COMPETISOFT: marco iberoamericano de procesos, evaluación y mejora</a></li><li><a href="#it-mark">8. IT Mark: certificación integral para PYME TI (ESI-Tecnalia)</a></li><li><a href="#iso-iec-29110">9. ISO/IEC 29110: perfiles de ciclo de vida para VSE</a></li><li><a href="#peru-latinoamerica">10. Adopción en el Perú y Latinoamérica: NTP 291.100 y NTP-ISO/IEC 29110</a></li><li><a href="#otros-modelos-spi">11. Otros modelos y enfoques de SPI para PYME</a></li><li><a href="#comparativa">12. Comparativa integral de modelos (incluye CMMI de la S6)</a></li><li><a href="#trampas-examen">13. Trampas típicas de examen e integración con S4–S6</a></li><li><a href="#siglas">Siglas de la sesión (80)</a></li><li><a href="#glosario">Glosario de términos</a></li></ol></details></aside><main>
+<div class="tabs"><a class="on" href="s7-teoria.html">📖 Teoría S7</a><a class="" href="s7-practica.html">🧩 Práctica S7</a><a href="examen.html?s=7">📝 Examen S7</a></div><h1>Sesión 7 · Otros modelos de calidad de procesos: MoProSoft, MPS.BR, COMPETISOFT, IT Mark e ISO/IEC 29110</h1>
+<p class="lead">El sílabo cierra la Unidad 2 con los <b>«otros modelos de calidad de procesos de importancia»</b>: los modelos <b>nacionales o regionales</b> creados para que las <b><abbr title="SME, Small and Medium-sized Enterprise – Pequeña y Mediana Empresa">PYME</abbr> (Pequeñas y Medianas Empresas)</b> y las <b><abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> (Very Small Entities – Entidades Muy Pequeñas)</b> de <abbr title="Software – Software / soporte lógico">SW</abbr> (Software) puedan mejorar sus procesos sin pagar el costo de <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> (Capability Maturity Model Integration) + <abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr> (Standard CMMI Appraisal Method for Process Improvement) o de <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 15504/33000 vistos en la S6. Se estudian <b><abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr></b> (México, NMX-I-059-NYCE), <b><abbr title="Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño">MPS.BR</abbr> / <abbr title="Modelo de Referência MPS para Software (también -SV Serviços y -RH Gestão de Pessoas)">MR-MPS-SW</abbr></b> (Brasil, <abbr title="Associação para Promoção da Excelência do Software Brasileiro">SOFTEX</abbr>), <b><abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr></b> (Iberoamérica, <abbr title="Programa Iberoamericano de Ciencia y Tecnología para el Desarrollo">CYTED</abbr>), <b>IT Mark</b> (Europa, ESI-Tecnalia) y la norma internacional <b>ISO/IEC 29110</b> (perfiles de ciclo de vida para VSE, adoptada en el Perú como NTP-ISO/IEC 29110 por <abbr title="Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual">INDECOPI</abbr>/INACAL), más otros enfoques de <abbr title="Software Process Improvement – Mejora del Proceso de Software">SPI</abbr> (Software Process Improvement – Mejora de Procesos de SW) como Agile SPI, SIMEP-SW, <abbr title="Método de Evaluación de la Capacidad de Procesos de Desarrollo de Software (Colombia)">MECPDS</abbr>, <abbr title="Initiating, Diagnosing, Establishing, Acting, Learning – Modelo de mejora del SEI: Iniciar, Diagnosticar, Establecer, Actuar, Aprender">IDEAL</abbr> y Métrica v3. Para esta sesión <b>no hay diapositivas</b> de la profesora: el contenido se construyó a partir de fuentes primarias (documento oficial MoProSoft v1.3, Guía General MPS de Software:2021, informe final COMPETISOFT, <abbr title="Technical Report – Informe Técnico (ISO)">TR</abbr> 29110-5-1-2, artículos SBC/CLEI/Revista EIA) y se integra con S4 (ISO/IEC/IEEE 12207:2017), S5 (NTP-ISO/IEC 12207:2016) y S6 (<abbr title="Software Process Improvement and Capability dEtermination – Mejora y determinación de la capacidad del proceso de software (ISO/IEC 15504)">SPICE</abbr>, CMMI).</p>
+<div class="clave"><h4>Ideas clave</h4><ul>
+<li><b>Problema de partida:</b> CMMI/SCAMPI e ISO/IEC 15504 se diseñaron para organizaciones grandes; en Europa ~<b>99,8 %</b> de las empresas <abbr title="Information Technology (IT) – Tecnologías de la Información">TI</abbr> son PYME y ~<b>85 %</b> micro; en el Perú ~<b>63 %</b> del sector SW son micro y ~<b>27 %</b> pequeñas.</li>
+<li>Ningún modelo de esta sesión «compite» con CMMI o <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr>: todos se declaran <b>puente o escalón</b> hacia ellos y son <b>compatibles</b> con ISO 9001, ISO/IEC 12207 e ISO/IEC 15504/33000.</li>
+<li><b>MoProSoft</b> (SE-PROSOFT, Dra. Hanna Oktaba, <abbr title="Universidad Nacional Autónoma de México">UNAM</abbr>, v1.3 ago-2005) = <b>NMX-I-059/01..04-NYCE-2005</b>: <b>3 categorías</b> (<abbr title="Categoría Alta Dirección (MoProSoft)">DIR</abbr>, <abbr title="Categoría Gerencia / Gestión (MoProSoft)">GER/GES</abbr>, <abbr title="Categoría Operación (MoProSoft)">OPE</abbr>) y <b>9 procesos</b> (<abbr title="Gestión de Negocio (MoProSoft DIR.1)">GN</abbr>, <abbr title="Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)">GPR</abbr>, <abbr title="Gestión de Proyectos – cartera (MoProSoft GES.2)">GPY</abbr>, <abbr title="Generic Resource – Recurso genérico">GR</abbr>, <abbr title="Recursos Humanos y Ambiente de Trabajo (MoProSoft GES.3.1)">RHAT</abbr>, <abbr title="British Standards Institution – Instituto Británico de Normalización">BSI</abbr>, <abbr title="Conocimiento de la Organización (MoProSoft GES.3.3)">CO</abbr>, <abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr>, <abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr>); parte <b>/02 = modelo</b>, parte <b>/04 = <abbr title="Método de Evaluación de Procesos para la Industria de Software (NMX-I-059/04-NYCE)">EvalProSoft</abbr></b>.</li>
+<li>MoProSoft mide <b>capacidad 0–5 por proceso</b> (estilo 15504) y el <b>nivel de madurez de capacidades</b> de la organización = el nivel que alcanzan <b>todos</b> sus procesos (el mínimo del perfil).</li>
+<li><b>MPS.BR</b> (SOFTEX, dic-2003): <b>7 niveles de madurez, de G (más bajo) a A (más alto)</b>; G+F ≈ CMMI ML2, E+D+C ≈ ML3, B ≈ ML4, A ≈ ML5. En 2021: 12 procesos (5 de proyecto + 7 organizacionales) y capacidades CP-G … CP-A.</li>
+<li><b>COMPETISOFT</b> (proyecto CYTED 506AC0287, 2006–2008, 13 países, dir. Mario Piattini, dir. técnica Hanna Oktaba): marco de <b>procesos (MoProSoft adaptado) + evaluación (15504-2/-4) + mejora (PmCOMPETISOFT)</b>; separa <abbr title="Desarrollo de Software (proceso COMPETISOFT)">DS</abbr> y <abbr title="Mantenimiento de Software (proceso COMPETISOFT)">MS</abbr>.</li>
+<li><b>PmCOMPETISOFT</b> = proceso de mejora ligero e iterativo de 5 actividades: <b>Instalación → Diagnóstico → Formulación → Ejecución → Revisión</b>; deriva de Agile SPI y es versión ligera de IDEAL.</li>
+<li><b>IT Mark</b> (<abbr title="European Software Institute – Instituto Europeo de Software (hoy Tecnalia)">ESI</abbr>, lanzado 1-jun-2005) = <b>esquema de certificación</b> de 3 áreas: negocio (<b><abbr title="Ten-Squared (10-Squared) – Modelo de evaluación de la gestión del negocio usado por IT Mark">10²</abbr></b>), seguridad (<b>ISO/IEC 27001</b>, antes 17799) y desarrollo (<b>CMMI 2–3 simplificado</b>); niveles <b>Basic, Premium, Elite (1–3 ★)</b>.</li>
+<li><b>ISO/IEC 29110</b> (<abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr> <abbr title="Working Group 24 – Grupo de Trabajo 24 de ISO/IEC JTC 1/SC 7">WG24</abbr>, 2011): VSE = <b>hasta 25 personas</b>; <b>perfiles</b> (no niveles) <b>Entry, Basic, Intermediate, Advanced</b>; el Basic tiene <b>2 procesos: <abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr> y <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr></b>; nace de <b>MoProSoft</b> (may-2006).</li>
+<li><b>Perú:</b> <abbr title="Norma Técnica Peruana">NTP</abbr> 291.100 (2009, MoProSoft) → NTP-ISO/IEC 29110 (2012) → normalización pasa de INDECOPI a <b><abbr title="Instituto Nacional de Calidad (Perú)">INACAL</abbr></b> (2015); GIDIS-PUCP lideró COMPETISOFT-Perú y ProCal-ProSer.</li>
+<li>Regla de oro en casos: «la calidad no tiene solución única»; se elige el modelo por <b>tamaño</b>, <b>mercado objetivo</b>, <b>presupuesto</b> y <b>exigencia contractual</b>.</li>
+</ul></div>
+
+<section id="contexto-pyme-vse">
+<h2>1. Por qué existen «otros modelos»: el problema de las PYME y VSE</h2>
+<p>En la S6 se vio que <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> (Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades) con su método <abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr> (Standard CMMI Appraisal Method for Process Improvement) e <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 15504 / ISO/IEC 33000 (<abbr title="Software Process Improvement and Capability dEtermination – Mejora y determinación de la capacidad del proceso de software (ISO/IEC 15504)">SPICE</abbr>, Software Process Improvement and Capability dEtermination) son modelos potentes pero <b>caros</b>: exigen inversión alta en dinero, tiempo y <abbr title="Human Resources – Recursos Humanos">RR. HH.</abbr> (Recursos Humanos), y el <abbr title="Return on Investment – Retorno de la Inversión">ROI</abbr> (Return On Investment – Retorno de la Inversión) llega a largo plazo. El informe final de <abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr> recuerda que hasta el <abbr title="Software Engineering Institute – Instituto de Ingeniería de Software (Carnegie Mellon)">SEI</abbr> (Software Engineering Institute) reconoció lo costoso de CMMI/SCAMPI, y que en Iberoamérica implica además pagar regalías y servicios al extranjero.</p>
+
+<div class="concepto"><h3>PYME / mipyme (Pequeña y Mediana Empresa; SME, Small and Medium-sized Enterprise)</h3>
+<p>Empresa cuyo tamaño (empleados y/o ventas) está por debajo de un umbral legal; en la UE (Unión Europea) <abbr title="SME, Small and Medium-sized Enterprise – Pequeña y Mediana Empresa">PYME</abbr> = ≤250 empleados y micro = ≤10. La <b>mipyme</b> agrega la microempresa. En <abbr title="Software – Software / soporte lógico">SW</abbr> el problema no es solo el tamaño sino la <b>ausencia de roles especializados</b>: una persona hace de <abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr> (Project Manager), analista, programador y <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> (Quality Assurance).</p>
+<p class="ej"><b>Ej.:</b> una software factory de 12 personas en Arequipa no puede pagar un SCAMPI A (Lead Appraiser + equipo + semanas de evaluación) solo para venderle un sistema de planillas a una municipalidad.</p></div>
+
+<div class="concepto"><h3>VSE (Very Small Entity – Entidad Muy Pequeña)</h3>
+<p>Término acuñado por el <abbr title="Working Group 24 – Grupo de Trabajo 24 de ISO/IEC JTC 1/SC 7">WG24</abbr> (Working Group 24) de ISO/IEC <abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr> en marzo de 2005: <b>empresa, organización, departamento o proyecto de hasta 25 personas</b>. Lo relevante es que la definición incluye <b>departamentos y proyectos</b>, no solo empresas independientes.</p>
+<p class="ej"><b>Ej.:</b> la <abbr title="Oficina General de Tecnologías de la Información">OGTI</abbr> (Oficina General de Tecnologías de la Información) de una universidad con un equipo de 9 desarrolladores para el SUM-UNMSM es una <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> aunque la <abbr title="Universidad Nacional Mayor de San Marcos">UNMSM</abbr> tenga miles de trabajadores.</p></div>
+
+<div class="concepto"><h3>SPI (Software Process Improvement – Mejora de Procesos de SW)</h3>
+<p>Disciplina que busca elevar sistemáticamente la capacidad de los procesos de SW mediante ciclos <b>diagnóstico → plan → implantación → evaluación</b> (<abbr title="Plan-Do-Check-Act – Planificar-Hacer-Verificar-Actuar">PDCA/PHVA</abbr>, <abbr title="Initiating, Diagnosing, Establishing, Acting, Learning – Modelo de mejora del SEI: Iniciar, Diagnosticar, Establecer, Actuar, Aprender">IDEAL</abbr>). Requiere un <b>modelo de referencia</b> (qué procesos), un <b>modelo de evaluación</b> (cómo medir capacidad) y un <b>modelo de mejora</b> (cómo cambiar). COMPETISOFT es la ilustración más clara de esa tríada.</p>
+<p class="ej"><b>Ej.:</b> una PYME proveedora del <abbr title="Banco de Crédito del Perú">BCP</abbr> aplica <abbr title="Software Process Improvement – Mejora del Proceso de Software">SPI</abbr>: diagnostica con Light <abbr title="Método de Evaluación de la Capacidad de Procesos de Desarrollo de Software (Colombia)">MECPDS</abbr>, formula un plan de 2 iteraciones y vuelve a medir el <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> (Key Performance Indicator) «% de proyectos con desviación ≤10 %».</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Dato de contexto</th><th>Valor</th><th>Fuente / uso en examen</th></tr></thead>
+<tbody>
+<tr><td>Empresas <abbr title="Information Technology (IT) – Tecnologías de la Información">TI</abbr> europeas que son PYME (≤250 empleados)</td><td>~99,8 %</td><td><abbr title="European Software Institute – Instituto Europeo de Software (hoy Tecnalia)">ESI</abbr> al lanzar IT Mark (2005)</td></tr>
+<tr><td>Empresas TI europeas que son micro (≤10)</td><td>~85 %</td><td>ESI</td></tr>
+<tr><td>Mipymes en el Perú (todas las ramas)</td><td>≈ 99,4–99,5 %</td><td>Laporte et al. (2015/2016)</td></tr>
+<tr><td>Sector SW peruano: micro / pequeñas</td><td>~63 % / ~27 %</td><td>Laporte et al.</td></tr>
+<tr><td>Encuesta WG24: VSE que no usan normas por falta de recursos</td><td>28 %</td><td>ISO/IEC JTC 1/SC 7</td></tr>
+<tr><td>… porque nadie se las exige</td><td>24 %</td><td>idem</td></tr>
+<tr><td>… porque son demasiado complejas / burocráticas</td><td>15 %</td><td>idem</td></tr>
+<tr><td>Brasil 2003: empresas <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> 9000 vs con <abbr title="Capability Maturity Model – Modelo de Madurez de Capacidades">CMM</abbr></td><td>214 vs ~30 (casi todas multinacionales)</td><td>Detonante de <abbr title="Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño">MPS.BR</abbr></td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Dificultades típicas de las PYME de SW</h3>
+<p>Según el Marco Metodológico de COMPETISOFT (F. J. Pino): (1) procesos no definidos; (2) proyectos fuera de plazo y costo; (3) baja calidad del producto; (4) proyectos no alineados con la estrategia; (5) falta de modelos de referencia, evaluación y mejora adecuados a su tamaño; (6) escasez de personal y <b>alta dependencia de individuos</b> («héroes») por falta de especialización de roles.</p>
+<p class="ej"><b>Ej.:</b> en una startup fintech limeña solo el CTO (Chief Technology Officer) sabe desplegar a producción; si renuncia, el <abbr title="Continuous Integration / Continuous Delivery-Deployment – Integración y Entrega/Despliegue Continuos">CI/CD</abbr> (Continuous Integration / Continuous Delivery) se detiene: dependencia de individuos.</p></div>
+
+<div class="concepto"><h3>Modelo nacional / regional de procesos</h3>
+<p>Modelo de referencia ligero, barato y en idioma local, promovido por un Estado o una red regional, <b>compatible con las normas internacionales</b> para que la PYME pueda luego escalar a ISO 9001, CMMI o ISO/IEC 15504. Ejemplos: <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> (México), MPS.BR (Brasil), COMPETISOFT (Iberoamérica), SIMEP-SW / Agile SPI (Colombia), Métrica v3 (España, metodología), IT Mark (Europa) y, como cierre internacional, ISO/IEC 29110.</p>
+<p class="ej"><b>Ej.:</b> el Perú no creó un modelo propio: adoptó MoProSoft como <b><abbr title="Norma Técnica Peruana">NTP</abbr> 291.100</b> (2009) y luego la ISO/IEC 29110 como NTP-ISO/IEC 29110 (2012).</p></div>
+
+<div class="concepto"><h3>Revisión sistemática de SPI en PYME (Pino, García y Piattini, 2008)</h3>
+<p>Artículo «Software process improvement in small and medium software enterprises: a systematic review», <i>Software Quality Journal</i> 16(2):237-261 (2008). Sintetiza decenas de estudios y concluye que las PYME necesitan modelos <b>ligeros, iterativos, con resultados rápidos</b> y métodos de evaluación de bajo costo; es la base teórica de COMPETISOFT y cita MESOPYME, OWPL, RAPID, TOPS, SPIRE, PROCESSUS, MoProSoft y MPS.BR.</p>
+<p class="ej"><b>Ej.:</b> si en el parcial preguntan «¿qué trabajo sustenta teóricamente el SPI para PYME iberoamericanas?», la respuesta es la revisión sistemática de Pino et al. (2008) en el SQJ (Software Quality Journal).</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><ul>
+<li>Ninguno de estos modelos «reemplaza» a CMMI o ISO: <b>MoProSoft</b> nace para ser «base de evaluaciones exitosas con ISO 9000 o CMM»; <b>COMPETISOFT</b> declara que «no pretende ser competencia del SEI o ISO»; <b>MPS.BR</b> busca compatibilidad con <abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> y conformidad con ISO/IEC 12207 y 330xx.</li>
+<li>VSE ≠ microempresa: la VSE se define por <b>≤25 personas</b> y puede ser un <b>departamento o proyecto</b> dentro de una organización grande.</li>
+</ul></div>
+</section>
+<section id="moprosoft-origen">
+<h2>2. MoProSoft: origen, ficha y la norma NMX-I-059-NYCE</h2>
+<p><b><abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr></b> (Modelo de Procesos para la Industria de Software) es el modelo mexicano de procesos para <abbr title="SME, Small and Medium-sized Enterprise – Pequeña y Mediana Empresa">PYME</abbr> (Pequeñas y Medianas Empresas) y áreas internas de desarrollo y/o mantenimiento de <abbr title="Software – Software / soporte lógico">SW</abbr> (Software). Fue impulsado por la SE (Secretaría de Economía) dentro de <abbr title="Programa para el Desarrollo de la Industria de Software (México, 2002)">PROSOFT</abbr> y elaborado por un grupo editor de la <abbr title="Universidad Nacional Autónoma de México">UNAM</abbr> (Universidad Nacional Autónoma de México) dirigido por la <b>Dra. Hanna Oktaba</b>.</p>
+
+<div class="concepto"><h3>MoProSoft (Modelo de Procesos para la Industria de Software)</h3>
+<p>Modelo de referencia de procesos organizado según la estructura típica de una empresa (Alta Dirección – Gerencia – Operación), con <b>3 categorías y 9 procesos</b> documentados con un <b>patrón de procesos</b> común. Requisitos de diseño: fácil de entender, fácil de aplicar, barato de adoptar y base para lograr evaluaciones exitosas con <b><abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> 9000:2000</b> o <b><abbr title="Capability Maturity Model – Modelo de Madurez de Capacidades">CMM</abbr> v1.1</b> (CMM, Capability Maturity Model).</p>
+<p class="ej"><b>Ej.:</b> una empresa de Guadalajara que desarrolla el ERP (Enterprise Resource Planning) de una cadena de farmacias adopta MoProSoft y se certifica con <abbr title="Normalización y Certificación Electrónica, A.C. (México)">NYCE</abbr> en nivel 2 para venderle al Gobierno Federal.</p></div>
+
+<div class="concepto"><h3>PROSOFT (Programa para el Desarrollo de la Industria de Software)</h3>
+<p>Política pública mexicana lanzada por la SE en <b>2002</b> para hacer de México un líder en SW. Metas: producción anual de SW de <b>5 000 MUSD</b> (millones de dólares), alcanzar el promedio mundial de gasto <abbr title="Information Technology (IT) – Tecnologías de la Información">TI</abbr> (México gastaba <b>1,4 % del PIB</b> frente a <b>4,3 %</b> mundial) y liderar en LATAM (Latinoamérica) los servicios TI. Una de sus estrategias fue contar con un modelo de procesos nacional: MoProSoft.</p>
+<p class="ej"><b>Ej.:</b> el equivalente peruano sería que el MEF (Ministerio de Economía y Finanzas) y PRODUCE financiaran un modelo nacional; en el Perú el impulso vino de la academia (GIDIS-PUCP) y de la normalización (<abbr title="Comité Técnico de Normalización de Ingeniería de Software y Sistemas de Información (Perú)">CTN-ISSI</abbr>).</p></div>
+
+<div class="concepto"><h3>NYCE (Normalización y Certificación Electrónica, A.C.)</h3>
+<p>Asociación civil mexicana creada en <b>1994</b>, integrante del SISMENEC (Sistema Mexicano de Metrología, Normalización y Evaluación de la Conformidad), que actúa como <b>ONN (Organismo Nacional de Normalización)</b> del sector electrónico/TI y como <b>organismo de certificación</b>. Emitió la NMX-I-059 y certifica MoProSoft y, hoy, <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110.</p>
+<p class="ej"><b>Ej.:</b> en el Perú el papel equivalente de normalización lo cumple el <abbr title="Instituto Nacional de Calidad (Perú)">INACAL</abbr> (Instituto Nacional de Calidad), y la certificación la hacen organismos acreditados por su DA (Dirección de Acreditación).</p></div>
+
+<div class="concepto"><h3>AMCIS (Asociación Mexicana para la Calidad en Ingeniería de Software)</h3>
+<p>Asociación profesional, presidida por Hanna Oktaba en la época, que impulsó la creación de MoProSoft y su difusión entre PYME; actuó como puente entre academia (UNAM), gobierno (SE) e industria.</p>
+<p class="ej"><b>Ej.:</b> en el examen, si preguntan quién «impulsó» MoProSoft: SE/PROSOFT (promotor), UNAM/Oktaba (autor técnico), <abbr title="Asociación Mexicana para la Calidad en Ingeniería de Software">AMCIS</abbr> (impulso gremial), NYCE (norma y certificación).</p></div>
+
+<div class="norma"><h4>NMX-I-059/01..04-NYCE-2005 (MoProSoft) · revisión NMX-I-059-NYCE-2011</h4>
+<ul>
+<li><b>Organismo emisor:</b> NYCE (Normalización y Certificación Electrónica, A.C.), México; promotor SE/PROSOFT; autor técnico UNAM (Dra. Hanna Oktaba).</li>
+<li><b>Versión/año:</b> MoProSoft v1.1 (2003), v1.2, <b>v1.3 (agosto 2005, «coloreada por niveles de capacidad»)</b>; declarada Norma Mexicana el <b>15-ago-2005</b>; revisión <b>2011</b>.</li>
+<li><b>Propósito:</b> dar a PYME y áreas internas de SW un modelo de procesos fácil, barato y compatible con ISO 9000:2000, CMM v1.1 (niveles 2 y 3) e ISO/IEC 15504.</li>
+<li><b>Estructura:</b> 4 partes (01 conceptos y productos; 02 requisitos de procesos = MoProSoft; 03 guía de implantación; 04 directrices de evaluación = <abbr title="Método de Evaluación de Procesos para la Industria de Software (NMX-I-059/04-NYCE)">EvalProSoft</abbr>); 3 categorías (<abbr title="Categoría Alta Dirección (MoProSoft)">DIR</abbr>, GER, <abbr title="Categoría Operación (MoProSoft)">OPE</abbr>) y 9 procesos; capacidad 0–5 por proceso.</li>
+<li><b>Bases:</b> ISO 9000:2000, CMM v1.1 niveles 2 y 3, marco ISO/IEC 15504, <abbr title="Project Management Body of Knowledge – Cuerpo de Conocimientos de la Dirección de Proyectos">PMBOK</abbr> (Project Management Body of Knowledge) y <abbr title="Software Engineering Body of Knowledge – Cuerpo de Conocimiento de la Ingeniería de Software">SWEBOK</abbr> (Software Engineering Body of Knowledge).</li>
+<li><b>Adopción en el Perú:</b> <b><abbr title="Norma Técnica Peruana">NTP</abbr> 291.100</b> (NTP-291.100-1:2009 modelo; NTP-291.100-2 evaluación).</li>
+<li><b>Trampa típica:</b> creer que la parte 01 es el modelo; el modelo es la <b>parte 02</b> y el método de evaluación EvalProSoft es la <b>parte 04</b>.</li>
+</ul></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Parte</th><th>Título</th><th>Contenido</th></tr></thead>
+<tbody>
+<tr><td><b>NMX-I-059/01-NYCE</b></td><td>Definición de conceptos y productos</td><td>Glosario y descripción de los productos usados en las demás partes</td></tr>
+<tr><td><b>NMX-I-059/02-NYCE</b></td><td>Requisitos de procesos (MoProSoft)</td><td>Los 9 procesos a implantar: el «modelo» propiamente dicho</td></tr>
+<tr><td><b>NMX-I-059/03-NYCE</b></td><td>Guía de implantación de procesos</td><td>Propuesta práctica de cómo implantar la parte 02</td></tr>
+<tr><td><b>NMX-I-059/04-NYCE</b></td><td>Directrices para la evaluación de procesos (EvalProSoft)</td><td>Usa la parte 02 + cap. 5 de la NMX-I-15504/02-NYCE para obtener el perfil de nivel de capacidad por proceso y el nivel de madurez de capacidades de la organización</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>NMX (Norma Mexicana)</h3>
+<p>Norma de aplicación <b>voluntaria</b> emitida por un ONN mexicano, a diferencia de la NOM (Norma Oficial Mexicana), que es obligatoria. MoProSoft es <abbr title="Norma Mexicana (voluntaria)">NMX</abbr>: su adopción depende de que el mercado (p. ej. compras públicas) la valore.</p>
+<p class="ej"><b>Ej.:</b> igual que una NTP (Norma Técnica Peruana) es voluntaria salvo que una <abbr title="Resolución Ministerial">RM</abbr> (Resolución Ministerial) la haga obligatoria, como pasó con la NTP-ISO/IEC 12207 para el Estado (S5).</p></div>
+</section>
+
+<section id="moprosoft-estructura">
+<h2>3. MoProSoft: 3 categorías y 9 procesos</h2>
+<p><abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> refleja la estructura de una organización en tres niveles: <b>Alta Dirección</b>, <b>Gerencia (Gestión)</b> y <b>Operación</b>. Cada nivel es una <b>categoría</b> que agrupa procesos.</p>
+
+<div class="tabla"><table>
+<thead><tr><th>Categoría</th><th>Sigla</th><th>Qué aborda</th><th>Relación con las otras</th></tr></thead>
+<tbody>
+<tr><td><b>Alta Dirección</b></td><td><b><abbr title="Categoría Alta Dirección (MoProSoft)">DIR</abbr></b></td><td>Gestión del negocio: razón de ser, objetivos, estrategia, mejora continua</td><td>Da lineamientos a GER y se retroalimenta de ella</td></tr>
+<tr><td><b>Gerencia</b></td><td><b>GER</b> (procesos numerados <b>GES</b>)</td><td>Gestión de procesos, proyectos y recursos según los lineamientos de DIR</td><td>Provee elementos a <abbr title="Categoría Operación (MoProSoft)">OPE</abbr>, recibe y evalúa su información, reporta a DIR</td></tr>
+<tr><td><b>Operación</b></td><td><b>OPE</b></td><td>Proyectos de desarrollo y mantenimiento de <abbr title="Software – Software / soporte lógico">SW</abbr></td><td>Ejecuta con lo que le da GER y le entrega información y productos</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Categoría DIR (Alta Dirección)</h3>
+<p>Categoría que contiene un único proceso, <b>DIR.1 Gestión de Negocio (<abbr title="Gestión de Negocio (MoProSoft DIR.1)">GN</abbr>)</b>. Establece la razón de ser de la organización, sus objetivos y los «Procesos Requeridos», y evalúa resultados para la mejora continua.</p>
+<p class="ej"><b>Ej.:</b> el directorio de una startup que provee a Yape define la visión «ser el proveedor #1 de pagos QR para mypes en 2027»: eso es DIR.</p></div>
+
+<div class="concepto"><h3>Categoría GER / GES (Gerencia / Gestión)</h3>
+<p>Categoría intermedia con <b>GES.1 Gestión de Procesos (<abbr title="Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)">GPR</abbr>)</b>, <b>GES.2 Gestión de Proyectos (<abbr title="Gestión de Proyectos – cartera (MoProSoft GES.2)">GPY</abbr>)</b> y <b>GES.3 Gestión de Recursos (<abbr title="Generic Resource – Recurso genérico">GR</abbr>)</b> con sus 3 subprocesos (<abbr title="Recursos Humanos y Ambiente de Trabajo (MoProSoft GES.3.1)">RHAT</abbr>, <abbr title="British Standards Institution – Instituto Británico de Normalización">BSI</abbr>, <abbr title="Conocimiento de la Organización (MoProSoft GES.3.3)">CO</abbr>). Traduce la estrategia en procesos, cartera y recursos.</p>
+<p class="ej"><b>Ej.:</b> la gerencia de operaciones de una software factory decide qué proyectos acepta (GPY), qué proceso de pruebas estandariza (GPR) y a quién contrata (RHAT).</p></div>
+
+<div class="concepto"><h3>Categoría OPE (Operación)</h3>
+<p>Categoría donde se ejecutan los proyectos concretos: <b>OPE.1 Administración de Proyectos Específicos (<abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr>)</b> y <b>OPE.2 Desarrollo y Mantenimiento de Software (<abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr>)</b>. Es el «perfil base» con el que suelen comenzar las <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> y lo que la <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110 Basic tomó como <abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr> y <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr>.</p>
+<p class="ej"><b>Ej.:</b> el equipo que construye el app móvil de citas de EsSalud (plan del proyecto + <abbr title="Software Requirements Specification – Especificación de Requisitos de Software">SRS</abbr> + código + pruebas) trabaja en OPE.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4>
+<p>El documento v1.3 llama a la categoría <b>«Gerencia (GER)»</b> pero numera sus procesos <b>GES.1, GES.2, GES.3</b> (por «Gestión»). Muchas fuentes dicen «Gestión (GES)». Ambas son aceptables: en el examen escribe <b>«Gerencia/Gestión (<abbr title="Categoría Gerencia / Gestión (MoProSoft)">GER/GES</abbr>)»</b>.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Código</th><th>Proceso</th><th>Sigla</th><th>Propósito (parafraseado)</th></tr></thead>
+<tbody>
+<tr><td><b>DIR.1</b></td><td>Gestión de Negocio</td><td><b>GN</b></td><td>Establecer la razón de ser, objetivos y condiciones para lograrlos considerando a los clientes; evaluar resultados y proponer cambios para la mejora continua; habilitar a la organización para responder al cambio</td></tr>
+<tr><td><b>GES.1</b></td><td>Gestión de Procesos</td><td><b>GPR</b></td><td>Establecer los procesos según los «Procesos Requeridos» del Plan Estratégico; definir, planificar e implantar mejoras sobre ellos</td></tr>
+<tr><td><b>GES.2</b></td><td>Gestión de Proyectos</td><td><b>GPY</b></td><td>Asegurar que la <b>cartera</b> de proyectos contribuya a los objetivos y estrategias</td></tr>
+<tr><td><b>GES.3</b></td><td>Gestión de Recursos</td><td><b>GR</b></td><td>Conseguir y dotar <abbr title="Human Resources – Recursos Humanos">RR. HH.</abbr>, infraestructura, ambiente de trabajo y proveedores; crear y mantener la Base de Conocimiento</td></tr>
+<tr><td>GES.3.1</td><td>Recursos Humanos y Ambiente de Trabajo</td><td><b>RHAT</b></td><td>Proveer personal adecuado a los roles y evaluar el ambiente de trabajo</td></tr>
+<tr><td>GES.3.2</td><td>Bienes, Servicios e Infraestructura</td><td><b>BSI</b></td><td>Proveer proveedores de bienes, servicios e infraestructura que satisfagan los requisitos de adquisición</td></tr>
+<tr><td>GES.3.3</td><td>Conocimiento de la Organización</td><td><b>CO</b></td><td>Mantener disponible y administrar la Base de Conocimiento (productos, planes, reportes, lecciones aprendidas)</td></tr>
+<tr><td><b>OPE.1</b></td><td>Administración de Proyectos Específicos</td><td><b>APE</b></td><td>Establecer y ejecutar sistemáticamente las actividades para cumplir los objetivos de <b>un</b> proyecto en tiempo y costo</td></tr>
+<tr><td><b>OPE.2</b></td><td>Desarrollo y Mantenimiento de Software</td><td><b>DMS</b></td><td>Realizar sistemáticamente análisis, diseño, construcción, integración y pruebas de productos de SW nuevos o modificados cumpliendo los requerimientos</td></tr>
+</tbody></table></div>
+
+<p>Relaciones (Fig. 2 del modelo), en esquema:</p>
+<ul>
+<li><b>DIR.1 GN</b> → da lineamientos (Plan Estratégico) a
+<ul><li><b>GES.1 GPR</b> (procesos), <b>GES.2 GPY</b> (cartera), <b>GES.3 GR</b> (recursos → RHAT, BSI, CO)</li></ul></li>
+<li><b>GES.2 GPY (1)</b> → <b>OPE.1 APE (1..n)</b>: una cartera, muchos proyectos específicos.
+<ul><li><b>APE ↔ DMS</b>: APE planifica y controla; DMS produce el SW y reporta avance.</li></ul></li>
+<li>Toda la información y productos aprobados → <b>CO</b> (Base de Conocimiento).</li>
+</ul>
+
+<div class="concepto"><h3>GN (Gestión de Negocio, DIR.1)</h3>
+<p>Objetivos: <b>O1</b> planificación estratégica exitosa; <b>O2</b> que la organización trabaje según el Plan Estratégico (comunicarlo e implantarlo); <b>O3</b> mejorar el Plan mediante Propuestas de Mejora. Indicadores: I1 desempeño satisfactorio de los indicadores del Plan; I2 los miembros conocen el Plan y trabajan según él; I3/I4 propuestas basadas en el Reporte de Valoración y cambios efectivos al Plan. Actividades: <b>A1 Planificación Estratégica</b>, <b>A2 Preparación para la Realización</b>, <b>A3 Valoración y Mejora Continua</b>. Roles: GD (Grupo Directivo, autoridad), RGN (Responsable de Gestión de Negocio, responsable), <abbr title="Generic Goal – Meta genérica">GG</abbr> (Grupo de Gestión).</p>
+<p class="ej"><b>Ej.:</b> el GD de una fintech limeña define misión, visión, el objetivo «3 bancos clientes en 2027» y los Procesos Requeridos; el RGN lo comunica y cada trimestre emite el Reporte de Valoración.</p></div>
+
+<div class="concepto"><h3>GPR (Gestión de Procesos, GES.1)</h3>
+<p>Objetivos: O1 planificar definición, implantación y mejora de procesos; O2 dar seguimiento; O3 mejorar el desempeño según el Plan de Procesos; O4 informar a GN. Actividades: <b>A1 Planificación</b>, <b>A2 Preparación a la Implantación</b>, <b>A3 Evaluación y Control</b> (Plan de Evaluación, Reporte de Evaluación, Plan de Acciones, Plan de Mejora, riesgos, lecciones aprendidas). Roles: RGN, RGP (Responsable de Gestión de Procesos), RP (Responsable de Proceso), EV (Evaluador).</p>
+<p class="ej"><b>Ej.:</b> el SEPG (Software Engineering Process Group) documenta el proceso de pruebas con SonarQube y lo audita cada trimestre = GPR. En <abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr>, PmCOMPETISOFT es un «despliegue» detallado de este proceso.</p></div>
+
+<div class="concepto"><h3>GPY (Gestión de Proyectos, GES.2)</h3>
+<p>Gestiona la <b>cartera</b> (portafolio): O1 cartera alineada a la estrategia; O2 mantener bajo control sus actividades; O3 informar desempeño a GN; O4 atender <b>Comentarios y Quejas del Cliente</b>. Actividades: A1 Planificación (alternativas de proyectos internos, Plan de Gestión de Proyectos, <b>Plan de Ventas</b>, mecanismos de comunicación con clientes), A2 Realización (ejecutar Plan de Ventas y Plan de Proyectos), A3 Evaluación y Control (Reporte Cuantitativo y Cualitativo, acciones correctivas y preventivas). Rol: RGPY (Responsable de Gestión de Proyectos).</p>
+<p class="ej"><b>Ej.:</b> decidir si la empresa acepta el proyecto «app para Rímac» o el de «Plaza Vea» y atender la queja formal de Interbank sobre la relación comercial = GPY.</p></div>
+
+<div class="concepto"><h3>GR (Gestión de Recursos, GES.3) y sus subprocesos RHAT, BSI, CO</h3>
+<p>GR: A1 Planificación de Recursos (Plan de Adquisiciones y Capacitación; Planes Operativos de RHAT, BSI y CO), A2 Seguimiento y Control, <b>A3 Investigación de Tendencias Tecnológicas</b> (Propuestas Tecnológicas). Roles: RGR, RRHAT, RBSI, RCO. <b>RHAT</b>: A1 Preparación, A2 Instrumentación (selección, capacitación, evaluación del ambiente), A3 Generación de Reportes. <b>BSI</b>: A1 Preparación, A2 Instrumentación (adquisiciones, proveedores, mantenimiento de infraestructura), A3 Reportes. <b>CO</b>: A1 Planificación, A2 Realización, A3 Evaluación y Control de la <b>Base de Conocimiento</b>; roles RGR, RCO, GRP (Grupo de Responsables de Procesos).</p>
+<p class="ej"><b>Ej.:</b> contratar 2 <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> testers y medir el clima laboral = RHAT; comprar licencias de Jira y un servidor de <abbr title="Continuous Integration / Continuous Delivery-Deployment – Integración y Entrega/Despliegue Continuos">CI/CD</abbr> = BSI; mantener Confluence/Git con plantillas y lecciones aprendidas = CO; investigar <abbr title="Artificial Intelligence (AI) – Inteligencia Artificial">IA</abbr> (Inteligencia Artificial) generativa para testing = GR (A3).</p></div>
+
+<div class="concepto"><h3>APE (Administración de Proyectos Específicos, OPE.1)</h3>
+<p>Gestiona <b>un</b> proyecto. Objetivos: O1 cumplir los objetivos en tiempo y costo; O2 mantener informado al cliente (reuniones de avance); O3 atender <b>Solicitudes de Cambio</b>. Actividades: <b>A1 Planificación</b> (Proceso Específico, Protocolo de Entrega, ciclos, Tiempo Estimado, Plan de Adquisiciones y Capacitación, Equipo de Trabajo, Calendario, Costo Estimado, <b>Plan de Manejo de Riesgos</b>, Plan del Proyecto y Plan de Desarrollo), <b>A2 Realización</b> (acordar tareas con el <abbr title="Requirements Development and Management – Desarrollo y Gestión de Requisitos">RDM</abbr>, subcontratos, Reportes de Actividades, costo real, Registro de Rastreo, analizar Solicitudes de Cambio, reuniones de avance), <b>A3 Evaluación y Control</b> (cumplimiento de planes, riesgos, Reporte de Seguimiento), <b>A4 Cierre</b> (entrega según Protocolo → <b>Documento de Aceptación del Cliente</b>; cierre de subcontratos; Reporte de Mediciones y Sugerencias de Mejora). Roles: RGPY, RAPE, <abbr title="Capability Level – Nivel de capacidad">CL</abbr> (Cliente), RSC (Responsable del Subcontrato), RDM, ET (Equipo de Trabajo).</p>
+<p class="ej"><b>Ej.:</b> el jefe de proyecto (RAPE) del módulo de matrícula del SUM-UNMSM estima, arma el calendario y el plan de riesgos y al final obtiene el acta de aceptación de la <abbr title="Oficina General de Tecnologías de la Información">OGTI</abbr> = APE.</p></div>
+
+<div class="concepto"><h3>DMS (Desarrollo y Mantenimiento de Software, OPE.2)</h3>
+<p>Se ejecuta en uno o más <b>ciclos</b>, cada uno con <b>6 fases</b>: Inicio, Requerimientos, Análisis y Diseño, Construcción, Integración y Pruebas, Cierre. En cada fase: distribución de tareas, producción + verificación/validación/prueba + corrección y Reporte de Actividades. Objetivos: O1 consistencia entre productos de entrada y salida mediante <abbr title="Verification and Validation – Verificación y Validación">V&amp;V</abbr> (Verificación y Validación) y pruebas; O2 sustentar ciclos posteriores con la Configuración de SW integrada; O3 cumplir el Plan de Desarrollo. <b>Integra los procesos de soporte</b> (verificación, validación, documentación, control de configuración) en un solo marco.</p>
+<p class="ej"><b>Ej.:</b> para el app móvil de SINEACE (caso G3 de la S5): Requerimientos = SRS (Software Requirements Specification) + plan de pruebas de sistema; Construcción = componentes Kotlin + pruebas unitarias JUnit; Integración y Pruebas = pruebas <abbr title="End-to-End – De extremo a extremo">E2E</abbr> (End-to-End) + manual de usuario final.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Fase DMS</th><th>Productos principales</th></tr></thead>
+<tbody>
+<tr><td>A1 <b>Inicio</b></td><td>Revisión del Plan de Desarrollo con el equipo: entendimiento común y compromiso</td></tr>
+<tr><td>A2 <b>Requerimientos</b></td><td>Especificación de Requerimientos + <b>Plan de Pruebas de Sistema</b>; Manual de Usuario preliminar</td></tr>
+<tr><td>A3 <b>Análisis y Diseño</b></td><td>Análisis y Diseño (estructura de componentes) + <b>Plan de Pruebas de Integración</b></td></tr>
+<tr><td>A4 <b>Construcción</b></td><td>Componentes de SW + <b>pruebas unitarias</b></td></tr>
+<tr><td>A5 <b>Integración y Pruebas</b></td><td>SW integrado y probado; versión final de Manuales de Usuario, Operación y Mantenimiento</td></tr>
+<tr><td>A6 <b>Cierre</b></td><td>Integración final de la <b>Configuración de Software</b>, Lecciones Aprendidas, Reporte de Mediciones y Sugerencias de Mejora</td></tr>
+</tbody></table></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Criterio</th><th>GPY (GES.2)</th><th>APE (OPE.1)</th></tr></thead>
+<tbody>
+<tr><td>Objeto</td><td>Cartera (portafolio) de proyectos</td><td>Un proyecto concreto</td></tr>
+<tr><td>Pregunta que responde</td><td>¿Qué proyectos hacemos y están alineados a la estrategia?</td><td>¿Cómo cumplimos este proyecto en tiempo y costo?</td></tr>
+<tr><td>Productos típicos</td><td>Plan de Ventas, Plan de Gestión de Proyectos, propuestas, Reporte Cuantitativo y Cualitativo</td><td>Plan del Proyecto, Calendario, Costo Estimado, Plan de Manejo de Riesgos, Documento de Aceptación</td></tr>
+<tr><td>Cliente</td><td>Atiende <b>Comentarios y Quejas del Cliente</b> sobre la empresa</td><td>Atiende <b>Solicitudes de Cambio</b> del proyecto</td></tr>
+<tr><td>Rol responsable</td><td>RGPY</td><td>RAPE</td></tr>
+<tr><td>Equivalente en otros modelos</td><td><abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr>: gestión de portafolio (no es <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> en v1.3); MPS 2012: GPP; MPS 2021: <abbr title="Gerência Organizacional – Gestión Organizacional (MPS 2021)">ORG</abbr></td><td>ISO/IEC 29110: PM; MPS: GPR; CMMI: <abbr title="Project Planning – Planificación del Proyecto">PP</abbr> + <abbr title="Project Monitoring and Control – Monitoreo y Control del Proyecto">PMC</abbr></td></tr>
+</tbody></table></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><ul>
+<li><b>«9 procesos»</b> se cuentan así: GN, GPR, GPY, GR, RHAT, BSI, CO, APE, DMS (GR y sus 3 subprocesos cuentan por separado; son «6 procesos + 3 subprocesos»).</li>
+<li><b>GPY ≠ APE</b>: cartera vs proyecto específico. Una Solicitud de Cambio de un proyecto es APE; una queja sobre la relación con la empresa es GPY.</li>
+<li>Investigar tendencias tecnológicas es del proceso padre <b>GR (A3)</b>, no de BSI.</li>
+<li>No confundas la sigla <b>GPR de MoProSoft</b> (Gestión de <b>Procesos</b>) con <b>GPR de <abbr title="Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño">MPS.BR</abbr></b> (Gerência de <b>Projetos</b>).</li>
+</ul></div>
+</section>
+<section id="moprosoft-roles-patron">
+<h2>4. MoProSoft: roles, productos y el patrón de procesos</h2>
+<p>Todo proceso <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> se documenta con el mismo <b>patrón de procesos</b> de 3 partes. Es un tema MUY preguntable porque <abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr> lo hereda y la <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110 usa una notación parecida (objetivos <abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr>.O1…, actividades PM.1…).</p>
+
+<div class="concepto"><h3>Clasificación de roles en MoProSoft</h3>
+<p>Los roles se agrupan en <b>Grupo Directivo</b>, <b>Responsable de Proceso</b> e <b>Involucrado</b> (analista AN, diseñador de interfaz DU, diseñador DI, programador <abbr title="Pull Request – Solicitud de integración de cambios (gatillo de code review)">PR</abbr>, responsable de pruebas RPU, revisor RE, responsable de manuales <abbr title="Resolución Ministerial">RM</abbr>…); los roles externos son <b>Cliente (<abbr title="Capability Level – Nivel de capacidad">CL</abbr>)</b> y <b>Usuario (US)</b>. Un rol puede ser asumido por una o varias personas a tiempo parcial o completo: clave para <abbr title="SME, Small and Medium-sized Enterprise – Pequeña y Mediana Empresa">PYME</abbr>, donde <b>una persona = varios roles</b>.</p>
+<p class="ej"><b>Ej.:</b> en una <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> de 5 personas, el gerente es GD y RGN; el desarrollador senior es RAPE, <abbr title="Requirements Development and Management – Desarrollo y Gestión de Requisitos">RDM</abbr> y RE a la vez.</p></div>
+
+<div class="concepto"><h3>Configuración de Software</h3>
+<p>Conjunto <b>consistente</b> de productos de <abbr title="Software – Software / soporte lógico">SW</abbr> (Especificación de Requerimientos, Análisis y Diseño, Software [componente/sistema], Prueba, Registro de Rastreo, Manuales) que se integra al cierre de cada ciclo <abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr> y sustenta los ciclos posteriores. Es el equivalente MoProSoft de la línea base de la <abbr title="Software Configuration Management – Gestión de la Configuración del Software">SCM</abbr> (Software Configuration Management) de <abbr title="Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos">IEEE</abbr> 828 / ISO/IEC 12207.</p>
+<p class="ej"><b>Ej.:</b> al cerrar el ciclo 2 del sistema de trámite de una municipalidad, la versión v2.0 del <abbr title="Software Requirements Specification – Especificación de Requisitos de Software">SRS</abbr> + código etiquetado en Git + casos de prueba forman la Configuración de SW.</p></div>
+
+<div class="concepto"><h3>Base de Conocimiento (proceso CO)</h3>
+<p>Repositorio organizacional que contiene productos, planes, reportes, registros y <b>lecciones aprendidas</b>; un producto entra en ella en el momento definido por la sección «Incorporación a la base de conocimiento» del patrón y desde ahí queda bajo control de <abbr title="Conocimiento de la Organización (MoProSoft GES.3.3)">CO</abbr>.</p>
+<p class="ej"><b>Ej.:</b> la lección aprendida «las APIs (Application Programming Interfaces) de SUNAT cambian sin aviso: añadir pruebas de contrato» se registra en la Base de Conocimiento tras el cierre del proyecto.</p></div>
+
+<div class="concepto"><h3>Patrón de procesos (3 partes)</h3>
+<p>Esquema estándar para describir procesos: <b>(1) Definición general del proceso</b> (proceso, categoría, propósito, descripción, objetivos, indicadores, metas cuantitativas, responsabilidad y autoridad, subprocesos, procesos relacionados, entradas, salidas, productos internos, referencias); <b>(2) Prácticas</b> (roles y capacitación, actividades, diagrama de flujo <abbr title="Unified Modeling Language – Lenguaje Unificado de Modelado">UML</abbr>, verificaciones y validaciones, incorporación a la base de conocimiento, recursos de infraestructura, mediciones, capacitación, situaciones excepcionales, lecciones aprendidas); <b>(3) Guías de ajuste</b>.</p>
+<p class="ej"><b>Ej.:</b> una empresa que provee a Interbank documenta un proceso nuevo «Gestión de Seguridad» con el patrón: O1 «reducir vulnerabilidades críticas», I1 «n.º de vulnerabilidades críticas abiertas por release», meta «0», M1 «conteo <abbr title="Static / Dynamic Application Security Testing – Pruebas de seguridad estáticas / dinámicas de aplicaciones">SAST/DAST</abbr> por release».</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Parte 1 · Elemento</th><th>Qué contiene</th></tr></thead>
+<tbody>
+<tr><td>Proceso</td><td>Nombre precedido de su acrónimo (p. ej. «<abbr title="Categoría Operación (MoProSoft)">OPE</abbr>.1 Administración de Proyectos Específicos»)</td></tr>
+<tr><td>Categoría</td><td>Categoría + acrónimo (<abbr title="Categoría Alta Dirección (MoProSoft)">DIR</abbr> / GER / OPE)</td></tr>
+<tr><td>Propósito</td><td>Objetivos generales medibles y resultados esperados</td></tr>
+<tr><td>Descripción</td><td>Resumen de actividades y productos del flujo</td></tr>
+<tr><td>Objetivos</td><td>Específicos: O1, O2…</td></tr>
+<tr><td>Indicadores</td><td>I1, I2… indicando entre paréntesis a qué objetivo responden</td></tr>
+<tr><td>Metas cuantitativas</td><td>Valor numérico o rango de satisfacción por indicador</td></tr>
+<tr><td>Responsabilidad y autoridad</td><td>Responsable = rol que ejecuta; Autoridad = rol que valida la ejecución y el propósito</td></tr>
+<tr><td>Subprocesos</td><td>Opcional (p. ej. <abbr title="Generic Resource – Recurso genérico">GR</abbr> → <abbr title="Recursos Humanos y Ambiente de Trabajo (MoProSoft GES.3.1)">RHAT</abbr>, <abbr title="British Standards Institution – Instituto Británico de Normalización">BSI</abbr>, CO)</td></tr>
+<tr><td>Procesos relacionados</td><td>Nombres</td></tr>
+<tr><td>Entradas</td><td>Nombre + fuente</td></tr>
+<tr><td>Salidas</td><td>Nombre + descripción + destino</td></tr>
+<tr><td>Productos internos</td><td>Generados y usados dentro del propio proceso</td></tr>
+<tr><td>Referencias bibliográficas</td><td>Normas, modelos, libros</td></tr>
+</tbody></table></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Parte 2 · Elemento (Prácticas)</th><th>Qué contiene</th></tr></thead>
+<tbody>
+<tr><td>Roles involucrados y capacitación</td><td>Rol, abreviatura, capacitación requerida</td></tr>
+<tr><td>Actividades</td><td>A1, A2… asociadas a objetivos (O1, O2) con tareas A1.1, A1.2 y rol responsable</td></tr>
+<tr><td>Diagrama de flujo de trabajo</td><td>Diagrama de actividades <b>UML</b> (Unified Modeling Language) con actividades y productos</td></tr>
+<tr><td>Verificaciones y validaciones</td><td>Ver1/Val1… producto, rol, descripción; validación interna o externa (cliente); se recomienda <b>validar después de verificar</b></td></tr>
+<tr><td>Incorporación a la base de conocimiento</td><td>Producto + forma de aprobación (Ver/Val/otra o «Ninguna»)</td></tr>
+<tr><td>Recursos de infraestructura</td><td><abbr title="Hardware – Hardware / soporte físico">HW</abbr> (Hardware) / SW requerido por actividad</td></tr>
+<tr><td>Mediciones</td><td>M1, M2… para evaluar indicadores</td></tr>
+<tr><td>Capacitación</td><td>Reglas para capacitar a los roles</td></tr>
+<tr><td>Situaciones excepcionales</td><td>Mecanismos para manejar lo que impide una actividad</td></tr>
+<tr><td>Lecciones aprendidas</td><td>Mecanismos para aprovecharlas</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Objetivo, indicador, medición y meta cuantitativa</h3>
+<p>Cuatro elementos distintos del patrón: el <b>objetivo</b> (O) dice <i>qué se quiere lograr</i>; el <b>indicador</b> (I) dice <i>qué se evalúa</i> para saber si se logra; la <b>medición</b> (M) dice <i>cómo se obtiene el dato</i>; la <b>meta cuantitativa</b> da <i>el valor esperado</i>. Equivalen al enfoque GQM (Goal-Question-Metric) de Basili.</p>
+<p class="ej"><b>Ej.:</b> O1 «cumplir el plazo»; I1 «el tiempo real está acorde con lo estimado»; M1 «desviación % = (real − estimado) / estimado × 100»; meta «≤10 %».</p></div>
+
+<div class="concepto"><h3>Responsabilidad vs autoridad</h3>
+<p>En el patrón, el <b>responsable</b> es el rol que <b>ejecuta</b> el proceso y la <b>autoridad</b> es el rol que <b>valida</b> que la ejecución cumplió el propósito. Corresponde a la «R» y la «A» de una matriz <abbr title="Responsible, Accountable, Consulted, Informed – Responsable, Aprobador, Consultado, Informado">RACI</abbr> (Responsible, Accountable, Consulted, Informed).</p>
+<p class="ej"><b>Ej.:</b> en <abbr title="Gestión de Negocio (MoProSoft DIR.1)">GN</abbr> el responsable es el RGN y la autoridad es el Grupo Directivo; en <abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr> el responsable es el RAPE y la autoridad el RGPY.</p></div>
+
+<div class="concepto"><h3>Verificación (Ver) y validación (Val) en el patrón</h3>
+<p><b>Verificación</b>: ¿se construyó el producto bien, conforme a lo especificado? <b>Validación</b>: ¿el producto sirve para el uso previsto por el cliente? Pueden ser internas o externas; se recomienda validar después de verificar. Calzan con <abbr title="Verification and Validation – Verificación y Validación">V&amp;V</abbr> de IEEE 1012 e ISO/IEC 12207 (S4–S5).</p>
+<p class="ej"><b>Ej.:</b> Ver1: el RE (Revisor) revisa que el SRS cumpla la plantilla y no tenga ambigüedades; Val1: el cliente (<abbr title="Oficina General de Tecnologías de la Información">OGTI</abbr>) confirma en una demo que el flujo de matrícula refleja lo que necesita.</p></div>
+
+<div class="concepto"><h3>Guías de ajuste</h3>
+<p>Modificaciones permitidas a un proceso para adaptarlo a la organización o al proyecto <b>siempre que no afecten sus objetivos</b>. Es la versión MoProSoft del <i>tailoring</i> de ISO/IEC 12207 (S5) y de las «directrices de adaptación» de <abbr title="Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño">MPS.BR</abbr>.</p>
+<p class="ej"><b>Ej.:</b> para proyectos menores a 1 mes, fusionar las fases Análisis y Diseño y Construcción del DMS, manteniendo el objetivo O1 de consistencia mediante V&amp;V.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><ul>
+<li><b>Indicador ≠ medición ≠ meta</b>: el indicador dice <i>qué</i>, la medición <i>cómo</i> y la meta <i>cuánto</i>.</li>
+<li>La guía de ajuste <b>no puede</b> eliminar un objetivo del proceso; si lo hace ya no es ajuste sino otro proceso.</li>
+<li>El diagrama de flujo del patrón es un <b>diagrama de actividades UML</b> (COMPETISOFT lo hace con carriles por rol), no un diagrama de Ishikawa ni <abbr title="Business Process Model and Notation – Modelo y notación de procesos de negocio">BPMN</abbr> (Business Process Model and Notation).</li>
+</ul></div>
+</section>
+
+<section id="moprosoft-niveles-evalprosoft">
+<h2>5. MoProSoft: niveles de capacidad, EvalProSoft y relación con otras normas</h2>
+
+<div class="concepto"><h3>Niveles de capacidad de MoProSoft (v1.3 «coloreada»)</h3>
+<p>Basados en la NMX-I-006/02-NYCE-2004 ≈ <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 15504-2:2003. Cada proceso se ubica en un nivel de <b>capacidad 0–5</b>; las prácticas y productos están <b>marcados con colores</b> según el nivel en que deben implantarse: amarillo (1), azul (2), verde (3), rosa (4); el nivel 5 no tiene color: se logra cumpliendo sistemáticamente los objetivos y mejorando las metas cuantitativas.</p>
+<p class="ej"><b>Ej.:</b> una <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> implanta primero todo lo «amarillo» de <abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr> (plan básico, calendario) y luego lo «azul» (seguimiento y control formal) para pasar APE de nivel 1 a 2.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Nivel</th><th>Capacidad del proceso</th><th>Color</th><th>Significado</th><th>Atributos 15504 (PA)</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>Incompleto</td><td>—</td><td>No implantado o no logra su propósito («caos»)</td><td>—</td></tr>
+<tr><td>1</td><td><b>Realizado</b></td><td>amarillo</td><td>El proceso logra su propósito</td><td><abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> 1.1</td></tr>
+<tr><td>2</td><td><b>Gestionado / Administrado</b></td><td>azul</td><td>Se planifica y controla; productos de trabajo establecidos, controlados y mantenidos</td><td>PA 2.1, PA 2.2</td></tr>
+<tr><td>3</td><td><b>Establecido</b></td><td>verde</td><td>Se implanta a partir de un proceso definido (estándar) capaz de lograr resultados</td><td>PA 3.1, PA 3.2</td></tr>
+<tr><td>4</td><td><b>Predecible</b></td><td>rosa</td><td>Opera dentro de límites definidos (control cuantitativo)</td><td>PA 4.1, PA 4.2</td></tr>
+<tr><td>5</td><td><b>Optimizado / Optimizando</b></td><td>ninguno</td><td>Mejora continua para metas actuales y futuras</td><td>PA 5.1, PA 5.2</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Nivel de madurez de capacidades (regla EvalProSoft)</h3>
+<p>El nivel organizacional es el <b>nivel máximo que alcanzan todos</b> sus 9 procesos, es decir, el <b>mínimo del perfil de capacidad</b>. Para subir hay que cumplir todo lo de los niveles anteriores más lo del nuevo nivel. No se promedia ni se toma el máximo.</p>
+<p class="ej"><b>Ej.:</b> perfil <abbr title="Gestión de Negocio (MoProSoft DIR.1)">GN</abbr>=2, <abbr title="Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)">GPR</abbr>=2, <abbr title="Gestión de Proyectos – cartera (MoProSoft GES.2)">GPY</abbr>=3, <abbr title="Generic Resource – Recurso genérico">GR</abbr>=2, <abbr title="Recursos Humanos y Ambiente de Trabajo (MoProSoft GES.3.1)">RHAT</abbr>=2, <abbr title="British Standards Institution – Instituto Británico de Normalización">BSI</abbr>=2, <abbr title="Conocimiento de la Organización (MoProSoft GES.3.3)">CO</abbr>=2, APE=3, <abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr>=3 → la organización es <b>nivel 2</b>. Si GN bajara a 1, la organización sería nivel 1 aunque APE y DMS estén en 3.</p></div>
+
+<div class="concepto"><h3>EvalProSoft (Método de Evaluación de Procesos para la Industria de Software)</h3>
+<p>Es la <b>NMX-I-059/04-NYCE</b>; usa la parte 02 + ISO/IEC 15504-2 (vía NMX-I-15504/02-NYCE). Propósitos: (1) <b>determinar la capacidad</b> actual (perfil por proceso + nivel de madurez de capacidades); (2) <b>mejora continua</b>: usar los hallazgos para diseñar un ciclo de mejora. <abbr title="Normalización y Certificación Electrónica, A.C. (México)">NYCE</abbr> ofrece además una herramienta de pre-evaluación asistida.</p>
+<p class="ej"><b>Ej.:</b> antes de la evaluación formal, una <abbr title="SME, Small and Medium-sized Enterprise – Pequeña y Mediana Empresa">PYME</abbr> de Monterrey hace la pre-evaluación de NYCE y descubre que CO está en nivel 0 porque no tiene Base de Conocimiento.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Uso de EvalProSoft</th><th>Quién evalúa</th><th>Alcance</th><th>Resultado</th></tr></thead>
+<tbody>
+<tr><td><b>1. Evaluación para la acreditación de capacidades</b></td><td><b>Evaluador Certificado</b> contratado por la organización</td><td>Los 9 procesos</td><td>Perfil certificado + nivel de madurez de capacidades, comparable en el mercado; el Organismo Rector arma estadísticas de la industria</td></tr>
+<tr><td><b>2. Evaluación de capacidades del proveedor</b></td><td>Evaluador elegido por el <b>cliente</b></td><td>Solo los procesos relevantes para el servicio a contratar</td><td>Insumo para selección de proveedores</td></tr>
+<tr><td><b>3. Autoevaluación</b></td><td>Personal interno o externo, no necesariamente evaluador</td><td>Libre</td><td>Base del plan de mejora; no interviene el Organismo Rector</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Evaluación de capacidades del proveedor</h3>
+<p>Uso de <abbr title="Método de Evaluación de Procesos para la Industria de Software (NMX-I-059/04-NYCE)">EvalProSoft</abbr> en el que el <b>cliente</b> (adquirente) decide qué procesos evaluar en función del servicio que contratará; se alinea con el proceso de Adquisición de ISO/IEC 12207 y con <abbr title="Supplier Agreement Management – Gestión de Acuerdos con Proveedores">SAM</abbr> (Supplier Agreement Management) de <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr>.</p>
+<p class="ej"><b>Ej.:</b> la SUNAT, antes de tercerizar el mantenimiento de un aplicativo, pediría evaluar solo APE y DMS del proveedor.</p></div>
+
+<div class="norma"><h4>NMX-I-059/04-NYCE (EvalProSoft)</h4>
+<ul>
+<li><b>Organismo emisor:</b> NYCE (México), sobre trabajo de la <abbr title="Universidad Nacional Autónoma de México">UNAM</abbr>.</li>
+<li><b>Versión/año:</b> 2005 (junto a las partes 01–03); actualizada en la revisión 2011.</li>
+<li><b>Propósito:</b> método de evaluación de los procesos <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> para determinar capacidad y orientar la mejora.</li>
+<li><b>Estructura:</b> basado en ISO/IEC 15504-2 (NMX-I-15504/02-NYCE): atributos PA 1.1 a PA 5.2 → perfil de capacidad por proceso → nivel de madurez de capacidades; 3 usos (acreditación, proveedor, autoevaluación).</li>
+<li><b>Trampa típica:</b> decir que EvalProSoft «otorga niveles de madurez 1–5 como CMMI por etapas». Otorga un <b>perfil de capacidad</b> por proceso y el nivel organizacional = mínimo común.</li>
+</ul></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Norma / modelo</th><th>Relación con MoProSoft</th></tr></thead>
+<tbody>
+<tr><td><abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> 9001:2000</td><td>Base; el Anexo A1 mapea cada proceso (p. ej. GN ↔ cláusulas 4, 5, 7.2.3, 8.1–8.5)</td></tr>
+<tr><td><abbr title="Capability Maturity Model – Modelo de Madurez de Capacidades">CMM</abbr> v1.1 / CMMI</td><td>Basado en niveles 2 y 3 de CMM; GN mapea a <abbr title="Organizational Process Focus – Enfoque en el Proceso Organizacional">OPF</abbr>/OPD (nivel 3), <abbr title="Quantitative Project Management – Gestión Cuantitativa del Proyecto">QPM</abbr> (nivel 4) y prácticas de nivel 5</td></tr>
+<tr><td>ISO/IEC <abbr title="Technical Report – Informe Técnico (ISO)">TR</abbr> 15504-2:1998 / 15504-2:2003</td><td>Marco general y base de la evaluación; para todos los procesos aplica SUP.1 Documentación, SUP.2 Gestión de Configuración, SUP.3 <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr>, SUP.4 Verificación, SUP.5 Validación, SUP.8 Resolución de Problemas, <abbr title="Gerência Organizacional – Gestión Organizacional (MPS 2021)">ORG</abbr>.5 Medición</td></tr>
+<tr><td><abbr title="Project Management Body of Knowledge – Cuerpo de Conocimientos de la Dirección de Proyectos">PMBOK</abbr>, <abbr title="Software Engineering Body of Knowledge – Cuerpo de Conocimiento de la Ingeniería de Software">SWEBOK</abbr></td><td>Prácticas incorporadas (APE ↔ PMBOK)</td></tr>
+<tr><td><b>ISO/IEC 29110</b></td><td>En <b>mayo de 2006</b> el <abbr title="Working Group 24 – Grupo de Trabajo 24 de ISO/IEC JTC 1/SC 7">WG24</abbr> eligió MoProSoft como <b>base</b> del proyecto VSE (APE ≈ <abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr>, DMS ≈ <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr>)</td></tr>
+<tr><td><abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr></td><td>Su modelo de procesos es MoProSoft adaptado</td></tr>
+<tr><td>Perú</td><td>Adoptado como <b><abbr title="Norma Técnica Peruana">NTP</abbr> 291.100</b> (NTP-291.100-1:2009)</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Cobertura normativa del modelo MoProSoft/COMPETISOFT</h3>
+<p>Estudios comparativos del modelo COMPETISOFT (derivado de MoProSoft) reportan cobertura de <b>ISO 9001:2000 ≈ 92 %</b>, de <b>ISO/IEC 12207 Anexo F ≈ 95 %</b> y de <b>CMMI nivel 2 ≈ 77 %</b>. La cobertura de CMMI es menor porque MoProSoft se estructura por niveles organizacionales y no por PA (Process Areas).</p>
+<p class="ej"><b>Ej.:</b> una PYME con MoProSoft nivel 2 que aspira a CMMI ML2 debe cerrar brechas en <abbr title="Process and Product Quality Assurance – Aseguramiento de la Calidad del Proceso y del Producto">PPQA</abbr> (Process and Product Quality Assurance) y <abbr title="Measurement and Analysis – Medición y Análisis">MA</abbr> (Measurement and Analysis), que MoProSoft dispersa entre procesos.</p></div>
+
+<div class="concepto"><h3>Uso del modelo (organización con o sin procesos) e implantación</h3>
+<p><b>Sin procesos:</b> generar una instancia de cada proceso (metas cuantitativas, renombrar roles y productos a la jerga propia, estándares de documentación, recursos, mediciones, aplicar guías de ajuste; en DMS definir métodos y técnicas concretas). <b>Con procesos:</b> establecer la correspondencia proceso propio ↔ MoProSoft, analizar discrepancias (gap analysis) y planificar ajustes. <b>Implantación:</b> piloto o «big bang», con evolución por mejora continua y metas cada vez más ambiciosas.</p>
+<p class="ej"><b>Ej.:</b> una empresa que ya trabaja con Scrum mapea Sprint Planning → APE-Planificación y Sprint Review → APE-Realización (reunión de avance con el cliente), y descubre que le falta el Plan de Manejo de Riesgos.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><ul>
+<li>MoProSoft <b>no</b> tiene «5 niveles de madurez como CMMI»: sus niveles son de <b>capacidad</b> por proceso (0–5) y el nivel organizacional es el <b>mínimo común</b>.</li>
+<li>MoProSoft <b>no</b> es «CMMI simplificado»: su estructura <abbr title="Categoría Alta Dirección (MoProSoft)">DIR</abbr>/GER/OPE es <b>organizacional</b>, mientras que CMMI v1.3 agrupa PA en Process Management, Project Management, Engineering y Support.</li>
+<li>Error frecuente en el cálculo: <b>promediar</b> el perfil (p. ej. 2,2) o tomar el <b>máximo</b>; lo correcto es el mínimo.</li>
+</ul></div>
+</section>
+<section id="mps-br">
+<h2>6. MPS.BR / MR-MPS-SW: el modelo brasileño</h2>
+<p>El programa <b><abbr title="Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño">MPS.BR</abbr></b> (Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño) nació en <b>diciembre de 2003</b> porque Brasil tenía entonces 214 empresas <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> 9000 pero solo ~30 con <abbr title="Capability Maturity Model – Modelo de Madurez de Capacidades">CMM</abbr> (Capability Maturity Model), casi todas multinacionales. Lo coordina <b><abbr title="Associação para Promoção da Excelência do Software Brasileiro">SOFTEX</abbr></b> (Associação para Promoção da Excelência do Software Brasileiro) con apoyo del MCTI (Ministério da Ciência, Tecnologia e Inovação), <b><abbr title="Financiadora de Estudos e Projetos (Brasil)">FINEP</abbr></b> (Financiadora de Estudos e Projetos), <b><abbr title="Serviço Brasileiro de Apoio às Micro e Pequenas Empresas">SEBRAE</abbr></b> (Serviço Brasileiro de Apoio às Micro e Pequenas Empresas) y el BID/FUMIN (Banco Interamericano de Desarrollo / Fondo Multilateral de Inversiones).</p>
+
+<div class="concepto"><h3>MPS.BR (Melhoria de Processo do Software Brasileiro)</h3>
+<p>Programa nacional cuyo objetivo es <b>aumentar la competitividad</b> de las organizaciones mejorando sus procesos. Tiene una <b>meta técnica</b> (actualizar modelos, formar consultores, evaluadores e instituciones) y una <b>meta de negocio</b> (difundir y viabilizar la adopción mediante el <abbr title="Modelo de Negócio MPS – Modelo de Negocio MPS">MN-MPS</abbr>, cursos, pruebas, workshops y transparencia de las evaluaciones).</p>
+<p class="ej"><b>Ej.:</b> una fábrica de <abbr title="Software – Software / soporte lógico">SW</abbr> de Recife (FSBR) fue evaluada nivel F en 2013 y re-evaluada nivel F con <abbr title="Modelo de Referência MPS para Software (también -SV Serviços y -RH Gestão de Pessoas)">MR-MPS-SW</abbr>:2023 en 2023 tras un gap analysis de 10 días.</p></div>
+
+<div class="concepto"><h3>SOFTEX (Associação para Promoção da Excelência do Software Brasileiro)</h3>
+<p>Organización que coordina el programa MPS.BR. Opera mediante tres estructuras: <b>UEP</b> (Unidade de Execução do Programa – ejecuta el programa), <b>FCC</b> (Fórum de Credenciamento e Controle – acredita y controla instituciones) y <b>ETM</b> (Equipe Técnica do Modelo – mantiene técnicamente el modelo).</p>
+<p class="ej"><b>Ej.:</b> si una <abbr title="Artificial Intelligence (AI) – Inteligencia Artificial">IA</abbr> (Instituição Avaliadora) comete irregularidades en una evaluación, es el FCC quien puede retirarle la acreditación.</p></div>
+
+<div class="norma"><h4>MR-MPS-SW (Modelo de Referência MPS para Software) · Guia Geral MPS de Software</h4>
+<ul>
+<li><b>Organismo emisor:</b> SOFTEX (Brasil), programa MPS.BR.</li>
+<li><b>Versión/año:</b> 2005 (v1.0), 2006, 2007, 2009, 2011, <b>2012</b>, <b>2016</b>, <b>2021</b> (Guia Geral MPS de Software:2021, 1-ene-2021), <b>2023</b> y <b>2024</b> (junio 2024, versión vigente citada en 2025).</li>
+<li><b>Propósito:</b> modelo de referencia de procesos y niveles de madurez para la mejora de procesos de SW, accesible a <abbr title="SME, Small and Medium-sized Enterprise – Pequeña y Mediana Empresa">PYME</abbr> brasileñas.</li>
+<li><b>Base técnica:</b> <b>NBR <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr>/IEEE 12207</b> + familia <b>ISO/IEC 330xx</b> (antes 15504); compatible con <b><abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> v2.0</b>.</li>
+<li><b>Estructura:</b> <b>7 niveles de madurez (G a A)</b>; en 2021, <b>12 procesos</b> en 2 conjuntos (5 de proyecto + 7 organizacionales) y 5 capacidades (CP-G, CP-F, CP-E/D/C, CP-B, CP-A); componentes MR-MPS-SW, MR-MPS-SV, MR-MPS-RH, <abbr title="Método de Avaliação MPS – Método de Evaluación MPS">MA-MPS</abbr>, MN-MPS.</li>
+<li><b>Validez</b> de una evaluación: <b>3 años</b>.</li>
+<li><b>Adopción:</b> ~596 evaluaciones MPS-SW hasta dic-2014.</li>
+<li><b>Trampa típica:</b> pensar que A es el nivel más bajo: <b>G es el más bajo y A el más alto</b>.</li>
+</ul></div>
+
+<div class="concepto"><h3>Componentes del modelo MPS</h3>
+<p>El modelo MPS se compone de modelos de referencia, un método de evaluación y un modelo de negocio, documentados en guías (Guia Geral, Guias de Implementação por nivel, Guia de Avaliação, Guia de Aquisição).</p>
+<p class="ej"><b>Ej.:</b> una empresa de servicios de mesa de ayuda usaría MR-MPS-SV en lugar de MR-MPS-SW, pero sería evaluada con el mismo MA-MPS.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Componente</th><th>Sigla</th><th>Descripción</th></tr></thead>
+<tbody>
+<tr><td>Modelo de Referencia MPS para Software</td><td><b>MR-MPS-SW</b></td><td>Procesos (propósito + resultados esperados) y niveles de madurez</td></tr>
+<tr><td>Modelo de Referencia MPS para Serviços</td><td><b>MR-MPS-SV</b></td><td>Servicios <abbr title="Information Technology (IT) – Tecnologías de la Información">TI</abbr> (base ISO/IEC 20000 + 330xx; compatible con CMMI-SVC)</td></tr>
+<tr><td>Modelo de Referencia MPS para Gestão de Pessoas</td><td><b>MR-MPS-RH</b></td><td>Gestión de personas (base NBR ISO 9001:2015, ISO/IEC 33020, PNQ/FNQ, People CMM y <b><abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr></b>)</td></tr>
+<tr><td>Método de Avaliação</td><td><b>MA-MPS</b></td><td>Proceso y método de evaluación conforme ISO/IEC 33020, 33002 y 33004</td></tr>
+<tr><td>Modelo de Negócio</td><td><b>MN-MPS</b></td><td>Reglas de negocio: implementación por <b><abbr title="Implementation Infrastructure – Infraestructura de Implementación (Practice Area V2.0)">II</abbr></b> (Instituições Implementadoras), evaluación por <b>IA</b> (Instituições Avaliadoras), <b>grupos cooperados</b> de empresas con subsidio SEBRAE, consultores</td></tr>
+</tbody></table></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4>
+<p>En la versión clásica (2005–2016) se enseñaban <b>3 componentes: MR-MPS, MA-MPS y MN-MPS</b>. La Guía 2021 habla de <b>5 componentes</b> (MR-MPS-SW, MR-MPS-SV, MR-MPS-RH, MA-MPS, MN-MPS). Si te preguntan «componentes del MPS.BR», da la respuesta clásica y menciona la ampliación de 2021. Dato fino: la Guía 2021 cita a MoProSoft (NMX-I-059/2-NYCE-2011) como fuente para el MR-MPS-RH.</p></div>
+
+<div class="concepto"><h3>Niveles de madurez MPS (G a A)</h3>
+<p>Siete niveles; <b>nivel de madurez = combinación de procesos + su capacidad</b>. Al subir se agregan procesos y se exige más capacidad; los resultados son <b>acumulativos</b> (lo exigido en G debe seguir cumpliéndose en F y superiores). La razón de partir los niveles 2 y 3 de <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> en G/F y E/D/C es dar <b>escalones más cortos y baratos</b> a las PYME (resultados visibles en 6–12 meses).</p>
+<p class="ej"><b>Ej.:</b> una PYME de Porto Alegre alcanza G en 8 meses (<abbr title="Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)">GPR</abbr> + <abbr title="Engenharia de Requisitos – Ingeniería de Requisitos (MPS 2021)">REQ</abbr>) y obtiene así una evaluación oficial que le sirve para licitar, cuando CMMI ML2 le habría tomado 18 meses.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Nivel</th><th>Nombre (portugués)</th><th>Traducción</th><th>≈ CMMI-DEV</th><th>≈ ISO/IEC 15504/33020</th></tr></thead>
+<tbody>
+<tr><td><b>A</b> (más alto)</td><td>Em Otimização</td><td>En optimización</td><td>Nivel 5 (<abbr title="Organizational Performance Management – Gestión del Rendimiento Organizacional">OPM</abbr>/CAR)</td><td>CL5</td></tr>
+<tr><td><b>B</b></td><td>Gerenciado Quantitativamente</td><td>Gestionado cuantitativamente</td><td>Nivel 4 (<abbr title="Organizational Process Performance – Rendimiento del Proceso Organizacional">OPP</abbr>, <abbr title="Quantitative Project Management – Gestión Cuantitativa del Proyecto">QPM</abbr>)</td><td>CL4</td></tr>
+<tr><td><b>C</b></td><td>Definido</td><td>Definido</td><td>Nivel 3 completo (+ <abbr title="Decision Analysis and Resolution – Análisis y Resolución de Decisiones">DAR</abbr>, <abbr title="Risk Management – Gestión de Riesgos">RSKM</abbr>)</td><td>CL3</td></tr>
+<tr><td><b>D</b></td><td>Largamente Definido</td><td>Ampliamente definido</td><td>Parte del nivel 3 (<abbr title="Requirements Development – Desarrollo de Requisitos">RD</abbr>, TS, PI, <abbr title="Verification – Verificación">VER</abbr>, <abbr title="Validation – Validación">VAL</abbr>)</td><td>CL3</td></tr>
+<tr><td><b>E</b></td><td>Parcialmente Definido</td><td>Parcialmente definido</td><td>Parte del nivel 3 (<abbr title="Organizational Process Focus – Enfoque en el Proceso Organizacional">OPF</abbr>, <abbr title="Organizational Process Definition – Definición del Proceso Organizacional">OPD</abbr>, <abbr title="Organizational Training – Formación Organizacional">OT</abbr>)</td><td>CL3 parcial</td></tr>
+<tr><td><b>F</b></td><td>Gerenciado</td><td>Gestionado</td><td>Nivel 2 completo (+ <abbr title="Configuration Management – Gestión de la Configuración">CM</abbr>, <abbr title="Process and Product Quality Assurance – Aseguramiento de la Calidad del Proceso y del Producto">PPQA</abbr>, <abbr title="Measurement and Analysis – Medición y Análisis">MA</abbr>, <abbr title="Supplier Agreement Management – Gestión de Acuerdos con Proveedores">SAM</abbr>)</td><td>CL2</td></tr>
+<tr><td><b>G</b> (más bajo)</td><td>Parcialmente Gerenciado</td><td>Parcialmente gestionado</td><td>Parte del nivel 2 (<abbr title="Project Planning – Planificación del Proyecto">PP</abbr>, <abbr title="Project Monitoring and Control – Monitoreo y Control del Proyecto">PMC</abbr>, <abbr title="Requirements Management – Gestión de Requisitos">REQM</abbr>)</td><td>CL1–CL2 en procesos de proyecto</td></tr>
+</tbody></table></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4>
+<p>En la figura de la Guía 2021 los rótulos aparecen como «Nível D – Definido» y «Nível C – Totalmente Definido». La denominación <b>clásica</b> (la de cursos y concursos) es <b>D = Largamente Definido, C = Definido</b>. En el examen usa la clásica y, si se pregunta por 2021, menciona la variación.</p></div>
+
+<div class="concepto"><h3>MR-MPS-SW:2021 — dos conjuntos de procesos</h3>
+<p>Desde 2021 los procesos se dividen en <b>Procesos de Proyecto</b> (GPR, REQ, <abbr title="Projeto e Construção do Produto – Diseño y Construcción del Producto (MPS)">PCP</abbr>, <abbr title="Integração do Produto – Integración del Producto (MPS)">ITP</abbr>, <abbr title="Verification and Validation – Verificación y Validación (Practice Area V2.0)">VV</abbr>), que se tratan como <b>un único proceso</b> que se ejecuta con la capacidad del nivel, y <b>Procesos Organizacionales</b> (<abbr title="Gerência de Configuração – Gestión de Configuración (MPS)">GCO</abbr>, <abbr title="Aquisição – Adquisición (MPS)">AQU</abbr>, <abbr title="Medição – Medición (MPS)">MED</abbr>, <abbr title="Gerência de Decisões – Gestión de Decisiones (MPS)">GDE</abbr>, <abbr title="Gerência de Recursos Humanos (MPS)">GRH</abbr>, <abbr title="Gerência de Processos – Gestión de Procesos (MPS 2021)">GPC</abbr>, <abbr title="Gerência Organizacional – Gestión Organizacional (MPS 2021)">ORG</abbr>), cada uno ejecutado con la capacidad del nivel. AQU es <b>excluible</b> si la organización no adquiere; ORG 8–10 también (p. ej. portafolio si hay un solo proyecto). GPR tiene ≥19 resultados esperados y ORG ≥11.</p>
+<p class="ej"><b>Ej.:</b> una <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> que no subcontrata nada excluye AQU justificándolo en el Plan de Avaliação, y aun así puede lograr el nivel F.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Procesos de Proyecto</th><th>Procesos Organizacionales</th></tr></thead>
+<tbody>
+<tr><td><b>GPR</b> Gerência de Projetos (Gestión de Proyectos)</td><td><b>GCO</b> Gerência de Configuração (Gestión de Configuración)</td></tr>
+<tr><td><b>REQ</b> Engenharia de Requisitos (Ingeniería de Requisitos)</td><td><b>AQU</b> Aquisição (Adquisición; excluible)</td></tr>
+<tr><td><b>PCP</b> Projeto e Construção do Produto (Diseño y Construcción del Producto)</td><td><b>MED</b> Medição (Medición)</td></tr>
+<tr><td><b>ITP</b> Integração do Produto (Integración del Producto)</td><td><b>GDE</b> Gerência de Decisões (Gestión de Decisiones)</td></tr>
+<tr><td><b>VV</b> Verificação e Validação (Verificación y Validación)</td><td><b>GRH</b> Gerência de Recursos Humanos</td></tr>
+<tr><td></td><td><b>GPC</b> Gerência de Processos (incluye la estrategia de <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> de proceso y producto)</td></tr>
+<tr><td></td><td><b>ORG</b> Gerência Organizacional (alta dirección: objetivos, directrices, recursos, responsabilidades)</td></tr>
+</tbody></table></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Nivel</th><th>Procesos que se agregan o evolucionan (Guía 2021)</th><th>Capacidad exigida</th></tr></thead>
+<tbody>
+<tr><td><b>G</b></td><td>GPR, REQ</td><td><b>CP-G</b></td></tr>
+<tr><td><b>F</b></td><td>+ GCO, MED, AQU, GPC, ORG</td><td><b>CP-F</b></td></tr>
+<tr><td><b>E</b></td><td>+ <b>GRH</b>; GPC (evol.), ORG (evol.)</td><td><b>CP-E/D/C</b></td></tr>
+<tr><td><b>D</b></td><td>GPR (evol.), REQ (evol.), + <b>PCP</b>, <b>ITP</b>, <b>VV</b></td><td>CP-E/D/C</td></tr>
+<tr><td><b>C</b></td><td>+ <b>GDE</b>; MED (evol.), AQU (evol.), ORG (evol.)</td><td>CP-E/D/C</td></tr>
+<tr><td><b>B</b></td><td>GPR, MED, AQU, ORG (evol.)</td><td><b>CP-B</b> (procesos seleccionados)</td></tr>
+<tr><td><b>A</b></td><td>GPR, MED, AQU, GPC, ORG (evol.)</td><td><b>CP-A</b> (procesos seleccionados)</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Capacidad del proceso CP (Capacidade do Processo, MPS 2021)</h3>
+<p>Reemplaza a los antiguos <abbr title="Process Attribute – Atributo de Processo – Atributo de Proceso (MPS clásico)">AP</abbr>/RAP. <b>CP-G</b> «ejecución gestionada»: produce sus resultados, ejecución planificada y monitoreada, personas preparadas. <b>CP-F</b> «ejecución y productos de trabajo gestionados»: + verificación objetiva de que el proceso se sigue y evaluación objetiva de los productos contra procesos y estándares, con registro, comunicación y resolución de no conformidades (<b>es la QA</b>). <b>CP-E/D/C</b> «proceso definido»: proceso padrón + directrices de adaptación, verificación de que se sigue <b>y es efectivo</b>, oportunidades de mejora, activos de proceso disponibles. <b>CP-B</b> «proceso previsible»: técnicas estadísticas y cuantitativas para prever el logro de objetivos de calidad y desempeño. <b>CP-A</b> «mejorado continuamente»: mejoras seleccionadas por análisis cuantitativo que <b>remueven causas comunes de variación</b>.</p>
+<p class="ej"><b>Ej.:</b> una empresa con CP-B usa gráficos de control (<abbr title="Statistical Process Control – Control Estadístico de Procesos">SPC</abbr>, Statistical Process Control) de densidad de defectos por <abbr title="Kilo Lines of Code – Miles de Líneas de Código">KLOC</abbr> (miles de líneas de código); con CP-A ataca las causas comunes detectadas, como en <abbr title="Define, Measure, Analyze, Improve, Control – Definir, Medir, Analizar, Implementar/Mejorar, Controlar">DMAIC</abbr> de Six Sigma (S2).</p></div>
+
+<div class="concepto"><h3>MR-MPS-SW clásico (2012/2016) y sus AP (Atributos de Processo)</h3>
+<p>Versión anterior aún presente en exámenes. Cada nivel exigía procesos y <b>AP</b> (Atributos de Processo) demostrados mediante <b>RAP</b> (Resultados de Atributo de Processo); cada proceso se demostraba con «resultados esperados» (GPR 1…GPR n). AP 1.1 proceso ejecutado; AP 2.1 ejecución gerenciada; AP 2.2 productos de trabajo gerenciados; AP 3.1 proceso definido; AP 3.2 proceso implementado; AP 4.1 proceso medido; AP 4.2 proceso controlado; AP 5.1 innovación; AP 5.2 optimización continua.</p>
+<p class="ej"><b>Ej.:</b> en 2012, para el nivel F, una empresa debía mostrar AP 2.2: sus planes de proyecto versionados en el repositorio y revisados por <abbr title="Garantia da Qualidade – Aseguramiento de la Calidad (MPS clásico)">GQA</abbr>.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Nivel</th><th>Procesos MPS clásico (sigla)</th><th>AP exigidos</th></tr></thead>
+<tbody>
+<tr><td>G</td><td><b>GPR</b> Gerência de Projetos, <b>GRE</b> Gerência de Requisitos</td><td>AP 1.1, AP 2.1</td></tr>
+<tr><td>F</td><td><b>AQU</b> Aquisição, <b>GCO</b> Gerência de Configuração, <b>GPP</b> Gerência de Portfólio de Projetos, <b>GQA</b> Garantia da Qualidade, <b>MED</b> Medição</td><td>+ AP 2.2</td></tr>
+<tr><td>E</td><td><b>AMP</b> Avaliação e Melhoria do Processo Organizacional, <b>DFP</b> Definição do Processo Organizacional, <b>GRH</b> Gerência de Recursos Humanos, <b>GRU</b> Gerência de Reutilização, GPR (evol.)</td><td>+ AP 3.1, AP 3.2</td></tr>
+<tr><td>D</td><td><b><abbr title="Defect Removal Efficiency – Eficiencia de Remoción de Defectos">DRE</abbr></b> Desenvolvimento de Requisitos, <b>ITP</b>, <b>PCP</b>, <b>VAL</b> Validação, <b>VER</b> Verificação</td><td>AP 1.1–3.2</td></tr>
+<tr><td>C</td><td><b>DRU</b> Desenvolvimento para Reutilização, <b>GDE</b> Gerência de Decisões, <b>GRI</b> Gerência de Riscos</td><td>AP 1.1–3.2</td></tr>
+<tr><td>B</td><td>GPR (evol.: gestión cuantitativa)</td><td>+ AP 4.1, AP 4.2</td></tr>
+<tr><td>A</td><td>(sin procesos nuevos)</td><td>+ AP 5.1, AP 5.2</td></tr>
+</tbody></table></div>
+
+<div class="ojo"><h4>Ojo en el examen · cambios 2012 → 2021</h4><ul>
+<li>GRE + DRE → <b>REQ</b>; VER + VAL → <b>VV</b>.</li>
+<li><b>GQA desaparece como proceso</b>: su contenido pasa a la capacidad <b>CP-F</b> y a <b>GPC</b>.</li>
+<li>GPP pasa a <b>ORG</b>; DFP + AMP → <b>GPC</b>; GRI se integra en GPR; GRU y DRU desaparecen; <b>ORG aparece desde F</b>.</li>
+<li>Por eso, en 2012 «para F faltan GQA y GPP»; en 2021 esas funciones están en CP-F/GPC y ORG.</li>
+</ul></div>
+
+<div class="concepto"><h3>MA-MPS (Método de Avaliação MPS)</h3>
+<p>Método de evaluación conforme ISO/IEC 33020/33002/33004 (antes 15504-2), ejecutado por una <b>IA</b> (Instituição Avaliadora) acreditada por SOFTEX con un <b>Avaliador Líder</b> y equipo; las exclusiones (p. ej. AQU) se justifican en el Plan de Avaliação. Etapas: contratación → preparación (avaliação inicial / gap analysis) → avaliação final (entrevistas, evidencias e indicadores por resultado) → documentación y publicación en el sitio de SOFTEX. Escala clásica de implementación de resultados: <b>T</b> totalmente, <b>L</b> largamente, <b>P</b> parcialmente, <b>N</b> no implementado, <b>NA</b> no aplicable.</p>
+<p class="ej"><b>Ej.:</b> en la avaliação final, el resultado REQ 3 de un proyecto se califica L porque la trazabilidad existe pero faltan 2 requisitos sin vínculo a casos de prueba.</p></div>
+
+<div class="concepto"><h3>MN-MPS y grupos cooperados</h3>
+<p>El modelo de negocio permite que varias PYME formen un <b>grupo cooperado</b> que contrata en conjunto una II (implementación) y una IA (evaluación), con financiamiento parcial de SEBRAE (≈50 % o más según la época). Así el costo es muy inferior al de un <abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr>.</p>
+<p class="ej"><b>Ej.:</b> 8 PYME de Florianópolis comparten consultor, capacitación y evaluador para alcanzar el nivel G en el mismo año.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><ul>
+<li><b>MPS: G es el nivel más bajo, A el más alto</b> (al revés del alfabeto intuitivo); 7 niveles frente a 5 de CMMI por etapas.</li>
+<li>Equivalencias clave: <b>G+F ≈ CMMI ML2</b>, <b>E+D+C ≈ ML3</b>, <b>B ≈ ML4</b>, <b>A ≈ ML5</b>.</li>
+<li>Una empresa MPS C está «a la altura» de CMMI ML3; para licitar con un banco de EE. UU. podría necesitar igual SCAMPI/Benchmark, pero para el gobierno brasileño el MPS es reconocido.</li>
+</ul></div>
+</section>
+<section id="competisoft">
+<h2>7. COMPETISOFT: marco iberoamericano de procesos, evaluación y mejora</h2>
+<p><b><abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr></b> (Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica) fue el proyecto <b>506AC0287</b> del programa <b><abbr title="Programa Iberoamericano de Ciencia y Tecnología para el Desarrollo">CYTED</abbr></b> (Ciencia y Tecnología para el Desarrollo), área temática 5 TIC (Tecnologías de la Información y la Comunicación), ejecutado en <b>2006–2008</b> por universidades, empresas y organismos de normalización de <b>13 países</b>.</p>
+
+<div class="concepto"><h3>COMPETISOFT</h3>
+<p>Proyecto de investigación que produjo un <b>marco metodológico</b> de tres modelos: <b>Modelo de Procesos</b> (<abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> adaptado), <b>Modelo de Evaluación</b> (conforme <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 15504-2 y -4) y <b>Modelo de Mejora</b> (PmCOMPETISOFT). Método de investigación: <b>I-A (Investigación-Acción) participativa</b> + casos de estudio. Resultado editorial: libro <i>COMPETISOFT: Mejora de procesos software para pequeñas y medianas empresas y proyectos</i> (Oktaba, Piattini, Pino, Orozco, Alquicira; Ra-Ma, 2008).</p>
+<p class="ej"><b>Ej.:</b> una <abbr title="SME, Small and Medium-sized Enterprise – Pequeña y Mediana Empresa">PYME</abbr> de Trujillo que quiere empezar a mejorar sin certificar todavía puede usar COMPETISOFT, que es público y gratuito.</p></div>
+
+<div class="norma"><h4>COMPETISOFT · Proyecto CYTED 506AC0287 (2006–2008)</h4>
+<ul>
+<li><b>Organismo emisor:</b> programa CYTED (no es norma <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr>); dirección: <b>Dr. Mario Piattini</b> (UCLM, Universidad de Castilla-La Mancha, España); dirección técnica: <b>Dra. Hanna Oktaba</b> (<abbr title="Universidad Nacional Autónoma de México">UNAM</abbr>, México); dirección de calidad: Dra. Alejandra Cechich (U. Nacional del Comahue, Argentina).</li>
+<li><b>Versión/año:</b> 2006–2008; COMPETISOFT-Perú continuó 2009–2011 (GIDIS-PUCP).</li>
+<li><b>Propósito:</b> elevar la competitividad de las PYME iberoamericanas con un marco de mejora ligero, adaptado y compatible con normas internacionales; «no pretende ser competencia del <abbr title="Software Engineering Institute – Instituto de Ingeniería de Software (Carnegie Mellon)">SEI</abbr> o ISO».</li>
+<li><b>Estructura:</b> 3 modelos (procesos, evaluación, mejora); modelo de procesos de 3 categorías (<abbr title="Categoría Alta Dirección (MoProSoft)">DIR</abbr>, GER, <abbr title="Categoría Operación (MoProSoft)">OPE</abbr>) y <b>10 procesos</b>; capacidad 0–5 (15504); ciclo de mejora de 5 actividades.</li>
+<li><b>Base normativa:</b> MoProSoft + ISO 9000, <abbr title="Capability Maturity Model for Software – CMM para Software">SW-CMM</abbr>, <abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> v1.2 (niveles 2 y 3), ISO/IEC 12207, ISO/IEC 15504, <abbr title="Project Management Body of Knowledge – Cuerpo de Conocimientos de la Dirección de Proyectos">PMBOK</abbr>, MANTEMA, Métrica v3.</li>
+<li><b>Trampa típica:</b> decir que COMPETISOFT es una «norma certificable»; es un proyecto/marco; la certificación se hace por normas nacionales (<abbr title="Norma Mexicana (voluntaria)">NMX</abbr>, <abbr title="Norma Técnica Peruana">NTP</abbr>) o ISO/IEC 29110.</li>
+</ul></div>
+
+<div class="concepto"><h3>CYTED (Programa Iberoamericano de Ciencia y Tecnología para el Desarrollo)</h3>
+<p>Programa intergubernamental de cooperación científica entre países iberoamericanos que financia redes y proyectos de investigación; COMPETISOFT fue uno de sus proyectos del área TIC.</p>
+<p class="ej"><b>Ej.:</b> gracias a CYTED, la <abbr title="Pontificia Universidad Católica del Perú">PUCP</abbr> (Pontificia Universidad Católica del Perú) participó en COMPETISOFT junto a la UNAM y la UCLM sin pagar regalías por el modelo.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Tipo de grupo</th><th>Participantes</th></tr></thead>
+<tbody>
+<tr><td><b>Consolidados</b></td><td>UNAM (México), Universidade Nova de Lisboa (Portugal), Universidade de São Paulo (Brasil), Universidad de los Andes (Venezuela), Universidad Técnica Federico Santa María (Chile), Universidad Nacional del Comahue (Argentina), UCLM (España)</td></tr>
+<tr><td><b>Emergentes</b></td><td>U. Internacional SEK (Ecuador), U. del Cauca (Colombia), U. de las Ciencias Informáticas (Cuba), Instituto Tecnológico de Costa Rica, U. Nacional de La Matanza (Argentina), U. Católica del Maule (Chile), U. de la República (Uruguay), <b>PUCP – <abbr title="Grupo de Investigación y Desarrollo de Ingeniería de Software (PUCP)">GIDIS</abbr></b> (Perú), EAFIT (Colombia)</td></tr>
+<tr><td><b>Normalización</b></td><td><b>IRAM</b> (Instituto Argentino de Normalización y Certificación) como investigador; otros organismos como observadores</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Paquetes de trabajo (WP, Work Packages) de COMPETISOFT</h3>
+<p>WP1 gestión; WP2 modelo de procesos; WP3 modelo de capacidades (coord. UNAM); WP4 método de evaluación (coord. USP, Universidade de São Paulo); WP5 validación (coord. Comahue); WP6 capacitación (UNAM; 12 cursos y 4 talleres); WP7 sensibilización institucional (U. de los Andes); WP8 difusión.</p>
+<p class="ej"><b>Ej.:</b> la pregunta «¿qué <abbr title="Work Product – Producto de Trabajo">WP</abbr> se encargó del método de evaluación?» → WP4, coordinado por la USP.</p></div>
+
+<div class="concepto"><h3>Modelo de Procesos COMPETISOFT</h3>
+<p>Derivado de MoProSoft, con tres diferencias: (1) «Gestión de Proyectos» se renombra <b>Gestión de Cartera de Proyectos</b>; (2) <abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr> se <b>divide</b> en <b><abbr title="Desarrollo de Software (proceso COMPETISOFT)">DS</abbr> (Desarrollo de Software)</b> y <b><abbr title="Mantenimiento de Software (proceso COMPETISOFT)">MS</abbr> (Mantenimiento de Software)</b>, este último inspirado en <b>MANTEMA</b>; (3) base en <b>CMMI-DEV v1.2 niveles 2 y 3</b> en vez de <abbr title="Capability Maturity Model – Modelo de Madurez de Capacidades">CMM</abbr> v1.1. Mantiene el patrón de procesos (diagramas <abbr title="Unified Modeling Language – Lenguaje Unificado de Modelado">UML</abbr> con carriles por rol) y define un <b>perfil base</b> de Operación (<abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr>, DS, MS) para empezar.</p>
+<p class="ej"><b>Ej.:</b> una empresa de Popayán de 4 personas que solo hace apps móviles empieza por APE y DS en nivel 1–2 (perfil base) y deja MS para un segundo ciclo.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Categoría</th><th>Procesos COMPETISOFT (10)</th><th>Diferencia con MoProSoft</th></tr></thead>
+<tbody>
+<tr><td><b>Alta Dirección (DIR)</b></td><td>Gestión de Negocio</td><td>Igual</td></tr>
+<tr><td><b>Gerencia (GER)</b></td><td>Gestión de Procesos; <b>Gestión de Cartera de Proyectos</b>; Gestión de Recursos → Gestión de <abbr title="Human Resources – Recursos Humanos">RR. HH.</abbr>; Gestión de Bienes, Servicios e Infraestructura; Gestión de Conocimiento</td><td><abbr title="Gestión de Proyectos – cartera (MoProSoft GES.2)">GPY</abbr> renombrado a «Cartera»</td></tr>
+<tr><td><b>Operación (OPE)</b></td><td><b>APE</b> Administración de Proyecto Específico; <b>DS</b> Desarrollo de Software; <b>MS</b> Mantenimiento de Software</td><td>DMS dividido en DS + MS</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>MANTEMA</h3>
+<p>Metodología española para el <b>mantenimiento de <abbr title="Software – Software / soporte lógico">SW</abbr></b> (grupo Alarcos, UCLM, Piattini et al.), que distingue tipos de mantenimiento (correctivo urgente/no urgente, perfectivo, adaptativo, preventivo) y sus actividades. COMPETISOFT la usó para definir el proceso MS.</p>
+<p class="ej"><b>Ej.:</b> un error en producción del cálculo de IGV (Impuesto General a las Ventas) en el facturador electrónico SUNAT es mantenimiento <b>correctivo urgente</b> en MS.</p></div>
+
+<div class="concepto"><h3>Modelo de Evaluación COMPETISOFT</h3>
+<p>No impone un único método: cada país define su modelo de evaluación <b>conforme a ISO/IEC 15504-2 y 15504-4</b> para lograr <b>reconocimiento mutuo</b>. Dimensión de capacidad 0–5 (Incompleto; Realizado <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> 1.1; Gestionado PA 2.1–2.2; Establecido PA 3.1–3.2; Predecible PA 4.1–4.2; Optimizado PA 5.1–5.2) con indicadores <b><abbr title="Generic Practice – Práctica genérica">GP</abbr></b> (Generic Practices – prácticas genéricas), <b><abbr title="Generic Resource – Recurso genérico">GR</abbr></b> (Generic Resources – recursos genéricos) y <b>GWP</b> (Generic Work Products – productos de trabajo genéricos).</p>
+<p class="ej"><b>Ej.:</b> en el Perú la evaluación se hizo con la NTP-291.100-2 (basada en 15504-2); en México, con <abbr title="Método de Evaluación de Procesos para la Industria de Software (NMX-I-059/04-NYCE)">EvalProSoft</abbr>; ambas son reconocibles mutuamente.</p></div>
+
+<div class="concepto"><h3>METvalCOMPETISOFT, PvalCOMPETISOFT, Light MECPDS, EvalTOOL e IDCompetiSoft</h3>
+<p><b>METvalCOMPETISOFT</b> es la metodología de valoración compuesta por: (i) el proceso <b>PvalCOMPETISOFT</b>; (ii) el método <b>Light <abbr title="Método de Evaluación de la Capacidad de Procesos de Desarrollo de Software (Colombia)">MECPDS</abbr></b> (Método de Evaluación de la Capacidad de Procesos de Desarrollo de Software, versión ligera, conforme 15504-2, escala <b>N/P/L/F</b>: Not, Partially, Largely, Fully achieved); (iii) medidas de rendimiento/capacidad; (iv) la herramienta <b>EvalTOOL</b>. El diagnóstico inicial puede hacerse además con <b>IDCompetiSoft</b> (instrumento de diagnóstico, PUCP).</p>
+<p class="ej"><b>Ej.:</b> en el diagnóstico de una PYME de Cusco, Light MECPDS califica APE PA 1.1 = P (parcialmente) y DS PA 1.1 = L (largamente).</p></div>
+
+<div class="concepto"><h3>PmCOMPETISOFT (proceso de mejora)</h3>
+<p>Proceso <b>ligero, iterativo e incremental</b> (Pino et al., 2007–2009) para guiar la mejora en PYME/VSE; es un <b>despliegue detallado del proceso Gestión de Procesos</b> y deriva de <b>Agile SPI-Process</b> (Colombia, SIMEP-SW). El Modelo de Mejora lo complementa con la herramienta <b>GENESIS</b>, una guía para formular y ejecutar mejoras, una <b>estrategia de selección y priorización de procesos</b> y METvalCOMPETISOFT.</p>
+<p class="ej"><b>Ej.:</b> «Kuntur Apps» (6 personas, Cusco) aplica PmCOMPETISOFT en 16 semanas con un consultor universitario para llevar APE y DS a nivel 1.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>#</th><th>Actividad PmCOMPETISOFT</th><th>Qué se hace</th><th>Productos</th><th>≈ IDEAL (SEI)</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><b>Instalación</b></td><td>Compromiso de la alta dirección, propuesta/convenio, alcance, objetivos, grupos y roles, plan general del ciclo</td><td>Convenio, plantilla de despegue, propuesta de mejora</td><td>Initiating</td></tr>
+<tr><td>2</td><td><b>Diagnóstico</b></td><td>Valoración de capacidad (PvalCOMPETISOFT / Light MECPDS) de los procesos priorizados</td><td>Reporte de valoración, perfil de capacidad, oportunidades de mejora</td><td>Diagnosing</td></tr>
+<tr><td>3</td><td><b>Formulación</b></td><td>Plan de mejora: priorizar oportunidades, n.º de <b>iteraciones</b>, recursos, riesgos, contingencias</td><td>Plan de mejora (iteraciones)</td><td>Establishing</td></tr>
+<tr><td>4</td><td><b>Ejecución</b></td><td>Definir/ajustar procesos, pilotear en proyectos, capacitar, medir; consultoría</td><td>Procesos mejorados, plantillas, reportes de iteración</td><td>Acting</td></tr>
+<tr><td>5</td><td><b>Revisión</b></td><td>Evaluar resultados vs objetivos, lecciones aprendidas, decidir el siguiente ciclo</td><td>Reporte final, propuesta del siguiente ciclo</td><td>Learning</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Roles de PmCOMPETISOFT (GGM, RMP, RP, GMP, E)</h3>
+<p><b><abbr title="Grupo de Gestión de la Mejora (PmCOMPETISOFT)">GGM</abbr></b> (Grupo de Gestión de la Mejora): gerente + responsables de proceso; el asesor COMPETISOFT participa sin voto. <b>RMP</b> (Responsable de la Dirección de la Mejora de Procesos): asesor/consultor que conduce la mejora. <b>RP</b> (Responsable del Proceso): 1–2 personas de la empresa dueñas del proceso. <b>GMP</b> (Grupo de Mejora de Procesos): equipo que ejecuta las mejoras. <b>E</b> (Evaluador): realiza las valoraciones. En la infraestructura Agile <abbr title="Software Process Improvement – Mejora del Proceso de Software">SPI</abbr> se agrupan en <b>EG</b> (equipo de gestión), <b>ETP</b> (equipo técnico de procesos) y <b>EM</b> (equipo de mejora/evaluación).</p>
+<p class="ej"><b>Ej.:</b> en Kuntur Apps, GGM = gerente + desarrollador senior; RMP = consultor de la UNSAAC; GMP = 2 practicantes; E = otros practicantes formados en Light MECPDS (distintos de quienes ejecutan, para objetividad).</p></div>
+
+<div class="concepto"><h3>Criterios ágiles del Modelo de Mejora</h3>
+<p>Inspirados en el Manifiesto Ágil: entrega temprana y continua de mejoras; diagnóstico continuo; colaboración efectiva; proyectos en torno a individuos motivados; ritmo sostenido; infraestructura técnica y de gestión; aprendizaje continuo.</p>
+<p class="ej"><b>Ej.:</b> en vez de un plan de mejora anual, se hacen iteraciones de 4 semanas que entregan una plantilla de <abbr title="Software Requirements Specification – Especificación de Requisitos de Software">SRS</abbr> usable en el siguiente sprint.</p></div>
+
+<div class="concepto"><h3>Resultados de COMPETISOFT en PYME (Colombia y Perú)</h3>
+<p><b>Colombia (Popayán, 2010, Revista EIA 13):</b> 5 mipymes de 4–6 personas, objetivo nivel 1 en APE y DS en ~3 meses; <b>3 de 5 mejoraron</b> (<abbr title="Process Attribute – Atributo de Processo – Atributo de Proceso (MPS clásico)">AP</abbr> 1.1 y parte de AP 2.1; solo una tocó AP 2.2); las que fracasaron no ejecutaron lo consensuado → el <b>compromiso de la dirección es crítico</b>. <b>Perú (COMPETISOFT-PUCP / COMPETISOFT-Perú 2009–2011):</b> casos de tesis PUCP Delta, Tau, Lim.Lambda (2.º ciclo), Lim.Omega; ~22 pequeñas empresas intervenidas; en <b>2010</b> el Instituto de Calidad PUCP certificó a <b>5 empresas</b> con <b>NTP-291.100-2</b>. Lecciones: definir formalmente roles, mantener motivación, empezar por procesos de Operación, medir el esfuerzo de mejora.</p>
+<p class="ej"><b>Ej.:</b> <abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr> de un ciclo: % de prácticas base implementadas, horas-persona de mejora y desviación de plazo del proyecto piloto.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><ul>
+<li><b>COMPETISOFT</b> es un <b>proyecto CYTED</b> que produjo un <b>marco</b> (procesos + evaluación + mejora); su modelo de procesos <b>se basa en MoProSoft</b>; separa <b>DS y MS</b>; tiene 10 procesos (MoProSoft tiene 9).</li>
+<li><b>PmCOMPETISOFT</b> es un <b>proceso de mejora</b> (5 actividades), no un modelo de procesos; es despliegue de <b>Gestión de Procesos</b> y deriva de <b>Agile SPI</b>.</li>
+<li>Director = <b>Piattini</b> (UCLM); directora técnica = <b>Oktaba</b> (UNAM). No los inviertas.</li>
+</ul></div>
+</section>
+
+<section id="it-mark">
+<h2>8. IT Mark: certificación integral para PYME TI (ESI-Tecnalia)</h2>
+<p><b>IT Mark</b> (o ITMark) fue creado por el <b><abbr title="European Software Institute – Instituto Europeo de Software (hoy Tecnalia)">ESI</abbr></b> (European Software Institute, Bilbao/Zamudio, País Vasco), luego integrado en <b>Tecnalia Research &amp; Innovation</b> («ESI-Tecnalia»), y lanzado mundialmente el <b>1-jun-2005</b> a través de la ESICenter Global Alliance.</p>
+
+<div class="concepto"><h3>IT Mark</h3>
+<p><b>Esquema de certificación único</b> para <abbr title="SME, Small and Medium-sized Enterprise – Pequeña y Mediana Empresa">PYME</abbr> y micro-PYME <abbr title="Information Technology (IT) – Tecnologías de la Información">TI</abbr> que desarrollan o mantienen <abbr title="Software – Software / soporte lógico">SW</abbr> o sistemas. No define procesos propios: evalúa simultáneamente <b>tres áreas</b> reutilizando modelos simplificados: (1) <b>gestión del negocio</b> → modelo <b><abbr title="Ten-Squared (10-Squared) – Modelo de evaluación de la gestión del negocio usado por IT Mark">10²</abbr> (10-Squared)</b> (estrategia, comercial, finanzas, marketing; en versiones posteriores también <abbr title="European Foundation for Quality Management – Fundación Europea para la Gestión de la Calidad">EFQM</abbr> e <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> 9001); (2) <b>seguridad de la información</b> → <b><abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 17799</b> en la versión inicial y luego <b>ISO/IEC 27001/27002:2005</b>; (3) <b>procesos de desarrollo de SW</b> → <b><abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> simplificado (niveles de madurez 2 y 3)</b>.</p>
+<p class="ej"><b>Ej.:</b> una empresa de 15 personas que hace la billetera de un banco regional quiere mostrar a Interbank que programa bien (<abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr>), protege datos (ISO/IEC 27001) y es financieramente sostenible (10²): IT Mark Basic le da una «foto integral» barata.</p></div>
+
+<div class="concepto"><h3>ESI (European Software Institute) y Tecnalia</h3>
+<p>El ESI fue una fundación creada en el País Vasco (España) para promover la mejora del SW europeo; fue socio del <abbr title="Software Engineering Institute – Instituto de Ingeniería de Software (Carnegie Mellon)">SEI</abbr> para CMMI en Europa y formó una red de <b>ESI Centers</b> (Bulgaria, Serbia/Instituto Mihajlo Pupin, Colombia, Brasil vía <abbr title="Red Latinoamericana de la Industria del Software">RELAIS</abbr>…). Hoy forma parte de <b>Tecnalia</b>.</p>
+<p class="ej"><b>Ej.:</b> el Instituto Pupin (Serbia) certificó empresas IT Mark en 2010 como ESI Center.</p></div>
+
+<div class="concepto"><h3>10² (10-Squared, «Ten-Squared»)</h3>
+<p>Modelo de evaluación de la <b>gestión empresarial</b> usado por IT Mark: revisa estrategia, comercial, finanzas, marketing, organización y <abbr title="Human Resources – Recursos Humanos">RR. HH.</abbr> de la PYME. En el reporte, los criterios de negocio se agrupan según los <b>9 criterios del modelo EFQM</b> (European Foundation for Quality Management) visto en S2.</p>
+<p class="ej"><b>Ej.:</b> una PYME logra 63 % de los criterios de negocio porque tiene plan estratégico y presupuesto, pero no plan de marketing.</p></div>
+
+<div class="norma"><h4>IT Mark (ESI-Tecnalia, 2005)</h4>
+<ul>
+<li><b>Organismo emisor:</b> ESI (European Software Institute) → Tecnalia; no es norma ISO.</li>
+<li><b>Versión/año:</b> lanzamiento mundial 1-jun-2005; referencias actualizadas de ISO/IEC 17799 a ISO/IEC 27001/27002:2005.</li>
+<li><b>Propósito:</b> certificar de forma integral y barata a PYME TI en negocio, seguridad de la información y desarrollo.</li>
+<li><b>Estructura:</b> 3 áreas (10², ISO/IEC 27001, CMMI 2–3); <b>3 niveles: Basic (1★), Premium (2★), Elite (3★)</b>; método de evaluación basado en <b>ISO/IEC 15504</b> con evaluador acreditado por ESI (entrevistas, revisión de documentos y artefactos, observación del local).</li>
+<li><b>Trampa típica:</b> decir que «IT Mark evalúa solo procesos de desarrollo» o que «es un modelo de procesos propio»: es un <b>esquema de certificación</b> que reutiliza 10², 27001 y CMMI.</li>
+</ul></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Nivel</th><th>Negocio (% de criterios)</th><th>Seguridad de la información (SI)</th><th>Desarrollo (procesos CMMI)</th></tr></thead>
+<tbody>
+<tr><td><b>Basic</b> (1★)</td><td>≥ 50 %</td><td>Nivel 1: acciones básicas de <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr></td><td>Hasta 2 procesos no implementados, <b>excepto <abbr title="Project Planning – Planificación del Proyecto">PP</abbr> y <abbr title="Project Monitoring and Control – Monitoreo y Control del Proyecto">PMC</abbr></b> (Project Planning, Project Monitoring and Control), que deben estar</td></tr>
+<tr><td><b>Premium</b> (2★)</td><td>≥ 60 %</td><td>Nivel 2: procesos de SI documentados</td><td>Ninguno no implementado y &gt;2 largamente o totalmente implementados</td></tr>
+<tr><td><b>Elite</b> (3★)</td><td>≥ 75 %</td><td>Nivel 3: SI institucionalizada</td><td>Ninguno no implementado y &gt;10 largamente o totalmente implementados</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Regla de nivel IT Mark (mínimo de las tres áreas)</h3>
+<p>El nivel global es el <b>mínimo</b> alcanzado entre negocio, seguridad y desarrollo. «Totalmente implementado» = cumple sin debilidades; «Largamente» = cumple con debilidades.</p>
+<p class="ej"><b>Ej.:</b> Negocio 63 % (Premium), SI documentada (Premium), desarrollo 0 no implementados y 5 L/T (Premium) → <b>Premium</b>. Si Negocio fuera 55 %, quedaría <b>Basic</b> aunque las otras áreas fueran Premium.</p></div>
+
+<div class="concepto"><h3>Agenda de una evaluación IT Mark Basic</h3>
+<p>Aproximadamente <b>1 día</b>: seminario ITMark Overview 4 h; evaluación de gestión empresarial 4 h; seguridad 4 h; procesos técnicos 6 h; consolidación 1 h; presentación de resultados 1 h (actividades en paralelo por evaluadores). El reporte da el % de adherencia por criterio y <b>acciones de mejora</b>, para iniciar la mejora continua.</p>
+<p class="ej"><b>Ej.:</b> en 4 empresas brasileñas que ya tenían MPS-SW F y <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> 2, IT Mark halló inventario de activos desactualizado, política de seguridad inexistente y ausencia de acuerdo formal de uso de la red: los modelos de desarrollo <b>no</b> cubren SI.</p></div>
+
+<div class="concepto"><h3>IT Mark como evaluación de VSE para ISO/IEC 29110</h3>
+<p>Larrucea, Santamaría y Colomo-Palacios (2016, <i>Journal of Software: Evolution and Process</i> 28(11)) mapearon IT Mark ↔ ISO/IEC 29110 y concluyeron que IT Mark puede servir como método de evaluación de <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr>, aportando una «factoría de experiencia».</p>
+<p class="ej"><b>Ej.:</b> una VSE que ya tiene IT Mark Premium tiene evidencias de <abbr title="Project Planning / Project Monitoring and Control – Planificación de Proyecto / Monitoreo y Control de Proyecto (CMMI)">PP/PMC</abbr> que reutiliza para la auditoría del perfil Basic (<abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr>.1, PM.3).</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><ul>
+<li>IT Mark = <b>3 áreas</b> (10², ISO/IEC 27001, CMMI) y <b>3 estrellas</b> (Basic, Premium, Elite); creado por <b>ESI</b> (hoy Tecnalia) en <b>2005</b>.</li>
+<li>En Basic, <b>PP y PMC no pueden faltar</b>, aunque se toleren hasta 2 procesos no implementados.</li>
+<li>No confundas los «niveles 1–3» de seguridad de IT Mark con los niveles de madurez de CMMI.</li>
+</ul></div>
+</section>
+<section id="iso-iec-29110">
+<h2>9. ISO/IEC 29110: perfiles de ciclo de vida para VSE</h2>
+<p>La <b><abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110</b> (<i>Systems and software engineering — Lifecycle profiles for Very Small Entities</i>) es la respuesta <b>internacional</b> de <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> (International Organization for Standardization) e <abbr title="International Electrotechnical Commission – Comisión Electrotécnica Internacional">IEC</abbr> (International Electrotechnical Commission) al problema de las <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> (Very Small Entities). La elaboró el <b><abbr title="Working Group 24 – Grupo de Trabajo 24 de ISO/IEC JTC 1/SC 7">WG24</abbr></b> del <b><abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr></b> (Joint Technical Committee 1 / Subcommittee 7, ingeniería de <abbr title="Software – Software / soporte lógico">SW</abbr> y sistemas), tomando <b><abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> como base</b>.</p>
+
+<div class="norma"><h4>ISO/IEC 29110 (serie) · ISO/IEC TR 29110-5-1-2 (perfil Básico)</h4>
+<ul>
+<li><b>Organismo emisor:</b> ISO/IEC JTC 1/SC 7, WG24.</li>
+<li><b>Versión/año:</b> 2004 Canadá plantea la necesidad; mar-2005 se define VSE (1–25 personas); may-2005 se aprueba el WG24; <b>may-2006 se elige MoProSoft como base</b>; <b>2011</b> primeras publicaciones (<abbr title="Technical Report – Informe Técnico (ISO)">TR</abbr> 29110-1, 29110-2, TR 29110-3, 29110-4-1, <b>TR 29110-5-1-2 Basic</b>); Entry (2012); Intermediate y Advanced (2017–2018); revisiones 2016–2025 (p. ej. 29110-5-1-2:2025).</li>
+<li><b>Propósito:</b> dar a las VSE un subconjunto adecuado de normas (perfil) que puedan aplicar y certificar con bajo costo.</li>
+<li><b>Base:</b> subconjunto de <b>ISO/IEC 12207</b> (SW) e <b>ISO/IEC 15288</b> (sistemas) + <b>ISO/IEC 15289</b> (productos de información); evaluación conforme <b>ISO/IEC 15504/33000</b>.</li>
+<li><b>Estructura:</b> partes 1 (visión general), 2 (marco y taxonomía), 3 (evaluación y certificación), 4 (especificación de perfiles, lo certificable), 5 (guías de gestión e ingeniería); Generic Profile Group de <b>4 perfiles</b>: Entry, Basic, Intermediate, Advanced; el Basic tiene <b>2 procesos: <abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr> y <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr></b>.</li>
+<li><b>Gratuidad:</b> los TR (Technical Reports) como 29110-1 y 29110-5-1-x son <b>de libre descarga</b>; existen <abbr title="Deployment Package – Paquete de Despliegue (ISO/IEC 29110)">DP</abbr> (Deployment Packages) gratuitos.</li>
+<li><b>En el Perú:</b> NTP-ISO/IEC 29110-1, NTP-ISO/IEC TR 29110-3 y NTP-RT-ISO/IEC TR 29110-5-1-2 (2012); catálogo actual en <abbr title="Instituto Nacional de Calidad (Perú)">INACAL</abbr>.</li>
+<li><b>Trampa típica:</b> «la 29110 es un modelo de madurez con 5 niveles» → FALSO: son <b>perfiles</b>, no niveles de madurez.</li>
+</ul></div>
+
+<div class="concepto"><h3>Perfil (profile) en ISO/IEC 29110</h3>
+<p>Conjunto de una o más normas base (12207, 15288, 15289…) y/o partes de ellas, con las opciones y parámetros elegidos, necesario para cumplir una función particular. Es un <b>subconjunto adaptado</b>, no un nivel de madurez. Los perfiles se agrupan en <b>profile groups</b>; el más usado es el <b>Generic Profile Group</b> (aplicable a VSE que no desarrollan SW crítico).</p>
+<p class="ej"><b>Ej.:</b> una VSE de Lima que hace el sistema de citas de una clínica no necesita los 30 procesos de la ISO/IEC/IEEE 12207:2017 (S4): el perfil Basic le da solo PM y SI.</p></div>
+
+<div class="concepto"><h3>ISO/IEC TR (Technical Report – Informe Técnico)</h3>
+<p>Documento ISO de tipo informativo (no especifica requisitos certificables) que suele publicarse cuando el contenido es guía o estado del arte. En la 29110, las <b>guías</b> (parte 5) y la visión general son TR; la parte <b>4</b> (especificación de perfiles) es la norma <b>certificable</b>.</p>
+<p class="ej"><b>Ej.:</b> una VSE descarga gratis el TR 29110-5-1-2 para implantar; el auditor, en cambio, audita contra la ISO/IEC 29110-4-1.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Parte</th><th>Contenido</th><th>Público principal</th></tr></thead>
+<tbody>
+<tr><td><b>29110-1</b></td><td>Visión general (overview), conceptos y vocabulario</td><td>VSE, clientes, evaluadores</td></tr>
+<tr><td><b>29110-2-1</b></td><td>Marco y taxonomía de perfiles</td><td>Desarrolladores de perfiles</td></tr>
+<tr><td><b>29110-3-x</b></td><td>Evaluación (assessment guide 29110-3-1) y certificación/conformidad (29110-3-2/-3/-4)</td><td>Evaluadores, auditores, organismos de certificación</td></tr>
+<tr><td><b>29110-4-x</b></td><td>Especificaciones de perfiles (29110-4-1 Generic profile group: software) — lo <b>certificable</b></td><td>Organismos de certificación, desarrolladores de perfiles</td></tr>
+<tr><td><b>29110-5-x</b></td><td>Guías de gestión e ingeniería por perfil: 5-1-1 Entry, <b>5-1-2 Basic</b>, 5-1-3 Intermediate, 5-1-4 Advanced; 5-6-x sistemas; 5-2/5-3 organizacional/servicios</td><td>VSE (implantación)</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Generic Profile Group: Entry, Basic, Intermediate, Advanced</h3>
+<p>Cuatro perfiles <b>acumulativos</b> (cada uno incluye todo lo del anterior), elegidos según el tipo de VSE, no según su «madurez».</p>
+<p class="ej"><b>Ej.:</b> una VSE con 3 proyectos en paralelo para gobiernos regionales necesita el perfil Intermediate (gestión de cartera), no el Basic.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Perfil</th><th>Para quién</th><th>Rasgos</th></tr></thead>
+<tbody>
+<tr><td><b>Entry</b> (de entrada)</td><td>Startups (&lt;3 años) o proyectos pequeños (≈ ≤6 personas-mes)</td><td>Mínimo indispensable de PM y SI</td></tr>
+<tr><td><b>Basic</b> (básico)</td><td>VSE con <b>un proyecto a la vez y un solo equipo</b></td><td><b>PM + SI</b> completos (el más implantado y certificado)</td></tr>
+<tr><td><b>Intermediate</b> (intermedio)</td><td>VSE con <b>varios proyectos en paralelo</b> y más de un equipo</td><td>+ gestión organizacional (cartera, recursos, procesos)</td></tr>
+<tr><td><b>Advanced</b> (avanzado)</td><td>VSE que quiere crecer y competir como empresa independiente</td><td>+ gestión del negocio, más prácticas organizacionales</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>PM (Project Management – Gestión de Proyecto) del perfil Básico</h3>
+<p>Propósito: establecer y ejecutar sistemáticamente las tareas del proyecto de implementación de SW para cumplir objetivos de <b>calidad, tiempo y costo</b> (análogo a <b><abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr></b> de MoProSoft). Objetivos <b>PM.O1–PM.O7</b>. Actividades: <b>PM.1 Project Planning</b>, <b>PM.2 Project Plan Execution</b>, <b>PM.3 Project Assessment and Control</b>, <b>PM.4 Project Closure</b>. Notación: «PM.1 Project Planning (PM.O1, PM.O5, PM.O6, PM.O7)» = la actividad contribuye a esos objetivos.</p>
+<p class="ej"><b>Ej.:</b> el <abbr title="Statement of Work – Enunciado del Trabajo">SOW</abbr> (Statement of Work – Enunciado del Trabajo) firmado con la clínica es la entrada de PM.1; las actas de sprint review son Meeting Records de PM.2; el acta de conformidad final es el Acceptance Record de PM.4.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Actividad PM</th><th>Tareas clave (resumen)</th></tr></thead>
+<tbody>
+<tr><td><b>PM.1 Project Planning</b> (Planificación)</td><td>Revisar el <b>SOW</b>, instrucciones de entrega, tareas (incluye <abbr title="Verification and Validation – Verificación y Validación">V&amp;V</abbr> y revisiones), duración, recursos, estructura del equipo, calendario, esfuerzo y costo, <b>riesgos</b>, estrategia de control de versiones, <b>Project Plan</b>, verificación y aprobación del plan, aceptación del cliente, crear el <b>Project Repository</b> (PM.1.1–PM.1.15)</td></tr>
+<tr><td><b>PM.2 Project Plan Execution</b> (Ejecución del plan)</td><td>Registrar avance en el <b>Progress Status Record</b>, analizar <b>Change Requests</b> (costo, plazo, impacto técnico), reuniones de revisión con el equipo y con el cliente (<b>Meeting Record</b>), respaldo y recuperación del repositorio (PM.2.1–PM.2.6)</td></tr>
+<tr><td><b>PM.3 Project Assessment and Control</b> (Evaluación y control)</td><td>Comparar avance real vs plan, acciones correctivas (<b>Correction Register</b>), identificar cambios por desviaciones o riesgos (PM.3.1–PM.3.3)</td></tr>
+<tr><td><b>PM.4 Project Closure</b> (Cierre)</td><td>Formalizar el cierre según instrucciones de entrega, <b>Acceptance Record</b> firmado, actualizar repositorio (PM.4.1–PM.4.2)</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>SI (Software Implementation – Implementación de Software) del perfil Básico</h3>
+<p>Propósito: realización sistemática de análisis, diseño, construcción, integración y pruebas de productos de SW nuevos o modificados según los requisitos (análogo a <b><abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr></b>). Objetivos <b>SI.O1–SI.O7</b>. Actividades: SI.1 Initiation, SI.2 Requirements Analysis, SI.3 Architectural and Detailed Design, SI.4 Construction, SI.5 Integration and Tests, SI.6 Product Delivery.</p>
+<p class="ej"><b>Ej.:</b> para el tablero presupuestal del MEF, validar la Requirements Specification con el cliente es SI.2; ejecutar pruebas de integración y emitir el Test Report es SI.5.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Actividad SI</th><th>Productos/tareas clave</th><th>≈ fase DMS (MoProSoft)</th></tr></thead>
+<tbody>
+<tr><td><b>SI.1 Software Implementation Initiation</b></td><td>Revisar el Project Plan con el equipo (compromiso), preparar el ambiente de implementación</td><td>Inicio</td></tr>
+<tr><td><b>SI.2 Software Requirements Analysis</b></td><td>Asignar tareas, <b>Requirements Specification</b>, verificarla y <b>validarla con el cliente</b>, documentación de usuario preliminar, incorporar a la línea base</td><td>Requerimientos</td></tr>
+<tr><td><b>SI.3 Software Architectural and Detailed Design</b></td><td><b>Software Design</b>, verificación, <b>Test Cases and Test Procedures</b>, actualizar <b>Traceability Record</b></td><td>Análisis y Diseño</td></tr>
+<tr><td><b>SI.4 Software Construction</b></td><td>Componentes, <b>pruebas unitarias</b>, corrección de defectos, trazabilidad</td><td>Construcción</td></tr>
+<tr><td><b>SI.5 Software Integration and Tests</b></td><td>Integrar, ejecutar pruebas → <b>Test Report</b>, corregir, Product Operation Guide, documentación de usuario verificada</td><td>Integración y Pruebas</td></tr>
+<tr><td><b>SI.6 Product Delivery</b></td><td><b>Maintenance Documentation</b>, verificar, entregar la <b>Software Configuration</b> según instrucciones de entrega</td><td>Cierre</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Roles del perfil Básico (CUS, PM, TL, WT, AN, DES, PR)</h3>
+<p><b>CUS</b> (Customer – cliente), <b>PM</b> (Project Manager – gerente de proyecto), <b>TL</b> (Technical Leader – líder técnico), <b>WT</b> (Work Team – equipo de trabajo), <b>AN</b> (Analyst – analista), <b>DES</b> (Designer – diseñador), <b><abbr title="Pull Request – Solicitud de integración de cambios (gatillo de code review)">PR</abbr></b> (Programmer – programador). Una persona puede tener varios roles.</p>
+<p class="ej"><b>Ej.:</b> en una VSE de 4 personas, el fundador es PM y TL; los otros tres son WT y se rotan los roles AN, DES y PR.</p></div>
+
+<div class="concepto"><h3>Productos clave del perfil Básico (SOW, Project Plan, Project Repository, Traceability Record…)</h3>
+<p>El Basic exige pocos pero precisos productos de información (estilo ISO/IEC 15289): SOW, Project Plan, Project Repository (con estrategia de control de versiones), Progress Status Record, Change Request, Meeting Record, Correction Register, Acceptance Record, Requirements Specification, Software Design, Test Cases and Test Procedures, Test Report, Traceability Record, Product Operation Guide, Software User Documentation, Maintenance Documentation y Software Configuration.</p>
+<p class="ej"><b>Ej.:</b> un tablero de Jira puede servir de Progress Status Record y un repositorio GitLab con ramas protegidas cumple el Project Repository + control de versiones.</p></div>
+
+<div class="concepto"><h3>DP (Deployment Package – Paquete de Despliegue)</h3>
+<p>Conjunto <b>gratuito</b> de artefactos (guías paso a paso, plantillas, listas de verificación, ejemplos, mapeos a normas) para implantar un tema concreto del perfil: requisitos, arquitectura, V&amp;V, gestión de proyecto, gestión de configuración, construcción y pruebas, entrega del producto, etc.</p>
+<p class="ej"><b>Ej.:</b> una VSE usa el DP «Version Control» para definir su estrategia de ramas en Git, cumpliendo PM.1 (estrategia de control de versiones) y PM.2 (respaldo del repositorio).</p></div>
+
+<div class="concepto"><h3>Ciclo de vida neutral</h3>
+<p>La 29110 no impone un modelo de ciclo de vida: sirve para cascada, iterativo, incremental, evolutivo o <b>ágil</b>. Lo exigido son los <b>resultados</b> (objetivos y productos), no la secuencia.</p>
+<p class="ej"><b>Ej.:</b> un equipo Scrum mapea Product Backlog refinado → Requirements Specification (SI.2) y Definition of Done con pruebas unitarias → SI.4.</p></div>
+
+<div class="concepto"><h3>Certificación y evaluación ISO/IEC 29110</h3>
+<p>Dos vías: (1) <b>evaluación de capacidad</b> (assessment, 29110-3-1, conforme 15504/33000); (2) <b>auditoría de conformidad/certificación</b> contra la especificación del perfil (29110-4-1) por un <b>organismo de certificación acreditado</b> (p. ej. <abbr title="Normalización y Certificación Electrónica, A.C. (México)">NYCE</abbr> en México; organismos acreditados en el Perú). Certificado típico de 3 años con auditorías de seguimiento; auditoría de 1–2 días para una VSE pequeña; costo mucho menor que <abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr>.</p>
+<p class="ej"><b>Ej.:</b> en 2015 una startup peruana de <b>4 personas</b> se convirtió en la <b>primera VSE peruana certificada</b> ISO/IEC 29110 Basic (caso publicado por Laporte, Muñoz, Gerançon / PUCP-ÉTS).</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><ul>
+<li>VSE = <b>≤25 personas</b>; <b>perfiles</b>, no niveles; Basic = <b>PM + SI</b>; nace de <b>MoProSoft</b> (may-2006).</li>
+<li>Revisar el Project Plan con el equipo al iniciar la implementación es <b>SI.1</b>, no PM.1 (el plan ya existe; se busca compromiso, como la fase Inicio de DMS).</li>
+<li>Analizar el impacto de un Change Request es <b>PM.2</b> (ejecución del plan), no PM.3.</li>
+<li>Lo certificable es la parte <b>4</b> (29110-4-1); la parte 5 (TR 29110-5-1-2) es la guía de implantación.</li>
+<li>Error frecuente en casos: proponer «29110 nivel 3»; no existen niveles.</li>
+</ul></div>
+</section>
+
+<section id="peru-latinoamerica">
+<h2>10. Adopción en el Perú y Latinoamérica: NTP 291.100 y NTP-ISO/IEC 29110</h2>
+<p>El Perú no desarrolló un modelo propio: la academia (<b>GIDIS-PUCP</b>, Grupo de Investigación y Desarrollo de Ingeniería de Software de la Pontificia Universidad Católica del Perú) y la normalización (<b><abbr title="Comité Técnico de Normalización de Ingeniería de Software y Sistemas de Información (Perú)">CTN-ISSI</abbr></b>) adoptaron <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> y luego la <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110 como <abbr title="Norma Técnica Peruana">NTP</abbr> (Normas Técnicas Peruanas). Esta sección conecta con la S5 (NTP-ISO/IEC 12207:2016).</p>
+
+<div class="tabla"><table>
+<thead><tr><th>Año</th><th>Hito en el Perú</th></tr></thead>
+<tbody>
+<tr><td>2003</td><td>GIDIS-PUCP impulsa el <b>CTN-ISSI</b> (Comité Técnico de Normalización de Ingeniería de Software y Sistemas de Información), adscrito a <b><abbr title="Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual">INDECOPI</abbr></b></td></tr>
+<tr><td>2004</td><td>La <b><abbr title="Oficina Nacional de Gobierno Electrónico e Informática">ONGEI</abbr></b> (Oficina Nacional de Gobierno Electrónico e Informática) hace obligatoria en el Estado la NTP-ISO/IEC 12207 y la NTP-ISO/IEC 17799 (luego 27001, 2012)</td></tr>
+<tr><td>May-2009</td><td><b>NTP-291.100-1:2009</b> basada en MoProSoft (numeración elegida a propósito para parecerse a la futura 29110)</td></tr>
+<tr><td>2009–2011</td><td>COMPETISOFT-Perú (GIDIS-PUCP): ~22 pequeñas empresas intervenidas</td></tr>
+<tr><td>2010</td><td>5 empresas certificadas con <b>NTP-291.100-2</b> por el Instituto de Calidad <abbr title="Pontificia Universidad Católica del Perú">PUCP</abbr></td></tr>
+<tr><td>2012</td><td>Se publican como NTP las partes 1, 3 y 5-1-2 de la ISO/IEC 29110: <b>NTP-ISO/IEC 29110-1</b>, <b>NTP-ISO/IEC <abbr title="Technical Report – Informe Técnico (ISO)">TR</abbr> 29110-3</b>, <b>NTP-RT-ISO/IEC TR 29110-5-1-2</b> («Guía de gestión e ingeniería – perfil básico»)</td></tr>
+<tr><td>2013–2016</td><td>Proyecto <b>ProCal-ProSer</b> (GIDIS-PUCP, financiado por FINCYT/Innóvate Perú): implantación en 10 empresas de varias ciudades; modelo de <b>gestión de servicios</b> basado en el perfil básico + ISO/IEC 20000 + CMMI-SVC</td></tr>
+<tr><td>2015</td><td>La normalización pasa de INDECOPI al <b><abbr title="Instituto Nacional de Calidad (Perú)">INACAL</abbr></b> (Instituto Nacional de Calidad); la ONGEI manifiesta interés en adoptar la 29110 en entidades públicas como vía de adopción de la 12207; primera <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> peruana certificada 29110</td></tr>
+<tr><td>—</td><td>La traducción al español del perfil básico y de los <abbr title="Deployment Package – Paquete de Despliegue (ISO/IEC 29110)">DP</abbr> se hizo con apoyo de la <b>UPC</b> (Universidad Peruana de Ciencias Aplicadas)</td></tr>
+</tbody></table></div>
+
+<div class="norma"><h4>NTP 291.100 (NTP-291.100-1:2009 y NTP-291.100-2)</h4>
+<ul>
+<li><b>Organismo emisor:</b> INDECOPI (Comisión de Normalización), a propuesta del CTN-ISSI; hoy el catálogo lo administra INACAL.</li>
+<li><b>Versión/año:</b> parte 1 mayo 2009; parte 2 hacia 2009–2010.</li>
+<li><b>Propósito:</b> adopción nacional de MoProSoft para <abbr title="SME, Small and Medium-sized Enterprise – Pequeña y Mediana Empresa">PYME</abbr> peruanas de <abbr title="Software – Software / soporte lógico">SW</abbr>.</li>
+<li><b>Estructura:</b> parte 1 = modelo de procesos (MoProSoft); parte 2 = evaluación (basada en ISO/IEC 15504-2).</li>
+<li><b>Trampa típica:</b> creer que la NTP 291.100 es «la traducción de la ISO/IEC 29110»: es <b>MoProSoft</b>; su número imita al de la 29110, que es su sucesora.</li>
+</ul></div>
+
+<div class="norma"><h4>NTP-ISO/IEC 29110 (NTP-ISO/IEC 29110-1, NTP-ISO/IEC TR 29110-3, NTP-RT-ISO/IEC TR 29110-5-1-2)</h4>
+<ul>
+<li><b>Organismo emisor:</b> INDECOPI (2012) → INACAL (desde 2015); CTN de ingeniería de SW.</li>
+<li><b>Versión/año:</b> 2012 (adopción de las versiones <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> 2011).</li>
+<li><b>Propósito:</b> llevar el perfil básico de la ISO/IEC 29110 a las VSE peruanas y facilitar la adopción de la 12207 en pequeñas entidades.</li>
+<li><b>Estructura:</b> parte 1 visión general; parte 3 guía de evaluación; 5-1-2 guía de gestión e ingeniería del perfil básico (<abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr> + <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr>).</li>
+<li><b>Trampa típica:</b> pensar que reemplaza a la <b>NTP-ISO/IEC 12207:2016</b> (S5). La 29110 es un <b>perfil</b> (subconjunto) de la 12207 para VSE; ambas conviven.</li>
+</ul></div>
+
+<div class="concepto"><h3>INDECOPI → INACAL</h3>
+<p><b>INDECOPI</b> (Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual) fue el organismo nacional de normalización hasta 2015; desde entonces lo es el <b>INACAL</b> (Instituto Nacional de Calidad, adscrito a PRODUCE), que aprueba y mantiene las NTP y acredita organismos de evaluación de la conformidad.</p>
+<p class="ej"><b>Ej.:</b> la NTP-ISO/IEC 12207:2016 de la S5 ya la aprobó el INACAL, mientras que la NTP-291.100-1:2009 la aprobó INDECOPI.</p></div>
+
+<div class="concepto"><h3>GIDIS-PUCP y CTN-ISSI</h3>
+<p>El <b>GIDIS-PUCP</b> es el grupo que lideró COMPETISOFT-Perú, ProCal-ProSer y la investigación con la ÉTS (École de Technologie Supérieure, Canadá, Claude Y. Laporte) sobre la 29110 en el Perú. El <b>CTN-ISSI</b> es el comité técnico que propone las NTP de ingeniería de SW.</p>
+<p class="ej"><b>Ej.:</b> una tesis PUCP que implanta el perfil básico en una VSE de Lima y la acompaña a la auditoría es típica de <abbr title="Grupo de Investigación y Desarrollo de Ingeniería de Software (PUCP)">GIDIS</abbr>.</p></div>
+
+<div class="concepto"><h3>ProCal-ProSer</h3>
+<p>Proyecto 2013–2016 del GIDIS-PUCP, financiado por FINCYT (Fondo para la Innovación, Ciencia y Tecnología) / Innóvate Perú, que implantó la NTP-ISO/IEC 29110 en 10 empresas de varias ciudades y creó un modelo de gestión de <b>servicios</b> basado en el perfil básico + ISO/IEC 20000 + CMMI-SVC (<abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> for Services).</p>
+<p class="ej"><b>Ej.:</b> una VSE de Arequipa que da soporte <abbr title="Information Technology (IT) – Tecnologías de la Información">TI</abbr> a clínicas usó el modelo de servicios ProSer para formalizar su mesa de ayuda con <abbr title="Service Level Agreement – Acuerdo de Nivel de Servicio">SLA</abbr> (Service Level Agreement).</p></div>
+
+<div class="concepto"><h3>RELAIS (Red Latinoamericana de la Industria del Software)</h3>
+<p>Proyecto 2010–2013 (con la CCL, Cámara de Comercio de Lima, entre los socios) que difundió MPS-SW, MoProSoft e IT Mark en México, Colombia y el Perú, conectando a las PYME con los <abbr title="European Software Institute – Instituto Europeo de Software (hoy Tecnalia)">ESI</abbr> Centers.</p>
+<p class="ej"><b>Ej.:</b> una PYME limeña socia de la CCL pudo acceder a una evaluación IT Mark subvencionada vía <abbr title="Red Latinoamericana de la Industria del Software">RELAIS</abbr>.</p></div>
+
+<div class="concepto"><h3>Adopción en Latinoamérica</h3>
+<p>México (<abbr title="Normalización y Certificación Electrónica, A.C. (México)">NYCE</abbr> certifica 29110; transición desde MoProSoft), Colombia, Brasil, Uruguay, Ecuador y Argentina adoptaron o difundieron la 29110. El patrón regional es: <b>modelo nacional → norma internacional</b> (MoProSoft → 29110), conservando los modelos nacionales como escalón.</p>
+<p class="ej"><b>Ej.:</b> una empresa mexicana certificada MoProSoft nivel 2 migra a 29110 Basic mapeando <abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr> → PM y <abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr> → SI.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><ul>
+<li>Cronología peruana: <b>NTP 291.100 (2009, MoProSoft) → NTP-ISO/IEC 29110 (2012)</b>; <b>INDECOPI → INACAL (2015)</b>.</li>
+<li>El entregable S5 del Grupo 06 cita «Gestión de Proyectos de la ISO/IEC TR 29110-5-1-2»: es el proceso <b>PM</b> del perfil básico, la «12207 para VSE».</li>
+<li>La ONGEI exigió la NTP-ISO/IEC 12207 en el Estado desde 2004 (antes de la <abbr title="Resolución Ministerial">RM</abbr> de 2017 vista en S5).</li>
+</ul></div>
+</section>
+<section id="otros-modelos-spi">
+<h2>11. Otros modelos y enfoques de SPI para PYME</h2>
+<p>Además de los cinco modelos principales, la literatura de <abbr title="Software Process Improvement – Mejora del Proceso de Software">SPI</abbr> (Software Process Improvement) para <abbr title="SME, Small and Medium-sized Enterprise – Pequeña y Mediana Empresa">PYME</abbr> (revisión sistemática de Pino et al., 2008) cita varios modelos y métodos ligeros que conviene reconocer.</p>
+
+<div class="concepto"><h3>Agile SPI y Agile SPI-Process</h3>
+<p>Marco de SPI «ágil» para PYME desarrollado en Colombia por la Universidad del Cauca (Hurtado, Pino, Vidal, Pardo, Fernández) dentro de SIMEP-SW. Incluye el proceso <b>Agile SPI-Process</b> (Instalación del programa → Diagnóstico → Formulación → Ejecución/mejora → Revisión; iterativo), el método de evaluación <b>Light <abbr title="Método de Evaluación de la Capacidad de Procesos de Desarrollo de Software (Colombia)">MECPDS</abbr></b>, una herramienta de definición de procesos y principios inspirados en el Manifiesto Ágil. Es el <b>antecedente directo de PmCOMPETISOFT</b>.</p>
+<p class="ej"><b>Ej.:</b> si un enunciado describe «un proceso de mejora de 5 fases iterativas de origen colombiano», es Agile SPI-Process (y su heredero PmCOMPETISOFT).</p></div>
+
+<div class="concepto"><h3>SIMEP-SW (Sistema Integral de Mejoramiento de los Procesos de Desarrollo de Software)</h3>
+<p>Programa nacional colombiano (~2003–2005, financiado por Colciencias) que generó Agile SPI y modelos de mejora para la industria colombiana; se cita junto a <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> y <abbr title="Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño">MPS.BR</abbr> como iniciativa nacional.</p>
+<p class="ej"><b>Ej.:</b> la tríada de iniciativas nacionales latinoamericanas de los 2000: MoProSoft (México), MPS.BR (Brasil), SIMEP-SW (Colombia).</p></div>
+
+<div class="concepto"><h3>MECPDS / Light MECPDS</h3>
+<p><b>MECPDS</b> (Método de Evaluación de la Capacidad de Procesos de Desarrollo de Software; Pino, García, Ruiz, Piattini, 2006) adapta <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 12207:2002 e ISO/IEC 15504:2003 a países en desarrollo; <b>Light MECPDS</b> es su versión ligera con escala <b>N/P/L/F</b> conforme 15504-2.</p>
+<p class="ej"><b>Ej.:</b> 0–15 % = N, &gt;15–50 % = P, &gt;50–85 % = L, &gt;85–100 % = F: un atributo con 60 % de evidencias se califica L.</p></div>
+
+<div class="concepto"><h3>Métrica v3</h3>
+<p>Metodología del Ministerio de Administraciones Públicas de España para la planificación, desarrollo y mantenimiento de <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr> (Sistemas de Información) en la administración pública. <b>No es un modelo de madurez</b>, sino una metodología; fue insumo de <abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr>.</p>
+<p class="ej"><b>Ej.:</b> si preguntan «¿Métrica v3 evalúa niveles?» → no; define procesos y técnicas (p. ej. EVS Estudio de Viabilidad del Sistema, ASI Análisis del Sistema de Información).</p></div>
+
+<div class="concepto"><h3>IDEAL (Initiating, Diagnosing, Establishing, Acting, Learning)</h3>
+<p>Modelo de ciclo de mejora del <abbr title="Software Engineering Institute – Instituto de Ingeniería de Software (Carnegie Mellon)">SEI</abbr> (Software Engineering Institute) en 5 fases: Iniciar, Diagnosticar, Establecer, Actuar, Aprender. PmCOMPETISOFT es su versión ligera: Instalación ≈ Initiating, Diagnóstico ≈ Diagnosing, Formulación ≈ Establishing, Ejecución ≈ Acting, Revisión ≈ Learning.</p>
+<p class="ej"><b>Ej.:</b> el SEPG de un banco aplica <abbr title="Initiating, Diagnosing, Establishing, Acting, Learning – Modelo de mejora del SEI: Iniciar, Diagnosticar, Establecer, Actuar, Aprender">IDEAL</abbr> para un programa <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> de 2 años; una <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> aplica PmCOMPETISOFT en 4 meses.</p></div>
+
+<div class="concepto"><h3>Modelos ligeros europeos y australianos (MESOPYME, OWPL, RAPID, TOPS, SPIRE, PROCESSUS)</h3>
+<p>Modelos o métodos de SPI para PYME citados por Pino et al. (2008): <b>OWPL</b> (Observatoire Wallon des Pratiques Logicielles, Bélgica), <b>RAPID</b> (Australia, evaluación rápida basada en 15504), <b>MESOPYME</b> (España, mejora con «paquetes de acción»), <b>TOPS</b>, <b>SPIRE</b> (SPI in Regions of Europe), <b>PROCESSUS</b>. Todos comparten: evaluación barata, pocas áreas priorizadas, resultados rápidos.</p>
+<p class="ej"><b>Ej.:</b> RAPID evalúa en un día unos 8 procesos 15504 en una PYME australiana, filosofía similar a la agenda de 1 día de IT Mark Basic.</p></div>
+
+<div class="concepto"><h3>Método de diagnóstico de madurez UNLaM</h3>
+<p>Método argentino (Universidad Nacional de La Matanza, CLEI 2008) para diagnosticar la madurez de PYME en el marco COMPETISOFT, previo a la valoración formal.</p>
+<p class="ej"><b>Ej.:</b> equivale en función al IDCompetiSoft peruano de la <abbr title="Pontificia Universidad Católica del Perú">PUCP</abbr>: un cuestionario inicial antes de aplicar Light MECPDS.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Modelo</th><th>País / origen</th><th>Qué es</th><th>Dato clave</th></tr></thead>
+<tbody>
+<tr><td>Agile SPI</td><td>Colombia, U. del Cauca (SIMEP-SW)</td><td>Marco de SPI ágil (proceso + evaluación + herramienta)</td><td>Antecedente de PmCOMPETISOFT</td></tr>
+<tr><td>SIMEP-SW</td><td>Colombia (Colciencias)</td><td>Programa nacional de mejora</td><td>Generó Agile SPI</td></tr>
+<tr><td>MECPDS / Light MECPDS</td><td>Colombia (2006)</td><td>Método de evaluación de capacidad</td><td>Escala N/P/L/F (15504-2)</td></tr>
+<tr><td>Métrica v3</td><td>España (MAP)</td><td>Metodología, no modelo de madurez</td><td>Insumo de COMPETISOFT</td></tr>
+<tr><td>MANTEMA</td><td>España (UCLM)</td><td>Metodología de mantenimiento</td><td>Base del proceso <abbr title="Mantenimiento de Software (proceso COMPETISOFT)">MS</abbr> de COMPETISOFT</td></tr>
+<tr><td><abbr title="Norma Técnica Peruana">NTP</abbr> 291.100</td><td>Perú (2009)</td><td>Adopción de MoProSoft</td><td>Antecesora de NTP-ISO/IEC 29110</td></tr>
+<tr><td>IDEAL</td><td>SEI, EE. UU.</td><td>Ciclo de mejora en 5 fases</td><td>PmCOMPETISOFT es su versión ligera</td></tr>
+<tr><td>OWPL, RAPID, MESOPYME, TOPS, SPIRE, PROCESSUS</td><td>Europa / Australia</td><td>Modelos/métodos ligeros de SPI</td><td>Citados en Pino et al. (2008)</td></tr>
+</tbody></table></div>
+
+<div class="ojo"><h4>Ojo en el examen · «MECA»</h4>
+<p>No se halló en fuentes confiables un modelo de mejora de procesos de <abbr title="Software – Software / soporte lógico">SW</abbr> llamado exactamente «MECA». Si aparece en una lista de «otros modelos», lo más probable es que se refiera a <b>MECPDS</b> (Colombia) u otro modelo nacional local. No inventes contenido: responde con MECPDS/Light MECPDS y explica que es un método de evaluación conforme a 15504.</p></div>
+</section>
+
+<section id="comparativa">
+<h2>12. Comparativa integral de modelos (incluye CMMI de la S6)</h2>
+<p>Esta sección integra <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr>, <abbr title="Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño">MPS.BR</abbr> (<abbr title="Modelo de Referência MPS para Software (también -SV Serviços y -RH Gestão de Pessoas)">MR-MPS-SW</abbr>), <abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr>, IT Mark, <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110 y <abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> (Capability Maturity Model Integration for Development) en tablas listas para responder preguntas de comparación.</p>
+
+<div class="tabla"><table>
+<thead><tr><th>Criterio</th><th>MoProSoft</th><th>MPS.BR (MR-MPS-SW)</th><th>COMPETISOFT</th><th>IT Mark</th><th>ISO/IEC 29110</th><th>CMMI-DEV (S6)</th></tr></thead>
+<tbody>
+<tr><td>País / ámbito</td><td>México</td><td>Brasil</td><td>Iberoamérica (13 países)</td><td>Europa (<abbr title="European Software Institute – Instituto Europeo de Software (hoy Tecnalia)">ESI</abbr>, España) → global</td><td>Internacional</td><td>EE. UU. → global</td></tr>
+<tr><td>Año</td><td>2002–2005 (<abbr title="Norma Mexicana (voluntaria)">NMX</abbr> 2005; rev. 2011)</td><td>2003 (guías 2005…2021/2024)</td><td>2006–2008</td><td>2005</td><td>2011 (rev. 2016–2025)</td><td>2000/2002 (v1.3 2010, v2.0 2018, v3.0 2023)</td></tr>
+<tr><td>Organismo</td><td>SE/PROSOFT, <abbr title="Universidad Nacional Autónoma de México">UNAM</abbr>, <abbr title="Asociación Mexicana para la Calidad en Ingeniería de Software">AMCIS</abbr>, <abbr title="Normalización y Certificación Electrónica, A.C. (México)">NYCE</abbr></td><td><abbr title="Associação para Promoção da Excelência do Software Brasileiro">SOFTEX</abbr> (+MCTI, <abbr title="Financiadora de Estudos e Projetos (Brasil)">FINEP</abbr>, <abbr title="Serviço Brasileiro de Apoio às Micro e Pequenas Empresas">SEBRAE</abbr>, BID)</td><td><abbr title="Programa Iberoamericano de Ciencia y Tecnología para el Desarrollo">CYTED</abbr> (UCLM, UNAM, <abbr title="Pontificia Universidad Católica del Perú">PUCP</abbr>…)</td><td>ESI → Tecnalia</td><td>ISO/IEC <abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr> <abbr title="Working Group 24 – Grupo de Trabajo 24 de ISO/IEC JTC 1/SC 7">WG24</abbr></td><td><abbr title="Software Engineering Institute – Instituto de Ingeniería de Software (Carnegie Mellon)">SEI</abbr>/CMU → <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> Institute/ISACA</td></tr>
+<tr><td>Base normativa</td><td><abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> 9000:2000, <abbr title="Capability Maturity Model – Modelo de Madurez de Capacidades">CMM</abbr> 2–3, 15504, <abbr title="Project Management Body of Knowledge – Cuerpo de Conocimientos de la Dirección de Proyectos">PMBOK</abbr>, <abbr title="Software Engineering Body of Knowledge – Cuerpo de Conocimiento de la Ingeniería de Software">SWEBOK</abbr></td><td>ISO/IEC/IEEE 12207, ISO/IEC 330xx, CMMI-DEV v2.0</td><td>MoProSoft + 12207, 15504, CMMI 1.2, PMBOK, MANTEMA, Métrica v3</td><td><abbr title="Ten-Squared (10-Squared) – Modelo de evaluación de la gestión del negocio usado por IT Mark">10²</abbr>, ISO/IEC 27001/27002, CMMI 2–3, 15504</td><td>12207, 15288, 15289, 15504/33000, MoProSoft</td><td>Propio (<abbr title="Capability Maturity Model for Software – CMM para Software">SW-CMM</abbr>)</td></tr>
+<tr><td>Estructura</td><td>3 categorías, 9 procesos</td><td>12 procesos (2021) en 2 conjuntos</td><td>3 categorías, 10 procesos</td><td>3 áreas</td><td>Basic: 2 procesos (<abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr> + <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr>); organizacionales en perfiles superiores</td><td>22 <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> (v1.3) / áreas de práctica (v2.0)</td></tr>
+<tr><td>Niveles</td><td>Capacidad 0–5 por proceso; madurez de capacidades organizacional</td><td>7 de madurez: G–A</td><td>Capacidad 0–5 (15504)</td><td>3 (Basic/Premium/Elite, 1–3★)</td><td>4 perfiles (Entry, Basic, Intermediate, Advanced)</td><td>Madurez 1–5 / capacidad 0–3</td></tr>
+<tr><td>Público</td><td><abbr title="SME, Small and Medium-sized Enterprise – Pequeña y Mediana Empresa">PYME</abbr> y áreas internas de <abbr title="Software – Software / soporte lógico">SW</abbr></td><td>Todas, foco PYME brasileñas</td><td>PYME iberoamericanas</td><td>PYME/micro <abbr title="Information Technology (IT) – Tecnologías de la Información">TI</abbr></td><td><abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> ≤25 personas</td><td>Organizaciones medianas/grandes</td></tr>
+<tr><td>Evaluación</td><td><abbr title="Método de Evaluación de Procesos para la Industria de Software (NMX-I-059/04-NYCE)">EvalProSoft</abbr> (NMX-I-059/04)</td><td><abbr title="Método de Avaliação MPS – Método de Evaluación MPS">MA-MPS</abbr> (<abbr title="Artificial Intelligence (AI) – Inteligencia Artificial">IA</abbr> acreditadas)</td><td>Cada país conforme 15504-2/-4; Light <abbr title="Método de Evaluación de la Capacidad de Procesos de Desarrollo de Software (Colombia)">MECPDS</abbr></td><td>Evaluador ESI, ~1 día</td><td>Assessment 29110-3 o auditoría de certificación</td><td><abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr> A/B/C → Benchmark/Sustainment</td></tr>
+<tr><td>Costo/esfuerzo</td><td>Bajo–medio</td><td>Bajo–medio (cooperado, SEBRAE)</td><td>Muy bajo (público y gratuito)</td><td>Bajo</td><td>Muy bajo (<abbr title="Technical Report – Informe Técnico (ISO)">TR</abbr> gratuitos, <abbr title="Deployment Package – Paquete de Despliegue (ISO/IEC 29110)">DP</abbr>)</td><td>Alto</td></tr>
+<tr><td>Compatibilidad</td><td>ISO 9001 (Anexo A1), CMM/CMMI 2–3, 15504</td><td>CMMI-DEV (G/F≈ML2, E-D-C≈ML3, B≈ML4, A≈ML5), 12207, 330xx</td><td>9001 (92 %), 12207 (95 %), CMMI-2 (77 %)</td><td>CMMI 2–3, 27001, 15504; mapeado a 29110</td><td>Perfil de 12207; evaluación 15504/33000; MoProSoft</td><td>15504/33000 (SCAMPI conforme)</td></tr>
+<tr><td>Qué certifica</td><td>Organización (nivel)</td><td>Unidad organizacional (nivel)</td><td>— (proyecto de investigación; certificación vía <abbr title="Norma Técnica Peruana">NTP</abbr>/NMX)</td><td>Empresa (estrellas)</td><td>VSE (perfil)</td><td>Unidad organizacional (nivel)</td></tr>
+</tbody></table></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Concepto</th><th>MoProSoft</th><th>COMPETISOFT</th><th>MPS-SW 2021</th><th>ISO/IEC 29110 Basic</th><th>CMMI-DEV v1.3</th><th>ISO/IEC/IEEE 12207:2017</th></tr></thead>
+<tbody>
+<tr><td>Gestionar un proyecto</td><td><abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr></td><td>APE</td><td><abbr title="Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)">GPR</abbr></td><td>PM</td><td><abbr title="Project Planning – Planificación del Proyecto">PP</abbr>, <abbr title="Project Monitoring and Control – Monitoreo y Control del Proyecto">PMC</abbr>, (<abbr title="Risk Management – Gestión de Riesgos">RSKM</abbr>)</td><td>Planificación, Evaluación y Control del Proyecto, Gestión de Riesgos</td></tr>
+<tr><td>Requisitos</td><td>DMS-Requerimientos</td><td><abbr title="Desarrollo de Software (proceso COMPETISOFT)">DS</abbr></td><td><abbr title="Engenharia de Requisitos – Ingeniería de Requisitos (MPS 2021)">REQ</abbr></td><td>SI.2</td><td><abbr title="Requirements Management – Gestión de Requisitos">REQM</abbr>, <abbr title="Requirements Development – Desarrollo de Requisitos">RD</abbr></td><td>Definición de requisitos de stakeholders / sistema</td></tr>
+<tr><td>Diseño y construcción</td><td>DMS-Análisis y Diseño, Construcción</td><td>DS</td><td><abbr title="Projeto e Construção do Produto – Diseño y Construcción del Producto (MPS)">PCP</abbr></td><td>SI.3, SI.4</td><td>TS</td><td>Arquitectura, diseño, implementación</td></tr>
+<tr><td>Integración y pruebas</td><td>DMS-Integración y Pruebas</td><td>DS</td><td><abbr title="Integração do Produto – Integración del Producto (MPS)">ITP</abbr>, <abbr title="Verification and Validation – Verificación y Validación (Practice Area V2.0)">VV</abbr></td><td>SI.5</td><td>PI, <abbr title="Verification – Verificación">VER</abbr>, <abbr title="Validation – Validación">VAL</abbr></td><td>Integración, Verificación, Validación</td></tr>
+<tr><td>Entrega / cierre</td><td>APE-Cierre, DMS-Cierre</td><td>APE, DS</td><td>GPR</td><td>PM.4, SI.6</td><td>—</td><td>Transición</td></tr>
+<tr><td>Mantenimiento</td><td><abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr> (modificados)</td><td><b><abbr title="Mantenimiento de Software (proceso COMPETISOFT)">MS</abbr></b></td><td>(proyectos de mantenimiento)</td><td>— (perfil de servicios)</td><td>—</td><td>Mantenimiento</td></tr>
+<tr><td>Configuración</td><td><abbr title="Conocimiento de la Organización (MoProSoft GES.3.3)">CO</abbr> + DMS (Configuración de SW)</td><td>Gestión de Conocimiento</td><td><abbr title="Gerência de Configuração – Gestión de Configuración (MPS)">GCO</abbr></td><td>Project Repository, control de versiones</td><td><abbr title="Configuration Management – Gestión de la Configuración">CM</abbr></td><td>Gestión de Configuración</td></tr>
+<tr><td>Mejora de procesos</td><td>GPR (GES.1)</td><td>Gestión de Procesos + PmCOMPETISOFT</td><td><abbr title="Gerência de Processos – Gestión de Procesos (MPS 2021)">GPC</abbr></td><td>(Intermediate/Advanced)</td><td><abbr title="Organizational Process Focus – Enfoque en el Proceso Organizacional">OPF</abbr>, <abbr title="Organizational Process Definition – Definición del Proceso Organizacional">OPD</abbr></td><td>Gestión del Modelo de Ciclo de Vida</td></tr>
+<tr><td>Estrategia / dirección</td><td><abbr title="Gestión de Negocio (MoProSoft DIR.1)">GN</abbr> (<abbr title="Categoría Alta Dirección (MoProSoft)">DIR</abbr>.1)</td><td>Gestión de Negocio</td><td><abbr title="Gerência Organizacional – Gestión Organizacional (MPS 2021)">ORG</abbr></td><td>(Advanced)</td><td>—</td><td>Gestión de Portafolio</td></tr>
+<tr><td>Personas</td><td><abbr title="Recursos Humanos y Ambiente de Trabajo (MoProSoft GES.3.1)">RHAT</abbr></td><td>Gestión de <abbr title="Human Resources – Recursos Humanos">RR. HH.</abbr></td><td><abbr title="Gerência de Recursos Humanos (MPS)">GRH</abbr></td><td>—</td><td><abbr title="Organizational Training – Formación Organizacional">OT</abbr></td><td>Gestión de RR. HH.</td></tr>
+<tr><td>Proveedores</td><td><abbr title="British Standards Institution – Instituto Británico de Normalización">BSI</abbr></td><td>Gestión de BSI</td><td><abbr title="Aquisição – Adquisición (MPS)">AQU</abbr></td><td>—</td><td><abbr title="Supplier Agreement Management – Gestión de Acuerdos con Proveedores">SAM</abbr></td><td>Adquisición</td></tr>
+<tr><td>Medición</td><td>Mediciones (en cada proceso)</td><td>idem</td><td><abbr title="Medição – Medición (MPS)">MED</abbr></td><td>Progress Status Record</td><td><abbr title="Measurement and Analysis – Medición y Análisis">MA</abbr></td><td>Medición</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Nivel de capacidad vs nivel de madurez vs perfil vs estrellas</h3>
+<p>Cuatro formas distintas de «graduar»: <b>capacidad</b> (0–5) se asigna a <b>un proceso</b> (15504, MoProSoft, COMPETISOFT); <b>madurez</b> se asigna a <b>la organización</b> como conjunto de procesos + capacidad (CMMI 1–5, MPS G–A); <b>perfil</b> es un <b>subconjunto de normas</b> elegido por tipo de entidad (29110); <b>estrellas</b> es un <b>grado de certificación multiárea</b> (IT Mark).</p>
+<p class="ej"><b>Ej.:</b> «APE está en capacidad 3» (MoProSoft), «la empresa es MPS nivel F» (madurez), «la VSE está certificada en el perfil Basic» (29110), «la PYME tiene IT Mark Premium 2★» (estrellas).</p></div>
+
+<div class="concepto"><h3>Transición MoProSoft → ISO/IEC 29110 Basic</h3>
+<p>Según «From MoProSoft Level 2 to ISO/IEC 29110 Basic Profile: Bridging the Gap» (CLEI EJ): <b>APE → PM</b> (Planificación → PM.1, Realización → PM.2, Evaluación y Control → PM.3, Cierre → PM.4) y <b>DMS → SI</b> (Inicio → SI.1, Requerimientos → SI.2, Análisis y Diseño → SI.3, Construcción → SI.4, Integración y Pruebas → SI.5, Cierre → SI.6). GN, GPR, <abbr title="Gestión de Proyectos – cartera (MoProSoft GES.2)">GPY</abbr>, <abbr title="Generic Resource – Recurso genérico">GR</abbr>, RHAT, BSI y CO no los exige el Basic (aparecen parcialmente en Intermediate/Advanced). Se ajustan nombres: Plan de Desarrollo ↔ Project Plan; Documento de Aceptación ↔ Acceptance Record; Registro de Rastreo ↔ Traceability Record.</p>
+<p class="ej"><b>Ej.:</b> riesgo: abandonar la Base de Conocimiento (CO) «porque no la piden»; la recomendación es mantenerla y apuntar al perfil Intermediate.</p></div>
+
+<div class="tabla"><table>
+<thead><tr><th>Situación</th><th>Modelo sugerido</th><th>Razón</th></tr></thead>
+<tbody>
+<tr><td>VSE ≤25 personas, un proyecto a la vez, quiere certificación internacional barata</td><td><b>ISO/IEC 29110 Basic</b></td><td>Norma internacional, DP gratuitos, NTP en el Perú</td></tr>
+<tr><td>PYME 26–150 personas en México o que vende al gobierno mexicano</td><td><b>MoProSoft (NMX-I-059)</b> / transición a 29110</td><td>Reconocimiento nacional</td></tr>
+<tr><td>Empresa que vende a Brasil o al gobierno brasileño</td><td><b>MPS-SW</b> (G → F)</td><td>Reconocido en compras públicas brasileñas, escalones cortos</td></tr>
+<tr><td>PYME iberoamericana que quiere empezar a mejorar sin certificar</td><td><b>COMPETISOFT + PmCOMPETISOFT</b></td><td>Público, gratuito, con guía de mejora</td></tr>
+<tr><td>PYME que necesita mostrar negocio + seguridad + desarrollo a la vez</td><td><b>IT Mark</b></td><td>Certificación integral en ~1 día</td></tr>
+<tr><td>Proveedor de banca internacional / outsourcing a EE. UU.</td><td><b>CMMI ML2–3 (SCAMPI/Benchmark)</b></td><td>Exigencia contractual</td></tr>
+<tr><td>Ya tiene ISO 9001 y quiere especializarse en SW</td><td>MoProSoft o MPS-SW nivel C</td><td>Cultura de procesos previa</td></tr>
+</tbody></table></div>
+
+<div class="concepto"><h3>Heurística de selección de modelo</h3>
+<p>Para elegir se cruzan 4 variables: (1) <b>tamaño</b> (≤25 → 29110; si no, MoProSoft/MPS/CMMI); (2) <b>mercado objetivo</b> (México → NMX; Brasil → MPS; EE. UU./banca → CMMI; Estado peruano → NTP); (3) <b>presupuesto y plazo</b>; (4) <b>alcance</b> (solo desarrollo vs negocio + seguridad → IT Mark/ISO 27001). «La calidad no tiene solución única».</p>
+<p class="ej"><b>Ej.:</b> «AndesCode S.A.C.» (18 personas, un proyecto y un equipo Scrum, S/ 60 000 y 12 meses para licitar con el Estado) → ISO/IEC 29110 Basic; CMMI ML3 sería desproporcionado y MPS G poco reconocido en el Perú.</p></div>
+
+<div class="concepto"><h3>Secuencia escalonada para una PYME mediana exportadora</h3>
+<p>Cuando la empresa no es VSE y tiene varios mercados, se recomienda una <b>ruta</b>: definir procesos alineados a la 12207 con COMPETISOFT/MoProSoft → MPS-SW F (Brasil, ≈ CMMI ML2) → MPS C / CMMI ML3 (banca EE. UU.) → opcional IT Mark / ISO/IEC 27001 si se exige seguridad.</p>
+<p class="ej"><b>Ej.:</b> una PYME de 60 personas en Arequipa que provee a 3 gobiernos regionales (exigen NTP-ISO/IEC 12207:2016) y quiere exportar a Brasil y a un banco de Miami sigue esa secuencia; la 29110 solo aplicaría a departamentos o proyectos ≤25.</p></div>
+
+<div class="ojo"><h4>Ojo en el examen</h4><ul>
+<li>No mezcles escalas: MoProSoft/COMPETISOFT = <b>capacidad por proceso</b>; MPS/CMMI = <b>madurez organizacional</b>; 29110 = <b>perfiles</b>; IT Mark = <b>estrellas</b>.</li>
+<li>Una empresa de 60 personas <b>no</b> es VSE; la 29110 puede aplicarse a un departamento o proyecto de ≤25 dentro de ella.</li>
+</ul></div>
+</section>
+<section id="trampas-examen">
+<h2>13. Trampas típicas de examen e integración con S4–S6</h2>
+<p>Resumen de confusiones frecuentes sobre <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr>, <abbr title="Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño">MPS.BR</abbr>, <abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr>, IT Mark e <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110, y de cómo se conectan con la ISO/IEC/IEEE 12207 (S4), la NTP-ISO/IEC 12207:2016 (S5) y <abbr title="Software Process Improvement and Capability dEtermination – Mejora y determinación de la capacidad del proceso de software (ISO/IEC 15504)">SPICE</abbr>/CMMI (S6).</p>
+
+<div class="ojo"><h4>Ojo en el examen · las 12 trampas</h4><ol>
+<li><b>MoProSoft</b> tiene <b>3 categorías y 9 procesos</b>; sus niveles son de <b>capacidad</b> por proceso (0–5) y el nivel organizacional es el <b>mínimo común</b>.</li>
+<li><b><abbr title="Gestión de Proyectos – cartera (MoProSoft GES.2)">GPY</abbr> ≠ <abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr></b>: cartera vs proyecto específico.</li>
+<li><b>NMX-I-059/02 = MoProSoft; /04 = <abbr title="Método de Evaluación de Procesos para la Industria de Software (NMX-I-059/04-NYCE)">EvalProSoft</abbr>.</b></li>
+<li><b>MPS.BR: G es el más bajo, A el más alto</b>; 7 niveles vs 5 de <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr>.</li>
+<li><b>MPS 2021</b>: <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> ya no es proceso (está en CP-F y <abbr title="Gerência de Processos – Gestión de Procesos (MPS 2021)">GPC</abbr>); requisitos = <abbr title="Engenharia de Requisitos – Ingeniería de Requisitos (MPS 2021)">REQ</abbr>; <abbr title="Verification and Validation – Verificación y Validación">V&amp;V</abbr> = <abbr title="Verification and Validation – Verificación y Validación (Practice Area V2.0)">VV</abbr>; <abbr title="Gerência Organizacional – Gestión Organizacional (MPS 2021)">ORG</abbr> aparece en F.</li>
+<li><b>COMPETISOFT</b> es un <b>proyecto <abbr title="Programa Iberoamericano de Ciencia y Tecnología para el Desarrollo">CYTED</abbr></b> que produjo un <b>marco</b> (procesos + evaluación + mejora); su modelo se basa en MoProSoft; separa <abbr title="Desarrollo de Software (proceso COMPETISOFT)">DS</abbr> y <abbr title="Mantenimiento de Software (proceso COMPETISOFT)">MS</abbr>.</li>
+<li><b>PmCOMPETISOFT</b> = proceso de mejora de 5 actividades, despliegue de Gestión de Procesos, derivado de Agile <abbr title="Software Process Improvement – Mejora del Proceso de Software">SPI</abbr>.</li>
+<li><b>IT Mark</b> = certificación de 3 áreas (<abbr title="Ten-Squared (10-Squared) – Modelo de evaluación de la gestión del negocio usado por IT Mark">10²</abbr>, 27001, CMMI) y 3 estrellas; <abbr title="European Software Institute – Instituto Europeo de Software (hoy Tecnalia)">ESI</abbr> (hoy Tecnalia), 2005.</li>
+<li><b>ISO/IEC 29110</b>: <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> ≤ <b>25</b> personas; <b>perfiles</b> (no niveles); Basic = <b><abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr> + <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr></b>; nace de <b>MoProSoft</b> (2006).</li>
+<li><b>Perú</b>: <abbr title="Norma Técnica Peruana">NTP</abbr> 291.100 (2009, MoProSoft) → NTP-ISO/IEC 29110 (2012); <abbr title="Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual">INDECOPI</abbr> → <abbr title="Instituto Nacional de Calidad (Perú)">INACAL</abbr> (2015).</li>
+<li>Compatibilidades: MoProSoft ↔ <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr> 9001:2000 + <abbr title="Capability Maturity Model – Modelo de Madurez de Capacidades">CMM</abbr> 2–3; MPS ↔ <abbr title="CMMI for Development – CMMI para Desarrollo">CMMI-DEV</abbr> v2.0 + 12207 + 330xx; 29110 ↔ 12207 (perfil) + 15504.</li>
+<li><b>Verificación</b> (contra especificación) vs <b>validación</b> (contra uso previsto) se mantiene en todos: MoProSoft Ver/Val; MPS VV; 29110 verification/validation results.</li>
+</ol></div>
+
+<div class="concepto"><h3>Relación de los modelos con ISO/IEC 12207 (S4–S5)</h3>
+<p>La ISO/IEC 12207 es el <b><abbr title="Process Reference Model – Modelo de referencia de procesos">PRM</abbr> (Process Reference Model – Modelo de Referencia de Procesos)</b> de fondo: MPS.BR declara conformidad con la NBR ISO/IEC/IEEE 12207; COMPETISOFT cubre ~95 % de su Anexo F; la 29110 es un <b>perfil</b> de la 12207 para VSE. Por eso, quien implanta 29110 Basic avanza hacia la NTP-ISO/IEC 12207:2016 exigida por el Estado peruano.</p>
+<p class="ej"><b>Ej.:</b> el proceso PM de la 29110 es un subconjunto de los procesos de gestión técnica de la 12207:2017 (Planificación del Proyecto, Evaluación y Control del Proyecto, Gestión de Riesgos, Gestión de Configuración).</p></div>
+
+<div class="concepto"><h3>Relación con ISO/IEC 15504 / 33000 y CMMI (S6)</h3>
+<p>ISO/IEC 15504/33000 aporta el <b><abbr title="Process Assessment Model – Modelo de evaluación de procesos">PAM</abbr> (Process Assessment Model)</b> y el marco de medición de capacidad (<abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> 1.1–5.2, escala N/P/L/F) usado por EvalProSoft, Light <abbr title="Método de Evaluación de la Capacidad de Procesos de Desarrollo de Software (Colombia)">MECPDS</abbr>, <abbr title="Método de Avaliação MPS – Método de Evaluación MPS">MA-MPS</abbr>, IT Mark y la evaluación 29110-3. CMMI aporta los <b>niveles de madurez</b> y PA (Process Areas) que MPS.BR e IT Mark mapean explícitamente.</p>
+<p class="ej"><b>Ej.:</b> la escala «T, L, P, N» del MA-MPS y la «F, L, P, N» de Light MECPDS son la misma idea de la escala de calificación de atributos de la ISO/IEC 33020.</p></div>
+
+<div class="norma"><h4>ISO/IEC/IEEE 12207 (NTP-ISO/IEC 12207:2016 en el Perú) · referencia para esta sesión</h4>
+<ul>
+<li><b>Organismo emisor:</b> ISO/IEC <abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr> (+ <abbr title="Institute of Electrical and Electronics Engineers – Instituto de Ingenieros Eléctricos y Electrónicos">IEEE</abbr> desde 2017); en el Perú INACAL.</li>
+<li><b>Versión/año:</b> 1995, 2008 (= NTP 2016, 7 grupos / 43 procesos), 2017 (4 grupos / 30 procesos).</li>
+<li><b>Propósito en S7:</b> PRM de fondo de MPS.BR, COMPETISOFT (cobertura ~95 % del Anexo F) e ISO/IEC 29110 (perfil = subconjunto de 12207).</li>
+<li><b>Trampa típica:</b> decir que la 29110 «sustituye» a la 12207; la 29110 es un perfil derivado de ella para VSE.</li>
+</ul></div>
+
+<div class="norma"><h4>ISO/IEC 15504 (SPICE) / ISO/IEC 33000 (330xx) · base de evaluación</h4>
+<ul>
+<li><b>Organismo emisor:</b> ISO/IEC JTC 1/SC 7.</li>
+<li><b>Versión/año:</b> <abbr title="Technical Report – Informe Técnico (ISO)">TR</abbr> 15504 (1998), 15504-2:2003; reemplazada progresivamente por la familia 330xx desde 2015 (33001, 33002, 33004, 33020…).</li>
+<li><b>Propósito en S7:</b> marco de medición de capacidad (niveles 0–5, PA 1.1–5.2, escala N/P/L/F) usado por EvalProSoft, NTP-291.100-2, COMPETISOFT/Light MECPDS, MA-MPS, IT Mark y 29110-3.</li>
+<li><b>Trampa típica:</b> confundir el nivel de <b>capacidad</b> 15504 (por proceso) con el nivel de <b>madurez</b> CMMI (organizacional).</li>
+</ul></div>
+
+<div class="norma"><h4>ISO/IEC 27001 (antes ISO/IEC 17799) · área de seguridad de IT Mark</h4>
+<ul>
+<li><b>Organismo emisor:</b> ISO/IEC <abbr title="Joint Technical Committee – Comité Técnico Conjunto (ISO/IEC JTC 1)">JTC</abbr> 1/SC 27.</li>
+<li><b>Versión/año:</b> ISO/IEC 17799 (2000/2005) → ISO/IEC 27001/27002:2005 → revisiones 2013 y 2022; en el Perú NTP-ISO/IEC 27001 (obligatoria en el Estado desde 2012, vía <abbr title="Oficina Nacional de Gobierno Electrónico e Informática">ONGEI</abbr>).</li>
+<li><b>Propósito en S7:</b> referencia del área de seguridad de la información de IT Mark (niveles 1–3).</li>
+<li><b>Estructura:</b> <abbr title="Sistema de Gestión de Seguridad de la Información (ISMS, ISO/IEC 27001)">SGSI</abbr> (Sistema de Gestión de Seguridad de la Información) con ciclo <abbr title="Plan-Do-Check-Act – Planificar-Hacer-Verificar-Actuar (PHVA)">PDCA</abbr> y controles del Anexo A (desarrollados en la 27002).</li>
+<li><b>Trampa típica:</b> creer que MoProSoft, MPS o 29110 cubren la seguridad de la información; IT Mark mostró que <b>no</b> la cubren.</li>
+</ul></div>
+
+<div class="concepto"><h3>PA: Process Attribute vs Process Area</h3>
+<p>La sigla <b>PA</b> tiene dos significados: <b>Process Attribute</b> (atributo de proceso de 15504/33020, p. ej. PA 2.1 gestión de la ejecución) y <b>Process Area</b> (área de proceso de CMMI v1.3, p. ej. <abbr title="Project Planning – Planificación del Proyecto">PP</abbr>, <abbr title="Project Monitoring and Control – Monitoreo y Control del Proyecto">PMC</abbr>, <abbr title="Requirements Management – Gestión de Requisitos">REQM</abbr>). En MPS clásico se usa <b><abbr title="Process Attribute – Atributo de Processo – Atributo de Proceso (MPS clásico)">AP</abbr></b> (Atributo de Processo) para lo primero.</p>
+<p class="ej"><b>Ej.:</b> «MoProSoft nivel 2 exige PA 2.1 y PA 2.2» habla de atributos; «IT Mark Basic exige PP y PMC» habla de áreas de proceso CMMI.</p></div>
+</section>
+
+<section id="siglas"><h2>Siglas de la sesión (80)</h2><div class="tabla"><table><thead><tr><th>Sigla</th><th>Inglés</th><th>Español</th></tr></thead><tbody><tr><td><b><abbr title="Ten-Squared (10-Squared) – Modelo de evaluación de la gestión del negocio usado por IT Mark">10²</abbr></b></td><td>Ten-Squared (10-Squared)</td><td>Modelo de evaluación de la gestión del negocio usado por IT Mark</td></tr><tr><td><b><abbr title="Asociación Mexicana para la Calidad en Ingeniería de Software">AMCIS</abbr></b></td><td>—</td><td>Asociación Mexicana para la Calidad en Ingeniería de Software</td></tr><tr><td><b><abbr title="Process Attribute – Atributo de Processo – Atributo de Proceso (MPS clásico)">AP</abbr></b></td><td>Process Attribute</td><td>Atributo de Processo – Atributo de Proceso (MPS clásico)</td></tr><tr><td><b><abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr></b></td><td>—</td><td>Administración de Proyectos Específicos (<abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> <abbr title="Categoría Operación (MoProSoft)">OPE</abbr>.1)</td></tr><tr><td><b><abbr title="Aquisição – Adquisición (MPS)">AQU</abbr></b></td><td>—</td><td>Aquisição – Adquisición (MPS)</td></tr><tr><td><b><abbr title="British Standards Institution – Instituto Británico de Normalización">BSI</abbr></b></td><td>—</td><td>Bienes, Servicios e Infraestructura (MoProSoft GES.3.2)</td></tr><tr><td><b><abbr title="Capability Maturity Model – Modelo de Madurez de Capacidades">CMM</abbr></b></td><td>Capability Maturity Model</td><td>Modelo de Madurez de Capacidades</td></tr><tr><td><b><abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr></b></td><td>Capability Maturity Model Integration</td><td>Integración de Modelos de Madurez de Capacidades</td></tr><tr><td><b><abbr title="Conocimiento de la Organización (MoProSoft GES.3.3)">CO</abbr></b></td><td>—</td><td>Conocimiento de la Organización (MoProSoft GES.3.3)</td></tr><tr><td><b><abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr></b></td><td>—</td><td>Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica</td></tr><tr><td><b><abbr title="Capacidade do Processo – Capacidad del Proceso (MPS 2021: CP-G, CP-F, CP-E/D/C, CP-B, CP-A)">CP</abbr></b></td><td>—</td><td>Capacidade do Processo – Capacidad del Proceso (MPS 2021: CP-G, CP-F, CP-E/D/C, CP-B, CP-A)</td></tr><tr><td><b><abbr title="Comité Técnico de Normalización de Ingeniería de Software y Sistemas de Información (Perú)">CTN-ISSI</abbr></b></td><td>—</td><td>Comité Técnico de Normalización de Ingeniería de Software y Sistemas de Información (Perú)</td></tr><tr><td><b><abbr title="Programa Iberoamericano de Ciencia y Tecnología para el Desarrollo">CYTED</abbr></b></td><td>—</td><td>Programa Iberoamericano de Ciencia y Tecnología para el Desarrollo</td></tr><tr><td><b><abbr title="Categoría Alta Dirección (MoProSoft)">DIR</abbr></b></td><td>—</td><td>Categoría Alta Dirección (MoProSoft)</td></tr><tr><td><b><abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr></b></td><td>—</td><td>Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)</td></tr><tr><td><b><abbr title="Deployment Package – Paquete de Despliegue (ISO/IEC 29110)">DP</abbr></b></td><td>Deployment Package</td><td>Paquete de Despliegue (<abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110)</td></tr><tr><td><b><abbr title="Desarrollo de Software (proceso COMPETISOFT)">DS</abbr></b></td><td>—</td><td>Desarrollo de Software (proceso COMPETISOFT)</td></tr><tr><td><b><abbr title="European Foundation for Quality Management – Fundación Europea para la Gestión de la Calidad">EFQM</abbr></b></td><td>European Foundation for Quality Management</td><td>Fundación Europea para la Gestión de la Calidad</td></tr><tr><td><b><abbr title="European Software Institute – Instituto Europeo de Software (hoy Tecnalia)">ESI</abbr></b></td><td>European Software Institute</td><td>Instituto Europeo de Software (hoy Tecnalia)</td></tr><tr><td><b><abbr title="Método de Evaluación de Procesos para la Industria de Software (NMX-I-059/04-NYCE)">EvalProSoft</abbr></b></td><td>—</td><td>Método de Evaluación de Procesos para la Industria de Software (NMX-I-059/04-NYCE)</td></tr><tr><td><b><abbr title="Financiadora de Estudos e Projetos (Brasil)">FINEP</abbr></b></td><td>—</td><td>Financiadora de Estudos e Projetos (Brasil)</td></tr><tr><td><b><abbr title="Gerência de Configuração – Gestión de Configuración (MPS)">GCO</abbr></b></td><td>—</td><td>Gerência de Configuração – Gestión de Configuración (MPS)</td></tr><tr><td><b><abbr title="Gerência de Decisões – Gestión de Decisiones (MPS)">GDE</abbr></b></td><td>—</td><td>Gerência de Decisões – Gestión de Decisiones (MPS)</td></tr><tr><td><b><abbr title="Categoría Gerencia / Gestión (MoProSoft)">GER/GES</abbr></b></td><td>—</td><td>Categoría Gerencia / Gestión (MoProSoft)</td></tr><tr><td><b><abbr title="Grupo de Gestión de la Mejora (PmCOMPETISOFT)">GGM</abbr></b></td><td>—</td><td>Grupo de Gestión de la Mejora (PmCOMPETISOFT)</td></tr><tr><td><b><abbr title="Grupo de Investigación y Desarrollo de Ingeniería de Software (PUCP)">GIDIS</abbr></b></td><td>—</td><td>Grupo de Investigación y Desarrollo de Ingeniería de Software (<abbr title="Pontificia Universidad Católica del Perú">PUCP</abbr>)</td></tr><tr><td><b><abbr title="Gestión de Negocio (MoProSoft DIR.1)">GN</abbr></b></td><td>—</td><td>Gestión de Negocio (MoProSoft DIR.1)</td></tr><tr><td><b><abbr title="Gerência de Processos – Gestión de Procesos (MPS 2021)">GPC</abbr></b></td><td>—</td><td>Gerência de Processos – Gestión de Procesos (MPS 2021)</td></tr><tr><td><b><abbr title="Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)">GPR</abbr></b></td><td>—</td><td>Gestión de Procesos (MoProSoft GES.1) / Gerência de Projetos – Gestión de Proyectos (MPS)</td></tr><tr><td><b><abbr title="Gestión de Proyectos – cartera (MoProSoft GES.2)">GPY</abbr></b></td><td>—</td><td>Gestión de Proyectos – cartera (MoProSoft GES.2)</td></tr><tr><td><b><abbr title="Garantia da Qualidade – Aseguramiento de la Calidad (MPS clásico)">GQA</abbr></b></td><td>—</td><td>Garantia da Qualidade – Aseguramiento de la Calidad (MPS clásico)</td></tr><tr><td><b><abbr title="Generic Resource – Recurso genérico">GR</abbr></b></td><td>—</td><td>Gestión de Recursos (MoProSoft GES.3)</td></tr><tr><td><b><abbr title="Gerência de Recursos Humanos (MPS)">GRH</abbr></b></td><td>—</td><td>Gerência de Recursos Humanos (MPS)</td></tr><tr><td><b><abbr title="Artificial Intelligence (AI) – Inteligencia Artificial">IA</abbr></b></td><td>—</td><td>Instituição Avaliadora – Institución Evaluadora (MPS)</td></tr><tr><td><b><abbr title="Initiating, Diagnosing, Establishing, Acting, Learning – Modelo de mejora del SEI: Iniciar, Diagnosticar, Establecer, Actuar, Aprender">IDEAL</abbr></b></td><td>Initiating, Diagnosing, Establishing, Acting, Learning</td><td>Modelo de ciclo de mejora del <abbr title="Software Engineering Institute – Instituto de Ingeniería de Software (Carnegie Mellon)">SEI</abbr></td></tr><tr><td><b><abbr title="Implementation Infrastructure – Infraestructura de Implementación (Practice Area V2.0)">II</abbr></b></td><td>—</td><td>Instituição Implementadora – Institución Implementadora (MPS)</td></tr><tr><td><b><abbr title="Instituto Nacional de Calidad (Perú)">INACAL</abbr></b></td><td>—</td><td>Instituto Nacional de Calidad (Perú)</td></tr><tr><td><b><abbr title="Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual">INDECOPI</abbr></b></td><td>—</td><td>Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual (Perú)</td></tr><tr><td><b>ISO/IEC</b></td><td>International Organization for Standardization / International Electrotechnical Commission</td><td>Organización Internacional de Normalización / Comisión Electrotécnica Internacional</td></tr><tr><td><b><abbr title="Integração do Produto – Integración del Producto (MPS)">ITP</abbr></b></td><td>—</td><td>Integração do Produto – Integración del Producto (MPS)</td></tr><tr><td><b><abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr></b></td><td>Joint Technical Committee 1 / Subcommittee 7</td><td>Comité Técnico Conjunto 1 / Subcomité 7 (ingeniería de <abbr title="Software – Software / soporte lógico">SW</abbr> y sistemas)</td></tr><tr><td><b><abbr title="Key Performance Indicator – Indicador Clave de Desempeño">KPI</abbr></b></td><td>Key Performance Indicator</td><td>Indicador clave de desempeño</td></tr><tr><td><b><abbr title="Método de Avaliação MPS – Método de Evaluación MPS">MA-MPS</abbr></b></td><td>—</td><td>Método de Avaliação MPS – Método de Evaluación MPS</td></tr><tr><td><b><abbr title="Método de Evaluación de la Capacidad de Procesos de Desarrollo de Software (Colombia)">MECPDS</abbr></b></td><td>—</td><td>Método de Evaluación de la Capacidad de Procesos de Desarrollo de Software (Colombia)</td></tr><tr><td><b><abbr title="Medição – Medición (MPS)">MED</abbr></b></td><td>—</td><td>Medição – Medición (MPS)</td></tr><tr><td><b><abbr title="Modelo de Negócio MPS – Modelo de Negocio MPS">MN-MPS</abbr></b></td><td>—</td><td>Modelo de Negócio MPS – Modelo de Negocio MPS</td></tr><tr><td><b>MoProSoft</b></td><td>—</td><td>Modelo de Procesos para la Industria de Software (México)</td></tr><tr><td><b><abbr title="Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño">MPS.BR</abbr></b></td><td>—</td><td>Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño</td></tr><tr><td><b><abbr title="Modelo de Referência MPS para Software (también -SV Serviços y -RH Gestão de Pessoas)">MR-MPS-SW</abbr></b></td><td>—</td><td>Modelo de Referência MPS para Software (también -SV Serviços y -RH Gestão de Pessoas)</td></tr><tr><td><b><abbr title="Mantenimiento de Software (proceso COMPETISOFT)">MS</abbr></b></td><td>—</td><td>Mantenimiento de Software (proceso COMPETISOFT)</td></tr><tr><td><b><abbr title="Norma Mexicana (voluntaria)">NMX</abbr></b></td><td>—</td><td>Norma Mexicana (voluntaria)</td></tr><tr><td><b><abbr title="Norma Técnica Peruana">NTP</abbr></b></td><td>—</td><td>Norma Técnica Peruana</td></tr><tr><td><b><abbr title="Normalización y Certificación Electrónica, A.C. (México)">NYCE</abbr></b></td><td>—</td><td>Normalización y Certificación Electrónica, A.C. (México)</td></tr><tr><td><b><abbr title="Oficina Nacional de Gobierno Electrónico e Informática">ONGEI</abbr></b></td><td>—</td><td>Oficina Nacional de Gobierno Electrónico e Informática (Perú)</td></tr><tr><td><b>OPE</b></td><td>—</td><td>Categoría Operación (MoProSoft)</td></tr><tr><td><b><abbr title="Gerência Organizacional – Gestión Organizacional (MPS 2021)">ORG</abbr></b></td><td>—</td><td>Gerência Organizacional – Gestión Organizacional (MPS 2021)</td></tr><tr><td><b><abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr></b></td><td>Process Attribute / Process Area</td><td>Atributo de Proceso (15504) / Área de Proceso (CMMI)</td></tr><tr><td><b><abbr title="Projeto e Construção do Produto – Diseño y Construcción del Producto (MPS)">PCP</abbr></b></td><td>—</td><td>Projeto e Construção do Produto – Diseño y Construcción del Producto (MPS)</td></tr><tr><td><b><abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr></b></td><td>Project Management / Project Manager</td><td>Gestión de Proyecto (proceso ISO/IEC 29110) / Gerente de Proyecto (rol)</td></tr><tr><td><b><abbr title="Project Management Body of Knowledge – Cuerpo de Conocimientos de la Dirección de Proyectos">PMBOK</abbr></b></td><td>Project Management Body of Knowledge</td><td>Cuerpo de Conocimientos de la Dirección de Proyectos</td></tr><tr><td><b><abbr title="Project Planning / Project Monitoring and Control – Planificación de Proyecto / Monitoreo y Control de Proyecto (CMMI)">PP/PMC</abbr></b></td><td>Project Planning / Project Monitoring and Control</td><td>Planificación de Proyecto / Monitoreo y Control de Proyecto (CMMI)</td></tr><tr><td><b><abbr title="Programa para el Desarrollo de la Industria de Software (México, 2002)">PROSOFT</abbr></b></td><td>—</td><td>Programa para el Desarrollo de la Industria de Software (México, 2002)</td></tr><tr><td><b>PUCP</b></td><td>—</td><td>Pontificia Universidad Católica del Perú</td></tr><tr><td><b><abbr title="SME, Small and Medium-sized Enterprise – Pequeña y Mediana Empresa">PYME</abbr></b></td><td>SME, Small and Medium-sized Enterprise</td><td>Pequeña y Mediana Empresa</td></tr><tr><td><b><abbr title="Red Latinoamericana de la Industria del Software">RELAIS</abbr></b></td><td>—</td><td>Red Latinoamericana de la Industria del Software</td></tr><tr><td><b><abbr title="Engenharia de Requisitos – Ingeniería de Requisitos (MPS 2021)">REQ</abbr></b></td><td>—</td><td>Engenharia de Requisitos – Ingeniería de Requisitos (MPS 2021)</td></tr><tr><td><b><abbr title="Recursos Humanos y Ambiente de Trabajo (MoProSoft GES.3.1)">RHAT</abbr></b></td><td>—</td><td>Recursos Humanos y Ambiente de Trabajo (MoProSoft GES.3.1)</td></tr><tr><td><b><abbr title="Standard CMMI Appraisal Method for Process Improvement – Método estándar de evaluación CMMI para la mejora de procesos">SCAMPI</abbr></b></td><td>Standard CMMI Appraisal Method for Process Improvement</td><td>Método Estándar de Evaluación CMMI para la Mejora de Procesos</td></tr><tr><td><b><abbr title="Serviço Brasileiro de Apoio às Micro e Pequenas Empresas">SEBRAE</abbr></b></td><td>—</td><td>Serviço Brasileiro de Apoio às Micro e Pequenas Empresas</td></tr><tr><td><b>SEI</b></td><td>Software Engineering Institute</td><td>Instituto de Ingeniería de Software (Carnegie Mellon University)</td></tr><tr><td><b><abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr></b></td><td>Software Implementation</td><td>Implementación de Software (proceso ISO/IEC 29110)</td></tr><tr><td><b><abbr title="Associação para Promoção da Excelência do Software Brasileiro">SOFTEX</abbr></b></td><td>—</td><td>Associação para Promoção da Excelência do Software Brasileiro</td></tr><tr><td><b><abbr title="Statement of Work – Enunciado del Trabajo">SOW</abbr></b></td><td>Statement of Work</td><td>Enunciado del Trabajo</td></tr><tr><td><b><abbr title="Software Process Improvement – Mejora del Proceso de Software">SPI</abbr></b></td><td>Software Process Improvement</td><td>Mejora de Procesos de Software</td></tr><tr><td><b><abbr title="Software Process Improvement and Capability dEtermination – Mejora y determinación de la capacidad del proceso de software (ISO/IEC 15504)">SPICE</abbr></b></td><td>Software Process Improvement and Capability dEtermination</td><td>Mejora de Procesos y Determinación de la Capacidad del SW (ISO/IEC 15504)</td></tr><tr><td><b><abbr title="Technical Report – Informe Técnico (ISO)">TR</abbr></b></td><td>Technical Report</td><td>Informe Técnico (<abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr>)</td></tr><tr><td><b><abbr title="Universidad Nacional Autónoma de México">UNAM</abbr></b></td><td>—</td><td>Universidad Nacional Autónoma de México</td></tr><tr><td><b><abbr title="Verification and Validation – Verificación y Validación">V&amp;V / VV</abbr></b></td><td>Verification and Validation</td><td>Verificación y Validación</td></tr><tr><td><b><abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr></b></td><td>Very Small Entity</td><td>Entidad Muy Pequeña (hasta 25 personas)</td></tr><tr><td><b><abbr title="Working Group 24 – Grupo de Trabajo 24 de ISO/IEC JTC 1/SC 7">WG24</abbr></b></td><td>Working Group 24</td><td>Grupo de Trabajo 24 de ISO/IEC JTC 1/SC 7</td></tr></tbody></table></div></section>
+<section id="glosario">
+<h2>Glosario de términos</h2>
+<dl class="glos">
+<dt>10² (10-Squared)</dt><dd>Modelo de evaluación de la gestión empresarial (estrategia, comercial, finanzas, marketing) usado por IT Mark. Ej.: 63 % de criterios <abbr title="Ten-Squared (10-Squared) – Modelo de evaluación de la gestión del negocio usado por IT Mark">10²</abbr> cumplidos → nivel Premium en negocio.</dd>
+<dt>Acceptance Record</dt><dd>Registro de aceptación firmado por el cliente al cierre del proyecto (<abbr title="Project Manager – Jefe/Gerente de proyecto">PM</abbr>.4, <abbr title="International Organization for Standardization / International Electrotechnical Commission – Organización Internacional de Normalización / Comisión Electrotécnica Internacional">ISO/IEC</abbr> 29110); equivale al Documento de Aceptación del Cliente de <abbr title="Administración de Proyectos Específicos (MoProSoft OPE.1)">APE</abbr>. Ej.: acta de conformidad del MEF.</dd>
+<dt>Agile SPI</dt><dd>Marco colombiano de mejora de procesos ágil (U. del Cauca, SIMEP-SW) con proceso, método Light <abbr title="Método de Evaluación de la Capacidad de Procesos de Desarrollo de Software (Colombia)">MECPDS</abbr> y herramienta; antecedente de PmCOMPETISOFT. Ej.: mejora en iteraciones de 4 semanas.</dd>
+<dt>APE (Administración de Proyectos Específicos)</dt><dd>Proceso <abbr title="Categoría Operación (MoProSoft)">OPE</abbr>.1 de <abbr title="Modelo de Procesos para la Industria de Software (México)">MoProSoft</abbr> que gestiona un proyecto concreto (Planificación, Realización, Evaluación y Control, Cierre). Ej.: cronograma del proyecto Rímac.</dd>
+<dt>Autoevaluación</dt><dd>Uso de <abbr title="Método de Evaluación de Procesos para la Industria de Software (NMX-I-059/04-NYCE)">EvalProSoft</abbr> hecho por personal interno o externo sin intervención del Organismo Rector, como base del plan de mejora. Ej.: diagnóstico interno antes de certificar.</dd>
+<dt>Base de Conocimiento</dt><dd>Repositorio organizacional (proceso <abbr title="Conocimiento de la Organización (MoProSoft GES.3.3)">CO</abbr>) de productos, planes, reportes y lecciones aprendidas. Ej.: Confluence con plantillas y lecciones de proyectos SUNAT.</dd>
+<dt>Capacidad del proceso</dt><dd>Grado (0–5) en que un proceso logra su propósito y está gestionado, establecido, predecible u optimizado (15504, MoProSoft); en MPS 2021, CP-G…CP-A. Ej.: <abbr title="Desarrollo y Mantenimiento de Software (MoProSoft OPE.2)">DMS</abbr> en capacidad 3.</dd>
+<dt>Categoría (MoProSoft)</dt><dd>Agrupación de procesos según el nivel organizacional: <abbr title="Categoría Alta Dirección (MoProSoft)">DIR</abbr> (Alta Dirección), <abbr title="Categoría Gerencia / Gestión (MoProSoft)">GER/GES</abbr> (Gerencia/Gestión), OPE (Operación). Ej.: APE pertenece a OPE.</dd>
+<dt>COMPETISOFT</dt><dd>Proyecto <abbr title="Programa Iberoamericano de Ciencia y Tecnología para el Desarrollo">CYTED</abbr> 506AC0287 (2006–2008, 13 países) que creó un marco de procesos, evaluación y mejora para <abbr title="SME, Small and Medium-sized Enterprise – Pequeña y Mediana Empresa">PYME</abbr> iberoamericanas. Ej.: base de COMPETISOFT-Perú (<abbr title="Pontificia Universidad Católica del Perú">PUCP</abbr>).</dd>
+<dt>Configuración de Software</dt><dd>Conjunto consistente de productos de <abbr title="Software – Software / soporte lógico">SW</abbr> integrado al cierre de cada ciclo DMS. Ej.: <abbr title="Software Requirements Specification – Especificación de Requisitos de Software">SRS</abbr> v2.0 + código etiquetado + casos de prueba.</dd>
+<dt>CP-F (Capacidade do Processo F)</dt><dd>Capacidad del MPS 2021 que exige gestionar ejecución y productos con verificación objetiva de adherencia: absorbe la antigua <abbr title="Garantia da Qualidade – Aseguramiento de la Calidad (MPS clásico)">GQA</abbr>. Ej.: auditorías de <abbr title="Quality Assurance – Aseguramiento de la Calidad">QA</abbr> de proceso en el nivel F.</dd>
+<dt>CYTED</dt><dd>Programa Iberoamericano de Ciencia y Tecnología para el Desarrollo, financiador de <abbr title="Mejora de Procesos para Fomentar la Competitividad de la Pequeña y Mediana Industria de Software de Iberoamérica">COMPETISOFT</abbr>. Ej.: red que unió <abbr title="Universidad Nacional Autónoma de México">UNAM</abbr>, UCLM y PUCP.</dd>
+<dt>Deployment Package (DP)</dt><dd>Paquete gratuito de guías, plantillas y ejemplos para implantar un tema del perfil ISO/IEC 29110. Ej.: <abbr title="Deployment Package – Paquete de Despliegue (ISO/IEC 29110)">DP</abbr> de control de versiones con Git.</dd>
+<dt>DMS (Desarrollo y Mantenimiento de Software)</dt><dd>Proceso OPE.2 de MoProSoft con ciclos de 6 fases (Inicio, Requerimientos, Análisis y Diseño, Construcción, Integración y Pruebas, Cierre). Ej.: construir el app de SINEACE.</dd>
+<dt>EvalProSoft</dt><dd>Método de evaluación de MoProSoft (NMX-I-059/04-NYCE), basado en ISO/IEC 15504-2, con tres usos: acreditación, proveedor y autoevaluación. Ej.: certificar nivel 2 ante <abbr title="Normalización y Certificación Electrónica, A.C. (México)">NYCE</abbr>.</dd>
+<dt>Generic Profile Group</dt><dd>Grupo de 4 perfiles acumulativos de la ISO/IEC 29110: Entry, Basic, Intermediate, Advanced. Ej.: <abbr title="Very Small Entity – Entidad muy pequeña (ISO/IEC 29110)">VSE</abbr> con 3 proyectos paralelos → Intermediate.</dd>
+<dt>Guía de ajuste</dt><dd>Modificación permitida a un proceso MoProSoft que no afecta sus objetivos (tailoring). Ej.: fusionar fases en proyectos de menos de 1 mes.</dd>
+<dt>IDEAL</dt><dd>Ciclo de mejora del <abbr title="Software Engineering Institute – Instituto de Ingeniería de Software (Carnegie Mellon)">SEI</abbr>: Initiating, Diagnosing, Establishing, Acting, Learning; PmCOMPETISOFT es su versión ligera. Ej.: programa <abbr title="Capability Maturity Model Integration – Integración de Modelos de Madurez de Capacidades">CMMI</abbr> de un banco.</dd>
+<dt>INACAL</dt><dd>Instituto Nacional de Calidad del Perú, organismo de normalización desde 2015 (antes <abbr title="Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual">INDECOPI</abbr>). Ej.: mantiene el catálogo NTP-ISO/IEC 29110.</dd>
+<dt>Indicador</dt><dd>Elemento del patrón MoProSoft que dice qué se evalúa para saber si se cumple un objetivo (I1, I2…). Ej.: I1 «el tiempo real está acorde con lo estimado».</dd>
+<dt>IT Mark</dt><dd>Esquema de certificación del <abbr title="European Software Institute – Instituto Europeo de Software (hoy Tecnalia)">ESI</abbr> (2005) para PYME <abbr title="Information Technology (IT) – Tecnologías de la Información">TI</abbr> en negocio (10²), seguridad (ISO/IEC 27001) y desarrollo (CMMI 2–3), con niveles Basic, Premium, Elite. Ej.: PYME fintech con IT Mark Basic.</dd>
+<dt>Light MECPDS</dt><dd>Versión ligera del Método de Evaluación de la Capacidad de Procesos de Desarrollo de SW, escala N/P/L/F conforme 15504-2. Ej.: APE <abbr title="Process Area / Practice Area / Process Attribute – Área de proceso (CMMI v1.x) / Área de práctica (CMMI V2+) / Atributo de proceso (ISO)">PA</abbr> 1.1 = P en el diagnóstico.</dd>
+<dt>MA-MPS</dt><dd>Método de Avaliação MPS, conforme ISO/IEC 33020/33002/33004, ejecutado por una <abbr title="Artificial Intelligence (AI) – Inteligencia Artificial">IA</abbr> acreditada por <abbr title="Associação para Promoção da Excelência do Software Brasileiro">SOFTEX</abbr>. Ej.: avaliação final con escala T/L/P/N.</dd>
+<dt>MANTEMA</dt><dd>Metodología española de mantenimiento de SW (UCLM) usada para el proceso <abbr title="Mantenimiento de Software (proceso COMPETISOFT)">MS</abbr> de COMPETISOFT. Ej.: mantenimiento correctivo urgente de un facturador SUNAT.</dd>
+<dt>Meta cuantitativa</dt><dd>Valor numérico o rango esperado de un indicador en el patrón MoProSoft. Ej.: desviación de plazo ≤10 %.</dd>
+<dt>MN-MPS</dt><dd>Modelo de Negócio MPS: reglas de implementación (<abbr title="Implementation Infrastructure – Infraestructura de Implementación (Practice Area V2.0)">II</abbr>), evaluación (IA) y grupos cooperados con subsidio <abbr title="Serviço Brasileiro de Apoio às Micro e Pequenas Empresas">SEBRAE</abbr>. Ej.: 8 PYME comparten consultor.</dd>
+<dt>MoProSoft</dt><dd>Modelo de Procesos para la Industria de Software (México, UNAM/SE-PROSOFT, v1.3 2005), 3 categorías y 9 procesos; base de la ISO/IEC 29110. Ej.: NMX-I-059/02-NYCE.</dd>
+<dt>MPS.BR</dt><dd>Programa brasileño Melhoria de Processo do Software Brasileiro (SOFTEX, 2003) con niveles G–A. Ej.: fábrica de Recife nivel F.</dd>
+<dt>MR-MPS-SW</dt><dd>Modelo de Referência MPS para Software: procesos con resultados esperados y 7 niveles de madurez. Ej.: versión 2021 con 12 procesos.</dd>
+<dt>Nivel de madurez de capacidades</dt><dd>Nivel organizacional MoProSoft = nivel que alcanzan todos los procesos (mínimo del perfil). Ej.: perfil con <abbr title="Gestión de Negocio (MoProSoft DIR.1)">GN</abbr>=1 → organización nivel 1.</dd>
+<dt>NMX-I-059-NYCE</dt><dd>Norma Mexicana de 4 partes que contiene MoProSoft (/02) y EvalProSoft (/04), emitida por NYCE en 2005 y revisada en 2011. Ej.: certificación para compras públicas mexicanas.</dd>
+<dt>NTP 291.100</dt><dd>Norma Técnica Peruana (2009) que adopta MoProSoft: parte 1 modelo, parte 2 evaluación; antecesora de la NTP-ISO/IEC 29110. Ej.: 5 empresas certificadas en 2010.</dd>
+<dt>NYCE</dt><dd>Normalización y Certificación Electrónica, A.C. (México, 1994): emite la NMX-I-059 y certifica MoProSoft e ISO/IEC 29110. Ej.: pre-evaluación asistida de NYCE.</dd>
+<dt>Patrón de procesos</dt><dd>Esquema de 3 partes (definición general, prácticas, guías de ajuste) para documentar procesos en MoProSoft y COMPETISOFT. Ej.: documentar «Gestión de Incidentes».</dd>
+<dt>Perfil (ISO/IEC 29110)</dt><dd>Subconjunto de normas base (12207, 15288, 15289) adaptado a un tipo de entidad; no es un nivel de madurez. Ej.: perfil Basic.</dd>
+<dt>Perfil Básico (Basic)</dt><dd>Perfil 29110 para VSE con un proyecto a la vez y un equipo; procesos PM y <abbr title="Software Implementation – Implementación de Software (proceso ISO/IEC 29110)">SI</abbr>. Ej.: primera VSE peruana certificada en 2015.</dd>
+<dt>PmCOMPETISOFT</dt><dd>Proceso de mejora ligero e iterativo de COMPETISOFT: Instalación, Diagnóstico, Formulación, Ejecución, Revisión. Ej.: mejora de 16 semanas en una VSE cusqueña.</dd>
+<dt>PROSOFT</dt><dd>Programa para el Desarrollo de la Industria de Software (México, 2002) que promovió MoProSoft. Ej.: meta de 5 000 MUSD de producción anual de SW.</dd>
+<dt>SI (Software Implementation)</dt><dd>Proceso del perfil Básico 29110 con actividades SI.1–SI.6 (inicio, requisitos, diseño, construcción, integración y pruebas, entrega). Ej.: Test Report en SI.5.</dd>
+<dt>SOFTEX</dt><dd>Associação para Promoção da Excelência do Software Brasileiro, coordinadora del <abbr title="Melhoria de Processo do Software Brasileiro – Mejora de Procesos del Software Brasileño">MPS.BR</abbr> (UEP, FCC, ETM). Ej.: publica las evaluaciones MPS en su sitio.</dd>
+<dt>SOW (Statement of Work)</dt><dd>Enunciado del trabajo acordado con el cliente; entrada de PM.1 en la 29110. Ej.: alcance firmado con la clínica.</dd>
+<dt>SPI (Software Process Improvement)</dt><dd>Mejora sistemática de procesos de SW mediante modelos de referencia, evaluación y mejora. Ej.: ciclo PmCOMPETISOFT en una PYME.</dd>
+<dt>TR (Technical Report)</dt><dd>Informe técnico <abbr title="International Organization for Standardization – Organización Internacional de Normalización">ISO</abbr>, informativo y no certificable; en la 29110 las guías (parte 5) son <abbr title="Technical Report – Informe Técnico (ISO)">TR</abbr> de libre descarga. Ej.: TR 29110-5-1-2.</dd>
+<dt>Traceability Record</dt><dd>Registro de trazabilidad requisitos ↔ diseño ↔ código ↔ pruebas del perfil 29110 (Registro de Rastreo en MoProSoft). Ej.: matriz <abbr title="Requirements Traceability Matrix – Matriz de trazabilidad de requisitos">RTM</abbr> en una hoja compartida.</dd>
+<dt>VSE (Very Small Entity)</dt><dd>Empresa, organización, departamento o proyecto de hasta 25 personas (ISO/IEC 29110). Ej.: equipo de 9 de la OGTI-UNMSM.</dd>
+<dt>WG24</dt><dd>Grupo de Trabajo 24 de ISO/IEC <abbr title="Joint Technical Committee 1 / Subcommittee 7 – Comité técnico conjunto ISO/IEC de ingeniería de SW y sistemas">JTC 1/SC 7</abbr> que desarrolló la ISO/IEC 29110 y eligió MoProSoft como base en 2006. Ej.: encuesta sobre por qué las VSE no usan normas.</dd>
+</dl>
+</section>
+<div class="pn"><a href="s6-teoria.html">← S6 · SPICE (15504) y CMMI</a><a href="examen.html">Ir al examen →</a></div>
+</main></div>
+<footer>Calidad de Software 20W0703 · FISI-UNMSM 2026-II · Repaso de estudio (Semanas 1–7) basado en el material de clase y entregables.</footer>
+<script src="assets/js/app.js" defer></script>
+</body></html>

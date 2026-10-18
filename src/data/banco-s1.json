@@ -1,0 +1,768 @@
+{
+ "mcq": [
+  {
+   "id": "s1-m01",
+   "s": 1,
+   "q": "En el equipo de Yape, una analista revisa antes de cada sprint review si los desarrolladores siguieron el estándar de codificación aprobado y el flujo de ramas definido por la organización, sin ejecutar la app ni leer la lógica del código. Según el marco de la profesora, ¿cómo se clasifica esta actividad?",
+   "o": [
+    "Control, porque inspecciona el código fuente como producto de trabajo intermedio",
+    "Control, porque detecta defectos ya introducidos antes de que lleguen al usuario",
+    "Aseguramiento, porque examina el cumplimiento del proceso y el estándar acordado",
+    "Calidad del software, porque define el atributo de mantenibilidad que se busca"
+   ],
+   "a": 2,
+   "exp": "Correcta: es SQA (Software Quality Assurance), pues lo examinado es el cumplimiento del proceso y del estándar, no el producto: es una auditoría de proceso, actividad típica de SQA en la diapositiva 17. Distractor 2: la inspección de código es QC (Quality Control), pero exige analizar la lógica del producto, cosa que aquí no se hace. Distractor 3: detectar defectos ya introducidos es la meta del QC reactivo; aquí no se busca ningún defecto en el SW. Distractor 4: la calidad de SW como objetivo define atributos meta como la mantenibilidad, pero no verifica cómo trabaja el equipo."
+  },
+  {
+   "id": "s1-m02",
+   "s": 1,
+   "q": "Con la curva del costo de la calidad de la clase, el equipo del SUM-UNMSM estima que 20 defectos que hoy aparecen en la fase de pruebas podrían detectarse en la fase de diseño mediante revisiones técnicas formales. ¿Cuál es el ahorro correcto en costo de corrección?",
+   "o": [
+    "Ahorro de 133 620 dólares, usando la diferencia entre pruebas y diseño",
+    "Ahorro de 139 940 dólares, usando la diferencia entre pruebas y requisitos",
+    "Ahorro de 272 940 dólares, usando la diferencia entre mantenimiento y diseño",
+    "Ahorro de 10 440 dólares, usando la diferencia entre codificación y diseño"
+   ],
+   "a": 0,
+   "exp": "Correcta: 20 × (7 136 − 455) = 20 × 6 681 = 133 620 USD, porque el defecto pasa de costar lo de pruebas a costar lo de diseño. Distractor 2 usa el costo de requerimientos de 139 USD, fase que el enunciado no menciona. Distractor 3 usa el costo de mantenimiento de 14 102 USD, que corresponde a defectos hallados en producción, no en pruebas. Distractor 4 usa codificación de 977 USD como fase de origen, error típico de leer mal la curva de la diapositiva 13."
+  },
+  {
+   "id": "s1-m03",
+   "s": 1,
+   "q": "Un auditor de Interbank analiza la curva de la diapositiva 13 y afirma que el mayor salto relativo y el mayor salto absoluto del costo de corrección ocurren en el mismo tramo entre fases consecutivas. ¿Qué conclusión es correcta?",
+   "o": [
+    "El relativo y el absoluto se dan juntos en el tramo de codificación a pruebas",
+    "El relativo se da de diseño a codificación y el absoluto de pruebas a mantenimiento",
+    "El relativo y el absoluto se dan juntos en el tramo de pruebas a mantenimiento",
+    "El relativo se da de codificación a pruebas y el absoluto de pruebas a mantenimiento"
+   ],
+   "a": 3,
+   "exp": "Correcta: de codificación a pruebas el costo pasa de 977 a 7 136 USD, un factor de 7,30, el mayor relativo; de pruebas a mantenimiento sube 6 966 USD, más que los 6 159 USD del tramo anterior, aunque solo se multiplica por 1,98. Distractor 2 olvida que el salto absoluto mayor es el último tramo. Distractor 3 confunde el factor 2,15 de diseño a codificación con el mayor. Distractor 4 confunde el mayor salto absoluto con el relativo, cuyo factor ahí es menor a 2."
+  },
+  {
+   "id": "s1-m04",
+   "s": 1,
+   "q": "La tienda en línea de Plaza Vea evalúa cuatro cambios. Aplicando literalmente la definición de calidad de la ISO 9000 vista en clase, ¿qué cambio dejaría intacto el grado de calidad del producto de SW?",
+   "o": [
+    "Bajar el tiempo de respuesta, pues es una característica asignada al producto",
+    "Bajar el precio de la licencia, pues es una característica asignada al SW",
+    "Cifrar los datos de pago, pues es una expectativa implícita y no un requisito",
+    "Mejorar la legibilidad del reporte, pues la usabilidad no es inherente al SW"
+   ],
+   "a": 1,
+   "exp": "Correcta: la ISO 9000 habla del grado en que las características inherentes cumplen los requisitos; el precio es una característica asignada, no inherente, así que no altera la calidad. Distractor 2: el tiempo de respuesta es inherente, ligado a la eficiencia, y sí cambia la calidad. Distractor 3: las expectativas implícitas, como la seguridad, forman parte de la calidad del SW según la diapositiva 9. Distractor 4: la usabilidad es una característica inherente de ISO 9126."
+  },
+  {
+   "id": "s1-m05",
+   "s": 1,
+   "q": "El sistema de declaraciones de la SUNAT cumple el 100 % de los casos del SRS aprobado, pero el último día de vencimiento cada consulta tarda 40 segundos y los contribuyentes abandonan la operación. Según la definición de calidad del SW de la profesora, ¿es un SW de calidad?",
+   "o": [
+    "Sí, porque la calidad equivale a la conformidad total con los requisitos escritos del SRS",
+    "No, porque la calidad abarca expectativas implícitas como la rapidez aunque no estén escritas",
+    "No, porque la lentitud prueba que se incumplió un requisito funcional explícito del SRS",
+    "Sí, porque la rapidez es un atributo del proceso de desarrollo y no del producto final"
+   ],
+   "a": 1,
+   "exp": "Correcta: la diapositiva 9 define la calidad del SW como el cumplimiento de requisitos explícitos y de expectativas implícitas como eficiencia, rapidez y seguridad; cumplir el SRS no basta. Distractor 2 reduce la calidad a la conformidad de Crosby e ignora lo implícito. Distractor 3 es falso: el enunciado dice que el SRS se cumple, y la rapidez no es un requisito funcional. Distractor 4 confunde un atributo del producto, la eficiencia, con un atributo del proceso."
+  },
+  {
+   "id": "s1-m06",
+   "s": 1,
+   "q": "Un compañero sostiene que el caso Knight Capital es una falla de QC, porque la lección de la diapositiva 26 lo agrupa con el apagón bajo monitoreo en tiempo real y pruebas de estrés. ¿Qué respuesta integra mejor ambas diapositivas de la profesora?",
+   "o": [
+    "La causa raíz es de QC de rendimiento, y la configuración es una tarea propia del testing",
+    "La causa raíz es de calidad como objetivo, pues no se definió el atributo de portabilidad",
+    "La causa raíz es de QC de regresión, y el SQA intervino recién al revisar el código muerto",
+    "La causa raíz es de SQA y configuración, y el monitoreo de QC habría contenido el daño"
+   ],
+   "a": 3,
+   "exp": "Correcta: la diapositiva 22 califica a Knight como falla grave de SQA y control de configuraciones, código obsoleto no desactivado; la 26 añade que el monitoreo en tiempo real, un QC de rendimiento, habría cortado la pérdida en los 45 minutos. Son lecturas complementarias: causa y contención. Distractor 2: la gestión de configuración es actividad SQA según la diapositiva 17, no de testing. Distractor 3: la portabilidad no tiene relación con el caso. Distractor 4 invierte los roles: revisar código es QC y el SQA no actúa después del defecto."
+  },
+  {
+   "id": "s1-m07",
+   "s": 1,
+   "q": "Para un core de seguros de Rímac, un arquitecto propone como única mitigación duplicar el servidor de cálculo con la misma versión del SW, citando que así se evita un desastre como el del Ariane 5. ¿Qué evaluación es correcta?",
+   "o": [
+    "No protege, porque dos réplicas con el mismo SW fallan igual ante el mismo dato",
+    "Sí protege, porque la redundancia de HW elimina el riesgo de un desborde de enteros",
+    "No protege, porque el respaldo del Ariane 5 cayó por una condición de carrera distinta",
+    "Sí protege, porque el respaldo del Ariane 5 funcionó y falló el computador de a bordo"
+   ],
+   "a": 0,
+   "exp": "Correcta: en el Ariane 5 el SRI de respaldo ejecutaba el mismo SW y cayó por el mismo desborde, una falla de modo común; la redundancia de HW no protege frente a un defecto de SW idéntico en ambas copias. Distractor 2 confunde fallas aleatorias de HW con defectos sistemáticos de SW. Distractor 3 inventa una condición de carrera, que pertenece al apagón de 2003 y al Therac-25. Distractor 4 es falso: el respaldo no funcionó y el OBC falló al leer el volcado de diagnóstico como datos de vuelo."
+  },
+  {
+   "id": "s1-m08",
+   "s": 1,
+   "q": "En el Therac-25 el SW mostraba un mensaje genérico ante un error de dosis, sin manual que lo explicara, y permitía reanudar con una tecla; los operadores volvían a disparar. Usando las características de ISO 9126 de la clase, ¿cuál se ve comprometida en primer término por ese mensaje?",
+   "o": [
+    "Eficiencia, porque el mensaje consumía recursos y retrasaba el tiempo de respuesta",
+    "Portabilidad, porque el mensaje provenía del código reutilizado de modelos previos",
+    "Usabilidad, porque el mensaje no era entendible ni guiaba una operación segura",
+    "Funcionalidad, porque el mensaje dañaba la interoperabilidad con la terminal usada"
+   ],
+   "a": 2,
+   "exp": "Correcta: la usabilidad en la versión de la profesora agrupa entendible, intuitiva y operable; un mensaje críptico que lleva a reanudar el disparo es un defecto de usabilidad con consecuencias de seguridad. Distractor 2: no hay evidencia de consumo de recursos; la eficiencia trata tiempo y recursos. Distractor 3: la reutilización de código es una causa del caso, pero la portabilidad trata adaptabilidad, instalabilidad y sustituibilidad. Distractor 4: la interoperabilidad trata el intercambio con otros sistemas, no la comprensión del operador."
+  },
+  {
+   "id": "s1-m09",
+   "s": 1,
+   "q": "El nuevo CTO de un banco peruano anuncia que la calidad del SW será responsabilidad del equipo de testing, y que así los demás podrán enfocarse en desarrollar. Según las diapositivas 10, 20 y 21, ¿qué reparto de responsabilidades es el correcto?",
+   "o": [
+    "Calidad recae en los testers, SQA en toda la organización, QC en analistas de calidad",
+    "Calidad recae en el líder del proyecto, SQA en los testers, QC en toda la organización",
+    "Calidad recae en el área de QA, SQA en los desarrolladores, QC en el usuario final",
+    "Calidad recae en toda la organización, SQA en líderes y analistas, QC en testers"
+   ],
+   "a": 3,
+   "exp": "Correcta: la diapositiva 10 dice que la calidad la consiguen todos los involucrados, y la 21 asigna la calidad a toda la organización, el SQA a ingenieros de procesos, analistas de calidad y líderes de proyecto, y el QC a ingenieros de pruebas, automatizadores y desarrolladores al corregir. Distractor 2 invierte calidad y SQA. Distractor 3 confunde el rol de líder con el objetivo global y pone a los testers en SQA. Distractor 4 traslada el QC al usuario final, cuando la meta es detectar defectos antes de que lleguen a él."
+  },
+  {
+   "id": "s1-m10",
+   "s": 1,
+   "q": "Una fintech limeña pasa de un despliegue mensual a varios despliegues diarios y además reduce sus incidentes en producción. El gerente cree que es una contradicción. Según la diapositiva 6, ¿qué explica el resultado?",
+   "o": [
+    "Las pruebas manuales al final del ciclo reducen el retrabajo y aceleran cada entrega",
+    "Los controles automatizados dan certeza de estabilidad y dejan desplegar sin miedo",
+    "Reducir las pruebas dinámicas libera horas del equipo para desplegar con más rapidez",
+    "Las revisiones estáticas reemplazan a las pruebas y por eso se despliega más seguido"
+   ],
+   "a": 1,
+   "exp": "Correcta: la diapositiva 6 explica que los controles de calidad automatizados, basados en pruebas dinámicas, dan la certeza de estabilidad que permite actualizar varias veces al día sin romper el sistema; se apoya en CI/CD. Distractor 2: las pruebas manuales al final son lentas y no aceleran la entrega. Distractor 3 es lo contrario a la paradoja: menos pruebas aumenta el riesgo. Distractor 4: las técnicas estáticas complementan y no reemplazan a las pruebas dinámicas."
+  },
+  {
+   "id": "s1-m11",
+   "s": 1,
+   "q": "En un proyecto del MEF, la jefa de proyecto compara las estimaciones de esfuerzo con el cronograma, revisa las dependencias entre actividades y pregunta qué puede salir mal y cuál será el plan de contingencia. ¿En qué pilar de lograr la calidad del SW se ubica su trabajo?",
+   "o": [
+    "Métodos de ingeniería del software, junto con el análisis de los requisitos",
+    "Control de calidad, junto con las métricas con retroalimentación al proceso",
+    "Técnicas de administración de proyectos, junto con la planificación del riesgo",
+    "Aseguramiento de la calidad, junto con las funciones de auditoría e informes"
+   ],
+   "a": 2,
+   "exp": "Correcta: la diapositiva 14 ubica en técnicas de administración de proyectos las estimaciones, las dependencias de las actividades y la planificación del riesgo con su plan de contingencia. Distractor 2: los métodos de ingeniería cubren el análisis de requisitos y el diseño, no el cronograma. Distractor 3: el control de calidad agrupa revisión de modelos, inspección de código y métricas. Distractor 4: el aseguramiento es la infraestructura de apoyo, auditoría e informes; analizar riesgos no lo convierte en auditoría."
+  },
+  {
+   "id": "s1-m12",
+   "s": 1,
+   "q": "El equipo del SINEACE mide la densidad de defectos por módulo después de cada inspección y usa esos datos para ajustar su forma de trabajar. Siguiendo literalmente la diapositiva 15, ¿en qué pilar ubica la profesora esas métricas?",
+   "o": [
+    "Control de calidad, pues sus métricas retroalimentan la mejora del proceso",
+    "Aseguramiento, pues toda medición que mejora el proceso pertenece al SQA",
+    "Métodos de ingeniería, pues la medición forma parte del diseño adecuado",
+    "Administración de proyectos, pues la medición sirve para estimar las fechas"
+   ],
+   "a": 0,
+   "exp": "Correcta: la diapositiva 15 coloca bajo control de calidad las técnicas de revisión, la inspección de código y las métricas de calidad con retroalimentación para mejorar el proceso; es una trampa porque muchos asocian toda mejora de proceso al SQA. Distractor 2 es la confusión típica: el SQA aporta infraestructura, auditoría e informes. Distractor 3: los métodos cubren requisitos y diseño. Distractor 4: estimar fechas es administración de proyectos, pero aquí la métrica es de defectos del producto."
+  },
+  {
+   "id": "s1-m13",
+   "s": 2,
+   "q": "Al construir un diagrama de Ishikawa 6M para el apagón de 2003, el equipo debe ubicar dos causas: la vegetación sin podar que tocó las líneas y un SRS del EMS sin requisito de autodiagnóstico de alarmas. ¿Qué asignación es coherente?",
+   "o": [
+    "Vegetación sin podar en medio ambiente y SRS sin autodiagnóstico en material",
+    "Vegetación sin podar en máquina y SRS sin autodiagnóstico en la medición",
+    "Vegetación sin podar en método y SRS sin autodiagnóstico en mano de obra",
+    "Vegetación sin podar en material y SRS sin autodiagnóstico en medio ambiente"
+   ],
+   "a": 0,
+   "exp": "Correcta: la vegetación es un factor del entorno físico, por eso va en medio ambiente; el SRS es un insumo del desarrollo, por eso va en material. Distractor 2: máquina es el EMS y sus servidores, y medición son los KPI y el monitoreo, no un documento de requisitos. Distractor 3: método son procedimientos como revisiones o FMEA, y mano de obra son las personas. Distractor 4 invierte las categorías: la vegetación no es un insumo del SW y el SRS no es el entorno."
+  },
+  {
+   "id": "s1-m14",
+   "s": 3,
+   "q": "En el BCP, el área de calidad emite una política que obliga a pasar el quality gate de SonarQube en cada merge y la audita mensualmente; cada desarrollador ejecuta el análisis sobre su código. ¿Cómo se clasifican ambas acciones?",
+   "o": [
+    "Exigir y auditar la regla es QC, mientras ejecutar el análisis sobre el código es SQA",
+    "Exigir la regla y ejecutar el análisis son QC, porque la herramienta revisa código",
+    "Exigir y auditar la regla es SQA, mientras ejecutar el análisis sobre el código es QC",
+    "Exigir la regla y ejecutar el análisis son SQA, porque el análisis estático previene"
+   ],
+   "a": 2,
+   "exp": "Correcta: definir, exigir y auditar un estándar del proceso es SQA; ejecutar una herramienta sobre un producto de trabajo es QC, aquí QC estático vía SAST. La misma herramienta puede ser QC o SQA según se ejecute o se institucionalice. Distractor 2 invierte la regla. Distractor 3 ignora que la política y su auditoría actúan sobre el proceso. Distractor 4 confunde técnica estática con prevención: el análisis detecta defectos ya escritos."
+  },
+  {
+   "id": "s1-m15",
+   "s": 4,
+   "q": "Si Knight Capital hubiera adoptado la ISO/IEC/IEEE 12207:2017, ¿qué proceso, y en qué grupo de la norma, habría evitado de forma más directa que un flag reutilizado reactivara el código obsoleto Power Peg en un servidor desactualizado?",
+   "o": [
+    "Gestión de la configuración, ubicada en el grupo de procesos técnicos del ciclo",
+    "Gestión de la configuración, ubicada en el grupo de procesos de gestión técnica",
+    "Verificación, ubicada en el grupo de procesos de gestión técnica del proyecto",
+    "Suministro, ubicado dentro del grupo de procesos de acuerdo entre las partes"
+   ],
+   "a": 1,
+   "exp": "Correcta: la gestión de la configuración, cláusula 6.3.5, pertenece a los procesos de gestión técnica; controla versiones, cambios y la consistencia entre los 8 servidores. Distractor 2 acierta el proceso pero lo ubica en el grupo técnico, error frecuente. Distractor 3: verificación es un proceso técnico, no de gestión técnica, y no gobierna versiones. Distractor 4: suministro es un proceso de acuerdo entre adquirente y proveedor, sin relación con el control de versiones."
+  },
+  {
+   "id": "s1-m16",
+   "s": 3,
+   "q": "Un consultor que evalúa la app del SINEACE con ISO 9126 afirma que esa norma no cubre la seguridad, mientras que ISO/IEC 25010 sí. ¿Qué precisión corresponde?",
+   "o": [
+    "En 9126 es característica propia y en 25010 pasa a ser subcaracterística de fiabilidad",
+    "En 9126 es subcaracterística de confiabilidad y en 25010 se integra en compatibilidad",
+    "En 9126 no aparece y en 25010 se incorpora como subcaracterística de la usabilidad",
+    "En 9126 es subcaracterística de funcionalidad y en 25010 pasa a ser característica"
+   ],
+   "a": 3,
+   "exp": "Correcta: en la lista de la diapositiva 11, la seguridad está dentro de funcionalidad; ISO/IEC 25010:2011 la eleva a característica, junto con compatibilidad, para llegar a 8. Distractor 2 invierte la evolución. Distractor 3: confiabilidad agrupa madurez, tolerancia a fallas y robustez, y compatibilidad es otra característica. Distractor 4 es falso porque sí aparece en 9126, y en 25010 no depende de usabilidad."
+  },
+  {
+   "id": "s1-m17",
+   "s": 3,
+   "q": "Dos alumnos discuten la confiabilidad: uno la descompone en madurez, tolerancia a fallas y robustez; el otro añade disponibilidad. ¿Qué afirmación ubica correctamente la disponibilidad?",
+   "o": [
+    "Pertenece a ISO/IEC 9126; en la lista de 25010 de clase están madurez, tolerancia y robustez",
+    "Pertenece a ISO/IEC 9126 dentro de la eficiencia, junto al comportamiento de los recursos",
+    "Pertenece a ISO/IEC 25010; en la lista de 9126 de clase están madurez, tolerancia y robustez",
+    "Pertenece a ISO/IEC 25010 dentro de la usabilidad, junto a la operabilidad del sistema"
+   ],
+   "a": 2,
+   "exp": "Correcta: la profesora lista para ISO 9126 madurez, tolerancia a fallas y robustez; la disponibilidad aparece en ISO/IEC 25010 dentro de fiabilidad, con madurez, tolerancia a fallos y recuperabilidad. Distractor 2 invierte las normas. Distractor 3: eficiencia en 9126 trata tiempo y recursos, no disponibilidad. Distractor 4: la operabilidad es de usabilidad, pero la disponibilidad no."
+  },
+  {
+   "id": "s1-m18",
+   "s": 1,
+   "q": "En el apagón de 2003 la función de alarmas falló en silencio por más de una hora. Si el operador eléctrico tuviera presupuesto para una sola medida cuyo objetivo es bajar el MTTD de esa falla a menos de un minuto en operación, ¿cuál elegiría?",
+   "o": [
+    "Una campaña de pruebas de estrés previa que fuerce ráfagas de eventos simultáneos",
+    "Una inspección formal del código concurrente del subsistema de alarmas del EMS",
+    "Un servidor de respaldo adicional que ejecute la misma versión del SW del EMS",
+    "Un watchdog que vigile el proceso de alarmas y avise cuando deje de responder"
+   ],
+   "a": 3,
+   "exp": "Correcta: el MTTD mide el tiempo hasta detectar una falla en operación; un watchdog o heartbeat, alineado con la lección de monitoreo en tiempo real, alerta en segundos cuando la alarma deja de latir. Distractor 2: las pruebas de estrés reducen la probabilidad de que el defecto llegue a producción, pero no detectan una falla residual en operación. Distractor 3: la inspección es QC preventivo respecto del usuario, pero tampoco mide el tiempo de detección. Distractor 4 repite la falla de modo común: en 2003 el respaldo también cayó."
+  },
+  {
+   "id": "s1-m19",
+   "s": 1,
+   "q": "En su entregable, el G3 justifica que el apagón es un problema de SQA, pero dentro del argumento menciona procedimientos de revisión, pruebas y validaciones. Si la profesora repregunta cómo encajan las pruebas en un argumento de SQA, ¿cuál es la mejor respuesta?",
+   "o": [
+    "El SQA ejecuta esas pruebas, y el QC se limita a registrar los defectos encontrados",
+    "El SQA planifica y exige esas pruebas, y el QC es quien las ejecuta sobre el producto",
+    "Las pruebas pasan a ser SQA cuando el sistema es crítico como el EMS del año 2003",
+    "Las pruebas son de QC, por lo que el caso debió clasificarse como una falla de QC"
+   ],
+   "a": 1,
+   "exp": "Correcta: el SQA define, planifica, exige y audita que existan pruebas adecuadas; el QC las ejecuta sobre el producto. Así el argumento del G3 sigue siendo SQA: faltó el proceso que obligara a probar la concurrencia. Distractor 2 invierte los roles. Distractor 3: la criticidad eleva el rigor, pero no cambia la naturaleza de la actividad. Distractor 4 confunde la actividad omitida con la causa raíz, que es la ausencia del proceso."
+  },
+  {
+   "id": "s1-m20",
+   "s": 1,
+   "q": "Yape registra cuatro costos del trimestre: capacitación del equipo en concurrencia, ejecución de la suite de regresión, retrabajo de un bug hallado en QA antes del release y parche urgente de un fallo reportado por usuarios. Según el CoQ de Pressman, ¿qué clasificación es correcta?",
+   "o": [
+    "Capacitación es prevención, regresión es evaluación y el parche es falla externa",
+    "Capacitación es evaluación, regresión es prevención y el parche es falla interna",
+    "Capacitación es prevención, regresión es falla interna y el parche es evaluación",
+    "Capacitación es falla interna, regresión es evaluación y el parche es prevención"
+   ],
+   "a": 0,
+   "exp": "Correcta: capacitar es prevención; ejecutar pruebas es evaluación o appraisal; corregir algo reportado por usuarios tras la entrega es falla externa; el retrabajo antes del release sería falla interna. CoGQ es prevención más evaluación y CoPQ es falla interna más externa. Distractor 2 confunde prevención y evaluación, y ubica el parche antes de la entrega. Distractor 3 llama falla a una prueba planificada. Distractor 4 llama prevención a un parche, que es un costo de mala calidad."
+  },
+  {
+   "id": "s1-m21",
+   "s": 1,
+   "q": "En una retrospectiva, el Scrum Master de RENIEC lanza la pregunta de si el SW es confiable, seguro, eficiente y cumple lo que el ciudadano necesita. Según el cuadro de la diapositiva 21, ¿a qué columna corresponde y qué naturaleza tiene?",
+   "o": [
+    "Aseguramiento de la calidad, con una naturaleza de estrategia proactiva",
+    "Control de calidad, con una naturaleza de acción reactiva sobre errores",
+    "Gestión de la configuración, con naturaleza de control de los cambios",
+    "Calidad de SW como objetivo, con una naturaleza de estado o de atributo"
+   ],
+   "a": 3,
+   "exp": "Correcta: en la diapositiva 21 esa es la pregunta de la columna calidad de SW, el objetivo, cuya naturaleza es un estado o atributo, el nivel de excelencia deseado. Distractor 2: el SQA responde si se usan los procesos correctos para evitar errores. Distractor 3: el QC responde si el producto funciona y está libre de fallos. Distractor 4: la gestión de configuración es una actividad SQA y no es columna del cuadro."
+  },
+  {
+   "id": "s1-m22",
+   "s": 2,
+   "q": "La profesora presenta, junto a la definición de ISO 9000, una perspectiva del usuario según la cual la calidad es qué tan bien el producto resuelve el problema del cliente. ¿Con qué autor y definición clásica de la gestión de la calidad se corresponde?",
+   "o": [
+    "Juran, quien define la calidad como la adecuación al uso del cliente",
+    "Crosby, quien define la calidad como la adecuación al uso del cliente",
+    "Deming, quien define la calidad como conformidad con los requisitos",
+    "Ishikawa, quien define la calidad como conformidad con requisitos"
+   ],
+   "a": 0,
+   "exp": "Correcta: la adecuación al uso, fitness for use, es la definición de Joseph M. Juran. Distractor 2 atribuye la frase a Crosby, cuya definición es conformidad con los requisitos y cero defectos. Distractor 3: Deming enfatiza la satisfacción del cliente con mejora continua vía PDCA, no la conformidad. Distractor 4: Ishikawa es conocido por el diagrama causa-efecto y los círculos de calidad."
+  },
+  {
+   "id": "s1-m23",
+   "s": 1,
+   "q": "Un hospital de Lima moderniza un equipo de radioterapia reutilizando el módulo de control de un modelo anterior, que tenía interbloqueos físicos que el nuevo equipo eliminó para abaratar costos. Integrando las lecciones del Therac-25 y del Ariane 5, ¿qué debe exigir el plan de calidad?",
+   "o": [
+    "Reutilizar el código sin cambios, porque ya demostró su madurez en los equipos previos",
+    "Reforzar las pruebas unitarias del módulo, porque la falla original fue de codificación aislada",
+    "Revalidar el código reutilizado en el nuevo contexto, porque las barreras previas ya no existen",
+    "Duplicar el procesador del equipo, porque la redundancia física cubre los defectos heredados"
+   ],
+   "a": 2,
+   "exp": "Correcta: en ambos casos se reutilizó código en un contexto distinto, Ariane 4 a Ariane 5 y Therac-20 a Therac-25, sin re-verificar ni revalidar; la diapositiva 26 exige rehacer todas las pruebas de integración. Distractor 2 es justo el error histórico: la madurez previa dependía de barreras de HW. Distractor 3: las fallas fueron de integración con el nuevo entorno, por lo que las pruebas unitarias aisladas no bastan. Distractor 4: la redundancia física no protege contra defectos de SW de modo común."
+  },
+  {
+   "id": "s1-m24",
+   "s": 1,
+   "q": "En una réplica del vuelo 501, el sesgo horizontal alcanza 40 000 unidades al convertir la velocidad horizontal del SRI. ¿Qué ocurre y qué técnica de QC lo habría revelado antes del lanzamiento?",
+   "o": [
+    "Desborda el flotante de 64 bits; lo revela una prueba unitaria con los datos del Ariane 4",
+    "Desborda el entero con signo de 16 bits; lo revela una prueba de valores límite con datos reales",
+    "No desborda el entero de 16 bits; el fallo proviene de una condición de carrera del SRI",
+    "Desborda el entero sin signo de 16 bits; lo revela una prueba de usabilidad del operador"
+   ],
+   "a": 1,
+   "exp": "Correcta: un entero con signo de 16 bits admite como máximo 32 767, así que 40 000 desborda; una prueba de integración con trayectorias reales del Ariane 5 y análisis de valores límite lo habría revelado. Distractor 2: el flotante de 64 bits es el origen y no desborda; con datos del Ariane 4 el valor nunca excedía el rango, por eso no se detectó. Distractor 3: en el Ariane 5 no hubo condición de carrera. Distractor 4: sin signo el máximo es 65 535, así que 40 000 no desbordaría, y la usabilidad no aplica."
+  },
+  {
+   "id": "s1-m25",
+   "s": 1,
+   "q": "Antes de escribir código, el equipo de matrícula del SUM-UNMSM revisa el modelo de casos de uso y el diagrama de clases para comprobar que sean consistentes y completos. Según las diapositivas 15 y 19, ¿cómo se clasifica esa actividad?",
+   "o": [
+    "Es SQA, porque toda actividad hecha antes de codificar es de tipo preventivo",
+    "Es QC, porque examina un producto de trabajo aunque ocurra antes de codificar",
+    "Es SQA, porque la revisión de modelos figura entre las auditorías de procesos",
+    "Es calidad como objetivo, porque define los atributos que el SW debe cumplir"
+   ],
+   "a": 1,
+   "exp": "Correcta: la diapositiva 15 incluye en control de calidad las técnicas de revisión de modelos para ver si son consistentes y completos, y la 19 incluye las revisiones de diseño en QC: se examina un producto de trabajo intermedio. Distractor 2 confunde el momento con la naturaleza: el SQA no se define por ser temprano sino por actuar sobre el proceso. Distractor 3: las auditorías de procesos verifican cumplimiento del proceso, no el contenido de un modelo. Distractor 4: definir atributos meta no es revisar modelos."
+  }
+ ],
+ "fill": [
+  {
+   "id": "s1-f01",
+   "s": 1,
+   "t": "Según la ISO {{1}}, la calidad es el grado en el que un conjunto de características {{2}} cumple con los requisitos.",
+   "r": [
+    [
+     "9000",
+     "ISO 9000"
+    ],
+    [
+     "inherentes"
+    ]
+   ],
+   "exp": "Definición de la diapositiva 8, ISO 9000:2015. Inherentes significa propias del objeto, como el tiempo de respuesta; el precio es una característica asignada."
+  },
+  {
+   "id": "s1-f02",
+   "s": 1,
+   "t": "La perspectiva del usuario define la calidad como {{1}}, definición clásica de Joseph M. {{2}}.",
+   "r": [
+    [
+     "adecuación al uso",
+     "adecuacion al uso",
+     "fitness for use"
+    ],
+    [
+     "Juran"
+    ]
+   ],
+   "exp": "Diapositiva 8. Crosby la define como conformidad con los requisitos; Juran como adecuación al uso."
+  },
+  {
+   "id": "s1-f03",
+   "s": 1,
+   "t": "La Ley de {{1}} afirma que detectar un error en producción cuesta hasta {{2}} veces más que solucionarlo en diseño o desarrollo.",
+   "r": [
+    [
+     "Boehm",
+     "Barry Boehm"
+    ],
+    [
+     "100",
+     "cien"
+    ]
+   ],
+   "exp": "Diapositiva 3. En la curva de la diapositiva 13 el factor exacto es 14 102 / 139, alrededor de 101."
+  },
+  {
+   "id": "s1-f04",
+   "s": 1,
+   "t": "En la curva del costo de la calidad, corregir un error detectado en requerimientos cuesta {{1}} dólares y en mantenimiento cuesta {{2}} dólares.",
+   "r": [
+    [
+     "139",
+     "$139"
+    ],
+    [
+     "14 102",
+     "14102",
+     "14,102",
+     "14.102",
+     "$14 102"
+    ]
+   ],
+   "exp": "Diapositiva 13: 139, 455, 977, 7 136 y 14 102 USD para requerimientos, diseño, codificación, pruebas y mantenimiento."
+  },
+  {
+   "id": "s1-f05",
+   "s": 1,
+   "t": "El SQA es un enfoque {{1}} centrado en el {{2}}, mientras que el QC es un enfoque {{3}} enfocado en el producto.",
+   "r": [
+    [
+     "proactivo"
+    ],
+    [
+     "proceso",
+     "procesos"
+    ],
+    [
+     "reactivo"
+    ]
+   ],
+   "exp": "Diapositivas 16 y 18: SQA previene en el proceso; QC detecta y corrige en el producto."
+  },
+  {
+   "id": "s1-f06",
+   "s": 1,
+   "t": "El caso Knight Capital ocurrió en el año {{1}}; en solo {{2}} minutos la firma perdió 440 millones de dólares.",
+   "r": [
+    [
+     "2012"
+    ],
+    [
+     "45",
+     "cuarenta y cinco"
+    ]
+   ],
+   "exp": "Diapositiva 22. La profesora lo califica como falla grave de SQA y control de configuraciones."
+  },
+  {
+   "id": "s1-f07",
+   "s": 1,
+   "t": "El apagón de 2003 se debió a una {{1}} en el sistema de gestión de energía de {{2}}, que dejó a 50 millones de personas sin luz.",
+   "r": [
+    [
+     "condición de carrera",
+     "condicion de carrera",
+     "race condition"
+    ],
+    [
+     "General Electric Energy",
+     "GE Energy",
+     "General Electric"
+    ]
+   ],
+   "exp": "Diapositiva 23. El EMS era el XA/21 de GE Energy, operado por FirstEnergy en Ohio."
+  },
+  {
+   "id": "s1-f08",
+   "s": 1,
+   "t": "El Ariane 5 se desintegró a los {{1}} segundos de su lanzamiento al convertir un número de punto flotante de 64 bits en un entero de {{2}} bits.",
+   "r": [
+    [
+     "37",
+     "treinta y siete"
+    ],
+    [
+     "16",
+     "dieciséis",
+     "dieciseis"
+    ]
+   ],
+   "exp": "Diapositiva 24: integer overflow; pérdida de 370 millones de dólares."
+  },
+  {
+   "id": "s1-f09",
+   "s": 1,
+   "t": "El Therac-25 mostraba el error genérico {{1}}, y al menos {{2}} pacientes recibieron sobredosis masivas de radiación.",
+   "r": [
+    [
+     "Malfunction 54",
+     "MALFUNCTION 54"
+    ],
+    [
+     "seis",
+     "6"
+    ]
+   ],
+   "exp": "Diapositiva 25, caso de 1985 a 1987, el de mayor impacto humano."
+  },
+  {
+   "id": "s1-f10",
+   "s": 1,
+   "t": "La ISO 9126 agrupa la calidad del producto en {{1}} características; fue reemplazada por la ISO/IEC {{2}}, perteneciente a la familia {{3}}.",
+   "r": [
+    [
+     "seis",
+     "6"
+    ],
+    [
+     "25010",
+     "25010:2011"
+    ],
+    [
+     "SQuaRE",
+     "Square",
+     "ISO/IEC 25000"
+    ]
+   ],
+   "exp": "Diapositiva 11 y Semana 3. ISO/IEC 25010:2011 tiene 8 características; la revisión 2023 tiene 9."
+  },
+  {
+   "id": "s1-f11",
+   "s": 1,
+   "t": "En el costo de la calidad, el CoGQ suma los costos de prevención y de {{1}}, mientras que el CoPQ suma los costos de falla interna y de falla {{2}}.",
+   "r": [
+    [
+     "evaluación",
+     "evaluacion",
+     "appraisal"
+    ],
+    [
+     "externa"
+    ]
+   ],
+   "exp": "Clasificación de Pressman asociada a la diapositiva 13."
+  },
+  {
+   "id": "s1-f12",
+   "s": 1,
+   "t": "En el cuadro comparativo de la diapositiva 21, la calidad de SW es el {{1}}, el SQA es el {{2}} y el QC es el producto.",
+   "r": [
+    [
+     "objetivo"
+    ],
+    [
+     "proceso"
+    ]
+   ],
+   "exp": "Tríada: objetivo, proceso, producto."
+  },
+  {
+   "id": "s1-f13",
+   "s": 1,
+   "t": "Entre las actividades típicas del SQA figuran la gestión de la {{1}} y el análisis de {{2}}.",
+   "r": [
+    [
+     "configuración",
+     "configuracion",
+     "SCM"
+    ],
+    [
+     "riesgos",
+     "riesgo"
+    ]
+   ],
+   "exp": "Diapositiva 17. Su ausencia explica el caso Knight Capital."
+  },
+  {
+   "id": "s1-f14",
+   "s": 1,
+   "t": "El Ariane 5 pertenecía a la agencia {{1}}, y el componente cuyo SW reutilizado del Ariane 4 falló fue el {{2}}.",
+   "r": [
+    [
+     "ESA",
+     "Agencia Espacial Europea"
+    ],
+    [
+     "SRI",
+     "Sistema de Referencia Inercial",
+     "IRS"
+    ]
+   ],
+   "exp": "El SRI de respaldo tenía el mismo SW y cayó también: falla de modo común."
+  },
+  {
+   "id": "s1-f15",
+   "s": 1,
+   "t": "El fabricante del Therac-25 fue {{1}}, y la investigación clásica del caso la publicaron Nancy Leveson y Clark {{2}} en 1993.",
+   "r": [
+    [
+     "AECL",
+     "Atomic Energy of Canada Limited"
+    ],
+    [
+     "Turner"
+    ]
+   ],
+   "exp": "Complemento verificado del caso 4. El SW se reutilizó de los modelos Therac-6 y Therac-20."
+  },
+  {
+   "id": "s1-f16",
+   "s": 1,
+   "t": "Según la diapositiva 20, el SQA se ejecuta a lo largo de todo el {{1}}, mientras que el QC se ejecuta principalmente en las fases de {{2}}.",
+   "r": [
+    [
+     "ciclo de vida",
+     "SDLC"
+    ],
+    [
+     "pruebas",
+     "prueba"
+    ]
+   ],
+   "exp": "Criterio Momento de la comparación directa SQA vs QC."
+  }
+ ],
+ "casos": [
+  {
+   "id": "s1-c01",
+   "s": [
+    1,
+    2,
+    4
+   ],
+   "titulo": "Apagón del noreste 2003: de defecto de producto a falla de SQA",
+   "enunciado": "<p>El 14 de agosto de 2003 la eléctrica FirstEnergy, en Ohio, operaba el EMS (Energy Management System) XA/21 de GE Energy. Durante una ráfaga de eventos de telemetría SCADA provocada por líneas de 345 kV que tocaron árboles sin podar, una <b>condición de carrera</b> congeló el subsistema de alarmas <b>sin mostrar ningún error</b>. Al caer el servidor primario, el servidor de respaldo, que ejecutaba el mismo SW, heredó la cola de eventos y también cayó. Durante más de una hora los operadores no recibieron alertas; el personal de TI vio fallas de servidor pero no avisó a la sala de control. La falla se propagó en cascada: 50 millones de personas en 8 estados de EE.UU. y Ontario quedaron sin luz durante dos días, con pérdidas estimadas en 6 000 millones de dólares.</p><p>El G3 analizó el caso con la técnica del <b>párrafo añadido</b>: conservó el relato de la profesora y añadió que no se establecieron controles para identificar y prevenir errores de concurrencia antes de producción, y que faltaron estándares de revisión, procedimientos de verificación y mecanismos de seguimiento de escenarios críticos.</p>",
+   "preguntas": [
+    "Explica por qué el caso es un problema de SQA y no solo un defecto del producto, usando los cuatro pilares de lograr la calidad del SW de las diapositivas 14 y 15.",
+    "Construye una tabla Problema | Causa raíz | Evidencia | Característica ISO 9126 afectada con al menos cinco filas.",
+    "Elabora un diagrama de Ishikawa 6M en forma de lista con al menos una causa por cada M.",
+    "Propón tres alternativas de mejora, una de SQA, una de QC y una de monitoreo, e indica cuál priorizarías con presupuesto limitado y por qué.",
+    "Define cuatro KPI con fórmula y umbral, y nombra dos normas que hoy exigirían revisiones formales y pruebas de failover."
+   ],
+   "solucion": "<h4>1. Por qué es SQA</h4><p>La condición de carrera es el <b>síntoma en el producto</b>; la <b>causa raíz</b> es un proceso que no exigía controles. Por pilar: <b>métodos de ingeniería</b>: el SRS no especificó comportamiento ante eventos concurrentes ni autodiagnóstico de alarmas, y el diseño usó redundancia no diversa; <b>administración de proyectos</b>: nadie planificó el riesgo de alarma silenciosa ni su contingencia; <b>control de calidad</b>: no se inspeccionó el código concurrente ni se midió la latencia de alarma; <b>aseguramiento</b>: no hubo auditoría ni informes que obligaran a revisar escenarios críticos. Un QC más intenso habría hallado este defecto, pero sin corregir el proceso se inyectarían otros similares.</p><h4>2. Tabla de problemas</h4><div class='tabla'><table><thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Característica</th></tr></thead><tbody><tr><td>Race condition en alarmas</td><td>Sin estándar de programación concurrente ni inspección</td><td>Bucle de eventos</td><td>Confiabilidad: madurez</td></tr><tr><td>Falla silenciosa</td><td>SRS sin requisito de autodiagnóstico, sin FMEA</td><td>Más de 1 h sin alertas</td><td>Confiabilidad: tolerancia a fallas</td></tr><tr><td>Respaldo también cae</td><td>Mismo SW, falla de modo común, failover no probado</td><td>Caída del servidor de respaldo</td><td>Confiabilidad: robustez</td></tr><tr><td>Concurrencia no probada</td><td>Plan de pruebas sin estrés ni carga</td><td>Defecto llega a producción</td><td>Eficiencia: comportamiento temporal</td></tr><tr><td>TI no informa a operadores</td><td>Sin procedimiento de gestión de incidentes</td><td>Informe del Task Force 2004</td><td>Proceso organizacional</td></tr><tr><td>Sin seguimiento de escenarios críticos</td><td>Sin gestión de riesgos ni RTM</td><td>Párrafo añadido del G3</td><td>Proceso SQA</td></tr></tbody></table></div><h4>3. Ishikawa 6M</h4><ul><li><b>Mano de obra:</b> devs sin capacitación en concurrencia; TI que no escaló.</li><li><b>Método:</b> sin SQAP IEEE 730, sin revisiones IEEE 1028, sin FMEA.</li><li><b>Máquina:</b> EMS con primario y respaldo idénticos, sin watchdog.</li><li><b>Material:</b> SRS sin requisitos de latencia ni autodiagnóstico; ráfaga SCADA.</li><li><b>Medición:</b> sin KPI de latencia de alarma ni DRE.</li><li><b>Medio ambiente:</b> vegetación sin podar, verano de alta demanda, normas NERC voluntarias en 2003.</li></ul><h4>4. Alternativas</h4><div class='alt'><h4>Alternativa A · SQA</h4><p>SQAP con estándar de concurrencia, RTF obligatorias del código crítico, gestión de riesgos desde requisitos, RTM y auditorías.</p></div><div class='alt'><h4>Alternativa B · QC</h4><p>Pruebas de estrés con tormentas de eventos, SAST de data races, pruebas de failover en staging con datos SCADA reales.</p></div><div class='alt'><h4>Alternativa C · Monitoreo</h4><p>Watchdog o heartbeat de la alarma, redundancia diversa, escalamiento TI a operadores en menos de 5 min.</p></div><p>Con presupuesto limitado se prioriza <b>C</b> para el sistema ya en operación, pues reduce el MTTD de más de 1 h a segundos y evita que una falla residual se vuelva catástrofe; luego A para atacar la fuente. La mejor respuesta es defensa en profundidad A + B + C.</p><h4>5. KPI y normas</h4><ul><li>Latencia de alarma p99 ≤ 2 s.</li><li>MTTD de falla de alarmas ≤ 1 min.</li><li>DRE = defectos pre-release / total ≥ 95 %.</li><li>100 % de módulos críticos con inspección formal.</li></ul><p>Normas: IEEE 1012 para V&amp;V por nivel de integridad, IEEE 1028 para revisiones, IEC 61508 para seguridad funcional, ISO/IEC/IEEE 12207:2017 gestión de riesgos y aseguramiento de la calidad, y normas NERC, obligatorias desde la EPAct 2005.</p>",
+   "criterios": [
+    "Distingue síntoma en el producto de causa raíz en el proceso y lo justifica con los cuatro pilares.",
+    "Menciona la falla silenciosa y la falla de modo común del servidor de respaldo.",
+    "Ubica correctamente las causas en las 6M, con la vegetación en medio ambiente.",
+    "Presenta alternativas SQA, QC y monitoreo y justifica la priorización.",
+    "KPI con fórmula y umbral medibles, y al menos dos normas pertinentes correctamente nombradas."
+   ]
+  },
+  {
+   "id": "s1-c02",
+   "s": [
+    1,
+    4
+   ],
+   "titulo": "Knight Capital 2012: gestión de configuración y despliegue",
+   "enunciado": "<p>El 1 de agosto de 2012 Knight Capital, firma de HFT (High-Frequency Trading), desplegó en su enrutador SMARS el código del nuevo RLP (Retail Liquidity Program) de la NYSE. El despliegue fue <b>manual</b> en 8 servidores y el técnico omitió el octavo. Para activar la nueva función se <b>reutilizó un flag</b> que en 2003 activaba la subrutina Power Peg, obsoleta pero nunca retirada del repositorio. Antes de la apertura el sistema envió unos 97 correos automáticos de error que nadie revisó. Al abrir el mercado el octavo servidor ejecutó Power Peg: unos 4 millones de órdenes erróneas en 154 acciones. En 45 minutos la firma perdió 440 millones de dólares, quedó en la quiebra y fue adquirida. La SEC le impuso una multa de 12 millones por violar la regla 15c3-5.</p><p>El G5 trató el caso como falla organizacional, inventando un senior que ignoró alertas; el G6 lo trató como falla técnica de QC, proponiendo SAST, regresión en CI, checksums y smoke tests.</p>",
+   "preguntas": [
+    "Clasifica cada falla como SQA, QC, gestión de configuración u operación: código muerto, flag reutilizado, despliegue manual, correos ignorados y ausencia de circuit breaker.",
+    "Explica por qué la profesora lo califica como falla de SQA y control de configuraciones, y por qué la diapositiva 26 lo agrupa con monitoreo en tiempo real.",
+    "Indica qué procesos de la ISO/IEC/IEEE 12207:2017, con su grupo, se incumplieron.",
+    "Compara críticamente los enfoques del G5 y del G6 y señala qué le falta a cada uno.",
+    "Propón tres KPI con umbral para el proceso de despliegue."
+   ],
+   "solucion": "<h4>1. Clasificación</h4><div class='tabla'><table><thead><tr><th>Falla</th><th>Lente</th><th>Razón</th></tr></thead><tbody><tr><td>Código muerto Power Peg</td><td>SQA / SCM</td><td>No había política de retiro de código ni control de cambios</td></tr><tr><td>Flag reutilizado</td><td>SCM / diseño</td><td>Cambio sin análisis de impacto en la línea base</td></tr><tr><td>Despliegue manual sin verificación</td><td>SQA + QC de despliegue</td><td>Sin procedimiento estándar automatizado ni smoke test</td></tr><tr><td>97 correos ignorados</td><td>Operación / monitoreo</td><td>Sin gestión de alertas ni responsable</td></tr><tr><td>Sin circuit breaker</td><td>Requisito no funcional ausente</td><td>Diseño sin límite de exposición</td></tr></tbody></table></div><h4>2. Doble lectura</h4><p>Causa raíz: proceso de configuración y despliegue, por eso SQA y control de configuraciones en la diapositiva 22. Contención: el monitoreo en tiempo real, un QC de rendimiento, habría detectado el comportamiento anómalo en minutos, por eso la diapositiva 26 lo agrupa con el apagón. Son lecturas complementarias.</p><h4>3. Procesos 12207:2017</h4><ul><li>Gestión de la configuración, 6.3.5, grupo de gestión técnica.</li><li>Gestión de riesgos, 6.3.4, gestión técnica.</li><li>Aseguramiento de la calidad, 6.3.8, gestión técnica.</li><li>Transición, 6.4.10, y Disposición o retiro, 6.4.14, grupo técnico: Power Peg nunca se retiró formalmente.</li></ul><h4>4. G5 vs G6</h4><p>G5 tiene el mayor anclaje teórico, citando las diapositivas 14, 17 y 20, pero inventa hechos y omite la SCM concreta. G6 es fiel a los hechos y muy técnico, pero llama QC preventivo a políticas que son SQA: exigir despliegue automatizado o bloquear merges con código muerto es institucionalizar el proceso. Ninguno cita normas ni KPI.</p><h4>5. KPI</h4><ul><li>100 % de despliegues automatizados.</li><li>0 nodos con hash distinto tras el despliegue.</li><li>0 fragmentos de código muerto en la rama principal; tiempo de corte del circuit breaker &lt; 5 s.</li></ul>",
+   "criterios": [
+    "Clasifica las cinco fallas con justificación coherente con las diapositivas 17, 20 y 21.",
+    "Integra causa raíz SQA y contención QC sin contradecir a la profesora.",
+    "Ubica la gestión de la configuración en gestión técnica y la disposición en procesos técnicos.",
+    "Evalúa a G5 y G6 señalando fidelidad a hechos y confusión QC preventivo vs SQA.",
+    "KPI cuantificables y vinculados a la causa."
+   ]
+  },
+  {
+   "id": "s1-c03",
+   "s": [
+    1,
+    3
+   ],
+   "titulo": "Ariane 5 vuelo 501: las tres lentes y la reutilización",
+   "enunciado": "<p>El 4 de junio de 1996 la ESA lanzó el Ariane 5 desde Kourou. El SRI (Sistema de Referencia Inercial) reutilizaba el SW del Ariane 4. Una función de alineamiento sin utilidad tras el despegue siguió ejecutándose y convirtió la velocidad horizontal, un flotante de 64 bits, a un entero con signo de 16 bits. Para no superar el 80 % de carga de CPU, 3 de 7 variables de conversión quedaron sin protección. La trayectoria del Ariane 5, más rápida, produjo un valor fuera de rango; el SRI se apagó; el SRI de respaldo, con el mismo SW, ya había caído 72 ms antes. El OBC interpretó el volcado de diagnóstico como datos de vuelo y a los 37 s el cohete se autodestruyó: 370 millones de dólares de pérdida. Las trayectorias del Ariane 5 no estaban en la especificación del SRI y no hubo pruebas de integración con datos reales.</p><p>El G4 analizó el caso con las tres lentes SQ, SQA y QC; el G7 con un cuadro QC vs SQA y la idea de doble falla en cadena.</p>",
+   "preguntas": [
+    "Redacta la causa raíz desde cada lente del cuadro de la diapositiva 21: calidad de SW como objetivo, SQA y QC.",
+    "Explica por qué la redundancia de HW no evitó el desastre.",
+    "Diseña un procedimiento SQA de reutilización de componentes con criterios de entrada y salida.",
+    "Con la curva de la diapositiva 13, calcula cuántas veces más cuesta corregir un defecto en mantenimiento que en requerimientos y comenta el resultado.",
+    "Indica qué característica y subcaracterística de ISO 9126 y de ISO/IEC 25010 se ven afectadas."
+   ],
+   "solucion": "<h4>1. Tres lentes</h4><ul><li><b>Calidad de SW:</b> no se fijó la confiabilidad y la seguridad como meta para el nuevo entorno; se asumió que el SW funcionaría.</li><li><b>SQA:</b> no existía política de reutilización ni revisión formal de requisitos de tipos y rangos de datos; la especificación no incluyó la trayectoria del Ariane 5.</li><li><b>QC:</b> no hubo prueba de integración en lazo cerrado con trayectorias reales ni análisis de valores límite.</li></ul><p>Doble falla en cadena: falló primero el SQA, que dejó el defecto, y luego el QC, que no lo detectó.</p><h4>2. Redundancia</h4><p>Ambos SRI tenían el mismo SW: falla de modo común. La redundancia de HW cubre fallas aleatorias, no defectos sistemáticos; se requiere diversidad de diseño.</p><h4>3. Procedimiento de reutilización</h4><ol><li>Entrada: inventario del componente, su perfil de uso original y supuestos documentados.</li><li>Análisis de compatibilidad de requisitos del nuevo contexto, con rangos de datos.</li><li>Revisión formal IEEE 1028 de los supuestos y del manejo de excepciones.</li><li>Eliminar funciones sin propósito en el nuevo sistema.</li><li>Re-verificación y revalidación V&amp;V: rehacer todas las pruebas de integración con datos reales, como exige la diapositiva 26.</li><li>Salida: informe de calificación aprobado por SQA independiente y registro en la línea base.</li></ol><h4>4. Cálculo</h4><p>14 102 / 139 ≈ 101,5 veces. Detectar la incompatibilidad de rangos en requisitos habría costado una fracción mínima frente a 370 millones de dólares y años de retraso, lo que confirma la Ley de Boehm.</p><h4>5. Característica afectada</h4><p>ISO 9126: confiabilidad, madurez y tolerancia a fallas. ISO/IEC 25010: fiabilidad, tolerancia a fallos y madurez; también adecuación funcional, corrección.</p>",
+   "criterios": [
+    "Diferencia correctamente las tres lentes con causas distintas.",
+    "Explica falla de modo común y diversidad de diseño.",
+    "El procedimiento incluye criterios de entrada y salida y la revalidación con datos reales.",
+    "Cálculo correcto cercano a 101 veces con interpretación.",
+    "Usa los nombres de características de cada norma sin mezclarlos."
+   ]
+  },
+  {
+   "id": "s1-c04",
+   "s": [
+    1,
+    3,
+    4
+   ],
+   "titulo": "Therac-25: el caso que ningún grupo trabajó",
+   "enunciado": "<p>AECL fabricó entre 1982 y 1987 el acelerador médico Therac-25. A diferencia de sus predecesores Therac-6 y Therac-20, eliminó los <b>interbloqueos de HW</b> y confió la seguridad al SW, que se reutilizó de esos modelos. El código lo escribió un único programador, sin revisión independiente, sin documentación formal ni pruebas formales del SW. Si el operador editaba el modo de tratamiento en menos de 8 s, una condición de carrera dejaba el haz de electrones a máxima potencia sin el escudo. Además, un contador de 1 byte se desbordaba cada 256 pasadas y omitía un chequeo de seguridad. El SW mostraba Malfunction 54, un mensaje no documentado, y permitía reanudar con una tecla. El análisis de fallas de AECL excluyó al SW. Entre 1985 y 1987 al menos seis pacientes recibieron sobredosis masivas y varios murieron.</p>",
+   "preguntas": [
+    "Identifica al menos seis fallas y clasifícalas como SQA, QC, diseño o usabilidad.",
+    "Explica por qué un mensaje de error genérico es un defecto de usabilidad con consecuencias de seguridad.",
+    "Explica qué es IV&V y por qué su ausencia es una falla de SQA.",
+    "Indica qué normas actuales habrían impedido el desastre y relaciona con la lección 4 de la diapositiva 26.",
+    "Propón cuatro KPI para el proceso de desarrollo de un equipo médico similar."
+   ],
+   "solucion": "<h4>1. Fallas</h4><div class='tabla'><table><thead><tr><th>Falla</th><th>Clase</th></tr></thead><tbody><tr><td>Eliminar interbloqueos de HW</td><td>Diseño</td></tr><tr><td>Reutilizar SW sin revalidar</td><td>SQA</td></tr><tr><td>Condición de carrera no detectada</td><td>QC</td></tr><tr><td>Desborde del contador de 1 byte</td><td>QC, faltó análisis de valores límite</td></tr><tr><td>Programador único sin revisión</td><td>SQA</td></tr><tr><td>Análisis de fallas sin el SW</td><td>SQA, gestión de riesgos</td></tr><tr><td>Malfunction 54 y reanudar con una tecla</td><td>Usabilidad</td></tr></tbody></table></div><h4>2. Usabilidad y seguridad</h4><p>En la lista ISO 9126 de clase, la usabilidad es entendible, intuitiva y operable. Un mensaje críptico no permite comprender el estado del equipo y la operación fácil de reanudar invita a repetir el disparo; el defecto de interfaz se convierte en daño físico.</p><h4>3. IV&amp;V</h4><p>IV&amp;V es la verificación y validación realizada por un equipo independiente técnica, gerencial y financieramente del desarrollador. Su ausencia es SQA porque es el proceso el que debe exigir revisión independiente en SW crítico, según IEEE 1012.</p><h4>4. Normas</h4><p>IEC 62304 para el ciclo de vida del SW de dispositivos médicos, ISO 14971 para gestión de riesgos, IEC 61508 para seguridad funcional e ISO/IEC 25010:2023, que añade la protección o safety. La lección 4 de la diapositiva 26 dice que este caso obligó a las industrias críticas a adoptar regulaciones estrictas.</p><h4>5. KPI</h4><ul><li>100 % de requisitos de seguridad con caso de prueba trazado en la RTM.</li><li>100 % de módulos críticos con revisión independiente.</li><li>0 mensajes de error sin documentar en el manual.</li><li>Tiempo de respuesta ante incidente reportado ≤ 24 h con análisis RCA.</li></ul>",
+   "criterios": [
+    "Al menos seis fallas bien clasificadas, incluida la eliminación de interbloqueos.",
+    "Vincula usabilidad con seguridad usando las subcaracterísticas de la clase.",
+    "Define IV&V con independencia y la ubica como exigencia del proceso.",
+    "Nombra normas sectoriales correctas y conecta con la diapositiva 26.",
+    "KPI medibles y pertinentes al dominio médico."
+   ]
+  },
+  {
+   "id": "s1-c05",
+   "s": [
+    1,
+    2
+   ],
+   "titulo": "Costo de la calidad en la mesa de partes digital del MEF",
+   "enunciado": "<p>El proyecto Mesa de Partes Digital del MEF registró 60 defectos en su primera versión, según la fase de detección: requerimientos 12, diseño 10, codificación 18, pruebas 14 y mantenimiento 6. Se usan los costos unitarios de la diapositiva 13: 139, 455, 977, 7 136 y 14 102 dólares.</p><p>La jefa de calidad propone introducir revisiones técnicas formales del diseño con un costo de 15 000 dólares por versión. Estima que así la mitad de los defectos hoy detectados en pruebas y la mitad de los detectados en mantenimiento se detectarían en diseño.</p>",
+   "preguntas": [
+    "Calcula el costo total actual de corrección y el porcentaje que representan pruebas más mantenimiento.",
+    "Calcula el ahorro bruto, el ahorro neto y el ROI de la propuesta.",
+    "Clasifica el costo de las revisiones y el costo de los defectos de mantenimiento en las categorías del CoQ y en CoGQ o CoPQ.",
+    "Indica si la propuesta es una acción de SQA o de QC y justifica con las diapositivas 15, 17 y 20.",
+    "Relaciona el resultado con la Ley de Boehm y con el ciclo PDCA de la Semana 2."
+   ],
+   "solucion": "<h4>1. Costo actual</h4><p>12 × 139 = 1 668; 10 × 455 = 4 550; 18 × 977 = 17 586; 14 × 7 136 = 99 904; 6 × 14 102 = 84 612. Total = <b>208 320 USD</b>. Pruebas más mantenimiento = 184 516 USD, el <b>88,6 %</b> del total con solo el 33 % de los defectos.</p><h4>2. Ahorro</h4><p>Se mueven 7 defectos de pruebas y 3 de mantenimiento a diseño: 7 × 6 681 = 46 767 y 3 × 13 647 = 40 941. Ahorro bruto = <b>87 708 USD</b>. Ahorro neto = 87 708 − 15 000 = <b>72 708 USD</b>. ROI = 72 708 / 15 000 ≈ <b>4,85, es decir 485 %</b>. Nuevo costo de corrección: 120 612 USD.</p><h4>3. CoQ</h4><p>Las revisiones son costo de <b>evaluación</b> desde la óptica de Pressman, pues inspeccionan un producto de trabajo, y forman parte del CoGQ; si se considera el diseño del proceso de revisión y la capacitación asociada, esa parte es prevención. Los defectos en mantenimiento son <b>falla externa</b>, parte del CoPQ.</p><h4>4. SQA o QC</h4><p>Ejecutar la revisión sobre el diseño es QC, pues la diapositiva 15 ubica la revisión de modelos en control de calidad. Decidir que toda versión pase por RTF obligatoria, presupuestarla y auditar su cumplimiento es SQA, pues la diapositiva 17 lista las revisiones técnicas formales y la mejora del método como actividades SQA. La propuesta, como política, es SQA; su ejecución es QC.</p><h4>5. Boehm y PDCA</h4><p>El defecto de mantenimiento cuesta unas 101 veces el de requerimientos: mover la detección hacia la izquierda es la forma más rentable de mejorar. En PDCA: Planificar la RTF, Hacer el piloto en una versión, Verificar comparando el costo real con los 208 320 USD de línea base, Actuar estandarizando si el ROI se confirma.</p>",
+   "criterios": [
+    "Total 208 320 USD y 88,6 % correctamente calculados.",
+    "Ahorro bruto 87 708, neto 72 708 y ROI cercano a 485 %.",
+    "Clasificación CoQ coherente con Pressman y con CoGQ y CoPQ.",
+    "Distingue política SQA de ejecución QC.",
+    "Conecta con la Ley de Boehm y con las cuatro fases del PDCA."
+   ]
+  },
+  {
+   "id": "s1-c06",
+   "s": [
+    1,
+    3
+   ],
+   "titulo": "Test de comprobación de atributos del prototipo de matrícula SUM-UNMSM",
+   "enunciado": "<p>La OGTIC de la UNMSM presenta el prototipo de la nueva pantalla de matrícula del SUM. Una prueba con 30 estudiantes arroja: tiempo medio para matricularse en 5 cursos de 6 min 40 s frente a una meta de 3 min; 14 clics de media frente a una meta de 8; 9 de 30 estudiantes no encontraron la opción de retiro de curso sin ayuda; el horario final se muestra como lista de códigos sin cuadrícula semanal; al ingresar un código de curso inexistente la pantalla se cierra y se pierde todo lo avanzado; no existe opción de personalizar ni atajos para usuarios frecuentes.</p>",
+   "preguntas": [
+    "Aplica el test de comprobación de atributos de la diapositiva 12 y complétalo con las dimensiones de robustez y riqueza de Pressman, indicando qué hallazgo responde a cada pregunta.",
+    "Convierte cada pregunta del test en una métrica objetiva con su valor actual y su meta.",
+    "Ubica cada hallazgo en la característica y subcaracterística de ISO 9126 de la clase y su equivalente en ISO/IEC 25010.",
+    "Indica si aplicar el checklist es QC o SQA, y qué tendría que pasar para que sea SQA."
+   ],
+   "solucion": "<h4>1. Test de atributos</h4><div class='tabla'><table><thead><tr><th>Dimensión</th><th>Pregunta</th><th>Hallazgo</th></tr></thead><tbody><tr><td>Intuitiva</td><td>¿Operaciones fáciles de localizar e iniciar?</td><td>9 de 30 no hallan el retiro: 30 % de fracaso</td></tr><tr><td>Eficiencia</td><td>¿Economía de movimientos?</td><td>14 clics frente a 8; 6 min 40 s frente a 3 min</td></tr><tr><td>Eficiencia</td><td>¿Salida legible?</td><td>Horario como lista de códigos sin cuadrícula</td></tr><tr><td>Robustez</td><td>¿Maneja datos erróneos sin caerse?</td><td>Código inexistente cierra la pantalla y pierde datos</td></tr><tr><td>Riqueza</td><td>¿Permite personalizar y atajos?</td><td>No existe</td></tr></tbody></table></div><h4>2. Métricas</h4><ul><li>Tasa de localización sin ayuda: actual 70 %, meta ≥ 95 %.</li><li>Clics por tarea: actual 14, meta ≤ 8.</li><li>Tiempo de tarea: actual 400 s, meta ≤ 180 s, una brecha del 122 %.</li><li>Pruebas de lectura del horario: % que identifica su cruce de horarios en ≤ 10 s, meta ≥ 90 %.</li><li>Tasa de caídas ante entrada inválida: meta 0 %.</li></ul><h4>3. ISO</h4><p>Localización: usabilidad, entendible e intuitiva; en 25010 usabilidad, aprendizaje y reconocimiento de adecuación. Clics y tiempo: eficiencia, comportamiento del tiempo; en 25010 eficiencia de desempeño. Horario ilegible: usabilidad, operable; en 25010 estética de la interfaz. Caída: confiabilidad, tolerancia a fallas y robustez; en 25010 fiabilidad, tolerancia a fallos, y usabilidad, protección frente a errores del usuario.</p><h4>4. QC o SQA</h4><p>Aplicar el checklist sobre el prototipo es QC estático, pues es una revisión de un entregable intermedio. Sería SQA si la organización define ese checklist como estándar obligatorio para todo prototipo, lo incorpora al SQAP y audita que se aplique.</p>",
+   "criterios": [
+    "Cubre las cuatro dimensiones: intuición, eficiencia, robustez y riqueza.",
+    "Métricas con valor actual y meta cuantificada.",
+    "Mapeo correcto a ISO 9126 y a ISO/IEC 25010 sin mezclar nombres.",
+    "Distingue aplicar el checklist como QC de institucionalizarlo como SQA."
+   ]
+  },
+  {
+   "id": "s1-c07",
+   "s": [
+    1,
+    2,
+    4
+   ],
+   "titulo": "Caída de pagos en quincena: presión de plazos e independencia del SQA",
+   "enunciado": "<p>Una billetera digital peruana con 9 millones de usuarios lanza una versión para pagos con QR el día 14 a las 18:00, a pedido comercial, para llegar a la quincena. El líder técnico ordena omitir la auditoría interna de proceso y la revisión técnica formal del módulo de conciliación para no pagar una penalidad contractual de 80 000 USD por retraso; dos desarrolladores advierten por correo que no hubo pruebas de carga. El grupo de calidad reporta al mismo líder técnico. El día 15, entre las 12:00 y las 15:30, el sistema rechaza el 38 % de los pagos por un bloqueo de base de datos bajo alta concurrencia. Se estiman 420 000 transacciones fallidas, 1,2 millones de USD de comisiones perdidas, 35 000 reclamos y una supervisión de la SBS.</p>",
+   "preguntas": [
+    "Identifica qué actividades SQA de la diapositiva 17 y qué técnicas de administración de proyectos de la diapositiva 14 se anularon.",
+    "Explica por qué la línea de reporte del grupo de calidad es la causa organizacional clave y qué propone IEEE 730 al respecto.",
+    "Compara el costo de la penalidad con la pérdida y calcula la relación; vincúlalo con la tabla de impacto organizacional de la diapositiva 7.",
+    "Calcula la disponibilidad efectiva del servicio de pagos ese día considerando 24 h y la franja de falla parcial, y propón un SLA y dos KPI.",
+    "Elabora un Ishikawa 6M resumido del incidente."
+   ],
+   "solucion": "<h4>1. Actividades anuladas</h4><p>SQA de la diapositiva 17: auditorías de procesos y revisiones técnicas formales, análisis de riesgos. Diapositiva 14: estimaciones para verificar que las fechas pueden cumplirse y planificación del riesgo con plan de contingencia; las advertencias se ignoraron.</p><h4>2. Independencia</h4><p>Si quien asegura la calidad depende de quien está presionado por el plazo, el SQA puede ser apagado. IEEE 730 exige que la función de SQA tenga independencia organizacional y acceso a un nivel de gestión distinto del jefe del proyecto; en CMMI lo cubre PPQA. Propuesta: el grupo de calidad reporta a la gerencia de riesgos y tiene poder de veto documentado para el pase a producción.</p><h4>3. Costos</h4><p>Pérdida directa 1 200 000 USD frente a 80 000 de penalidad: 15 veces más, sin contar reclamos, sanción y daño reputacional. Encaja en la columna de baja calidad de la diapositiva 7: gasto descontrolado en corrección urgente, pérdida de reputación y riesgo regulatorio.</p><h4>4. Disponibilidad</h4><p>Franja de 3,5 h con 38 % de rechazo equivale a 3,5 × 0,38 = 1,33 h de indisponibilidad efectiva. Disponibilidad = (24 − 1,33) / 24 ≈ <b>94,5 %</b>. SLA propuesto: ≥ 99,9 % mensual de pagos exitosos. KPI: tasa de pagos rechazados por causa técnica ≤ 0,1 %; MTTR ≤ 15 min; 100 % de releases con prueba de carga al doble del pico histórico.</p><h4>5. Ishikawa 6M</h4><ul><li><b>Mano de obra:</b> líder que prioriza plazo; alertas de devs ignoradas.</li><li><b>Método:</b> auditoría y RTF omitidas, sin pruebas de carga.</li><li><b>Máquina:</b> base de datos con bloqueo bajo concurrencia.</li><li><b>Material:</b> requisito no funcional de concurrencia ausente.</li><li><b>Medición:</b> sin KPI de capacidad ni alertas de tasa de rechazo.</li><li><b>Medio ambiente:</b> pico de quincena, presión comercial, SQA dependiente del líder.</li></ul>",
+   "criterios": [
+    "Cita actividades concretas de las diapositivas 14 y 17.",
+    "Identifica la falta de independencia del SQA y la relaciona con IEEE 730 o CMMI PPQA.",
+    "Relación de costos de 15 veces correcta y vinculada a la diapositiva 7.",
+    "Disponibilidad cercana a 94,5 % con procedimiento explícito y SLA o KPI coherentes.",
+    "Ishikawa con las seis categorías bien asignadas."
+   ]
+  }
+ ]
+}

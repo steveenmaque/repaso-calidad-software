@@ -1,0 +1,1500 @@
+<h1>Sesión 3 · Práctica</h1>
+<p class="lead">Casos de examen sobre <b>técnicas de calidad del SW (Software)</b>: técnicas estáticas (code review, análisis estático, walkthrough, inspección, auditoría), dinámicas (unitarias, integración, sistema, rendimiento/seguridad, regresión, UAT – User Acceptance Testing) y basadas en la experiencia; herramientas para evaluar diseño y código (SonarQube, ESLint, Checkstyle, PMD, Selenium, JUnit, JMeter, Jira…); y <b>estrategias de mejora</b> del proceso (PDCA – Plan-Do-Check-Act, CMMI – Capability Maturity Model Integration, SPE – Software Performance Engineering, OWASP SAMM – Software Assurance Maturity Model, UCD – User-Centered Design) con ISO/IEC 25010 como lenguaje de diagnóstico. Primero vienen los <b>casos de clase</b> (Ariane 5, tabla de 5 arquetipos de las diap. 17–18, métricas y técnicas), luego <b>todos los casos de los entregables T3</b> (G3 primero: Interbank y Saga Falabella; después G2, G4, G5, G6 y G7) y al final <b>siete casos NUEVOS de complejidad muy alta</b> (McCabe, inspección Fagan e IEEE 1028, captura-recaptura, Quality Gate de SonarQube, code smells, métricas CK/Martin y clasificación de NFR – Non-Functional Requirements con ISO/IEC 25010:2011/2023). <b>Regla de oro de la profesora:</b> en la tabla «Situación actual | Solución propuesta | Estrategia de mejora», la <i>solución</i> es una TÉCNICA/HERRAMIENTA sobre el producto o el pipeline, y la <i>estrategia</i> es un MODELO o MARCO de proceso que institucionaliza esa solución.</p>
+
+<section id="caso-1" class="caso">
+<h2>Caso 1 · Ariane 5 (ESA, 1996): las técnicas de calidad que faltaron</h2>
+<p class="origen">Origen: Diapositivas 9–12 (clase, Semana 03) + Informe de la Comisión de Investigación (Inquiry Board, J.-L. Lions, 1996) como complemento</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>El 4 de junio de 1996, el cohete <b>Ariane 5</b> (vuelo 501) de la <b>ESA (European Space Agency – Agencia Espacial Europea)</b> se autodestruyó a los <b>37 s</b> de vuelo. Pérdida: <b>más de USD 370 millones</b> (cohete + 4 satélites científicos Cluster) y <b>10 años</b> de ingeniería. Datos técnicos:</p>
+<ul>
+<li>El SW (Software) del <b>SRI (Sistema de Referencia Inercial)</b>, escrito en Ada, se <b>reutilizó tal cual del Ariane 4</b>. El Ariane 5 tenía una trayectoria con aceleración y velocidad horizontal muy superiores.</li>
+<li>En el <b>segundo 36</b>, una rutina de alineación convirtió la variable BH (<i>Horizontal Bias</i>, flotante de <b>64 bits</b>) a un <b>entero con signo de 16 bits</b> (rango −32 768 a 32 767). El valor no cabía → <b>Integer Overflow</b> → excepción <i>Operand Error</i> <b>no manejada</b>.</li>
+<li>De 7 conversiones riesgosas, 4 se protegieron y 3 no, para no superar un límite de carga de CPU del 80 %. La función de alineación que falló <b>no era necesaria después del despegue</b> en el Ariane 5 (se mantenía unos 40 s por herencia del Ariane 4).</li>
+<li>El SRI de respaldo tenía el <b>mismo SW</b> y falló 72 ms antes. El computador de a bordo interpretó el volcado de diagnóstico como datos de vuelo → deflexión total de las toberas → ruptura aerodinámica → autodestrucción.</li>
+<li>Las pruebas se hicieron en simuladores con <b>trayectorias del Ariane 4</b>; nunca se probó el sistema completo con el perfil de vuelo real del Ariane 5.</li>
+</ul>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Clasificar en la cadena error (equivocación humana) → defecto (falta en el artefacto) → falla (comportamiento observable) los elementos del caso.</li>
+<li>Identificar las <b>3 técnicas de calidad que faltaron según la profesora</b> e indicar si cada una es estática, dinámica o de gestión de requisitos/diseño.</li>
+<li>Mapear el problema a características y subcaracterísticas de <b>ISO/IEC 25010:2011</b>.</li>
+<li>Con la <b>Ley de Boehm</b>, estimar el costo relativo de corregir el defecto en requisitos frente a en operación, si corregirlo en el SRS (Software Requirements Specification) hubiera costado USD 40 000.</li>
+<li>Proponer dos alternativas de estrategia de mejora del proceso y un KPI (Key Performance Indicator) con fórmula y meta.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. Error → defecto → falla</h4>
+<div class="tabla"><table>
+<thead><tr><th>Nivel</th><th>En el Ariane 5</th><th>Técnica que lo habría cortado</th></tr></thead>
+<tbody>
+<tr><td>Error (equivocación humana)</td><td>Suponer que el SW del Ariane 4 era válido sin re-analizar el nuevo perfil de vuelo; decidir no proteger 3 conversiones por carga de CPU</td><td>Revisión de requisitos / walkthrough del análisis de reutilización (estática)</td></tr>
+<tr><td>Defecto (falta en el código)</td><td>Conversión 64→16 bits sin manejador de excepción ni validación de rango</td><td>Análisis estático de código (estática, automatizada)</td></tr>
+<tr><td>Falla (comportamiento observable)</td><td>SRI colapsa en el segundo 36, toberas se deflectan, autodestrucción en el segundo 37</td><td>Pruebas de integración/sistema con datos reales del Ariane 5 (dinámica)</td></tr>
+</tbody></table></div>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010 afectado</th></tr></thead>
+<tbody>
+<tr><td>Integer Overflow no manejado</td><td>No se aplicó análisis estático ni regla de codificación que exigiera protección de conversiones</td><td>3 de 7 conversiones sin protección</td><td>Fiabilidad → Tolerancia a fallos; Madurez</td></tr>
+<tr><td>Reutilización sin re-validación</td><td>Gestión de requisitos pobre: no se reespecificó el entorno (aceleración)</td><td>Simulaciones solo con trayectorias del Ariane 4</td><td>Adecuación funcional → Corrección funcional; calidad en uso → Cobertura de contexto</td></tr>
+<tr><td>Redundancia inútil</td><td>Redundancia de HW (Hardware) sin diversidad de SW → falla de modo común</td><td>El SRI de respaldo falló 72 ms antes con el mismo código</td><td>Fiabilidad → Tolerancia a fallos; Disponibilidad</td></tr>
+<tr><td>Función innecesaria activa</td><td>Diseño heredado no depurado: la alineación seguía corriendo tras el despegue</td><td>Función activa ~40 s sin propósito en el Ariane 5</td><td>Mantenibilidad → Analizabilidad; Adecuación funcional → Pertinencia</td></tr>
+<tr><td>Interpretación de diagnóstico como dato de vuelo</td><td>Interfaz SRI ↔ computador de a bordo sin contrato de datos verificado</td><td>Deflexión total de toberas</td><td>Compatibilidad → Interoperabilidad</td></tr>
+</tbody></table></div>
+<h4>2. Las 3 técnicas que faltaron (diap. 11–12)</h4>
+<ul>
+<li><b>Pruebas de integración con datos reales</b> → técnica <b>dinámica</b>: ejecutar el SRI integrado con el perfil de vuelo del Ariane 5 habría disparado el overflow en tierra.</li>
+<li><b>Análisis estático de código</b> → técnica <b>estática</b> automatizada: una herramienta (hoy PolySpace, que nació de la investigación post-Ariane en INRIA, o una regla SonarQube de <i>narrowing conversion</i>) habría marcado la conversión sin protección sin ejecutar nada.</li>
+<li><b>Gestión de requerimientos y diseño</b> → técnica <b>estática</b> sobre documentos (revisión del SRS y del SDD – Software Design Description, análisis de impacto de la reutilización).</li>
+</ul>
+<h4>4. Ley de Boehm</h4>
+<p>Escala clásica para sistemas grandes: requisitos 1 · diseño 5 · código 10 · pruebas 20 · aceptación 50 · operación 100+. Si corregir en el SRS cuesta USD 40 000, en operación el factor 100 da ≈ USD 4 M, pero el costo real fue > USD 370 M (factor ≈ 9 250). <b>Conclusión:</b> en sistemas críticos el factor de Boehm es un <i>piso</i>, no un techo, porque la falla en producción destruye el activo completo.</p>
+<div class="alt"><h4>Alternativa A · V&amp;V independiente (IV&amp;V) según IEEE 1012</h4>
+<p>Crear un equipo IV&amp;V (Independent Verification and Validation) con nivel de integridad 4 (máximo) para el SRI: revisión de requisitos de reutilización, análisis estático obligatorio, pruebas HIL (Hardware-in-the-Loop) con el perfil de vuelo del Ariane 5. Ej.: la NASA aplica IV&amp;V en West Virginia para todo SW de misión.</p></div>
+<div class="alt"><h4>Alternativa B · CMMI-DEV nivel 3 (áreas de Verificación, Validación y Gestión de Requisitos)</h4>
+<p>Institucionalizar en el proceso de la organización que todo componente reutilizado pase por un <b>análisis de impacto de reutilización</b> (RD – Requirements Development, VER – Verification, VAL – Validation en CMMI v1.3; PR/VV en CMMI V2.0) y por <i>Quality Gates</i> estáticos. Ej.: una regla del proceso definido: «ningún módulo heredado se integra sin re-ejecutar su suite con datos del nuevo entorno».</p></div>
+<div class="alt"><h4>Alternativa C · Diversidad de diseño + PDCA</h4>
+<p>Exigir diversidad de SW (N-version programming) en sistemas redundantes y aplicar un ciclo PDCA sobre los hallazgos del análisis estático (Plan: reglas de rango; Do: corrección; Check: cero conversiones sin protección; Act: actualizar el estándar de codificación).</p></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li><b>IEEE 1012-2016</b> (V&amp;V de sistemas, SW y HW): niveles de integridad 1–4; el SRI sería nivel 4 → exige análisis de interfaces, trazabilidad y pruebas de integración con datos del entorno real.</li>
+<li><b>ISO/IEC/IEEE 12207:2017</b>: fallaron los procesos técnicos de <i>Definición de requisitos del sistema/SW</i>, <i>Integración</i>, <i>Verificación</i> y <i>Validación</i>.</li>
+<li><b>ISO/IEC 25010:2011</b>: Fiabilidad (Tolerancia a fallos, Madurez) y Adecuación funcional (Corrección).</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li><b>% de conversiones de tipo sin protección</b> = conversiones sin manejador ÷ conversiones totales × 100 · meta <b>0 %</b> en SW de nivel de integridad 4.</li>
+<li><b>Cobertura de perfiles de vuelo</b> = escenarios del nuevo entorno probados ÷ escenarios especificados × 100 · meta 100 %.</li>
+<li><b>DRE (Defect Removal Efficiency)</b> = defectos antes de la entrega ÷ (antes + después) × 100 · meta ≥ 99 % en SW crítico.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) decir que fue «un bug del programador»: el informe Lions lo califica como fallo de especificación, diseño y pruebas; (2) clasificar el análisis estático como prueba dinámica; (3) creer que la redundancia de HW protege contra un defecto de SW idéntico en ambas unidades; (4) olvidar que <b>reutilizar no exime de V&amp;V</b> si cambia el entorno (frase clave de la diap. 12). No hay solución única: IV&amp;V, CMMI o diversidad de diseño son defendibles si atacan la causa raíz (supuestos no verificados).</div>
+</details>
+</section>
+
+<section id="caso-2" class="caso">
+<h2>Caso 2 · Los 5 arquetipos de la profesora: solución técnica vs estrategia de mejora</h2>
+<p class="origen">Origen: Diapositivas 17–18 (clase, Semana 03) — tabla modelo de la tarea T3</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>Una empresa peruana de retail y pagos, <b>«Andina Market»</b> (marketplace web + app con billetera), presenta cinco síntomas registrados por su área de SQA (Software Quality Assurance) en el último trimestre:</p>
+<ol>
+<li><b>Pruebas manuales:</b> la regresión de 420 casos tarda 6 días-persona por release; 3 de los últimos 10 releases escaparon defectos a producción por error humano.</li>
+<li><b>Código desorganizado:</b> 18 % de líneas duplicadas, TDR (Technical Debt Ratio) 23 % en el módulo de pedidos, cada cambio de regla de descuento toma 3 veces lo estimado.</li>
+<li><b>Falta de escalabilidad:</b> en el Cyber Wow el checkout colapsó con 9 000 usuarios concurrentes; el pico esperado era 15 000.</li>
+<li><b>Vulnerabilidades:</b> un pentest externo encontró datos de tarjeta en logs sin cifrar y tokens de sesión transmitidos por HTTP en un endpoint antiguo.</li>
+<li><b>Mala usabilidad:</b> 41 % de abandono en el flujo de devolución; los usuarios tardan 7 min promedio en encontrar el botón.</li>
+</ol>
+<figure><img src="@img/semana-03-tecnicas-de-calidad-de-software/p17.png" alt="Tabla de la profesora con los casos 1 a 3: pruebas manuales, código desorganizado y falta de escalabilidad, con su situación actual, solución propuesta y estrategia de mejora (PDCA, CMMI, SPE)"><figcaption>Diap. 17: casos 1–3 de la tabla modelo (Pruebas manuales → PDCA; Código desorganizado → CMMI; Escalabilidad → SPE).</figcaption></figure>
+<figure><img src="@img/semana-03-tecnicas-de-calidad-de-software/p18.png" alt="Tabla de la profesora con los casos 4 y 5: vulnerabilidades y mala usabilidad, con soluciones DevSecOps y pruebas de usabilidad y estrategias OWASP SAMM y UCD"><figcaption>Diap. 18: casos 4–5 (Vulnerabilidades → OWASP SAMM; Mala usabilidad → UCD).</figcaption></figure>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Completar para cada síntoma la tabla «Situación actual | Solución propuesta (técnica/herramienta) | Estrategia de mejora (modelo/marco)» según la profesora.</li>
+<li>Explicar por qué SonarQube, JMeter o Selenium <b>no</b> pueden ir en la columna «estrategia».</li>
+<li>Mapear cada síntoma a la característica ISO/IEC 25010:2011 afectada.</li>
+<li>Proponer un KPI con fórmula, línea base y meta por arquetipo.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados (tabla modelo completada)</h4>
+<div class="tabla"><table>
+<thead><tr><th>#</th><th>Situación actual (causa raíz)</th><th>Solución propuesta (técnica/herramienta)</th><th>Estrategia de mejora (modelo/marco)</th><th>ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>1 Pruebas manuales</td><td>Regresión manual lenta, sin automatización; error humano</td><td>Automatización con <b>Cypress/Selenium</b> integrada al pipeline <b>CI/CD</b> (Continuous Integration/Continuous Delivery)</td><td><b>Ciclo PDCA</b> enfocado en automatización de QA</td><td>Fiabilidad (Madurez); Mantenibilidad (Capacidad de ser probado)</td></tr>
+<tr><td>2 Código desorganizado</td><td>Sin estándares ni revisión; deuda técnica acumulada</td><td><b>Análisis estático</b> automatizado con <b>SonarQube</b> + <b>Quality Gates</b></td><td><b>Modelo CMMI</b> para estandarizar y madurar el proceso</td><td>Mantenibilidad (Modularidad, Analizabilidad, Modificabilidad)</td></tr>
+<tr><td>3 Escalabilidad</td><td>Capacidad estática; sin pruebas de carga previas</td><td>Pruebas de <b>carga/estrés con JMeter</b> + <b>autoescalado</b> en la nube</td><td><b>SPE</b> integrada en el ciclo de vida</td><td>Eficiencia de desempeño (Capacidad, Comportamiento temporal)</td></tr>
+<tr><td>4 Vulnerabilidades</td><td>Datos sensibles sin cifrar; sesiones interceptables</td><td><b>DevSecOps</b> con <b>SAST</b> (Static Application Security Testing) / <b>DAST</b> (Dynamic AST) + <b>pentesting</b></td><td><b>OWASP SAMM</b> para la madurez de la seguridad</td><td>Seguridad (Confidencialidad, Integridad, Autenticidad)</td></tr>
+<tr><td>5 Usabilidad</td><td>UI confusa; diseño sin usuarios</td><td><b>Pruebas de usabilidad</b> con usuarios reales + <b>heurísticas de Nielsen</b></td><td><b>UCD</b> como validador de calidad</td><td>Usabilidad (Operabilidad, Capacidad de aprendizaje, Protección contra errores)</td></tr>
+</tbody></table></div>
+<h4>2. Por qué una herramienta no es una estrategia</h4>
+<p>Una herramienta <b>ejecuta</b> una técnica sobre el producto (SonarQube mide deuda; JMeter genera carga; Selenium repite clics). Una estrategia de mejora es un <b>modelo de proceso</b> que define <i>quién, cuándo, con qué criterio y cómo se mejora continuamente</i>: PDCA da el ciclo de mejora; CMMI da niveles de madurez y prácticas institucionalizadas; SPE integra el rendimiento como RNF (requisito no funcional) desde el diseño; OWASP SAMM mide la madurez 0–3 en 5 funciones de negocio; UCD (ISO 9241-210) pone al usuario en cada iteración. Ej.: comprar SonarQube sin un proceso que obligue a respetar el Quality Gate es «tener termómetro sin tratamiento».</p>
+<div class="alt"><h4>Alternativa A · Respuesta «de la profesora» (1 modelo por arquetipo)</h4><p>Exactamente la tabla anterior. Es la respuesta esperada en el examen y la que mejor puntúa porque respeta la separación técnica/estrategia.</p></div>
+<div class="alt"><h4>Alternativa B · Un solo marco integrador</h4><p>Adoptar <b>CMMI-DEV V2.0 nivel 3</b> como paraguas (prácticas de Verificación y Validación, Aseguramiento de la Calidad del Proceso, Gestión del Rendimiento y la Medición) y gestionar los 5 frentes como planes de acción dentro de él, con OWASP SAMM como modelo específico para seguridad. Ventaja: coherencia organizacional; desventaja: más lento de implantar en una empresa mediana.</p></div>
+<div class="alt"><h4>Alternativa C · Priorización por costo de la calidad</h4><p>Ordenar con Pareto por CoPQ (Cost of Poor Quality): el arquetipo 4 (riesgo de multa bajo la Ley 29733 y PCI DSS) y el 3 (ventas perdidas en Cyber Wow) van primero; 2 y 1 después; 5 en paralelo con UX. Cada frente con su propio PDCA trimestral.</p></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li>Diap. 17–18 (tabla de la profesora) y diap. 22 (la tarea exige «estrategia de mejora de procesos utilizada»).</li>
+<li><b>ISO/IEC 25010:2011</b> como modelo de calidad del producto para nombrar el atributo roto.</li>
+<li><b>OWASP SAMM v2</b>: 5 funciones (Gobierno, Diseño, Implementación, Verificación, Operaciones), 15 prácticas, niveles 0–3. <b>ISO 9241-210</b> para UCD.</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>Arquetipo</th><th>KPI y fórmula</th><th>Línea base</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Tasa de escape = defectos en producción ÷ defectos totales × 100</td><td>30 % de releases con escape</td><td>≤ 5 %; regresión ≤ 4 h</td></tr>
+<tr><td>2</td><td>TDR = costo de remediación ÷ costo de desarrollo × 100</td><td>23 % (rating D)</td><td>≤ 5 % (rating A); duplicación ≤ 3 %</td></tr>
+<tr><td>3</td><td>Usuarios concurrentes sostenidos con p95 ≤ 2 s</td><td>9 000</td><td>≥ 1,3 × pico esperado = 19 500</td></tr>
+<tr><td>4</td><td>Vulnerabilidades críticas abiertas; nivel SAMM medio</td><td>2 críticas; SAMM 0,8</td><td>0 críticas &gt; 7 días; SAMM ≥ 1,5 en 12 meses</td></tr>
+<tr><td>5</td><td>SUS (System Usability Scale); tasa de abandono</td><td>41 % abandono</td><td>SUS ≥ 75; abandono ≤ 15 %</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) poner «SonarQube» o «JMeter» como estrategia; (2) poner «PDCA» como solución técnica; (3) confundir escalabilidad (Eficiencia de desempeño → Capacidad) con disponibilidad (Fiabilidad); (4) decir que DevSecOps es un modelo de madurez (es una práctica/cultura; el modelo de madurez es OWASP SAMM). La calidad no tiene solución única: la profesora asocia un modelo por arquetipo, pero CMMI, ISO/IEC 27001 o SRE (Site Reliability Engineering) también son estrategias defendibles si se justifican.</div>
+</details>
+</section>
+<section id="caso-3" class="caso">
+<h2>Caso 3 · SUM-UNMSM: clasificar técnicas, elegir herramientas y calcular las 6 métricas de clase</h2>
+<p class="origen">Origen: Diapositivas 4–8 y 13–16, 19–20 (clase, Semana 03) — actividad integradora creada para el repaso</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>La OGTI (Oficina General de Tecnologías de la Información) de la UNMSM moderniza el módulo de matrícula del SUM (Sistema Único de Matrícula), con backend Java (Spring), frontend React y app móvil. En el último ciclo se registraron estas actividades y datos:</p>
+<ol type="a">
+<li>Dos desarrolladores aprueban cada PR (Pull Request) en GitLab antes de integrarlo.</li>
+<li>SonarQube y ESLint se ejecutan en cada commit sin correr el sistema.</li>
+<li>El analista guía a sus compañeros por el SRS (Software Requirements Specification) de matrícula para recoger observaciones.</li>
+<li>JUnit prueba <code>calcularCreditosAprobados()</code> aisladamente.</li>
+<li>Se verifica que el SUM consuma la API de RENIEC con DNI de 8 dígitos.</li>
+<li>JMeter simula 12 000 alumnos matriculándose a las 8:00 a. m.</li>
+<li>Selenium re-ejecuta 300 casos en cada merge a <i>main</i>.</li>
+<li>Secretarios académicos de 3 facultades aprueban el módulo antes del pase.</li>
+<li>Un tester con experiencia prueba primero apellidos con «Ñ», tildes y apellidos compuestos.</li>
+<li>Sesión de 60 min sin guion: «explorar la matrícula con red 3G inestable».</li>
+<li>Un auditor de la OCI (Órgano de Control Institucional) verifica el cumplimiento de la NTP-ISO/IEC 12207.</li>
+</ol>
+<p>Datos del ciclo: 46 KLOC; 69 defectos registrados antes del pase y 23 en producción; 36 800 de 46 000 líneas cubiertas por pruebas; 14 incidencias en producción en 2 meses; tiempos de reparación de las últimas 5 incidencias: 2, 3, 5, 8 y 12 h; SonarQube reporta 1 035 h de deuda; encuesta a 500 alumnos: 190 promotores (9–10), 160 pasivos, 150 detractores (0–6).</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Clasificar a–k como técnica estática, dinámica o basada en la experiencia, y nombrar la técnica exacta de la diapositiva.</li>
+<li>Calcular las 6 métricas de la diap. 13 (densidad de defectos, cobertura, tasa de fallos, MTTR – Mean Time To Repair, deuda técnica/TDR, NPS – Net Promoter Score) y la DRE.</li>
+<li>Asignar una herramienta de cada una de las 5 categorías de las diap. 19–20 y justificar.</li>
+<li>Explicar cuál de los 4 componentes de la diap. 5 está más débil y qué estrategia propondría.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. Clasificación</h4>
+<div class="tabla"><table>
+<thead><tr><th>Ítem</th><th>Tipo</th><th>Técnica (diapositiva)</th><th>Comentario</th></tr></thead>
+<tbody>
+<tr><td>a</td><td>Estática</td><td>Revisión de código (Code Review) entre pares</td><td>Antes de integrar (diap. 14)</td></tr>
+<tr><td>b</td><td>Estática</td><td>Análisis estático automatizado</td><td>SonarQube y ESLint están resaltados en rojo en la diap. 14</td></tr>
+<tr><td>c</td><td>Estática</td><td>Walkthrough (recorrido)</td><td>Lo guía el autor (IEEE 1028)</td></tr>
+<tr><td>d</td><td>Dinámica</td><td>Prueba unitaria</td><td>Framework JUnit</td></tr>
+<tr><td>e</td><td>Dinámica</td><td>Prueba de integración</td><td>Comunicación entre servicios</td></tr>
+<tr><td>f</td><td>Dinámica</td><td>Prueba de rendimiento</td><td>Carga/estrés</td></tr>
+<tr><td>g</td><td>Dinámica</td><td>Prueba de regresión</td><td>Automatizada en CI/CD</td></tr>
+<tr><td>h</td><td>Dinámica</td><td>UAT (User Acceptance Testing)</td><td>Perspectiva del usuario de negocio = validación</td></tr>
+<tr><td>i</td><td>Experiencia</td><td>Adivinación de errores (Error Guessing)</td><td>Intuición previa (diap. 16)</td></tr>
+<tr><td>j</td><td>Experiencia</td><td>Prueba exploratoria</td><td>Aprender, diseñar y ejecutar a la vez, sin guion</td></tr>
+<tr><td>k</td><td>Estática</td><td>Auditoría</td><td>Evaluación independiente de conformidad</td></tr>
+</tbody></table></div>
+<h4>2. Métricas</h4>
+<div class="tabla"><table>
+<thead><tr><th>Métrica</th><th>Fórmula</th><th>Resultado</th><th>Lectura</th></tr></thead>
+<tbody>
+<tr><td>Densidad de defectos</td><td>(69 + 23) ÷ 46 KLOC</td><td><b>2,0 def/KLOC</b></td><td>Solo producción: 23 ÷ 46 = 0,5 def/KLOC</td></tr>
+<tr><td>Cobertura</td><td>36 800 ÷ 46 000 × 100</td><td><b>80 %</b></td><td>Iguala el umbral típico del Quality Gate «Sonar way» (código nuevo)</td></tr>
+<tr><td>Tasa de fallos en producción</td><td>14 ÷ 2 meses</td><td><b>7 incidencias/mes</b></td><td>Normalizar por usuarios para comparar facultades</td></tr>
+<tr><td>MTTR</td><td>(2+3+5+8+12) ÷ 5</td><td><b>6 h</b></td><td>Mediana = 5 h: el valor 12 h sesga la media</td></tr>
+<tr><td>Deuda técnica / TDR</td><td>1 035 h ÷ (46 000 × 0,5 h)</td><td><b>4,5 % → rating A</b></td><td>SonarQube usa 30 min/línea como costo de desarrollo</td></tr>
+<tr><td>NPS</td><td>% promotores − % detractores = 38 − 30</td><td><b>+8</b></td><td>Pasivos no cuentan; escala −100 a +100</td></tr>
+<tr><td>DRE</td><td>69 ÷ (69 + 23) × 100</td><td><b>75 %</b></td><td>Baja: 1 de cada 4 defectos escapa</td></tr>
+</tbody></table></div>
+<h4>3. Herramientas por categoría</h4>
+<ul>
+<li><b>Pruebas de SW:</b> JUnit (unitarias Java). <b>Control de versiones:</b> Git en GitLab (ramas + PR). <b>Análisis de código:</b> SonarQube (multi-lenguaje) + Checkstyle (convención Java) + ESLint (React). <b>Gestión de defectos:</b> Jira (o Mantis, libre). <b>Automatización:</b> Selenium (web) y Appium (app móvil).</li>
+</ul>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo afectado</th></tr></thead>
+<tbody>
+<tr><td>DRE de 75 %</td><td>Revisiones técnicas tempranas (el «eje central» de la diap. 5) insuficientes: solo se revisa código, no requisitos ni diseño</td><td>23 defectos en producción</td><td>Fiabilidad → Madurez</td></tr>
+<tr><td>NPS bajo (+8)</td><td>Falta de pruebas de usabilidad con alumnos reales</td><td>30 % detractores</td><td>Usabilidad → Operabilidad</td></tr>
+<tr><td>MTTR sesgado por casos de 12 h</td><td>Sin clasificación de severidad ni guardias</td><td>Rango 2–12 h</td><td>Fiabilidad → Capacidad de recuperación</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Reforzar revisiones técnicas (componente 1)</h4><p>Inspecciones formales del SRS y del SDD antes de codificar (Ley de Boehm: hasta 100 veces más barato) y PDCA trimestral sobre la DRE.</p></div>
+<div class="alt"><h4>Alternativa B · Estándares y madurez (componente 4)</h4><p>Adoptar la NTP-ISO/IEC 12207:2016 (procesos de Verificación y Validación) y un SQAP (Software Quality Assurance Plan) según IEEE 730 con metas de métricas por release.</p></div>
+<h4>Justificación normativa</h4>
+<p>Diap. 4 (definición: prevenir, detectar y corregir en <b>todo</b> el ciclo de vida), diap. 5 (4 componentes), diap. 13 (6 métricas). IEEE 1028 para distinguir walkthrough (c) y auditoría (k). ISO/IEC 25010 para mapear atributos.</p>
+<h4>KPI para medir la mejora</h4>
+<ul><li>DRE ≥ 90 % en 2 ciclos · densidad en producción ≤ 0,2 def/KLOC · MTTR ≤ 4 h para severidad alta · NPS ≥ +30.</li></ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) incluir a los pasivos en el NPS; (2) clasificar la UAT como verificación (es validación); (3) decir que JUnit es herramienta de automatización E2E; (4) olvidar que Selenium aparece en <b>dos</b> categorías (pruebas y automatización); (5) poner la auditoría como técnica dinámica; (6) confundir la cobertura de 80 % con «80 % de calidad».</div>
+</details>
+</section>
+
+<section id="caso-4" class="caso">
+<h2>Caso 4 · Interbank: exfiltración de 3,7 TB por credenciales de un proveedor de observabilidad</h2>
+<p class="origen">Origen: Entregable G3 (Laboratorio 03, Caso I, Problema 1) | Comparado con G4, G5, G6 y G7</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Interbank (Banco Internacional del Perú S.A.A., grupo Intercorp, 3.er banco del sistema; más de 6 300 colaboradores; cofundador de Plin) sufrió el <b>30-oct-2024</b> la divulgación de una BD (Base de Datos) exfiltrada de <b>3,7 TB</b> con datos de tarjetas (incluido el <b>CVV</b> – Card Verification Value), contraseñas y <b>credenciales de API internas</b> de millones de clientes. Según fuentes secundarias, el vector fue la explotación de fallas de <b>IAM (Identity and Access Management)</b> mediante <b>credenciales expuestas asociadas a New Relic</b> (proveedor de observabilidad de terceros), con <b>escalamiento de privilegios</b> hasta las BD en la nube. Los 3,7 TB salieron sin que se dispararan alertas de egreso. La <b>SBS</b> (Superintendencia de Banca, Seguros y AFP) y la <b>ANPD</b> (Autoridad Nacional de Protección de Datos Personales) abrieron investigaciones; hubo crisis reputacional.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Identificar la característica y <b>cuatro subcaracterísticas</b> de ISO/IEC 25010 vulneradas.</li>
+<li>Construir un Ishikawa 6M del efecto «exfiltración de 3,7 TB».</li>
+<li>Proponer la solución técnica y la estrategia de mejora (separando ambos niveles) con al menos 2 alternativas.</li>
+<li>Indicar qué norma de la industria de tarjetas se incumple al almacenar el CVV y qué requisito.</li>
+<li>Definir 4 KPI con fórmula y meta.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Credenciales de tercero reutilizables</td><td>Gestión de secretos deficiente: tokens estáticos de larga vida compartidos con el proveedor</td><td>Credenciales New Relic expuestas</td><td>Seguridad → Autenticidad</td></tr>
+<tr><td>Escalamiento de privilegios</td><td>Violación del principio de mínimo privilegio; sin segmentación entre observabilidad y BD transaccionales</td><td>Desde la cuenta de monitoreo se llegó a las BD</td><td>Seguridad → Confidencialidad, Integridad</td></tr>
+<tr><td>Exfiltración no detectada</td><td>Sin DLP (Data Loss Prevention) ni alertas de volumen; MTTD (Mean Time To Detect) alto</td><td>3,7 TB salieron sin alerta</td><td>Seguridad → Responsabilidad (Accountability)</td></tr>
+<tr><td>CVV almacenado</td><td>Diseño de datos que retiene SAD (Sensitive Authentication Data) post-autorización</td><td>CVV en el volcado</td><td>Seguridad → Confidencialidad; incumplimiento PCI DSS</td></tr>
+<tr><td>Riesgo de terceros no gestionado</td><td>Ausencia de TPRM (Third-Party Risk Management)</td><td>Proveedor como puerta de entrada</td><td>Seguridad (cadena de suministro)</td></tr>
+</tbody></table></div>
+<h4>Ishikawa 6M (reconstruido)</h4>
+<ul>
+<li><b>Mano de obra:</b> desarrolladores/operadores que embeben credenciales; baja conciencia de seguridad en proveedores.</li>
+<li><b>Método:</b> sin rotación de secretos, sin TPRM, sin revisión periódica de accesos, DevSecOps ausente en el pipeline.</li>
+<li><b>Máquina:</b> IAM permisivo, tokens estáticos, red sin segmentar, sin DLP.</li>
+<li><b>Material:</b> datos sensibles (CVV) almacenados; credenciales de API en texto plano.</li>
+<li><b>Medición:</b> sin alertas de egreso; MTTD alto; sin métricas de madurez de seguridad.</li>
+<li><b>Medio ambiente:</b> ecosistema de terceros, nube multi-proveedor, presión de <i>time-to-market</i>, ciberdelincuencia organizada.</li>
+</ul>
+<div class="alt"><h4>Alternativa A · La de G3: Zero Trust + bóvedas de secretos / DevSecOps</h4>
+<p><b>Solución:</b> arquitectura <b>Zero Trust</b> («nunca confiar, siempre verificar»), <b>Key Vaults</b> con secretos <b>efímeros</b> (rotación automática, tokens de minutos) e inhabilitación de tokens estáticos; <b>DLP con IA</b> para bloquear egresos anómalos. <b>Estrategia (según G3):</b> DevSecOps en CI/CD con <b>SAST</b> y escáneres de secretos (TruffleHog, SonarQube) que bloquean despliegues con contraseñas <i>hardcoded</i>.</p></div>
+<div class="alt"><h4>Alternativa B · Gobierno: SGSI ISO/IEC 27001:2022 + PAM</h4>
+<p>Implantar un SGSI (Sistema de Gestión de Seguridad de la Información) con controles del Anexo A: <b>A.5.19–A.5.22</b> (proveedores y cadena de suministro TIC), <b>A.5.17</b> (información de autenticación), <b>A.8.2</b> (accesos privilegiados), <b>A.8.5</b> (autenticación segura), <b>A.8.12</b> (prevención de fuga de datos), <b>A.8.16</b> (monitoreo), <b>A.8.24</b> (criptografía). Añadir PAM (Privileged Access Management) y alinear con la <b>Res. SBS N.° 504-2021</b> y la <b>Ley 29733</b>.</p></div>
+<div class="alt"><h4>Alternativa C · Madurez: OWASP SAMM v2 (la estrategia de la profesora)</h4>
+<p>Evaluación inicial de las 15 prácticas (niveles 0–3), metas en <i>Secure Build</i>, <i>Environment Management</i>, <i>Incident Management</i> y <i>Threat Assessment</i>; roadmap anual; detección con SIEM (Security Information and Event Management) y UEBA (User and Entity Behavior Analytics) en el SOC (Security Operations Center).</p></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li><b>ISO/IEC 25010:2011</b> → Seguridad: Confidencialidad, Integridad, Autenticidad, Responsabilidad.</li>
+<li><b>PCI DSS v4.0, req. 3.3</b> (Payment Card Industry Data Security Standard): prohíbe almacenar SAD (CVV2, PIN, banda completa) después de la autorización, aun cifrados.</li>
+<li><b>OWASP SAMM v2</b> (diap. 18) como modelo de madurez; <b>ISO/IEC 27001:2022</b> (diap. 21) como sistema de gestión certificable.</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>% de secretos con rotación automática</td><td>secretos rotados automáticamente ÷ secretos totales × 100</td><td>100 % en 6 meses; vida máxima ≤ 24 h</td></tr>
+<tr><td>Secretos hardcoded bloqueados</td><td>builds bloqueados por secretos ÷ builds totales</td><td>Tendencia a 0 en producción; 100 % detectados en CI</td></tr>
+<tr><td>MTTD de exfiltración</td><td>Σ (detección − inicio) ÷ nº incidentes</td><td>&lt; 15 min</td></tr>
+<tr><td>Cuentas privilegiadas revisadas</td><td>cuentas revisadas en el trimestre ÷ cuentas privilegiadas × 100</td><td>100 % trimestral</td></tr>
+<tr><td>Madurez OWASP SAMM</td><td>promedio de puntuación de las 15 prácticas</td><td>De ~1,0 a ≥ 2,0 en 18 meses</td></tr>
+</tbody></table></div>
+<h4>Cómo lo resolvieron los grupos (seguridad)</h4>
+<div class="tabla"><table>
+<thead><tr><th>Grupo</th><th>Vector/foco</th><th>Solución</th><th>Estrategia</th></tr></thead>
+<tbody>
+<tr><td><b>G3</b> (Interbank)</td><td>Credenciales de tercero → IAM → privilegios</td><td>Zero Trust, Key Vault efímero, DLP-IA</td><td>DevSecOps + SAST de secretos (sin modelo nombrado)</td></tr>
+<tr><td>G4 (Inkafarma)</td><td>Datos sin cifrar (genérico)</td><td>SAST, DAST, pentesting, SonarQube</td><td>OWASP SAMM + ISO 27001 + ISO 25010</td></tr>
+<tr><td>G5 (RENIEC)</td><td>APIs sin rate limiting; abuso de accesos</td><td>Zero Trust + API Gateway con throttling</td><td>DevSecOps SAST/DAST</td></tr>
+<tr><td>G7 (Scotiabank)</td><td>MFA no acreditado</td><td>SAST/DAST + pentest OTP/MFA</td><td>OWASP SAMM + ISO 27001 con métricas</td></tr>
+</tbody></table></div>
+<p>G3 es el más preciso en el <b>vector</b> (cadena de suministro + IAM), pero el único de seguridad que no nombra un <b>modelo</b> de madurez; G7 es el mejor en estrategia y métricas.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) poner DevSecOps/SAST como «estrategia» (es práctica/técnica; el modelo es OWASP SAMM o ISO 27001); (2) creer que SAST detecta un abuso de credenciales en producción (detecta secretos en código, no su uso anómalo: para eso SIEM/UEBA/DLP); (3) TruffleHog es <i>secret scanning</i>, técnicamente distinto de un SAST clásico, aunque ambos son análisis estático; (4) decir que el CVV se puede guardar si está cifrado (PCI DSS lo prohíbe); (5) citar solo «Seguridad» sin subcaracterísticas.</div>
+</details>
+</section>
+
+<section id="caso-5" class="caso">
+<h2>Caso 5 · Interbank: caídas sistémicas de la app y la Banca por Internet (2025)</h2>
+<p class="origen">Origen: Entregable G3 (Laboratorio 03, Caso I, Problema 2) | Comparado con G2, G4, G5, G6 y G7</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>El <b>10-feb-2025</b> Indecopi sancionó en primera instancia a Interbank por problemas operativos prolongados; el <b>24-jul-2025</b> un colapso sistémico dejó <b>inoperativas la app móvil y la Banca por Internet a nivel nacional</b>. G3 postula como causa una migración a microservicios <b>sin controles de estrés y concurrencia</b>, combinada con un monolito heredado. Indecopi exigió un <b>Programa de Cumplimiento Normativo</b> para restablecer saldos y garantizar continuidad. Datos supuestos para el análisis: pico histórico de quincena = 4 200 TPS (transacciones por segundo); capacidad probada = 3 000 TPS; SLA (Service Level Agreement) comprometido = 99,9 % mensual; en julio hubo 3 caídas de 95, 40 y 25 min; el banco se enteró de la primera por redes sociales 18 min después de iniciada.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Distinguir Disponibilidad (Fiabilidad) de Capacidad (Eficiencia de desempeño) y decir cuál falló.</li>
+<li>Calcular la disponibilidad de julio (31 días) y decir si se cumplió el SLA.</li>
+<li>Proponer topología técnica y elegir entre SPE, PDCA y SRE como estrategia, justificando.</li>
+<li>Definir SLO (Service Level Objective), RTO (Recovery Time Objective), RPO (Recovery Point Objective) y KPI.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Cálculo</h4>
+<p>Minutos del mes = 31 × 1 440 = 44 640. Caída = 95 + 40 + 25 = 160 min. Disponibilidad = (44 640 − 160) ÷ 44 640 = <b>99,64 %</b> &lt; 99,9 % → <b>SLA incumplido</b> (el presupuesto de error de 99,9 % es 44,6 min/mes; se consumió 3,6 veces). MTTR = 160 ÷ 3 = 53,3 min. Brecha de capacidad = 4 200 ÷ 3 000 = 1,4 → faltaba 40 % de capacidad respecto del pico.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Saturación en picos</td><td>Sin planificación de capacidad ni pruebas de estrés por encima del pico histórico</td><td>Capacidad 3 000 TPS vs pico 4 200</td><td>Eficiencia de desempeño → Capacidad, Comportamiento temporal</td></tr>
+<tr><td>Caída nacional total</td><td>Acoplamiento monolito–microservicios; sin aislamiento de fallos (circuit breaker)</td><td>App y web caen a la vez</td><td>Fiabilidad → Disponibilidad, Tolerancia a fallos</td></tr>
+<tr><td>Recuperación lenta</td><td>DRP (Disaster Recovery Plan) no probado; sin centro alterno activo</td><td>Caída de 95 min</td><td>Fiabilidad → Capacidad de recuperación</td></tr>
+<tr><td>Detección tardía</td><td>APM (Application Performance Monitoring) sin umbrales</td><td>18 min, aviso por redes</td><td>Fiabilidad → Madurez; proceso de monitoreo</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · La de G3: autoescalado + LB + DR / pruebas de estrés + APM</h4><p>Topología en la nube con <b>autoescalamiento dinámico</b>, <b>balanceadores de carga (LB)</b>, <b>centros de datos alternos</b> y <b>Disaster Recovery</b> automatizado; como «estrategia», pruebas de carga y estrés en preproducción y APM con alertas tempranas. Aporte distintivo de G3: la dimensión de <b>recuperación</b> (DR multi-sitio) que otros grupos omiten.</p></div>
+<div class="alt"><h4>Alternativa B · SPE (la estrategia de la profesora)</h4><p>Rendimiento como RNF verificable desde el diseño: modelos de capacidad, presupuestos de latencia por servicio, pruebas de carga en el pipeline CI/CD con <i>performance gates</i> (el build falla si p95 &gt; 800 ms a 1,3 × pico). Previene en lugar de reaccionar.</p></div>
+<div class="alt"><h4>Alternativa C · SRE + continuidad (ISO 22301, ITIL 4)</h4><p>SLO 99,95 % con <b>presupuesto de error</b> (si se agota, se congelan despliegues), <i>chaos engineering</i>, gestión de problemas ITIL 4, postmortem sin culpables y BCP (Business Continuity Plan) bajo ISO 22301 con RTO ≤ 15 min y RPO ≈ 0 para transferencias.</p></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li><b>ISO/IEC 25010:2011</b>: la Disponibilidad es <b>subcaracterística de Fiabilidad</b>; la Capacidad es subcaracterística de Eficiencia de desempeño. Aquí fallaron ambas: la falta de capacidad (causa) produjo indisponibilidad (efecto).</li>
+<li>Diap. 17, caso 3: JMeter + autoescalado → SPE. Diap. 7: continuidad del negocio en picos.</li>
+<li>Ley 29571 (Código de Protección y Defensa del Consumidor, deber de idoneidad) y regulación SBS de continuidad.</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Disponibilidad mensual = (min totales − min caída) ÷ min totales · meta ≥ 99,95 % (≈ 22 min/mes).</li>
+<li>MTBF (Mean Time Between Failures) ≥ 90 días; MTTR ≤ 15 min.</li>
+<li>Margen de capacidad = TPS sostenidos en estrés ÷ pico histórico · meta ≥ 1,5.</li>
+<li>Latencia p95 ≤ 800 ms y tasa de HTTP 5xx ≤ 0,1 % en quincena.</li>
+<li>MTTD ≤ 2 min (alerta de APM antes que redes sociales).</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos (caídas por concurrencia)</h4>
+<div class="tabla"><table>
+<thead><tr><th>Grupo</th><th>Solución técnica</th><th>Estrategia</th></tr></thead>
+<tbody>
+<tr><td><b>G3</b> (Interbank)</td><td>Autoescalado, LB, centros alternos, DR</td><td>Pruebas de estrés/carga + APM (sin modelo nombrado)</td></tr>
+<tr><td>G2 (BBVA, Rappi)</td><td>Pruebas de disponibilidad, carga, estrés, recuperación; HA</td><td>PDCA reactivo</td></tr>
+<tr><td>G4 (BCP/Yape)</td><td>Contenedores, autoescalado por RPS, circuit breaker, rate limiting, colas</td><td>SQA + DevOps, feature flags, freeze, canary, postmortem</td></tr>
+<tr><td>G5 (Yape)</td><td>Autoescalado + DRP probado anualmente</td><td>SPE + JMeter</td></tr>
+<tr><td>G6 (Pichincha, Tottus)</td><td>JMeter/k6, umbrales, autoescalado</td><td>SPE como RNF desde el diseño</td></tr>
+<tr><td>G7 (Ripley)</td><td>JMeter con ramp-up y breaking point</td><td>SPE continua</td></tr>
+</tbody></table></div>
+<div class="ojo"><b>Errores frecuentes:</b> (1) escribir «Fiabilidad y Disponibilidad» como dos características (G3 y G5 lo hicieron: Disponibilidad es subcaracterística); (2) poner «pruebas de estrés» en la columna estrategia (en la tabla de la profesora son solución); (3) confundir escalabilidad con disponibilidad; (4) proponer DR sin probarlo (un DRP no probado no existe). Tres estrategias son válidas (PDCA, SPE, SRE): la más preventiva es SPE, la más operativa es SRE.</div>
+</details>
+</section>
+<section id="caso-6" class="caso">
+<h2>Caso 6 · Saga Falabella: Seller Center rechaza cargas por falsos Product ID duplicados y borra imágenes</h2>
+<p class="origen">Origen: Entregable G3 (Laboratorio 03, Caso II, Problema 1)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Saga Falabella (en Perú desde 1952 como Sears; SAGA desde 1988; grupo Falabella desde 1995; 35 tiendas en Perú, más de 7 800 colaboradores; ecosistema falabella.com con más de 37 M de clientes y 180 M de visitas mensuales regionales) opera el <b>Seller Center</b>, plataforma B2B (Business-to-Business) donde miles de vendedores externos cargan su catálogo mediante <b>plantillas Excel</b>. Se reportan: rechazo de plantillas por <b>colisiones de Product ID</b> (códigos de barras GTIN/EAN tomados como duplicados), <b>eliminación autónoma de imágenes</b> por falsos errores de lectura de URL, y la obligación del vendedor de descargar <b>reportes manuales iterativos</b> para corregir. Riesgo: catálogo inconsistente → venta de productos con especificaciones distintas a la realidad (deber de idoneidad, Indecopi). Datos supuestos de un mes: 120 000 SKU (Stock Keeping Unit) cargados; 21 600 rechazados, de los cuales 8 640 eran válidos (falsos positivos); 3 100 imágenes eliminadas por error.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcular la tasa de rechazo, la tasa de falsos positivos sobre los rechazos y la precisión del validador.</li>
+<li>Mapear a subcaracterísticas de ISO/IEC 25010 y a características de calidad de datos de ISO/IEC 25012.</li>
+<li>Rediseñar la ingesta (solución técnica) y proponer una estrategia de mejora de procesos, con al menos 2 alternativas.</li>
+<li>Criticar la «estrategia» de G3 (Selenium + Jira) con base en la tabla de la profesora.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Cálculo</h4>
+<p>Tasa de rechazo = 21 600 ÷ 120 000 = <b>18 %</b>. Falsos positivos = 8 640 ÷ 21 600 = <b>40 %</b> de los rechazos. Precisión del validador (rechazos correctos ÷ rechazos) = 12 960 ÷ 21 600 = <b>60 %</b>: 4 de cada 10 rechazos castigan a un vendedor que hizo bien su trabajo.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo afectado</th></tr></thead>
+<tbody>
+<tr><td>Falsos duplicados de Product ID</td><td>Regla de unicidad de GTIN/EAN mal implementada (no valida dígito de control, ignora variantes)</td><td>40 % de rechazos son falsos</td><td>25010: Adecuación funcional → Corrección funcional</td></tr>
+<tr><td>Imágenes eliminadas</td><td>Proceso de importación no idempotente; ante timeout de URL externa borra en vez de reintentar</td><td>3 100 imágenes/mes</td><td>25010: Fiabilidad → Tolerancia a fallos; 25012: Completitud</td></tr>
+<tr><td>Validación tardía</td><td>Se valida en la BD central, no en el borde (entrada)</td><td>Errores aparecen después de la carga</td><td>25010: Usabilidad → Protección contra errores de usuario</td></tr>
+<tr><td>Formato frágil</td><td>Excel heterogéneo sin contrato de datos</td><td>Plantillas rechazadas por formato</td><td>25010: Compatibilidad → Interoperabilidad; 25012: Consistencia</td></tr>
+<tr><td>Sin trazabilidad de defectos de sellers</td><td>Canal de reporte informal</td><td>Reportes manuales iterativos</td><td>25010: Usabilidad → Operabilidad</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · La de G3: Middleware + APIs con validación en tiempo real</h4><p>Reemplazar los archivos planos por una capa <b>Middleware + APIs</b> que valide formato (<b>JSON/XML</b>) y reglas de negocio en tiempo real, rechazando atributos conflictivos antes de tocar la BD central. Como estrategia G3 propone automatizar pruebas funcionales con <b>Selenium</b> sobre la interfaz de carga y gestionar defectos con <b>Jira</b> (la única propuesta del curso con <b>gestión de defectos</b>, herramienta n.º 4 de la diap. 20).</p></div>
+<div class="alt"><h4>Alternativa B · Shift-left con contrato de datos + PDCA</h4><p>Contrato <b>OpenAPI/JSON Schema</b> publicado para sellers; <b>contract testing</b> (p. ej. Pact) en CI/CD; validación del dígito de control GTIN; importación de imágenes idempotente con reintentos y cola. <b>Estrategia:</b> ciclo <b>PDCA</b> mensual sobre la tasa de falsos positivos (Plan: meta ≤ 2 %; Do: corregir reglas; Check: medir; Act: estandarizar en la guía del seller).</p></div>
+<div class="alt"><h4>Alternativa C · CMMI-DEV + SonarQube sobre la deuda del módulo de ingesta</h4><p>Institucionalizar Gestión de Requisitos (reglas de unicidad como requisito verificable) y Verificación/Validación de CMMI-DEV nivel 3; SonarQube con Quality Gate para el módulo de ingesta; arquetipo 2 de la profesora (código desorganizado → CMMI).</p></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li><b>ISO/IEC 25010:2011</b> (producto) y <b>ISO/IEC 25012:2008</b> (modelo de calidad de datos, misma familia SQuaRE: Exactitud, Completitud, Consistencia, Credibilidad, Actualidad…).</li>
+<li><b>Ley 29571</b>, deber de idoneidad: lo ofrecido debe corresponder a lo entregado.</li>
+<li>Diap. 17: pruebas manuales → automatización → PDCA; código desorganizado → SonarQube → CMMI.</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>% de cargas exitosas al primer intento = SKU aceptados en 1.er intento ÷ SKU cargados · meta ≥ 95 %.</li>
+<li>Tasa de falsos positivos = rechazos válidos ÷ rechazos · base 40 % → meta ≤ 2 %.</li>
+<li>Imágenes eliminadas por error/mes · base 3 100 → meta 0.</li>
+<li>Defectos reportados por sellers por 1 000 SKU; MTTR de tickets Jira ≤ 48 h.</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p>Solo G3 trabajó un caso de <b>calidad de datos B2B</b>. Lo más cercano: G6-Pichincha (consistencia saldo app vs core, con contract testing) y G5-Yape (inconsistencia transaccional). G3 es el único que propone <b>gestión de defectos</b> (Jira) pero no nombra un modelo de proceso.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) G3 pone <b>herramientas</b> (Selenium, Jira) en la columna estrategia: la profesora espera un modelo (PDCA, CMMI); (2) probar la UI con Selenium no corrige la regla de negocio errónea: el defecto está en la validación, no en la interfaz; (3) olvidar ISO/IEC 25012 cuando el problema es de <b>datos</b>; (4) confundir Corrección funcional (resultado correcto) con Completitud funcional (que la función exista).</div>
+</details>
+</section>
+
+<section id="caso-7" class="caso">
+<h2>Caso 7 · Saga Falabella: desconexión OMS–última milla y devoluciones bloqueadas</h2>
+<p class="origen">Origen: Entregable G3 (Laboratorio 03, Caso II, Problema 2) | Comparado con G2 (Rappi) y G6 (Tottus)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>En 2024 Falabella prometió <b>envíos en 24 horas</b>, pero la desconexión entre el <b>OMS (Order Management System)</b>, el <b>WMS (Warehouse Management System)</b>, el <b>CRM (Customer Relationship Management)</b> y los operadores de última milla causó entregas fuera de plazo; los canales digitales presentaron <b>barreras algorítmicas</b> que dificultaban reembolsos. En <b>nov-2025</b> Indecopi sancionó a Saga Falabella por <b>publicidad engañosa</b> y <b>restricciones ilegales de cambios y devoluciones</b>. Datos supuestos de un trimestre: 300 000 pedidos; 246 000 entregados completos y a tiempo; 12 000 solicitudes de devolución, de las cuales 1 800 nunca llegaron al WMS (evento perdido); 2 400 reclamos en el Libro de Reclamaciones; SUS del flujo de devolución = 52.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcular OTIF (On Time In Full), % de eventos de devolución perdidos y reclamos por cada 1 000 pedidos.</li>
+<li>Determinar si la causa raíz es de Usabilidad, de Adecuación funcional o de Interoperabilidad (o combinación) y justificar.</li>
+<li>Proponer arquitectura de integración, pruebas y estrategia (UCD vs PDCA), con 2+ alternativas.</li>
+<li>Relacionar con la Ley 29571 y el Libro de Reclamaciones.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Cálculo</h4>
+<p>OTIF = 246 000 ÷ 300 000 = <b>82 %</b> (promesa de 24 h incumplida en 18 %). Eventos perdidos = 1 800 ÷ 12 000 = <b>15 %</b>. Reclamos = 2 400 ÷ 300 = <b>8 por 1 000 pedidos</b>. SUS 52 &lt; 68 (promedio de la industria) → usabilidad «pobre/marginal».</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Eventos de devolución perdidos</td><td>Integración punto a punto síncrona sin garantía de entrega (sin colas ni patrón Outbox)</td><td>15 % no llega al WMS</td><td>Compatibilidad → Interoperabilidad; Fiabilidad → Madurez</td></tr>
+<tr><td>Promesa 24 h incumplida</td><td>Promesa comercial sin validar capacidad logística (requisito no verificado)</td><td>OTIF 82 %</td><td>Adecuación funcional → Corrección funcional</td></tr>
+<tr><td>Barreras para devolver</td><td>Reglas restrictivas codificadas + flujo confuso</td><td>SUS 52; sanción Indecopi</td><td>Usabilidad → Operabilidad, Protección contra errores, Accesibilidad</td></tr>
+<tr><td>Atención sin visibilidad</td><td>CRM no recibe estado logístico</td><td>2 400 reclamos</td><td>Compatibilidad → Interoperabilidad</td></tr>
+</tbody></table></div>
+<p><b>Diagnóstico:</b> es una <b>combinación</b>; la causa dominante es de <b>interoperabilidad</b> (el evento no llega), agravada por un problema de <b>adecuación funcional</b> (reglas ilegales codificadas) y uno de <b>usabilidad</b>. El diagnóstico de la causa raíz decide la estrategia: si fuera solo UI, bastaría UCD; como hay pérdida de eventos, se requiere arquitectura y pruebas E2E.</p>
+<div class="alt"><h4>Alternativa A · La de G3: integración vía API + E2E en CI/CD + usabilidad</h4><p>Rediseño e integración vía <b>API</b> entre Front-end (carrito, atención) y Back-end (CRM, WMS); <b>Libro de Reclamaciones Virtual</b> sin fricción; estrategia: <b>pruebas de integración E2E (End-to-End)</b> en CI/CD para que cada evento de devolución impacte el registro logístico + pruebas de usabilidad continuas.</p></div>
+<div class="alt"><h4>Alternativa B · Arquitectura orientada a eventos + PDCA sobre OTIF</h4><p>EDA (Event-Driven Architecture) con patrón <b>Outbox</b> y colas (Kafka) para no perder eventos; idempotencia de mensajes; contract testing entre OMS y WMS; PDCA mensual con OTIF como CTQ (Critical To Quality).</p></div>
+<div class="alt"><h4>Alternativa C · UCD (ISO 9241-210) + evaluación heurística de Nielsen</h4><p>La estrategia de la profesora para usabilidad: evaluación heurística del flujo de devolución (visibilidad del estado del sistema, prevención de errores, control y libertad del usuario), pruebas con usuarios reales y rediseño iterativo; cumplimiento del Reglamento del Libro de Reclamaciones (D.S. 011-2011-PCM y modificatorias).</p></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li><b>Ley 29571</b>: deber de idoneidad y derecho a la devolución; publicidad engañosa.</li>
+<li><b>ISO/IEC 25010:2011</b>: Interoperabilidad, Corrección funcional, Operabilidad.</li>
+<li>Diap. 18 caso 5: pruebas de usabilidad + Nielsen → UCD.</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>OTIF ≥ 95 %; eventos perdidos OMS→WMS = 0 % (con reconciliación diaria).</li>
+<li>Tiempo de ciclo de devolución (solicitud → reembolso) ≤ 7 días.</li>
+<li>Reclamos ≤ 2 por 1 000 pedidos; SUS ≥ 75; CES (Customer Effort Score) ≤ 2.</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos (usabilidad y postventa)</h4>
+<ul>
+<li><b>G3 (Falabella):</b> integración API front–CRM–WMS + E2E + usabilidad continua, sin nombrar UCD.</li>
+<li><b>G2 (Rappi):</b> reglas automáticas de estados (retraso → cancelación → reembolso) + <b>UCD</b> del recorrido completo.</li>
+<li><b>G6 (Tottus/Fazil):</b> pruebas de usabilidad + UAT + UCD, pero mapeó a «Adecuación funcional» por error.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) tratar todo problema de «el usuario no puede devolver» como usabilidad: puede ser interoperabilidad o requisitos; (2) G3 menciona pruebas de usabilidad pero no nombra <b>UCD</b> ni Nielsen; (3) confundir OTIF con disponibilidad del SW; (4) proponer solo un Libro de Reclamaciones «más bonito» sin arreglar la pérdida de eventos.</div>
+</details>
+</section>
+<section id="caso-8" class="caso">
+<h2>Caso 8 · BBVA Perú: app indisponible y transferencia inusual no detectada</h2>
+<p class="origen">Origen: Entregable Grupo 02 (Casos BBVA-i y BBVA-ii)</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>BBVA (fundado en 1857, más de 25 países; estrategia de datos e IA) presenta dos problemas en Perú:</p>
+<ol type="i">
+<li><b>14-jul-2025:</b> los usuarios no pudieron ingresar a la app, consultar saldos, pagar ni transferir; el banco confirmó la falla. Supuesto: la caída duró 3 h 20 min un lunes de 9:00 a 12:20 con 240 000 sesiones fallidas.</li>
+<li><b>Sanción Indecopi:</b> el banco no acreditó medidas de <b>monitoreo y alerta</b> suficientes para detectar a tiempo una <b>transferencia inusual de S/ 10 000</b> (operación no reconocida por el cliente). Supuesto: el cliente transfería en promedio S/ 350 por operación, siempre desde Lima; la operación salió a las 3:12 a. m. desde un dispositivo nuevo registrado 6 min antes.</li>
+</ol>
+<p>G2 propuso: (i) pruebas de disponibilidad, carga, estrés y recuperación + monitoreo + HA (High Availability), con estrategia <b>PDCA</b> «a partir del incidente»; (ii) detección automática de anomalías, análisis de comportamiento, alertas en tiempo real y autenticación reforzada, con estrategia <b>DevSecOps</b>.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Desarrollar el PDCA completo de (i) y criticar un PDCA puramente reactivo.</li>
+<li>Para (ii), diferenciar un control de <b>desarrollo seguro</b> (DevSecOps) de un control <b>operativo antifraude</b> y elegir el marco más adecuado.</li>
+<li>Listar las señales de riesgo de la operación de S/ 10 000 y diseñar una regla de autenticación adaptativa.</li>
+<li>Proponer KPI para ambos problemas.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>(i) Indisponibilidad total</td><td>Sin redundancia efectiva ni pruebas de recuperación; capacidad no planificada</td><td>3 h 20 min; 240 000 sesiones fallidas</td><td>Fiabilidad → Disponibilidad, Capacidad de recuperación</td></tr>
+<tr><td>(ii) Fraude no detectado</td><td>Motor antifraude sin perfil de comportamiento ni step-up authentication</td><td>S/ 10 000 = 28,6 veces el monto promedio, 3:12 a. m., dispositivo de 6 min</td><td>Seguridad → Autenticidad, Responsabilidad</td></tr>
+</tbody></table></div>
+<h4>1. PDCA para (i)</h4>
+<ul>
+<li><b>Plan:</b> análisis causa raíz (5 porqués + Ishikawa), meta SLO 99,95 %, plan de capacidad por calendario.</li>
+<li><b>Do:</b> HA activo-activo, pruebas de recuperación (failover) y de estrés a 1,5 × pico.</li>
+<li><b>Check:</b> disponibilidad mensual, MTTR, resultados de simulacros.</li>
+<li><b>Act:</b> estandarizar el runbook, actualizar el DRP, repetir el ciclo trimestralmente.</li>
+</ul>
+<p><b>Crítica:</b> un PDCA que solo arranca «a partir del incidente» es correctivo; la profesora propone PDCA para pruebas manuales y <b>SPE</b> para escalabilidad, que es preventiva.</p>
+<h4>3. Señales y regla adaptativa</h4>
+<p>Señales: monto 28,6× la media, horario atípico, dispositivo recién enrolado, posible cambio de ubicación. Regla: si (monto &gt; 5× media) ∧ (dispositivo &lt; 24 h) → bloquear y exigir <b>step-up</b> (biometría + llamada de confirmación) y retener la operación 30 min.</p>
+<div class="alt"><h4>Alternativa A · La de G2: PDCA (i) + DevSecOps (ii)</h4><p>Formato correcto de 3 columnas y estrategias que son modelos/prácticas de proceso. Problema: DevSecOps actúa en el ciclo de <b>desarrollo</b> y el fraude de (ii) es un fallo de <b>operación</b>.</p></div>
+<div class="alt"><h4>Alternativa B · SPE (i) + ISO/IEC 27001 A.8.16 / OWASP SAMM Operaciones (ii)</h4><p>(i) SPE con performance gates; (ii) control A.8.16 (actividades de monitoreo) de ISO/IEC 27001:2022, función <i>Operations</i> de OWASP SAMM (Incident Management, Operational Management) y motor antifraude con ML (Machine Learning) y SIEM.</p></div>
+<div class="alt"><h4>Alternativa C · SRE (i) + autenticación basada en riesgo (ii)</h4><p>Presupuesto de error y chaos engineering; RBA (Risk-Based Authentication) con puntaje en tiempo real y conservación de evidencia (logs firmados) para poder probar ante Indecopi qué controles se aplicaron.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC 25010:2011 (Disponibilidad ⊂ Fiabilidad; Autenticidad ⊂ Seguridad); ISO/IEC 27001:2022 A.8.16; Res. SBS N.° 504-2021 (seguridad de la información y ciberseguridad); Ley 29571 (idoneidad del servicio financiero).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Disponibilidad ≥ 99,95 %; MTTR ≤ 15 min; RTO ≤ 30 min.</li>
+<li>Tasa de detección de fraude = fraudes detectados ÷ fraudes totales × 100 · meta ≥ 95 %.</li>
+<li>Tasa de falsos positivos = alertas legítimas bloqueadas ÷ alertas · meta ≤ 5 %.</li>
+<li>Tiempo de alerta ≤ 1 s (en línea, antes de liquidar la transferencia).</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p>G2 respeta el formato exacto de la diap. 17–18 pero es superficial (sin causa raíz ni KPI). Comparado con <b>G3</b>, G2 sí nombra modelos en la columna estrategia, mientras G3 aporta más evidencia y vínculo regulatorio. G7 (Scotiabank) trató un caso cercano de autenticación con métricas.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) aplicar DevSecOps/SAST a un problema operativo de fraude; (2) repetir PDCA con la misma redacción en casos distintos (G2 lo hizo en BBVA-i y Rappi-i); (3) no distinguir disponibilidad (Fiabilidad) de escalabilidad (Capacidad).</div>
+</details>
+</section>
+
+<section id="caso-9" class="caso">
+<h2>Caso 9 · Rappi: interrupción de pedidos y reembolso imposible</h2>
+<p class="origen">Origen: Entregable Grupo 02 (Casos Rappi-i y Rappi-ii)</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>Rappi (fundada en 2015; 9 países; más de 40 000 aliados) coordina catálogo, pagos, asignación de repartidores y estado de entrega. Dos problemas:</p>
+<ol type="i">
+<li><b>7-sep-2025:</b> usuarios (en Colombia, aunque G2 tituló «Rappi Perú») no podían hacer pedidos; la empresa no informó la causa.</li>
+<li>Pedido del <b>27-dic-2024</b> (un «Big Box» de KFC) no entregado; el cliente no pudo cancelarlo ni obtener reembolso; <b>Indecopi</b> dictó medida correctiva y ordenó cambiar el estado a «cancelado».</li>
+</ol>
+<p>Máquina de estados actual (supuesta): CREADO → PAGADO → ASIGNADO → EN_CAMINO → ENTREGADO. No existe transición desde EN_CAMINO a CANCELADO; el botón «Cancelar» desaparece en cuanto el pedido es ASIGNADO.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Rediseñar la máquina de estados con reglas de retraso, cancelación y reembolso automático.</li>
+<li>Indicar las subcaracterísticas de ISO/IEC 25010 afectadas en (i) y (ii).</li>
+<li>Comparar PDCA vs SPE para (i) y UCD vs revisión de requisitos para (ii).</li>
+<li>Señalar la inconsistencia de fuente del entregable.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>(i) No se pueden crear pedidos</td><td>Sin redundancia ni recuperación automática; sin comunicación de incidentes</td><td>Caída 7-sep-2025 sin causa informada</td><td>Fiabilidad → Disponibilidad</td></tr>
+<tr><td>(ii) No hay transición a CANCELADO</td><td>Requisito incompleto en la máquina de estados (defecto de especificación)</td><td>Botón desaparece tras ASIGNADO</td><td>Adecuación funcional → Completitud funcional</td></tr>
+<tr><td>(ii) Reembolso manual</td><td>Sin regla automática de compensación</td><td>Indecopi tuvo que ordenarlo</td><td>Adecuación funcional → Corrección; Usabilidad → Operabilidad</td></tr>
+</tbody></table></div>
+<h4>1. Máquina de estados rediseñada</h4>
+<ul>
+<li>Nuevas transiciones: ASIGNADO/EN_CAMINO → <b>RETRASADO</b> si t &gt; ETA + 30 min; RETRASADO → <b>CANCELADO_POR_CLIENTE</b> (botón visible); CANCELADO → <b>REEMBOLSO_EN_PROCESO</b> automático → <b>REEMBOLSADO</b> en ≤ 72 h; notificación push en cada transición.</li>
+<li>Pruebas: tabla de transición de estados (técnica de caja negra) con todas las transiciones válidas e inválidas.</li>
+</ul>
+<div class="alt"><h4>Alternativa A · La de G2: PDCA (i) + UCD (ii)</h4><p>PDCA para estabilidad; UCD sobre el recorrido pedido → cancelación → reembolso → comunicación. Coincide con la diap. 18 (usabilidad → UCD).</p></div>
+<div class="alt"><h4>Alternativa B · SPE (i) + Gestión de requisitos y revisión técnica (ii)</h4><p>Para (ii) el defecto nace en el <b>requisito</b> (falta un estado): una inspección del modelo de estados en el SRS lo detecta antes de codificar (técnica estática; Ley de Boehm). Para (i), SPE preventiva en lugar de PDCA reactivo.</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC 25010:2011; Ley 29571 (derecho a la devolución por servicio no prestado); diap. 14 (walkthrough/auditoría de requisitos) y diap. 18 (UCD).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>% de pedidos retrasados con opción de cancelar visible = 100 %.</li>
+<li>Tiempo medio de reembolso = Σ (reembolso − cancelación) ÷ nº · meta ≤ 72 h.</li>
+<li>Reclamos ante Indecopi por 100 000 pedidos · meta −80 % en 6 meses.</li>
+<li>Disponibilidad del servicio de pedidos ≥ 99,9 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) el incidente (i) ocurrió en <b>Colombia</b> aunque el caso se titule «Rappi Perú»: usar evidencia del país analizado; (2) tratar como usabilidad algo que es <b>completitud funcional</b> (la función no existe); (3) repetir PDCA sin adaptar al problema.</div>
+</details>
+</section>
+
+<section id="caso-10" class="caso">
+<h2>Caso 10 · BCP / Yape: caídas predecibles en quincena y fin de mes, y débitos no reflejados</h2>
+<p class="origen">Origen: Entregable Grupo 04 (Caso 1 BCP) + Grupo 05 (Yape P1 y P2) — mismo caso trabajado por dos grupos</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>BCP (fundado en 1889, subsidiaria de Credicorp; migró de mainframes a nube híbrida con Microsoft Azure y Kyndryl) opera Banca Móvil, VíaBCP y <b>Yape</b> (más de 18 M de usuarios). Hechos:</p>
+<ul>
+<li>Caídas/intermitencias reportadas en Downdetector y redes el <b>21-abr, 3-jun, 30-jun, 19-ago y 29-ago de 2026</b>; el 30-jun (último día del mes, pago de sueldos) la caída ocurrió <b>justo después de un mantenimiento</b>; el colapso es <b>abrupto</b>, no una degradación progresiva. Caída de Yape y BCP el 2-jul-2025; investigación preliminar de Indecopi (ago-2024).</li>
+<li>El banco reconoce la falla después de que se viraliza en X/Facebook; la <b>Res. SBS N.° 01741-2026</b> exige informar oportunamente interrupciones.</li>
+<li>En picos, timeouts entre servicios producen <b>saldos debitados no reflejados</b> y falsos errores → aumento masivo de reclamos (G5, Yape P2).</li>
+</ul>
+<p>Datos supuestos: tráfico normal 6 000 RPS (requests per second); pico de fin de mes 21 000 RPS; capacidad asignada fija 15 000 RPS; 0,4 % de pagos en el pico terminan en timeout y 30 % de ellos quedan con débito sin abono.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Explicar por qué un colapso abrupto en fechas predecibles indica un cuello de botella de concurrencia y una falla de planificación de capacidad.</li>
+<li>Calcular la brecha de capacidad y cuántas operaciones inconsistentes se generan por hora de pico.</li>
+<li>Diseñar la solución técnica (resiliencia + consistencia) y la estrategia de proceso, con 3 alternativas.</li>
+<li>Corregir el término «Exactitud funcional» usado por G5.</li>
+<li>Definir KPI con metas.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Cálculo</h4>
+<p>Brecha = 21 000 − 15 000 = 6 000 RPS (el pico es 1,4 × la capacidad). Operaciones en 1 h de pico = 21 000 × 3 600 = 75,6 M; timeouts = 0,4 % = 302 400; inconsistentes = 30 % = <b>90 720 débitos sin abono por hora</b>. Este número explica la avalancha de reclamos.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Colapso abrupto</td><td>Capacidad fija; sin <i>graceful degradation</i>, sin rate limiting ni circuit breaker</td><td>Cae de golpe, no se degrada</td><td>Eficiencia de desempeño → Capacidad; Fiabilidad → Tolerancia a fallos</td></tr>
+<tr><td>Fallas en fechas predecibles</td><td>Planificación de capacidad no alineada al calendario de negocio</td><td>Quincenas y fin de mes</td><td>Eficiencia de desempeño → Capacidad</td></tr>
+<tr><td>Caída post-mantenimiento</td><td>Gestión de cambios débil: despliegue cerca de fecha crítica, sin canary</td><td>30-jun-2026</td><td>Fiabilidad → Madurez</td></tr>
+<tr><td>Débitos no reflejados</td><td>Transacciones distribuidas sin compensación ni idempotencia</td><td>90 720 inconsistencias/h</td><td>Adecuación funcional → Corrección funcional; Seguridad → Integridad</td></tr>
+<tr><td>Comunicación tardía</td><td>Sin APM con umbrales; detección por redes</td><td>Incumple Res. SBS 01741-2026</td><td>Proceso de gestión de incidentes</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · La de G4: resiliencia + DevOps + gestión de liberaciones</h4><p>Contenedores orquestados con <b>autoescalado</b> por CPU, memoria o <b>RPS</b>; balanceador con <b>health checks</b>; <b>circuit breaker</b>, <b>rate limiting</b> y <b>colas asíncronas</b> (Amazon SQS o Kafka); estrés obligatorio antes de cada quincena o Cyber Yape con volumen <b>superior al pico histórico</b>. Proceso: SQA + DevOps CI/CD, <b>feature flags</b> (apagar lo no esencial en picos), APM (Datadog, CloudWatch), <b>freeze de 48–72 h</b> antes de fechas críticas, <b>canary/blue-green</b>, <b>postmortem sin culpables</b>. Lema: «probar antes de que pueda caer».</p></div>
+<div class="alt"><h4>Alternativa B · La de G5: SPE + JMeter + DRP probado; EDA para consistencia</h4><p>P1: autoescalado + DRP probado anualmente; estrategia <b>SPE</b> con JMeter simulando millones de transacciones (coincide exactamente con la fila 3 de la profesora). P2: <b>EDA</b> (Event-Driven Architecture), conciliación automatizada y <b>rollback</b>; simulación de fallos y pruebas de integración.</p></div>
+<div class="alt"><h4>Alternativa C · Patrón Saga + idempotencia + SRE</h4><p>Patrón <b>Saga</b> con transacciones compensatorias (si el abono falla, se revierte el débito), <b>clave de idempotencia</b> por pago para evitar dobles cargos al reintentar, conciliación cada 5 min; SRE con SLO por servicio crítico y presupuesto de error que bloquea despliegues cuando se agota.</p></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li><b>ISO/IEC 25010:2011</b>: Capacidad y Comportamiento temporal (Eficiencia de desempeño); Disponibilidad y Tolerancia a fallos (Fiabilidad); <b>Corrección funcional</b> (Adecuación funcional) e Integridad (Seguridad) para P2.</li>
+<li>Diap. 17 caso 3 (SPE); Res. SBS N.° 01741-2026 (reporte de interrupciones) y Res. SBS N.° 504-2021.</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Margen de capacidad</td><td>RPS sostenidos con p95 ≤ 1 s ÷ pico histórico</td><td>≥ 1,5 (≥ 31 500 RPS)</td></tr>
+<tr><td>Disponibilidad en días críticos</td><td>min operativos ÷ min del día</td><td>≥ 99,95 %</td></tr>
+<tr><td>Operaciones inconsistentes</td><td>débitos sin abono ÷ operaciones</td><td>0 tras conciliación de 5 min</td></tr>
+<tr><td>MTTD</td><td>Σ (detección − inicio) ÷ incidentes</td><td>≤ 2 min, antes que Downdetector</td></tr>
+<tr><td>Cambios en ventana de freeze</td><td>nº despliegues 72 h antes de fecha crítica</td><td>0</td></tr>
+</tbody></table></div>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p><b>G4</b> tiene la causa raíz más profunda del curso (concurrencia, capacidad rígida, calendario predecible, caída post-mantenimiento) pero no nombra un <b>modelo</b> (su contenido es SPE + SRE). <b>G5</b> alinea P1 perfectamente con la profesora (SPE) y aporta el único caso de <b>consistencia transaccional</b> distribuida. Frente a <b>G3</b> (Interbank), ambos coinciden en autoescalado; G3 añade DR multi-sitio y G5 «DRP probado».</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) «Exactitud» es término de <b>ISO/IEC 9126</b>; en ISO/IEC 25010 es <b>Corrección funcional</b>; (2) «Fiabilidad y Disponibilidad» como dos características; (3) reintentar pagos sin idempotencia (crea dobles cargos); (4) creer que autoescalar resuelve todo: si la BD es el cuello de botella, escalar pods agrava la saturación.</div>
+</details>
+</section>
+
+<section id="caso-11" class="caso">
+<h2>Caso 11 · Inkafarma: filtración de datos de ~4 millones de clientes</h2>
+<p class="origen">Origen: Entregable Grupo 04 (Caso 2)</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>Inkafarma (InRetail Pharma, grupo Intercorp; con Mifarma suma más de 2 400 locales en las 25 regiones; modelo omnicanal botica-web-app) sufrió a inicios de <b>2025</b> una filtración reportada de datos de <b>casi 4 millones de clientes</b> (registros ofrecidos en la <i>dark web</i>). La empresa está sujeta a la <b>Ley 29733</b> (datos de salud = datos sensibles), la ANPD, DIGEMID (Dirección General de Medicamentos, Insumos y Drogas) e Indecopi. G4 describe la situación como «datos sensibles almacenados sin cifrado adecuado y sesiones expuestas» y propone <b>DevSecOps</b> (SAST, DAST, pentesting, SonarQube) con estrategia <b>OWASP SAMM + ISO/IEC 27001 + ISO/IEC 25010</b>, citando la Ley de Boehm. Una fuente de prensa (El Comercio) recoge que la empresa aclaró que la filtración fue resuelta y no comprometió información sensible.</p>
+<p>Supuesto para el cálculo: corregir una vulnerabilidad de cifrado en diseño cuesta S/ 3 000; la multa máxima de la ANPD para infracción muy grave es de hasta 100 UIT (UIT 2025 = S/ 5 350).</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Evaluar críticamente la evidencia usada por G4.</li>
+<li>Ubicar SAST, DAST, pentesting y SonarQube en el ciclo de vida (fase y tipo de técnica).</li>
+<li>Comparar el costo de prevención con la multa máxima usando la Ley de Boehm.</li>
+<li>Proponer 2 alternativas y KPI.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Datos personales expuestos</td><td>Cifrado en reposo ausente o débil; controles de acceso insuficientes</td><td>~4 M registros ofrecidos</td><td>Seguridad → Confidencialidad</td></tr>
+<tr><td>Sesiones interceptables</td><td>Tokens de sesión sin TLS/flags Secure-HttpOnly</td><td>Texto de G4 (casi idéntico a la diap. 18)</td><td>Seguridad → Autenticidad, Integridad</td></tr>
+<tr><td>Análisis sin evidencia propia</td><td>Se copió la situación de la diapositiva y no se investigó el vector real</td><td>Contradice su propia fuente</td><td>(Calidad del análisis, no del producto)</td></tr>
+</tbody></table></div>
+<h4>2. Ubicación de técnicas</h4>
+<ul>
+<li><b>SAST</b> (estática): en cada commit/PR, fase de construcción. <b>SonarQube</b> (estática): mismo punto, con Quality Gate de seguridad.</li>
+<li><b>DAST</b> (dinámica): en staging, antes de cada liberación, contra la app ejecutándose. <b>Pentesting</b> (dinámica, manual/experiencia): periódico y antes de cambios mayores.</li>
+</ul>
+<h4>3. Boehm vs multa</h4>
+<p>Multa máxima = 100 × 5 350 = <b>S/ 535 000</b>. Factor 100 de Boehm sobre S/ 3 000 = S/ 300 000 de corrección en producción; sumando multa, el costo supera <b>S/ 835 000</b> (≈ 278 veces la prevención), sin contar reputación.</p>
+<div class="alt"><h4>Alternativa A · La de G4: DevSecOps + OWASP SAMM + ISO 27001</h4><p>Copia fiel de la fila 4 de la profesora; integra 3 marcos (OWASP SAMM para madurez, ISO 27001 para gestión, ISO 25010 para producto). Correcta en forma.</p></div>
+<div class="alt"><h4>Alternativa B · Privacidad desde el diseño + DLP + ISO/IEC 27701</h4><p>Clasificación de datos (salud = sensible), cifrado AES-256 en reposo y TLS 1.3 en tránsito, tokenización, minimización, DLP y extensión de privacidad ISO/IEC 27701 sobre el SGSI; banco de pruebas de seguridad con OWASP ASVS (Application Security Verification Standard) nivel 2.</p></div>
+<h4>Justificación normativa</h4>
+<p>Ley 29733 y su reglamento (D.S. 016-2024-JUS); ISO/IEC 27001:2022 A.8.24 (criptografía) y A.8.11 (enmascaramiento de datos); OWASP SAMM v2 (Implementación → Secure Build; Verificación → Security Testing).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>% de campos sensibles cifrados = campos cifrados ÷ campos sensibles · meta 100 %.</li>
+<li>Vulnerabilidades críticas abiertas &gt; 7 días · meta 0.</li>
+<li>Cobertura DAST de endpoints públicos ≥ 95 % por release.</li>
+<li>Madurez SAMM en Security Testing ≥ 2.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) reproducir el texto de la diapositiva como «situación actual» en lugar de evidencia propia; (2) citar una fuente que contradice la tesis sin discutirla; (3) creer que SonarQube por sí solo es DevSecOps; (4) no analizar el vector real del ataque.</div>
+</details>
+</section>
+
+<section id="caso-12" class="caso">
+<h2>Caso 12 · RENIEC: extracción masiva vía APIs y latencia en servicios de validación</h2>
+<p class="origen">Origen: Entregable Grupo 05 (RENIEC P1 y P2)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>RENIEC custodia la BD de identidad más crítica del país y atiende millones de consultas vía Web Services/APIs de entidades públicas y privadas. Hechos: (P1) datos ciudadanos ofrecidos a la venta por <b>menos de S/ 3</b> por consulta (El Comercio, nov-2024); uso indebido de accesos concedidos a entidades como el <b>Mininter</b> (investigación, abr-2025); <b>sin rate limiting</b> en las integraciones. (P2) En horas pico, cuellos de botella → latencia y <b>timeouts</b> que paralizan la validación de identidad de bancos y entidades dependientes.</p>
+<p>Datos supuestos: una credencial institucional realizó 480 000 consultas en 72 h (su promedio histórico era 1 200/día); la API no registra el usuario final ni la finalidad; p95 de la consulta en pico = 6,8 s con un SLA de 1,5 s.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Explicar por qué SAST/DAST (estrategia de G5) <b>no</b> detectan este vector.</li>
+<li>Diseñar controles técnicos de P1 (API Gateway, cuotas, auditoría) y las subcaracterísticas de Seguridad que protegen.</li>
+<li>Para P2, proponer arquitectura y estrategia de proceso.</li>
+<li>Calcular el factor de exceso de la credencial y diseñar una regla de cuota.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Cálculo</h4>
+<p>Consumo esperado en 72 h = 1 200 × 3 = 3 600. Real = 480 000 → <b>133 veces</b> lo normal. Regla: cuota diaria = 2 × media móvil de 30 días (2 400/día) con alerta al 80 % y bloqueo al 100 %, y throttling de 5 consultas/s por token.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Extracción masiva</td><td>Sin rate limiting ni cuotas por entidad</td><td>480 000 consultas en 72 h</td><td>Seguridad → Confidencialidad</td></tr>
+<tr><td>Abuso de accesos legítimos</td><td>Credencial institucional compartida; sin mínimo privilegio</td><td>Caso Mininter</td><td>Seguridad → Autenticidad</td></tr>
+<tr><td>Sin trazabilidad del usuario final</td><td>La API no registra quién consulta ni para qué</td><td>Imposible atribuir</td><td>Seguridad → Responsabilidad, No repudio</td></tr>
+<tr><td>Latencia y timeouts</td><td>BD centralizada sin caché ni escalamiento horizontal</td><td>p95 6,8 s vs 1,5 s</td><td>Eficiencia de desempeño → Comportamiento temporal, Capacidad</td></tr>
+</tbody></table></div>
+<h4>1. Por qué SAST/DAST no bastan</h4>
+<p>SAST busca defectos en el código y DAST ataca la app en ejecución; ambos suponen que el atacante explota un <b>defecto</b>. Aquí el atacante usa una <b>credencial válida</b> con la API funcionando «correctamente»: no hay bug que encontrar. Se requieren controles <b>operativos</b>: cuotas, UEBA, auditoría y mínimo privilegio.</p>
+<div class="alt"><h4>Alternativa A · La de G5: Zero Trust + API Gateway con throttling por token</h4><p>Solución precisa contra el <i>scraping</i>: Zero Trust, <b>API Gateway</b> con políticas estrictas de <b>throttling</b> y limitación por token. Estrategia de G5: DevSecOps con SAST/DAST y pentesting a los Web Services (insuficiente para el vector).</p></div>
+<div class="alt"><h4>Alternativa B · ISO/IEC 27001 + OWASP SAMM Operaciones + auditoría</h4><p>Credenciales por usuario final (no por entidad) con OAuth 2.0 + mTLS; registro inmutable de quién, cuándo y finalidad (Responsabilidad y No repudio); UEBA con alertas por desviación; revisión trimestral de accesos (A.5.18, A.8.15 registro, A.8.16 monitoreo de ISO/IEC 27001:2022).</p></div>
+<div class="alt"><h4>Alternativa C · P2 con SPE + caché + réplicas</h4><p>Réplicas de lectura, caché de consultas repetitivas con TTL corto, microservicios de validación escalables, colas para lotes masivos; SPE con presupuestos de latencia y pruebas de carga en preproducción (G5 propone microservicios + BD distribuidas en HA + caché, sin nombrar modelo).</p></div>
+<h4>Justificación normativa</h4>
+<p>ISO/IEC 25010:2011 (Seguridad: Confidencialidad, Autenticidad, Responsabilidad, No repudio); Ley 29733; NTP-ISO/IEC 27001 obligatoria en el Estado peruano (RM 004-2016-PCM); diap. 17 (SPE) y 18 (OWASP SAMM).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>% de credenciales con cuota y throttling = 100 %.</li>
+<li>Consultas con usuario final y finalidad registrados = 100 %.</li>
+<li>Tiempo de bloqueo ante consumo anómalo ≤ 10 min.</li>
+<li>p95 de validación ≤ 1,5 s en pico; disponibilidad ≥ 99,9 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) responder «SAST/DAST» a todo problema de seguridad; (2) confundir Responsabilidad (registro de acciones) con No repudio (prueba criptográfica de autoría); (3) RENIEC P2 sin fuente ni modelo de proceso; (4) formato calcado del de G3 sin aporte propio.</div>
+</details>
+</section>
+<section id="caso-13" class="caso">
+<h2>Caso 13 · Banco Pichincha del Perú: legacy + microservicios, picos PLIN/Yape, despliegues y MFA</h2>
+<p class="origen">Origen: Entregable Grupo 06 (Matriz de Mejora de Procesos y Calidad de SW, casos P1–P4)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Banco Pichincha del Perú S.A. (ex Banco Financiero, razón social cambiada en sep-2018; 7.º banco del sistema; el grupo controla el 99,4 % de las acciones) ejecuta un Plan Estratégico que redujo agencias de <b>41 a 22</b> y la planilla de <b>1 233 a 902</b>, bajando el ratio de eficiencia de <b>41,9 % a 35,1 %</b>. Su fondeo es minorista (85,2 % del saldo). La app tiene <b>&gt; 1,06 millones</b> de usuarios activos y, tras integrarse a la interoperabilidad <b>PLIN/Yape</b>, procesa <b>&gt; 13,6 millones</b> de transacciones mensuales. Se reportan cuatro situaciones:</p>
+<ul>
+<li><b>P1.</b> El <i>core banking</i> legacy convive con microservicios nuevos: tras ciertas actualizaciones el <b>saldo mostrado en la app ≠ saldo del core</b> durante minutos u horas.</li>
+<li><b>P2.</b> En quincena y fin de mes las transferencias inmediatas presentan cuellos de botella (timeouts, reintentos).</li>
+<li><b>P3.</b> Despliegues no controlados provocan <b>suspensiones transitorias</b> de cajeros (ATM – Automated Teller Machine) y canales virtuales.</li>
+<li><b>P4.</b> La migración a la nube amplió la superficie de ataque; la verificación del <b>MFA</b> (Multi-Factor Authentication) en flujos críticos es irregular.</li>
+</ul>
+<p>Datos de un trimestre: 9 releases, 3 con incidente en producción (MTTR – Mean Time To Repair – medio 95 min); 412 tickets de «saldo descuadrado»; p95 de transferencia inmediata en pico = 6,8 s (SLA – Service Level Agreement – interno 3 s).</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Clasificar P1–P4 en los 5 arquetipos de la profesora (diap. 17–18) y en características/subcaracterísticas de ISO/IEC 25010:2011.</li>
+<li>Para cada problema, separar <b>solución</b> (técnica/herramienta) y <b>estrategia de mejora</b> (modelo/marco).</li>
+<li>Argumentar por qué la reducción de agencias <b>eleva</b> la criticidad de la calidad del SW.</li>
+<li>Calcular el CFR (Change Failure Rate) actual y proponer KPI con meta.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>P1 Saldo app ≠ core</td><td>Integración síncrona/asíncrona sin contrato verificado ni conciliación; lógica de saldo duplicada en dos capas (deuda técnica arquitectónica)</td><td>412 tickets de saldo descuadrado</td><td>Compatibilidad → Interoperabilidad; Adecuación funcional → Corrección; Mantenibilidad → Modificabilidad</td></tr>
+<tr><td>P2 Cuellos de botella en pico</td><td>Capacidad estática, sin planificación por calendario de negocio; rendimiento no tratado como RNF (Requisito No Funcional) verificable</td><td>p95 6,8 s vs SLA 3 s</td><td>Eficiencia de desempeño → Comportamiento temporal, Capacidad</td></tr>
+<tr><td>P3 Despliegues que tumban canales</td><td>Release <i>big-bang</i>, regresión manual incompleta, sin <i>rollback</i> automático</td><td>3 de 9 releases con incidente</td><td>Fiabilidad → Disponibilidad, Madurez</td></tr>
+<tr><td>P4 MFA irregular</td><td>Seguridad añadida al final; sin SAST/DAST ni pruebas de autenticación en el pipeline</td><td>Superficie ampliada en nube</td><td>Seguridad → Autenticidad, Confidencialidad, No repudio</td></tr>
+</tbody></table></div>
+<p><b>Arquetipos:</b> P1 → #2 Código desorganizado/legacy (+ integración); P2 → #3 Escalabilidad; P3 → #1 Pruebas manuales/despliegues; P4 → #4 Vulnerabilidades.</p>
+<p><b>CFR actual</b> = releases con incidente ÷ releases = 3/9 = <b>33,3 %</b> (los equipos DORA – DevOps Research and Assessment – de alto desempeño están en ~0–15 %).</p>
+<div class="alt"><h4>Alternativa A · La de G6 (matriz por problema)</h4>
+<div class="tabla"><table>
+<thead><tr><th>#</th><th>Solución (técnica/herramienta)</th><th>Estrategia (modelo/marco)</th></tr></thead>
+<tbody>
+<tr><td>P1</td><td>Pruebas de integración y <b>contract testing</b> (p. ej. Pact), validación automatizada de consistencia, trazabilidad E2E (End-to-End) con observabilidad centralizada</td><td>Patrón <b>Strangler Fig</b> + <b>ACL</b> (Anti-Corruption Layer) + regresión obligatoria por iteración</td></tr>
+<tr><td>P2</td><td>Pruebas de carga y estrés con <b>JMeter o k6</b>, umbrales, autoescalado</td><td><b>SPE</b>: rendimiento como RNF verificable desde el diseño, carga en el pipeline</td></tr>
+<tr><td>P3</td><td>CI/CD con regresión automatizada, <b>canary / blue-green</b>, rollback automático</td><td><b>PDCA aplicado a releases</b>: Plan (planificar despliegue) → Do (subconjunto de usuarios) → Check (métricas) → Act (ajustar)</td></tr>
+<tr><td>P4</td><td><b>SonarQube</b> + pentesting periódico + verificación funcional de MFA</td><td><b>DevSecOps alineado a OWASP SAMM</b> + auditoría continua conforme a la SBS</td></tr>
+</tbody></table></div>
+<p>Observación: «Strangler Fig + ACL» es una estrategia de <i>migración arquitectónica</i>, no un modelo de proceso de la diap. 17; para la profesora conviene añadir <b>CMMI-DEV</b> (área de práctica Technical Solution / Product Integration) como institucionalización.</p></div>
+<div class="alt"><h4>Alternativa B · Un solo marco integrador: CMMI-DEV v2.0 nivel 3 + DORA</h4>
+<p>En vez de cuatro estrategias sueltas, institucionalizar un <b>proceso definido</b> (CMMI nivel 3) con áreas de práctica PI (Product Integration), VV (Verification and Validation), PR (Peer Reviews), CM (Configuration Management) y MPM (Managing Performance and Measurement), midiendo con las 4 métricas DORA (frecuencia de despliegue, <i>lead time</i>, CFR, MTTR). Las herramientas (Pact, k6, ArgoCD, SonarQube) quedan como medios de ese proceso. Ventaja: una sola línea base organizacional; desventaja: mayor costo y plazo (12–24 meses).</p></div>
+<div class="alt"><h4>Alternativa C · Consistencia por diseño: EDA + conciliación + SRE</h4>
+<p>Para P1, publicar eventos de dominio desde el core (CDC – Change Data Capture con Debezium/Kafka), saldo de la app como <b>proyección</b> del evento y job de <b>conciliación</b> cada 5 min con alerta; para P2–P3, prácticas SRE (Site Reliability Engineering): SLO (Service Level Objective) de 99,9 %, <i>error budget</i> que congela releases si se agota. Estrategia: PDCA guiado por el error budget.</p></div>
+<h4>Por qué cerrar agencias eleva la criticidad</h4>
+<p>Con 22 agencias, el canal digital deja de ser complementario y pasa a ser el <b>único</b> para muchos clientes: cada falla del SW no tiene «plan B» presencial. Como el fondeo es minorista, una caída prolongada se traduce en pérdida de confianza y retiros (riesgo de liquidez). La calidad del SW se vuelve <b>condición de viabilidad</b> del plan estratégico (argumento de G6). Además, por la <b>Ley de Boehm</b>, corregir en producción un defecto de saldo en fin de mes cuesta hasta ~100× más que detectarlo con análisis estático o revisión.</p>
+<h4>Justificación normativa</h4>
+<ul>
+<li><b>ISO/IEC 25010:2011</b>: Interoperabilidad (Compatibilidad), Corrección funcional, Comportamiento temporal/Capacidad, Disponibilidad (subcaracterística de Fiabilidad), Autenticidad.</li>
+<li>Diap. 17: PDCA, CMMI, SPE; diap. 18: OWASP SAMM.</li>
+<li><b>Res. SBS N.° 504-2021</b> (gestión de riesgos de seguridad de la información y ciberseguridad) y reglamento de gestión de continuidad del negocio de la SBS.</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Línea base → Meta</th></tr></thead>
+<tbody>
+<tr><td>CFR</td><td>releases con incidente ÷ releases</td><td>33,3 % → ≤ 10 %</td></tr>
+<tr><td>MTTR</td><td>Σ tiempo de restauración ÷ nº incidentes</td><td>95 min → ≤ 30 min (rollback automático)</td></tr>
+<tr><td>Tasa de descuadre</td><td>tickets de saldo descuadrado ÷ 1 M transacciones</td><td>≈ 10 → ≤ 0,5</td></tr>
+<tr><td>p95 transferencia inmediata en pico</td><td>percentil 95 del tiempo de respuesta</td><td>6,8 s → ≤ 3 s</td></tr>
+<tr><td>Cobertura de contract testing</td><td>APIs core con contrato verificado en CI ÷ APIs core</td><td>→ 100 %</td></tr>
+<tr><td>Flujos críticos con MFA verificado</td><td>flujos con prueba automatizada de MFA ÷ flujos críticos</td><td>→ 100 %</td></tr>
+</tbody></table></div>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p>G6 es el único grupo que propone <b>contract testing, Strangler Fig, ACL, canary/blue-green y PDCA aplicado a releases</b> (soluciones de nivel avanzado) y que vincula la calidad con indicadores financieros (ratio de eficiencia, fondeo, RCG – Ratio de Capital Global). Le faltaron KPI con metas y tiene inconsistencias internas (41 vs 35 agencias en texto y tabla). G7 ataca el problema legacy de Scotiabank desde el <b>código</b> (SonarQube + CMMI N3) y G6 desde la <b>arquitectura</b>: son complementarios (ver Caso 16).</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) poner «Strangler Fig» o «canary» como estrategia de mejora de procesos (son patrones/técnicas); (2) clasificar P1 solo como «Fiabilidad» cuando el saldo incorrecto es <b>Corrección funcional</b> y la causa es <b>Interoperabilidad</b>; (3) llamar «Disponibilidad» a una característica (es subcaracterística de Fiabilidad); (4) usar datos internos contradictorios: en un examen, si hay dos cifras, declara cuál usas y por qué. No hay solución única: G6 (arquitectura), CMMI (proceso) y SRE (operación) son defendibles si la causa raíz está bien diagnosticada.</div>
+</details>
+</section>
+<section id="caso-14" class="caso">
+<h2>Caso 14 · Tottus y Fazil: cuatro riesgos de calidad en el retail omnicanal</h2>
+<p class="origen">Origen: Entregable Grupo 06 (Matriz Tottus, casos T1–T4)</p> <span class="tag">Dificultad: Alta</span>
+<div class="enunciado">
+<p>Hipermercados Tottus (Grupo Falabella; primera tienda en MegaPlaza en nov-2002; formatos Hipermercados Tottus, Hiperbodegas Precio Uno y Tottus Vecino; e-commerce propio + marketplace <b>Fazil</b>) proyecta invertir <b>US$ 99 M</b> en <b>15 tiendas nuevas</b>. Un análisis previo a la campaña de Navidad identifica:</p>
+<ul>
+<li><b>T1.</b> El e-commerce y Fazil, dimensionados para 2 000 usuarios concurrentes, esperan picos de 9 000 en el Cyber.</li>
+<li><b>T2.</b> Actualizar catálogo, precios promocionales e inventario entre formatos tarda <b>4 días</b> porque la regresión es manual (620 casos de prueba; 2 analistas); en la última campaña escaparon 14 defectos de precio a producción.</li>
+<li><b>T3.</b> Un pentest externo detectó datos de pago y <i>tokens</i> de sesión transmitidos sin cifrado adecuado en un microservicio interno.</li>
+<li><b>T4.</b> En Fazil, el 71 % de los carritos se abandonan; las sesiones grabadas muestran usuarios que no encuentran el costo de envío ni el estado del delivery.</li>
+</ul>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Mapear T1–T4 a los arquetipos de la profesora y a ISO/IEC 25010:2011 (corrige cualquier mapeo erróneo).</li>
+<li>Proponer solución y estrategia para cada uno, con al menos 2 alternativas para T2 y T4.</li>
+<li>Calcular el ahorro de automatizar la regresión si cada caso manual toma 12 min y la ejecución automática toma 40 min en total.</li>
+<li>Criticar la evidencia del caso (¿es un incidente real o un riesgo?) y qué implica para el análisis.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>T1 Escalabilidad</td><td>Capacidad estática; sin pruebas de carga contra el pico esperado</td><td>2 000 vs 9 000 concurrentes (×4,5)</td><td>Eficiencia de desempeño → Capacidad, Comportamiento temporal</td></tr>
+<tr><td>T2 Regresión manual lenta</td><td>Ausencia de automatización y de suite de humo; datos de prueba no gestionados</td><td>4 días; 14 defectos de precio escapados</td><td>Adecuación funcional → Corrección; Mantenibilidad → Capacidad de ser probado</td></tr>
+<tr><td>T3 Datos sin cifrar</td><td>Confianza implícita en la red interna; sin revisión de seguridad en diseño</td><td>Hallazgo de pentest</td><td>Seguridad → Confidencialidad, Integridad</td></tr>
+<tr><td>T4 Abandono de carrito</td><td>Información clave no visible; diseño sin participación de usuarios</td><td>71 % de abandono; grabaciones</td><td><b>Usabilidad</b> → Reconocibilidad de la adecuación, Operabilidad, Estética de la UI</td></tr>
+</tbody></table></div>
+<p><b>Arquetipos:</b> T1 → #3; T2 → #1; T3 → #4; T4 → #5. G6 mapeó T4 a «Adecuación funcional»: <b>error</b>; la función existe, lo que falla es la facilidad de uso → Usabilidad (2011) / Capacidad de interacción (2023).</p>
+<h4>Cálculo del ahorro (T2)</h4>
+<p>Manual: 620 × 12 min = 7 440 min = <b>124 h</b> por ciclo de regresión. Automatizado: <b>0,67 h</b>. Ahorro ≈ 123 h por ciclo. Si hay 2 ciclos por semana, ≈ 246 h/semana liberadas (≈ 3 analistas a tiempo completo). Costo de automatizar (supuesto 0,5 h por caso = 310 h) → <i>break-even</i> en ≈ 2,5 ciclos.</p>
+<div class="alt"><h4>Alternativa A · La de G6 (calco de la tabla de la profesora)</h4>
+<p>T1: JMeter + autoescalado → SPE. T2: Cypress/Selenium en CI/CD → PDCA (time-to-market). T3: SAST con SonarQube + pentest → DevSecOps + OWASP SAMM. T4: pruebas de usabilidad + UAT con usuarios reales → UCD.</p></div>
+<div class="alt"><h4>Alternativa B · T2 con pirámide de pruebas y gestión de datos</h4>
+<p>No automatizar los 620 casos E2E (frágiles y lentos) sino: pruebas de <b>contrato/API</b> de la regla de precios (rápidas, 70 %), pruebas de integración del servicio de catálogo (20 %) y solo 60 E2E con Cypress sobre el flujo de compra (10 %). Agregar <b>validación de datos</b> de la carga de precios (reglas: precio promo &lt; precio regular; vigencia válida). Estrategia: PDCA con meta de DDP (Defect Detection Percentage) ≥ 95 %.</p></div>
+<div class="alt"><h4>Alternativa C · T4 con evaluación heurística + A/B testing</h4>
+<p>Evaluación heurística de Nielsen (10 heurísticas; p. ej. «visibilidad del estado del sistema» → mostrar estado del delivery; «prevención de errores» → mostrar costo de envío antes del pago), luego prueba con 5 usuarios por iteración y <b>A/B testing</b> del checkout. Estrategia: ciclo UCD de <b>ISO 9241-210</b> (entender contexto → requisitos → diseñar → evaluar → iterar).</p></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li><b>ISO/IEC 25010:2011</b>: Usabilidad (no Adecuación funcional) para T4; Capacidad para T1.</li>
+<li><b>ISO 9241-210:2019</b> (diseño centrado en el ser humano) para UCD; <b>PCI DSS v4.0 req. 4</b> (cifrado de datos de titular en tránsito) para T3.</li>
+<li><b>Ley 29571</b> (Código de Protección y Defensa del Consumidor): precios mal publicados = riesgo de sanción por Indecopi (T2).</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Tasa de abandono de carrito = carritos abandonados ÷ carritos creados: 71 % → ≤ 55 %.</li>
+<li>SUS (System Usability Scale) del checkout ≥ 75.</li>
+<li>Defectos de precio en producción por campaña: 14 → 0–1.</li>
+<li>Tiempo de regresión: 4 días → &lt; 2 h.</li>
+<li>p95 del checkout con 9 000 concurrentes ≤ 2 s; tasa de error ≤ 1 %.</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p>G6 trabajó Tottus como <b>riesgos hipotéticos</b> («corren el riesgo de colapsar»), sin incidente fechado ni fuente: el análisis queda como un calco de la tabla de la diap. 17. Compárese con G3 (Saga Falabella, mismo grupo empresarial), que usó <b>incidentes reales</b> con sanción de Indecopi. G2 y G3 también trataron el arquetipo #5 (Rappi, Falabella).</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) mapear UX a «Adecuación funcional»; (2) automatizar todo como E2E (anti-patrón «cono de helado»); (3) presentar un riesgo como si fuera un incidente: un análisis de calidad debe distinguir <b>problema observado</b> (con evidencia) de <b>riesgo</b> (con probabilidad e impacto); (4) creer que UAT (aceptación por el cliente) sustituye las pruebas de usabilidad (miden cosas distintas).</div>
+</details>
+</section>
+
+<section id="caso-15" class="caso">
+<h2>Caso 15 · Scotiabank Perú: multa por no acreditar MFA en un préstamo por app</h2>
+<p class="origen">Origen: Entregable Grupo 07 (Caso 1 Scotiabank) | Comparado con G6-Pichincha P4 y G2-BBVA</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Scotiabank Perú (filial del grupo canadiense; 2,7 M de clientes, 52 % en canales digitales en 2022; ~180 agencias convertidas en centros de asesoría; app con Plin, retiro sin tarjeta y <b>Clave Digital</b>) fue multado por <b>Indecopi con S/ 63 800</b> porque no pudo acreditar el uso de <b>MFA real</b> en un <b>préstamo de S/ 34 946,90</b> gestionado por la app, ni comprobar el <b>envío efectivo de la clave digital</b> (OTP – One-Time Password) al cliente que lo desconoció. Los <i>logs</i> de la app guardaban solo «OTP_OK» sin identificador de dispositivo, canal de envío, hora de entrega ni firma.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Explicar por qué el problema es, sobre todo, de <b>evidencia</b> y qué subcaracterísticas de Seguridad de ISO/IEC 25010 están implicadas.</li>
+<li>Comparar SAST y DAST (qué detectan, dónde van en el pipeline) y decir qué parte del problema resuelven y cuál no.</li>
+<li>Proponer al menos 2 alternativas de solución + estrategia.</li>
+<li>Diseñar el registro de evidencia mínimo de una operación con OTP.</li>
+<li>Definir KPI con fórmula y meta.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>No se puede probar quién autorizó</td><td>Registro de auditoría pobre (solo «OTP_OK»), no firmado ni inmutable</td><td>Multa S/ 63 800</td><td>Seguridad → <b>No repudio</b>, <b>Responsabilidad</b></td></tr>
+<tr><td>MFA posiblemente débil</td><td>Factores no independientes (OTP por SMS al mismo dispositivo donde está la app)</td><td>Préstamo desconocido por el cliente</td><td>Seguridad → <b>Autenticidad</b></td></tr>
+<tr><td>Sin trazabilidad del envío de OTP</td><td>Integración con proveedor SMS sin acuse de entrega almacenado</td><td>No se comprobó el envío</td><td>Compatibilidad → Interoperabilidad; Seguridad → Responsabilidad</td></tr>
+<tr><td>Requisito de seguridad no especificado</td><td>La SRS (Software Requirements Specification) no exigía evidencia probatoria</td><td>El diseño cumplía «funcionalmente»</td><td>Adecuación funcional → Completitud</td></tr>
+</tbody></table></div>
+<h4>SAST vs DAST (tabla de G7, ampliada)</h4>
+<div class="tabla"><table>
+<thead><tr><th>Criterio</th><th>SAST (Static Application Security Testing)</th><th>DAST (Dynamic Application Security Testing)</th></tr></thead>
+<tbody>
+<tr><td>Objeto</td><td>Código fuente/bytecode sin ejecutar (técnica <b>estática</b>)</td><td>Aplicación/API en ejecución (técnica <b>dinámica</b>, caja negra)</td></tr>
+<tr><td>Detecta</td><td>Inyección, secretos, validación insuficiente, uso inseguro de cripto</td><td>Fallos de sesión, autenticación rota, configuración, cabeceras</td></tr>
+<tr><td>Momento</td><td>Cada <i>commit</i>/PR (Pull Request)</td><td>Antes de cada liberación, en <i>staging</i></td></tr>
+<tr><td>Herramientas</td><td>SonarQube, Semgrep, Checkmarx</td><td>OWASP ZAP, Burp Suite</td></tr>
+<tr><td>¿Resuelve este caso?</td><td colspan="2">Parcialmente: encuentran vulnerabilidades del flujo de autenticación, pero <b>no generan evidencia probatoria</b>. La falta de un log firmado es un defecto de <b>requisitos/diseño</b>, detectable con revisión de requisitos o inspección del SDD (Software Design Description), no con SAST/DAST.</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · La de G7: DevSecOps SAST/DAST + pentest OTP/MFA → OWASP SAMM + ISO/IEC 27001</h4>
+<p>SAST en cada commit con Quality Gate de seguridad que bloquea el pipeline; DAST antes de cada release; pentest periódico enfocado en sesiones y OTP. Estrategia: OWASP SAMM (madurez) + ISO/IEC 27001 (gestión continua). Correcta en la separación solución/estrategia, pero incompleta en el aspecto probatorio.</p></div>
+<div class="alt"><h4>Alternativa B · Evidencia por diseño (no repudio)</h4>
+<p>Requisito explícito en la SRS: «toda operación de crédito por canal digital genera un registro de evidencia firmado». Implementación: <b>log de auditoría inmutable</b> (WORM – Write Once Read Many, o cadena de <i>hashes</i>), firmado con HSM (Hardware Security Module), con: id de cliente, id de operación, <i>device fingerprint</i>, IP/geolocalización, canal y hora de envío del OTP, acuse del proveedor SMS, hora de validación, hash del OTP, versión de la app. Revisión del diseño mediante <b>inspección</b> (IEEE 1028) con checklist de requisitos de evidencia.</p></div>
+<div class="alt"><h4>Alternativa C · MFA fuerte + autenticación basada en riesgo</h4>
+<p>Reemplazar OTP-SMS por <b>firma en el dispositivo</b> (FIDO2/passkeys o token de software vinculado), biometría + PIN; para préstamos &gt; S/ 5 000 exigir <i>step-up</i> y periodo de enfriamiento; motor de riesgo que bloquea si hay SIM-swap reciente. Estrategia: ISO/IEC 27001:2022 controles A.8.5 (autenticación segura) y A.8.15 (registro).</p></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li><b>ISO/IEC 25010:2011</b>, Seguridad: Autenticidad (probar la identidad), <b>Responsabilidad</b> (rastrear acciones a una entidad) y <b>No repudio</b> (probar que la acción ocurrió y no puede negarse).</li>
+<li><b>Res. SBS N.° 504-2021</b>: autenticación reforzada en operaciones por canales digitales; <b>Ley 29571</b> (carga de la prueba en el proveedor: por eso la multa).</li>
+<li><b>OWASP ASVS</b> (Application Security Verification Standard) cap. de autenticación y registro como checklist de verificación.</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<div class="tabla"><table>
+<thead><tr><th>KPI</th><th>Fórmula</th><th>Meta</th></tr></thead>
+<tbody>
+<tr><td>Operaciones con evidencia completa</td><td>operaciones con registro firmado y completo ÷ operaciones de crédito × 100</td><td>100 %</td></tr>
+<tr><td>Reclamos perdidos por falta de prueba</td><td>reclamos resueltos en contra por falta de evidencia ÷ reclamos</td><td>→ 0 (G7: «incidentes no acreditados → 0»)</td></tr>
+<tr><td>Cobertura SAST/DAST del flujo de autenticación</td><td>endpoints de autenticación analizados ÷ endpoints</td><td>&gt; 90 % (meta de G7)</td></tr>
+<tr><td>MTTR de vulnerabilidades críticas</td><td>Σ (cierre − detección) ÷ nº vulnerabilidades críticas</td><td>≤ 7 días</td></tr>
+</tbody></table></div>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p><b>G7</b> fue el único con métricas y metas numéricas y con criterio explícito SAST vs DAST («SAST en cada commit, DAST antes de cada liberación»), pero no reconoció el carácter <b>probatorio</b>. <b>G6</b> (Pichincha P4) propuso «verificación funcional de MFA» + SonarQube + pentest → DevSecOps/OWASP SAMM, sin evidencia de incidente. <b>G2</b> (BBVA, S/ 10 000 no detectados) es un caso de <b>control operativo antifraude</b>, distinto: allí la solución es monitoreo de comportamiento, no SAST.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) responder solo «SAST/DAST» ante un problema de evidencia; (2) confundir Responsabilidad (trazabilidad de acciones) con No repudio (prueba no negable, típicamente criptográfica); (3) suponer que un OTP por SMS es MFA fuerte (si llega al mismo móvil que tiene la app, los factores no son independientes); (4) olvidar que en el Perú la carga de probar la autorización recae en el banco ante Indecopi.</div>
+</details>
+</section>
+<section id="caso-16" class="caso">
+<h2>Caso 16 · Scotiabank Perú: deuda técnica por acoplamiento con el Core Banking monolítico</h2>
+<p class="origen">Origen: Entregable Grupo 07 (Caso 2 Scotiabank) | Comparado con G6-Pichincha P1 — coincide con la fila 2 de la tabla de la profesora (diap. 17)</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>La banca digital de Scotiabank Perú (microservicios Java/TypeScript y APIs móviles) convive con un <b>Core Banking monolítico</b> (COBOL + PL/SQL). Un primer análisis con SonarQube Server sobre 410 KLOC (miles de líneas de código) arroja:</p>
+<div class="tabla"><table>
+<thead><tr><th>Componente</th><th>KLOC</th><th>Deuda (días-persona, 8 h)</th><th>Duplicación</th><th>Métodos con complejidad cognitiva &gt; 15</th><th>Cobertura</th></tr></thead>
+<tbody>
+<tr><td>Microservicios nuevos</td><td>120</td><td>150</td><td>4,2 %</td><td>38</td><td>71 %</td></tr>
+<tr><td>Capa wrapper/facade del legado</td><td>90</td><td>420</td><td>11,5 %</td><td>212</td><td>34 %</td></tr>
+<tr><td>Scripts PL/SQL del core</td><td>200</td><td>1 100</td><td>18,0 %</td><td>640</td><td>5 %</td></tr>
+</tbody></table></div>
+<p>Síntomas: lógica de negocio duplicada (cálculo de comisiones en 3 lugares), métodos de 600+ líneas, regresiones imprevistas en cada cambio y <i>time-to-market</i> de 9 semanas por funcionalidad. Costo de desarrollo por línea según SonarQube: 30 min.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcular el TDR (Technical Debt Ratio) y el rating de mantenibilidad SQALE de cada componente.</li>
+<li>Diseñar un Quality Gate para código nuevo (enfoque <i>Clean as You Code</i>) con umbrales diferenciados.</li>
+<li>Comparar SonarQube y Veracode para este caso y justificar la elección.</li>
+<li>Proponer 2 alternativas de estrategia y justificar el nivel de CMMI pedido.</li>
+<li>Definir KPI con fórmula y meta.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Cálculo del TDR</h4>
+<p>TDR = costo de remediación ÷ (costo por línea × LOC). Costo por línea = 30 min = 0,5 h; 1 día = 8 h.</p>
+<div class="tabla"><table>
+<thead><tr><th>Componente</th><th>Costo de desarrollo</th><th>Deuda</th><th>TDR</th><th>Rating</th></tr></thead>
+<tbody>
+<tr><td>Microservicios</td><td>120 000 × 0,5 = 60 000 h</td><td>150 × 8 = 1 200 h</td><td><b>2,0 %</b></td><td>A (≤ 5 %)</td></tr>
+<tr><td>Wrapper/facade</td><td>45 000 h</td><td>3 360 h</td><td><b>7,5 %</b></td><td>B (5–10 %)</td></tr>
+<tr><td>PL/SQL core</td><td>100 000 h</td><td>8 800 h</td><td><b>8,8 %</b></td><td>B</td></tr>
+<tr><td>Global</td><td>205 000 h</td><td>13 360 h</td><td><b>6,5 %</b></td><td>B</td></tr>
+</tbody></table></div>
+<p>Lectura: el TDR global es «B» pero esconde que la <b>duplicación</b> (18 %) y la <b>complejidad</b> del core son críticas; el rating de mantenibilidad no lo es todo.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Lógica de negocio duplicada</td><td>Integraciones punto a punto que replican reglas en vez de exponer un servicio único</td><td>Comisiones en 3 lugares; duplicación 11,5–18 %</td><td>Mantenibilidad → Modificabilidad, Reusabilidad</td></tr>
+<tr><td>Métodos extensos y complejos</td><td>Sin estándar de codificación ni revisión de pares; presión de plazos</td><td>852 métodos &gt; 15 de complejidad cognitiva</td><td>Mantenibilidad → Analizabilidad, Capacidad de ser probado</td></tr>
+<tr><td>Regresiones imprevistas</td><td>Alto acoplamiento + cobertura baja (5–34 %)</td><td>Regresiones por cambio</td><td>Fiabilidad → Madurez; Mantenibilidad → Modularidad</td></tr>
+<tr><td>Time-to-market lento</td><td>Efecto acumulado de la deuda (interés de la deuda)</td><td>9 semanas/funcionalidad</td><td>Mantenibilidad (efecto de negocio)</td></tr>
+</tbody></table></div>
+<h4>Quality Gate propuesto (código nuevo)</h4>
+<div class="tabla"><table>
+<thead><tr><th>Condición</th><th>Microservicios</th><th>Wrapper/facade</th><th>Fuente del umbral</th></tr></thead>
+<tbody>
+<tr><td>Rating de mantenibilidad del código nuevo</td><td>A</td><td>A</td><td>Sonar way</td></tr>
+<tr><td>Duplicación en código nuevo</td><td>&lt; 3 %</td><td>&lt; 5 %</td><td>Metas de G7</td></tr>
+<tr><td>Complejidad cognitiva por método</td><td>≤ 15 (≤ 10 en lógica transaccional crítica)</td><td>≤ 15</td><td>G7 / regla S3776</td></tr>
+<tr><td>Cobertura del código nuevo</td><td>≥ 80 %</td><td>≥ 70 %</td><td>Sonar way (80 %)</td></tr>
+<tr><td>Bugs y vulnerabilidades nuevas</td><td>0</td><td>0</td><td>Sonar way</td></tr>
+<tr><td>Security hotspots revisados</td><td>100 %</td><td>100 %</td><td>Sonar way</td></tr>
+</tbody></table></div>
+<h4>SonarQube vs Veracode</h4>
+<p><b>SonarQube</b>: foco en mantenibilidad, deuda, code smells, duplicación, complejidad, cobertura; integración nativa con Azure DevOps/Jenkins/GitLab y bloqueo de PR por Quality Gate; soporta COBOL y PL/SQL (ediciones comerciales); <b>SonarLint</b> en el IDE (Integrated Development Environment). <b>Veracode</b>: SAST + SCA (Software Composition Analysis) con foco en seguridad y cumplimiento. Como el problema es de <b>mantenibilidad</b>, se elige SonarQube (decisión de G7); Veracode sería complemento si el problema fuera de seguridad o dependencias vulnerables.</p>
+<div class="alt"><h4>Alternativa A · La de G7: SonarQube + Quality Gates + Clean as You Code → CMMI-DEV v2.0 nivel 3 + ISO/IEC 25010</h4>
+<p>Análisis estático continuo; QG estricto que detiene código que aumente la deuda; SonarLint para corregir antes del commit. Estrategia: CMMI-DEV v2.0 <b>nivel 3 (Definido)</b> para que la refactorización y el control de código sean un <b>proceso organizacional estándar</b> (no depende del proyecto). Por qué nivel 3 y no 2: en nivel 2 (Gestionado) cada proyecto se gestiona por sí mismo; el estándar de codificación y el QG compartido para todos los equipos es una práctica del <b>proceso definido a nivel de organización</b>, característica del nivel 3.</p></div>
+<div class="alt"><h4>Alternativa B · Arquitectura primero (enfoque G6): Strangler Fig + ACL + contract testing</h4>
+<p>Extraer progresivamente del core las capacidades (comisiones → microservicio único), con una capa anticorrupción que traduce el modelo legado y <i>contract tests</i> que protegen la interfaz. La deuda del PL/SQL no se paga: se <b>retira</b>. Más caro a corto plazo, pero elimina la duplicación en origen.</p></div>
+<div class="alt"><h4>Alternativa C · Gestión económica de la deuda (PDCA trimestral)</h4>
+<p>Registrar la deuda como <i>backlog</i> priorizado por interés (frecuencia de cambio × costo de cambio: análisis de <i>hotspots</i> de código con churn). Reservar el 20 % de cada sprint a pagar deuda en los 10 módulos con más cambios. Check trimestral con TDR y lead time; Act: ajustar el porcentaje.</p></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li><b>ISO/IEC 25010:2011</b> → Mantenibilidad (Modularidad, Reusabilidad, Analizabilidad, Modificabilidad, Capacidad de ser probado).</li>
+<li><b>CMMI-DEV v2.0</b>, nivel de madurez 3 (Definido); áreas de práctica PR (Peer Reviews), TS (Technical Solution), PAD (Process Asset Development).</li>
+<li>Modelo <b>SQALE</b> (Software Quality Assessment based on Lifecycle Expectations) en que se basa el rating de SonarQube.</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>TDR global = deuda ÷ costo de desarrollo: 6,5 % → ≤ 5 % (A) en 12 meses; TDR del código nuevo &lt; 5 % siempre.</li>
+<li>Densidad de duplicación: microservicios &lt; 3 %, wrapper &lt; 5 % (metas G7).</li>
+<li>% de métodos con complejidad cognitiva &gt; 15: reducir 50 % en los módulos más modificados.</li>
+<li>Lead time por funcionalidad: 9 → 4 semanas.</li>
+<li>Regresiones por release: medir línea base y reducir 60 %.</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p>Solo <b>G7</b> y <b>G6</b> trataron el arquetipo #2. G7 atacó el <b>código</b> (SonarQube, QG, SonarLint, CMMI N3) con metas numéricas: TDR &lt; 5 %, complejidad ≤ 15/≤ 10, duplicación &lt; 3 %/&lt; 5 % — el mejor alineado con la fila 2 de la profesora. G6 atacó la <b>arquitectura</b> (Strangler Fig + ACL). Ambos son válidos y complementarios.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) llamar «SAST» al análisis de calidad estructural (SAST es de seguridad; lo estructural es análisis estático de calidad/linters); (2) usar «Transferibilidad» (término de traducciones antiguas de ISO 9126) en vez de <b>Portabilidad</b> (25010:2011) o Flexibilidad (25010:2023) — y además Portabilidad no es la característica afectada aquí; (3) confundir complejidad <b>ciclomática</b> (McCabe, nº de caminos, umbral recomendado 10) con complejidad <b>cognitiva</b> (Sonar, dificultad de lectura, umbral por defecto 15); (4) creer que un TDR «A» implica código sano (puede haber alta duplicación o baja cobertura).</div>
+</details>
+</section>
+
+<section id="caso-17" class="caso">
+<h2>Caso 17 · Ripley: saturación del checkout en Cyber Days y regresiones manuales en la pasarela</h2>
+<p class="origen">Origen: Entregable Grupo 07 (Casos 3 y 4 Ripley) | Comparado con G6-Tottus T1/T2, G4-BCP y G5-Yape</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Ripley (tiendas + Ripley.com + marketplace lanzado en Perú en la Navidad de 2018 + Banco Ripley) prepara el Black Friday. Datos del último Cyber Days:</p>
+<ul>
+<li>Pico de <b>12 000 usuarios concurrentes</b>; el checkout comenzó a fallar a partir de ~7 500; tasa de error 9 %; p95 de 11 s; conversión cayó de 3,1 % a 1,4 %. Ticket promedio S/ 280; 420 000 sesiones en las 6 horas pico.</li>
+<li>La regresión de flujos de compra y pasarela de pago es manual: 380 casos, 3 días; en el año escaparon <b>27 defectos</b> a producción en esos flujos (los otros 93 se hallaron antes de liberar).</li>
+</ul>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Diseñar la prueba de rendimiento con JMeter (tipos de prueba, perfil de carga, criterios de éxito) y explicar el <i>breaking point</i>.</li>
+<li>Estimar la venta perdida por la caída de conversión en las horas pico.</li>
+<li>Calcular el DDP (Defect Detection Percentage) actual de la regresión y fijar meta.</li>
+<li>Elegir entre Cypress y Selenium (criterios) y la estrategia de mejora para cada problema, con 2 alternativas.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Checkout colapsa a 7 500 concurrentes</td><td>Capacidad estática; cuello de botella (pool de conexiones a BD / pasarela externa) no identificado antes de la campaña</td><td>Error 9 %, p95 11 s</td><td>Eficiencia de desempeño → Capacidad, Comportamiento temporal; Fiabilidad → Disponibilidad</td></tr>
+<tr><td>Conversión baja en pico</td><td>Consecuencia del anterior + reintentos fallidos</td><td>3,1 % → 1,4 %</td><td>Efecto de negocio (calidad en uso: Efectividad)</td></tr>
+<tr><td>Regresión manual lenta</td><td>Sin automatización; suite sin priorización por riesgo</td><td>3 días; 380 casos</td><td>Mantenibilidad → Capacidad de ser probado</td></tr>
+<tr><td>Escape de defectos</td><td>Cobertura insuficiente del embudo de compra</td><td>27 defectos en producción</td><td>Adecuación funcional → Corrección; Fiabilidad → Madurez</td></tr>
+</tbody></table></div>
+<h4>Cálculos</h4>
+<ul>
+<li><b>Venta perdida</b> ≈ 420 000 sesiones × (3,1 % − 1,4 %) × S/ 280 = 420 000 × 0,017 × 280 ≈ <b>S/ 2 M</b> en 6 horas (sin contar daño reputacional ni efecto sobre Banco Ripley).</li>
+<li><b>DDP</b> = defectos hallados antes de liberar ÷ (antes + después) = 93 ÷ (93 + 27) = <b>77,5 %</b>. Meta ≥ 95 %.</li>
+</ul>
+<h4>Diseño de la prueba de rendimiento</h4>
+<div class="tabla"><table>
+<thead><tr><th>Tipo</th><th>Perfil</th><th>Objetivo / criterio</th></tr></thead>
+<tbody>
+<tr><td>Carga (load)</td><td>Ramp-up 0 → 12 000 usuarios en 30 min; meseta 60 min</td><td>p95 ≤ 2 s, error ≤ 1 %, throughput ≥ objetivo de pedidos/min</td></tr>
+<tr><td>Estrés (stress)</td><td>Escalones de +1 000 hasta fallar</td><td>Hallar el <b>breaking point</b>: carga a partir de la cual el error o la latencia se disparan (hoy ~7 500); objetivo ≥ 1,5 × pico (18 000)</td></tr>
+<tr><td>Pico (spike)</td><td>De 2 000 a 12 000 en 1 min</td><td>Autoescalado reacciona en &lt; 3 min</td></tr>
+<tr><td>Resistencia (soak)</td><td>8 000 usuarios por 8 h</td><td>Sin fugas de memoria ni degradación</td></tr>
+</tbody></table></div>
+<p>Métricas: throughput (tx/s), tiempos en percentiles p50/p95/p99, tasa de errores, uso de CPU/memoria/conexiones. El <b>breaking point</b> es la frontera de capacidad; la diferencia con el pico esperado es el <b>margen</b>.</p>
+<h4>Cypress vs Selenium (criterio de G7)</h4>
+<p><b>Cypress</b>: E2E rápidas en navegadores modernos, JS/TS, video y capturas nativas en CI → para la web principal. <b>Selenium</b>: multiplataforma y multidispositivo (Selenium Grid, Appium para móvil) → para compatibilidad. Decisión de G7: Cypress para Ripley.com + Selenium para el parque de dispositivos.</p>
+<div class="alt"><h4>Alternativa A · La de G7: SPE continua (checkout) + PDCA de automatización (regresión)</h4>
+<p>JMeter con ramp-up, breaking point, throughput, percentiles y tasa de error antes de cada campaña → <b>SPE</b> como disciplina. Cypress/Selenium E2E en CI/CD → <b>PDCA</b> de automatización progresiva y madurez del área de QA; métricas: cobertura &gt; 75 % del embudo, tasa de fallos en producción por release, MTTR.</p></div>
+<div class="alt"><h4>Alternativa B · Resiliencia y degradación controlada</h4>
+<p>Cola virtual (sala de espera) ante picos, <i>rate limiting</i>, <i>circuit breaker</i> hacia la pasarela, caché del catálogo en CDN (Content Delivery Network), autoescalado por RPS (Requests Per Second) programado por calendario de campañas, <i>freeze</i> de cambios 72 h antes. Estrategia: SRE con SLO de checkout (99,9 % de éxito) + <i>game days</i> previos al Black Friday.</p></div>
+<div class="alt"><h4>Alternativa C · Pruebas basadas en riesgo + shift-left</h4>
+<p>Priorizar los 380 casos por riesgo (impacto × probabilidad): automatizar primero los 60 de pago y carrito; añadir pruebas de contrato con la pasarela y revisiones de código obligatorias en módulos de pago. Estrategia: TMMi (Test Maturity Model integration) nivel 2–3 como marco de madurez de pruebas.</p></div>
+<h4>Justificación normativa</h4>
+<ul>
+<li><b>ISO/IEC 25010:2011</b>: Eficiencia de desempeño (Capacidad, Comportamiento temporal), Fiabilidad (Disponibilidad).</li>
+<li><b>ISO/IEC/IEEE 29119</b> (pruebas de SW): documentación del plan de pruebas de rendimiento y técnicas basadas en riesgo.</li>
+<li>Diap. 17: SPE para escalabilidad; PDCA para pruebas manuales.</li>
+</ul>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Breaking point ÷ pico esperado ≥ 1,5.</li>
+<li>p95 del checkout en pico ≤ 2 s; tasa de error ≤ 1 %; conversión en pico ≥ 2,8 %.</li>
+<li>DDP: 77,5 % → ≥ 95 %.</li>
+<li>Duración de la regresión: 3 días → ≤ 1 h; cobertura automatizada del embudo &gt; 75 % (meta de G7).</li>
+</ul>
+<h4>Cómo lo resolvieron los grupos</h4>
+<p>El arquetipo #3 lo trataron los 6 grupos: G7 (Ripley) y G6 (Tottus, Pichincha) eligieron <b>SPE</b>; G2 (BBVA, Rappi) <b>PDCA</b> reactivo; G4 (BCP/Yape) la solución más rica (contenedores, circuit breaker, colas, freeze, canary, postmortem). Para #1 (pruebas manuales), G7 y G6-Tottus usaron Cypress/Selenium + PDCA; G7 añadió métricas, G6 no. Ninguno de los casos Ripley tiene incidente fechado: los datos de este enunciado se agregaron para el repaso.</p>
+<div class="ojo"><b>Errores frecuentes:</b> (1) reportar promedios en vez de percentiles (el promedio oculta la cola lenta); (2) confundir prueba de carga (carga esperada) con estrés (más allá del límite); (3) poner «JMeter» como estrategia; (4) automatizar sin estabilizar datos de prueba (pruebas «flaky»); (5) creer que el autoescalado resuelve todo: si el cuello está en la BD o en la pasarela externa, escalar el front no sirve.</div>
+</details>
+</section>
+<section id="caso-18" class="caso">
+<h2>Caso 18 · Complejidad ciclomática de McCabe en el cálculo del total de un pedido (Plaza Vea online)</h2>
+<p class="origen">Origen: Web: <a href="https://www.math.unipd.it/~tullio/IS-1/2004/Approfondimenti/cyclomatic.htm">NIST SP 500-235 «Structured Testing» (McCabe &amp; Watson)</a> y <a href="https://www.infor.uva.es/~jvalvarez/docencia/tema7.pdf">UVa, pruebas de caja blanca</a> — adaptado para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Durante una <b>revisión de código</b> del e-commerce de Plaza Vea, SonarQube marca el método <code>calcularTotal</code> (Java). El revisor numera los nodos del CFG (Control Flow Graph) a nivel de decisión así:</p>
+<div class="tabla"><table>
+<thead><tr><th>Nodo</th><th>Sentencia</th></tr></thead>
+<tbody>
+<tr><td>n1</td><td><code>int total = 0;</code></td></tr>
+<tr><td>n2</td><td><code>for (Item it : items) {</code></td></tr>
+<tr><td>n3</td><td><code>if (it.precio &gt; 0 &amp;&amp; it.stock &gt; 0) {</code></td></tr>
+<tr><td>n4</td><td><code>total += it.precio; } }</code></td></tr>
+<tr><td>n5</td><td><code>switch (c.tipo) {</code></td></tr>
+<tr><td>n6</td><td><code>case VIP: total = total * 80 / 100; break;</code></td></tr>
+<tr><td>n7</td><td><code>case CORP: total = total * 90 / 100; break;</code></td></tr>
+<tr><td>n8</td><td><code>default: break; }</code></td></tr>
+<tr><td>n9</td><td><code>while (total &gt; 1000 &amp;&amp; !c.moroso) {</code></td></tr>
+<tr><td>n10</td><td><code>total -= 100; }</code></td></tr>
+<tr><td>n11</td><td><code>return total;</code></td></tr>
+</tbody></table></div>
+<p>Aristas: 1-2, 2-3, 2-5, 3-4, 3-2, 4-2, 5-6, 5-7, 5-8, 6-9, 7-9, 8-9, 9-10, 10-9, 9-11. El estándar de codificación del equipo exige V(G) ≤ 10 por método (umbral de McCabe; hasta 15 con justificación documentada).</p>
+<p>Además, el programa completo tiene tres módulos: A (main) con E = 11, N = 9; B con E = 7, N = 6; C con E = 4, N = 4; y complejidades de diseño iv(A) = 3, iv(B) = 2, iv(C) = 1.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcular V(G) de <code>calcularTotal</code> por tres fórmulas (aristas-nodos, predicados, regiones).</li>
+<li>Recalcular V(G) a nivel de <b>condición simple</b> (separando cada <code>&amp;&amp;</code>) y explicar por qué la herramienta reporta un valor distinto al del revisor.</li>
+<li>Listar un conjunto básico de caminos con su caso de prueba y resultado esperado.</li>
+<li>Clasificar el riesgo según la escala del SEI (Software Engineering Institute) y dictaminar frente al estándar.</li>
+<li>Calcular V(G) del programa (grafo con P componentes) y la complejidad de integración S1.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. V(G) por tres fórmulas</h4>
+<ul>
+<li><b>Aristas–nodos:</b> E = 15, N = 11 → V(G) = E − N + 2 = 15 − 11 + 2 = <b>6</b>.</li>
+<li><b>Predicados:</b> for (1) + if (1) + switch de 3 ramas (3 − 1 = 2) + while (1) = 5 → V(G) = P + 1 = <b>6</b>.</li>
+<li><b>Regiones</b> del grafo plano (incluida la exterior) = <b>6</b>.</li>
+</ul>
+<h4>2. Nivel de condición simple</h4>
+<p>Separando n3 en (precio &gt; 0) → (stock &gt; 0) y n9 en (total &gt; 1000) → (!moroso): N = 13, E = 19 → V(G) = 19 − 13 + 2 = <b>8</b> (= 7 condiciones simples + 1). Herramientas como SonarQube o PMD cuentan cada operador <code>&amp;&amp;</code>/<code>||</code> como decisión adicional; por eso reportan 8. Ninguno está «mal»: son <b>granularidades distintas</b>; en un informe se declara cuál se usa.</p>
+<h4>3. Caminos básicos y casos de prueba</h4>
+<div class="tabla"><table>
+<thead><tr><th>Camino</th><th>Recorrido</th><th>Datos de prueba</th><th>Esperado</th></tr></thead>
+<tbody>
+<tr><td>P1</td><td>1-2-5-8-9-11</td><td>lista vacía, tipo NORMAL</td><td>0</td></tr>
+<tr><td>P2</td><td>1-2-3-2-5-8-9-11</td><td>1 ítem con precio 0</td><td>0</td></tr>
+<tr><td>P3</td><td>1-2-3-4-2-5-8-9-11</td><td>1 ítem precio 50, stock 3, NORMAL</td><td>50</td></tr>
+<tr><td>P4</td><td>1-2-5-6-9-11</td><td>lista vacía, VIP</td><td>0</td></tr>
+<tr><td>P5</td><td>1-2-5-7-9-11</td><td>lista vacía, CORP</td><td>0</td></tr>
+<tr><td>P6</td><td>1-2-3-4-2-5-8-9-10-9-11</td><td>1 ítem precio 1 050, NORMAL, moroso = false</td><td>950</td></tr>
+</tbody></table></div>
+<p>A nivel de condición se añaden 2 casos: ítem con precio &gt; 0 y stock = 0; total &gt; 1000 con moroso = true → <b>8 casos</b>. Observación de revisión: P4 y P5 no prueban realmente el descuento (lista vacía); un buen diseño de pruebas usa además ítems no vacíos con VIP/CORP (cobertura de caminos ≠ calidad de los datos).</p>
+<h4>4. Riesgo y dictamen</h4>
+<p>Escala SEI: 1–10 programa simple, bajo riesgo; 11–20 moderado; 21–50 complejo, alto riesgo; &gt; 50 no testeable. V(G) = 6 u 8 → <b>bajo riesgo</b>; <b>cumple</b> V(G) ≤ 10. Pero la revisión puede reportar otros defectos: aritmética entera para dinero (<code>total * 80 / 100</code> trunca), descuentos como números mágicos y el bucle <code>while</code> que resta 100 de forma no evidente (requisito poco claro).</p>
+<h4>5. Programa con varios componentes</h4>
+<ul>
+<li>V(A) = 11 − 9 + 2 = 4; V(B) = 7 − 6 + 2 = 3; V(C) = 4 − 4 + 2 = 2.</li>
+<li>Programa: E = 22, N = 19, P = 3 → V = E − N + 2P = 22 − 19 + 6 = <b>9</b> = 4 + 3 + 2. Usar P = 1 da 5 (error).</li>
+<li>S1 = Σ iv(G) − n + 1 = (3 + 2 + 1) − 3 + 1 = <b>4</b> → número mínimo de pruebas de integración para cubrir las llamadas entre módulos.</li>
+</ul>
+<div class="alt"><h4>Alternativa A · Aceptar el método y documentar</h4><p>V(G) ≤ 10: se aprueba en la revisión; se registran como observaciones menores los números mágicos y la aritmética entera; se exige la suite de 8 casos (cobertura de condición).</p></div>
+<div class="alt"><h4>Alternativa B · Refactorizar aunque cumpla</h4><p>Extraer <code>sumarItemsVendibles()</code>, reemplazar el <code>switch</code> por polimorfismo/Strategy (<code>PoliticaDescuento</code> por tipo de cliente) y usar <code>BigDecimal</code>. V(G) por método baja a 2–3 y cada unidad se prueba aislada: mejora Analizabilidad y Capacidad de ser probado (ISO/IEC 25010 → Mantenibilidad).</p></div>
+<h4>Justificación normativa</h4>
+<p>McCabe (1976) y NIST SP 500-235 (<i>structured testing</i>: nº de casos ≥ V(G)); técnica de <b>prueba de caja blanca</b> apoyada en una <b>técnica estática</b> (medición de código). ISO/IEC 25010 → Mantenibilidad (Capacidad de ser probado). La medición la automatizan SonarQube, PMD o Checkstyle (diap. 20).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>% de métodos con V(G) &gt; 10 = métodos que superan ÷ métodos totales: meta &lt; 2 % en código nuevo.</li>
+<li>Cobertura de ramas (<i>branch coverage</i>) del módulo ≥ 85 %.</li>
+<li>Casos de prueba por método ≥ V(G) (regla de <i>structured testing</i>).</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) decir que el <code>switch</code> aporta 3 (aporta ramas − 1 = 2) o contar el <code>default</code> como decisión extra; (2) olvidar el «+2P» cuando hay varios componentes; (3) creer que V(G) mide la dificultad de lectura (eso es la complejidad <b>cognitiva</b> de Sonar); (4) creer que cumplir V(G) ≤ 10 garantiza calidad: es un indicador de <b>testabilidad</b>, no de corrección.</div>
+</details>
+</section>
+
+<section id="caso-19" class="caso">
+<h2>Caso 19 · SUNAT: inspección Fagan del módulo de Impuesto a la Renta y tipos de revisión IEEE 1028</h2>
+<p class="origen">Origen: Web: <a href="https://personal.utdallas.edu/~wew021000/SE6367/03-Lecture/51-Peer-Reviews-one-slide.pdf">UT Dallas, Peer Reviews</a>, <a href="https://www.math.unipd.it/~tullio/IS-1/2004/Approfondimenti/Inspections-Walkthroughs.pdf">Univ. Padova, Inspections &amp; Walkthroughs</a> y <a href="https://arxiv.org/pdf/1612.04590">arXiv 1612.04590</a> — adaptado para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>La OTI (Oficina de Tecnologías de la Información) de un contratista de la SUNAT inspeccionará un módulo de <b>3 000 LOC</b> (Lines Of Code) del cálculo del Impuesto a la Renta. Equipo: moderador, autor, lector y 2 inspectores. Datos del plan:</p>
+<ul>
+<li>Preparación individual a <b>125 LOC/h</b> (el autor no prepara); reunión a <b>150 LOC/h</b>, máximo <b>2 h por sesión</b>.</li>
+<li>Planificación 4 h (moderador); <i>overview</i> 1 h con los 5.</li>
+<li>Hallazgos: <b>111 defectos</b> (44 mayores, 67 menores); retrabajo 1,5 h por mayor y 0,25 h por menor; seguimiento 4 h.</li>
+<li>Después, pruebas y producción encontraron <b>45 defectos más</b> de ese módulo.</li>
+<li>Corregir un defecto encontrado en ST (System Testing) cuesta, en promedio, 6 h.</li>
+</ul>
+<p>Paralelamente, en el proyecto ocurren estas actividades: (a) el autor guía a compañeros por su código para formarlos y recoger comentarios; (b) la reunión descrita arriba; (c) un tercero independiente verifica el cumplimiento del contrato y de ISO 9001; (d) la gerencia revisa el avance contra el SQAP (Software Quality Assurance Plan) y reasigna recursos; (e) expertos evalúan si la arquitectura propuesta es adecuada y recomiendan alternativas; (f) un PR en GitHub aprobado por un compañero.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Número de sesiones de reunión y esfuerzo total de la inspección (h-persona) por fase.</li>
+<li>Esfuerzo por defecto, efectividad de la inspección y densidad de defectos detectados.</li>
+<li>Comparar económicamente con encontrar y corregir esos 111 defectos en ST.</li>
+<li>¿Qué debe hacer el moderador si el equipo propone revisar a 500 LOC/h para «terminar rápido»?</li>
+<li>Clasificar (a)–(f) en los tipos de IEEE 1028 indicando líder, objetivo y formalidad.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. Sesiones y esfuerzo</h4>
+<div class="tabla"><table>
+<thead><tr><th>Fase Fagan</th><th>Cálculo</th><th>h-persona</th></tr></thead>
+<tbody>
+<tr><td>Planificación</td><td>moderador</td><td>4</td></tr>
+<tr><td>Overview</td><td>1 h × 5</td><td>5</td></tr>
+<tr><td>Preparación</td><td>3 000 / 125 = 24 h × 4 personas</td><td>96</td></tr>
+<tr><td>Reunión de inspección</td><td>3 000 / 150 = 20 h → <b>10 sesiones</b> de 2 h; 20 h × 5</td><td>100</td></tr>
+<tr><td>Retrabajo</td><td>44 × 1,5 + 67 × 0,25 = 66 + 16,75</td><td>82,75</td></tr>
+<tr><td>Seguimiento (follow-up)</td><td>moderador</td><td>4</td></tr>
+<tr><td><b>Total</b></td><td></td><td><b>291,75</b></td></tr>
+</tbody></table></div>
+<h4>2. Indicadores</h4>
+<ul>
+<li>Esfuerzo por defecto = 291,75 / 111 = <b>2,63 h/defecto</b> (solo detección: 205 / 111 = 1,85 h).</li>
+<li>Efectividad = 111 / (111 + 45) = <b>71,2 %</b>.</li>
+<li>Densidad detectada = 111 / 3 KLOC = <b>37 defectos/KLOC</b>.</li>
+</ul>
+<h4>3. Economía</h4>
+<p>En ST: 111 × 6 = 666 h. Ahorro ≈ 666 − 291,75 = <b>374 h (56 %)</b>, sin contar que algunos defectos nunca se habrían encontrado en ST y que, por la Ley de Boehm, en producción costarían mucho más (diap. de técnicas estáticas: detectar temprano es más barato).</p>
+<h4>4. Tasa de 500 LOC/h</h4>
+<p>La <b>tasa de inspección</b> es la principal variable de control: por encima de ~250 LOC/h la efectividad cae drásticamente. El moderador debe aplicar el <b>criterio de entrada</b>: rechazar la sesión o re-planificar (más sesiones, dividir el módulo, priorizar las partes de mayor riesgo como cálculo de tramos y deducciones).</p>
+<h4>5. Clasificación IEEE 1028</h4>
+<div class="tabla"><table>
+<thead><tr><th>Actividad</th><th>Tipo IEEE 1028</th><th>Líder</th><th>Objetivo</th><th>Formalidad</th></tr></thead>
+<tbody>
+<tr><td>(a)</td><td>Walkthrough (recorrido)</td><td>Autor</td><td>Aprendizaje, entendimiento, hallar anomalías</td><td>Baja-media</td></tr>
+<tr><td>(b)</td><td>Inspección</td><td>Moderador entrenado</td><td>Detectar defectos; métricas; verificar retrabajo</td><td>La más alta</td></tr>
+<tr><td>(c)</td><td>Auditoría</td><td>Auditor líder</td><td>Evaluar conformidad independiente con normas/contratos</td><td>Alta</td></tr>
+<tr><td>(d)</td><td>Revisión de gestión</td><td>Gerente/responsable</td><td>Progreso, riesgos, decisiones sobre recursos</td><td>Media</td></tr>
+<tr><td>(e)</td><td>Revisión técnica</td><td>Líder técnico</td><td>Evaluar adecuación técnica y alternativas</td><td>Media-alta</td></tr>
+<tr><td>(f)</td><td>Revisión informal entre pares (no es uno de los 5 tipos formales)</td><td>—</td><td>Feedback rápido</td><td>Baja</td></tr>
+</tbody></table></div>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión</th></tr></thead>
+<tbody>
+<tr><td>Efectividad 71 % (escapan 29 %)</td><td>Checklist genérico; inspectores sin perspectiva de dominio tributario</td><td>45 defectos posteriores</td><td>Adecuación funcional → Corrección</td></tr>
+<tr><td>Presión por acelerar la tasa</td><td>Plan de proyecto sin tiempo para técnicas estáticas</td><td>Propuesta de 500 LOC/h</td><td>Proceso (SQA)</td></tr>
+<tr><td>Confusión de tipos de revisión</td><td>SQAP no define qué revisión aplica a cada artefacto</td><td>PR tratado como «inspección»</td><td>Proceso (IEEE 730/1028)</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Mejorar la inspección</h4><p>Checklist específico de reglas tributarias (tramos, UIT – Unidad Impositiva Tributaria, redondeos), lectura basada en perspectivas (PBR – Perspective-Based Reading: usuario, probador, diseñador), recolección de métricas por sesión y meta de efectividad ≥ 80 %.</p></div>
+<div class="alt"><h4>Alternativa B · Combinar estático automatizado + inspección focalizada</h4><p>Pasar primero SonarQube/PMD (elimina defectos triviales), e inspeccionar formalmente solo los 800 LOC de mayor riesgo; el resto con revisión de PR con dos aprobadores. Menos esfuerzo, efectividad similar en lo crítico.</p></div>
+<h4>Justificación normativa</h4>
+<p><b>IEEE Std 1028-2008</b> (Software Reviews and Audits: 5 tipos), proceso de Fagan (planificación, overview, preparación, reunión, retrabajo, seguimiento); <b>IEEE 730</b> exige que el SQAP defina revisiones y auditorías; en <b>ISO/IEC/IEEE 12207:2017</b> corresponde a los procesos de Verificación y de Aseguramiento de la Calidad.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Efectividad de inspección = defectos en inspección ÷ (inspección + posteriores): 71,2 % → ≥ 80 %.</li>
+<li>Tasa de inspección ≤ 150 LOC/h (control de la sesión).</li>
+<li>Costo por defecto detectado ≤ 2 h.</li>
+<li>% de artefactos críticos inspeccionados = 100 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) contar al autor en la preparación; (2) olvidar el retrabajo y el seguimiento en el esfuerzo total; (3) llamar «inspección» a un walkthrough (en el walkthrough lidera el autor; en la inspección, un moderador); (4) confundir auditoría (conformidad, independiente) con revisión técnica (adecuación técnica); (5) creer que más velocidad de revisión es más eficiencia.</div>
+</details>
+</section>
+<section id="caso-20" class="caso">
+<h2>Caso 20 · SUM-UNMSM: ¿cuántos defectos quedan en el SDD? Estimación por captura-recaptura</h2>
+<p class="origen">Origen: Web: <a href="https://ehealthinformation.ca/web/default/files/wp-files/isern-97-22.pdf">Briand, El Emam et al., ISERN-97-22</a> y <a href="https://lup.lub.lu.se/record/326164">Thelin, Petersson &amp; Runeson (2002)</a> — adaptado para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>En la inspección del SDD (Software Design Description) del nuevo módulo de matrícula del SUM (Sistema Único de Matrícula) de la UNMSM, dos inspectores trabajaron de forma independiente: el inspector A halló <b>25</b> defectos, el B <b>20</b>, y <b>12</b> fueron hallados por ambos. El SQAP establece: «si la efectividad estimada de la inspección es &lt; 80 %, el documento se re-inspecciona antes de pasar a construcción». En una segunda ronda se añade un inspector C, que halla 18 defectos, de los cuales 15 ya habían sido hallados por A o B.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Estimar el total de defectos con Lincoln-Petersen y con Chapman.</li>
+<li>Estimar los defectos remanentes y la efectividad; aplicar la regla del SQAP.</li>
+<li>Con el inspector C, re-estimar tratando (A ∪ B) como «primera captura» y C como «segunda».</li>
+<li>Indicar supuestos, limitaciones y cómo mitigarlos.</li>
+<li>Proponer 2 alternativas de decisión y KPI.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1–2. Estimación</h4>
+<ul>
+<li><b>Lincoln-Petersen:</b> N̂ = (n<sub>A</sub> × n<sub>B</sub>) / m = (25 × 20) / 12 = <b>41,7</b>.</li>
+<li><b>Chapman</b> (menos sesgado con muestras pequeñas): N̂ = (n<sub>A</sub> + 1)(n<sub>B</sub> + 1)/(m + 1) − 1 = (26 × 21)/13 − 1 = <b>41,0</b>.</li>
+<li>Únicos encontrados = 25 + 20 − 12 = <b>33</b>. Remanentes ≈ 41,7 − 33 ≈ <b>8–9</b>.</li>
+<li>Efectividad estimada = 33 / 41,7 = <b>79,2 %</b> &lt; 80 % → <b>re-inspeccionar</b> según el SQAP.</li>
+</ul>
+<h4>3. Segunda ronda</h4>
+<p>Primera captura: 33 (A ∪ B); segunda: 18 (C); recapturados: 15. N̂ = (33 × 18)/15 = <b>39,6</b>. Únicos totales = 33 + (18 − 15) = 36 → remanentes ≈ 3–4; efectividad ≈ 36 / 39,6 = <b>90,9 %</b> → el SDD puede pasar a construcción.</p>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión</th></tr></thead>
+<tbody>
+<tr><td>Efectividad inicial bajo el umbral</td><td>Solo 2 inspectores con la misma perspectiva</td><td>79,2 %</td><td>Proceso de verificación</td></tr>
+<tr><td>Defectos de diseño remanentes</td><td>Checklist genérico; reglas académicas (prerrequisitos, cruces de horario) poco cubiertas</td><td>≈ 8–9 estimados</td><td>Adecuación funcional → Corrección/Completitud del producto final</td></tr>
+<tr><td>Riesgo de subestimación</td><td>Defectos «difíciles» que nadie ve (heterogeneidad de detectabilidad)</td><td>Supuesto violado</td><td>Fiabilidad de la medición</td></tr>
+</tbody></table></div>
+<h4>4. Supuestos y limitaciones</h4>
+<ul>
+<li>Población cerrada (el documento no cambia entre capturas).</li>
+<li>Independencia entre inspectores y <b>igual probabilidad de detección</b> para todos los defectos: rara vez se cumple → el estimador tiende a <b>subestimar</b>.</li>
+<li>Con m pequeño (pocos recapturados) la varianza es alta: reportar intervalo de confianza.</li>
+<li>Mitigación: 3+ inspectores, modelos con heterogeneidad (Mh-JK, jackknife), lectura basada en perspectivas (PBR).</li>
+</ul>
+<div class="alt"><h4>Alternativa A · Re-inspección con perspectivas (PBR)</h4><p>Añadir inspectores con perspectiva de «estudiante», «secretaría académica» y «probador»; costo moderado; mejora la efectividad y reduce la homogeneidad de detección.</p></div>
+<div class="alt"><h4>Alternativa B · Pasar a construcción con riesgo controlado</h4><p>Aceptar el 79 % (desviación documentada y aprobada por el responsable de SQA), pero exigir pruebas basadas en el diseño de las zonas con más defectos (densidad por sección del SDD) y revisión de diseño adicional antes de la integración. Útil si el cronograma de matrícula es inamovible; debe constar como desviación en el SQAP.</p></div>
+<h4>Justificación normativa</h4>
+<p><b>IEEE 1028</b> (inspección: recolección de datos y decisión de salida); <b>IEEE 730</b> (el SQAP define criterios de aceptación de productos); <b>ISO/IEC/IEEE 12207:2017</b>, proceso de Verificación; técnica estática sobre un artefacto que no es código (el SDD), alineada con la idea de la profesora de aplicar técnicas estáticas en <b>todo</b> el ciclo.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Efectividad estimada de inspección = únicos encontrados ÷ N̂: meta ≥ 80 % (lograda: 90,9 %).</li>
+<li>Defectos remanentes estimados por documento ≤ 5.</li>
+<li>Defectos de diseño encontrados en pruebas (fuga) ÷ total de defectos de diseño: ≤ 10 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) sumar 25 + 20 = 45 como «defectos encontrados» (se duplican los 12 comunes); (2) invertir la fórmula (m en el numerador); (3) presentar N̂ como valor exacto; (4) aplicar captura-recaptura con inspectores que trabajaron juntos (viola independencia). No hay solución única: re-inspeccionar o aceptar con riesgo son decisiones de gestión válidas si están documentadas.</div>
+</details>
+</section>
+
+<section id="caso-21" class="caso">
+<h2>Caso 21 · App de delivery limeña: deuda técnica, rating SQALE y Quality Gate de SonarQube</h2>
+<p class="origen">Origen: Web: <a href="https://docs.sonarsource.com/sonarqube-server/2025.3/user-guide/code-metrics/metrics-definition">SonarQube, definición de métricas</a> y <a href="https://docs.sonarsource.com/sonarqube/10.4/user-guide/quality-gates">SonarQube, Quality Gates</a> — adaptado para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>El backend de una app de delivery limeña tiene <b>48 000 LOC</b> y un costo de remediación (deuda técnica) de <b>1 320 h</b>. En el último sprint se añadieron <b>3 200 líneas</b> con <b>1 100 min</b> de deuda nueva; métricas del código nuevo: cobertura <b>76,4 %</b>, duplicación <b>2,1 %</b>, <b>60 %</b> de <i>security hotspots</i> revisados y <b>1 bug nuevo de severidad Blocker</b>. El QG (Quality Gate) es «Sonar way»: sin issues nuevos, 100 % de hotspots revisados, cobertura ≥ 80 % y duplicación ≤ 3 % en código nuevo. Escala de mantenibilidad (TDR): A ≤ 5 %, B 5–10 %, C 10–20 %, D 20–50 %, E &gt; 50 %; costo de desarrollo = 30 min por línea. Fiabilidad (modelo clásico): A = 0 bugs, B ≥ 1 menor, C ≥ 1 mayor, D ≥ 1 crítico, E ≥ 1 blocker. El líder técnico quiere liberar «porque el código nuevo tiene rating A».</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Calcular TDR y rating global y del código nuevo.</li>
+<li>Dictaminar el QG condición por condición.</li>
+<li>Rating de fiabilidad del código nuevo.</li>
+<li>Horas de deuda a pagar para llegar a A global.</li>
+<li>Responder al líder técnico y proponer 2 alternativas de acción.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Cálculos</h4>
+<ul>
+<li>Costo de desarrollo global = 48 000 × 30 min = 1 440 000 min = <b>24 000 h</b>. TDR = 1 320 / 24 000 = <b>5,5 %</b> → <b>B</b>.</li>
+<li>Código nuevo: 1 100 / (3 200 × 30) = 1 100 / 96 000 = <b>1,15 %</b> → <b>A</b>.</li>
+<li>Fiabilidad del código nuevo = <b>E</b> (≥ 1 blocker).</li>
+<li>Para A global: deuda ≤ 0,05 × 24 000 = 1 200 h → pagar <b>≥ 120 h</b> (más el efecto de las líneas nuevas).</li>
+</ul>
+<h4>Dictamen del Quality Gate</h4>
+<div class="tabla"><table>
+<thead><tr><th>Condición (código nuevo)</th><th>Umbral</th><th>Valor</th><th>Resultado</th></tr></thead>
+<tbody>
+<tr><td>Issues nuevos</td><td>0</td><td>1 bug Blocker</td><td>FALLA</td></tr>
+<tr><td>Security hotspots revisados</td><td>100 %</td><td>60 %</td><td>FALLA</td></tr>
+<tr><td>Cobertura</td><td>≥ 80 %</td><td>76,4 %</td><td>FALLA</td></tr>
+<tr><td>Duplicación</td><td>≤ 3 %</td><td>2,1 %</td><td>PASA</td></tr>
+<tr><td colspan="3"><b>QG (condiciones con AND)</b></td><td><b>FAILED</b></td></tr>
+</tbody></table></div>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Bug blocker en código nuevo</td><td>Sin revisión de PR obligatoria; QG no bloqueante en el pipeline</td><td>Fiabilidad E</td><td>Fiabilidad → Madurez</td></tr>
+<tr><td>Hotspots sin revisar</td><td>Nadie con rol de seguridad asignado</td><td>60 %</td><td>Seguridad</td></tr>
+<tr><td>Cobertura insuficiente</td><td>Pruebas unitarias no exigidas en la DoD (Definition of Done)</td><td>76,4 %</td><td>Mantenibilidad → Capacidad de ser probado</td></tr>
+<tr><td>Deuda global en B</td><td>Legado acumulado</td><td>TDR 5,5 %</td><td>Mantenibilidad</td></tr>
+</tbody></table></div>
+<p><b>Respuesta al líder técnico:</b> el rating A de <i>mantenibilidad</i> es solo una dimensión; el QG evalúa varias condiciones con AND y falla en 3 de 4. Liberar violaría el criterio de salida acordado.</p>
+<div class="alt"><h4>Alternativa A · Bloquear y corregir (Clean as You Code)</h4><p>QG bloqueante en CI/CD; corregir el blocker, revisar los hotspots, subir la cobertura del código nuevo a ≥ 80 %; no exigir pagar la deuda legada para liberar (el enfoque <i>Clean as You Code</i> evalúa el código nuevo). Estrategia: PDCA por sprint con la DoD actualizada.</p></div>
+<div class="alt"><h4>Alternativa B · Liberación con excepción formal</h4><p>Si hay urgencia de negocio: corregir obligatoriamente el blocker y los hotspots (riesgo inaceptable), y aceptar cobertura 76,4 % con excepción aprobada por QA, con plan de remediación en el siguiente sprint y fecha límite. Se registra como desviación (trazable en la auditoría de SQA).</p></div>
+<div class="alt"><h4>Alternativa C · Pagar deuda global por presupuesto</h4><p>Reservar 120–150 h en 3 sprints para pasar a A global, priorizando los archivos con más cambios (deuda con más «interés»). Institucionalizar con CMMI nivel 3 (estándar organizacional de QG).</p></div>
+<h4>Justificación normativa</h4>
+<p>Modelo <b>SQALE</b> (rating de mantenibilidad); <b>ISO/IEC 25010</b> (Fiabilidad, Seguridad, Mantenibilidad); <b>ISO/IEC 25023</b> (medidas de calidad del producto); diap. 17 fila 2 (SonarQube + Quality Gates → CMMI).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>% de builds que pasan el QG al primer intento ≥ 90 %.</li>
+<li>TDR global 5,5 % → ≤ 5 %; TDR del código nuevo &lt; 5 % siempre.</li>
+<li>Bugs blocker/críticos nuevos por sprint = 0.</li>
+<li>Hotspots revisados = 100 %; cobertura del código nuevo ≥ 80 %.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) aprobar el QG porque el rating de mantenibilidad es A; (2) calcular el TDR dividiendo deuda entre LOC (falta multiplicar por el costo por línea); (3) mezclar el rating global con el del código nuevo; (4) creer que «hotspot» = vulnerabilidad confirmada (es código sensible que requiere revisión humana).</div>
+</details>
+</section>
+
+<section id="caso-22" class="caso">
+<h2>Caso 22 · Planilla de una municipalidad: code smells, reglas de análisis estático y refactorización</h2>
+<p class="origen">Origen: Web: <a href="https://refactoring.guru/refactoring/smells">Refactoring.Guru (catálogo de Fowler)</a> y <a href="https://rules.sonarsource.com/java/">reglas Sonar para Java</a> — creado para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Se revisa con SonarQube y una revisión de pares la clase <code>GestorPlanilla</code> del sistema de planillas de una municipalidad (<b>2 300 líneas, 48 métodos, 31 atributos</b>). Extracto:</p>
+<div class="tabla"><table>
+<thead><tr><th>Línea</th><th>Código</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>public double calcular(String tipo, double sueldo, int hijos, boolean afp, String region, int horasExtra, double bono) {</code></td></tr>
+<tr><td>2</td><td><code>double r = 0;</code></td></tr>
+<tr><td>3</td><td><code>if (tipo.equals("PLANILLA")) { r = sueldo * 0.13; if (afp) r = sueldo * 0.1137; }</code></td></tr>
+<tr><td>4</td><td><code>else if (tipo.equals("CAS")) { r = sueldo * 0.13; }</code></td></tr>
+<tr><td>5</td><td><code>else if (tipo.equals("PLANILLA")) { r = 0; }</code></td></tr>
+<tr><td>6</td><td><code>if (hijos &gt; 0) r -= 102.5;</code></td></tr>
+<tr><td>7</td><td><code>// double old = sueldo * 0.12;</code></td></tr>
+<tr><td>8</td><td><code>return r + horasExtra * (sueldo / 240) * 1.25 + bono; }</code></td></tr>
+<tr><td>9</td><td><code>public double calcularGratificacion(Empleado e) { return e.getContrato().getSueldo() * e.getContrato().getFactor() + e.getContrato().getBono(); }</code></td></tr>
+<tr><td>10</td><td><code>private void legacyExport() { /* sin llamadas */ }</code></td></tr>
+</tbody></table></div>
+<p>El parámetro <code>region</code> no se usa. Tras el último cambio de la tasa de aporte, se olvidó actualizar dos de los cinco lugares donde aparece <code>0.13</code>.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Identificar al menos 8 smells/defectos con su evidencia, la regla de análisis estático asociada y la subcaracterística ISO/IEC 25010 afectada.</li>
+<li>Distinguir cuáles son defectos de <b>fiabilidad/corrección</b> (bugs) y cuáles de <b>mantenibilidad</b>.</li>
+<li>Proponer la refactorización (2 alternativas de diseño).</li>
+<li>Configurar herramientas (Checkstyle, PMD, SonarQube) y KPI.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Smell / defecto</th><th>Causa raíz / evidencia</th><th>Regla típica</th><th>ISO/IEC 25010</th><th>Tipo</th></tr></thead>
+<tbody>
+<tr><td>God Class / Large Class</td><td>2 300 líneas, 48 métodos, 31 atributos: acumula responsabilidades</td><td>tamaño de clase; LCOM alto</td><td>Mantenibilidad → Modularidad, Analizabilidad</td><td>Mantenibilidad</td></tr>
+<tr><td>Long Parameter List</td><td>7 parámetros (L1)</td><td>java:S107</td><td>Mantenibilidad</td><td>Mantenibilidad</td></tr>
+<tr><td>Magic Numbers</td><td>0.13, 0.1137, 102.5, 240, 1.25</td><td>java:S109</td><td>Mantenibilidad → Modificabilidad</td><td>Mantenibilidad (y origen de bugs: la tasa no se actualizó en 2 lugares)</td></tr>
+<tr><td>Literales duplicados / Primitive Obsession</td><td>"PLANILLA" repetido; tipo como String</td><td>java:S1192</td><td>Mantenibilidad; Fiabilidad</td><td>Mantenibilidad</td></tr>
+<tr><td>Condición duplicada (código inalcanzable)</td><td>L5 repite la condición de L3: nunca se ejecuta</td><td>condiciones idénticas en if/else-if (java:S1862)</td><td>Fiabilidad (defecto latente); Adecuación funcional → Corrección</td><td><b>Bug</b></td></tr>
+<tr><td>Código comentado</td><td>L7</td><td>java:S125</td><td>Mantenibilidad → Analizabilidad</td><td>Mantenibilidad</td></tr>
+<tr><td>Código muerto</td><td><code>legacyExport()</code> sin llamadas; parámetro <code>region</code> sin uso</td><td>java:S1144, S1172</td><td>Mantenibilidad; riesgo tipo Knight Capital si se reactiva</td><td>Mantenibilidad</td></tr>
+<tr><td>Feature Envy / Message Chains</td><td><code>e.getContrato().getSueldo()…</code> (L9)</td><td>Ley de Demeter</td><td>Mantenibilidad → Modularidad (acoplamiento)</td><td>Mantenibilidad</td></tr>
+<tr><td>Condicionales por tipo</td><td>Cadena if/else por tipo de contrato</td><td>java:S3776 (complejidad cognitiva)</td><td>Mantenibilidad → Capacidad de ser probado</td><td>Mantenibilidad</td></tr>
+<tr><td><code>double</code> para dinero</td><td>Errores de redondeo en soles</td><td>regla de precisión monetaria</td><td>Adecuación funcional → Corrección</td><td><b>Bug</b></td></tr>
+<tr><td>Lógica duplicada de tasa</td><td>0.13 en 5 lugares, 2 sin actualizar</td><td>detección de duplicación (CPD de PMD)</td><td>Adecuación funcional → Corrección</td><td><b>Bug</b> (ya materializado)</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Refactorización incremental (Fowler)</h4><p>Extract Class (<code>CalculadoraAporte</code>, <code>CalculadoraGratificacion</code>), Introduce Parameter Object (<code>DatosRemuneracion</code>), Replace Magic Number with Symbolic Constant y luego con <b>tabla parametrizable</b> (las tasas cambian por norma: deben estar en configuración), Replace Type Code with Enum (<code>TipoContrato</code>), Move Method a <code>Contrato</code>, eliminar código muerto/comentado, <code>BigDecimal</code> con redondeo explícito. Cada paso protegido por pruebas unitarias (red de seguridad).</p></div>
+<div class="alt"><h4>Alternativa B · Patrón Strategy por régimen laboral</h4><p>Interfaz <code>RegimenLaboral</code> con implementaciones <code>Planilla728</code>, <code>CAS</code>, etc.; cada una calcula aportes leyendo tasas de un repositorio de parámetros con vigencia. Reemplaza los condicionales por polimorfismo (Replace Conditional with Polymorphism); agregar un régimen nuevo no toca código existente (principio Abierto/Cerrado).</p></div>
+<h4>Configuración de herramientas</h4>
+<ul>
+<li><b>Checkstyle</b>: estilo y convenciones (longitud de método ≤ 50, parámetros ≤ 4, números mágicos).</li>
+<li><b>PMD</b>: código muerto, God Class, CPD (Copy-Paste Detector) con umbral de 50 tokens.</li>
+<li><b>SonarQube</b>: agrega todo, calcula deuda y aplica el QG en CI/CD; <b>SonarLint</b> en el IDE.</li>
+</ul>
+<h4>Justificación normativa</h4>
+<p><b>ISO/IEC 25010:2011</b> → Mantenibilidad (Modularidad, Reusabilidad, Analizabilidad, Modificabilidad, Capacidad de ser probado) y Adecuación funcional (Corrección). La revisión de código y el análisis estático son <b>técnicas estáticas</b> (no ejecutan el programa), como enseña la profesora; las herramientas son las de la diap. 20.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>Code smells por KLOC: medir línea base → −60 % en 2 sprints.</li>
+<li>Duplicación ≤ 3 %; complejidad cognitiva ≤ 15 por método.</li>
+<li>Defectos de cálculo de planilla reportados por RR. HH. por mes → 0.</li>
+<li>Tiempo para aplicar un cambio de tasa normativa: de días a &lt; 1 h (solo configuración).</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) tratar todo como «smell» y no ver los <b>bugs</b> escondidos (condición duplicada, double para dinero, tasa no actualizada); (2) refactorizar sin pruebas; (3) creer que el código comentado «sirve de historial» (para eso está el SCM – Software Configuration Management, p. ej. Git); (4) confundir una regla de estilo (Checkstyle) con una de defectos (PMD/Sonar bugs).</div>
+</details>
+</section>
+<section id="caso-23" class="caso">
+<h2>Caso 23 · Core de cuentas de una caja municipal: métricas CK y métricas de paquetes de Martin</h2>
+<p class="origen">Origen: Web: <a href="https://www.aivosto.com/project/help/pm-oo-ck.html">Aivosto, métricas CK</a>, <a href="https://homepages.dcc.ufmg.br/~figueiredo/disciplinas/aulas/metricas-ck_v03.pdf">UFMG, métricas CK</a> y <a href="https://www.spinellis.gr/sw/ckjm/doc/indexw.html">ckjm</a> — adaptado para el repaso</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>Una CMAC (Caja Municipal de Ahorro y Crédito) evalúa el <b>diseño</b> de su nuevo core de cuentas antes de construirlo. Jerarquía: <code>Cuenta</code> (raíz) → <code>CuentaAhorro</code>, <code>CuentaCorriente</code>; <code>CuentaAhorro</code> → <code>CuentaCTS</code> (CTS – Compensación por Tiempo de Servicios). <code>CuentaCorriente</code> tiene atributos {sobregiro, comisionMensual, ultimaFechaCobro} y métodos:</p>
+<div class="tabla"><table>
+<thead><tr><th>Método</th><th>V(G)</th><th>Atributos propios que usa</th><th>Llama a</th></tr></thead>
+<tbody>
+<tr><td>m1 <code>retirar()</code></td><td>3</td><td>sobregiro</td><td>Movimiento.registrar(), Cuenta.getSaldo()</td></tr>
+<tr><td>m2 <code>cobrarMantenimiento()</code></td><td>2</td><td>comisionMensual, ultimaFechaCobro</td><td>Comision.calcular(), Movimiento.registrar()</td></tr>
+<tr><td>m3 <code>ampliarSobregiro()</code></td><td>2</td><td>sobregiro</td><td>RiesgoService.evaluar()</td></tr>
+<tr><td>m4 <code>generarEstado()</code></td><td>1</td><td>ninguno</td><td>Movimiento.listar(), PdfWriter.escribir()</td></tr>
+</tbody></table></div>
+<p>Paquetes (Ca = acoplamiento aferente, Ce = eferente; clases abstractas / total): <b>pagos</b> (Ca 6, Ce 2, 1/10), <b>ui</b> (Ca 0, Ce 7, 0/12), <b>dominio</b> (Ca 8, Ce 0, 4/8), <b>infra</b> (Ca 3, Ce 3, 1/4). Umbrales del equipo: LCOM* &gt; 0,8 = baja cohesión; D &gt; 0,5 = revisar paquete.</p>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>DIT (Depth of Inheritance Tree) y NOC (Number Of Children) de las 4 clases.</li>
+<li>WMC (Weighted Methods per Class), RFC (Response For a Class), CBO (Coupling Between Objects) y LCOM (Lack of Cohesion in Methods: CK y Henderson-Sellers) de <code>CuentaCorriente</code>.</li>
+<li>Inestabilidad I, abstracción A y distancia D de cada paquete; interpretar.</li>
+<li>Proponer 2 alternativas de rediseño y KPI.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1. DIT y NOC</h4>
+<p>Raíz = 0: DIT(Cuenta) = 0, DIT(Ahorro) = 1, DIT(Corriente) = 1, DIT(CTS) = 2. NOC(Cuenta) = 2, NOC(Ahorro) = 1, NOC(Corriente) = 0, NOC(CTS) = 0. (Herramientas como ckjm cuentan desde 1 por <code>Object</code>: declarar la convención.)</p>
+<h4>2. Métricas de CuentaCorriente</h4>
+<ul>
+<li><b>WMC</b> = 3 + 2 + 2 + 1 = <b>8</b> (ponderado por V(G)); = 4 con peso unitario.</li>
+<li><b>RFC</b> = 4 métodos propios + 6 métodos remotos distintos (Movimiento.registrar, Cuenta.getSaldo, Comision.calcular, RiesgoService.evaluar, Movimiento.listar, PdfWriter.escribir) = <b>10</b>.</li>
+<li><b>CBO</b> = {Movimiento, Comision, RiesgoService, PdfWriter} = <b>4</b> (5 si la convención incluye la superclase Cuenta).</li>
+<li><b>LCOM (CK)</b>: 6 pares de métodos; solo (m1, m3) comparten atributo → Q = 1, P = 5 → LCOM = P − Q = <b>4</b>.</li>
+<li><b>LCOM* (Henderson-Sellers)</b>: μ(sobregiro) = 2, μ(comisionMensual) = 1, μ(ultimaFechaCobro) = 1 → media = 1,333; m = 4 → (1,333 − 4)/(1 − 4) = <b>0,89</b> &gt; 0,8 → <b>baja cohesión</b>.</li>
+</ul>
+<h4>3. Métricas de Martin (D = |A + I − 1|, I = Ce/(Ca + Ce))</h4>
+<div class="tabla"><table>
+<thead><tr><th>Paquete</th><th>I</th><th>A</th><th>D</th><th>Interpretación</th></tr></thead>
+<tbody>
+<tr><td>pagos</td><td>0,25</td><td>0,10</td><td><b>0,65</b></td><td>«Zona de dolor»: estable (muchos dependen de él) y concreto → difícil de cambiar; revisar</td></tr>
+<tr><td>ui</td><td>1,00</td><td>0,00</td><td>0,00</td><td>Inestable y concreto: correcto para la capa de presentación</td></tr>
+<tr><td>dominio</td><td>0,00</td><td>0,50</td><td>0,50</td><td>Estable pero poco abstracto: en el límite</td></tr>
+<tr><td>infra</td><td>0,50</td><td>0,25</td><td>0,25</td><td>Aceptable</td></tr>
+</tbody></table></div>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo ISO/IEC 25010</th></tr></thead>
+<tbody>
+<tr><td>Baja cohesión en CuentaCorriente</td><td>Mezcla de responsabilidades: operación, comisiones y reportes</td><td>LCOM* 0,89; m4 no usa atributos propios</td><td>Mantenibilidad → Modularidad, Reusabilidad</td></tr>
+<tr><td>Paquete pagos en zona de dolor</td><td>Implementaciones concretas sin interfaces, de las que dependen 6 paquetes</td><td>D = 0,65</td><td>Mantenibilidad → Modificabilidad</td></tr>
+<tr><td>Dependencia directa de PdfWriter</td><td>La entidad conoce la infraestructura</td><td>CBO incluye PdfWriter</td><td>Mantenibilidad → Capacidad de ser probado</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Extract Class</h4><p>Mover m4 a <code>EstadoCuentaService</code> y m2 a <code>GestorComisiones</code>; <code>CuentaCorriente</code> queda con m1 y m3 (ambos usan sobregiro) → LCOM* ≈ 0, CBO baja a 3.</p></div>
+<div class="alt"><h4>Alternativa B · Inversión de dependencias en pagos</h4><p>Introducir interfaces (<code>PasarelaPago</code>, <code>ProcesadorCargo</code>) en pagos y que los 6 clientes dependan de ellas: A sube de 0,10 a ~0,40 → D ≈ 0,35. Aplicar el principio de dependencias estables (SDP) y de abstracciones estables (SAP).</p></div>
+<h4>Justificación normativa</h4>
+<p><b>ISO/IEC 25010</b> → Mantenibilidad; <b>ISO/IEC 25023</b> define medidas de modularidad/acoplamiento; la evaluación de <b>diseño</b> antes de codificar es una técnica estática (herramientas para evaluar diseño de la diap. 20; p. ej. ckjm, SonarQube, NDepend, JDepend).</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>% de clases con LCOM* &gt; 0,8 ≤ 10 %.</li>
+<li>CBO medio ≤ 5; RFC ≤ 50 por clase.</li>
+<li>Paquetes con D &gt; 0,5 = 0.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) contar dos veces Movimiento.registrar en el RFC; (2) olvidar declarar la convención de DIT/CBO; (3) leer LCOM alto como «buena cohesión» (es <i>falta</i> de cohesión); (4) creer que D = 0 en ui es malo (para presentación es lo esperado). Las métricas orientan, no dictan: un mismo valor puede ser aceptable según el rol del paquete.</div>
+</details>
+</section>
+
+<section id="caso-24" class="caso">
+<h2>Caso 24 · App móvil SINEACE: clasificar 18 RNF con ISO/IEC 25010:2011 y 2023</h2>
+<p class="origen">Origen: Web: <a href="https://quality.arc42.org/articles/iso-25010-update-2023">arc42 Quality, «ISO 25010 update 2023»</a> y <a href="https://webstore.ansi.org/preview-pages/ISO/preview_ISO+IEC+25010-2023.pdf">vista previa de ISO/IEC 25010:2023</a> — adaptado al proyecto SINEACE del G3</p> <span class="tag">Dificultad: Muy alta</span>
+<div class="enunciado">
+<p>El G3 especifica la SRS de la app móvil del SINEACE (Sistema Nacional de Evaluación, Acreditación y Certificación de la Calidad Educativa). Deben clasificarse estos RNF (Requisitos No Funcionales):</p>
+<ul>
+<li>R1 Consultar el estado de acreditación en ≤ 2 s (p95) con 500 usuarios concurrentes.</li>
+<li>R2 Disponibilidad 99,5 % mensual.</li>
+<li>R3 Si cae el servicio de RENIEC, seguir operando con datos en caché señalados.</li>
+<li>R4 Recuperar el formulario de autoevaluación tras un cierre inesperado.</li>
+<li>R5 Cifrado AES-256 en reposo y TLS 1.3 en tránsito.</li>
+<li>R6 Registrar quién modificó un puntaje y cuándo.</li>
+<li>R7 Actas con firma digital que el firmante no pueda negar.</li>
+<li>R8 Bloqueo tras 5 intentos fallidos y limitación de fuerza bruta.</li>
+<li>R9 Cumplir WCAG 2.1 AA (Web Content Accessibility Guidelines).</li>
+<li>R10 Un usuario nuevo completa el registro sin capacitación en ≤ 10 min.</li>
+<li>R11 Confirmación antes del envío definitivo de la autoevaluación.</li>
+<li>R12 Funcionar en Android 10+ e iOS 15+.</li>
+<li>R13 Crecer de 5 000 a 50 000 usuarios añadiendo nodos.</li>
+<li>R14 Intercambiar datos con SUNEDU vía API REST.</li>
+<li>R15 Cobertura ≥ 80 % y V(G) ≤ 10 por método.</li>
+<li>R16 Cálculo correcto del puntaje por estándar.</li>
+<li>R17 Bloquear la cámara de evidencias si el usuario conduce (&gt; 20 km/h).</li>
+<li>R18 Actualizarse desde la tienda sin reinstalar.</li>
+</ul>
+</div>
+<h3>Se pide</h3>
+<ol>
+<li>Clasificar cada RNF (característica / subcaracterística) en ISO/IEC 25010:2011 (la versión de la profesora) y en 25010:2023.</li>
+<li>Señalar los RNF que <b>no tienen equivalente directo</b> en 2011.</li>
+<li>Indicar qué técnica de calidad (estática o dinámica) y qué herramienta verificaría 6 de ellos.</li>
+<li>Reescribir R10 de forma medible si fuera ambiguo y proponer KPI.</li>
+</ol>
+<details class="sol"><summary>Ver solución propuesta</summary>
+<h4>1–2. Clasificación</h4>
+<div class="tabla"><table>
+<thead><tr><th>RNF</th><th>ISO/IEC 25010:2011</th><th>ISO/IEC 25010:2023</th></tr></thead>
+<tbody>
+<tr><td>R1</td><td>Eficiencia de desempeño / Comportamiento temporal</td><td>igual</td></tr>
+<tr><td>R2</td><td>Fiabilidad / Disponibilidad</td><td>igual</td></tr>
+<tr><td>R3</td><td>Fiabilidad / Tolerancia a fallos</td><td>igual</td></tr>
+<tr><td>R4</td><td>Fiabilidad / Capacidad de recuperación</td><td>igual</td></tr>
+<tr><td>R5</td><td>Seguridad / Confidencialidad</td><td>igual</td></tr>
+<tr><td>R6</td><td>Seguridad / Responsabilidad</td><td>igual</td></tr>
+<tr><td>R7</td><td>Seguridad / No repudio</td><td>igual</td></tr>
+<tr><td>R8</td><td>Seguridad (se forzaba en Autenticidad/Integridad) — <b>sin equivalente directo</b></td><td>Seguridad / <b>Resistencia</b> (nueva)</td></tr>
+<tr><td>R9</td><td>Usabilidad / Accesibilidad</td><td>Capacidad de interacción / <b>Inclusividad</b></td></tr>
+<tr><td>R10</td><td>Usabilidad / Capacidad de aprendizaje</td><td>Capacidad de interacción / Capacidad de aprendizaje</td></tr>
+<tr><td>R11</td><td>Usabilidad / Protección contra errores de usuario</td><td>Capacidad de interacción / igual</td></tr>
+<tr><td>R12</td><td>Portabilidad / Adaptabilidad</td><td>Flexibilidad / Adaptabilidad</td></tr>
+<tr><td>R13</td><td>Eficiencia de desempeño / Capacidad (aproximación) — <b>sin equivalente directo</b></td><td>Flexibilidad / <b>Escalabilidad</b> (nueva)</td></tr>
+<tr><td>R14</td><td>Compatibilidad / Interoperabilidad</td><td>igual</td></tr>
+<tr><td>R15</td><td>Mantenibilidad / Capacidad de ser probado (y Analizabilidad)</td><td>igual</td></tr>
+<tr><td>R16</td><td>Adecuación funcional / Corrección funcional</td><td>igual</td></tr>
+<tr><td>R17</td><td><b>sin equivalente</b></td><td><b>Protección (Safety)</b> / Restricción operativa (característica nueva)</td></tr>
+<tr><td>R18</td><td>Portabilidad / Instalabilidad</td><td>Flexibilidad / Instalabilidad</td></tr>
+</tbody></table></div>
+<h4>3. Técnica y herramienta de verificación</h4>
+<div class="tabla"><table>
+<thead><tr><th>RNF</th><th>Técnica</th><th>Herramienta</th></tr></thead>
+<tbody>
+<tr><td>R1, R13</td><td>Dinámica: prueba de carga/escalabilidad</td><td>JMeter, k6</td></tr>
+<tr><td>R5</td><td>Estática (SAST: cripto débil) + dinámica (escaneo TLS)</td><td>SonarQube, OWASP ZAP, testssl</td></tr>
+<tr><td>R9</td><td>Estática automatizada + evaluación experta</td><td>axe, Lighthouse, Accessibility Scanner</td></tr>
+<tr><td>R10</td><td>Dinámica basada en experiencia: prueba de usabilidad con usuarios</td><td>Sesiones moderadas + SUS</td></tr>
+<tr><td>R15</td><td>Estática (métricas) + cobertura de pruebas unitarias</td><td>SonarQube, JaCoCo, ESLint</td></tr>
+<tr><td>R16</td><td>Estática (inspección de la regla) + dinámica (unitarias con tabla de decisión)</td><td>JUnit/Jest</td></tr>
+</tbody></table></div>
+<h4>Problemas identificados</h4>
+<div class="tabla"><table>
+<thead><tr><th>Problema</th><th>Causa raíz</th><th>Evidencia</th><th>Atributo/dimensión</th></tr></thead>
+<tbody>
+<tr><td>Confusión entre subcaracterísticas cercanas</td><td>No se usa una sola versión de la norma como referencia</td><td>R6/R7, R1/R13</td><td>Calidad de la SRS (IEEE 830/29148: no ambigua)</td></tr>
+<tr><td>RNF sin equivalente en 2011</td><td>La versión 2023 añadió Resistencia, Escalabilidad, Protección</td><td>R8, R13, R17</td><td>Trazabilidad norma–requisito</td></tr>
+<tr><td>R10 parcialmente medible</td><td>No define población ni tasa de éxito</td><td>«sin capacitación»</td><td>Verificabilidad del requisito</td></tr>
+</tbody></table></div>
+<div class="alt"><h4>Alternativa A · Usar solo 2011 (la de la profesora) con notas</h4><p>Clasificar todo con 2011 y marcar R8, R13 y R17 con nota «en 25010:2023 sería…». Recomendado para el examen.</p></div>
+<div class="alt"><h4>Alternativa B · Migrar la SRS a 2023</h4><p>Usar las 9 características de 2023 y una tabla de equivalencias hacia 2011 para auditores que usen la versión antigua. Mejor para un proyecto nuevo en 2026.</p></div>
+<h4>4. R10 medible</h4>
+<p>«El 90 % de usuarios nuevos de IES (Instituciones de Educación Superior), sin capacitación previa, completa el registro en ≤ 10 min en una prueba con n ≥ 8 participantes, con ≤ 1 error crítico.»</p>
+<h4>Justificación normativa</h4>
+<p><b>ISO/IEC 25010:2011</b> (8 características: Adecuación funcional, Eficiencia de desempeño, Compatibilidad, Usabilidad, Fiabilidad, Seguridad, Mantenibilidad, Portabilidad) vs <b>ISO/IEC 25010:2023</b> (9: renombra Usabilidad → Capacidad de interacción y Portabilidad → Flexibilidad; añade Protección; Madurez → Ausencia de fallos). <b>ISO/IEC/IEEE 29148</b> para requisitos verificables.</p>
+<h4>KPI para medir la mejora</h4>
+<ul>
+<li>% de RNF con criterio de aceptación medible = 100 %.</li>
+<li>% de RNF trazados a una subcaracterística y a un caso de prueba (RTM – Requirements Traceability Matrix) = 100 %.</li>
+<li>Tasa de éxito de la tarea de registro ≥ 90 %; SUS ≥ 75.</li>
+</ul>
+<div class="ojo"><b>Errores frecuentes:</b> (1) poner R1 en «Capacidad» (Capacidad = límites máximos; tiempo de respuesta = Comportamiento temporal); (2) confundir R6 (Responsabilidad: registro) con R7 (No repudio: prueba criptográfica); (3) poner Disponibilidad como característica (es subcaracterística de Fiabilidad); (4) usar términos de 2023 sin avisar, cuando la profesora enseña 2011; (5) clasificar R17 como Seguridad (Security) cuando es Protección (Safety): daño a personas, no a la información.</div>
+</details>
+</section>
+<!--FIN-->

@@ -1,0 +1,756 @@
+{
+ "mcq": [
+  {
+   "id": "s2-m01",
+   "s": 2,
+   "q": "Una fábrica de SW de Lima, proveedora de Interbank, evoluciona así: en 2019 el área de QC rechaza todo build que falla las pruebas finales; en 2021 un equipo SQA independiente audita si los proyectos siguen el plan y los estándares definidos; en 2023 lanza proyectos para elevar la capacidad del proceso de cumplir los requisitos; en 2025 la gerencia dirige y controla toda la organización en torno a la calidad. Un auditor externo sostiene que en 2021 la empresa ya estaba en la etapa de mejora de la calidad de la Figura 1 de Murrieta Saavedra et al., porque las auditorías detectaban desviaciones. ¿Qué corrección es la más precisa?",
+   "o": [
+    "Era mejora: toda auditoría de proceso eleva por sí misma la capacidad de cumplir los requisitos",
+    "Era control: la auditoría detecta desviaciones ya ocurridas y por eso equivale a rechazar el build",
+    "Era aseguramiento: la auditoría de proceso busca dar confianza de que se cumplirán los requisitos",
+    "Era gestión total: la auditoría compromete a la alta dirección en dirigir toda la organización"
+   ],
+   "a": 2,
+   "exp": "Correcta: la Figura 1 define el aseguramiento como generar confianza de que se cumplirán los requisitos, y en la S1 el SQA es el conjunto planificado y sistemático de acciones que aporta confianza de que el proceso cumple estándares; auditar el cumplimiento del plan es justo eso. Control falla: el QC verifica el producto y cumple requisitos, mientras que la auditoría examina el proceso, no el build. Mejora falla: incrementar la capacidad exige acciones sobre el proceso, como los proyectos de 2023; auditar no basta. Gestión total falla: dirigir y controlar toda la organización recién aparece en 2025."
+  },
+  {
+   "id": "s2-m02",
+   "s": 2,
+   "q": "En el Ishikawa 6M del SUM-UNMSM visto en clase, un analista debe ubicar dos causas que mencionan al Banco de la Nación: la obligación de que el sistema valide en tiempo real los recibos de pago y constancias durante la matrícula, y el hecho de que los códigos de pago tarden hasta 48 h en activarse tras el depósito. Su informe repite la ubicación que usó el G3 en su Laboratorio 02. ¿Qué ubicación coincide con la diapositiva de la profesora?",
+   "o": [
+    "La validación en tiempo real va en Métodos y la demora de activación del pago va en Materiales",
+    "La validación en tiempo real va en Medición y la demora de activación del pago va en Maquinaria",
+    "La validación en tiempo real va en Materiales y la demora de activación del pago va en Métodos",
+    "La validación en tiempo real va en Métodos y la demora de activación del pago va en Medio ambiente"
+   ],
+   "a": 0,
+   "exp": "Correcta: en las diapositivas 28 y 29 la burocracia en los requisitos, que obliga a validar en tiempo real recibos y constancias, es un procedimiento o regla, por eso es Métodos; los recibos de pago no integrados son un insumo de información, por eso es Materiales. La opción que pone la validación en Materiales y la demora en Métodos es precisamente el intercambio Métodos por Materiales que cometió el G3 y que la nota marca como error típico. Medición y Maquinaria fallan: Medición es control y monitoreo, como las alertas al 80 %, y Maquinaria es infraestructura como servidores o ancho de banda. Medio ambiente falla: ahí van la brecha digital, el presupuesto público y la cultura de última hora."
+  },
+  {
+   "id": "s2-m03",
+   "s": 2,
+   "q": "En una auditoría de precios de un supermercado se revisan 2 000 SKU. Para cada SKU el equipo Six Sigma define 3 oportunidades de defecto: precio de góndola, precio cobrado en el POS y vigencia de la promoción. Se hallan 46 defectos en total. Con el desplazamiento convencional de 1,5σ, ¿qué resultado es el correcto?",
+   "o": [
+    "7 667 DPMO, nivel sigma cercano a 2,4",
+    "23 000 DPMO, nivel sigma cercano a 3,5",
+    "69 000 DPMO, nivel sigma cercano a 3,0",
+    "7 667 DPMO, nivel sigma cercano a 3,9"
+   ],
+   "a": 3,
+   "exp": "Correcta: DPMO = defectos / unidades x oportunidades x 10^6 = 46 / 6 000 x 10^6 ≈ 7 667; el rendimiento es 99,23 %, que corresponde a Z ≈ 2,42 de corto plazo más 1,5 de desplazamiento ≈ 3,9σ. 23 000 DPMO ignora las 3 oportunidades por unidad y trata cada SKU como una sola oportunidad. 69 000 multiplica en lugar de dividir por las oportunidades. 7 667 con 2,4σ calcula bien el DPMO pero olvida sumar el desplazamiento de 1,5σ que usa la tabla de 3,4 DPMO para 6σ."
+  },
+  {
+   "id": "s2-m04",
+   "s": 2,
+   "q": "Una pesquera peruana mediana decide postular al Premio Nacional a la Calidad, coordinado por el Comité de Gestión de la Calidad con secretaría técnica del CDI de la SNI. Su consultor arma la preparación sobre los bloques Dirección, Ejecución y Resultados, argumentando que el premio peruano es una adaptación regional del modelo europeo. ¿Qué observación es la correcta según la clase?",
+   "o": [
+    "El PNC se estructura sobre fases DMAIC, por lo que conviene formar primero Black Belts certificados",
+    "El PNC se alinea con los criterios Baldrige, por lo que conviene prepararse sobre sus siete dimensiones",
+    "El PNC evalúa los diez criterios Deming, por lo que conviene prepararse sobre control estadístico SPC",
+    "El PNC adapta el modelo europeo vía Fundibeq, por lo que la preparación del consultor resulta adecuada"
+   ],
+   "a": 1,
+   "exp": "Correcta: la diapositiva 34 dice que el PNC se basa en el Modelo de Excelencia en la Gestión, fuertemente alineado con Malcolm Baldrige, con 7 dimensiones: Liderazgo, Estrategia, Clientes, Medición y Gestión del Conocimiento, Personal, Operaciones y Resultados. La opción de Fundibeq confunde el PNC con el Modelo Iberoamericano, que según la diapositiva 16 adapta el modelo europeo. La opción Deming confunde el premio japonés de JUSE con el peruano. La opción DMAIC confunde un modelo macro de excelencia con la metodología micro Six Sigma; la diapositiva 36 los presenta como complementarios."
+  },
+  {
+   "id": "s2-m05",
+   "s": 2,
+   "q": "En una planta de autopartes que postula al Premio Deming, el área de calidad actualiza cada día los gráficos de control SPC y las variables críticas se mantienen bajo control. Sin embargo, los auditores comprueban que los operarios de línea no saben leer esos gráficos ni construir una hoja de verificación, y que solo los ingenieros dominan las herramientas. ¿Qué criterio del Modelo Deming queda más debilitado?",
+   "o": [
+    "Estandarización, que exige manuales, instructivos y normas de trabajo actualizados con sistema",
+    "Educación y diseminación, que exige que todo el personal domine las herramientas estadísticas básicas",
+    "Garantía de calidad, que exige inspección, gestión de equipos de medición y entrega de lo prometido",
+    "Gestión y control, que exige el uso diario de gráficos SPC y el control de las variables críticas"
+   ],
+   "a": 1,
+   "exp": "Correcta: la diapositiva 19 indica que Educación y Diseminación comprueba que todos los empleados, desde operarios hasta gerentes, entiendan y apliquen herramientas estadísticas básicas; la diapositiva 23 refuerza que el modelo exige que todo el personal domine las 7QC. Gestión y control falla: el enunciado dice que los gráficos se usan a diario y las variables están bajo control. Estandarización falla: no se menciona carencia de manuales ni de su actualización. Garantía de calidad falla: no hay evidencia de problemas de inspección ni de equipos de medición."
+  },
+  {
+   "id": "s2-m06",
+   "s": 2,
+   "q": "Un equipo de Yape quiere reducir los rechazos de pagos con QR. Identifica el problema y modela la solución con datos; luego libera el cambio de inmediato a los 15 millones de usuarios; después mide estadísticamente los rechazos y, como mejoraron, documenta el nuevo procedimiento como estándar. Según el PHVA que buscan los auditores del Modelo Deming en la diapositiva 22, ¿qué etapa se ejecutó de forma incorrecta?",
+   "o": [
+    "Planear, porque la solución debía estandarizarse antes de diseñarse con un modelo matemático",
+    "Verificar, porque la medición debía basarse en la opinión de los usuarios y no en estadística",
+    "Actuar, porque el cambio exitoso debía reiniciar el ciclo en lugar de convertirse en estándar",
+    "Hacer, porque la solución debía implementarse primero a pequeña escala como prueba piloto"
+   ],
+   "a": 3,
+   "exp": "Correcta: en la diapositiva 22 la etapa Hacer es implementar la solución a pequeña escala, como prueba piloto; liberar a toda la base de usuarios salta ese paso y expone a todos al riesgo. Planear falla: identificar el problema y diseñar la solución matemática es lo que se hizo, y estandarizar pertenece a Actuar. Verificar falla: la diapositiva pide medir con datos estadísticos, que es lo que se hizo. Actuar falla: si el cambio fue exitoso se estandariza; reiniciar el ciclo es la alternativa cuando no lo fue."
+  },
+  {
+   "id": "s2-m07",
+   "s": 2,
+   "q": "Tras varias caídas del portal SUNAT Virtual, la jefatura de TI decide pasar de 5 a 20 testers que revisan manualmente cada release completo justo antes de producción, sin cambiar los estándares de desarrollo ni las revisiones de diseño. A la luz de los 14 puntos de Deming y de la comparación QC versus SQA de la S1, ¿qué juicio es el más sólido?",
+   "o": [
+    "Contradice dejar de depender de la inspección masiva y refuerza un enfoque reactivo centrado en el producto",
+    "Aplica la mejora constante del sistema porque más inspección final reduce el costo de corregir defectos",
+    "Contradice desterrar el temor porque más testers aumentan la presión sobre los programadores del equipo",
+    "Aplica dejar de depender de la inspección masiva porque las pruebas son una técnica preventiva de SQA"
+   ],
+   "a": 0,
+   "exp": "Correcta: el punto 3 de Deming pide dejar de depender de la inspección masiva y construir la calidad desde el inicio; ampliar la inspección final es lo contrario. En la S1, el QC es reactivo y orientado al producto, mientras que el SQA es proactivo y orientado al proceso. La opción que llama a las pruebas técnica preventiva de SQA confunde pruebas con SQA: las pruebas son actividad típica de QC. La opción del temor invoca otro punto sin base en el enunciado. La opción de la mejora constante contradice la Ley de Boehm y la curva de la S1: detectar en pruebas cuesta unas 51 veces más que en requisitos, de modo que inspeccionar al final no abarata la corrección."
+  },
+  {
+   "id": "s2-m08",
+   "s": 2,
+   "q": "Un gerente cita a un gurú que, según el cuadro comparativo de la clase, culpa de la mala calidad a los defectos de los procesos, define la calidad como adecuación al uso, sostiene que el temor puede sacar lo mejor de las personas y no incorpora la educación ni el crecimiento personal en su filosofía. ¿De quién se trata?",
+   "o": [
+    "Philip B. Crosby",
+    "Genichi Taguchi",
+    "Joseph M. Juran",
+    "W. Edwards Deming"
+   ],
+   "a": 2,
+   "exp": "Correcta: en la Tabla 2 Juran culpa a los defectos de los procesos, define la calidad como adecuación al uso y afirma que el temor puede sacar lo mejor de las personas; en la fila de educación figura No. Taguchi es el distractor fino: también tiene No en educación, pero culpa a la variación y la tabla dice que no menciona el miedo. Crosby culpa a la falta de conformidad con los requisitos y considera que no es apto que exista temor. Deming culpa a la variación y propone desterrar el temor."
+  },
+  {
+   "id": "s2-m09",
+   "s": 2,
+   "q": "La UNMSM convoca a empresas privadas, ministerios y egresados líderes a mesas de co-creación para rediseñar sus mallas curriculares, y automatiza la matrícula y la titulación en sus 20 facultades. Un informe ubica estas acciones dentro del Modelo EFQM en su versión vigente descrita en clase. ¿Qué ubicación es la correcta?",
+   "o": [
+    "Resultados, porque refleja la percepción de los grupos de interés externos sobre la universidad",
+    "Dirección, porque redefine el propósito, la estrategia y la cultura organizacional de la universidad",
+    "Agentes facilitadores, porque el modelo vigente agrupa así los criterios de gestión de procesos",
+    "Ejecución, porque implica a los grupos de interés y gestiona la transformación para crear valor"
+   ],
+   "a": 3,
+   "exp": "Correcta: en la diapositiva 33 el bloque Ejecución responde cómo cumple su propósito e incluye la implicación de los grupos de interés, la creación de valor sostenible y la gestión de la transformación; la diapositiva 47 ubica ahí las mesas de co-creación y la automatización de trámites. Dirección falla: allí se define el propósito Liderar la transformación científica y social del Perú al 2030 y la cultura. Resultados falla: allí se miden la empleabilidad a 12 meses, las patentes ante Indecopi y el impacto social. Agentes facilitadores pertenece a la versión anterior del modelo, no a la estructura Dirección, Ejecución y Resultados; mezclar versiones es un error detectado en el G4."
+  },
+  {
+   "id": "s2-m10",
+   "s": 2,
+   "q": "En el BCP, el comité de excelencia evaluará el avance de toda la organización y el equipo Black Belt evaluará el proyecto de créditos hipotecarios. Un analista propone usar para ambos el mismo tipo de evidencia. Según la tabla La sinergia perfecta de la diapositiva 36, ¿qué asignación es la correcta?",
+   "o": [
+    "Comité con benchmarking y nivel sigma; proyecto con puntajes de madurez, Cp y Cpk",
+    "Comité con puntajes de madurez y benchmarking; proyecto con nivel sigma, Cp y Cpk",
+    "Comité con nivel sigma, Cp y Cpk; proyecto con puntajes de madurez y benchmarking",
+    "Comité con puntajes de madurez, Cp y Cpk; proyecto con benchmarking y nivel sigma"
+   ],
+   "a": 1,
+   "exp": "Correcta: la diapositiva 36 indica que el PNC, de nivel estratégico o macro, mide con puntajes de madurez basados en evidencias globales y benchmarking de mercado, y que Six Sigma, de nivel operativo o micro, mide con nivel sigma, capacidad de proceso Cp y Cpk y reducción de mermas. Las demás opciones intercambian o mezclan las evidencias: aplicar Cpk a toda la organización no tiene sentido, porque la capacidad de proceso se calcula sobre una característica de un proceso concreto, y el benchmarking de mercado no mide la variabilidad de un proceso."
+  },
+  {
+   "id": "s2-m11",
+   "s": 2,
+   "q": "El tiempo de respuesta de la API de consulta de saldo de un banco tiene especificación inferior de 100 ms y superior de 400 ms. El proceso es estable, con media de 300 ms y desviación estándar de 25 ms. ¿Qué diagnóstico es el correcto?",
+   "o": [
+    "Cp de 2,00 y Cpk de 2,67: centrado en el valor nominal y con capacidad de nivel 6σ",
+    "Cp de 4,00 y Cpk de 1,33: capaz en potencia pero descentrado hacia el límite inferior",
+    "Cp de 2,00 y Cpk de 1,33: capaz en potencia pero descentrado hacia el límite superior",
+    "Cp de 1,33 y Cpk de 2,00: centrado en el valor nominal pero con dispersión excesiva"
+   ],
+   "a": 2,
+   "exp": "Correcta: Cp = LSE − LIE / 6σ = 300 / 150 = 2,00; Cpk = mínimo entre 400 − 300 / 75 = 1,33 y 300 − 100 / 75 = 2,67, es decir 1,33. Como Cpk es menor que Cp, el proceso está descentrado, y lo está hacia el límite superior porque la media de 300 queda más cerca de 400. La opción con Cp 1,33 y Cpk 2,00 invierte los índices: Cpk nunca supera a Cp. La opción con Cpk 2,67 toma el máximo en lugar del mínimo. La opción con Cp 4,00 divide entre 3σ al calcular Cp y además ubica mal el descentrado. Cp y Cpk son complemento estándar de la tabla de la diapositiva 36."
+  },
+  {
+   "id": "s2-m12",
+   "s": 2,
+   "q": "Un alumno compara el Diagrama 1 en escalera de la diapositiva 12, que va de la inspección a la gestión total de la calidad, con la Figura 1 de Murrieta Saavedra et al. que aparece en la diapositiva 17 y en la lectura. ¿Qué etapa aparece rotulada en la Figura 1 pero no en la escalera?",
+   "o": [
+    "La etapa de mejora de la calidad",
+    "La etapa de control de la calidad",
+    "La etapa de gestión total de calidad",
+    "La etapa de aseguramiento de calidad"
+   ],
+   "a": 0,
+   "exp": "Correcta: la escalera tiene Inspección, Control estadístico, Confiabilidad, Aseguramiento, Liderazgo de la Alta Gerencia y Gestión total; la Figura 1 tiene Control, Aseguramiento, Mejora de la calidad y Gestión de la Calidad Total, con la convergencia de normas y modelos como punto de llegada. Mejora de la calidad, definida como incrementar la capacidad de cumplir los requisitos, solo está en la Figura 1. Aseguramiento y gestión total están en las dos. Control también está en las dos, como control estadístico en la escalera. A la inversa, Inspección, Confiabilidad y Liderazgo de la Alta Gerencia están solo en la escalera."
+  },
+  {
+   "id": "s2-m13",
+   "s": 2,
+   "q": "En su trabajo sobre Artika, un grupo escribe: el PNC peruano es la versión local del Modelo Iberoamericano de Fundibeq, y por eso postular a uno equivale a postular al otro. La docente pide corregir la afirmación con lo visto en las diapositivas 16 y 34. ¿Qué corrección es la adecuada?",
+   "o": [
+    "El Iberoamericano adapta el modelo de Baldrige y lo gestiona la SNI, y el PNC se alinea con EFQM",
+    "El Iberoamericano adapta el modelo europeo y lo gestiona Fundibeq, y el PNC se alinea con Baldrige",
+    "El Iberoamericano adapta el modelo europeo y lo gestiona el CDI, y el PNC se alinea con Deming",
+    "El Iberoamericano adapta el Premio Deming y lo gestiona JUSE, y el PNC se alinea con Fundibeq"
+   ],
+   "a": 1,
+   "exp": "Correcta: la diapositiva 16 describe los Modelos Iberoamericanos de 1999 como adaptación del modelo europeo, gestionados por Fundibeq y orientados a la autoevaluación; la diapositiva 34 dice que el PNC está fuertemente alineado con Malcolm Baldrige y lo coordina el Comité de Gestión de la Calidad con el CDI de la SNI. La opción que alinea el PNC con EFQM invierte las alineaciones y asigna a la SNI un modelo que no gestiona. La opción de JUSE confunde con el Premio Deming. La opción del CDI acierta en la base europea, pero atribuye la gestión al CDI y alinea el PNC con Deming. Error frecuente en G5, G6 y G7."
+  },
+  {
+   "id": "s2-m14",
+   "s": 2,
+   "q": "La lectura de la semana define la seguridad como garantizar la integridad, confidencialidad y disponibilidad. Un tester del SUM-UNMSM quiere clasificar con el modelo ISO 9126 de la S1 la capacidad del sistema de seguir atendiendo la matrícula cuando cae uno de sus nodos. ¿Qué característica y subcaracterística de la diapositiva de la S1 corresponden mejor?",
+   "o": [
+    "Eficiencia, con la subcaracterística de comportamiento temporal",
+    "Portabilidad, con la subcaracterística de adaptabilidad técnica",
+    "Funcionalidad, con la subcaracterística de seguridad de acceso",
+    "Confiabilidad, con la subcaracterística de tolerancia a fallas"
+   ],
+   "a": 3,
+   "exp": "Correcta: en la lista ISO 9126 de la S1, Confiabilidad agrupa madurez, tolerancia a fallas y robustez; seguir operando ante la caída de un nodo es tolerancia a fallas. Funcionalidad con seguridad falla: la lectura mete la disponibilidad dentro de seguridad, pero en los modelos de producto la seguridad de acceso protege contra accesos no autorizados y la continuidad ante fallos es fiabilidad. Eficiencia falla: el comportamiento temporal mide tiempos de respuesta, no continuidad del servicio. Portabilidad falla: se refiere a cambiar de entorno, no a sobrevivir a fallos."
+  },
+  {
+   "id": "s2-m15",
+   "s": 2,
+   "q": "El área de QA de Interbank fija como estándar interno que su app debe estar disponible el 99,5 % del mes y evalúa el servicio contra esa meta. Otra área aplica una encuesta que compara lo que los clientes esperaban antes de usar la app con lo que percibieron durante y después de usarla. Según los dos enfoques de evaluación del servicio que recoge la lectura, ¿qué clasificación es la correcta?",
+   "o": [
+    "La meta interna de disponibilidad es el enfoque externo y la encuesta es el enfoque subjetivo",
+    "La meta interna de disponibilidad es el enfoque objetivo y la encuesta es el enfoque percibido",
+    "La meta interna de disponibilidad es el enfoque subjetivo y la encuesta es el enfoque objetivo",
+    "La meta interna de disponibilidad es el enfoque objetivo y la encuesta es el enfoque subjetivo"
+   ],
+   "a": 2,
+   "exp": "Correcta: la lectura, citando a Phuong Vu et al., llama subjetivo o interno al enfoque en que la empresa desarrolla criterios y estándares internos, y objetivo al que compara las percepciones del cliente durante y después del servicio con sus expectativas previas. Es contraintuitivo, porque un porcentaje de disponibilidad parece objetivo, y por eso es trampa de examen. La opción que llama objetivo a la meta interna es la intuición invertida. La opción del enfoque percibido inventa un nombre que la lectura no usa. La opción del enfoque externo llama externo a lo que la lectura llama interno."
+  },
+  {
+   "id": "s2-m16",
+   "s": 2,
+   "q": "Una empresa de SW limeña certificada en ISO 9001 pregunta si su sistema de gestión impulsa la innovación de productos. Según el hallazgo de El Manzani et al. que recoge la lectura, desde la teoría de sistemas sociotécnicos, ¿qué conclusión es la correcta?",
+   "o": [
+    "Combinadas, las prácticas sociales y técnicas impactan fuerte en la innovación incremental y menos en la radical",
+    "Por separado, las prácticas técnicas de ISO 9001 ya impactan fuerte en la innovación incremental y la radical",
+    "Combinadas, las prácticas sociales y técnicas impactan fuerte en la innovación radical y menos en la incremental",
+    "Combinadas, las prácticas sociales y técnicas no muestran ninguna relación significativa con la innovación"
+   ],
+   "a": 0,
+   "exp": "Correcta: la discusión de la lectura indica que las prácticas social y técnica, consideradas por separado, no tienen relación significativa con la innovación incremental ni radical, pero combinadas como sistema sociotécnico muestran un impacto fuerte y significativo en la innovación incremental y positivo pero menos marcado en la radical. La opción que privilegia la innovación radical invierte incremental y radical, distractor típico. La opción de las prácticas por separado atribuye el efecto a ISO 9001 aislada, lo contrario del hallazgo. La opción sin relación significativa aplica a la combinación lo que solo vale para las prácticas por separado."
+  },
+  {
+   "id": "s2-m17",
+   "s": 2,
+   "q": "Para un informe, un alumno debe clasificar TQM, Six Sigma, Kaizen, Lean, el modelo EFQM y la norma ISO 9001 tal como lo hace la conclusión de la lectura sobre evolución de la gestión de la calidad. ¿Qué clasificación respeta esa conclusión?",
+   "o": [
+    "TQM, Six Sigma, Kaizen y Lean son estrategias o métodos; EFQM e ISO 9001 son enfoques",
+    "Six Sigma, Kaizen, Lean e ISO 9001 son estrategias o métodos; TQM y EFQM son enfoques",
+    "TQM, EFQM, Kaizen y Lean son estrategias o métodos; Six Sigma e ISO 9001 son enfoques",
+    "TQM, Six Sigma, EFQM e ISO 9001 son estrategias o métodos; Kaizen y Lean son enfoques"
+   ],
+   "a": 0,
+   "exp": "Correcta: las conclusiones indican que las estrategias y métodos más utilizados son TQM, Six Sigma, Kaizen y Lean, y que los enfoques son el modelo EFQM y la norma ISO 9001; además, todos deben adecuarse al tipo y orientación de la empresa. Las demás opciones mueven a EFQM o ISO 9001 al grupo de métodos de mejora, o sacan a TQM o Six Sigma de él, que es el distractor típico: tratar EFQM como si fuera una metodología como Six Sigma o tratar una norma de requisitos como un método de mejora."
+  },
+  {
+   "id": "s2-m18",
+   "s": 2,
+   "q": "Una cadena de supermercados con locales clausurados por plagas registra en un año: S/ 80 000 en capacitación BPM y en el diseño del plan de fumigación, S/ 45 000 en inspecciones internas diarias con checklist, S/ 30 000 en productos vencidos destruidos antes de llegar a la góndola y S/ 120 000 en multas y clausuras impuestas por la municipalidad. Con la clasificación del costo de la calidad de la S1, ¿qué agrupación es la correcta?",
+   "o": [
+    "Prevención 80 000, evaluación 75 000, falla interna 0 y falla externa 120 000",
+    "Prevención 125 000, evaluación 30 000, falla interna 0 y falla externa 120 000",
+    "Prevención 80 000, evaluación 45 000, falla interna 30 000 y falla externa 120 000",
+    "Prevención 80 000, evaluación 45 000, falla interna 150 000 y falla externa 0"
+   ],
+   "a": 2,
+   "exp": "Correcta: capacitar y planificar es prevención; inspeccionar es evaluación o appraisal; destruir vencidos antes de que lleguen al cliente es falla interna; multas y clausuras detectadas por la autoridad o el cliente son falla externa, la parte más cara del CoPQ. La opción con prevención de 125 000 mete la inspección en prevención: inspeccionar detecta, no previene. La opción con evaluación de 75 000 trata la destrucción de vencidos como evaluación, cuando es el costo de un defecto ya producido. La opción con falla interna de 150 000 trata las multas como falla interna, cuando el defecto ya salió de la organización. Este patrón de detección externa es el que reportaron G4 y G7."
+  },
+  {
+   "id": "s2-m19",
+   "s": 2,
+   "q": "En el caso Knight Capital de la S1, un técnico desplegó a mano el nuevo código en 7 de los 8 servidores y el octavo reactivó la función obsoleta Power Peg; no existía un procedimiento estandarizado ni automatizado de despliegue y nadie verificó la configuración. Un analista arma un Ishikawa 6M con el criterio de la clase, que distingue causa raíz de síntoma. ¿En qué M debe ubicar la causa raíz principal?",
+   "o": [
+    "Mano de obra, porque el técnico olvidó copiar el código en el octavo de los servidores",
+    "Medición, porque nadie monitoreó en tiempo real las órdenes emitidas por el sistema",
+    "Maquinaria, porque uno de los servidores conservaba un código obsoleto sin depurar",
+    "Métodos, porque falta un procedimiento estandarizado de despliegue y verificación"
+   ],
+   "a": 3,
+   "exp": "Correcta: en la clase Métodos agrupa procedimientos y reglas; la ausencia de un procedimiento estandarizado y automatizado de despliegue, que en la S1 se señala como falla de SQA y de gestión de configuración, explica que un olvido humano llegara a producción. Mano de obra describe el síntoma: cualquier persona puede olvidar un paso si el método depende de la memoria, en línea con Deming, que atribuye la mayoría de los problemas al sistema. Maquinaria y Medición son causas contribuyentes reales, pero no la raíz: el código muerto y la falta de monitoreo explican el daño, no por qué el despliegue quedó inconsistente."
+  },
+  {
+   "id": "s2-m20",
+   "s": 2,
+   "q": "En un proyecto del MEF, el líder de calidad hace tres cosas: define estándares de codificación y el plan de calidad antes de programar; ejecuta pruebas de regresión antes de cada release para detectar defectos; y analiza la tendencia de defectos para rediseñar el proceso de revisión. Al cruzar la trilogía de Juran con la tríada de la S1, ¿qué correspondencia es la correcta?",
+   "o": [
+    "Estándares y plan son control ligado a QC; regresión es planificación ligada a SQA; rediseño es mejora",
+    "Estándares y plan son planificación ligada a SQA; regresión es control ligado a QC; rediseño es mejora",
+    "Estándares y plan son mejora ligada a SQA; regresión es control ligado a QC; rediseño es planificación",
+    "Estándares y plan son planificación ligada a QC; regresión es mejora ligada a SQA; rediseño es control"
+   ],
+   "a": 1,
+   "exp": "Correcta: la trilogía de Juran es planificación, control y mejora de la calidad. Definir estándares y el plan antes de construir es planificación y en la S1 es actividad típica de SQA, que es proactivo y se centra en el proceso; las pruebas de regresión son control y en la S1 son QC, reactivo y centrado en el producto; usar los datos de defectos para rediseñar el proceso es mejora, coherente con que el QC alimente al SQA. Las demás opciones permutan las etapas de la trilogía o atribuyen las pruebas al SQA."
+  },
+  {
+   "id": "s2-m21",
+   "s": 2,
+   "q": "En el proyecto Six Sigma de créditos hipotecarios del BCP, el equipo Black Belt recorre el proceso desde la entrega de boletas en la agencia hasta la revisión legal de la partida en Sunarp, cronometra cada paso y descubre que el 95 % del tiempo el expediente está esperando en la bandeja de alguien. Según la diapositiva 52, ¿en qué fase DMAIC se ubica este hallazgo?",
+   "o": [
+    "Controlar, porque se obtiene de los tableros de control en tiempo real",
+    "Analizar, porque revela la causa raíz estadística de la demora total",
+    "Definir, porque delimita el problema de 45 días y la meta de 15 días",
+    "Medir, porque surge del mapeo y del cronometraje del proceso actual"
+   ],
+   "a": 3,
+   "exp": "Correcta: la diapositiva 52 ubica en Medir el mapeo del proceso, la medición de tiempos y el hallazgo del 95 % de espera; es una línea base, no todavía una causa. Analizar falla: en la diapositiva 53 las causas raíz son los errores de digitación y que legal y riesgos no comparten sistema, lo que duplica la evaluación. Definir falla: ahí está el problema de 45 días y la meta de menos de 15 días. Controlar falla: los dashboards y la alerta a las 24 h se instalan al final."
+  },
+  {
+   "id": "s2-m22",
+   "s": 2,
+   "q": "En el mismo proyecto del BCP, el ciclo de 45 días tenía un 95 % de espera y un 5 % de trabajo con valor agregado. Tras la mejora el ciclo baja a 12 días sostenidos y el trabajo con valor agregado sigue siendo de 2,25 días. ¿Cómo cambia la eficiencia del ciclo del proceso PCE y cuánto se redujo el tiempo de ciclo?",
+   "o": [
+    "La PCE pasa de 5 % a 73,30 % y el ciclo se reduce en 18,75 %",
+    "La PCE pasa de 5 % a 18,75 % y el ciclo se reduce en 73,3 %",
+    "La PCE pasa de 95 % a 81,25 % y el ciclo se reduce en 73,3 %",
+    "La PCE pasa de 5 % a 26,67 % y el ciclo se reduce en 66,7 %"
+   ],
+   "a": 1,
+   "exp": "Correcta: PCE = tiempo de valor agregado / tiempo de ciclo; antes 2,25 / 45 = 5 %, después 2,25 / 12 = 18,75 %; reducción del ciclo = 45 − 12 / 45 = 73,3 %, que supera la meta de menos de 15 días. 26,67 % y 66,7 % salen de usar 15 días, la meta, en lugar de los 12 logrados. 95 % y 81,25 % confunden la PCE con el porcentaje de espera. La opción con PCE de 73,30 % intercambia los dos indicadores. La PCE es complemento estándar de Lean Six Sigma."
+  },
+  {
+   "id": "s2-m23",
+   "s": 2,
+   "q": "Un ensayo afirma que el Premio Deming fue instituido en 1953 por el Ministerio de Comercio Internacional e Industria de Japón para premiar la aplicación de la norma ISO 9001. Con la línea de tiempo y la diapositiva 18 de la clase, ¿qué corrección es la exacta?",
+   "o": [
+    "Lo creó la JUSE en 1951 para reconocer avances en control total de calidad y métodos estadísticos",
+    "Lo creó la JUSE en 1951 para reconocer avances en aseguramiento de calidad según la ISO 9001",
+    "Lo creó la ASQ en 1946 para reconocer avances en control total de calidad y métodos estadísticos",
+    "Lo creó la JSA en 1945 para reconocer avances en normalización industrial y gráficos de control"
+   ],
+   "a": 0,
+   "exp": "Correcta: la diapositiva 18 indica que el Premio Deming fue creado en 1951 por la Unión de Científicos e Ingenieros Japoneses para reconocer avances en Control Total de la Calidad y en métodos estadísticos. El premio de 1953 es el del MITI, otro galardón. La JSA nace en 1945 por fusión de asociaciones y no crea el premio. La ASQ es estadounidense, formada en 1946 por George D. Edwards. La opción que menciona la ISO 9001 acierta en JUSE y 1951, pero la ISO 9001 recién se publica en 1987, 36 años después."
+  },
+  {
+   "id": "s2-m24",
+   "s": 2,
+   "q": "Una fintech peruana entrena modelos de aprendizaje automático con millones de transacciones para anticipar caídas de su pasarela y escalar recursos antes de los picos de Cyber Wow. Al cruzar las tendencias actuales de la diapositiva 14 con las dimensiones analizadas en la lectura, ¿qué combinación es la correcta?",
+   "o": [
+    "Tendencia de IA y analítica de datos; potencia la dimensión tangibilidad del servicio",
+    "Tendencia de transformación digital; potencia la dimensión seguridad de la información",
+    "Tendencia de IA y analítica de datos; potencia la dimensión capacidad de respuesta",
+    "Tendencia de sostenibilidad y ética; potencia la dimensión capacidad de respuesta"
+   ],
+   "a": 2,
+   "exp": "Correcta: la diapositiva 14 asocia la IA y la analítica de datos con predecir fallas, automatizar auditorías y entender la calidad percibida; la lectura, citando a Kumar et al., afirma que la IA y el análisis de datos potencian la capacidad de anticipar tendencias y adaptarse con rapidez, es decir, la capacidad de respuesta. Transformación digital se refiere a nube, trazabilidad y registros electrónicos, y la seguridad en la lectura trata de integridad y confianza. Sostenibilidad y ética se refiere a criterios ESG. Tangibilidad es la apariencia de instalaciones, equipos y materiales."
+  },
+  {
+   "id": "s2-m25",
+   "s": 2,
+   "q": "Una municipalidad distrital de Lima en plena modernización nunca ha medido su gestión. Quiere un diagnóstico anual en el que un comité de Recursos Humanos, Operaciones y Finanzas califique con honestidad su nivel de madurez frente a criterios de excelencia, para cerrar brechas paso a paso. Según los ejemplos de aplicación y el resumen de la diapositiva 44, ¿qué modelo encaja mejor?",
+   "o": [
+    "Malcolm Baldrige, porque busca que la organización gane competitividad frente a su competencia",
+    "Iberoamericano o PNC, porque buscan que la organización aprenda a medirse y mejorar paso a paso",
+    "Deming, porque busca que la organización domine la estadística para que el proceso no falle",
+    "EFQM, porque es una entidad pública cuyo fin es trascender en la sociedad y no generar ganancias"
+   ],
+   "a": 1,
+   "exp": "Correcta: la diapositiva 43 describe a una entidad pública en modernización que usa la guía de Fundibeq o del PNC para un diagnóstico anual con comité multiárea, y la diapositiva 44 resume que Iberoamérica y el PNC buscan que las organizaciones aprendan a medirse y mejorar paso a paso; la clave del enunciado es la autoevaluación de madurez. EFQM es el distractor más fino, porque la clase lo propone para la UNMSM por su valor social, pero el enunciado no pone en el centro el propósito social sino el autodiagnóstico inicial. Baldrige apunta a que el negocio gane. Deming apunta al control estadístico del proceso."
+  },
+  {
+   "id": "s2-m26",
+   "s": 2,
+   "q": "La app de una entidad pública cumple todos los requisitos escritos en su SRS, pero los usuarios la abandonan porque cada consulta tarda 9 s y no resuelve lo que realmente necesitan. ¿Bajo qué concepción de calidad, entre las vistas en la S1 y la S2, podría sostenerse que la app sí tiene calidad?",
+   "o": [
+    "La de Arroyo Valer, que la ubica en la percepción de quien la experimenta",
+    "La de la S1, que suma requisitos explícitos y expectativas implícitas",
+    "La de Juran, que define la calidad como adecuación o aptitud para el uso",
+    "La de Crosby, que define la calidad como conformidad con los requisitos"
+   ],
+   "a": 3,
+   "exp": "Correcta: Crosby culpa a la falta de conformidad con los requisitos y define la calidad como cumplirlos; si el SRS se cumple, bajo esa visión la app es conforme. Juran exige aptitud para el uso, y la app no resuelve el problema del usuario. Arroyo Valer, en la lectura, sitúa la calidad en la percepción del consumidor, que aquí es negativa. La definición de la S1 incluye expectativas implícitas como la eficiencia y la rapidez, de modo que 9 s por consulta la descalifican. La pregunta muestra por qué la S1 advierte que cumplir el SRS no basta."
+  }
+ ],
+ "fill": [
+  {
+   "id": "s2-f01",
+   "s": 2,
+   "t": "El Premio Deming fue creado en {{1}} por la {{2}} para reconocer avances en el Control Total de la Calidad y en los métodos estadísticos.",
+   "r": [
+    [
+     "1951"
+    ],
+    [
+     "JUSE",
+     "Unión de Científicos e Ingenieros Japoneses",
+     "Union of Japanese Scientists and Engineers"
+    ]
+   ],
+   "exp": "Diapositiva 18. No confundir con el premio del MITI de 1953 ni con la JSA de 1945."
+  },
+  {
+   "id": "s2-f02",
+   "s": 2,
+   "t": "El Premio Malcolm Baldrige se creó en {{1}} en EE. UU. y, según la clase, evalúa {{2}} criterios interconectados, empezando por Liderazgo y terminando en {{3}}.",
+   "r": [
+    [
+     "1987"
+    ],
+    [
+     "7",
+     "siete"
+    ],
+    [
+     "Resultados"
+    ]
+   ],
+   "exp": "Diapositivas 9, 16 y 32. MBNQA: Liderazgo, Estrategia, Clientes, Medición análisis y gestión del conocimiento, Fuerza laboral, Operaciones y Resultados."
+  },
+  {
+   "id": "s2-f03",
+   "s": 2,
+   "t": "Alcanzar el nivel Six Sigma significa operar con un máximo de {{1}} defectos por millón de oportunidades, es decir, un {{2}} % de eficiencia.",
+   "r": [
+    [
+     "3,4",
+     "3.4"
+    ],
+    [
+     "99,99966",
+     "99.99966"
+    ]
+   ],
+   "exp": "Diapositiva 35. La cifra asume el desplazamiento convencional de 1,5σ."
+  },
+  {
+   "id": "s2-f04",
+   "s": 2,
+   "t": "Las fases DMAIC según la profesora son Definir, Medir, Analizar, {{1}} y {{2}}.",
+   "r": [
+    [
+     "Implementar",
+     "Mejorar",
+     "Implementar o Mejorar",
+     "Improve"
+    ],
+    [
+     "Controlar",
+     "Control"
+    ]
+   ],
+   "exp": "Diapositiva 35: la profesora escribe Implementar y aclara Mejorar; en la literatura la I es Improve. Para diseñar procesos nuevos se usa DMADV."
+  },
+  {
+   "id": "s2-f05",
+   "s": 2,
+   "t": "En el Modelo EFQM actual, el bloque {{1}} responde por qué existe la organización, el bloque {{2}} responde cómo cumple su propósito y el bloque {{3}} responde qué ha logrado.",
+   "r": [
+    [
+     "Dirección",
+     "Direccion"
+    ],
+    [
+     "Ejecución",
+     "Ejecucion"
+    ],
+    [
+     "Resultados"
+    ]
+   ],
+   "exp": "Diapositiva 33. Estructura del EFQM 2020; su lógica de evaluación es RADAR, también llamada REDER."
+  },
+  {
+   "id": "s2-f06",
+   "s": 2,
+   "t": "El Premio Nacional a la Calidad del Perú lo coordina el {{1}}, cuya secretaría técnica recae en el {{2}} de la {{3}}.",
+   "r": [
+    [
+     "CGC",
+     "Comité de Gestión de la Calidad"
+    ],
+    [
+     "CDI",
+     "Centro de Desarrollo Industrial"
+    ],
+    [
+     "SNI",
+     "Sociedad Nacional de Industrias"
+    ]
+   ],
+   "exp": "Diapositiva 34. El PNC usa el Modelo de Excelencia en la Gestión alineado con Baldrige y entrega la Medalla Líder en Calidad."
+  },
+  {
+   "id": "s2-f07",
+   "s": 2,
+   "t": "Los Modelos Iberoamericanos, de {{1}}, adaptan el modelo {{2}} y son gestionados por {{3}}.",
+   "r": [
+    [
+     "1999"
+    ],
+    [
+     "europeo",
+     "EFQM"
+    ],
+    [
+     "Fundibeq",
+     "FUNDIBEQ",
+     "Fundación Iberoamericana para la Gestión de la Calidad"
+    ]
+   ],
+   "exp": "Diapositiva 16. Fomentan la autoevaluación y el desarrollo competitivo."
+  },
+  {
+   "id": "s2-f08",
+   "s": 2,
+   "t": "En la Figura 1 de Murrieta Saavedra et al., el aseguramiento de la calidad consiste en generar {{1}} de que se cumplirán los requisitos, y la mejora de la calidad en incrementar la {{2}} de cumplirlos.",
+   "r": [
+    [
+     "confianza"
+    ],
+    [
+     "capacidad"
+    ]
+   ],
+   "exp": "Coinciden con las definiciones de ISO 9000:2015. Control = cumplir requisitos; gestión total = dirigir y controlar la organización."
+  },
+  {
+   "id": "s2-f09",
+   "s": 2,
+   "t": "Las 7 herramientas básicas de la calidad fueron recopiladas por {{1}}; el ciclo PHVA empezó a enseñarse en Japón en {{2}} por W. Edwards Deming.",
+   "r": [
+    [
+     "Kaoru Ishikawa",
+     "Ishikawa"
+    ],
+    [
+     "1950"
+    ]
+   ],
+   "exp": "Diapositivas 6 y 23. El PDCA nace del ciclo de Shewhart."
+  },
+  {
+   "id": "s2-f10",
+   "s": 2,
+   "t": "La trilogía de la calidad de Juran está formada por la planificación, el {{1}} y la {{2}} de la calidad.",
+   "r": [
+    [
+     "control"
+    ],
+    [
+     "mejora"
+    ]
+   ],
+   "exp": "Diapositivas 37 y 38. Juran define la calidad como adecuación o aptitud para el uso."
+  },
+  {
+   "id": "s2-f11",
+   "s": 2,
+   "t": "Philip Crosby lanzó el concepto de cero defectos en {{1}} y publicó La calidad no cuesta en {{2}}.",
+   "r": [
+    [
+     "1961"
+    ],
+    [
+     "1979"
+    ]
+   ],
+   "exp": "Diapositivas 7 y 8. En 1966 fue vicepresidente de calidad de ITT."
+  },
+  {
+   "id": "s2-f12",
+   "s": 2,
+   "t": "Según la lectura, las cinco dimensiones de la calidad del servicio son tangibilidad, fiabilidad, capacidad de respuesta, {{1}} y {{2}}.",
+   "r": [
+    [
+     "seguridad"
+    ],
+    [
+     "empatía",
+     "empatia"
+    ]
+   ],
+   "exp": "Son las dimensiones SERVQUAL, mnemotecnia RATER. La lectura analiza en detalle seguridad y capacidad de respuesta."
+  },
+  {
+   "id": "s2-f13",
+   "s": 2,
+   "t": "La revisión bibliográfica de la lectura cubrió el periodo {{1}} en las bases de datos Scopus y {{2}}.",
+   "r": [
+    [
+     "2019–2023",
+     "2019-2023",
+     "2019 a 2023"
+    ],
+    [
+     "Web of Science",
+     "WoS"
+    ]
+   ],
+   "exp": "Método de la lectura de Alvarez Caballero, 2024, artículo de revisión."
+  },
+  {
+   "id": "s2-f14",
+   "s": 2,
+   "t": "En la diapositiva 36, el PNC es el {{1}} de la empresa hacia la excelencia, mientras que Six Sigma es el {{2}} que limpia las tuberías operativas.",
+   "r": [
+    [
+     "mapa de ruta"
+    ],
+    [
+     "motor técnico",
+     "motor tecnico"
+    ]
+   ],
+   "exp": "PNC: nivel estratégico o macro. Six Sigma: nivel operativo o micro."
+  },
+  {
+   "id": "s2-f15",
+   "s": 2,
+   "t": "En la línea de tiempo de la clase, la JUSE se forma en {{1}}, la ISO en {{2}} y Feigenbaum publica Control total de calidad en {{3}}.",
+   "r": [
+    [
+     "1946"
+    ],
+    [
+     "1947"
+    ],
+    [
+     "1961"
+    ]
+   ],
+   "exp": "Diapositivas 6 y 7. La sede de ISO está en Ginebra."
+  },
+  {
+   "id": "s2-f16",
+   "s": 2,
+   "t": "La norma ISO 9001:2015 define un proceso como una serie de actividades {{1}} que convierten elementos de {{2}} en resultados.",
+   "r": [
+    [
+     "interrelacionadas"
+    ],
+    [
+     "entrada"
+    ]
+   ],
+   "exp": "Página 6 de la lectura; base del enfoque a procesos y del PHVA con pensamiento basado en riesgos."
+  },
+  {
+   "id": "s2-f17",
+   "s": 2,
+   "t": "En el Ishikawa del SUM, la causa falta de alertas tempranas cuando el servidor llega al {{1}} % de su capacidad pertenece a la M de {{2}}.",
+   "r": [
+    [
+     "80"
+    ],
+    [
+     "Medición",
+     "Medicion"
+    ]
+   ],
+   "exp": "Diapositiva 30. Medición agrupa control y monitoreo; G6 propuso bajar el umbral al 75 %."
+  }
+ ],
+ "casos": [
+  {
+   "id": "s2-c01",
+   "s": [
+    1,
+    2
+   ],
+   "titulo": "SUM-UNMSM: saturación en matrícula, 6M, capacidad y PHVA",
+   "enunciado": "<p>El SUM (Sistema Unificado de Matrícula) de la UNMSM habilita a unos <b>30 000</b> estudiantes por franjas de <b>2 h</b> según promedio ponderado; el tramo 14,00–16,00 abarca dos franjas y concentra la mayor parte del alumnado. La capa de aplicación corre en una nube y la BD en otra, comunicadas por Internet. El día de matrícula se registran ≈15 000 usuarios concurrentes a las 12:00, con latencia de 5,5 s, y ≈18 000 a las 16:00, con 6,8 s; el balanceador devuelve HTTP 504 cuando una respuesta supera 5 s. Cada alumno abre en promedio 4 pestañas o dispositivos. Los recibos del Banco de la Nación tardan hasta 48 h en activarse y las constancias médicas se validan en tiempo real durante la matrícula. La OCI recibe alertas solo cuando el servidor ya cayó. La mesa de ayuda de la escuela tiene 2 personas que atienden unos 10 min por alumno y tras cada franja quedan ≈300 casos por resolver en 4 h.</p><p>La dirección propone una cola virtual que admita 1 000 usuarios concurrentes; cada matrícula completa dura en promedio 5 min.</p>",
+   "preguntas": [
+    "Construya el Ishikawa 6M con al menos dos causas por M, separando con cuidado Métodos de Materiales, e indique para cada causa si es raíz o síntoma.",
+    "Con la cola virtual, calcule el throughput y el tiempo total para matricular a los 30 000 alumnos; calcule además la capacidad de la mesa de ayuda y el personal necesario para los 300 casos en 4 h.",
+    "Proponga una mejora por M con trazabilidad causa a mejora y clasifíquelas en aumentar capacidad, nivelar la demanda o sacar trabajo de la ruta crítica.",
+    "Defina cinco KPI con fórmula, línea base y meta, y despliegue las mejoras en un ciclo PHVA según la versión de los auditores Deming.",
+    "Relacione el caso con las lecciones de la S1 sobre monitoreo en tiempo real y pruebas de estrés."
+   ],
+   "solucion": "<h4>1. Ishikawa 6M</h4><div class='tabla'><table><thead><tr><th>M</th><th>Causa</th><th>Tipo</th></tr></thead><tbody><tr><td>Mano de obra</td><td>Soporte reactivo con 2 personas; alumnos que abren 4 sesiones</td><td>Raíz organizativa / síntoma de falta de regla</td></tr><tr><td>Maquinaria</td><td>Servidores sin autoescalado; latencia entre nubes por Internet</td><td>Raíz técnica</td></tr><tr><td>Métodos</td><td>Cronograma masivo de 2 h; validación en tiempo real de constancias y recibos</td><td>Raíz</td></tr><tr><td>Materiales</td><td>Recibos no integrados con 48 h de demora; BD de historiales con errores; slots mal calculados</td><td>Raíz</td></tr><tr><td>Medición</td><td>Sin alerta al 80 %; no se mide el tiempo de espera por alumno</td><td>Raíz de detección tardía</td></tr><tr><td>Medio ambiente</td><td>Cultura de última hora; brecha digital regional; presupuesto público rígido</td><td>Externa, se mitiga</td></tr></tbody></table></div><p>Los 504 y la latencia de 6,8 s son el efecto o síntoma, no causas. Ojo: la validación en tiempo real es Métodos y los recibos no integrados son Materiales; el G3 los intercambió.</p><h4>2. Cálculos</h4><p>Ley de Little: throughput = 1 000 / 5 min = <b>200 alumnos/min</b>; 30 000 / 200 = <b>150 min</b>, es decir 2 h 30 min, compatible con franjas más cortas y sin 504. Mesa de ayuda: 60 / 10 = 6 casos por persona-hora; 2 personas = 12 casos/h, unos 48 en 4 h, frente a 300 requeridos. Demanda = 300 / 4 = 75 casos/h; personal = 75 / 6 = 12,5, es decir <b>13 personas</b>, o reducir el tiempo de atención con chatbot y FAQ: a 4 min por caso bastan 5 personas.</p><h4>3. Mejoras</h4><ul><li>Aumentar capacidad: autoescalado y enlace dedicado entre nubes.</li><li>Nivelar la demanda: cola virtual, sesión única por código, sitio estático con la oferta académica, franjas más estrechas.</li><li>Sacar trabajo de la ruta crítica: pre-validar constancias y pagos 48–72 h antes, integración por API con el banco, limpieza previa de la BD.</li><li>Medición: monitoreo con alerta al 75–80 % y medición del tiempo por etapa.</li></ul><h4>4. KPI y PHVA</h4><ul><li>p95 de latencia = percentil 95 del tiempo de respuesta; base 6,8 s, meta menor que 2 s.</li><li>Tasa 5xx = respuestas 5xx / total; meta menor que 0,5 %.</li><li>Disponibilidad en la ventana = tiempo operativo / tiempo programado; meta 99,5 %.</li><li>% pagos validados en menos de 30 min; base 0 %, meta 95 %.</li><li>FCR de la mesa de ayuda; meta 80 %.</li></ul><p>PHVA: P = Pareto de incidentes de la campaña anterior y modelo de capacidad; H = piloto en una facultad, por ejemplo la FISI; V = comparar p95 y 5xx con estadística frente a la línea base; A = estandarizar en las 20 facultades o reiniciar el ciclo.</p><h4>5. Enlace con la S1</h4><p>La diapositiva de lecciones aprendidas de la S1 dice que los casos Knight Capital y el apagón de 2003 mostraron la necesidad de monitoreo en tiempo real y pruebas de estrés, que son QC de rendimiento. Las alertas que solo llegan cuando el servidor ya cayó repiten el patrón del apagón, donde el sistema de alarmas falló sin avisar.</p>",
+   "criterios": [
+    "Ubica correctamente Métodos y Materiales según la diapositiva y distingue efecto de causa.",
+    "Calcula 200 alumnos/min y 150 min, y 12,5 hasta 13 personas o una alternativa justificada.",
+    "Cada mejora se traza a una causa concreta y no se limita a pedir más hardware.",
+    "Los KPI tienen fórmula, línea base y meta numérica; el PHVA incluye piloto y estandarización.",
+    "Vincula con la S1 de forma explícita, mencionando monitoreo, pruebas de estrés y QC."
+   ]
+  },
+  {
+   "id": "s2-c02",
+   "s": [
+    2
+   ],
+   "titulo": "BCP: Modelo de Excelencia más DMAIC en créditos hipotecarios",
+   "enunciado": "<p>El BCP gestiona su estrategia con un Modelo de Excelencia alineado con el PNC y Baldrige y mide su enfoque en el cliente con el NPS. En créditos hipotecarios el ciclo aprobación-desembolso dura <b>45 días</b>; la meta es menos de 15 días. En una muestra de <b>1 200 expedientes</b> se revisan <b>8 campos críticos</b> por expediente y se hallan <b>312 errores</b> de llenado. El 95 % del tiempo de ciclo es espera. Legal y riesgos usan sistemas distintos y evalúan dos veces al cliente. Tras el rediseño, con validación de identidad contra Reniec, ingreso de datos con IA y eliminación de firmas físicas intermedias, el ciclo baja a <b>12 días</b> y una nueva muestra de 1 200 expedientes registra <b>18 errores</b>.</p>",
+   "preguntas": [
+    "Calcule el DPMO y el nivel sigma antes y después, con desplazamiento de 1,5σ, y comente si se llega a 6σ.",
+    "Calcule la reducción del ciclo y la PCE antes y después, suponiendo que el valor agregado se mantiene en 2,25 días.",
+    "Ubique cada hecho del enunciado en su fase DMAIC y explique por qué el 95 % de espera no es todavía una causa raíz.",
+    "Explique, con la tabla de la diapositiva 36, qué evalúa el Modelo de Excelencia y qué evalúa el proyecto Six Sigma, y cómo se conectan en la diapositiva 54."
+   ],
+   "solucion": "<h4>1. DPMO y sigma</h4><p>Antes: oportunidades = 1 200 × 8 = 9 600; DPMO = 312 / 9 600 × 10<sup>6</sup> = <b>32 500</b>; rendimiento 96,75 %, Z ≈ 1,85 + 1,5 ≈ <b>3,35σ</b>. Después: 18 / 9 600 × 10<sup>6</sup> = <b>1 875 DPMO</b>; rendimiento 99,81 %, Z ≈ 2,90 + 1,5 ≈ <b>4,4σ</b>. No es 6σ, que exige 3,4 DPMO; la diapositiva dice cercano a Six Sigma, lo que es una aproximación comercial.</p><h4>2. Ciclo y PCE</h4><p>Reducción = (45 − 12) / 45 = <b>73,3 %</b>; supera la meta por 3 días. PCE antes = 2,25 / 45 = <b>5 %</b>; PCE después = 2,25 / 12 = <b>18,75 %</b>. La mejora vino de eliminar espera, no de trabajar más rápido.</p><h4>3. DMAIC</h4><ul><li>D: 45 días, quejas y fuga de clientes; meta menos de 15 días y cero errores.</li><li>M: mapeo desde las boletas hasta Sunarp; 95 % de espera; 32 500 DPMO.</li><li>A: errores de digitación y duplicidad de evaluación entre legal y riesgos.</li><li>I: plataforma automatizada con Reniec e IA y sin firmas intermedias.</li><li>C: dashboards y alerta al gerente si un expediente pasa 24 h con un analista.</li></ul><p>El 95 % de espera es una medición que describe dónde se va el tiempo; la causa es por qué espera el expediente, y eso se explica en Analizar.</p><h4>4. Macro y micro</h4><p>El Modelo de Excelencia es estratégico: mide con puntajes de madurez y benchmarking y fija el mapa de ruta, por ejemplo ser el banco más simple, con NPS y cuota digital. Six Sigma es operativo: mide con nivel sigma, Cp, Cpk y mermas, y es el motor técnico. En la diapositiva 54 el modelo define la visión, los proyectos resuelven problemas duros como las colas y el resultado es éxito sostenido.</p>",
+   "criterios": [
+    "Usa oportunidades en el DPMO y suma el desplazamiento de 1,5σ.",
+    "Calcula 73,3 %, 5 % y 18,75 % sin confundir PCE con porcentaje de espera.",
+    "Ubica el 95 % de espera en Medir y las causas raíz en Analizar.",
+    "Distingue con claridad nivel macro y nivel micro y cita la diapositiva 36 o la 54."
+   ]
+  },
+  {
+   "id": "s2-c03",
+   "s": [
+    1,
+    2
+   ],
+   "titulo": "EPS: cartas de garantía, debate de modelos y costo de la mala calidad",
+   "enunciado": "<p>Una EPS emite unas <b>4 200 cartas de garantía al mes</b> para su red de más de 300 clínicas. El flujo exige tres firmas secuenciales con colas promedio de 2,5 h, 3,1 h y 4,4 h; el trabajo efectivo del auditor médico es de unos 25 min por carta. Solo el <b>61 %</b> de las cartas se emite dentro del SLA de 4 h y el percentil 90 es de <b>19 h</b>. La Extranet de prestadores se cae en picos de dengue, la validación del asegurado da timeouts y las altas de planilla llegan con 48–72 h de desfase. En el año, de 210 reclamos ante Indecopi y SUSALUD, 38 terminaron en sanción o revocación del rechazo; un caso documentado es una carta oncológica emitida un día después del fallecimiento del paciente. El G3 descartó Deming porque la falla depende de un tercero; el G7 eligió Deming porque es variabilidad operativa; el G2 eligió Six Sigma más Baldrige.</p>",
+   "preguntas": [
+    "Construya un Ishikawa 6M con causas redactadas como fallas, no como reglas, separando causas internas de externas.",
+    "Calcule el tiempo total de espera en las firmas, la proporción de valor agregado y el porcentaje de reclamos con sanción o revocación.",
+    "Arbitre el debate entre G3, G7 y G2 usando los 14 puntos de Deming y los criterios de Baldrige, y proponga un modelo macro más un motor operativo.",
+    "Clasifique los costos del caso según el costo de la calidad de la S1 y explique por qué la detección por el cliente o la autoridad es la más cara."
+   ],
+   "solucion": "<h4>1. Ishikawa</h4><p>Internas: auditores insuficientes en turnos pico, en Mano de obra; flujo secuencial de tres firmas, en Métodos; Extranet sin redundancia y timeouts, en Maquinaria; padrón con desfase de 48–72 h, en Materiales; no se mide el tiempo por etapa ni el p90, en Medición. Externas: informes de clínicas con diagnósticos ambiguos, en Materiales; presión en salas de emergencia y picos de dengue, en Medio ambiente. Error a evitar: escribir respuesta objetivo menor a 4 horas como causa; eso es una regla, no una falla.</p><h4>2. Cálculos</h4><p>Espera = 2,5 + 3,1 + 4,4 = <b>10 h</b>; valor agregado ≈ 0,42 h, unos 4 % del tiempo. El cuello de botella es el diseño secuencial, no el auditor. 38 / 210 = <b>18,1 %</b> de reclamos con sanción o revocación. Solo 61 % en SLA y p90 de 19 h indican alta variabilidad.</p><h4>3. Arbitraje</h4><p>El punto 4 de Deming, relaciones de largo plazo con proveedores, muestra que Deming sí alcanza a la red de clínicas, así que el descarte del G3 es débil. Si la causa dominante es la variabilidad interna, el G7 es defendible. Por el impacto en confianza y fidelidad en un momento crítico, Baldrige aporta Clientes, Operaciones y Medición. Propuesta: <b>Baldrige como marco macro</b> y <b>Six Sigma DMAIC como motor</b> con CTQ igual a tiempo de emisión, meta de p90 menor que 4 h; firmas en paralelo y preautorización por reglas para diagnósticos frecuentes. Lo que se califica es la coherencia causa raíz, criterio del modelo y KPI.</p><h4>4. Costo de la calidad</h4><p>Prevención: capacitación de auditores y diseño de reglas. Evaluación: auditoría médica e inspección documental. Falla interna: cartas observadas y reprocesadas antes de emitirse. Falla externa: sanciones, revocaciones, reclamos y daño reputacional; el caso oncológico es la falla externa extrema. Según la S1, corregir tarde cuesta hasta 100 veces más.</p>",
+   "criterios": [
+    "Las causas están redactadas como fallas y separadas en internas y externas.",
+    "Calcula 10 h de espera y 18,1 % y concluye que el problema es de diseño del flujo.",
+    "Usa el punto 4 de Deming para rebatir al G3 y propone una combinación macro más micro coherente con KPI.",
+    "Clasifica bien prevención, evaluación, falla interna y falla externa con ejemplos del caso."
+   ]
+  },
+  {
+   "id": "s2-c04",
+   "s": [
+    2
+   ],
+   "titulo": "Plaza Vea: precios góndola contra caja y OTIF en Cyber Wow",
+   "enunciado": "<p>Una auditoría en una tienda revisa <b>2 000 SKU</b> y halla <b>46</b> con precio de góndola distinto al cobrado en caja o autocaja, la mayoría promociones del fin de semana. Los precios se replican al POS por batch nocturno y las PDA de etiquetado fallan por Wi-Fi. En el canal digital, durante la semana del Cyber Wow, el OTIF diario fue: L 95 %, M 96 %, X 94 %, J 90 %, V 82 %, S 65 % y D 58 %, con meta de 90 %. El lead time prometido no suma el tiempo de los sellers del Marketplace y el stock se comparte con Makro.</p>",
+   "preguntas": [
+    "Calcule el Price Accuracy Rate, el DPMO con una oportunidad por SKU y el nivel sigma.",
+    "Calcule el OTIF promedio semanal, el déficit frente a la meta y el OTIF promedio del fin de semana; explique qué herramienta de las 7QC revela el patrón.",
+    "Construya un Ishikawa 6M breve que explique la caída del fin de semana.",
+    "Elija y justifique el modelo de gestión: Six Sigma, Deming o Baldrige, citando el resumen de la diapositiva 44.",
+    "Proponga una solución tecnológica y una de proceso para los precios y compárelas."
+   ],
+   "solucion": "<h4>1. Precios</h4><p>Exactitud = 1 954 / 2 000 = <b>97,7 %</b>; DPMO = 46 / 2 000 × 10<sup>6</sup> = <b>23 000</b>; Z ≈ 2,0 + 1,5 = <b>3,5σ</b>.</p><h4>2. OTIF</h4><p>Promedio = (95 + 96 + 94 + 90 + 82 + 65 + 58) / 7 = 580 / 7 ≈ <b>82,9 %</b>; déficit ≈ <b>7,1 puntos</b>. Fin de semana = (65 + 58) / 2 = <b>61,5 %</b>; de lunes a jueves ≈ 93,75 %. La <b>estratificación</b> por día, que la profesora asocia también con diagrama de flujo, y un gráfico de control muestran que la caída es una causa asignable concentrada en el fin de semana, no ruido aleatorio.</p><h4>3. Ishikawa</h4><p>Mano de obra: pickers saturados. Maquinaria: servidores sin pruebas de estrés y sincronización por API lenta. Métodos: carrito mixto sin regla de sustitución. Materiales: catálogo con falsa disponibilidad de Makro y sellers. Medición: lead time que no suma sellers. Medio ambiente: picos de demanda y couriers tercerizados saturados.</p><h4>4. Modelo</h4><p>La variabilidad es medible y repetitiva, lo que favorece <b>Six Sigma DMAIC</b> con CTQ igual a pedido completo y a tiempo; como el impacto recae en la fidelidad en el evento de mayor venta, Baldrige es el marco macro, como en la combinación del BCP. Deming también es defendible para los precios si se encuadra como proceso interno de tienda. No hay solución única: se califica la coherencia.</p><h4>5. Alternativas</h4><p>Tecnológica: etiquetas electrónicas sincronizadas en tiempo real con el POS; alta inversión, ataca la raíz del batch nocturno. Proceso: doble control antes de abrir y auditorías sorpresa; bajo costo, depende de disciplina y es evaluación, no prevención.</p>",
+   "criterios": [
+    "Calcula 97,7 %, 23 000 DPMO y 3,5σ.",
+    "Calcula 82,9 %, 7,1 puntos y 61,5 % y nombra estratificación o gráfico de control.",
+    "El Ishikawa explica específicamente el fin de semana.",
+    "Justifica el modelo con la naturaleza de la causa y no con la fama de la empresa.",
+    "Compara costo, raíz atacada y tipo de costo de calidad de cada alternativa."
+   ]
+  },
+  {
+   "id": "s2-c05",
+   "s": [
+    2
+   ],
+   "titulo": "Matriz ponderada para elegir modelo de TQM en cuatro organizaciones",
+   "enunciado": "<p>Un consultor debe recomendar un modelo para cuatro organizaciones: <b>A</b>, una universidad pública que quiere eliminar silos entre facultades y medir su impacto social; <b>B</b>, una consultora TI multinacional con contratos sujetos a SLA y alta rotación de ingenieros; <b>C</b>, una planta de autopartes con variabilidad dimensional y reclamos por piezas fuera de tolerancia; <b>D</b>, una empresa regional mediana que nunca se ha autoevaluado. Debe usar cinco criterios con pesos: origen interno de la causa 25 %, impacto en el cliente y la competencia 25 %, peso de grupos de interés y sociedad 20 %, disponibilidad de datos estadísticos 15 % y necesidad de autodiagnóstico 15 %.</p>",
+   "preguntas": [
+    "Asigne a cada organización un modelo principal entre Deming, Baldrige, EFQM e Iberoamericano o PNC, citando el ejemplo de clase que lo respalda.",
+    "Para la organización C, puntúe de 1 a 5 los cuatro modelos en los cinco criterios y calcule el puntaje ponderado.",
+    "Proponga para cada organización un complemento operativo y justifique la combinación con la diapositiva 36.",
+    "Identifique el error conceptual de estas frases: EFQM no aplica porque no hay causa social; Deming no aplica porque la falla es de un tercero; el PNC es una adaptación del EFQM."
+   ],
+   "solucion": "<h4>1. Asignación</h4><ul><li>A → <b>EFQM</b>: el caso UNMSM de las diapositivas 45 a 47, valor sostenible para la sociedad.</li><li>B → <b>Baldrige</b>: el caso Indra, con SLA, fuerza laboral y resultados de negocio.</li><li>C → <b>Deming</b>: Toyota o Komatsu, SPC y cero defectos.</li><li>D → <b>Iberoamericano o PNC</b>: TASA o Electroperú, diagnóstico anual y brechas.</li></ul><h4>2. Matriz para C</h4><div class='tabla'><table><thead><tr><th>Modelo</th><th>Interno 25</th><th>Cliente 25</th><th>Sociedad 20</th><th>Datos 15</th><th>Autodiag. 15</th><th>Total</th></tr></thead><tbody><tr><td>Deming</td><td>5</td><td>4</td><td>2</td><td>5</td><td>2</td><td>3,70</td></tr><tr><td>Baldrige</td><td>3</td><td>5</td><td>3</td><td>3</td><td>3</td><td>3,50</td></tr><tr><td>EFQM</td><td>3</td><td>3</td><td>5</td><td>2</td><td>3</td><td>3,25</td></tr><tr><td>Iberoam./PNC</td><td>3</td><td>3</td><td>3</td><td>2</td><td>5</td><td>3,15</td></tr></tbody></table></div><p>Ejemplo Deming: 0,25×5 + 0,25×4 + 0,20×2 + 0,15×5 + 0,15×2 = 1,25 + 1,00 + 0,40 + 0,75 + 0,30 = 3,70.</p><h4>3. Complementos</h4><p>A: EFQM con proyectos Kaizen en trámites. B: Baldrige con Six Sigma sobre tiempos de resolución de incidentes. C: Deming con Six Sigma DMAIC para Cp y Cpk. D: PNC con Six Sigma como motor técnico, según la diapositiva 36: el PNC es el mapa de ruta y Six Sigma el motor técnico.</p><h4>4. Errores</h4><p>EFQM, en su bloque Ejecución, implica a grupos de interés como clínicas, proveedores y aliados, aunque no haya causa social. Deming, por su punto 4, trabaja con proveedores en relaciones de largo plazo. El PNC se alinea con Baldrige; el que adapta el modelo europeo es el Iberoamericano de Fundibeq.</p>",
+   "criterios": [
+    "Cada asignación cita un ejemplo de clase coherente.",
+    "La matriz suma pesos 100 % y los cálculos son correctos.",
+    "Cada combinación respeta la lógica macro y micro.",
+    "Corrige los tres errores con el argumento exacto."
+   ]
+  },
+  {
+   "id": "s2-c06",
+   "s": [
+    1,
+    2
+   ],
+   "titulo": "SERVQUAL en una app pública: brechas, seguridad y capacidad de respuesta",
+   "enunciado": "<p>Se aplica una encuesta SERVQUAL, escala 1 a 7, a 400 usuarios de una app móvil de un organismo público peruano. Expectativa y percepción por dimensión: Tangibilidad E 6,1 P 5,9; Fiabilidad E 6,6 P 5,4; Capacidad de respuesta E 6,4 P 4,3; Seguridad E 6,8 P 5,0; Empatía E 5,5 P 5,2. Pesos de importancia: 10 %, 30 %, 25 %, 25 % y 10 %. Los reclamos señalan que los tickets se responden en 3 días y que el personal de soporte no domina el trámite. La entidad ya certificó ISO 9001, pero no capacita a su personal ni hace retrospectivas, y no ha lanzado mejoras en dos años.</p>",
+   "preguntas": [
+    "Calcule la brecha P − E de cada dimensión, la brecha promedio simple y la ponderada, e identifique la prioridad.",
+    "Distinga la seguridad en el sentido SERVQUAL de la seguridad que define la lectura citando a Nizamidou, y clasifique la continuidad del servicio con el modelo ISO 9126 de la S1.",
+    "Explique, con el hallazgo de El Manzani et al., por qué la certificación ISO 9001 no ha producido mejoras, y proponga cómo corregirlo.",
+    "Ubique a la entidad en una etapa de la Figura 1 y proponga KPI para capacidad de respuesta."
+   ],
+   "solucion": "<h4>1. Brechas</h4><p>T −0,2; F −1,2; CR −2,1; S −1,8; E −0,3. Promedio simple = −5,6 / 5 = <b>−1,12</b>. Ponderada = 0,1×(−0,2) + 0,3×(−1,2) + 0,25×(−2,1) + 0,25×(−1,8) + 0,1×(−0,3) = −0,02 − 0,36 − 0,525 − 0,45 − 0,03 = <b>−1,385</b>. Prioridad: capacidad de respuesta, luego seguridad. El cálculo P − E corresponde al enfoque que la lectura llama objetivo.</p><h4>2. Seguridad</h4><p>En SERVQUAL, seguridad es assurance: conocimiento y cortesía del personal que inspira confianza; el soporte que no domina el trámite la daña. La lectura, con Nizamidou, define seguridad como integridad, confidencialidad y disponibilidad, que es seguridad de la información. En la ISO 9126 de la S1, la seguridad de acceso es subcaracterística de Funcionalidad y la continuidad ante fallos es Confiabilidad por tolerancia a fallas.</p><h4>3. Sistema sociotécnico</h4><p>El Manzani et al.: prácticas técnicas como ISO 9001 y sociales como formación y trabajo en equipo, por separado, no tienen relación significativa con la innovación; combinadas, impactan fuerte en la innovación incremental y menos en la radical. La entidad tiene solo la parte técnica. Corrección: formación continua, que la lectura llama base del cambio cultural, retrospectivas y empoderamiento, junto con el SGC.</p><h4>4. Etapa y KPI</h4><p>Tiene un SGC que da confianza pero no mejora su capacidad: está en <b>aseguramiento</b>, sin llegar a mejora. KPI: tiempo medio de primera respuesta, meta menor que 4 h; % tickets dentro de SLA, meta 90 %; MTTR; FCR; brecha P − E de capacidad de respuesta, meta mayor que −0,5.</p>",
+   "criterios": [
+    "Calcula −1,12 y −1,385 y prioriza capacidad de respuesta.",
+    "Separa assurance de seguridad de la información y usa correctamente la ISO 9126 de la S1.",
+    "Aplica El Manzani con el matiz incremental y radical y la combinación de prácticas.",
+    "Ubica en aseguramiento con argumento y propone KPI medibles."
+   ]
+  }
+ ]
+}

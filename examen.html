@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Examen · Repaso Calidad de SW</title>
+<meta name="description" content="Simulacro configurable del examen parcial.">
+<link rel="stylesheet" href="assets/css/style.css"></head>
+<body>
+<header class="top"><a class="brand" href="index.html">Repaso Parcial · Calidad de SW</a><nav class="menu"><a href="index.html">Inicio</a><a href="s1-teoria.html">S1</a><a href="s2-teoria.html">S2</a><a href="s3-teoria.html">S3</a><a href="s4-teoria.html">S4</a><a href="s5-teoria.html">S5</a><a href="s6-teoria.html">S6</a><a href="s7-teoria.html">S7</a><a href="normas.html">Normas</a><a href="siglas.html">Siglas</a><a href="examen.html" class=on>Examen</a></nav></header>
+<div class="wrap full"><main>
+<h1>Simulacro de examen parcial</h1>
+<p class="lead">Arma tu examen: elige las sesiones, cuántas preguntas teóricas (opción múltiple y para completar) y cuántos casos prácticos quieres resolver. Las opciones se barajan en cada intento.</p>
+<p class="fuente" id="stats"></p>
+<div class="cfg">
+ <div><label>Sesiones</label><div class="chk" id="ses"></div></div>
+ <div><label for="nm">Preguntas de opción múltiple</label><select id="nm"><option>0</option><option selected>5</option><option>10</option><option>15</option><option>20</option><option>30</option><option value="all">Todas</option></select></div>
+ <div><label for="nf">Preguntas para completar</label><select id="nf"><option>0</option><option>3</option><option selected>5</option><option>10</option><option>15</option><option value="all">Todas</option></select></div>
+ <div><label for="nc">Casos prácticos a resolver</label><select id="nc"><option>0</option><option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option value="all">Todos</option></select></div>
+ <div><label><input type="checkbox" id="nuevas" checked> Priorizar preguntas no vistas</label><button class="btn sec" id="reiniciar" type="button">Borrar historial</button></div>
+ <div><button class="btn" id="generar" type="button">Generar examen</button></div>
+</div>
+<div id="examen" class="hide"></div>
+<div class="score hide" id="barra"><button class="btn" id="calificar" type="button">Calificar</button><span>⏱ <span id="reloj">0:00</span></span><span id="res"></span></div>
+<script src="assets/js/banco.js"></script><script src="assets/js/examen.js"></script>
+</main></div>
+<footer>Calidad de Software 20W0703 · FISI-UNMSM 2026-II · Repaso de estudio (Semanas 1–7) basado en el material de clase y entregables.</footer>
+<script src="assets/js/app.js" defer></script>
+</body></html>
